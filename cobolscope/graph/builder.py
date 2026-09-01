@@ -28,6 +28,9 @@ from cobolscope.models import (
     ExecSqlStatementNode,
     ExecCicsStatementNode,
     ExecSqlImsStatementNode,
+    ExitStatementNode,
+    GobackStatementNode,
+    StopStatementNode,
 )
 from cobolscope.reachability import PushdownReachabilityAnalyzer
 from .models import (
@@ -68,6 +71,7 @@ class CallGraphGenerator:
         nodes: Dict[str, CallGraphNode] = {}
         edges: List[CallGraphEdge] = []
         cluster_map: Dict[str, CallGraphCluster] = {}
+        proc_statements: Dict[str, List[AnyStatementNode]] = {}
 
         # Initialize cluster containers
         for ntype, theme in CLUSTER_THEMES.items():
@@ -80,119 +84,222 @@ class CallGraphGenerator:
                 node_ids=[],
             )
 
-        # 0. Execute Pushdown Reachability Analysis to validate control flow, LIFO return points, and dead code
+        # 0. Execute Pushdown Reachability Analysis
         reachability_engine = PushdownReachabilityAnalyzer(self.model)
         reachability_model = reachability_engine.analyze()
 
-        # 1. First Pass: Create all nodes
-        para_list = self.model.paragraphs
-        exit_to_parent_map: Dict[str, str] = {}
+        # 1. Determine whether program is Section-Structured or Paragraph-Structured
+        is_section_based = len(self.model.sections) > 0 and any(len(s.paragraph_names) > 0 for s in self.model.sections)
+        symbol_to_proc: Dict[str, str] = {}
 
-        # Detect exit pairs if collapsing is enabled
-        for i, p in enumerate(para_list):
-            p_name_up = p.name.upper().strip()
-            if p_name_up.endswith("-EXIT") and i > 0:
-                parent_candidate = para_list[i - 1].name.upper().strip()
-                if p_name_up == f"{parent_candidate}-EXIT":
-                    exit_to_parent_map[p_name_up] = parent_candidate
-
-        for i, p in enumerate(para_list):
-            p_name_up = p.name.upper().strip()
-            if self.collapse_exits and p_name_up in exit_to_parent_map:
-                # Merge into parent node
-                parent_name = exit_to_parent_map[p_name_up]
-                if parent_name in nodes:
-                    nodes[parent_name].collapsed_exit_nodes.append(p.name)
-                continue
-
-            node_type = ParagraphClassifier.classify(p)
-            cluster_theme = CLUSTER_THEMES[node_type]
-            if not self.enable_clustering:
-                cluster_id = "cluster_generic"
-            elif node_type == GraphNodeType.ROUTINE_EXIT and not self.collapse_exits:
-                parent_name = exit_to_parent_map.get(p_name_up)
-                if parent_name and parent_name in nodes:
-                    cluster_id = nodes[parent_name].cluster_id
-                else:
-                    cluster_id = cluster_theme["id"]
-            else:
-                cluster_id = cluster_theme["id"]
-
-            # Compute Statement Metrics & Complexity
-            all_stmts = self._collect_all_statements(p.statements)
-            stmt_count = len(all_stmts)
-            cc = 1  # Base cyclomatic complexity
-
-            io_summary: Dict[str, int] = {"READ": 0, "WRITE": 0, "SQL": 0, "CALL": 0}
-            src_fields: Set[str] = set()
-            tgt_fields: Set[str] = set()
-
-            for s in all_stmts:
-                # Branch complexity
-                if isinstance(s, IfStatementNode):
-                    cc += 1
-                elif isinstance(s, EvaluateStatementNode):
-                    cc += len(s.when_branches)
-                elif isinstance(s, PerformStatementNode) and (s.until_condition or s.times_expr):
-                    cc += 1
-
-                # I/O counters
-                if isinstance(s, ReadStatementNode):
-                    io_summary["READ"] += 1
-                elif isinstance(s, (WriteStatementNode, RewriteStatementNode)):
-                    io_summary["WRITE"] += 1
-                elif isinstance(s, (ExecSqlStatementNode, ExecCicsStatementNode, ExecSqlImsStatementNode)):
-                    io_summary["SQL"] += 1
-                elif isinstance(s, CallStatementNode):
-                    io_summary["CALL"] += 1
-
-                # Data lineages
-                for fid in getattr(s, "source_field_ids", None) or []:
-                    src_fields.add(fid)
-                for fid in getattr(s, "target_field_ids", None) or []:
-                    tgt_fields.add(fid)
-
-            # Prune 0-value I/O counters
-            io_summary = {k: v for k, v in io_summary.items() if v > 0}
-
-            start_line = p.location.start_line if p.location else 0
-            end_line = p.location.end_line if p.location else 0
-            is_unreachable = p_name_up in reachability_model.unreachable_paragraphs
-
-            node = CallGraphNode(
-                id=self._sanitize_id(p.name),
-                name=p.name,
-                section=p.section_parent,
-                node_type=node_type,
-                cluster_id=cluster_id,
-                start_line=start_line,
-                end_line=end_line,
-                statement_count=stmt_count,
-                cyclomatic_complexity=cc,
-                is_terminal=p.is_terminal,
-                is_exit_paragraph=(node_type == GraphNodeType.ROUTINE_EXIT),
-                is_unreachable=is_unreachable,
-                io_summary=io_summary,
-                source_field_ids=sorted(list(src_fields)),
-                target_field_ids=sorted(list(tgt_fields)),
-                called_by=list(p.called_by),
-                successors=list(p.successors),
-                fallthrough_successor=p.fallthrough_successor,
+        def is_exit_name(pname: str) -> bool:
+            up = pname.upper().strip()
+            return (
+                up.endswith("-EXIT")
+                or up.endswith("_EXIT")
+                or up.endswith("-EX")
+                or up.endswith("_EX")
+                or up.endswith("999")
+                or up.endswith("99")
+                or up.endswith("9999")
             )
 
-            nodes[p_name_up] = node
-            if cluster_id in cluster_map:
-                cluster_map[cluster_id].node_ids.append(node.id)
+        if is_section_based:
+            # === Section-Driven Procedures ===
+            for s in self.model.sections:
+                proc_key = s.name.upper().strip()
+                all_stmts: List[AnyStatementNode] = []
+                exit_paras: List[str] = []
 
-        # 2. Second Pass: Extract Edges (Calls, Jumps, Thru, Fallthrough)
+                if s.statements:
+                    all_stmts.extend(self._collect_all_statements(s.statements))
+
+                for p_name in s.paragraph_names:
+                    p_obj = self.model.get_paragraph(p_name)
+                    if p_obj:
+                        p_stmts = self._collect_all_statements(p_obj.statements)
+                        all_stmts.extend(p_stmts)
+                        if is_exit_name(p_name) or (len(p_stmts) == 1 and isinstance(p_stmts[0], (ExitStatementNode, GobackStatementNode))):
+                            exit_paras.append(p_name)
+                    elif is_exit_name(p_name):
+                        exit_paras.append(p_name)
+
+                proc_statements[proc_key] = all_stmts
+                symbol_to_proc[proc_key] = proc_key
+                for p_name in s.paragraph_names:
+                    symbol_to_proc[p_name.upper().strip()] = proc_key
+
+                # Statement metrics & Complexity
+                stmt_count = len(all_stmts)
+                cc = 1
+                io_summary: Dict[str, int] = {"READ": 0, "WRITE": 0, "SQL": 0, "CALL": 0}
+                src_fields: Set[str] = set()
+                tgt_fields: Set[str] = set()
+                has_terminal = False
+
+                for stmt in all_stmts:
+                    if isinstance(stmt, IfStatementNode):
+                        cc += 1
+                    elif isinstance(stmt, EvaluateStatementNode):
+                        cc += len(stmt.when_branches)
+                    elif isinstance(stmt, PerformStatementNode) and (stmt.until_condition or stmt.times_expr):
+                        cc += 1
+
+                    if isinstance(stmt, ReadStatementNode):
+                        io_summary["READ"] += 1
+                    elif isinstance(stmt, (WriteStatementNode, RewriteStatementNode)):
+                        io_summary["WRITE"] += 1
+                    elif isinstance(stmt, (ExecSqlStatementNode, ExecCicsStatementNode, ExecSqlImsStatementNode)):
+                        io_summary["SQL"] += 1
+                    elif isinstance(stmt, CallStatementNode):
+                        io_summary["CALL"] += 1
+
+                    if isinstance(stmt, (StopStatementNode, GobackStatementNode)):
+                        has_terminal = True
+                    elif isinstance(stmt, ExecCicsStatementNode) and "RETURN" in (stmt.raw_payload or "").upper():
+                        has_terminal = True
+
+                    for fid in getattr(stmt, "source_field_ids", None) or []:
+                        src_fields.add(fid)
+                    for fid in getattr(stmt, "target_field_ids", None) or []:
+                        tgt_fields.add(fid)
+
+                io_summary = {k: v for k, v in io_summary.items() if v > 0}
+
+                # Classification
+                node_type = ParagraphClassifier.classify_procedure(
+                    name=s.name,
+                    section=s.name,
+                    statements=all_stmts,
+                    is_terminal=has_terminal,
+                )
+                cluster_theme = CLUSTER_THEMES[node_type]
+                cluster_id = cluster_theme["id"] if self.enable_clustering else "cluster_generic"
+
+                start_line = s.location.start_line if s.location else 0
+                end_line = s.location.end_line if s.location else 0
+
+                node = CallGraphNode(
+                    id=self._sanitize_id(s.name),
+                    name=s.name,
+                    section=s.name,
+                    node_type=node_type,
+                    cluster_id=cluster_id,
+                    start_line=start_line,
+                    end_line=end_line,
+                    statement_count=stmt_count,
+                    cyclomatic_complexity=cc,
+                    is_terminal=has_terminal,
+                    is_exit_paragraph=False,
+                    is_unreachable=False,
+                    io_summary=io_summary,
+                    source_field_ids=sorted(list(src_fields)),
+                    target_field_ids=sorted(list(tgt_fields)),
+                    collapsed_exit_nodes=exit_paras,
+                )
+                nodes[proc_key] = node
+                if cluster_id in cluster_map:
+                    cluster_map[cluster_id].node_ids.append(node.id)
+
+        else:
+            # === Paragraph-Driven Procedures ===
+            para_list = self.model.paragraphs
+            exit_to_parent_map: Dict[str, str] = {}
+
+            for i, p in enumerate(para_list):
+                p_name_up = p.name.upper().strip()
+                if (is_exit_name(p_name_up) or (len(p.statements) == 1 and isinstance(p.statements[0], ExitStatementNode))) and i > 0:
+                    parent_candidate = para_list[i - 1].name.upper().strip()
+                    exit_to_parent_map[p_name_up] = parent_candidate
+
+            for i, p in enumerate(para_list):
+                p_name_up = p.name.upper().strip()
+                if self.collapse_exits and p_name_up in exit_to_parent_map:
+                    parent_name = exit_to_parent_map[p_name_up]
+                    if parent_name in nodes:
+                        nodes[parent_name].collapsed_exit_nodes.append(p.name)
+                    symbol_to_proc[p_name_up] = parent_name
+                    continue
+
+                all_stmts = self._collect_all_statements(p.statements)
+                proc_statements[p_name_up] = all_stmts
+                symbol_to_proc[p_name_up] = p_name_up
+
+                stmt_count = len(all_stmts)
+                cc = 1
+                io_summary = {"READ": 0, "WRITE": 0, "SQL": 0, "CALL": 0}
+                src_fields = set()
+                tgt_fields = set()
+                has_terminal = p.is_terminal
+
+                for stmt in all_stmts:
+                    if isinstance(stmt, IfStatementNode):
+                        cc += 1
+                    elif isinstance(stmt, EvaluateStatementNode):
+                        cc += len(stmt.when_branches)
+                    elif isinstance(stmt, PerformStatementNode) and (stmt.until_condition or stmt.times_expr):
+                        cc += 1
+
+                    if isinstance(stmt, ReadStatementNode):
+                        io_summary["READ"] += 1
+                    elif isinstance(stmt, (WriteStatementNode, RewriteStatementNode)):
+                        io_summary["WRITE"] += 1
+                    elif isinstance(stmt, (ExecSqlStatementNode, ExecCicsStatementNode, ExecSqlImsStatementNode)):
+                        io_summary["SQL"] += 1
+                    elif isinstance(stmt, CallStatementNode):
+                        io_summary["CALL"] += 1
+
+                    if isinstance(stmt, (StopStatementNode, GobackStatementNode)):
+                        has_terminal = True
+                    elif isinstance(stmt, ExecCicsStatementNode) and "RETURN" in (stmt.raw_payload or "").upper():
+                        has_terminal = True
+
+                    for fid in getattr(stmt, "source_field_ids", None) or []:
+                        src_fields.add(fid)
+                    for fid in getattr(stmt, "target_field_ids", None) or []:
+                        tgt_fields.add(fid)
+
+                io_summary = {k: v for k, v in io_summary.items() if v > 0}
+
+                node_type = ParagraphClassifier.classify_procedure(
+                    name=p.name,
+                    section=p.section_parent,
+                    statements=all_stmts,
+                    is_terminal=has_terminal,
+                )
+                cluster_theme = CLUSTER_THEMES[node_type]
+                cluster_id = cluster_theme["id"] if self.enable_clustering else "cluster_generic"
+
+                start_line = p.location.start_line if p.location else 0
+                end_line = p.location.end_line if p.location else 0
+                is_unreachable = p_name_up in reachability_model.unreachable_paragraphs
+
+                node = CallGraphNode(
+                    id=self._sanitize_id(p.name),
+                    name=p.name,
+                    section=p.section_parent,
+                    node_type=node_type,
+                    cluster_id=cluster_id,
+                    start_line=start_line,
+                    end_line=end_line,
+                    statement_count=stmt_count,
+                    cyclomatic_complexity=cc,
+                    is_terminal=has_terminal,
+                    is_exit_paragraph=(node_type == GraphNodeType.ROUTINE_EXIT),
+                    is_unreachable=is_unreachable,
+                    io_summary=io_summary,
+                    source_field_ids=sorted(list(src_fields)),
+                    target_field_ids=sorted(list(tgt_fields)),
+                    called_by=list(p.called_by),
+                    successors=list(p.successors),
+                    fallthrough_successor=p.fallthrough_successor,
+                )
+                nodes[p_name_up] = node
+                if cluster_id in cluster_map:
+                    cluster_map[cluster_id].node_ids.append(node.id)
+
+        # 2. Second Pass: Extract Clean Invocation Edges (Single Edge per Call)
         seen_edges: Set[Tuple[str, str, GraphEdgeType]] = set()
-
-        section_map: Dict[str, Tuple[str, str]] = {}
-        for sec in self.model.sections:
-            if sec.paragraph_names:
-                first_p = sec.paragraph_names[0].upper().strip()
-                last_p = sec.paragraph_names[-1].upper().strip()
-                section_map[sec.name.upper().strip()] = (first_p, last_p)
 
         def is_error_trap(node_obj: CallGraphNode) -> bool:
             if node_obj.node_type == GraphNodeType.ERROR_HANDLING:
@@ -200,122 +307,105 @@ class CallGraphGenerator:
             n_up = node_obj.name.upper()
             return any(k in n_up for k in ("ABEND", "ERROR", "SYS-ERR", "FATAL", "TRAP", "EXCEPTION"))
 
-        for p in para_list:
-            caller_name_up = p.name.upper().strip()
-            if self.collapse_exits and caller_name_up in exit_to_parent_map:
-                continue
-
-            all_stmts = self._collect_all_statements(p.statements)
-            for stmt in all_stmts:
+        for src_proc_key, src_node in nodes.items():
+            stmts = proc_statements.get(src_proc_key, [])
+            for stmt in stmts:
                 # 2A. PERFORM Statements
                 if isinstance(stmt, PerformStatementNode) and stmt.target:
-                    target_raw = stmt.target.upper().strip()
-                    thru_raw = stmt.thru.upper().strip() if stmt.thru else None
+                    tgt_sym = stmt.target.upper().strip()
+                    tgt_proc = symbol_to_proc.get(tgt_sym)
 
-                    # Expand Section target if applicable
-                    if target_raw in section_map:
-                        first_p, last_p = section_map[target_raw]
-                        target_raw = first_p
-                        thru_raw = thru_raw if thru_raw else last_p
-
-                    target_name = exit_to_parent_map.get(target_raw, target_raw) if self.collapse_exits else target_raw
-
-                    # Check if target exists in nodes
-                    if target_name in nodes:
-                        target_node = nodes[target_name]
+                    if tgt_proc and tgt_proc in nodes and tgt_proc != src_proc_key:
+                        target_node = nodes[tgt_proc]
                         edge_type = GraphEdgeType.ERROR_BRANCH if is_error_trap(target_node) else GraphEdgeType.PERFORM
-                        edge_key = (caller_name_up, target_name, edge_type)
+                        edge_key = (src_proc_key, tgt_proc, edge_type)
 
-                        if edge_key not in seen_edges and caller_name_up != target_name:
+                        if edge_key not in seen_edges:
                             seen_edges.add(edge_key)
                             line_no = stmt.location.start_line if stmt.location else None
                             edges.append(CallGraphEdge(
-                                source=caller_name_up,
-                                target=target_name,
+                                source=src_proc_key,
+                                target=tgt_proc,
                                 edge_type=edge_type,
                                 line_number=line_no,
                             ))
+                            if tgt_proc not in src_node.successors:
+                                src_node.successors.append(tgt_proc)
+                            if src_proc_key not in target_node.called_by:
+                                target_node.called_by.append(src_proc_key)
 
-                    # Expand PERFORM ... THRU sequence if present
-                    if thru_raw:
-                        thru_name = exit_to_parent_map.get(thru_raw, thru_raw) if self.collapse_exits else thru_raw
-                        if thru_name != target_name and thru_name in nodes:
-                            thru_edge_key = (caller_name_up, thru_name, GraphEdgeType.PERFORM_THRU)
-                            if thru_edge_key not in seen_edges and caller_name_up != thru_name:
-                                seen_edges.add(thru_edge_key)
-                                edges.append(CallGraphEdge(
-                                    source=caller_name_up,
-                                    target=thru_name,
-                                    edge_type=GraphEdgeType.PERFORM_THRU,
-                                    label="THRU",
-                                    line_number=stmt.location.start_line if stmt.location else None,
-                                ))
-
-                # 2B. GO TO Statements (Simple and GO TO DEPENDING ON)
+                # 2B. GO TO Statements (Inter-Procedure Only)
                 elif isinstance(stmt, GoToStatementNode):
                     goto_targets: List[str] = []
                     if stmt.target:
-                        tgt = stmt.target.upper().strip()
-                        if tgt in section_map:
-                            goto_targets.append(section_map[tgt][0])
-                        else:
-                            goto_targets.append(tgt)
+                        goto_targets.append(stmt.target.upper().strip())
                     if stmt.depending_on:
                         before_dep = stmt.depending_on.upper().split("DEPENDING")[0]
                         for token in re.findall(r"[A-Za-z0-9_\-]+", before_dep):
-                            token_up = token.strip().upper()
-                            if token_up in section_map:
-                                sec_tgt = section_map[token_up][0]
-                                if sec_tgt not in goto_targets:
-                                    goto_targets.append(sec_tgt)
-                            elif token_up not in goto_targets:
-                                goto_targets.append(token_up)
+                            goto_targets.append(token.strip().upper())
 
-                    for target_raw in goto_targets:
-                        target_name = exit_to_parent_map.get(target_raw, target_raw) if self.collapse_exits else target_raw
-                        if target_name in nodes and caller_name_up != target_name:
-                            target_node = nodes[target_name]
+                    for raw_tgt in goto_targets:
+                        tgt_proc = symbol_to_proc.get(raw_tgt)
+                        if tgt_proc and tgt_proc in nodes and tgt_proc != src_proc_key:
+                            target_node = nodes[tgt_proc]
                             edge_type = GraphEdgeType.ERROR_BRANCH if is_error_trap(target_node) else GraphEdgeType.GO_TO
-                            edge_key = (caller_name_up, target_name, edge_type)
+                            edge_key = (src_proc_key, tgt_proc, edge_type)
+
                             if edge_key not in seen_edges:
                                 seen_edges.add(edge_key)
+                                line_no = stmt.location.start_line if stmt.location else None
                                 edges.append(CallGraphEdge(
-                                    source=caller_name_up,
-                                    target=target_name,
+                                    source=src_proc_key,
+                                    target=tgt_proc,
                                     edge_type=edge_type,
-                                    line_number=stmt.location.start_line if stmt.location else None,
+                                    line_number=line_no,
                                 ))
+                                if tgt_proc not in src_node.successors:
+                                    src_node.successors.append(tgt_proc)
+                                if src_proc_key not in target_node.called_by:
+                                    target_node.called_by.append(src_proc_key)
 
-        # 2C. Validated Fallthrough Edges (Computed directly from Pushdown Reachability Fixed-Point)
+                # 2C. CALL Statements (Dynamic/External Subprograms)
+                elif isinstance(stmt, CallStatementNode) and stmt.target:
+                    tgt_raw = stmt.target.replace("'", "").replace('"', '').strip()
+                    tgt_proc = symbol_to_proc.get(tgt_raw.upper())
+                    if tgt_proc and tgt_proc in nodes and tgt_proc != src_proc_key:
+                        edge_key = (src_proc_key, tgt_proc, GraphEdgeType.CALL)
+                        if edge_key not in seen_edges:
+                            seen_edges.add(edge_key)
+                            edges.append(CallGraphEdge(
+                                source=src_proc_key,
+                                target=tgt_proc,
+                                edge_type=GraphEdgeType.CALL,
+                                line_number=stmt.location.start_line if stmt.location else None,
+                            ))
+
+        # 2D. Validated Fallthrough Edges
         if not self.hide_fallthrough:
             for ft_pair in reachability_model.validated_fallthrough_edges:
-                src_raw, tgt_raw = ft_pair[0], ft_pair[1]
-                src = exit_to_parent_map.get(src_raw, src_raw) if self.collapse_exits else src_raw
-                tgt = exit_to_parent_map.get(tgt_raw, tgt_raw) if self.collapse_exits else tgt_raw
-                if src in nodes and tgt in nodes and src != tgt:
-                    edge_key = (src, tgt, GraphEdgeType.FALLTHROUGH)
+                src_raw, tgt_raw = ft_pair[0].upper().strip(), ft_pair[1].upper().strip()
+                src_proc = symbol_to_proc.get(src_raw)
+                tgt_proc = symbol_to_proc.get(tgt_raw)
+                if src_proc and tgt_proc and src_proc in nodes and tgt_proc in nodes and src_proc != tgt_proc:
+                    edge_key = (src_proc, tgt_proc, GraphEdgeType.FALLTHROUGH)
                     if edge_key not in seen_edges:
                         seen_edges.add(edge_key)
                         edges.append(CallGraphEdge(
-                            source=src,
-                            target=tgt,
+                            source=src_proc,
+                            target=tgt_proc,
                             edge_type=GraphEdgeType.FALLTHROUGH,
                         ))
 
         # Determine Entry Point
         entry_point_name: Optional[str] = None
         reach_ep = getattr(reachability_model, "entrypoint", None) or getattr(reachability_model, "entry_point", None)
-        if reach_ep and reach_ep.upper().strip() in nodes:
-            entry_point_name = reach_ep.upper().strip()
-        else:
-            # First non-exit paragraph in execution sequence
-            for p in para_list:
-                p_up = p.name.upper().strip()
-                if p_up in nodes and not nodes[p_up].is_exit_paragraph:
-                    entry_point_name = p_up
-                    break
-            if not entry_point_name and nodes:
-                entry_point_name = next(iter(nodes.keys()))
+        if reach_ep:
+            ep_proc = symbol_to_proc.get(reach_ep.upper().strip())
+            if ep_proc and ep_proc in nodes:
+                entry_point_name = ep_proc
+
+        if not entry_point_name and nodes:
+            entry_point_name = next(iter(nodes.keys()))
 
         if entry_point_name and entry_point_name in nodes:
             nodes[entry_point_name].is_entry_point = True

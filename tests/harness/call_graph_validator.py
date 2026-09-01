@@ -47,20 +47,25 @@ class CallGraphValidator:
 
     def verify_node_coverage(self) -> bool:
         """
-        Verifies that every paragraph in the AST is either present as a node
-        or properly tracked in a collapsed exit container.
+        Verifies that every procedure/section/paragraph in the AST is either present as a node
+        or properly tracked in a collapsed exit container or procedure container.
         """
-        model_paras = {p.name.upper().strip() for p in self.model.paragraphs}
-        graph_nodes = set(self.graph.nodes.keys())
+        is_section_based = len(self.model.sections) > 0 and any(len(s.paragraph_names) > 0 for s in self.model.sections)
 
-        if self.generator.collapse_exits:
-            # Add all collapsed exits
-            for node in self.graph.nodes.values():
-                for exit_name in node.collapsed_exit_nodes:
-                    graph_nodes.add(exit_name.upper().strip())
-
-        missing = model_paras - graph_nodes
-        assert not missing, f"Missing paragraphs in call graph: {missing}"
+        if is_section_based:
+            model_secs = {s.name.upper().strip() for s in self.model.sections}
+            graph_nodes = set(self.graph.nodes.keys())
+            missing = model_secs - graph_nodes
+            assert not missing, f"Missing sections in call graph: {missing}"
+        else:
+            model_paras = {p.name.upper().strip() for p in self.model.paragraphs}
+            graph_nodes = set(self.graph.nodes.keys())
+            if self.generator.collapse_exits:
+                for node in self.graph.nodes.values():
+                    for exit_name in node.collapsed_exit_nodes:
+                        graph_nodes.add(exit_name.upper().strip())
+            missing = model_paras - graph_nodes
+            assert not missing, f"Missing paragraphs in call graph: {missing}"
         return True
 
     def verify_ast_call_parity(self) -> bool:
@@ -68,6 +73,20 @@ class CallGraphValidator:
         Verifies that every PERFORM and GO TO call-site in the AST
         is accounted for in the graph edges.
         """
+        is_section_based = len(self.model.sections) > 0 and any(len(s.paragraph_names) > 0 for s in self.model.sections)
+        symbol_to_proc: Dict[str, str] = {}
+
+        if is_section_based:
+            for s in self.model.sections:
+                s_up = s.name.upper().strip()
+                symbol_to_proc[s_up] = s_up
+                for p in s.paragraph_names:
+                    symbol_to_proc[p.upper().strip()] = s_up
+        else:
+            for p in self.model.paragraphs:
+                p_up = p.name.upper().strip()
+                symbol_to_proc[p_up] = p_up
+
         ast_calls: Set[Tuple[str, str]] = set()
 
         def scan_stmts(stmts: List[AnyStatementNode], caller: str):
@@ -94,30 +113,14 @@ class CallGraphValidator:
             if e.edge_type in (GraphEdgeType.PERFORM, GraphEdgeType.GO_TO, GraphEdgeType.ERROR_BRANCH):
                 graph_edges.add((e.source.upper().strip(), e.target.upper().strip()))
 
-        # For collapsed exits, map target names
-        if self.generator.collapse_exits:
-            for (caller, target) in ast_calls:
-                target_mapped = target
-                if target.endswith("-EXIT"):
-                    parent_candidate = target[:-5]
-                    if parent_candidate in self.graph.nodes:
-                        target_mapped = parent_candidate
-                caller_mapped = caller
-                if caller.endswith("-EXIT"):
-                    parent_candidate = caller[:-5]
-                    if parent_candidate in self.graph.nodes:
-                        caller_mapped = parent_candidate
+        for (caller, target) in ast_calls:
+            caller_proc = symbol_to_proc.get(caller, caller)
+            target_proc = symbol_to_proc.get(target, target)
 
-                if caller_mapped != target_mapped and target_mapped in self.graph.nodes:
-                    assert (caller_mapped, target_mapped) in graph_edges, (
-                        f"AST call ({caller} -> {target}) missing from graph edges!"
-                    )
-        else:
-            for (caller, target) in ast_calls:
-                if caller != target and target in self.graph.nodes:
-                    assert (caller, target) in graph_edges, (
-                        f"AST call ({caller} -> {target}) missing from graph edges!"
-                    )
+            if caller_proc != target_proc and target_proc in self.graph.nodes:
+                assert (caller_proc, target_proc) in graph_edges, (
+                    f"AST call ({caller} -> {target}, mapped: {caller_proc} -> {target_proc}) missing from graph edges!"
+                )
 
         return True
 
@@ -157,21 +160,30 @@ class CallGraphValidator:
         return True
 
     def verify_thru_expansion(self) -> bool:
-        """Verifies that all PERFORM ... THRU statements generate proper THRU edges."""
-        thru_stmts = []
+        """Verifies that all PERFORM ... THRU statements generate proper procedure calls."""
+        is_section_based = len(self.model.sections) > 0 and any(len(s.paragraph_names) > 0 for s in self.model.sections)
+        symbol_to_proc: Dict[str, str] = {}
+
+        if is_section_based:
+            for s in self.model.sections:
+                s_up = s.name.upper().strip()
+                symbol_to_proc[s_up] = s_up
+                for p in s.paragraph_names:
+                    symbol_to_proc[p.upper().strip()] = s_up
+        else:
+            for p in self.model.paragraphs:
+                p_up = p.name.upper().strip()
+                symbol_to_proc[p_up] = p_up
+
+        graph_edges = {(e.source.upper().strip(), e.target.upper().strip()) for e in self.graph.edges}
+
         for p in self.model.paragraphs:
+            caller_proc = symbol_to_proc.get(p.name.upper().strip(), p.name.upper().strip())
             for s in p.statements:
                 if isinstance(s, PerformStatementNode) and s.target and s.thru:
-                    thru_stmts.append((p.name.upper().strip(), s.target.upper().strip(), s.thru.upper().strip()))
-
-        for caller, target, thru in thru_stmts:
-            if not self.generator.collapse_exits:
-                thru_edges = [
-                    e for e in self.graph.edges
-                    if e.source.upper().strip() == caller and e.edge_type == GraphEdgeType.PERFORM_THRU
-                ]
-                if thru in self.graph.nodes and caller != thru:
-                    assert any(e.target.upper().strip() == thru for e in thru_edges), (
-                        f"Missing THRU edge from {caller} to {thru}"
-                    )
+                    tgt_proc = symbol_to_proc.get(s.target.upper().strip(), s.target.upper().strip())
+                    if caller_proc != tgt_proc and tgt_proc in self.graph.nodes:
+                        assert (caller_proc, tgt_proc) in graph_edges, (
+                            f"Missing procedure edge ({caller_proc} -> {tgt_proc}) for PERFORM {s.target} THRU {s.thru}"
+                        )
         return True

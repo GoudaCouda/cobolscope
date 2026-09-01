@@ -114,57 +114,74 @@ class ParagraphClassifier:
     _RE_TABLE = re.compile(r"(?:^|[-_])(?:TBL|TABLE|SEARCH|LOOKUP|GENTBL|GEN-TBL|DECODE|LOAD-TBL)(?:[-_]|$)", re.IGNORECASE)
 
     @classmethod
-    def classify(cls, para: ParagraphNode) -> GraphNodeType:
-        name = (para.name or "").strip().upper()
-        sec = (para.section_parent or "").strip().upper()
+    def classify_procedure(
+        cls,
+        name: str,
+        section: Optional[str] = None,
+        statements: Optional[List[AnyStatementNode]] = None,
+        is_terminal: bool = False,
+    ) -> GraphNodeType:
+        name_up = (name or "").strip().upper()
+        sec_up = (section or "").strip().upper()
+        stmts = statements or []
 
         # 1. Exit nodes
-        if name.endswith("-EXIT") or name.endswith("_EXIT") or sec.endswith("-EXIT"):
+        if name_up.endswith("-EXIT") or name_up.endswith("_EXIT") or name_up.endswith("999") or name_up.endswith("99"):
             return GraphNodeType.ROUTINE_EXIT
-        if len(para.statements) == 1 and isinstance(para.statements[0], ExitStatementNode):
-            return GraphNodeType.ROUTINE_EXIT
+        if len(stmts) == 1 and isinstance(stmts[0], (ExitStatementNode, GobackStatementNode, StopStatementNode)):
+            if isinstance(stmts[0], ExitStatementNode):
+                return GraphNodeType.ROUTINE_EXIT
 
         # 2. Error Handling & Abend (Declaratives, Error routines)
-        if (cls._RE_ABEND.search(name) or cls._RE_ERROR.search(name) or "ERROR" in name
-                or cls._RE_ABEND.search(sec) or cls._RE_ERROR.search(sec) or "ERROR" in sec):
+        if (cls._RE_ABEND.search(name_up) or cls._RE_ERROR.search(name_up) or "ERROR" in name_up or "ABEND" in name_up
+                or cls._RE_ABEND.search(sec_up) or cls._RE_ERROR.search(sec_up) or "ERROR" in sec_up or "ABEND" in sec_up):
             return GraphNodeType.ERROR_HANDLING
 
         # 3. Main Driver & Secondary Entrypoints
-        if ((cls._RE_MAIN.search(name) or "ALT-ENTRY" in name or name.startswith("0000-")
-                or cls._RE_MAIN.search(sec) or sec in ("PREMIERE", "MAIN", "MAINLINE", "MAIN-LOGIC"))
-                and "EXIT" not in name and "EXIT" not in sec):
+        if ((cls._RE_MAIN.search(name_up) or "ALT-ENTRY" in name_up or name_up.startswith("0000-") or name_up in ("PREMIERE", "MAIN", "MAINLINE", "MAIN-LOGIC")
+                or cls._RE_MAIN.search(sec_up) or sec_up in ("PREMIERE", "MAIN", "MAINLINE", "MAIN-LOGIC"))
+                and "EXIT" not in name_up and "EXIT" not in sec_up):
             return GraphNodeType.MAIN_DRIVER
 
         # 4. Wrap-up / Clean Termination
-        if cls._RE_WRAPUP.search(name) or cls._RE_WRAPUP.search(sec):
+        if cls._RE_WRAPUP.search(name_up) or cls._RE_WRAPUP.search(sec_up) or "GET-ME-OUT" in name_up or "GET-ME-OUT" in sec_up:
             return GraphNodeType.TERMINATION
-        if para.is_terminal and any(isinstance(s, (StopStatementNode, GobackStatementNode)) for s in para.statements):
+        if is_terminal and any(isinstance(s, (StopStatementNode, GobackStatementNode)) for s in stmts):
             return GraphNodeType.TERMINATION
 
         # 5. Initialization / Housekeeping
-        if cls._RE_INIT.search(name) or cls._RE_INIT.search(sec):
+        if cls._RE_INIT.search(name_up) or cls._RE_INIT.search(sec_up):
             return GraphNodeType.INITIALIZATION
 
         # 6. Database / Subsystem Access
         has_sql_cics = any(
             isinstance(s, (ExecSqlStatementNode, ExecCicsStatementNode, ExecSqlImsStatementNode))
-            for s in para.statements
+            for s in stmts
         )
-        if has_sql_cics or cls._RE_DB_IO.search(name) or cls._RE_DB_IO.search(sec):
+        if has_sql_cics or cls._RE_DB_IO.search(name_up) or cls._RE_DB_IO.search(sec_up):
             return GraphNodeType.DATABASE_IO
 
         # 7. Table / Memory Lookups
-        has_search = any(isinstance(s, SearchStatementNode) for s in para.statements)
-        if has_search or cls._RE_TABLE.search(name) or cls._RE_TABLE.search(sec):
+        has_search = any(isinstance(s, SearchStatementNode) for s in stmts)
+        if has_search or cls._RE_TABLE.search(name_up) or cls._RE_TABLE.search(sec_up):
             return GraphNodeType.TABLE_LOOKUP
 
         # 8. File I/O
         has_file_io = any(
             isinstance(s, (ReadStatementNode, WriteStatementNode, RewriteStatementNode, DeleteStatementNode, OpenStatementNode, CloseStatementNode))
-            for s in para.statements
+            for s in stmts
         )
-        if has_file_io or cls._RE_FILE_IO.search(name) or cls._RE_FILE_IO.search(sec):
+        if has_file_io or cls._RE_FILE_IO.search(name_up) or cls._RE_FILE_IO.search(sec_up):
             return GraphNodeType.FILE_IO
 
         # 9. Default Business Logic
         return GraphNodeType.BUSINESS_LOGIC
+
+    @classmethod
+    def classify(cls, para: ParagraphNode) -> GraphNodeType:
+        return cls.classify_procedure(
+            name=para.name,
+            section=para.section_parent,
+            statements=para.statements,
+            is_terminal=para.is_terminal,
+        )
