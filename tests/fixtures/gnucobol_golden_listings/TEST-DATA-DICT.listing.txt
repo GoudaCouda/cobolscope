@@ -1,0 +1,29 @@
+GnuCOBOL 3.2.0                TEST-DATA-DICT.cbl                2026/08/29
+Command Line: cobc -fsyntax-only -std=ibm -Xref -t TEST-DATA-DICT.cbl
+
+Line   Lvl  Field Name               Picture / Usage              Offset  Length
+================================================================================
+000006 01   WS-TYPES-RECORD                                       000000  000055
+000007 05   WS-STR-ALPHANUM          X(10)                        000000  000010
+000008 05   WS-NUM-DISPLAY           9(5)V99                      000010  000007
+000009 05   WS-COMP-1-FLOAT          COMP-1                       000017  000004
+000010 05   WS-COMP-2-FLOAT          COMP-2                       000021  000008
+000011 05   WS-COMP-HALFWORD         S9(4) COMP                   000029  000002
+000012 05   WS-COMP-FULLWORD         S9(8) COMP                   000031  000004
+000013 05   WS-COMP-DOUBLEWORD       S9(16) COMP                  000035  000008
+000014 05   WS-COMP3-PACKED-EVEN     S9(6) COMP-3                 000043  000004
+000015 05   WS-COMP3-PACKED-ODD      S9(7) COMP-3                 000047  000004
+000016 05   WS-PTR-ADDR              POINTER                      000051  000004
+000019 01   WS-BASE-RECORD                                        000055  000012
+000020 05   WS-RAW-DATE              X(8)                         000055  000008
+000021 05   WS-DATE-PARTS                                         000055  000008
+000022 10   WS-YEAR                  9(4)                         000055  000004
+000023 10   WS-MONTH                 9(2)                         000059  000002
+000024 10   WS-DAY                   9(2)                         000061  000002
+000025 05   WS-NEXT-FIELD            X(4)                         000063  000004
+000028 01   WS-MATRIX-RECORD                                      000067  000456
+000029 05   WS-MONTHS                                             000067  000456
+000030 10   WS-MONTH-NAME            X(3)                         000067  000003
+000031 10   WS-DAYS                  X(1)                         000070  000031
+000032 10   WS-TOTAL-AMT             S9(5)V99 COMP-3              000101  000004
+000035 01   WS-STATUS-FLAG           X(1)                         000523  000001

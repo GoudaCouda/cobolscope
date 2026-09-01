@@ -1,0 +1,17 @@
+{# Reusable Jinja2 macros for COBOL Data Dictionary rendering #}
+
+{% macro render_badge(redefines, occurs, value) -%}
+  {% if redefines %}<span class="badge badge-redefines">REDEFINES {{ redefines }}</span>{% endif %}
+  {% if occurs %}<span class="badge badge-occurs">OCCURS {{ occurs }}</span>{% endif %}
+  {% if value %}<span class="badge badge-value">VALUE {{ value }}</span>{% endif %}
+{%- endmacro %}
+
+{% macro render_conditions_88(conditions) -%}
+  {% if conditions %}
+    <div class="cond88-block">
+      {% for c in conditions %}
+        <div class="cond88-item"><b>88 {{ c['name'] }}:</b> {{ c['values'] | join(', ') }}</div>
+      {% endfor %}
+    </div>
+  {% endif %}
+{%- endmacro %}

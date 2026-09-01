@@ -1,0 +1,810 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Procedure Call Graph - {{ program_id }}</title>
+  <style>
+    :root {
+      --bg-primary: #F8FAFC;
+      --bg-surface: #FFFFFF;
+      --border-color: #E2E8F0;
+      --text-primary: #0F172A;
+      --text-secondary: #475569;
+      --text-muted: #94A3B8;
+      --primary: #0078D4;
+      --primary-hover: #106EBE;
+      --primary-light: #EFF6FC;
+      --sidebar-width: 380px;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      background: var(--bg-primary);
+      color: var(--text-primary);
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+    }
+
+    /* Header & Stats Bar */
+    header {
+      background: var(--bg-surface);
+      border-bottom: 1px solid var(--border-color);
+      padding: 12px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+      z-index: 10;
+    }
+
+    .title-group {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .title-group h1 {
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: var(--text-primary);
+    }
+
+    .badge-bar {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 4px 10px;
+      border-radius: 9999px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      background: #F1F5F9;
+      color: var(--text-secondary);
+      border: 1px solid var(--border-color);
+    }
+
+    .badge-primary { background: var(--primary-light); color: var(--primary); border-color: #C7E0F4; }
+    .badge-danger { background: #FDF3F0; color: #D83B01; border-color: #F8D2C4; }
+
+    /* Controls Bar */
+    .controls-bar {
+      background: var(--bg-surface);
+      border-bottom: 1px solid var(--border-color);
+      padding: 8px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      z-index: 9;
+    }
+
+    .search-box {
+      position: relative;
+      width: 320px;
+    }
+
+    .search-box input {
+      width: 100%;
+      padding: 6px 12px 6px 32px;
+      border: 1px solid var(--border-color);
+      border-radius: 6px;
+      font-size: 0.875rem;
+      outline: none;
+      transition: border-color 0.15s;
+    }
+
+    .search-box input:focus {
+      border-color: var(--primary);
+      box-shadow: 0 0 0 2px rgba(0, 120, 212, 0.15);
+    }
+
+    .search-icon {
+      position: absolute;
+      left: 10px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--text-muted);
+      font-size: 0.85rem;
+    }
+
+    .btn-group {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    button.btn {
+      padding: 6px 12px;
+      font-size: 0.8125rem;
+      font-weight: 500;
+      border-radius: 6px;
+      border: 1px solid var(--border-color);
+      background: var(--bg-surface);
+      color: var(--text-primary);
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.15s ease;
+    }
+
+    button.btn:hover {
+      background: #F1F5F9;
+      border-color: #CBD5E1;
+    }
+
+    button.btn-primary {
+      background: var(--primary);
+      color: #FFFFFF;
+      border-color: var(--primary);
+    }
+
+    button.btn-primary:hover {
+      background: var(--primary-hover);
+    }
+
+    /* Main Workspace */
+    .workspace {
+      flex: 1;
+      display: flex;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .canvas-container {
+      flex: 1;
+      position: relative;
+      background: #FAFAFA;
+      overflow: hidden;
+      cursor: grab;
+    }
+
+    .canvas-container:active {
+      cursor: grabbing;
+    }
+
+    #svg-wrapper {
+      position: absolute;
+      top: 0;
+      left: 0;
+      transform-origin: 0 0;
+    }
+
+    #svg-wrapper svg {
+      display: block;
+      user-select: none;
+    }
+
+    /* Floating Zoom Controls */
+    .zoom-toolbar {
+      position: absolute;
+      bottom: 24px;
+      left: 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      background: var(--bg-surface);
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      padding: 4px;
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+      z-index: 5;
+    }
+
+    .zoom-toolbar button {
+      width: 32px;
+      height: 32px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: none;
+      background: transparent;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 1rem;
+      color: var(--text-secondary);
+      transition: background 0.15s;
+    }
+
+    .zoom-toolbar button:hover {
+      background: #F1F5F9;
+      color: var(--text-primary);
+    }
+
+    /* Inspector Sidebar */
+    .inspector {
+      width: var(--sidebar-width);
+      background: var(--bg-surface);
+      border-left: 1px solid var(--border-color);
+      display: flex;
+      flex-direction: column;
+      overflow-y: auto;
+      box-shadow: -2px 0 6px rgba(0, 0, 0, 0.03);
+      z-index: 8;
+      transition: transform 0.2s ease;
+    }
+
+    .inspector-header {
+      padding: 16px;
+      border-bottom: 1px solid var(--border-color);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .inspector-header h2 {
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--text-primary);
+    }
+
+    .inspector-body {
+      padding: 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .inspector-section {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .section-title {
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--text-muted);
+    }
+
+    .meta-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+    }
+
+    .meta-card {
+      background: #F8FAFC;
+      border: 1px solid var(--border-color);
+      border-radius: 6px;
+      padding: 8px 12px;
+    }
+
+    .meta-label { font-size: 0.75rem; color: var(--text-muted); }
+    .meta-val { font-size: 0.875rem; font-weight: 600; color: var(--text-primary); margin-top: 2px; }
+
+    .tag-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+
+    .tag {
+      padding: 3px 8px;
+      background: #F1F5F9;
+      border: 1px solid var(--border-color);
+      border-radius: 4px;
+      font-size: 0.75rem;
+      color: var(--text-secondary);
+      cursor: pointer;
+      transition: all 0.15s;
+    }
+
+    .tag:hover {
+      background: var(--primary-light);
+      color: var(--primary);
+      border-color: #C7E0F4;
+    }
+
+    .field-tag-read { background: #F0FDF4; border-color: #DCFCE7; color: #15803D; }
+    .field-tag-write { background: #FEF2F2; border-color: #FEE2E2; color: #B91C1C; }
+
+    /* Node Highlight in SVG */
+    .highlight-match g.node polygon, .highlight-match g.node path, .highlight-match g.node ellipse {
+      stroke: #E53E3E !important;
+      stroke-width: 3px !important;
+    }
+
+    .highlight-selected g.node polygon, .highlight-selected g.node path, .highlight-selected g.node ellipse {
+      stroke: #0078D4 !important;
+      stroke-width: 3.5px !important;
+      filter: drop-shadow(0 0 6px rgba(0, 120, 212, 0.4));
+    }
+
+    .dimmed {
+      opacity: 0.25 !important;
+      transition: opacity 0.2s;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header -->
+  <header>
+    <div class="title-group">
+      <h1>Procedure Call Graph: <code>{{ program_id }}</code></h1>
+    </div>
+    <div class="badge-bar">
+      {% if graph.entry_point %}
+      <div class="badge" style="background:#EFF6FC; color:#0078D4; border-color:#C7E0F4;">
+        <span>&#9654; Start:</span> <b>{{ graph.entry_point }}</b>
+      </div>
+      {% endif %}
+      <div class="badge badge-primary">
+        <span>Paragraphs:</span> <b>{{ graph.total_paragraphs }}</b>
+      </div>
+      <div class="badge">
+        <span>Calls:</span> <b>{{ graph.total_calls }}</b>
+      </div>
+      <div class="badge">
+        <span>Max Depth:</span> <b>{{ graph.max_depth }}</b>
+      </div>
+      {% if graph.has_cycles %}
+      <div class="badge badge-danger">
+        <span>Topology:</span> <b>Recursive / Cycles</b>
+      </div>
+      {% else %}
+      <div class="badge">
+        <span>Topology:</span> <b>DAG (No Cycles)</b>
+      </div>
+      {% endif %}
+    </div>
+  </header>
+
+  <!-- Controls -->
+  <div class="controls-bar">
+    <div class="search-box">
+      <span class="search-icon">🔍</span>
+      <input type="text" id="nodeSearch" placeholder="Search section or paragraph (e.g. UPDATE-ACCOUNT or UAD010)...">
+    </div>
+    <div class="btn-group">
+      <button class="btn btn-primary" id="btnJumpStart" title="Center view on the program entry point">🎯 Jump to Start</button>
+      <button class="btn" id="btnFit">⛶ Fit to Screen</button>
+      <button class="btn" id="btnReset">↺ Reset View</button>
+      <button class="btn" id="btnDownloadSvg">⬇ Download SVG</button>
+      <button class="btn" id="btnDownloadDot">📄 Download DOT</button>
+    </div>
+  </div>
+
+  <!-- Workspace -->
+  <div class="workspace">
+    <div class="canvas-container" id="canvas">
+      <div id="svg-wrapper">
+        {{ svg_content | safe }}
+      </div>
+
+      <div class="zoom-toolbar">
+        <button id="btnZoomIn" title="Zoom In">+</button>
+        <button id="btnZoomOut" title="Zoom Out">−</button>
+        <button id="btnZoomReset" title="Reset Zoom">1:1</button>
+      </div>
+    </div>
+
+    <!-- Node Inspector Sidebar -->
+    <div class="inspector" id="inspector">
+      <div class="inspector-header">
+        <div>
+          <h2 id="inspTitle">Paragraph Inspector</h2>
+          <div id="inspSubtitle" style="font-size:0.8rem; color:var(--text-secondary); margin-top:2px;"></div>
+        </div>
+        <span class="badge" id="inspTypeBadge">GENERIC</span>
+      </div>
+      <div class="inspector-body">
+        <div class="inspector-section">
+          <div class="section-title">Execution Context</div>
+          <div class="meta-grid">
+            <div class="meta-card">
+              <div class="meta-label">Section</div>
+              <div class="meta-val" id="inspSection" style="word-break:break-word; font-size:0.8rem;">-</div>
+            </div>
+            <div class="meta-card">
+              <div class="meta-label">Paragraph</div>
+              <div class="meta-val" id="inspPara" style="font-size:0.8rem;">-</div>
+            </div>
+            <div class="meta-card">
+              <div class="meta-label">Line Span</div>
+              <div class="meta-val" id="inspLines">-</div>
+            </div>
+            <div class="meta-card">
+              <div class="meta-label">Complexity (CC)</div>
+              <div class="meta-val" id="inspCC">-</div>
+            </div>
+            <div class="meta-card">
+              <div class="meta-label">Statements</div>
+              <div class="meta-val" id="inspStmts">-</div>
+            </div>
+            <div class="meta-card">
+              <div class="meta-label">Cluster</div>
+              <div class="meta-val" id="inspCluster">-</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="inspector-section">
+          <div class="section-title">Invoked By (Callers)</div>
+          <div class="tag-list" id="inspCallers">
+            <span style="font-size:0.8rem; color:var(--text-muted);">None</span>
+          </div>
+        </div>
+
+        <div class="inspector-section">
+          <div class="section-title">Calls (Successors)</div>
+          <div class="tag-list" id="inspSuccessors">
+            <span style="font-size:0.8rem; color:var(--text-muted);">None</span>
+          </div>
+        </div>
+
+        <div class="inspector-section">
+          <div class="section-title">Variables Read (Source DFG)</div>
+          <div class="tag-list" id="inspReadFields">
+            <span style="font-size:0.8rem; color:var(--text-muted);">None</span>
+          </div>
+        </div>
+
+        <div class="inspector-section">
+          <div class="section-title">Variables Modified (Target DFG)</div>
+          <div class="tag-list" id="inspWriteFields">
+            <span style="font-size:0.8rem; color:var(--text-muted);">None</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Raw DOT Data for Download -->
+  <textarea id="dotSource" style="display:none;">{{ dot_content }}</textarea>
+
+  <!-- Interactive Logic -->
+  <script>
+    const graphData = {{ graph.model_dump_json() | safe }};
+
+    // Pan & Zoom State
+    let scale = 1.0;
+    let panX = 0;
+    let panY = 0;
+    let isPanning = false;
+    let startX = 0;
+    let startY = 0;
+
+    const canvas = document.getElementById("canvas");
+    const svgWrapper = document.getElementById("svg-wrapper");
+    const svg = svgWrapper.querySelector("svg");
+
+    function updateTransform() {
+      svgWrapper.style.transform = `translate(${panX}px, ${panY}px) scale(${scale})`;
+    }
+
+    // Zoom Handlers
+    function zoom(delta, clientX, clientY) {
+      const oldScale = scale;
+      scale = Math.min(Math.max(0.15, scale * delta), 5.0);
+
+      if (clientX !== undefined && clientY !== undefined) {
+        const rect = canvas.getBoundingClientRect();
+        const offsetX = clientX - rect.left;
+        const offsetY = clientY - rect.top;
+        panX -= (offsetX - panX) * (scale / oldScale - 1);
+        panY -= (offsetY - panY) * (scale / oldScale - 1);
+      }
+      updateTransform();
+    }
+
+    canvas.addEventListener("wheel", (e) => {
+      e.preventDefault();
+      const delta = e.deltaY < 0 ? 1.15 : 0.85;
+      zoom(delta, e.clientX, e.clientY);
+    });
+
+    canvas.addEventListener("mousedown", (e) => {
+      if (e.target.closest("button") || e.target.closest("input")) return;
+      isPanning = true;
+      startX = e.clientX - panX;
+      startY = e.clientY - panY;
+    });
+
+    window.addEventListener("mousemove", (e) => {
+      if (!isPanning) return;
+      panX = e.clientX - startX;
+      panY = e.clientY - startY;
+      updateTransform();
+    });
+
+    window.addEventListener("mouseup", () => { isPanning = false; });
+
+    document.getElementById("btnZoomIn").addEventListener("click", () => zoom(1.2));
+    document.getElementById("btnZoomOut").addEventListener("click", () => zoom(0.8));
+    document.getElementById("btnZoomReset").addEventListener("click", () => {
+      scale = 1.0;
+      panX = 0;
+      panY = 0;
+      updateTransform();
+    });
+
+    document.getElementById("btnReset").addEventListener("click", () => {
+      fitToScreen();
+      clearHighlight();
+    });
+
+    document.getElementById("btnFit").addEventListener("click", fitToScreen);
+
+    function fitToScreen() {
+      if (!svg) return;
+      const canvasRect = canvas.getBoundingClientRect();
+      const vb = svg.viewBox ? svg.viewBox.baseVal : null;
+      let width = 800;
+      let height = 600;
+
+      if (vb && vb.width > 0 && vb.height > 0) {
+        width = vb.width;
+        height = vb.height;
+      } else {
+        try {
+          const bbox = svg.getBBox();
+          if (bbox && bbox.width > 0 && bbox.height > 0) {
+            width = bbox.width;
+            height = bbox.height;
+          }
+        } catch (e) {}
+      }
+
+      const padding = 40;
+      const availW = Math.max(100, canvasRect.width - padding);
+      const availH = Math.max(100, canvasRect.height - padding);
+
+      scale = Math.min(availW / width, availH / height, 1.2);
+      panX = (canvasRect.width - width * scale) / 2;
+      panY = Math.max(20, (canvasRect.height - height * scale) / 2);
+      updateTransform();
+    }
+
+    function focusNode(nodeName) {
+      if (!svg || !nodeName) return;
+      const node = graphData.nodes[nodeName.toUpperCase().trim()];
+      if (!node) return;
+
+      const g = Array.from(svg.querySelectorAll("g.node")).find(el => {
+        const title = el.querySelector("title");
+        return title && (title.textContent.trim().toUpperCase() === node.id.toUpperCase() || title.textContent.trim().toUpperCase() === nodeName.toUpperCase());
+      });
+      if (!g) return;
+
+      const canvasRect = canvas.getBoundingClientRect();
+      const bbox = g.getBBox();
+      scale = 1.15;
+      const centerX = bbox.x + bbox.width / 2;
+      const centerY = bbox.y + bbox.height / 2;
+      panX = (canvasRect.width / 2) - (centerX * scale);
+      panY = (canvasRect.height / 2) - (centerY * scale);
+      updateTransform();
+    }
+
+    // Node Interaction & Inspection
+    function selectNode(nodeName) {
+      const node = graphData.nodes[nodeName.toUpperCase().trim()];
+      if (!node) return;
+
+      // Update Inspector Panel
+      const hasDistinctSection = Boolean(node.section && node.section.trim() && node.section.trim().toUpperCase() !== node.name.trim().toUpperCase());
+      const displayTitle = hasDistinctSection ? node.section.trim() : node.name;
+      const displaySubtitle = hasDistinctSection ? `¶ Paragraph: ${node.name}` : "";
+
+      document.getElementById("inspTitle").textContent = displayTitle;
+      document.getElementById("inspSubtitle").textContent = displaySubtitle;
+
+      const typeBadge = document.getElementById("inspTypeBadge");
+      if (node.is_entry_point) {
+        typeBadge.textContent = "▶ START / " + node.node_type;
+        typeBadge.style.background = "#EFF6FC";
+        typeBadge.style.color = "#0078D4";
+      } else {
+        typeBadge.textContent = node.node_type;
+        typeBadge.style.background = "#F1F5F9";
+        typeBadge.style.color = "var(--text-secondary)";
+      }
+
+      document.getElementById("inspSection").textContent = node.section ? node.section : "—";
+      document.getElementById("inspPara").textContent = node.name;
+      document.getElementById("inspLines").textContent = node.start_line > 0 ? `L${node.start_line}-${node.end_line}` : "N/A";
+      document.getElementById("inspCC").textContent = node.cyclomatic_complexity;
+      document.getElementById("inspStmts").textContent = node.statement_count;
+      document.getElementById("inspCluster").textContent = node.cluster_id.replace("cluster_", "");
+
+      // Callers List
+      const callersEl = document.getElementById("inspCallers");
+      callersEl.innerHTML = "";
+      if (node.called_by.length > 0) {
+        node.called_by.forEach(caller => {
+          const tag = document.createElement("span");
+          tag.className = "tag";
+          tag.textContent = caller;
+          tag.onclick = () => { selectNode(caller); focusNode(caller); };
+          callersEl.appendChild(tag);
+        });
+      } else {
+        callersEl.innerHTML = '<span style="font-size:0.8rem; color:var(--text-muted);">' + (node.is_entry_point ? '&#9654; Program Entry Point' : 'Root / Uncalled') + '</span>';
+      }
+
+      // Successors List
+      const succEl = document.getElementById("inspSuccessors");
+      succEl.innerHTML = "";
+      if (node.successors.length > 0) {
+        node.successors.forEach(succ => {
+          const tag = document.createElement("span");
+          tag.className = "tag";
+          tag.textContent = succ;
+          tag.onclick = () => { selectNode(succ); focusNode(succ); };
+          succEl.appendChild(tag);
+        });
+      } else {
+        succEl.innerHTML = '<span style="font-size:0.8rem; color:var(--text-muted);">Terminal / None</span>';
+      }
+
+      // Read Fields
+      const readEl = document.getElementById("inspReadFields");
+      readEl.innerHTML = "";
+      if (node.source_field_ids && node.source_field_ids.length > 0) {
+        node.source_field_ids.slice(0, 15).forEach(f => {
+          const tag = document.createElement("span");
+          tag.className = "tag field-tag-read";
+          tag.textContent = f;
+          readEl.appendChild(tag);
+        });
+      } else {
+        readEl.innerHTML = '<span style="font-size:0.8rem; color:var(--text-muted);">No variable reads</span>';
+      }
+
+      // Write Fields
+      const writeEl = document.getElementById("inspWriteFields");
+      writeEl.innerHTML = "";
+      if (node.target_field_ids && node.target_field_ids.length > 0) {
+        node.target_field_ids.slice(0, 15).forEach(f => {
+          const tag = document.createElement("span");
+          tag.className = "tag field-tag-write";
+          tag.textContent = f;
+          writeEl.appendChild(tag);
+        });
+      } else {
+        writeEl.innerHTML = '<span style="font-size:0.8rem; color:var(--text-muted);">No variable writes</span>';
+      }
+
+      // Highlight SVG Node
+      if (svg) {
+        svg.querySelectorAll("g.node").forEach(g => {
+          g.classList.remove("highlight-selected");
+          const title = g.querySelector("title");
+          if (title && (title.textContent.trim().toUpperCase() === node.id.toUpperCase() || title.textContent.trim().toUpperCase() === nodeName.toUpperCase())) {
+            g.classList.add("highlight-selected");
+          }
+        });
+      }
+    }
+
+    // Attach click handlers to SVG nodes
+    if (svg) {
+      svg.querySelectorAll("g.node").forEach(g => {
+        g.style.cursor = "pointer";
+        g.addEventListener("click", () => {
+          const title = g.querySelector("title");
+          if (title) {
+            const rawName = title.textContent.trim().replace(/^p_/, "").replace(/_/g, "-");
+            // Match against graphData nodes
+            for (const k in graphData.nodes) {
+              if (graphData.nodes[k].id === title.textContent.trim() || k === rawName.toUpperCase()) {
+                selectNode(k);
+                break;
+              }
+            }
+          }
+        });
+      });
+    }
+
+    // Jump to Start button
+    const btnJump = document.getElementById("btnJumpStart");
+    if (btnJump) {
+      btnJump.addEventListener("click", () => {
+        const startKey = graphData.entry_point || Object.keys(graphData.nodes)[0];
+        if (startKey) {
+          selectNode(startKey);
+          focusNode(startKey);
+        }
+      });
+    }
+
+    // Search & Live Filter
+    const searchInput = document.getElementById("nodeSearch");
+    searchInput.addEventListener("input", (e) => {
+      const q = e.target.value.trim().toUpperCase();
+      if (!svg) return;
+
+      if (!q) {
+        clearHighlight();
+        return;
+      }
+
+      let firstMatchKey = null;
+      svg.querySelectorAll("g.node").forEach(g => {
+        const title = g.querySelector("title");
+        const text = g.textContent.toUpperCase();
+        let isMatch = text.includes(q);
+        if (!isMatch && title) {
+          isMatch = title.textContent.toUpperCase().includes(q);
+        }
+
+        if (isMatch) {
+          g.classList.remove("dimmed");
+          g.classList.add("highlight-match");
+          if (!firstMatchKey && title) {
+            for (const k in graphData.nodes) {
+              const nd = graphData.nodes[k];
+              if (nd.id === title.textContent.trim() || k === title.textContent.trim().toUpperCase()
+                  || (nd.section && nd.section.toUpperCase().includes(q))
+                  || nd.name.toUpperCase().includes(q)) {
+                firstMatchKey = k;
+                break;
+              }
+            }
+          }
+        } else {
+          g.classList.remove("highlight-match");
+          g.classList.add("dimmed");
+        }
+      });
+
+      if (firstMatchKey) {
+        selectNode(firstMatchKey);
+      }
+    });
+
+    function clearHighlight() {
+      if (!svg) return;
+      svg.querySelectorAll("g.node").forEach(g => {
+        g.classList.remove("highlight-match");
+        g.classList.remove("dimmed");
+      });
+    }
+
+    // Downloads
+    document.getElementById("btnDownloadSvg").addEventListener("click", () => {
+      if (!svg) return;
+      const svgData = new XMLSerializer().serializeToString(svg);
+      const blob = new Blob([svgData], { type: "image/svg+xml;charset=utf-8" });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = `${graphData.program_id}_CallGraph.svg`;
+      a.click();
+      URL.revokeObjectURL(url);
+    });
+
+    document.getElementById("btnDownloadDot").addEventListener("click", () => {
+      const dot = document.getElementById("dotSource").value;
+      const blob = new Blob([dot], { type: "text/vnd.graphviz;charset=utf-8" });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = `${graphData.program_id}_CallGraph.dot`;
+      a.click();
+      URL.revokeObjectURL(url);
+    });
+
+    // Auto-select start node and fit to screen on load
+    window.addEventListener("DOMContentLoaded", () => {
+      fitToScreen();
+      const startKey = graphData.entry_point || Object.keys(graphData.nodes)[0];
+      if (startKey) selectNode(startKey);
+    });
+  </script>
+</body>
+</html>

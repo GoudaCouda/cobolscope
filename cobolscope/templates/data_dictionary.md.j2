@@ -1,0 +1,35 @@
+# Data Dictionary: `{{ program.program_id }}`
+
+**Source File:** `{{ program.source_file_path }}`  
+{% if program.author %}**Author:** {{ program.author }}  {% endif %}
+{% if program.date_written %}**Date Written:** {{ program.date_written }}  {% endif %}
+
+## Executive Summary
+
+| Metric | Value |
+| :--- | :--- |
+| **Total Data Items** | {{ summary.total_fields }} |
+| **Level-88 Business Rules** | {{ summary.total_88s }} |
+| **Memory Overlays (REDEFINES)** | {{ summary.total_redefines }} |
+| **Working-Storage Span** | {{ summary.ws_bytes | format_bytes }} |
+
+{% if file_controls %}
+## External File Interfaces (File Controls)
+
+| Select Name | Assigned Dataset / Device | Organization | Access Mode | Record Key | File Status |
+| :--- | :--- | :--- | :--- | :--- | :--- |
+{% for fc in file_controls %}
+| **`{{ fc.select_name }}`** | {{ ("`" + fc.assign_to + "`") if fc.assign_to else "—" }} | {{ fc.organization }} | {{ fc.access_mode }} | {{ ("`" + fc.record_key + "`") if fc.record_key else "—" }} | {{ ("`" + fc.file_status_var + "`") if fc.file_status_var else "—" }} |
+{% endfor %}
+
+{% endif %}
+{% for sec_name, s_rows in sections.items() %}
+## {{ sec_name }}
+
+| Level | Field Name / Path | Business Type | PIC / Usage | Offset | Bytes | Allowed Values / Attributes | References |
+| :---: | :--- | :--- | :--- | :---: | :---: | :--- | :--- |
+{% for r in s_rows %}
+| {{ "%02d" | format(r.level) }} | {{ ("&nbsp;&nbsp;" * r.depth) }}{% if r.level == 1 %}**`{{ r.name }}`**{% else %}`{{ r.name }}`{% endif %}<br/><small>`{{ r.qualified_name }}`</small> | {{ r.logical_type }} | {{ r | format_md_pic_usage }} | {{ r.byte_offset }} | {{ r.byte_length }} | {{ r | format_md_attributes }} | {{ r | format_md_references }} |
+{% endfor %}
+
+{% endfor %}

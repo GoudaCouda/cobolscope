@@ -1,0 +1,25 @@
+[build-system]
+requires = ["setuptools>=61.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "cobolscope"
+version = "0.1.0"
+description = "Modern COBOL semantic analysis, AST extraction, data dictionary, and procedure call graph visualizer."
+requires-python = ">=3.7"
+readme = "README.md"
+dependencies = [
+    "pydantic>=2.0.0",
+    "jinja2>=3.0.0",
+]
+
+[project.scripts]
+cobolscope = "cobolscope.cli:main"
+proleap = "cobolscope.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["cobolscope*"]
+
+[tool.setuptools.package-data]
+cobolscope = ["templates/*.j2", "lib/*.jar"]

@@ -1,0 +1,83 @@
+       IDENTIFICATION DIVISION.
+       PROGRAM-ID. TSTEDGES.
+       ENVIRONMENT DIVISION.
+       INPUT-OUTPUT SECTION.
+       FILE-CONTROL.
+           SELECT CUST-FILE ASSIGN TO 'CUST.DAT'
+               FILE STATUS IS WS-FILE-STATUS.
+       DATA DIVISION.
+       FILE SECTION.
+       FD  CUST-FILE.
+       01  CUST-REC               PIC X(100).
+       WORKING-STORAGE SECTION.
+       01  WS-FILE-STATUS         PIC X(2).
+       01  WS-FLAG                PIC 9(1) VALUE 0.
+       01  WS-TRAN-TYPE           PIC 9(1) VALUE 1.
+       01  WS-PARAM               PIC X(10).
+       LINKAGE SECTION.
+       01  LK-PARAM               PIC X(10).
+
+       PROCEDURE DIVISION.
+       DECLARATIVES.
+       FILE-ERROR-HANDLING SECTION.
+           USE AFTER STANDARD ERROR PROCEDURE ON CUST-FILE.
+       ERROR-LOG-PARA.
+           DISPLAY 'I/O ERROR OCCURRED'
+           GOBACK.
+       END DECLARATIVES.
+
+       0000-MAIN SECTION.
+       0000-START.
+           DISPLAY 'TEST GRAPH PIPELINE START'
+           PERFORM 2000-CALC-SECTION
+           PERFORM 4000-DISPATCH
+           PERFORM 3000-ROUTINE
+           STOP RUN.
+
+       1000-TERMINATE.
+           DISPLAY 'NORMAL END'
+           GOBACK.
+
+       1100-OBSOLETE-CLEANUP.
+           DISPLAY 'CLEANING UP STRANDED CODE'
+           GOBACK.
+
+       2000-CALC-SECTION SECTION.
+       2000-FIRST-PARA.
+           MOVE 1 TO WS-FLAG.
+       2000-SECOND-PARA.
+           MOVE 2 TO WS-FLAG.
+
+       3000-ROUTINE.
+           MOVE 3 TO WS-FLAG
+           GO TO 3000-EXIT.
+
+       3100-SKIPPED-LOGIC.
+           MOVE 0 TO WS-FLAG.
+
+       3000-EXIT.
+           EXIT.
+
+       4000-DISPATCH.
+           GO TO 4100-NEW-ACCT
+                 4200-UPDATE-ACCT
+                 4300-CLOSE-ACCT
+               DEPENDING ON WS-TRAN-TYPE.
+
+       4100-NEW-ACCT.
+           DISPLAY 'NEW ACCT'
+           GOBACK.
+
+       4200-UPDATE-ACCT.
+           DISPLAY 'UPDATE ACCT'
+           GOBACK.
+
+       4300-CLOSE-ACCT.
+           DISPLAY 'CLOSE ACCT'
+           GOBACK.
+
+       5000-ALT-ENTRY-SECTION SECTION.
+           ENTRY 'ALTENTRY' USING LK-PARAM.
+       5000-ALT-ENTRY-PARA.
+           DISPLAY 'ALT ENTRY INVOKED'
+           GOBACK.

@@ -1,0 +1,17 @@
+__pycache__/
+*.py[cod]
+*.class
+*.egg-info/
+dist/
+build/
+.pytest_cache/
+tests/.cache/
+output/
+dict.html
+dict.md
+proleap-cobol-parser/
+cobol_lst/
+tests/fixtures/cobol_lst/
+AGENTS.md
+GEMINI.md
+lib/
