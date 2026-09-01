@@ -1,6 +1,6 @@
 # CobolScope
 
-[![Python 3.8+](https://img.shields.io/badge/python-3.8+-blue.svg)](https://www.python.org/downloads/)
+[![Python 3.10+](https://img.shields.io/badge/python-3.10+-blue.svg)](https://www.python.org/downloads/)
 [![Java 17+](https://img.shields.io/badge/java-17+-orange.svg)](https://openjdk.org/)
 [![License: Apache 2.0](https://img.shields.io/badge/License-Apache_2.0-blue.svg)](LICENSE)
 
@@ -25,19 +25,19 @@ CobolScope bridges enterprise mainframe COBOL to modern Python data models, enab
 ## Quick Start
 
 ### Prerequisites
-- **Java JDK 17+** on your `PATH` (`javac` and `java`)
-- **Python 3.8+**
+- **Java 17+ runtime** on your `PATH` (`java`)
+- **Python 3.10+**
 - *(Optional)* [Graphviz](https://graphviz.org/) (`dot` on your `PATH`) for SVG compilation
 
-### 1. Build & Install
+### 1. Install
 ```bash
-# Compile Java extractors
-./build.ps1
-# (or on Linux/macOS: javac --release 17 -cp lib/proleap-cobol-parser.jar -d lib java/*.java)
-
-# Install Python package in editable mode
+# The Java parser bridge is already bundled with the package.
 pip install -e .
 ```
+
+To rebuild the bundled Java bridge while developing CobolScope, install a JDK
+17+ (`java` and `javac`) and run `python build_java.py`. On Windows,
+`./build.ps1` is an equivalent wrapper.
 
 ### 2. CLI Usage
 
@@ -100,7 +100,7 @@ print(f"Total Paragraphs: {len(model.paragraphs)}")
 # 2. Inspect Data Dictionary & Memory Layout
 dict_gen = DataDictionaryGenerator(model)
 for row in dict_gen.rows:
-    print(f"{row.level:02d} {row.name:<30} Offset: {row.byte_offset:<5} Len: {row.byte_length:<4} Type: {row.business_type}")
+    print(f"{row.level:02d} {row.name:<30} Offset: {row.byte_offset:<5} Len: {row.byte_length:<4} Type: {row.logical_type}")
 
 # Export Markdown or HTML
 md_report = dict_gen.to_markdown()
@@ -108,9 +108,9 @@ html_report = dict_gen.to_html()
 
 # 3. Generate Procedure Call Graph
 graph_gen = CallGraphGenerator(model)
-dot_source = graph_gen.generate_dot()
-svg_content = graph_gen.generate_svg()
-html_viewer = graph_gen.generate_html()
+dot_source = graph_gen.to_dot()
+svg_content = graph_gen.to_svg()
+html_viewer = graph_gen.to_html()
 
 # 4. Run Reachability & Dead Code Detection
 analyzer = PushdownReachabilityAnalyzer(model)
@@ -157,8 +157,8 @@ CobolScope enforces strict mathematical, architectural, and compiler correctness
 
 To run the full suite:
 ```powershell
-python -m tests.run_all_tests.py
-python -m tests.test_nist_suite.py
+python -m tests.run_all_tests
+python -m tests.test_nist_suite
 ```
 
 ---
