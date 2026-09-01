@@ -9,6 +9,12 @@ digraph "XFRFUN_CallGraph" {
     bgcolor="#FFFFFF";
     fontname="Segoe UI, -apple-system, BlinkMacSystemFont, Roboto, Helvetica, Arial, sans-serif";
     fontsize=12;
+
+    // Top-Level Program Header Title
+    labelloc="t";
+    labeljust="c";
+    label=<<table border="0" cellborder="0" cellspacing="0" cellpadding="3"><tr><td><font point-size="15" color="#0F172A"><b>Procedure Call Graph: XFRFUN</b></font></td></tr><tr><td><font point-size="9" color="#64748B">10 Procedures | 14 Calls &amp; Transfers | Max Depth: 5</font></td></tr></table>>;
+
     node [fontname="Segoe UI, Helvetica, Arial, sans-serif", fontsize=10, shape=box, style="filled,rounded", penwidth=1.5, margin="0.15,0.08"];
     edge [fontname="Segoe UI, Helvetica, Arial, sans-serif", fontsize=8, arrowsize=0.75];
 

@@ -108,6 +108,15 @@ def render_dot(graph: CallGraph, enable_clustering: bool = True) -> str:
     lines.append('    bgcolor="#FFFFFF";')
     lines.append('    fontname="Segoe UI, -apple-system, BlinkMacSystemFont, Roboto, Helvetica, Arial, sans-serif";')
     lines.append('    fontsize=12;')
+    lines.append('')
+    lines.append('    // Top-Level Program Header Title')
+    lines.append('    labelloc="t";')
+    lines.append('    labeljust="c";')
+    lines.append(f'    label=<<table border="0" cellborder="0" cellspacing="0" cellpadding="3">'
+                 f'<tr><td><font point-size="15" color="#0F172A"><b>Procedure Call Graph: {html.escape(graph.program_id)}</b></font></td></tr>'
+                 f'<tr><td><font point-size="9" color="#64748B">{len(graph.nodes)} Procedures | {len(graph.edges)} Calls &amp; Transfers | Max Depth: {graph.max_depth}</font></td></tr>'
+                 f'</table>>;')
+    lines.append('')
     lines.append('    node [fontname="Segoe UI, Helvetica, Arial, sans-serif", fontsize=10, shape=box, style="filled,rounded", penwidth=1.5, margin="0.15,0.08"];')
     lines.append('    edge [fontname="Segoe UI, Helvetica, Arial, sans-serif", fontsize=8, arrowsize=0.75];')
     lines.append('')
