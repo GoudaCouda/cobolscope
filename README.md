@@ -35,9 +35,10 @@ CobolScope bridges enterprise mainframe COBOL to modern Python data models, enab
 pip install -e .
 ```
 
-To rebuild the bundled Java bridge while developing CobolScope, install a JDK
-17+ (`java` and `javac`) and run `python build_java.py`. On Windows,
-`./build.ps1` is an equivalent wrapper.
+To rebuild the bundled Java bridge after changing files under `java/`, install
+a JDK 17+ (`java` and `javac`) and run `python build_java.py`. The equivalent
+platform wrappers are `./build.ps1` on Windows and `./build.sh` on Linux/macOS.
+Regular CobolScope users do not need to run these build scripts.
 
 ### 2. CLI Usage
 
