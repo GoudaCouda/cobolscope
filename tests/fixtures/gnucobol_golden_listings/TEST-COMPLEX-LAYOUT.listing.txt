@@ -1,0 +1,201 @@
+GnuCOBOL 3.2.0          tests\fixtures\TEST-COMPLEX-LAYOUT.cbl                        Tue Sep 01 2026 18:40:42  Page 0001
+
+LINE    PG/LN  A...B............................................................SEQUENCE
+
+000001         IDENTIFICATION DIVISION.
+000002         PROGRAM-ID. TSTCMPLX.
+000003
+000004         DATA DIVISION.
+000005         WORKING-STORAGE SECTION.
+000006
+000007         77  WS-STANDALONE-COUNT        PIC S9(4) COMP VALUE 0.
+000008
+000009         01  WS-CUSTOMER-RECORD.
+000010             05  WS-RECORD-HEADER.
+000011                 10  WS-RECORD-TYPE     PIC X.
+000012                 10  FILLER             PIC X(2).
+000013                 10  WS-RECORD-LENGTH   PIC 9(5) COMP-3.
+000014             05  WS-CUSTOMER-DETAIL.
+000015                 10  WS-CUSTOMER-KEY.
+000016                     15  WS-BRANCH-CODE  PIC 9(6).
+000017                     15  WS-ACCOUNT-NO   PIC 9(10).
+000018                 10  WS-CUSTOMER-NAME.
+000019                     15  WS-TITLE        PIC X(8).
+000020                     15  WS-FIRST-NAME   PIC X(20).
+000021                     15  WS-LAST-NAME    PIC X(30).
+000022                 10  WS-CONTACT-GROUP.
+000023                     15  WS-PHONE OCCURS 3 TIMES.
+000024                         20  WS-PHONE-TYPE PIC X.
+000025                         20  WS-PHONE-NUMBER PIC X(15).
+000026             05  WS-ACCOUNT-TABLE OCCURS 2 TIMES.
+000027                 10  WS-ACCOUNT-DETAIL.
+000028                     15  WS-ACCOUNT-TYPE PIC X(3).
+000029                     15  FILLER          PIC X.
+000030                     15  WS-BALANCE      PIC S9(9)V99 COMP-3.
+000031                     15  WS-LIMIT        PIC S9(9) COMP.
+000032                 10  WS-MONTH-TABLE OCCURS 12 TIMES.
+000033                     15  WS-MONTH-AMOUNT PIC S9(7)V99 COMP-3.
+000034
+000035         01  WS-STATUS                  PIC X VALUE 'N'.
+000036             88  WS-STATUS-VALID        VALUE 'Y'.
+000037             88  WS-STATUS-INVALID      VALUE 'N'.
+000038
+000039         01  WS-DATE-STORAGE.
+000040             05  WS-DATE-RAW            PIC X(8).
+000041             05  WS-DATE-PARTS REDEFINES WS-DATE-RAW.
+000042                 10  WS-DATE-YEAR       PIC 9(4).
+000043                 10  WS-DATE-MONTH      PIC 99.
+000044                 10  WS-DATE-DAY        PIC 99.
+000045             05  WS-DATE-TRAILER        PIC X(2).
+000046
+000047         01  WS-ALIGNMENT-RECORD.
+000048             05  WS-ALIGN-PREFIX        PIC X.
+000049             05  FILLER                 PIC X.
+000050             05  WS-ALIGNED-SHORT       PIC S9(4) COMP.
+000051             05  FILLER                 PIC X(3).
+000052             05  FILLER                 PIC X(3).
+GnuCOBOL 3.2.0          tests\fixtures\TEST-COMPLEX-LAYOUT.cbl                        Tue Sep 01 2026 18:40:42  Page 0002
+
+LINE    PG/LN  A...B............................................................SEQUENCE
+
+000053             05  WS-ALIGNED-LONG        PIC S9(9) COMP.
+000054             05  WS-ALIGN-SUFFIX        PIC X(2).
+000055
+000056         LINKAGE SECTION.
+000057         01  LK-REQUEST.
+000058             05  LK-REQUEST-ID          PIC X(12).
+000059             05  LK-REQUEST-DATA.
+000060                 10  LK-REQUEST-CODE    PIC 9(4) COMP.
+000061                 10  LK-REQUEST-AMOUNT  PIC S9(7)V99 COMP-3.
+000062                 10  FILLER             PIC X(5).
+000063
+000064         PROCEDURE DIVISION USING LK-REQUEST.
+000065         0000-MAIN.
+000066             GOBACK.
+GnuCOBOL 3.2.0          tests\fixtures\TEST-COMPLEX-LAYOUT.cbl                        Tue Sep 01 2026 18:40:42  Page 0003
+
+SIZE  TYPE           LVL  NAME                           PICTURE
+
+      WORKING-STORAGE SECTION
+
+00002 NUMERIC        77   WS-STANDALONE-COUNT            S9(4) COMP
+
+00276 GROUP          01   WS-CUSTOMER-RECORD
+00006 GROUP          05   WS-RECORD-HEADER
+00001 ALPHANUMERIC   10   WS-RECORD-TYPE                 X
+00002 ALPHANUMERIC   10   FILLER                         X(2)
+00003 NUMERIC        10   WS-RECORD-LENGTH               9(5) COMP-3
+00122 GROUP          05   WS-CUSTOMER-DETAIL
+00016 GROUP          10   WS-CUSTOMER-KEY
+00006 NUMERIC        15   WS-BRANCH-CODE                 9(6)
+00010 NUMERIC        15   WS-ACCOUNT-NO                  9(10)
+00058 GROUP          10   WS-CUSTOMER-NAME
+00008 ALPHANUMERIC   15   WS-TITLE                       X(8)
+00020 ALPHANUMERIC   15   WS-FIRST-NAME                  X(20)
+00030 ALPHANUMERIC   15   WS-LAST-NAME                   X(30)
+00048 GROUP          10   WS-CONTACT-GROUP
+00048 GROUP          15   WS-PHONE                       OCCURS 3
+00001 ALPHANUMERIC   20   WS-PHONE-TYPE                  X
+00015 ALPHANUMERIC   20   WS-PHONE-NUMBER                X(15)
+00148 GROUP          05   WS-ACCOUNT-TABLE               OCCURS 2
+00014 GROUP          10   WS-ACCOUNT-DETAIL
+00003 ALPHANUMERIC   15   WS-ACCOUNT-TYPE                X(3)
+00001 ALPHANUMERIC   15   FILLER                         X
+00006 NUMERIC        15   WS-BALANCE                     S9(9)V99 COMP-3
+00004 NUMERIC        15   WS-LIMIT                       S9(9) COMP
+00060 GROUP          10   WS-MONTH-TABLE                 OCCURS 12
+00005 NUMERIC        15   WS-MONTH-AMOUNT                S9(7)V99 COMP-3
+
+00001 ALPHANUMERIC   01   WS-STATUS                      X
+      CONDITIONAL    88   WS-STATUS-VALID
+      CONDITIONAL    88   WS-STATUS-INVALID
+
+00010 GROUP          01   WS-DATE-STORAGE
+00008 ALPHANUMERIC   05   WS-DATE-RAW                    X(8)
+00008 GROUP          05   WS-DATE-PARTS, REDEFINES WS-DATE-RAW
+00004 NUMERIC        10   WS-DATE-YEAR                   9(4)
+00002 NUMERIC        10   WS-DATE-MONTH                  99
+00002 NUMERIC        10   WS-DATE-DAY                    99
+00002 ALPHANUMERIC   05   WS-DATE-TRAILER                X(2)
+
+00016 GROUP          01   WS-ALIGNMENT-RECORD
+00001 ALPHANUMERIC   05   WS-ALIGN-PREFIX                X
+00001 ALPHANUMERIC   05   FILLER                         X
+00002 NUMERIC        05   WS-ALIGNED-SHORT               S9(4) COMP
+00003 ALPHANUMERIC   05   FILLER                         X(3)
+00003 ALPHANUMERIC   05   FILLER                         X(3)
+00004 NUMERIC        05   WS-ALIGNED-LONG                S9(9) COMP
+00002 ALPHANUMERIC   05   WS-ALIGN-SUFFIX                X(2)
+
+GnuCOBOL 3.2.0          tests\fixtures\TEST-COMPLEX-LAYOUT.cbl                        Tue Sep 01 2026 18:40:42  Page 0004
+
+SIZE  TYPE           LVL  NAME                           PICTURE
+
+      LINKAGE SECTION
+
+00024 GROUP          01   LK-REQUEST
+00012 ALPHANUMERIC   05   LK-REQUEST-ID                  X(12)
+00012 GROUP          05   LK-REQUEST-DATA
+00002 NUMERIC        10   LK-REQUEST-CODE                9(4) COMP
+00005 NUMERIC        10   LK-REQUEST-AMOUNT              S9(7)V99 COMP-3
+00005 ALPHANUMERIC   10   FILLER                         X(5)
+
+GnuCOBOL 3.2.0          tests\fixtures\TEST-COMPLEX-LAYOUT.cbl                        Tue Sep 01 2026 18:40:42  Page 0005
+
+NAME                           DEFINED                                    REFERENCES
+
+WS-STANDALONE-COUNT            7      not referenced
+WS-CUSTOMER-RECORD             9      not referenced
+WS-RECORD-HEADER               10     not referenced
+WS-RECORD-TYPE                 11     not referenced
+WS-RECORD-LENGTH               13     not referenced
+WS-CUSTOMER-DETAIL             14     not referenced
+WS-CUSTOMER-KEY                15     not referenced
+WS-BRANCH-CODE                 16     not referenced
+WS-ACCOUNT-NO                  17     not referenced
+WS-CUSTOMER-NAME               18     not referenced
+WS-TITLE                       19     not referenced
+WS-FIRST-NAME                  20     not referenced
+WS-LAST-NAME                   21     not referenced
+WS-CONTACT-GROUP               22     not referenced
+WS-PHONE                       23     not referenced
+WS-PHONE-TYPE                  24     not referenced
+WS-PHONE-NUMBER                25     not referenced
+WS-ACCOUNT-TABLE               26     not referenced
+WS-ACCOUNT-DETAIL              27     not referenced
+WS-ACCOUNT-TYPE                28     not referenced
+WS-BALANCE                     30     not referenced
+WS-LIMIT                       31     not referenced
+WS-MONTH-TABLE                 32     not referenced
+WS-MONTH-AMOUNT                33     not referenced
+WS-STATUS                      35     not referenced
+WS-STATUS-VALID                36     not referenced
+WS-STATUS-INVALID              37     not referenced
+WS-DATE-STORAGE                39     not referenced
+WS-DATE-RAW                    40     not referenced
+WS-DATE-PARTS                  41     not referenced
+WS-DATE-YEAR                   42     not referenced
+WS-DATE-MONTH                  43     not referenced
+WS-DATE-DAY                    44     not referenced
+WS-DATE-TRAILER                45     not referenced
+WS-ALIGNMENT-RECORD            47     not referenced
+WS-ALIGN-PREFIX                48     not referenced
+WS-ALIGNED-SHORT               50     not referenced
+WS-ALIGNED-LONG                53     not referenced
+WS-ALIGN-SUFFIX                54     not referenced
+
+LK-REQUEST                     57      *64                                                                     x1
+LK-REQUEST-ID                  58     referenced by parent
+LK-REQUEST-DATA                59     referenced by parent
+LK-REQUEST-CODE                60     referenced by parent
+LK-REQUEST-AMOUNT              61     referenced by parent
+
+GnuCOBOL 3.2.0          tests\fixtures\TEST-COMPLEX-LAYOUT.cbl                        Tue Sep 01 2026 18:40:42  Page 0006
+
+LABEL                          DEFINED                                    REFERENCES
+
+E TSTCMPLX                     65
+P 0000-MAIN                    65     not referenced
+
+0 warnings in compilation group
+0 errors in compilation group

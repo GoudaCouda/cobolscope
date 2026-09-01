@@ -192,6 +192,52 @@ class GnuCobolRunner:
             full_output = "\n".join(output_parts)
             return self.parse_listing_output(full_output, str(path))
 
+    def write_xref_listing(
+        self,
+        cobol_file: str | Path,
+        output_file: str | Path,
+        std: str = "ibm",
+        copybook_dirs: Optional[List[str | Path]] = None,
+        allow_syntax_errors: bool = False,
+    ) -> Path:
+        """Run GnuCOBOL and persist its unmodified ``-T`` listing output."""
+        if not self.is_available():
+            raise EnvironmentError(
+                "GnuCOBOL compiler (cobc) not found on PATH or known directories."
+            )
+
+        source = Path(cobol_file).resolve()
+        destination = Path(output_file).resolve()
+        destination.parent.mkdir(parents=True, exist_ok=True)
+        cmd = [
+            self.cobc_path,
+            "-fsyntax-only",
+            f"-std={std}",
+            "-ftsymbols",
+            "-Xref",
+        ]
+        for copybook_dir in copybook_dirs or []:
+            cmd.extend(["-I", str(Path(copybook_dir).resolve())])
+        source_arg = os.path.relpath(source, Path.cwd())
+        cmd.extend(["-T", str(destination), source_arg])
+
+        result = subprocess.run(
+            cmd,
+            env=self.env,
+            stdout=subprocess.PIPE,
+            stderr=subprocess.PIPE,
+            text=True,
+            check=False,
+        )
+        if not destination.exists():
+            diagnostics = "\n".join((result.stdout, result.stderr)).strip()
+            raise RuntimeError(f"GnuCOBOL did not emit {destination}:\n{diagnostics}")
+        if result.returncode != 0 and not allow_syntax_errors:
+            destination.unlink(missing_ok=True)
+            diagnostics = "\n".join((result.stdout, result.stderr)).strip()
+            raise RuntimeError(f"GnuCOBOL failed to compile {source}:\n{diagnostics}")
+        return destination
+
     @staticmethod
     def parse_listing_output(raw_text: str, source_file: str = "") -> GnuCobolListing:
         """
@@ -226,7 +272,8 @@ class GnuCobolRunner:
         in_symbols_table = False
         in_xref_names = False
 
-        symbol_entries: List[Tuple[int, int, str, str, str, str]] = []
+        symbol_entries: List[Tuple[int, int, str, str, str, str, str]] = []
+        current_section = ""
 
         for line in lines:
             if "SIZE" in line and "TYPE" in line and "LVL" in line and "NAME" in line:
@@ -234,6 +281,10 @@ class GnuCobolRunner:
                 continue
 
             if in_symbols_table:
+                section_match = re.match(r"^\s*(.+? SECTION)\s*$", line)
+                if section_match:
+                    current_section = section_match.group(1).upper()
+                    continue
                 if "NAME" in line and "DEFINED" in line and "REFERENCES" in line:
                     in_symbols_table = False
                     in_xref_names = True
@@ -252,7 +303,8 @@ class GnuCobolRunner:
                         clean_name,
                         type_str.upper().strip(),
                         redef_target,
-                        (pic_str or "").strip()
+                        (pic_str or "").strip(),
+                        current_section,
                     ))
                     continue
 
@@ -285,8 +337,14 @@ class GnuCobolRunner:
             running_offset = 0
             field_offsets: Dict[str, int] = {}
             level_stack: List[Tuple[int, int]] = []
+            active_section = ""
 
-            for size, lvl, name, ftype, redefines, pic in symbol_entries:
+            for size, lvl, name, ftype, redefines, pic, section in symbol_entries:
+                if section != active_section:
+                    active_section = section
+                    running_offset = 0
+                    field_offsets = {}
+                    level_stack = []
                 if lvl == 88:
                     continue
 
@@ -297,9 +355,13 @@ class GnuCobolRunner:
 
                 total_allocated_size = size if ftype == "GROUP" else (size * occurs_mult)
 
-                if lvl == 1:
-                    level_stack = [(1, running_offset)]
-                    current_offset = running_offset
+                if lvl in (1, 77):
+                    current_offset = (
+                        field_offsets[redefines]
+                        if redefines and redefines in field_offsets
+                        else running_offset
+                    )
+                    level_stack = [(lvl, current_offset)]
                     field_offsets[name] = current_offset
                     fields[name] = GnuCobolField(
                         name=name,
@@ -309,6 +371,7 @@ class GnuCobolRunner:
                         byte_offset=current_offset,
                         byte_length=total_allocated_size,
                         redefines=redefines,
+                        section=section,
                     )
                     if not redefines:
                         running_offset += total_allocated_size
@@ -332,6 +395,7 @@ class GnuCobolRunner:
                         byte_offset=current_offset,
                         byte_length=total_allocated_size,
                         redefines=redefines,
+                        section=section,
                     )
 
                     if not redefines and level_stack:

@@ -1,0 +1,114 @@
+GnuCOBOL 3.2.0          tests\fixtures\bank_of_z\cobol\GETSCODE.cbl                   Tue Sep 01 2026 18:40:41  Page 0001
+
+LINE    PG/LN  A...B............................................................SEQUENCE
+
+000001         CBL CICS('SP,EDF')
+warning: ignoring unknown directive: '#       CBL CICS('SP,EDF')'
+000002        ******************************************************************
+000003        *                                                                *
+000004        *  Copyright IBM Corp. 2023                                      *
+000005        *                                                                *
+000006        ******************************************************************
+000007         IDENTIFICATION DIVISION.
+000008         PROGRAM-ID. GETSCODE.
+000009         AUTHOR. James O'Grady.
+000010
+000011
+000012         ENVIRONMENT DIVISION.
+000013         CONFIGURATION SECTION.
+000014        *SOURCE-COMPUTER.   IBM-370 WITH DEBUGGING MODE.
+000015         SOURCE-COMPUTER.  IBM-370.
+000016         OBJECT-COMPUTER.  IBM-370.
+000017
+000018         INPUT-OUTPUT SECTION.
+000019
+000020
+000021         DATA DIVISION.
+000022         FILE SECTION.
+000023
+000024
+000025         WORKING-STORAGE SECTION.
+000026
+000027
+000028         COPY SORTCODE REPLACING ==SORTCODE== BY ==LITERAL-SORTCODE==.
+000001C       ******************************************************************
+000002C       *                                                                *
+000003C       *  Copyright IBM Corp. 2023                                      *
+000004C       *                                                                *
+000005C       *                                                                *
+000006C       ******************************************************************
+000007C        77 LITERAL-SORTCODE PIC 9(6) VALUE 987654.
+000029
+000030
+000031         LINKAGE SECTION.
+000032         01 DFHCOMMAREA.
+000033             COPY GETSCODE.
+000001C       ******************************************************************
+000002C       *                                                                *
+000003C       *  Copyright IBM Corp. 2023                                      *
+000004C       *                                                                *
+000005C       *                                                                *
+000006C       ******************************************************************
+000007C            03 GETSORTCODEOperation.
+000008C              06 SORTCODE pic xXXXXX.
+000034
+000035
+000036         PROCEDURE DIVISION USING DFHCOMMAREA.
+GnuCOBOL 3.2.0          tests\fixtures\bank_of_z\cobol\GETSCODE.cbl                   Tue Sep 01 2026 18:40:41  Page 0002
+
+LINE    PG/LN  A...B............................................................SEQUENCE
+
+000037         PREMIERE SECTION.
+000038         A010.
+000039             MOVE LITERAL-SORTCODE
+000040             TO SORTCODE OF DFHCOMMAREA.
+000041
+000042
+000043             EXEC CICS RETURN
+error: 'EXEC' is a reserved word, but isn't supported
+error: syntax error, unexpected Identifier, expecting SECTION or .
+000044             END-EXEC.
+000045
+000046             GOBACK.
+GnuCOBOL 3.2.0          tests\fixtures\bank_of_z\cobol\GETSCODE.cbl                   Tue Sep 01 2026 18:40:41  Page 0003
+
+SIZE  TYPE           LVL  NAME                           PICTURE
+
+      WORKING-STORAGE SECTION
+
+00006 NUMERIC        77   LITERAL-SORTCODE               9(6)
+
+      LINKAGE SECTION
+
+00006 GROUP          01   DFHCOMMAREA
+00006 GROUP          03   GETSORTCODEOperation
+00006 ALPHANUMERIC   06   SORTCODE                       XXXXXX
+
+GnuCOBOL 3.2.0          tests\fixtures\bank_of_z\cobol\GETSCODE.cbl                   Tue Sep 01 2026 18:40:41  Page 0004
+
+NAME                           DEFINED                                    REFERENCES
+
+LITERAL-SORTCODE               7        39                                                                     x1
+
+DFHCOMMAREA                    32      *36                                                                     x1
+GETSORTCODEOperation           7      referenced by parent/child
+SORTCODE                       8       *40                                                                     x1
+
+GnuCOBOL 3.2.0          tests\fixtures\bank_of_z\cobol\GETSCODE.cbl                   Tue Sep 01 2026 18:40:41  Page 0005
+
+LABEL                          DEFINED                                    REFERENCES
+
+P A010                         38     not referenced
+S PREMIERE                     37     not referenced
+E GETSCODE                     37
+
+GnuCOBOL 3.2.0          tests\fixtures\bank_of_z\cobol\GETSCODE.cbl                   Tue Sep 01 2026 18:40:41  Page 0006
+
+Error/Warning summary:
+
+tests\fixtures\bank_of_z\cobol\GETSCODE.cbl:1: warning: ignoring unknown directive: '#       CBL CICS('SP,EDF')'
+tests\fixtures\bank_of_z\cobol\GETSCODE.cbl:43: error: 'EXEC' is a reserved word, but isn't supported
+tests\fixtures\bank_of_z\cobol\GETSCODE.cbl:43: error: syntax error, unexpected Identifier, expecting SECTION or .
+
+1 warning in compilation group
+2 errors in compilation group
