@@ -1,7 +1,7 @@
 # Data Dictionary: `XFRFUN`
 
 **Source File:** `C:\Users\austi\cobolscope\tests\fixtures\bank_of_z\cobol\XFRFUN.cbl`  
-**Author:** *>CE Jon Collett. *>CE  
+**Author:** Jon Collett  
 ## Executive Summary
 
 | Metric | Value |
@@ -15,54 +15,54 @@
 
 | Level | Field Name / Path | Business Type | PIC / Usage | Offset | Bytes | Allowed Values / Attributes | References |
 | :---: | :--- | :--- | :--- | :---: | :---: | :--- | :--- |
-| 77 | `SORTCODE`<br/><small>`SORTCODE`</small> | Numeric Display (6 digits) | `9(6)` | 0 | 6 | **Default:** `987654` | <small>*PREMIERE*</small><br/>`A010` |
+| 77 | `SORTCODE`<br/><small>`SORTCODE`</small> | Numeric Display (6 digits) | `9(6)` | 0 | 6 | **Default:** `987654` | `PREMIERE`<br/><small>*A010*</small> |
 | 01 | **`FILLER`**<br/><small>`FILLER`</small> | Elementary | *DISPLAY* | 6 | 0 | — | — |
-| 01 | **`HOST-ACCOUNT-ROW`**<br/><small>`HOST-ACCOUNT-ROW`</small> | Group | *DISPLAY* | 6 | 88 | — | <small>*UPDATE-ACCOUNT-DB2-TO*</small><br/>`UADT010` |
-| 03 | &nbsp;&nbsp;`HV-ACCOUNT-EYECATCHER`<br/><small>`HOST-ACCOUNT-ROW.HV-ACCOUNT-EYECATCHER`</small> | Alphanumeric (4 chars) | `X(4)` | 6 | 4 | — | <small>*PREMIERE*</small><br/>`A010` |
+| 01 | **`HOST-ACCOUNT-ROW`**<br/><small>`HOST-ACCOUNT-ROW`</small> | Group | *DISPLAY* | 6 | 88 | — | `UPDATE-ACCOUNT-DB2-TO`<br/><small>*UADT010*</small> |
+| 03 | &nbsp;&nbsp;`HV-ACCOUNT-EYECATCHER`<br/><small>`HOST-ACCOUNT-ROW.HV-ACCOUNT-EYECATCHER`</small> | Alphanumeric (4 chars) | `X(4)` | 6 | 4 | — | `PREMIERE`<br/><small>*A010*</small> |
 | 03 | &nbsp;&nbsp;`HV-ACCOUNT-CUST-NO`<br/><small>`HOST-ACCOUNT-ROW.HV-ACCOUNT-CUST-NO`</small> | Alphanumeric (10 chars) | `X(10)` | 10 | 10 | — | — |
 | 03 | &nbsp;&nbsp;`HV-ACCOUNT-KEY`<br/><small>`HOST-ACCOUNT-ROW.HV-ACCOUNT-KEY`</small> | Group | *DISPLAY* | 20 | 14 | — | — |
-| 05 | &nbsp;&nbsp;&nbsp;&nbsp;`HV-ACCOUNT-SORTCODE`<br/><small>`HOST-ACCOUNT-ROW.HV-ACCOUNT-KEY.HV-ACCOUNT-SORTCODE`</small> | Alphanumeric (6 chars) | `X(6)` | 20 | 6 | — | <small>*PREMIERE*</small><br/>`A010`<br/>&nbsp;<br/><small>*UPDATE-ACCOUNT-DB2-FROM*</small><br/>`UADF010`<br/>&nbsp;<br/><small>*UPDATE-ACCOUNT-DB2-TO*</small><br/>`UADT010` |
-| 05 | &nbsp;&nbsp;&nbsp;&nbsp;`HV-ACCOUNT-ACC-NO`<br/><small>`HOST-ACCOUNT-ROW.HV-ACCOUNT-KEY.HV-ACCOUNT-ACC-NO`</small> | Alphanumeric (8 chars) | `X(8)` | 26 | 8 | — | <small>*PREMIERE*</small><br/>`A010`<br/>&nbsp;<br/><small>*UPDATE-ACCOUNT-DB2-FROM*</small><br/>`UADF010`<br/>*( +2 more)* |
+| 05 | &nbsp;&nbsp;&nbsp;&nbsp;`HV-ACCOUNT-SORTCODE`<br/><small>`HOST-ACCOUNT-ROW.HV-ACCOUNT-KEY.HV-ACCOUNT-SORTCODE`</small> | Alphanumeric (6 chars) | `X(6)` | 20 | 6 | — | `PREMIERE`<br/><small>*A010*</small><br/>&nbsp;<br/>`UPDATE-ACCOUNT-DB2-FROM`<br/><small>*UADF010*</small><br/>&nbsp;<br/>`UPDATE-ACCOUNT-DB2-TO`<br/><small>*UADT010*</small> |
+| 05 | &nbsp;&nbsp;&nbsp;&nbsp;`HV-ACCOUNT-ACC-NO`<br/><small>`HOST-ACCOUNT-ROW.HV-ACCOUNT-KEY.HV-ACCOUNT-ACC-NO`</small> | Alphanumeric (8 chars) | `X(8)` | 26 | 8 | — | `PREMIERE`<br/><small>*A010*</small><br/>&nbsp;<br/>`UPDATE-ACCOUNT-DB2-FROM`<br/><small>*UADF010*</small><br/>*( +2 more)* |
 | 03 | &nbsp;&nbsp;`HV-ACCOUNT-ACC-TYPE`<br/><small>`HOST-ACCOUNT-ROW.HV-ACCOUNT-ACC-TYPE`</small> | Alphanumeric (8 chars) | `X(8)` | 34 | 8 | — | — |
 | 03 | &nbsp;&nbsp;`HV-ACCOUNT-INT-RATE`<br/><small>`HOST-ACCOUNT-ROW.HV-ACCOUNT-INT-RATE`</small> | Signed Decimal(6, 2) Packed | `S9(4)V99`<br/>*COMP_3* | 42 | 4 | — | — |
 | 03 | &nbsp;&nbsp;`HV-ACCOUNT-OPENED`<br/><small>`HOST-ACCOUNT-ROW.HV-ACCOUNT-OPENED`</small> | Alphanumeric (10 chars) | `X(10)` | 46 | 10 | — | — |
 | 03 | &nbsp;&nbsp;`HV-ACCOUNT-OVERDRAFT-LIM`<br/><small>`HOST-ACCOUNT-ROW.HV-ACCOUNT-OVERDRAFT-LIM`</small> | Signed Integer (32-bit Binary) | `S9(9)`<br/>*COMP* | 56 | 4 | — | — |
 | 03 | &nbsp;&nbsp;`HV-ACCOUNT-LAST-STMT`<br/><small>`HOST-ACCOUNT-ROW.HV-ACCOUNT-LAST-STMT`</small> | Alphanumeric (10 chars) | `X(10)` | 60 | 10 | — | — |
 | 03 | &nbsp;&nbsp;`HV-ACCOUNT-NEXT-STMT`<br/><small>`HOST-ACCOUNT-ROW.HV-ACCOUNT-NEXT-STMT`</small> | Alphanumeric (10 chars) | `X(10)` | 70 | 10 | — | — |
-| 03 | &nbsp;&nbsp;`HV-ACCOUNT-AVAIL-BAL`<br/><small>`HOST-ACCOUNT-ROW.HV-ACCOUNT-AVAIL-BAL`</small> | Signed Decimal(12, 2) Packed | `S9(10)V99`<br/>*COMP_3* | 80 | 7 | — | <small>*UPDATE-ACCOUNT-DB2-FROM*</small><br/>`UADF010`<br/>&nbsp;<br/><small>*UPDATE-ACCOUNT-DB2-TO*</small><br/>`UADT010` |
-| 03 | &nbsp;&nbsp;`HV-ACCOUNT-ACTUAL-BAL`<br/><small>`HOST-ACCOUNT-ROW.HV-ACCOUNT-ACTUAL-BAL`</small> | Signed Decimal(12, 2) Packed | `S9(10)V99`<br/>*COMP_3* | 87 | 7 | — | <small>*UPDATE-ACCOUNT-DB2-FROM*</small><br/>`UADF010`<br/>&nbsp;<br/><small>*UPDATE-ACCOUNT-DB2-TO*</small><br/>`UADT010` |
+| 03 | &nbsp;&nbsp;`HV-ACCOUNT-AVAIL-BAL`<br/><small>`HOST-ACCOUNT-ROW.HV-ACCOUNT-AVAIL-BAL`</small> | Signed Decimal(12, 2) Packed | `S9(10)V99`<br/>*COMP_3* | 80 | 7 | — | `UPDATE-ACCOUNT-DB2-FROM`<br/><small>*UADF010*</small><br/>&nbsp;<br/>`UPDATE-ACCOUNT-DB2-TO`<br/><small>*UADT010*</small> |
+| 03 | &nbsp;&nbsp;`HV-ACCOUNT-ACTUAL-BAL`<br/><small>`HOST-ACCOUNT-ROW.HV-ACCOUNT-ACTUAL-BAL`</small> | Signed Decimal(12, 2) Packed | `S9(10)V99`<br/>*COMP_3* | 87 | 7 | — | `UPDATE-ACCOUNT-DB2-FROM`<br/><small>*UADF010*</small><br/>&nbsp;<br/>`UPDATE-ACCOUNT-DB2-TO`<br/><small>*UADT010*</small> |
 | 01 | **`FILLER`**<br/><small>`FILLER`</small> | Elementary | *DISPLAY* | 94 | 0 | — | — |
-| 01 | **`HOST-PROCTRAN-ROW`**<br/><small>`HOST-PROCTRAN-ROW`</small> | Group | *DISPLAY* | 94 | 96 | — | <small>*WRITE-TO-PROCTRAN-DB2*</small><br/>`WTPD010` |
-| 03 | &nbsp;&nbsp;`HV-PROCTRAN-EYECATCHER`<br/><small>`HOST-PROCTRAN-ROW.HV-PROCTRAN-EYECATCHER`</small> | Alphanumeric (4 chars) | `X(4)` | 94 | 4 | — | <small>*WRITE-TO-PROCTRAN-DB2*</small><br/>`WTPD010` |
-| 03 | &nbsp;&nbsp;`HV-PROCTRAN-SORT-CODE`<br/><small>`HOST-PROCTRAN-ROW.HV-PROCTRAN-SORT-CODE`</small> | Alphanumeric (6 chars) | `X(6)` | 98 | 6 | — | <small>*WRITE-TO-PROCTRAN-DB2*</small><br/>`WTPD010` |
-| 03 | &nbsp;&nbsp;`HV-PROCTRAN-ACC-NUMBER`<br/><small>`HOST-PROCTRAN-ROW.HV-PROCTRAN-ACC-NUMBER`</small> | Alphanumeric (8 chars) | `X(8)` | 104 | 8 | — | <small>*WRITE-TO-PROCTRAN-DB2*</small><br/>`WTPD010` |
-| 03 | &nbsp;&nbsp;`HV-PROCTRAN-DATE`<br/><small>`HOST-PROCTRAN-ROW.HV-PROCTRAN-DATE`</small> | Alphanumeric (10 chars) | `X(10)` | 112 | 10 | — | <small>*WRITE-TO-PROCTRAN-DB2*</small><br/>`WTPD010` |
-| 03 | &nbsp;&nbsp;`HV-PROCTRAN-TIME`<br/><small>`HOST-PROCTRAN-ROW.HV-PROCTRAN-TIME`</small> | Alphanumeric (6 chars) | `X(6)` | 122 | 6 | — | <small>*WRITE-TO-PROCTRAN-DB2*</small><br/>`WTPD010` |
-| 03 | &nbsp;&nbsp;`HV-PROCTRAN-REF`<br/><small>`HOST-PROCTRAN-ROW.HV-PROCTRAN-REF`</small> | Alphanumeric (12 chars) | `X(12)` | 128 | 12 | — | <small>*WRITE-TO-PROCTRAN-DB2*</small><br/>`WTPD010` |
-| 03 | &nbsp;&nbsp;`HV-PROCTRAN-TYPE`<br/><small>`HOST-PROCTRAN-ROW.HV-PROCTRAN-TYPE`</small> | Alphanumeric (3 chars) | `X(3)` | 140 | 3 | — | <small>*WRITE-TO-PROCTRAN-DB2*</small><br/>`WTPD010` |
-| 03 | &nbsp;&nbsp;`HV-PROCTRAN-DESC`<br/><small>`HOST-PROCTRAN-ROW.HV-PROCTRAN-DESC`</small> | Alphanumeric (40 chars) | `X(40)` | 143 | 40 | — | <small>*WRITE-TO-PROCTRAN-DB2*</small><br/>`WTPD010` |
-| 03 | &nbsp;&nbsp;`HV-PROCTRAN-AMOUNT`<br/><small>`HOST-PROCTRAN-ROW.HV-PROCTRAN-AMOUNT`</small> | Signed Decimal(12, 2) Packed | `S9(10)V99`<br/>*COMP_3* | 183 | 7 | — | <small>*WRITE-TO-PROCTRAN-DB2*</small><br/>`WTPD010` |
+| 01 | **`HOST-PROCTRAN-ROW`**<br/><small>`HOST-PROCTRAN-ROW`</small> | Group | *DISPLAY* | 94 | 96 | — | `WRITE-TO-PROCTRAN-DB2`<br/><small>*WTPD010*</small> |
+| 03 | &nbsp;&nbsp;`HV-PROCTRAN-EYECATCHER`<br/><small>`HOST-PROCTRAN-ROW.HV-PROCTRAN-EYECATCHER`</small> | Alphanumeric (4 chars) | `X(4)` | 94 | 4 | — | `WRITE-TO-PROCTRAN-DB2`<br/><small>*WTPD010*</small> |
+| 03 | &nbsp;&nbsp;`HV-PROCTRAN-SORT-CODE`<br/><small>`HOST-PROCTRAN-ROW.HV-PROCTRAN-SORT-CODE`</small> | Alphanumeric (6 chars) | `X(6)` | 98 | 6 | — | `WRITE-TO-PROCTRAN-DB2`<br/><small>*WTPD010*</small> |
+| 03 | &nbsp;&nbsp;`HV-PROCTRAN-ACC-NUMBER`<br/><small>`HOST-PROCTRAN-ROW.HV-PROCTRAN-ACC-NUMBER`</small> | Alphanumeric (8 chars) | `X(8)` | 104 | 8 | — | `WRITE-TO-PROCTRAN-DB2`<br/><small>*WTPD010*</small> |
+| 03 | &nbsp;&nbsp;`HV-PROCTRAN-DATE`<br/><small>`HOST-PROCTRAN-ROW.HV-PROCTRAN-DATE`</small> | Alphanumeric (10 chars) | `X(10)` | 112 | 10 | — | `WRITE-TO-PROCTRAN-DB2`<br/><small>*WTPD010*</small> |
+| 03 | &nbsp;&nbsp;`HV-PROCTRAN-TIME`<br/><small>`HOST-PROCTRAN-ROW.HV-PROCTRAN-TIME`</small> | Alphanumeric (6 chars) | `X(6)` | 122 | 6 | — | `WRITE-TO-PROCTRAN-DB2`<br/><small>*WTPD010*</small> |
+| 03 | &nbsp;&nbsp;`HV-PROCTRAN-REF`<br/><small>`HOST-PROCTRAN-ROW.HV-PROCTRAN-REF`</small> | Alphanumeric (12 chars) | `X(12)` | 128 | 12 | — | `WRITE-TO-PROCTRAN-DB2`<br/><small>*WTPD010*</small> |
+| 03 | &nbsp;&nbsp;`HV-PROCTRAN-TYPE`<br/><small>`HOST-PROCTRAN-ROW.HV-PROCTRAN-TYPE`</small> | Alphanumeric (3 chars) | `X(3)` | 140 | 3 | — | `WRITE-TO-PROCTRAN-DB2`<br/><small>*WTPD010*</small> |
+| 03 | &nbsp;&nbsp;`HV-PROCTRAN-DESC`<br/><small>`HOST-PROCTRAN-ROW.HV-PROCTRAN-DESC`</small> | Alphanumeric (40 chars) | `X(40)` | 143 | 40 | — | `WRITE-TO-PROCTRAN-DB2`<br/><small>*WTPD010*</small> |
+| 03 | &nbsp;&nbsp;`HV-PROCTRAN-AMOUNT`<br/><small>`HOST-PROCTRAN-ROW.HV-PROCTRAN-AMOUNT`</small> | Signed Decimal(12, 2) Packed | `S9(10)V99`<br/>*COMP_3* | 183 | 7 | — | `WRITE-TO-PROCTRAN-DB2`<br/><small>*WTPD010*</small> |
 | 01 | **`FILLER`**<br/><small>`FILLER`</small> | Elementary | *DISPLAY* | 190 | 0 | — | — |
 | 01 | **`WS-CICS-WORK-AREA`**<br/><small>`WS-CICS-WORK-AREA`</small> | Group | *DISPLAY* | 190 | 8 | — | — |
-| 05 | &nbsp;&nbsp;`WS-CICS-RESP`<br/><small>`WS-CICS-WORK-AREA.WS-CICS-RESP`</small> | Signed Integer (32-bit Binary) | `S9(8)`<br/>*COMP* | 190 | 4 | — | <small>*UPDATE-ACCOUNT-DB2*</small><br/>`UAD010`<br/>&nbsp;<br/><small>*UPDATE-ACCOUNT-DB2-TO*</small><br/>`UADT010`<br/>&nbsp;<br/><small>*ABEND-HANDLING*</small><br/>`AH010` |
-| 05 | &nbsp;&nbsp;`WS-CICS-RESP2`<br/><small>`WS-CICS-WORK-AREA.WS-CICS-RESP2`</small> | Signed Integer (32-bit Binary) | `S9(8)`<br/>*COMP* | 194 | 4 | — | <small>*UPDATE-ACCOUNT-DB2*</small><br/>`UAD010`<br/>&nbsp;<br/><small>*UPDATE-ACCOUNT-DB2-TO*</small><br/>`UADT010`<br/>&nbsp;<br/><small>*ABEND-HANDLING*</small><br/>`AH010` |
+| 05 | &nbsp;&nbsp;`WS-CICS-RESP`<br/><small>`WS-CICS-WORK-AREA.WS-CICS-RESP`</small> | Signed Integer (32-bit Binary) | `S9(8)`<br/>*COMP* | 190 | 4 | — | `UPDATE-ACCOUNT-DB2`<br/><small>*UAD010*</small><br/>&nbsp;<br/>`UPDATE-ACCOUNT-DB2-TO`<br/><small>*UADT010*</small><br/>&nbsp;<br/>`ABEND-HANDLING`<br/><small>*AH010*</small> |
+| 05 | &nbsp;&nbsp;`WS-CICS-RESP2`<br/><small>`WS-CICS-WORK-AREA.WS-CICS-RESP2`</small> | Signed Integer (32-bit Binary) | `S9(8)`<br/>*COMP* | 194 | 4 | — | `UPDATE-ACCOUNT-DB2`<br/><small>*UAD010*</small><br/>&nbsp;<br/>`UPDATE-ACCOUNT-DB2-TO`<br/><small>*UADT010*</small><br/>&nbsp;<br/>`ABEND-HANDLING`<br/><small>*AH010*</small> |
 
 ## LINKAGE
 
 | Level | Field Name / Path | Business Type | PIC / Usage | Offset | Bytes | Allowed Values / Attributes | References |
 | :---: | :--- | :--- | :--- | :---: | :---: | :--- | :--- |
 | 01 | **`DFHCOMMAREA`**<br/><small>`DFHCOMMAREA`</small> | Group | *DISPLAY* | 0 | 90 | — | — |
-| 03 | &nbsp;&nbsp;`COMM-FACCNO`<br/><small>`DFHCOMMAREA.COMM-FACCNO`</small> | Numeric Display (8 digits) | `9(8)` | 0 | 8 | — | <small>*UPDATE-ACCOUNT-DB2*</small><br/>`UAD010`<br/>&nbsp;<br/><small>*UPDATE-ACCOUNT-DB2-FROM*</small><br/>`UADF010`<br/>&nbsp;<br/><small>*WRITE-TO-PROCTRAN-DB2*</small><br/>`WTPD010` |
-| 03 | &nbsp;&nbsp;`COMM-FSCODE`<br/><small>`DFHCOMMAREA.COMM-FSCODE`</small> | Numeric Display (6 digits) | `9(6)` | 8 | 6 | — | <small>*PREMIERE*</small><br/>`A010`<br/>&nbsp;<br/><small>*UPDATE-ACCOUNT-DB2*</small><br/>`UAD010`<br/>*( +2 more)* |
-| 03 | &nbsp;&nbsp;`COMM-TACCNO`<br/><small>`DFHCOMMAREA.COMM-TACCNO`</small> | Numeric Display (8 digits) | `9(8)` | 14 | 8 | — | <small>*UPDATE-ACCOUNT-DB2*</small><br/>`UAD010`<br/>&nbsp;<br/><small>*UPDATE-ACCOUNT-DB2-TO*</small><br/>`UADT010`<br/>&nbsp;<br/><small>*WRITE-TO-PROCTRAN-DB2*</small><br/>`WTPD010` |
-| 03 | &nbsp;&nbsp;`COMM-TSCODE`<br/><small>`DFHCOMMAREA.COMM-TSCODE`</small> | Numeric Display (6 digits) | `9(6)` | 22 | 6 | — | <small>*PREMIERE*</small><br/>`A010`<br/>&nbsp;<br/><small>*UPDATE-ACCOUNT-DB2*</small><br/>`UAD010`<br/>*( +2 more)* |
-| 03 | &nbsp;&nbsp;`COMM-AMT`<br/><small>`DFHCOMMAREA.COMM-AMT`</small> | Signed Decimal Display (12, 2) | `S9(10)V99` | 28 | 12 | — | <small>*PREMIERE*</small><br/>`A010`<br/>&nbsp;<br/><small>*UPDATE-ACCOUNT-DB2-FROM*</small><br/>`UADF010`<br/>*( +2 more)* |
-| 03 | &nbsp;&nbsp;`COMM-FAVBAL`<br/><small>`DFHCOMMAREA.COMM-FAVBAL`</small> | Signed Decimal Display (12, 2) | `S9(10)V99` | 40 | 12 | — | <small>*UPDATE-ACCOUNT-DB2-FROM*</small><br/>`UADF010` |
-| 03 | &nbsp;&nbsp;`COMM-FACTBAL`<br/><small>`DFHCOMMAREA.COMM-FACTBAL`</small> | Signed Decimal Display (12, 2) | `S9(10)V99` | 52 | 12 | — | <small>*UPDATE-ACCOUNT-DB2-FROM*</small><br/>`UADF010` |
-| 03 | &nbsp;&nbsp;`COMM-TAVBAL`<br/><small>`DFHCOMMAREA.COMM-TAVBAL`</small> | Signed Decimal Display (12, 2) | `S9(10)V99` | 64 | 12 | — | <small>*UPDATE-ACCOUNT-DB2-TO*</small><br/>`UADT010` |
-| 03 | &nbsp;&nbsp;`COMM-TACTBAL`<br/><small>`DFHCOMMAREA.COMM-TACTBAL`</small> | Signed Decimal Display (12, 2) | `S9(10)V99` | 76 | 12 | — | <small>*UPDATE-ACCOUNT-DB2-TO*</small><br/>`UADT010` |
-| 03 | &nbsp;&nbsp;`COMM-FAIL-CODE`<br/><small>`DFHCOMMAREA.COMM-FAIL-CODE`</small> | Alphanumeric (1 chars) | `X` | 88 | 1 | — | <small>*PREMIERE*</small><br/>`A010`<br/>&nbsp;<br/><small>*UPDATE-ACCOUNT-DB2*</small><br/>`UAD010`<br/>*( +3 more)* |
-| 03 | &nbsp;&nbsp;`COMM-SUCCESS`<br/><small>`DFHCOMMAREA.COMM-SUCCESS`</small> | Alphanumeric (1 chars) | `X` | 89 | 1 | — | <small>*PREMIERE*</small><br/>`A010`<br/>&nbsp;<br/><small>*UPDATE-ACCOUNT-DB2*</small><br/>`UAD010`<br/>*( +3 more)* |
+| 03 | &nbsp;&nbsp;`COMM-FACCNO`<br/><small>`DFHCOMMAREA.COMM-FACCNO`</small> | Numeric Display (8 digits) | `9(8)` | 0 | 8 | — | `UPDATE-ACCOUNT-DB2`<br/><small>*UAD010*</small><br/>&nbsp;<br/>`UPDATE-ACCOUNT-DB2-FROM`<br/><small>*UADF010*</small><br/>&nbsp;<br/>`WRITE-TO-PROCTRAN-DB2`<br/><small>*WTPD010*</small> |
+| 03 | &nbsp;&nbsp;`COMM-FSCODE`<br/><small>`DFHCOMMAREA.COMM-FSCODE`</small> | Numeric Display (6 digits) | `9(6)` | 8 | 6 | — | `PREMIERE`<br/><small>*A010*</small><br/>&nbsp;<br/>`UPDATE-ACCOUNT-DB2`<br/><small>*UAD010*</small><br/>*( +2 more)* |
+| 03 | &nbsp;&nbsp;`COMM-TACCNO`<br/><small>`DFHCOMMAREA.COMM-TACCNO`</small> | Numeric Display (8 digits) | `9(8)` | 14 | 8 | — | `UPDATE-ACCOUNT-DB2`<br/><small>*UAD010*</small><br/>&nbsp;<br/>`UPDATE-ACCOUNT-DB2-TO`<br/><small>*UADT010*</small><br/>&nbsp;<br/>`WRITE-TO-PROCTRAN-DB2`<br/><small>*WTPD010*</small> |
+| 03 | &nbsp;&nbsp;`COMM-TSCODE`<br/><small>`DFHCOMMAREA.COMM-TSCODE`</small> | Numeric Display (6 digits) | `9(6)` | 22 | 6 | — | `PREMIERE`<br/><small>*A010*</small><br/>&nbsp;<br/>`UPDATE-ACCOUNT-DB2`<br/><small>*UAD010*</small><br/>*( +2 more)* |
+| 03 | &nbsp;&nbsp;`COMM-AMT`<br/><small>`DFHCOMMAREA.COMM-AMT`</small> | Signed Decimal Display (12, 2) | `S9(10)V99` | 28 | 12 | — | `PREMIERE`<br/><small>*A010*</small><br/>&nbsp;<br/>`UPDATE-ACCOUNT-DB2-FROM`<br/><small>*UADF010*</small><br/>*( +2 more)* |
+| 03 | &nbsp;&nbsp;`COMM-FAVBAL`<br/><small>`DFHCOMMAREA.COMM-FAVBAL`</small> | Signed Decimal Display (12, 2) | `S9(10)V99` | 40 | 12 | — | `UPDATE-ACCOUNT-DB2-FROM`<br/><small>*UADF010*</small> |
+| 03 | &nbsp;&nbsp;`COMM-FACTBAL`<br/><small>`DFHCOMMAREA.COMM-FACTBAL`</small> | Signed Decimal Display (12, 2) | `S9(10)V99` | 52 | 12 | — | `UPDATE-ACCOUNT-DB2-FROM`<br/><small>*UADF010*</small> |
+| 03 | &nbsp;&nbsp;`COMM-TAVBAL`<br/><small>`DFHCOMMAREA.COMM-TAVBAL`</small> | Signed Decimal Display (12, 2) | `S9(10)V99` | 64 | 12 | — | `UPDATE-ACCOUNT-DB2-TO`<br/><small>*UADT010*</small> |
+| 03 | &nbsp;&nbsp;`COMM-TACTBAL`<br/><small>`DFHCOMMAREA.COMM-TACTBAL`</small> | Signed Decimal Display (12, 2) | `S9(10)V99` | 76 | 12 | — | `UPDATE-ACCOUNT-DB2-TO`<br/><small>*UADT010*</small> |
+| 03 | &nbsp;&nbsp;`COMM-FAIL-CODE`<br/><small>`DFHCOMMAREA.COMM-FAIL-CODE`</small> | Alphanumeric (1 chars) | `X` | 88 | 1 | — | `PREMIERE`<br/><small>*A010*</small><br/>&nbsp;<br/>`UPDATE-ACCOUNT-DB2`<br/><small>*UAD010*</small><br/>*( +3 more)* |
+| 03 | &nbsp;&nbsp;`COMM-SUCCESS`<br/><small>`DFHCOMMAREA.COMM-SUCCESS`</small> | Alphanumeric (1 chars) | `X` | 89 | 1 | — | `PREMIERE`<br/><small>*A010*</small><br/>&nbsp;<br/>`UPDATE-ACCOUNT-DB2`<br/><small>*UAD010*</small><br/>*( +3 more)* |
 
 ## LOCAL-STORAGE
 
@@ -71,7 +71,7 @@
 | 01 | **`SYSIDERR-RETRY`**<br/><small>`SYSIDERR-RETRY`</small> | Numeric Display (3 digits) | `999` | 0 | 3 | — | — |
 | 01 | **`FILE-RETRY`**<br/><small>`FILE-RETRY`</small> | Numeric Display (3 digits) | `999` | 3 | 3 | — | — |
 | 01 | **`WS-EXIT-RETRY-LOOP`**<br/><small>`WS-EXIT-RETRY-LOOP`</small> | Alphanumeric (1 chars) | `X` | 6 | 1 | — | — |
-| 01 | **`DB2-DEADLOCK-RETRY`**<br/><small>`DB2-DEADLOCK-RETRY`</small> | Numeric Display (3 digits) | `999` | 7 | 3 | — | <small>*PREMIERE*</small><br/>`A010`<br/>&nbsp;<br/><small>*UPDATE-ACCOUNT-DB2-TO*</small><br/>`UADT010` |
+| 01 | **`DB2-DEADLOCK-RETRY`**<br/><small>`DB2-DEADLOCK-RETRY`</small> | Numeric Display (3 digits) | `999` | 7 | 3 | — | `PREMIERE`<br/><small>*A010*</small><br/>&nbsp;<br/>`UPDATE-ACCOUNT-DB2-TO`<br/><small>*UADT010*</small> |
 | 01 | **`DB2-DATE-REFORMAT`**<br/><small>`DB2-DATE-REFORMAT`</small> | Group | *DISPLAY* | 10 | 10 | — | — |
 | 03 | &nbsp;&nbsp;`DB2-DATE-REF-YR`<br/><small>`DB2-DATE-REFORMAT.DB2-DATE-REF-YR`</small> | Numeric Display (4 digits) | `9(4)` | 10 | 4 | — | — |
 | 03 | &nbsp;&nbsp;`FILLER`<br/><small>`DB2-DATE-REFORMAT.FILLER`</small> | Alphanumeric (1 chars) | `X` | 14 | 1 | — | — |
@@ -132,33 +132,33 @@
 | 07 | &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`ACCOUNT-NEXT-STMT-YEAR`<br/><small>`WS-ACC-DATA2.ACCOUNT-DATA.ACCOUNT-NEXT-STMT-GROUP.ACCOUNT-NEXT-STMT-YEAR`</small> | Numeric Display (4 digits) | `9999` | 188 | 4 | — | — |
 | 05 | &nbsp;&nbsp;&nbsp;&nbsp;`ACCOUNT-AVAILABLE-BALANCE`<br/><small>`WS-ACC-DATA2.ACCOUNT-DATA.ACCOUNT-AVAILABLE-BALANCE`</small> | Signed Decimal Display (12, 2) | `S9(10)V99` | 192 | 12 | — | — |
 | 05 | &nbsp;&nbsp;&nbsp;&nbsp;`ACCOUNT-ACTUAL-BALANCE`<br/><small>`WS-ACC-DATA2.ACCOUNT-DATA.ACCOUNT-ACTUAL-BALANCE`</small> | Signed Decimal Display (12, 2) | `S9(10)V99` | 204 | 12 | — | — |
-| 01 | **`WS-EIBTASKN12`**<br/><small>`WS-EIBTASKN12`</small> | Numeric Display (12 digits) | `9(12)` | 216 | 12 | **Default:** `0` | <small>*WRITE-TO-PROCTRAN-DB2*</small><br/>`WTPD010` |
-| 01 | **`WS-SQLCODE-DISP`**<br/><small>`WS-SQLCODE-DISP`</small> | Numeric Display (9 digits) | `9(9)` | 228 | 9 | **Default:** `0` | <small>*WRITE-TO-PROCTRAN-DB2*</small><br/>`WTPD010` |
+| 01 | **`WS-EIBTASKN12`**<br/><small>`WS-EIBTASKN12`</small> | Numeric Display (12 digits) | `9(12)` | 216 | 12 | **Default:** `0` | `WRITE-TO-PROCTRAN-DB2`<br/><small>*WTPD010*</small> |
+| 01 | **`WS-SQLCODE-DISP`**<br/><small>`WS-SQLCODE-DISP`</small> | Numeric Display (9 digits) | `9(9)` | 228 | 9 | **Default:** `0` | `WRITE-TO-PROCTRAN-DB2`<br/><small>*WTPD010*</small> |
 | 01 | **`DESIRED-ACC-KEY`**<br/><small>`DESIRED-ACC-KEY`</small> | Group | *DISPLAY* | 237 | 14 | — | — |
-| 03 | &nbsp;&nbsp;`DESIRED-SORT-CODE`<br/><small>`DESIRED-ACC-KEY.DESIRED-SORT-CODE`</small> | Numeric Display (6 digits) | `9(6)` | 237 | 6 | — | <small>*PREMIERE*</small><br/>`A010`<br/>&nbsp;<br/><small>*UPDATE-ACCOUNT-DB2*</small><br/>`UAD010`<br/>*( +2 more)* |
-| 03 | &nbsp;&nbsp;`DESIRED-ACC-NO`<br/><small>`DESIRED-ACC-KEY.DESIRED-ACC-NO`</small> | Numeric Display (8 digits) | `9(8)` | 243 | 8 | — | <small>*UPDATE-ACCOUNT-DB2*</small><br/>`UAD010`<br/>&nbsp;<br/><small>*UPDATE-ACCOUNT-DB2-FROM*</small><br/>`UADF010`<br/>&nbsp;<br/><small>*UPDATE-ACCOUNT-DB2-TO*</small><br/>`UADT010` |
+| 03 | &nbsp;&nbsp;`DESIRED-SORT-CODE`<br/><small>`DESIRED-ACC-KEY.DESIRED-SORT-CODE`</small> | Numeric Display (6 digits) | `9(6)` | 237 | 6 | — | `PREMIERE`<br/><small>*A010*</small><br/>&nbsp;<br/>`UPDATE-ACCOUNT-DB2`<br/><small>*UAD010*</small><br/>*( +2 more)* |
+| 03 | &nbsp;&nbsp;`DESIRED-ACC-NO`<br/><small>`DESIRED-ACC-KEY.DESIRED-ACC-NO`</small> | Numeric Display (8 digits) | `9(8)` | 243 | 8 | — | `UPDATE-ACCOUNT-DB2`<br/><small>*UAD010*</small><br/>&nbsp;<br/>`UPDATE-ACCOUNT-DB2-FROM`<br/><small>*UADF010*</small><br/>&nbsp;<br/>`UPDATE-ACCOUNT-DB2-TO`<br/><small>*UADT010*</small> |
 | 01 | **`NEW-ACCOUNT-AVAILABLE-BALANCE`**<br/><small>`NEW-ACCOUNT-AVAILABLE-BALANCE`</small> | Signed Decimal Display (12, 2) | `S9(10)V99` | 251 | 12 | **Default:** `0` | — |
 | 01 | **`NEW-ACCOUNT-ACTUAL-BALANCE`**<br/><small>`NEW-ACCOUNT-ACTUAL-BALANCE`</small> | Signed Decimal Display (12, 2) | `S9(10)V99` | 263 | 12 | **Default:** `0` | — |
 | 01 | **`WS-ACC-REC-LEN`**<br/><small>`WS-ACC-REC-LEN`</small> | Signed SmallInt (16-bit Binary) | `S9(4)`<br/>*COMP* | 275 | 2 | **Default:** `0` | — |
 | 01 | **`NEW-ACCOUNT-AVAILABLE-BALANCE2`**<br/><small>`NEW-ACCOUNT-AVAILABLE-BALANCE2`</small> | Signed Decimal Display (12, 2) | `S9(10)V99` | 277 | 12 | **Default:** `0` | — |
 | 01 | **`NEW-ACCOUNT-ACTUAL-BALANCE2`**<br/><small>`NEW-ACCOUNT-ACTUAL-BALANCE2`</small> | Signed Decimal Display (12, 2) | `S9(10)V99` | 289 | 12 | **Default:** `0` | — |
 | 01 | **`WS-ACC-REC-LEN2`**<br/><small>`WS-ACC-REC-LEN2`</small> | Signed SmallInt (16-bit Binary) | `S9(4)`<br/>*COMP* | 301 | 2 | **Default:** `0` | — |
-| 01 | **`WS-U-TIME`**<br/><small>`WS-U-TIME`</small> | Signed Integer(15) Packed | `S9(15)`<br/>*COMP_3* | 303 | 8 | — | <small>*UPDATE-ACCOUNT-DB2*</small><br/>`UAD010`<br/>&nbsp;<br/><small>*UPDATE-ACCOUNT-DB2-TO*</small><br/>`UADT010`<br/>*( +2 more)* |
-| 01 | **`WS-ORIG-DATE`**<br/><small>`WS-ORIG-DATE`</small> | Alphanumeric (10 chars) | `X(10)` | 311 | 10 | — | <small>*UPDATE-ACCOUNT-DB2*</small><br/>`UAD010`<br/>&nbsp;<br/><small>*UPDATE-ACCOUNT-DB2-TO*</small><br/>`UADT010`<br/>*( +2 more)* |
+| 01 | **`WS-U-TIME`**<br/><small>`WS-U-TIME`</small> | Signed Integer(15) Packed | `S9(15)`<br/>*COMP_3* | 303 | 8 | — | `UPDATE-ACCOUNT-DB2`<br/><small>*UAD010*</small><br/>&nbsp;<br/>`UPDATE-ACCOUNT-DB2-TO`<br/><small>*UADT010*</small><br/>*( +2 more)* |
+| 01 | **`WS-ORIG-DATE`**<br/><small>`WS-ORIG-DATE`</small> | Alphanumeric (10 chars) | `X(10)` | 311 | 10 | — | `UPDATE-ACCOUNT-DB2`<br/><small>*UAD010*</small><br/>&nbsp;<br/>`UPDATE-ACCOUNT-DB2-TO`<br/><small>*UADT010*</small><br/>*( +2 more)* |
 | 01 | **`WS-ORIG-DATE-GRP`**<br/><small>`WS-ORIG-DATE-GRP`</small> | Group | *DISPLAY* | 311 | 10 | <mark>REDEFINES WS-ORIG-DATE</mark> | — |
 | 03 | &nbsp;&nbsp;`WS-ORIG-DATE-DD`<br/><small>`WS-ORIG-DATE-GRP.WS-ORIG-DATE-DD`</small> | Numeric Display (2 digits) | `99` | 311 | 2 | — | — |
 | 03 | &nbsp;&nbsp;`FILLER`<br/><small>`WS-ORIG-DATE-GRP.FILLER`</small> | Alphanumeric (1 chars) | `X` | 313 | 1 | — | — |
 | 03 | &nbsp;&nbsp;`WS-ORIG-DATE-MM`<br/><small>`WS-ORIG-DATE-GRP.WS-ORIG-DATE-MM`</small> | Numeric Display (2 digits) | `99` | 314 | 2 | — | — |
 | 03 | &nbsp;&nbsp;`FILLER`<br/><small>`WS-ORIG-DATE-GRP.FILLER`</small> | Alphanumeric (1 chars) | `X` | 316 | 1 | — | — |
 | 03 | &nbsp;&nbsp;`WS-ORIG-DATE-YYYY`<br/><small>`WS-ORIG-DATE-GRP.WS-ORIG-DATE-YYYY`</small> | Numeric Display (4 digits) | `9999` | 317 | 4 | — | — |
-| 01 | **`WS-ORIG-DATE-GRP-X`**<br/><small>`WS-ORIG-DATE-GRP-X`</small> | Group | *DISPLAY* | 321 | 10 | — | <small>*WRITE-TO-PROCTRAN-DB2*</small><br/>`WTPD010` |
+| 01 | **`WS-ORIG-DATE-GRP-X`**<br/><small>`WS-ORIG-DATE-GRP-X`</small> | Group | *DISPLAY* | 321 | 10 | — | `WRITE-TO-PROCTRAN-DB2`<br/><small>*WTPD010*</small> |
 | 03 | &nbsp;&nbsp;`WS-ORIG-DATE-DD-X`<br/><small>`WS-ORIG-DATE-GRP-X.WS-ORIG-DATE-DD-X`</small> | Alphanumeric (2 chars) | `XX` | 321 | 2 | — | — |
 | 03 | &nbsp;&nbsp;`FILLER`<br/><small>`WS-ORIG-DATE-GRP-X.FILLER`</small> | Alphanumeric (1 chars) | `X` | 323 | 1 | **Default:** `.` | — |
 | 03 | &nbsp;&nbsp;`WS-ORIG-DATE-MM-X`<br/><small>`WS-ORIG-DATE-GRP-X.WS-ORIG-DATE-MM-X`</small> | Alphanumeric (2 chars) | `XX` | 324 | 2 | — | — |
 | 03 | &nbsp;&nbsp;`FILLER`<br/><small>`WS-ORIG-DATE-GRP-X.FILLER`</small> | Alphanumeric (1 chars) | `X` | 326 | 1 | **Default:** `.` | — |
 | 03 | &nbsp;&nbsp;`WS-ORIG-DATE-YYYY-X`<br/><small>`WS-ORIG-DATE-GRP-X.WS-ORIG-DATE-YYYY-X`</small> | Alphanumeric (4 chars) | `X(4)` | 327 | 4 | — | — |
 | 01 | **`REJ-REASON`**<br/><small>`REJ-REASON`</small> | Alphanumeric (2 chars) | `XX` | 331 | 2 | **Default:** `SPACES` | — |
-| 01 | **`PROCTRAN-AREA`**<br/><small>`PROCTRAN-AREA`</small> | Group | *DISPLAY* | 333 | 99 | — | <small>*WRITE-TO-PROCTRAN-DB2*</small><br/>`WTPD010` |
+| 01 | **`PROCTRAN-AREA`**<br/><small>`PROCTRAN-AREA`</small> | Group | *DISPLAY* | 333 | 99 | — | `WRITE-TO-PROCTRAN-DB2`<br/><small>*WTPD010*</small> |
 | 03 | &nbsp;&nbsp;`PROC-TRAN-DATA`<br/><small>`PROCTRAN-AREA.PROC-TRAN-DATA`</small> | Group | *DISPLAY* | 333 | 99 | — | — |
 | 05 | &nbsp;&nbsp;&nbsp;&nbsp;`PROC-TRAN-EYE-CATCHER`<br/><small>`PROCTRAN-AREA.PROC-TRAN-DATA.PROC-TRAN-EYE-CATCHER`</small> | Alphanumeric (4 chars) | `X(4)` | 333 | 4 | • `88 PROC-TRAN-VALID`: 'PRTR' | — |
 | 05 | &nbsp;&nbsp;&nbsp;&nbsp;`PROC-TRAN-LOGICAL-DELETE-AREA`<br/><small>`PROCTRAN-AREA.PROC-TRAN-DATA.PROC-TRAN-LOGICAL-DELETE-AREA`</small> | Group | *DISPLAY* | 333 | 4 | <mark>REDEFINES PROC-TRAN-EYE-CATCHER</mark> | — |
@@ -178,12 +178,12 @@
 | 07 | &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`PROC-TRAN-TIME-GRP-MM`<br/><small>`PROCTRAN-AREA.PROC-TRAN-DATA.PROC-TRAN-TIME-GRP.PROC-TRAN-TIME-GRP-MM`</small> | Numeric Display (2 digits) | `99` | 361 | 2 | — | — |
 | 07 | &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`PROC-TRAN-TIME-GRP-SS`<br/><small>`PROCTRAN-AREA.PROC-TRAN-DATA.PROC-TRAN-TIME-GRP.PROC-TRAN-TIME-GRP-SS`</small> | Numeric Display (2 digits) | `99` | 363 | 2 | — | — |
 | 05 | &nbsp;&nbsp;&nbsp;&nbsp;`PROC-TRAN-REF`<br/><small>`PROCTRAN-AREA.PROC-TRAN-DATA.PROC-TRAN-REF`</small> | Numeric Display (12 digits) | `9(12)` | 365 | 12 | — | — |
-| 05 | &nbsp;&nbsp;&nbsp;&nbsp;`PROC-TRAN-TYPE`<br/><small>`PROCTRAN-AREA.PROC-TRAN-DATA.PROC-TRAN-TYPE`</small> | Alphanumeric (3 chars) | `X(3)` | 377 | 3 | • `88 PROC-TY-CHEQUE-ACKNOWLEDGED`: 'CHA'<br/>• `88 PROC-TY-CHEQUE-FAILURE`: 'CHF'<br/>• `88 PROC-TY-CHEQUE-PAID-IN`: 'CHI'<br/>• `88 PROC-TY-CHEQUE-PAID-OUT`: 'CHO'<br/>• `88 PROC-TY-CREDIT`: 'CRE'<br/>• `88 PROC-TY-DEBIT`: 'DEB'<br/>• `88 PROC-TY-WEB-CREATE-ACCOUNT`: 'ICA'<br/>• `88 PROC-TY-WEB-CREATE-CUSTOMER`: 'ICC'<br/>• `88 PROC-TY-WEB-DELETE-ACCOUNT`: 'IDA'<br/>• `88 PROC-TY-WEB-DELETE-CUSTOMER`: 'IDC'<br/>• `88 PROC-TY-BRANCH-CREATE-ACCOUNT`: 'OCA'<br/>• `88 PROC-TY-BRANCH-CREATE-CUSTOMER`: 'OCC'<br/>• `88 PROC-TY-BRANCH-DELETE-ACCOUNT`: 'ODA'<br/>• `88 PROC-TY-BRANCH-DELETE-CUSTOMER`: 'ODC'<br/>• `88 PROC-TY-CREATE-SODD`: 'OCS'<br/>• `88 PROC-TY-PAYMENT-CREDIT`: 'PCR'<br/>• `88 PROC-TY-PAYMENT-DEBIT`: 'PDR'<br/>• `88 PROC-TY-TRANSFER`: 'TFR' | <small>*WRITE-TO-PROCTRAN-DB2*</small><br/>`WTPD010` |
-| 05 | &nbsp;&nbsp;&nbsp;&nbsp;`PROC-TRAN-DESC`<br/><small>`PROCTRAN-AREA.PROC-TRAN-DATA.PROC-TRAN-DESC`</small> | Alphanumeric (40 chars) | `X(40)` | 380 | 40 | — | <small>*WRITE-TO-PROCTRAN-DB2*</small><br/>`WTPD010` |
+| 05 | &nbsp;&nbsp;&nbsp;&nbsp;`PROC-TRAN-TYPE`<br/><small>`PROCTRAN-AREA.PROC-TRAN-DATA.PROC-TRAN-TYPE`</small> | Alphanumeric (3 chars) | `X(3)` | 377 | 3 | • `88 PROC-TY-CHEQUE-ACKNOWLEDGED`: 'CHA'<br/>• `88 PROC-TY-CHEQUE-FAILURE`: 'CHF'<br/>• `88 PROC-TY-CHEQUE-PAID-IN`: 'CHI'<br/>• `88 PROC-TY-CHEQUE-PAID-OUT`: 'CHO'<br/>• `88 PROC-TY-CREDIT`: 'CRE'<br/>• `88 PROC-TY-DEBIT`: 'DEB'<br/>• `88 PROC-TY-WEB-CREATE-ACCOUNT`: 'ICA'<br/>• `88 PROC-TY-WEB-CREATE-CUSTOMER`: 'ICC'<br/>• `88 PROC-TY-WEB-DELETE-ACCOUNT`: 'IDA'<br/>• `88 PROC-TY-WEB-DELETE-CUSTOMER`: 'IDC'<br/>• `88 PROC-TY-BRANCH-CREATE-ACCOUNT`: 'OCA'<br/>• `88 PROC-TY-BRANCH-CREATE-CUSTOMER`: 'OCC'<br/>• `88 PROC-TY-BRANCH-DELETE-ACCOUNT`: 'ODA'<br/>• `88 PROC-TY-BRANCH-DELETE-CUSTOMER`: 'ODC'<br/>• `88 PROC-TY-CREATE-SODD`: 'OCS'<br/>• `88 PROC-TY-PAYMENT-CREDIT`: 'PCR'<br/>• `88 PROC-TY-PAYMENT-DEBIT`: 'PDR'<br/>• `88 PROC-TY-TRANSFER`: 'TFR' | `WRITE-TO-PROCTRAN-DB2`<br/><small>*WTPD010*</small> |
+| 05 | &nbsp;&nbsp;&nbsp;&nbsp;`PROC-TRAN-DESC`<br/><small>`PROCTRAN-AREA.PROC-TRAN-DATA.PROC-TRAN-DESC`</small> | Alphanumeric (40 chars) | `X(40)` | 380 | 40 | — | `WRITE-TO-PROCTRAN-DB2`<br/><small>*WTPD010*</small> |
 | 05 | &nbsp;&nbsp;&nbsp;&nbsp;`PROC-TRAN-DESC-XFR`<br/><small>`PROCTRAN-AREA.PROC-TRAN-DATA.PROC-TRAN-DESC-XFR`</small> | Group | *DISPLAY* | 380 | 40 | <mark>REDEFINES PROC-TRAN-DESC</mark> | — |
 | 07 | &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`PROC-TRAN-DESC-XFR-HEADER`<br/><small>`PROCTRAN-AREA.PROC-TRAN-DATA.PROC-TRAN-DESC-XFR.PROC-TRAN-DESC-XFR-HEADER`</small> | Alphanumeric (26 chars) | `X(26)` | 380 | 26 | • `88 PROC-TRAN-DESC-XFR-FLAG`: 'TRANSFER' | — |
-| 07 | &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`PROC-TRAN-DESC-XFR-SORTCODE`<br/><small>`PROCTRAN-AREA.PROC-TRAN-DATA.PROC-TRAN-DESC-XFR.PROC-TRAN-DESC-XFR-SORTCODE`</small> | Numeric Display (6 digits) | `9(6)` | 406 | 6 | — | <small>*WRITE-TO-PROCTRAN-DB2*</small><br/>`WTPD010` |
-| 07 | &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`PROC-TRAN-DESC-XFR-ACCOUNT`<br/><small>`PROCTRAN-AREA.PROC-TRAN-DATA.PROC-TRAN-DESC-XFR.PROC-TRAN-DESC-XFR-ACCOUNT`</small> | Numeric Display (8 digits) | `9(8)` | 412 | 8 | — | <small>*WRITE-TO-PROCTRAN-DB2*</small><br/>`WTPD010` |
+| 07 | &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`PROC-TRAN-DESC-XFR-SORTCODE`<br/><small>`PROCTRAN-AREA.PROC-TRAN-DATA.PROC-TRAN-DESC-XFR.PROC-TRAN-DESC-XFR-SORTCODE`</small> | Numeric Display (6 digits) | `9(6)` | 406 | 6 | — | `WRITE-TO-PROCTRAN-DB2`<br/><small>*WTPD010*</small> |
+| 07 | &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`PROC-TRAN-DESC-XFR-ACCOUNT`<br/><small>`PROCTRAN-AREA.PROC-TRAN-DATA.PROC-TRAN-DESC-XFR.PROC-TRAN-DESC-XFR-ACCOUNT`</small> | Numeric Display (8 digits) | `9(8)` | 412 | 8 | — | `WRITE-TO-PROCTRAN-DB2`<br/><small>*WTPD010*</small> |
 | 05 | &nbsp;&nbsp;&nbsp;&nbsp;`PROC-TRAN-DESC-DELACC`<br/><small>`PROCTRAN-AREA.PROC-TRAN-DATA.PROC-TRAN-DESC-DELACC`</small> | Group | *DISPLAY* | 380 | 40 | <mark>REDEFINES PROC-TRAN-DESC</mark> | — |
 | 07 | &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`PROC-DESC-DELACC-CUSTOMER`<br/><small>`PROCTRAN-AREA.PROC-TRAN-DATA.PROC-TRAN-DESC-DELACC.PROC-DESC-DELACC-CUSTOMER`</small> | Numeric Display (10 digits) | `9(10)` | 380 | 10 | — | — |
 | 07 | &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`PROC-DESC-DELACC-ACCTYPE`<br/><small>`PROCTRAN-AREA.PROC-TRAN-DATA.PROC-TRAN-DESC-DELACC.PROC-DESC-DELACC-ACCTYPE`</small> | Alphanumeric (8 chars) | `X(8)` | 390 | 8 | — | — |
@@ -260,30 +260,30 @@
 | 07 | &nbsp;&nbsp;&nbsp;&nbsp;`WS-CUSTOMER-RANGE-TOP`<br/><small>`WS-PASSED-DATA.WS-CUSTOMER-RANGE.WS-CUSTOMER-RANGE-TOP`</small> | Alphanumeric (1 chars) | `X` | 900 | 1 | — | — |
 | 07 | &nbsp;&nbsp;&nbsp;&nbsp;`WS-CUSTOMER-RANGE-MIDDLE`<br/><small>`WS-PASSED-DATA.WS-CUSTOMER-RANGE.WS-CUSTOMER-RANGE-MIDDLE`</small> | Alphanumeric (1 chars) | `X` | 901 | 1 | — | — |
 | 07 | &nbsp;&nbsp;&nbsp;&nbsp;`WS-CUSTOMER-RANGE-BOTTOM`<br/><small>`WS-PASSED-DATA.WS-CUSTOMER-RANGE.WS-CUSTOMER-RANGE-BOTTOM`</small> | Alphanumeric (1 chars) | `X` | 902 | 1 | — | — |
-| 01 | **`MY-ABEND-CODE`**<br/><small>`MY-ABEND-CODE`</small> | Alphanumeric (4 chars) | `XXXX` | 903 | 4 | — | <small>*ABEND-HANDLING*</small><br/>`AH010` |
-| 01 | **`WS-STORM-DRAIN`**<br/><small>`WS-STORM-DRAIN`</small> | Alphanumeric (1 chars) | `X` | 907 | 1 | **Default:** `N` | <small>*ABEND-HANDLING*</small><br/>`AH010` |
-| 01 | **`STORM-DRAIN-CONDITION`**<br/><small>`STORM-DRAIN-CONDITION`</small> | Alphanumeric (20 chars) | `X(20)` | 908 | 20 | — | <small>*CHECK-FOR-STORM-DRAIN-DB2*</small><br/>`CFSDD010` |
-| 01 | **`SQLCODE-DISPLAY`**<br/><small>`SQLCODE-DISPLAY`</small> | Signed Numeric Display (8 digits) | `S9(8)` | 928 | 8 | — | <small>*UPDATE-ACCOUNT-DB2-TO*</small><br/>`UADT010`<br/>&nbsp;<br/><small>*CHECK-FOR-STORM-DRAIN-DB2*</small><br/>`CFSDD010`<br/>&nbsp;<br/><small>*ABEND-HANDLING*</small><br/>`AH010` |
+| 01 | **`MY-ABEND-CODE`**<br/><small>`MY-ABEND-CODE`</small> | Alphanumeric (4 chars) | `XXXX` | 903 | 4 | — | `ABEND-HANDLING`<br/><small>*AH010*</small> |
+| 01 | **`WS-STORM-DRAIN`**<br/><small>`WS-STORM-DRAIN`</small> | Alphanumeric (1 chars) | `X` | 907 | 1 | **Default:** `N` | `ABEND-HANDLING`<br/><small>*AH010*</small> |
+| 01 | **`STORM-DRAIN-CONDITION`**<br/><small>`STORM-DRAIN-CONDITION`</small> | Alphanumeric (20 chars) | `X(20)` | 908 | 20 | — | `CHECK-FOR-STORM-DRAIN-DB2`<br/><small>*CFSDD010*</small> |
+| 01 | **`SQLCODE-DISPLAY`**<br/><small>`SQLCODE-DISPLAY`</small> | Signed Numeric Display (8 digits) | `S9(8)` | 928 | 8 | — | `UPDATE-ACCOUNT-DB2-TO`<br/><small>*UADT010*</small><br/>&nbsp;<br/>`CHECK-FOR-STORM-DRAIN-DB2`<br/><small>*CFSDD010*</small><br/>&nbsp;<br/>`ABEND-HANDLING`<br/><small>*AH010*</small> |
 | 01 | **`NUMERIC-AMOUNT-DISPLAY`**<br/><small>`NUMERIC-AMOUNT-DISPLAY`</small> | Decimal Display (13, 2) | `+9(10).99` | 936 | 14 | — | — |
 | 01 | **`WS-TIME-DATA`**<br/><small>`WS-TIME-DATA`</small> | Group | *DISPLAY* | 950 | 6 | — | — |
-| 03 | &nbsp;&nbsp;`WS-TIME-NOW`<br/><small>`WS-TIME-DATA.WS-TIME-NOW`</small> | Numeric Display (6 digits) | `9(6)` | 950 | 6 | — | <small>*WRITE-TO-PROCTRAN-DB2*</small><br/>`WTPD010` |
+| 03 | &nbsp;&nbsp;`WS-TIME-NOW`<br/><small>`WS-TIME-DATA.WS-TIME-NOW`</small> | Numeric Display (6 digits) | `9(6)` | 950 | 6 | — | `WRITE-TO-PROCTRAN-DB2`<br/><small>*WTPD010*</small> |
 | 03 | &nbsp;&nbsp;`WS-TIME-NOW-GRP`<br/><small>`WS-TIME-DATA.WS-TIME-NOW-GRP`</small> | Group | *DISPLAY* | 950 | 6 | <mark>REDEFINES WS-TIME-NOW</mark> | — |
-| 05 | &nbsp;&nbsp;&nbsp;&nbsp;`WS-TIME-NOW-GRP-HH`<br/><small>`WS-TIME-DATA.WS-TIME-NOW-GRP.WS-TIME-NOW-GRP-HH`</small> | Numeric Display (2 digits) | `99` | 950 | 2 | — | <small>*UPDATE-ACCOUNT-DB2*</small><br/>`UAD010`<br/>&nbsp;<br/><small>*UPDATE-ACCOUNT-DB2-TO*</small><br/>`UADT010`<br/>*( +2 more)* |
-| 05 | &nbsp;&nbsp;&nbsp;&nbsp;`WS-TIME-NOW-GRP-MM`<br/><small>`WS-TIME-DATA.WS-TIME-NOW-GRP.WS-TIME-NOW-GRP-MM`</small> | Numeric Display (2 digits) | `99` | 952 | 2 | — | <small>*UPDATE-ACCOUNT-DB2*</small><br/>`UAD010`<br/>&nbsp;<br/><small>*UPDATE-ACCOUNT-DB2-TO*</small><br/>`UADT010`<br/>*( +2 more)* |
+| 05 | &nbsp;&nbsp;&nbsp;&nbsp;`WS-TIME-NOW-GRP-HH`<br/><small>`WS-TIME-DATA.WS-TIME-NOW-GRP.WS-TIME-NOW-GRP-HH`</small> | Numeric Display (2 digits) | `99` | 950 | 2 | — | `UPDATE-ACCOUNT-DB2`<br/><small>*UAD010*</small><br/>&nbsp;<br/>`UPDATE-ACCOUNT-DB2-TO`<br/><small>*UADT010*</small><br/>*( +2 more)* |
+| 05 | &nbsp;&nbsp;&nbsp;&nbsp;`WS-TIME-NOW-GRP-MM`<br/><small>`WS-TIME-DATA.WS-TIME-NOW-GRP.WS-TIME-NOW-GRP-MM`</small> | Numeric Display (2 digits) | `99` | 952 | 2 | — | `UPDATE-ACCOUNT-DB2`<br/><small>*UAD010*</small><br/>&nbsp;<br/>`UPDATE-ACCOUNT-DB2-TO`<br/><small>*UADT010*</small><br/>*( +2 more)* |
 | 05 | &nbsp;&nbsp;&nbsp;&nbsp;`WS-TIME-NOW-GRP-SS`<br/><small>`WS-TIME-DATA.WS-TIME-NOW-GRP.WS-TIME-NOW-GRP-SS`</small> | Numeric Display (2 digits) | `99` | 954 | 2 | — | — |
 | 01 | **`WS-ABEND-PGM`**<br/><small>`WS-ABEND-PGM`</small> | Alphanumeric (8 chars) | `X(8)` | 956 | 8 | **Default:** `ABNDPROC` | — |
-| 01 | **`ABNDINFO-REC`**<br/><small>`ABNDINFO-REC`</small> | Group | *DISPLAY* | 964 | 678 | — | <small>*UPDATE-ACCOUNT-DB2*</small><br/>`UAD010`<br/>&nbsp;<br/><small>*UPDATE-ACCOUNT-DB2-TO*</small><br/>`UADT010`<br/>*( +2 more)* |
+| 01 | **`ABNDINFO-REC`**<br/><small>`ABNDINFO-REC`</small> | Group | *DISPLAY* | 964 | 678 | — | `UPDATE-ACCOUNT-DB2`<br/><small>*UAD010*</small><br/>&nbsp;<br/>`UPDATE-ACCOUNT-DB2-TO`<br/><small>*UADT010*</small><br/>*( +2 more)* |
 | 03 | &nbsp;&nbsp;`ABND-VSAM-KEY`<br/><small>`ABNDINFO-REC.ABND-VSAM-KEY`</small> | Group | *DISPLAY* | 964 | 12 | — | — |
-| 05 | &nbsp;&nbsp;&nbsp;&nbsp;`ABND-UTIME-KEY`<br/><small>`ABNDINFO-REC.ABND-VSAM-KEY.ABND-UTIME-KEY`</small> | Signed Integer(15) Packed | `S9(15)`<br/>*COMP_3* | 964 | 8 | — | <small>*UPDATE-ACCOUNT-DB2*</small><br/>`UAD010`<br/>&nbsp;<br/><small>*UPDATE-ACCOUNT-DB2-TO*</small><br/>`UADT010`<br/>*( +2 more)* |
-| 05 | &nbsp;&nbsp;&nbsp;&nbsp;`ABND-TASKNO-KEY`<br/><small>`ABNDINFO-REC.ABND-VSAM-KEY.ABND-TASKNO-KEY`</small> | Numeric Display (4 digits) | `9(4)` | 972 | 4 | — | <small>*UPDATE-ACCOUNT-DB2*</small><br/>`UAD010`<br/>&nbsp;<br/><small>*UPDATE-ACCOUNT-DB2-TO*</small><br/>`UADT010`<br/>*( +2 more)* |
+| 05 | &nbsp;&nbsp;&nbsp;&nbsp;`ABND-UTIME-KEY`<br/><small>`ABNDINFO-REC.ABND-VSAM-KEY.ABND-UTIME-KEY`</small> | Signed Integer(15) Packed | `S9(15)`<br/>*COMP_3* | 964 | 8 | — | `UPDATE-ACCOUNT-DB2`<br/><small>*UAD010*</small><br/>&nbsp;<br/>`UPDATE-ACCOUNT-DB2-TO`<br/><small>*UADT010*</small><br/>*( +2 more)* |
+| 05 | &nbsp;&nbsp;&nbsp;&nbsp;`ABND-TASKNO-KEY`<br/><small>`ABNDINFO-REC.ABND-VSAM-KEY.ABND-TASKNO-KEY`</small> | Numeric Display (4 digits) | `9(4)` | 972 | 4 | — | `UPDATE-ACCOUNT-DB2`<br/><small>*UAD010*</small><br/>&nbsp;<br/>`UPDATE-ACCOUNT-DB2-TO`<br/><small>*UADT010*</small><br/>*( +2 more)* |
 | 03 | &nbsp;&nbsp;`ABND-APPLID`<br/><small>`ABNDINFO-REC.ABND-APPLID`</small> | Alphanumeric (8 chars) | `X(8)` | 976 | 8 | — | — |
-| 03 | &nbsp;&nbsp;`ABND-TRANID`<br/><small>`ABNDINFO-REC.ABND-TRANID`</small> | Alphanumeric (4 chars) | `X(4)` | 984 | 4 | — | <small>*UPDATE-ACCOUNT-DB2*</small><br/>`UAD010`<br/>&nbsp;<br/><small>*UPDATE-ACCOUNT-DB2-TO*</small><br/>`UADT010`<br/>*( +2 more)* |
-| 03 | &nbsp;&nbsp;`ABND-DATE`<br/><small>`ABNDINFO-REC.ABND-DATE`</small> | Alphanumeric (10 chars) | `X(10)` | 988 | 10 | — | <small>*UPDATE-ACCOUNT-DB2*</small><br/>`UAD010`<br/>&nbsp;<br/><small>*UPDATE-ACCOUNT-DB2-TO*</small><br/>`UADT010`<br/>*( +2 more)* |
-| 03 | &nbsp;&nbsp;`ABND-TIME`<br/><small>`ABNDINFO-REC.ABND-TIME`</small> | Alphanumeric (8 chars) | `X(8)` | 998 | 8 | — | <small>*UPDATE-ACCOUNT-DB2*</small><br/>`UAD010`<br/>&nbsp;<br/><small>*UPDATE-ACCOUNT-DB2-TO*</small><br/>`UADT010`<br/>*( +2 more)* |
-| 03 | &nbsp;&nbsp;`ABND-CODE`<br/><small>`ABNDINFO-REC.ABND-CODE`</small> | Alphanumeric (4 chars) | `X(4)` | 1006 | 4 | — | <small>*UPDATE-ACCOUNT-DB2*</small><br/>`UAD010`<br/>&nbsp;<br/><small>*UPDATE-ACCOUNT-DB2-TO*</small><br/>`UADT010`<br/>*( +2 more)* |
+| 03 | &nbsp;&nbsp;`ABND-TRANID`<br/><small>`ABNDINFO-REC.ABND-TRANID`</small> | Alphanumeric (4 chars) | `X(4)` | 984 | 4 | — | `UPDATE-ACCOUNT-DB2`<br/><small>*UAD010*</small><br/>&nbsp;<br/>`UPDATE-ACCOUNT-DB2-TO`<br/><small>*UADT010*</small><br/>*( +2 more)* |
+| 03 | &nbsp;&nbsp;`ABND-DATE`<br/><small>`ABNDINFO-REC.ABND-DATE`</small> | Alphanumeric (10 chars) | `X(10)` | 988 | 10 | — | `UPDATE-ACCOUNT-DB2`<br/><small>*UAD010*</small><br/>&nbsp;<br/>`UPDATE-ACCOUNT-DB2-TO`<br/><small>*UADT010*</small><br/>*( +2 more)* |
+| 03 | &nbsp;&nbsp;`ABND-TIME`<br/><small>`ABNDINFO-REC.ABND-TIME`</small> | Alphanumeric (8 chars) | `X(8)` | 998 | 8 | — | `UPDATE-ACCOUNT-DB2`<br/><small>*UAD010*</small><br/>&nbsp;<br/>`UPDATE-ACCOUNT-DB2-TO`<br/><small>*UADT010*</small><br/>*( +2 more)* |
+| 03 | &nbsp;&nbsp;`ABND-CODE`<br/><small>`ABNDINFO-REC.ABND-CODE`</small> | Alphanumeric (4 chars) | `X(4)` | 1006 | 4 | — | `UPDATE-ACCOUNT-DB2`<br/><small>*UAD010*</small><br/>&nbsp;<br/>`UPDATE-ACCOUNT-DB2-TO`<br/><small>*UADT010*</small><br/>*( +2 more)* |
 | 03 | &nbsp;&nbsp;`ABND-PROGRAM`<br/><small>`ABNDINFO-REC.ABND-PROGRAM`</small> | Alphanumeric (8 chars) | `X(8)` | 1010 | 8 | — | — |
-| 03 | &nbsp;&nbsp;`ABND-RESPCODE`<br/><small>`ABNDINFO-REC.ABND-RESPCODE`</small> | Signed Numeric Display (8 digits) | `S9(8)` | 1018 | 8 | — | <small>*UPDATE-ACCOUNT-DB2*</small><br/>`UAD010`<br/>&nbsp;<br/><small>*UPDATE-ACCOUNT-DB2-TO*</small><br/>`UADT010`<br/>*( +2 more)* |
-| 03 | &nbsp;&nbsp;`ABND-RESP2CODE`<br/><small>`ABNDINFO-REC.ABND-RESP2CODE`</small> | Signed Numeric Display (8 digits) | `S9(8)` | 1026 | 8 | — | <small>*UPDATE-ACCOUNT-DB2*</small><br/>`UAD010`<br/>&nbsp;<br/><small>*UPDATE-ACCOUNT-DB2-TO*</small><br/>`UADT010`<br/>*( +2 more)* |
-| 03 | &nbsp;&nbsp;`ABND-SQLCODE`<br/><small>`ABNDINFO-REC.ABND-SQLCODE`</small> | Signed Numeric Display (8 digits) | `S9(8)` | 1034 | 8 | — | <small>*UPDATE-ACCOUNT-DB2*</small><br/>`UAD010`<br/>&nbsp;<br/><small>*UPDATE-ACCOUNT-DB2-TO*</small><br/>`UADT010`<br/>*( +2 more)* |
-| 03 | &nbsp;&nbsp;`ABND-FREEFORM`<br/><small>`ABNDINFO-REC.ABND-FREEFORM`</small> | Alphanumeric (600 chars) | `X(600)` | 1042 | 600 | — | <small>*UPDATE-ACCOUNT-DB2*</small><br/>`UAD010`<br/>&nbsp;<br/><small>*UPDATE-ACCOUNT-DB2-TO*</small><br/>`UADT010`<br/>*( +2 more)* |
+| 03 | &nbsp;&nbsp;`ABND-RESPCODE`<br/><small>`ABNDINFO-REC.ABND-RESPCODE`</small> | Signed Numeric Display (8 digits) | `S9(8)` | 1018 | 8 | — | `UPDATE-ACCOUNT-DB2`<br/><small>*UAD010*</small><br/>&nbsp;<br/>`UPDATE-ACCOUNT-DB2-TO`<br/><small>*UADT010*</small><br/>*( +2 more)* |
+| 03 | &nbsp;&nbsp;`ABND-RESP2CODE`<br/><small>`ABNDINFO-REC.ABND-RESP2CODE`</small> | Signed Numeric Display (8 digits) | `S9(8)` | 1026 | 8 | — | `UPDATE-ACCOUNT-DB2`<br/><small>*UAD010*</small><br/>&nbsp;<br/>`UPDATE-ACCOUNT-DB2-TO`<br/><small>*UADT010*</small><br/>*( +2 more)* |
+| 03 | &nbsp;&nbsp;`ABND-SQLCODE`<br/><small>`ABNDINFO-REC.ABND-SQLCODE`</small> | Signed Numeric Display (8 digits) | `S9(8)` | 1034 | 8 | — | `UPDATE-ACCOUNT-DB2`<br/><small>*UAD010*</small><br/>&nbsp;<br/>`UPDATE-ACCOUNT-DB2-TO`<br/><small>*UADT010*</small><br/>*( +2 more)* |
+| 03 | &nbsp;&nbsp;`ABND-FREEFORM`<br/><small>`ABNDINFO-REC.ABND-FREEFORM`</small> | Alphanumeric (600 chars) | `X(600)` | 1042 | 600 | — | `UPDATE-ACCOUNT-DB2`<br/><small>*UAD010*</small><br/>&nbsp;<br/>`UPDATE-ACCOUNT-DB2-TO`<br/><small>*UADT010*</small><br/>*( +2 more)* |
 

@@ -11,6 +11,33 @@ from .statements import AnyStatementNode, EvaluateStatementNode
 from .procedure import SectionNode, ParagraphNode, AsgAuditSummary
 
 
+import re as _re
+
+_PROLEAP_CE_TAG = _re.compile(r"\*>CE\s*", _re.IGNORECASE)
+
+
+def _sanitize_id_field(value: Optional[str]) -> Optional[str]:
+    """
+    Strip ProLeap *>CE annotation markers from IDENTIFICATION DIVISION metadata fields.
+
+    ProLeap represents the text of AUTHOR., DATE-WRITTEN., etc. paragraphs verbatim
+    including any `*>CE ... *>CE` inline comment delimiters it inserts.  We remove
+    those tokens here at the IR boundary so that the clean human-readable value
+    propagates everywhere (templates, JSON export, etc.) without ad-hoc filtering.
+
+    Examples:
+        "*>CE Jon Collett. *>CE"  ->  "Jon Collett."
+        "*>CE 2023-01-01 *>CE"   ->  "2023-01-01"
+        "Jon Collett."            ->  "Jon Collett."   (no-op)
+    """
+    if not value:
+        return value
+    cleaned = _PROLEAP_CE_TAG.sub("", value).strip().rstrip(".")
+    # Collapse any internal runs of whitespace left by stripping
+    cleaned = " ".join(cleaned.split())
+    return cleaned if cleaned else None
+
+
 class ProgramModel(BaseModel):
     """The root canonical Intermediate Representation (IR) container."""
     model_config = ConfigDict(populate_by_name=True)
@@ -37,10 +64,16 @@ class ProgramModel(BaseModel):
     @model_validator(mode="before")
     @classmethod
     def normalize_paragraphs(cls, data: Any) -> Any:
-        if isinstance(data, dict) and "paragraphs" in data:
-            paras = data["paragraphs"]
+        if isinstance(data, dict):
+            # Normalise paragraphs dict -> list
+            paras = data.get("paragraphs")
             if isinstance(paras, dict):
                 data["paragraphs"] = list(paras.values())
+            # Strip *>CE markers from all IDENTIFICATION DIVISION text fields
+            for key in ("author", "installation", "dateWritten", "date_written",
+                        "dateCompiled", "date_compiled"):
+                if key in data:
+                    data[key] = _sanitize_id_field(data[key])
         return data
 
     def model_post_init(self, __context: Any) -> None:

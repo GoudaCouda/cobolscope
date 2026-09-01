@@ -157,8 +157,8 @@ CobolScope enforces strict mathematical, architectural, and compiler correctness
 
 To run the full suite:
 ```powershell
-python tests/run_all_tests.py
-python tests/test_nist_suite.py
+python -m tests.run_all_tests.py
+python -m tests.test_nist_suite.py
 ```
 
 ---
