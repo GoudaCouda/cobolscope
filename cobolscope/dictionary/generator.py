@@ -246,9 +246,16 @@ def _create_jinja_env() -> jinja2.Environment:
     def format_md_references(r: DictionaryRow) -> str:
         if not r.references:
             return "—"
-        if len(r.references) <= 3:
-            return ", ".join(f"`{ref}`" for ref in r.references)
-        return f"{', '.join(f'`{ref}`' for ref in r.references[:2])} *(+{len(r.references)-2} more)*"
+        formatted = []
+        for ref in r.references:
+            if " > " in ref:
+                sec, para = ref.split(" > ", 1)
+                formatted.append(f"`{sec}`<br/><small>*{para}*</small>")
+            else:
+                formatted.append(f"`{ref}`")
+        if len(formatted) <= 3:
+            return "<br/>&nbsp;<br/>".join(formatted)
+        return f"{'<br/>&nbsp;<br/>'.join(formatted[:2])}<br/>*( +{len(formatted)-2} more)*"
 
     env.filters["format_bytes"] = format_bytes
     env.filters["format_md_pic_usage"] = format_md_pic_usage
@@ -323,7 +330,7 @@ class DataDictionaryGenerator:
 
         # References
         refs = self.usage_index.get(field.id or "", [])
-        clean_refs = [r for r in refs if not r.startswith("SECTION:")]
+        clean_refs = list(dict.fromkeys(r for r in refs if not r.startswith("SECTION:")))
 
         row = DictionaryRow(
             section=section,

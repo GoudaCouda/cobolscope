@@ -151,14 +151,30 @@
         }
         .cond88-item { margin-top: 0.15rem; }
 
-        .refs-list { display: flex; flex-wrap: wrap; gap: 0.25rem; }
-        .ref-tag {
-            background: #334155;
-            color: #e2e8f0;
-            padding: 0.1rem 0.4rem;
-            border-radius: 0.2rem;
-            font-size: 0.75rem;
+        .refs-list { display: flex; flex-direction: column; gap: 0.3rem; align-items: flex-start; }
+        .ref-breadcrumb {
+            display: inline-flex;
+            flex-direction: column;
+            align-items: flex-start;
+            background: rgba(56, 189, 248, 0.06);
+            border: 1px solid rgba(56, 189, 248, 0.2);
+            border-radius: 0.3rem;
+            padding: 0.25rem 0.55rem 0.2rem;
+            gap: 0;
+        }
+        .ref-sec {
+            font-size: 0.65rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+            color: var(--text-muted);
+            line-height: 1.3;
+        }
+        .ref-para {
             font-family: ui-monospace, SFMono-Regular, monospace;
+            font-size: 0.8rem;
+            color: #e2e8f0;
+            line-height: 1.3;
         }
     </style>
 </head>
@@ -167,7 +183,7 @@
         <header class="header">
             <div>
                 <h1>Data Dictionary: XFRFUN</h1>
-                <div class="meta-text">Source: <span class="font-mono">C:\Users\austi\proleap-cli\tests\fixtures\bank_of_z\cobol\XFRFUN.cbl</span></div>
+                <div class="meta-text">Source: <span class="font-mono">C:\Users\austi\cobolscope\tests\fixtures\bank_of_z\cobol\XFRFUN.cbl</span></div>
             </div>
             <div class="meta-text text-right">
 <div>Author: *>CE Jon Collett. *>CE</div>            </div>
@@ -271,7 +287,10 @@
                         <td class="text-center font-mono"><b>6</b></td>
                         <td>
                             <div class="refs-list">
-                                <span class="ref-tag">A010</span>
+                                <div class="ref-breadcrumb" title="PREMIERE > A010">
+                                    <span class="ref-sec">PREMIERE</span>
+                                    <span class="ref-para">A010</span>
+                                </div>
                             </div>
                         </td>
                     </tr>
@@ -305,7 +324,10 @@
                         <td class="text-center font-mono"><b>88</b></td>
                         <td>
                             <div class="refs-list">
-                                <span class="ref-tag">UADT010</span>
+                                <div class="ref-breadcrumb" title="UPDATE-ACCOUNT-DB2-TO > UADT010">
+                                    <span class="ref-sec">UPDATE-ACCOUNT-DB2-TO</span>
+                                    <span class="ref-para">UADT010</span>
+                                </div>
                             </div>
                         </td>
                     </tr>
@@ -323,7 +345,10 @@
                         <td class="text-center font-mono"><b>4</b></td>
                         <td>
                             <div class="refs-list">
-                                <span class="ref-tag">A010</span>
+                                <div class="ref-breadcrumb" title="PREMIERE > A010">
+                                    <span class="ref-sec">PREMIERE</span>
+                                    <span class="ref-para">A010</span>
+                                </div>
                             </div>
                         </td>
                     </tr>
@@ -373,9 +398,18 @@
                         <td class="text-center font-mono"><b>6</b></td>
                         <td>
                             <div class="refs-list">
-                                <span class="ref-tag">A010</span>
-                                <span class="ref-tag">UADF010</span>
-                                <span class="ref-tag">UADT010</span>
+                                <div class="ref-breadcrumb" title="PREMIERE > A010">
+                                    <span class="ref-sec">PREMIERE</span>
+                                    <span class="ref-para">A010</span>
+                                </div>
+                                <div class="ref-breadcrumb" title="UPDATE-ACCOUNT-DB2-FROM > UADF010">
+                                    <span class="ref-sec">UPDATE-ACCOUNT-DB2-FROM</span>
+                                    <span class="ref-para">UADF010</span>
+                                </div>
+                                <div class="ref-breadcrumb" title="UPDATE-ACCOUNT-DB2-TO > UADT010">
+                                    <span class="ref-sec">UPDATE-ACCOUNT-DB2-TO</span>
+                                    <span class="ref-para">UADT010</span>
+                                </div>
                             </div>
                         </td>
                     </tr>
@@ -393,10 +427,22 @@
                         <td class="text-center font-mono"><b>8</b></td>
                         <td>
                             <div class="refs-list">
-                                <span class="ref-tag">A010</span>
-                                <span class="ref-tag">UADF010</span>
-                                <span class="ref-tag">UADT010</span>
-                                <span class="ref-tag">AH010</span>
+                                <div class="ref-breadcrumb" title="PREMIERE > A010">
+                                    <span class="ref-sec">PREMIERE</span>
+                                    <span class="ref-para">A010</span>
+                                </div>
+                                <div class="ref-breadcrumb" title="UPDATE-ACCOUNT-DB2-FROM > UADF010">
+                                    <span class="ref-sec">UPDATE-ACCOUNT-DB2-FROM</span>
+                                    <span class="ref-para">UADF010</span>
+                                </div>
+                                <div class="ref-breadcrumb" title="UPDATE-ACCOUNT-DB2-TO > UADT010">
+                                    <span class="ref-sec">UPDATE-ACCOUNT-DB2-TO</span>
+                                    <span class="ref-para">UADT010</span>
+                                </div>
+                                <div class="ref-breadcrumb" title="ABEND-HANDLING > AH010">
+                                    <span class="ref-sec">ABEND-HANDLING</span>
+                                    <span class="ref-para">AH010</span>
+                                </div>
                             </div>
                         </td>
                     </tr>
@@ -510,8 +556,14 @@
                         <td class="text-center font-mono"><b>7</b></td>
                         <td>
                             <div class="refs-list">
-                                <span class="ref-tag">UADF010</span>
-                                <span class="ref-tag">UADT010</span>
+                                <div class="ref-breadcrumb" title="UPDATE-ACCOUNT-DB2-FROM > UADF010">
+                                    <span class="ref-sec">UPDATE-ACCOUNT-DB2-FROM</span>
+                                    <span class="ref-para">UADF010</span>
+                                </div>
+                                <div class="ref-breadcrumb" title="UPDATE-ACCOUNT-DB2-TO > UADT010">
+                                    <span class="ref-sec">UPDATE-ACCOUNT-DB2-TO</span>
+                                    <span class="ref-para">UADT010</span>
+                                </div>
                             </div>
                         </td>
                     </tr>
@@ -529,8 +581,14 @@
                         <td class="text-center font-mono"><b>7</b></td>
                         <td>
                             <div class="refs-list">
-                                <span class="ref-tag">UADF010</span>
-                                <span class="ref-tag">UADT010</span>
+                                <div class="ref-breadcrumb" title="UPDATE-ACCOUNT-DB2-FROM > UADF010">
+                                    <span class="ref-sec">UPDATE-ACCOUNT-DB2-FROM</span>
+                                    <span class="ref-para">UADF010</span>
+                                </div>
+                                <div class="ref-breadcrumb" title="UPDATE-ACCOUNT-DB2-TO > UADT010">
+                                    <span class="ref-sec">UPDATE-ACCOUNT-DB2-TO</span>
+                                    <span class="ref-para">UADT010</span>
+                                </div>
                             </div>
                         </td>
                     </tr>
@@ -564,7 +622,10 @@
                         <td class="text-center font-mono"><b>96</b></td>
                         <td>
                             <div class="refs-list">
-                                <span class="ref-tag">WTPD010</span>
+                                <div class="ref-breadcrumb" title="WRITE-TO-PROCTRAN-DB2 > WTPD010">
+                                    <span class="ref-sec">WRITE-TO-PROCTRAN-DB2</span>
+                                    <span class="ref-para">WTPD010</span>
+                                </div>
                             </div>
                         </td>
                     </tr>
@@ -582,7 +643,10 @@
                         <td class="text-center font-mono"><b>4</b></td>
                         <td>
                             <div class="refs-list">
-                                <span class="ref-tag">WTPD010</span>
+                                <div class="ref-breadcrumb" title="WRITE-TO-PROCTRAN-DB2 > WTPD010">
+                                    <span class="ref-sec">WRITE-TO-PROCTRAN-DB2</span>
+                                    <span class="ref-para">WTPD010</span>
+                                </div>
                             </div>
                         </td>
                     </tr>
@@ -600,7 +664,10 @@
                         <td class="text-center font-mono"><b>6</b></td>
                         <td>
                             <div class="refs-list">
-                                <span class="ref-tag">WTPD010</span>
+                                <div class="ref-breadcrumb" title="WRITE-TO-PROCTRAN-DB2 > WTPD010">
+                                    <span class="ref-sec">WRITE-TO-PROCTRAN-DB2</span>
+                                    <span class="ref-para">WTPD010</span>
+                                </div>
                             </div>
                         </td>
                     </tr>
@@ -618,7 +685,10 @@
                         <td class="text-center font-mono"><b>8</b></td>
                         <td>
                             <div class="refs-list">
-                                <span class="ref-tag">WTPD010</span>
+                                <div class="ref-breadcrumb" title="WRITE-TO-PROCTRAN-DB2 > WTPD010">
+                                    <span class="ref-sec">WRITE-TO-PROCTRAN-DB2</span>
+                                    <span class="ref-para">WTPD010</span>
+                                </div>
                             </div>
                         </td>
                     </tr>
@@ -636,7 +706,10 @@
                         <td class="text-center font-mono"><b>10</b></td>
                         <td>
                             <div class="refs-list">
-                                <span class="ref-tag">WTPD010</span>
+                                <div class="ref-breadcrumb" title="WRITE-TO-PROCTRAN-DB2 > WTPD010">
+                                    <span class="ref-sec">WRITE-TO-PROCTRAN-DB2</span>
+                                    <span class="ref-para">WTPD010</span>
+                                </div>
                             </div>
                         </td>
                     </tr>
@@ -654,7 +727,10 @@
                         <td class="text-center font-mono"><b>6</b></td>
                         <td>
                             <div class="refs-list">
-                                <span class="ref-tag">WTPD010</span>
+                                <div class="ref-breadcrumb" title="WRITE-TO-PROCTRAN-DB2 > WTPD010">
+                                    <span class="ref-sec">WRITE-TO-PROCTRAN-DB2</span>
+                                    <span class="ref-para">WTPD010</span>
+                                </div>
                             </div>
                         </td>
                     </tr>
@@ -672,7 +748,10 @@
                         <td class="text-center font-mono"><b>12</b></td>
                         <td>
                             <div class="refs-list">
-                                <span class="ref-tag">WTPD010</span>
+                                <div class="ref-breadcrumb" title="WRITE-TO-PROCTRAN-DB2 > WTPD010">
+                                    <span class="ref-sec">WRITE-TO-PROCTRAN-DB2</span>
+                                    <span class="ref-para">WTPD010</span>
+                                </div>
                             </div>
                         </td>
                     </tr>
@@ -690,7 +769,10 @@
                         <td class="text-center font-mono"><b>3</b></td>
                         <td>
                             <div class="refs-list">
-                                <span class="ref-tag">WTPD010</span>
+                                <div class="ref-breadcrumb" title="WRITE-TO-PROCTRAN-DB2 > WTPD010">
+                                    <span class="ref-sec">WRITE-TO-PROCTRAN-DB2</span>
+                                    <span class="ref-para">WTPD010</span>
+                                </div>
                             </div>
                         </td>
                     </tr>
@@ -708,7 +790,10 @@
                         <td class="text-center font-mono"><b>40</b></td>
                         <td>
                             <div class="refs-list">
-                                <span class="ref-tag">WTPD010</span>
+                                <div class="ref-breadcrumb" title="WRITE-TO-PROCTRAN-DB2 > WTPD010">
+                                    <span class="ref-sec">WRITE-TO-PROCTRAN-DB2</span>
+                                    <span class="ref-para">WTPD010</span>
+                                </div>
                             </div>
                         </td>
                     </tr>
@@ -726,7 +811,10 @@
                         <td class="text-center font-mono"><b>7</b></td>
                         <td>
                             <div class="refs-list">
-                                <span class="ref-tag">WTPD010</span>
+                                <div class="ref-breadcrumb" title="WRITE-TO-PROCTRAN-DB2 > WTPD010">
+                                    <span class="ref-sec">WRITE-TO-PROCTRAN-DB2</span>
+                                    <span class="ref-para">WTPD010</span>
+                                </div>
                             </div>
                         </td>
                     </tr>
@@ -776,9 +864,18 @@
                         <td class="text-center font-mono"><b>4</b></td>
                         <td>
                             <div class="refs-list">
-                                <span class="ref-tag">UAD010</span>
-                                <span class="ref-tag">UADT010</span>
-                                <span class="ref-tag">AH010</span>
+                                <div class="ref-breadcrumb" title="UPDATE-ACCOUNT-DB2 > UAD010">
+                                    <span class="ref-sec">UPDATE-ACCOUNT-DB2</span>
+                                    <span class="ref-para">UAD010</span>
+                                </div>
+                                <div class="ref-breadcrumb" title="UPDATE-ACCOUNT-DB2-TO > UADT010">
+                                    <span class="ref-sec">UPDATE-ACCOUNT-DB2-TO</span>
+                                    <span class="ref-para">UADT010</span>
+                                </div>
+                                <div class="ref-breadcrumb" title="ABEND-HANDLING > AH010">
+                                    <span class="ref-sec">ABEND-HANDLING</span>
+                                    <span class="ref-para">AH010</span>
+                                </div>
                             </div>
                         </td>
                     </tr>
@@ -796,9 +893,18 @@
                         <td class="text-center font-mono"><b>4</b></td>
                         <td>
                             <div class="refs-list">
-                                <span class="ref-tag">UAD010</span>
-                                <span class="ref-tag">UADT010</span>
-                                <span class="ref-tag">AH010</span>
+                                <div class="ref-breadcrumb" title="UPDATE-ACCOUNT-DB2 > UAD010">
+                                    <span class="ref-sec">UPDATE-ACCOUNT-DB2</span>
+                                    <span class="ref-para">UAD010</span>
+                                </div>
+                                <div class="ref-breadcrumb" title="UPDATE-ACCOUNT-DB2-TO > UADT010">
+                                    <span class="ref-sec">UPDATE-ACCOUNT-DB2-TO</span>
+                                    <span class="ref-para">UADT010</span>
+                                </div>
+                                <div class="ref-breadcrumb" title="ABEND-HANDLING > AH010">
+                                    <span class="ref-sec">ABEND-HANDLING</span>
+                                    <span class="ref-para">AH010</span>
+                                </div>
                             </div>
                         </td>
                     </tr>
@@ -832,9 +938,18 @@
                         <td class="text-center font-mono"><b>8</b></td>
                         <td>
                             <div class="refs-list">
-                                <span class="ref-tag">UAD010</span>
-                                <span class="ref-tag">UADF010</span>
-                                <span class="ref-tag">WTPD010</span>
+                                <div class="ref-breadcrumb" title="UPDATE-ACCOUNT-DB2 > UAD010">
+                                    <span class="ref-sec">UPDATE-ACCOUNT-DB2</span>
+                                    <span class="ref-para">UAD010</span>
+                                </div>
+                                <div class="ref-breadcrumb" title="UPDATE-ACCOUNT-DB2-FROM > UADF010">
+                                    <span class="ref-sec">UPDATE-ACCOUNT-DB2-FROM</span>
+                                    <span class="ref-para">UADF010</span>
+                                </div>
+                                <div class="ref-breadcrumb" title="WRITE-TO-PROCTRAN-DB2 > WTPD010">
+                                    <span class="ref-sec">WRITE-TO-PROCTRAN-DB2</span>
+                                    <span class="ref-para">WTPD010</span>
+                                </div>
                             </div>
                         </td>
                     </tr>
@@ -852,10 +967,22 @@
                         <td class="text-center font-mono"><b>6</b></td>
                         <td>
                             <div class="refs-list">
-                                <span class="ref-tag">A010</span>
-                                <span class="ref-tag">UAD010</span>
-                                <span class="ref-tag">UADF010</span>
-                                <span class="ref-tag">WTPD010</span>
+                                <div class="ref-breadcrumb" title="PREMIERE > A010">
+                                    <span class="ref-sec">PREMIERE</span>
+                                    <span class="ref-para">A010</span>
+                                </div>
+                                <div class="ref-breadcrumb" title="UPDATE-ACCOUNT-DB2 > UAD010">
+                                    <span class="ref-sec">UPDATE-ACCOUNT-DB2</span>
+                                    <span class="ref-para">UAD010</span>
+                                </div>
+                                <div class="ref-breadcrumb" title="UPDATE-ACCOUNT-DB2-FROM > UADF010">
+                                    <span class="ref-sec">UPDATE-ACCOUNT-DB2-FROM</span>
+                                    <span class="ref-para">UADF010</span>
+                                </div>
+                                <div class="ref-breadcrumb" title="WRITE-TO-PROCTRAN-DB2 > WTPD010">
+                                    <span class="ref-sec">WRITE-TO-PROCTRAN-DB2</span>
+                                    <span class="ref-para">WTPD010</span>
+                                </div>
                             </div>
                         </td>
                     </tr>
@@ -873,9 +1000,18 @@
                         <td class="text-center font-mono"><b>8</b></td>
                         <td>
                             <div class="refs-list">
-                                <span class="ref-tag">UAD010</span>
-                                <span class="ref-tag">UADT010</span>
-                                <span class="ref-tag">WTPD010</span>
+                                <div class="ref-breadcrumb" title="UPDATE-ACCOUNT-DB2 > UAD010">
+                                    <span class="ref-sec">UPDATE-ACCOUNT-DB2</span>
+                                    <span class="ref-para">UAD010</span>
+                                </div>
+                                <div class="ref-breadcrumb" title="UPDATE-ACCOUNT-DB2-TO > UADT010">
+                                    <span class="ref-sec">UPDATE-ACCOUNT-DB2-TO</span>
+                                    <span class="ref-para">UADT010</span>
+                                </div>
+                                <div class="ref-breadcrumb" title="WRITE-TO-PROCTRAN-DB2 > WTPD010">
+                                    <span class="ref-sec">WRITE-TO-PROCTRAN-DB2</span>
+                                    <span class="ref-para">WTPD010</span>
+                                </div>
                             </div>
                         </td>
                     </tr>
@@ -893,10 +1029,22 @@
                         <td class="text-center font-mono"><b>6</b></td>
                         <td>
                             <div class="refs-list">
-                                <span class="ref-tag">A010</span>
-                                <span class="ref-tag">UAD010</span>
-                                <span class="ref-tag">UADT010</span>
-                                <span class="ref-tag">WTPD010</span>
+                                <div class="ref-breadcrumb" title="PREMIERE > A010">
+                                    <span class="ref-sec">PREMIERE</span>
+                                    <span class="ref-para">A010</span>
+                                </div>
+                                <div class="ref-breadcrumb" title="UPDATE-ACCOUNT-DB2 > UAD010">
+                                    <span class="ref-sec">UPDATE-ACCOUNT-DB2</span>
+                                    <span class="ref-para">UAD010</span>
+                                </div>
+                                <div class="ref-breadcrumb" title="UPDATE-ACCOUNT-DB2-TO > UADT010">
+                                    <span class="ref-sec">UPDATE-ACCOUNT-DB2-TO</span>
+                                    <span class="ref-para">UADT010</span>
+                                </div>
+                                <div class="ref-breadcrumb" title="WRITE-TO-PROCTRAN-DB2 > WTPD010">
+                                    <span class="ref-sec">WRITE-TO-PROCTRAN-DB2</span>
+                                    <span class="ref-para">WTPD010</span>
+                                </div>
                             </div>
                         </td>
                     </tr>
@@ -914,10 +1062,22 @@
                         <td class="text-center font-mono"><b>12</b></td>
                         <td>
                             <div class="refs-list">
-                                <span class="ref-tag">A010</span>
-                                <span class="ref-tag">UADF010</span>
-                                <span class="ref-tag">UADT010</span>
-                                <span class="ref-tag">WTPD010</span>
+                                <div class="ref-breadcrumb" title="PREMIERE > A010">
+                                    <span class="ref-sec">PREMIERE</span>
+                                    <span class="ref-para">A010</span>
+                                </div>
+                                <div class="ref-breadcrumb" title="UPDATE-ACCOUNT-DB2-FROM > UADF010">
+                                    <span class="ref-sec">UPDATE-ACCOUNT-DB2-FROM</span>
+                                    <span class="ref-para">UADF010</span>
+                                </div>
+                                <div class="ref-breadcrumb" title="UPDATE-ACCOUNT-DB2-TO > UADT010">
+                                    <span class="ref-sec">UPDATE-ACCOUNT-DB2-TO</span>
+                                    <span class="ref-para">UADT010</span>
+                                </div>
+                                <div class="ref-breadcrumb" title="WRITE-TO-PROCTRAN-DB2 > WTPD010">
+                                    <span class="ref-sec">WRITE-TO-PROCTRAN-DB2</span>
+                                    <span class="ref-para">WTPD010</span>
+                                </div>
                             </div>
                         </td>
                     </tr>
@@ -935,7 +1095,10 @@
                         <td class="text-center font-mono"><b>12</b></td>
                         <td>
                             <div class="refs-list">
-                                <span class="ref-tag">UADF010</span>
+                                <div class="ref-breadcrumb" title="UPDATE-ACCOUNT-DB2-FROM > UADF010">
+                                    <span class="ref-sec">UPDATE-ACCOUNT-DB2-FROM</span>
+                                    <span class="ref-para">UADF010</span>
+                                </div>
                             </div>
                         </td>
                     </tr>
@@ -953,7 +1116,10 @@
                         <td class="text-center font-mono"><b>12</b></td>
                         <td>
                             <div class="refs-list">
-                                <span class="ref-tag">UADF010</span>
+                                <div class="ref-breadcrumb" title="UPDATE-ACCOUNT-DB2-FROM > UADF010">
+                                    <span class="ref-sec">UPDATE-ACCOUNT-DB2-FROM</span>
+                                    <span class="ref-para">UADF010</span>
+                                </div>
                             </div>
                         </td>
                     </tr>
@@ -971,7 +1137,10 @@
                         <td class="text-center font-mono"><b>12</b></td>
                         <td>
                             <div class="refs-list">
-                                <span class="ref-tag">UADT010</span>
+                                <div class="ref-breadcrumb" title="UPDATE-ACCOUNT-DB2-TO > UADT010">
+                                    <span class="ref-sec">UPDATE-ACCOUNT-DB2-TO</span>
+                                    <span class="ref-para">UADT010</span>
+                                </div>
                             </div>
                         </td>
                     </tr>
@@ -989,7 +1158,10 @@
                         <td class="text-center font-mono"><b>12</b></td>
                         <td>
                             <div class="refs-list">
-                                <span class="ref-tag">UADT010</span>
+                                <div class="ref-breadcrumb" title="UPDATE-ACCOUNT-DB2-TO > UADT010">
+                                    <span class="ref-sec">UPDATE-ACCOUNT-DB2-TO</span>
+                                    <span class="ref-para">UADT010</span>
+                                </div>
                             </div>
                         </td>
                     </tr>
@@ -1007,11 +1179,26 @@
                         <td class="text-center font-mono"><b>1</b></td>
                         <td>
                             <div class="refs-list">
-                                <span class="ref-tag">A010</span>
-                                <span class="ref-tag">UAD010</span>
-                                <span class="ref-tag">UADF010</span>
-                                <span class="ref-tag">UADT010</span>
-                                <span class="ref-tag">AH010</span>
+                                <div class="ref-breadcrumb" title="PREMIERE > A010">
+                                    <span class="ref-sec">PREMIERE</span>
+                                    <span class="ref-para">A010</span>
+                                </div>
+                                <div class="ref-breadcrumb" title="UPDATE-ACCOUNT-DB2 > UAD010">
+                                    <span class="ref-sec">UPDATE-ACCOUNT-DB2</span>
+                                    <span class="ref-para">UAD010</span>
+                                </div>
+                                <div class="ref-breadcrumb" title="UPDATE-ACCOUNT-DB2-FROM > UADF010">
+                                    <span class="ref-sec">UPDATE-ACCOUNT-DB2-FROM</span>
+                                    <span class="ref-para">UADF010</span>
+                                </div>
+                                <div class="ref-breadcrumb" title="UPDATE-ACCOUNT-DB2-TO > UADT010">
+                                    <span class="ref-sec">UPDATE-ACCOUNT-DB2-TO</span>
+                                    <span class="ref-para">UADT010</span>
+                                </div>
+                                <div class="ref-breadcrumb" title="ABEND-HANDLING > AH010">
+                                    <span class="ref-sec">ABEND-HANDLING</span>
+                                    <span class="ref-para">AH010</span>
+                                </div>
                             </div>
                         </td>
                     </tr>
@@ -1029,11 +1216,26 @@
                         <td class="text-center font-mono"><b>1</b></td>
                         <td>
                             <div class="refs-list">
-                                <span class="ref-tag">A010</span>
-                                <span class="ref-tag">UAD010</span>
-                                <span class="ref-tag">UADF010</span>
-                                <span class="ref-tag">UADT010</span>
-                                <span class="ref-tag">AH010</span>
+                                <div class="ref-breadcrumb" title="PREMIERE > A010">
+                                    <span class="ref-sec">PREMIERE</span>
+                                    <span class="ref-para">A010</span>
+                                </div>
+                                <div class="ref-breadcrumb" title="UPDATE-ACCOUNT-DB2 > UAD010">
+                                    <span class="ref-sec">UPDATE-ACCOUNT-DB2</span>
+                                    <span class="ref-para">UAD010</span>
+                                </div>
+                                <div class="ref-breadcrumb" title="UPDATE-ACCOUNT-DB2-FROM > UADF010">
+                                    <span class="ref-sec">UPDATE-ACCOUNT-DB2-FROM</span>
+                                    <span class="ref-para">UADF010</span>
+                                </div>
+                                <div class="ref-breadcrumb" title="UPDATE-ACCOUNT-DB2-TO > UADT010">
+                                    <span class="ref-sec">UPDATE-ACCOUNT-DB2-TO</span>
+                                    <span class="ref-para">UADT010</span>
+                                </div>
+                                <div class="ref-breadcrumb" title="ABEND-HANDLING > AH010">
+                                    <span class="ref-sec">ABEND-HANDLING</span>
+                                    <span class="ref-para">AH010</span>
+                                </div>
                             </div>
                         </td>
                     </tr>
@@ -1099,8 +1301,14 @@
                         <td class="text-center font-mono"><b>3</b></td>
                         <td>
                             <div class="refs-list">
-                                <span class="ref-tag">A010</span>
-                                <span class="ref-tag">UADT010</span>
+                                <div class="ref-breadcrumb" title="PREMIERE > A010">
+                                    <span class="ref-sec">PREMIERE</span>
+                                    <span class="ref-para">A010</span>
+                                </div>
+                                <div class="ref-breadcrumb" title="UPDATE-ACCOUNT-DB2-TO > UADT010">
+                                    <span class="ref-sec">UPDATE-ACCOUNT-DB2-TO</span>
+                                    <span class="ref-para">UADT010</span>
+                                </div>
                             </div>
                         </td>
                     </tr>
@@ -2084,7 +2292,10 @@
                         <td class="text-center font-mono"><b>12</b></td>
                         <td>
                             <div class="refs-list">
-                                <span class="ref-tag">WTPD010</span>
+                                <div class="ref-breadcrumb" title="WRITE-TO-PROCTRAN-DB2 > WTPD010">
+                                    <span class="ref-sec">WRITE-TO-PROCTRAN-DB2</span>
+                                    <span class="ref-para">WTPD010</span>
+                                </div>
                             </div>
                         </td>
                     </tr>
@@ -2102,7 +2313,10 @@
                         <td class="text-center font-mono"><b>9</b></td>
                         <td>
                             <div class="refs-list">
-                                <span class="ref-tag">WTPD010</span>
+                                <div class="ref-breadcrumb" title="WRITE-TO-PROCTRAN-DB2 > WTPD010">
+                                    <span class="ref-sec">WRITE-TO-PROCTRAN-DB2</span>
+                                    <span class="ref-para">WTPD010</span>
+                                </div>
                             </div>
                         </td>
                     </tr>
@@ -2136,10 +2350,22 @@
                         <td class="text-center font-mono"><b>6</b></td>
                         <td>
                             <div class="refs-list">
-                                <span class="ref-tag">A010</span>
-                                <span class="ref-tag">UAD010</span>
-                                <span class="ref-tag">UADF010</span>
-                                <span class="ref-tag">UADT010</span>
+                                <div class="ref-breadcrumb" title="PREMIERE > A010">
+                                    <span class="ref-sec">PREMIERE</span>
+                                    <span class="ref-para">A010</span>
+                                </div>
+                                <div class="ref-breadcrumb" title="UPDATE-ACCOUNT-DB2 > UAD010">
+                                    <span class="ref-sec">UPDATE-ACCOUNT-DB2</span>
+                                    <span class="ref-para">UAD010</span>
+                                </div>
+                                <div class="ref-breadcrumb" title="UPDATE-ACCOUNT-DB2-FROM > UADF010">
+                                    <span class="ref-sec">UPDATE-ACCOUNT-DB2-FROM</span>
+                                    <span class="ref-para">UADF010</span>
+                                </div>
+                                <div class="ref-breadcrumb" title="UPDATE-ACCOUNT-DB2-TO > UADT010">
+                                    <span class="ref-sec">UPDATE-ACCOUNT-DB2-TO</span>
+                                    <span class="ref-para">UADT010</span>
+                                </div>
                             </div>
                         </td>
                     </tr>
@@ -2157,9 +2383,18 @@
                         <td class="text-center font-mono"><b>8</b></td>
                         <td>
                             <div class="refs-list">
-                                <span class="ref-tag">UAD010</span>
-                                <span class="ref-tag">UADF010</span>
-                                <span class="ref-tag">UADT010</span>
+                                <div class="ref-breadcrumb" title="UPDATE-ACCOUNT-DB2 > UAD010">
+                                    <span class="ref-sec">UPDATE-ACCOUNT-DB2</span>
+                                    <span class="ref-para">UAD010</span>
+                                </div>
+                                <div class="ref-breadcrumb" title="UPDATE-ACCOUNT-DB2-FROM > UADF010">
+                                    <span class="ref-sec">UPDATE-ACCOUNT-DB2-FROM</span>
+                                    <span class="ref-para">UADF010</span>
+                                </div>
+                                <div class="ref-breadcrumb" title="UPDATE-ACCOUNT-DB2-TO > UADT010">
+                                    <span class="ref-sec">UPDATE-ACCOUNT-DB2-TO</span>
+                                    <span class="ref-para">UADT010</span>
+                                </div>
                             </div>
                         </td>
                     </tr>
@@ -2273,10 +2508,22 @@
                         <td class="text-center font-mono"><b>8</b></td>
                         <td>
                             <div class="refs-list">
-                                <span class="ref-tag">UAD010</span>
-                                <span class="ref-tag">UADT010</span>
-                                <span class="ref-tag">WTPD010</span>
-                                <span class="ref-tag">AH010</span>
+                                <div class="ref-breadcrumb" title="UPDATE-ACCOUNT-DB2 > UAD010">
+                                    <span class="ref-sec">UPDATE-ACCOUNT-DB2</span>
+                                    <span class="ref-para">UAD010</span>
+                                </div>
+                                <div class="ref-breadcrumb" title="UPDATE-ACCOUNT-DB2-TO > UADT010">
+                                    <span class="ref-sec">UPDATE-ACCOUNT-DB2-TO</span>
+                                    <span class="ref-para">UADT010</span>
+                                </div>
+                                <div class="ref-breadcrumb" title="WRITE-TO-PROCTRAN-DB2 > WTPD010">
+                                    <span class="ref-sec">WRITE-TO-PROCTRAN-DB2</span>
+                                    <span class="ref-para">WTPD010</span>
+                                </div>
+                                <div class="ref-breadcrumb" title="ABEND-HANDLING > AH010">
+                                    <span class="ref-sec">ABEND-HANDLING</span>
+                                    <span class="ref-para">AH010</span>
+                                </div>
                             </div>
                         </td>
                     </tr>
@@ -2294,10 +2541,22 @@
                         <td class="text-center font-mono"><b>10</b></td>
                         <td>
                             <div class="refs-list">
-                                <span class="ref-tag">UAD010</span>
-                                <span class="ref-tag">UADT010</span>
-                                <span class="ref-tag">WTPD010</span>
-                                <span class="ref-tag">AH010</span>
+                                <div class="ref-breadcrumb" title="UPDATE-ACCOUNT-DB2 > UAD010">
+                                    <span class="ref-sec">UPDATE-ACCOUNT-DB2</span>
+                                    <span class="ref-para">UAD010</span>
+                                </div>
+                                <div class="ref-breadcrumb" title="UPDATE-ACCOUNT-DB2-TO > UADT010">
+                                    <span class="ref-sec">UPDATE-ACCOUNT-DB2-TO</span>
+                                    <span class="ref-para">UADT010</span>
+                                </div>
+                                <div class="ref-breadcrumb" title="WRITE-TO-PROCTRAN-DB2 > WTPD010">
+                                    <span class="ref-sec">WRITE-TO-PROCTRAN-DB2</span>
+                                    <span class="ref-para">WTPD010</span>
+                                </div>
+                                <div class="ref-breadcrumb" title="ABEND-HANDLING > AH010">
+                                    <span class="ref-sec">ABEND-HANDLING</span>
+                                    <span class="ref-para">AH010</span>
+                                </div>
                             </div>
                         </td>
                     </tr>
@@ -2411,7 +2670,10 @@
                         <td class="text-center font-mono"><b>10</b></td>
                         <td>
                             <div class="refs-list">
-                                <span class="ref-tag">WTPD010</span>
+                                <div class="ref-breadcrumb" title="WRITE-TO-PROCTRAN-DB2 > WTPD010">
+                                    <span class="ref-sec">WRITE-TO-PROCTRAN-DB2</span>
+                                    <span class="ref-para">WTPD010</span>
+                                </div>
                             </div>
                         </td>
                     </tr>
@@ -2525,7 +2787,10 @@
                         <td class="text-center font-mono"><b>99</b></td>
                         <td>
                             <div class="refs-list">
-                                <span class="ref-tag">WTPD010</span>
+                                <div class="ref-breadcrumb" title="WRITE-TO-PROCTRAN-DB2 > WTPD010">
+                                    <span class="ref-sec">WRITE-TO-PROCTRAN-DB2</span>
+                                    <span class="ref-para">WTPD010</span>
+                                </div>
                             </div>
                         </td>
                     </tr>
@@ -2873,7 +3138,10 @@
                         <td class="text-center font-mono"><b>3</b></td>
                         <td>
                             <div class="refs-list">
-                                <span class="ref-tag">WTPD010</span>
+                                <div class="ref-breadcrumb" title="WRITE-TO-PROCTRAN-DB2 > WTPD010">
+                                    <span class="ref-sec">WRITE-TO-PROCTRAN-DB2</span>
+                                    <span class="ref-para">WTPD010</span>
+                                </div>
                             </div>
                         </td>
                     </tr>
@@ -2891,7 +3159,10 @@
                         <td class="text-center font-mono"><b>40</b></td>
                         <td>
                             <div class="refs-list">
-                                <span class="ref-tag">WTPD010</span>
+                                <div class="ref-breadcrumb" title="WRITE-TO-PROCTRAN-DB2 > WTPD010">
+                                    <span class="ref-sec">WRITE-TO-PROCTRAN-DB2</span>
+                                    <span class="ref-para">WTPD010</span>
+                                </div>
                             </div>
                         </td>
                     </tr>
@@ -2944,7 +3215,10 @@
                         <td class="text-center font-mono"><b>6</b></td>
                         <td>
                             <div class="refs-list">
-                                <span class="ref-tag">WTPD010</span>
+                                <div class="ref-breadcrumb" title="WRITE-TO-PROCTRAN-DB2 > WTPD010">
+                                    <span class="ref-sec">WRITE-TO-PROCTRAN-DB2</span>
+                                    <span class="ref-para">WTPD010</span>
+                                </div>
                             </div>
                         </td>
                     </tr>
@@ -2962,7 +3236,10 @@
                         <td class="text-center font-mono"><b>8</b></td>
                         <td>
                             <div class="refs-list">
-                                <span class="ref-tag">WTPD010</span>
+                                <div class="ref-breadcrumb" title="WRITE-TO-PROCTRAN-DB2 > WTPD010">
+                                    <span class="ref-sec">WRITE-TO-PROCTRAN-DB2</span>
+                                    <span class="ref-para">WTPD010</span>
+                                </div>
                             </div>
                         </td>
                     </tr>
@@ -4214,7 +4491,10 @@
                         <td class="text-center font-mono"><b>4</b></td>
                         <td>
                             <div class="refs-list">
-                                <span class="ref-tag">AH010</span>
+                                <div class="ref-breadcrumb" title="ABEND-HANDLING > AH010">
+                                    <span class="ref-sec">ABEND-HANDLING</span>
+                                    <span class="ref-para">AH010</span>
+                                </div>
                             </div>
                         </td>
                     </tr>
@@ -4232,7 +4512,10 @@
                         <td class="text-center font-mono"><b>1</b></td>
                         <td>
                             <div class="refs-list">
-                                <span class="ref-tag">AH010</span>
+                                <div class="ref-breadcrumb" title="ABEND-HANDLING > AH010">
+                                    <span class="ref-sec">ABEND-HANDLING</span>
+                                    <span class="ref-para">AH010</span>
+                                </div>
                             </div>
                         </td>
                     </tr>
@@ -4250,7 +4533,10 @@
                         <td class="text-center font-mono"><b>20</b></td>
                         <td>
                             <div class="refs-list">
-                                <span class="ref-tag">CFSDD010</span>
+                                <div class="ref-breadcrumb" title="CHECK-FOR-STORM-DRAIN-DB2 > CFSDD010">
+                                    <span class="ref-sec">CHECK-FOR-STORM-DRAIN-DB2</span>
+                                    <span class="ref-para">CFSDD010</span>
+                                </div>
                             </div>
                         </td>
                     </tr>
@@ -4268,9 +4554,18 @@
                         <td class="text-center font-mono"><b>8</b></td>
                         <td>
                             <div class="refs-list">
-                                <span class="ref-tag">UADT010</span>
-                                <span class="ref-tag">CFSDD010</span>
-                                <span class="ref-tag">AH010</span>
+                                <div class="ref-breadcrumb" title="UPDATE-ACCOUNT-DB2-TO > UADT010">
+                                    <span class="ref-sec">UPDATE-ACCOUNT-DB2-TO</span>
+                                    <span class="ref-para">UADT010</span>
+                                </div>
+                                <div class="ref-breadcrumb" title="CHECK-FOR-STORM-DRAIN-DB2 > CFSDD010">
+                                    <span class="ref-sec">CHECK-FOR-STORM-DRAIN-DB2</span>
+                                    <span class="ref-para">CFSDD010</span>
+                                </div>
+                                <div class="ref-breadcrumb" title="ABEND-HANDLING > AH010">
+                                    <span class="ref-sec">ABEND-HANDLING</span>
+                                    <span class="ref-para">AH010</span>
+                                </div>
                             </div>
                         </td>
                     </tr>
@@ -4320,7 +4615,10 @@
                         <td class="text-center font-mono"><b>6</b></td>
                         <td>
                             <div class="refs-list">
-                                <span class="ref-tag">WTPD010</span>
+                                <div class="ref-breadcrumb" title="WRITE-TO-PROCTRAN-DB2 > WTPD010">
+                                    <span class="ref-sec">WRITE-TO-PROCTRAN-DB2</span>
+                                    <span class="ref-para">WTPD010</span>
+                                </div>
                             </div>
                         </td>
                     </tr>
@@ -4354,10 +4652,22 @@
                         <td class="text-center font-mono"><b>2</b></td>
                         <td>
                             <div class="refs-list">
-                                <span class="ref-tag">UAD010</span>
-                                <span class="ref-tag">UADT010</span>
-                                <span class="ref-tag">WTPD010</span>
-                                <span class="ref-tag">AH010</span>
+                                <div class="ref-breadcrumb" title="UPDATE-ACCOUNT-DB2 > UAD010">
+                                    <span class="ref-sec">UPDATE-ACCOUNT-DB2</span>
+                                    <span class="ref-para">UAD010</span>
+                                </div>
+                                <div class="ref-breadcrumb" title="UPDATE-ACCOUNT-DB2-TO > UADT010">
+                                    <span class="ref-sec">UPDATE-ACCOUNT-DB2-TO</span>
+                                    <span class="ref-para">UADT010</span>
+                                </div>
+                                <div class="ref-breadcrumb" title="WRITE-TO-PROCTRAN-DB2 > WTPD010">
+                                    <span class="ref-sec">WRITE-TO-PROCTRAN-DB2</span>
+                                    <span class="ref-para">WTPD010</span>
+                                </div>
+                                <div class="ref-breadcrumb" title="ABEND-HANDLING > AH010">
+                                    <span class="ref-sec">ABEND-HANDLING</span>
+                                    <span class="ref-para">AH010</span>
+                                </div>
                             </div>
                         </td>
                     </tr>
@@ -4375,10 +4685,22 @@
                         <td class="text-center font-mono"><b>2</b></td>
                         <td>
                             <div class="refs-list">
-                                <span class="ref-tag">UAD010</span>
-                                <span class="ref-tag">UADT010</span>
-                                <span class="ref-tag">WTPD010</span>
-                                <span class="ref-tag">AH010</span>
+                                <div class="ref-breadcrumb" title="UPDATE-ACCOUNT-DB2 > UAD010">
+                                    <span class="ref-sec">UPDATE-ACCOUNT-DB2</span>
+                                    <span class="ref-para">UAD010</span>
+                                </div>
+                                <div class="ref-breadcrumb" title="UPDATE-ACCOUNT-DB2-TO > UADT010">
+                                    <span class="ref-sec">UPDATE-ACCOUNT-DB2-TO</span>
+                                    <span class="ref-para">UADT010</span>
+                                </div>
+                                <div class="ref-breadcrumb" title="WRITE-TO-PROCTRAN-DB2 > WTPD010">
+                                    <span class="ref-sec">WRITE-TO-PROCTRAN-DB2</span>
+                                    <span class="ref-para">WTPD010</span>
+                                </div>
+                                <div class="ref-breadcrumb" title="ABEND-HANDLING > AH010">
+                                    <span class="ref-sec">ABEND-HANDLING</span>
+                                    <span class="ref-para">AH010</span>
+                                </div>
                             </div>
                         </td>
                     </tr>
@@ -4428,10 +4750,22 @@
                         <td class="text-center font-mono"><b>678</b></td>
                         <td>
                             <div class="refs-list">
-                                <span class="ref-tag">UAD010</span>
-                                <span class="ref-tag">UADT010</span>
-                                <span class="ref-tag">WTPD010</span>
-                                <span class="ref-tag">AH010</span>
+                                <div class="ref-breadcrumb" title="UPDATE-ACCOUNT-DB2 > UAD010">
+                                    <span class="ref-sec">UPDATE-ACCOUNT-DB2</span>
+                                    <span class="ref-para">UAD010</span>
+                                </div>
+                                <div class="ref-breadcrumb" title="UPDATE-ACCOUNT-DB2-TO > UADT010">
+                                    <span class="ref-sec">UPDATE-ACCOUNT-DB2-TO</span>
+                                    <span class="ref-para">UADT010</span>
+                                </div>
+                                <div class="ref-breadcrumb" title="WRITE-TO-PROCTRAN-DB2 > WTPD010">
+                                    <span class="ref-sec">WRITE-TO-PROCTRAN-DB2</span>
+                                    <span class="ref-para">WTPD010</span>
+                                </div>
+                                <div class="ref-breadcrumb" title="ABEND-HANDLING > AH010">
+                                    <span class="ref-sec">ABEND-HANDLING</span>
+                                    <span class="ref-para">AH010</span>
+                                </div>
                             </div>
                         </td>
                     </tr>
@@ -4465,10 +4799,22 @@
                         <td class="text-center font-mono"><b>8</b></td>
                         <td>
                             <div class="refs-list">
-                                <span class="ref-tag">UAD010</span>
-                                <span class="ref-tag">UADT010</span>
-                                <span class="ref-tag">WTPD010</span>
-                                <span class="ref-tag">AH010</span>
+                                <div class="ref-breadcrumb" title="UPDATE-ACCOUNT-DB2 > UAD010">
+                                    <span class="ref-sec">UPDATE-ACCOUNT-DB2</span>
+                                    <span class="ref-para">UAD010</span>
+                                </div>
+                                <div class="ref-breadcrumb" title="UPDATE-ACCOUNT-DB2-TO > UADT010">
+                                    <span class="ref-sec">UPDATE-ACCOUNT-DB2-TO</span>
+                                    <span class="ref-para">UADT010</span>
+                                </div>
+                                <div class="ref-breadcrumb" title="WRITE-TO-PROCTRAN-DB2 > WTPD010">
+                                    <span class="ref-sec">WRITE-TO-PROCTRAN-DB2</span>
+                                    <span class="ref-para">WTPD010</span>
+                                </div>
+                                <div class="ref-breadcrumb" title="ABEND-HANDLING > AH010">
+                                    <span class="ref-sec">ABEND-HANDLING</span>
+                                    <span class="ref-para">AH010</span>
+                                </div>
                             </div>
                         </td>
                     </tr>
@@ -4486,10 +4832,22 @@
                         <td class="text-center font-mono"><b>4</b></td>
                         <td>
                             <div class="refs-list">
-                                <span class="ref-tag">UAD010</span>
-                                <span class="ref-tag">UADT010</span>
-                                <span class="ref-tag">WTPD010</span>
-                                <span class="ref-tag">AH010</span>
+                                <div class="ref-breadcrumb" title="UPDATE-ACCOUNT-DB2 > UAD010">
+                                    <span class="ref-sec">UPDATE-ACCOUNT-DB2</span>
+                                    <span class="ref-para">UAD010</span>
+                                </div>
+                                <div class="ref-breadcrumb" title="UPDATE-ACCOUNT-DB2-TO > UADT010">
+                                    <span class="ref-sec">UPDATE-ACCOUNT-DB2-TO</span>
+                                    <span class="ref-para">UADT010</span>
+                                </div>
+                                <div class="ref-breadcrumb" title="WRITE-TO-PROCTRAN-DB2 > WTPD010">
+                                    <span class="ref-sec">WRITE-TO-PROCTRAN-DB2</span>
+                                    <span class="ref-para">WTPD010</span>
+                                </div>
+                                <div class="ref-breadcrumb" title="ABEND-HANDLING > AH010">
+                                    <span class="ref-sec">ABEND-HANDLING</span>
+                                    <span class="ref-para">AH010</span>
+                                </div>
                             </div>
                         </td>
                     </tr>
@@ -4523,10 +4881,22 @@
                         <td class="text-center font-mono"><b>4</b></td>
                         <td>
                             <div class="refs-list">
-                                <span class="ref-tag">UAD010</span>
-                                <span class="ref-tag">UADT010</span>
-                                <span class="ref-tag">WTPD010</span>
-                                <span class="ref-tag">AH010</span>
+                                <div class="ref-breadcrumb" title="UPDATE-ACCOUNT-DB2 > UAD010">
+                                    <span class="ref-sec">UPDATE-ACCOUNT-DB2</span>
+                                    <span class="ref-para">UAD010</span>
+                                </div>
+                                <div class="ref-breadcrumb" title="UPDATE-ACCOUNT-DB2-TO > UADT010">
+                                    <span class="ref-sec">UPDATE-ACCOUNT-DB2-TO</span>
+                                    <span class="ref-para">UADT010</span>
+                                </div>
+                                <div class="ref-breadcrumb" title="WRITE-TO-PROCTRAN-DB2 > WTPD010">
+                                    <span class="ref-sec">WRITE-TO-PROCTRAN-DB2</span>
+                                    <span class="ref-para">WTPD010</span>
+                                </div>
+                                <div class="ref-breadcrumb" title="ABEND-HANDLING > AH010">
+                                    <span class="ref-sec">ABEND-HANDLING</span>
+                                    <span class="ref-para">AH010</span>
+                                </div>
                             </div>
                         </td>
                     </tr>
@@ -4544,10 +4914,22 @@
                         <td class="text-center font-mono"><b>10</b></td>
                         <td>
                             <div class="refs-list">
-                                <span class="ref-tag">UAD010</span>
-                                <span class="ref-tag">UADT010</span>
-                                <span class="ref-tag">WTPD010</span>
-                                <span class="ref-tag">AH010</span>
+                                <div class="ref-breadcrumb" title="UPDATE-ACCOUNT-DB2 > UAD010">
+                                    <span class="ref-sec">UPDATE-ACCOUNT-DB2</span>
+                                    <span class="ref-para">UAD010</span>
+                                </div>
+                                <div class="ref-breadcrumb" title="UPDATE-ACCOUNT-DB2-TO > UADT010">
+                                    <span class="ref-sec">UPDATE-ACCOUNT-DB2-TO</span>
+                                    <span class="ref-para">UADT010</span>
+                                </div>
+                                <div class="ref-breadcrumb" title="WRITE-TO-PROCTRAN-DB2 > WTPD010">
+                                    <span class="ref-sec">WRITE-TO-PROCTRAN-DB2</span>
+                                    <span class="ref-para">WTPD010</span>
+                                </div>
+                                <div class="ref-breadcrumb" title="ABEND-HANDLING > AH010">
+                                    <span class="ref-sec">ABEND-HANDLING</span>
+                                    <span class="ref-para">AH010</span>
+                                </div>
                             </div>
                         </td>
                     </tr>
@@ -4565,10 +4947,22 @@
                         <td class="text-center font-mono"><b>8</b></td>
                         <td>
                             <div class="refs-list">
-                                <span class="ref-tag">UAD010</span>
-                                <span class="ref-tag">UADT010</span>
-                                <span class="ref-tag">WTPD010</span>
-                                <span class="ref-tag">AH010</span>
+                                <div class="ref-breadcrumb" title="UPDATE-ACCOUNT-DB2 > UAD010">
+                                    <span class="ref-sec">UPDATE-ACCOUNT-DB2</span>
+                                    <span class="ref-para">UAD010</span>
+                                </div>
+                                <div class="ref-breadcrumb" title="UPDATE-ACCOUNT-DB2-TO > UADT010">
+                                    <span class="ref-sec">UPDATE-ACCOUNT-DB2-TO</span>
+                                    <span class="ref-para">UADT010</span>
+                                </div>
+                                <div class="ref-breadcrumb" title="WRITE-TO-PROCTRAN-DB2 > WTPD010">
+                                    <span class="ref-sec">WRITE-TO-PROCTRAN-DB2</span>
+                                    <span class="ref-para">WTPD010</span>
+                                </div>
+                                <div class="ref-breadcrumb" title="ABEND-HANDLING > AH010">
+                                    <span class="ref-sec">ABEND-HANDLING</span>
+                                    <span class="ref-para">AH010</span>
+                                </div>
                             </div>
                         </td>
                     </tr>
@@ -4586,10 +4980,22 @@
                         <td class="text-center font-mono"><b>4</b></td>
                         <td>
                             <div class="refs-list">
-                                <span class="ref-tag">UAD010</span>
-                                <span class="ref-tag">UADT010</span>
-                                <span class="ref-tag">WTPD010</span>
-                                <span class="ref-tag">AH010</span>
+                                <div class="ref-breadcrumb" title="UPDATE-ACCOUNT-DB2 > UAD010">
+                                    <span class="ref-sec">UPDATE-ACCOUNT-DB2</span>
+                                    <span class="ref-para">UAD010</span>
+                                </div>
+                                <div class="ref-breadcrumb" title="UPDATE-ACCOUNT-DB2-TO > UADT010">
+                                    <span class="ref-sec">UPDATE-ACCOUNT-DB2-TO</span>
+                                    <span class="ref-para">UADT010</span>
+                                </div>
+                                <div class="ref-breadcrumb" title="WRITE-TO-PROCTRAN-DB2 > WTPD010">
+                                    <span class="ref-sec">WRITE-TO-PROCTRAN-DB2</span>
+                                    <span class="ref-para">WTPD010</span>
+                                </div>
+                                <div class="ref-breadcrumb" title="ABEND-HANDLING > AH010">
+                                    <span class="ref-sec">ABEND-HANDLING</span>
+                                    <span class="ref-para">AH010</span>
+                                </div>
                             </div>
                         </td>
                     </tr>
@@ -4623,10 +5029,22 @@
                         <td class="text-center font-mono"><b>8</b></td>
                         <td>
                             <div class="refs-list">
-                                <span class="ref-tag">UAD010</span>
-                                <span class="ref-tag">UADT010</span>
-                                <span class="ref-tag">WTPD010</span>
-                                <span class="ref-tag">AH010</span>
+                                <div class="ref-breadcrumb" title="UPDATE-ACCOUNT-DB2 > UAD010">
+                                    <span class="ref-sec">UPDATE-ACCOUNT-DB2</span>
+                                    <span class="ref-para">UAD010</span>
+                                </div>
+                                <div class="ref-breadcrumb" title="UPDATE-ACCOUNT-DB2-TO > UADT010">
+                                    <span class="ref-sec">UPDATE-ACCOUNT-DB2-TO</span>
+                                    <span class="ref-para">UADT010</span>
+                                </div>
+                                <div class="ref-breadcrumb" title="WRITE-TO-PROCTRAN-DB2 > WTPD010">
+                                    <span class="ref-sec">WRITE-TO-PROCTRAN-DB2</span>
+                                    <span class="ref-para">WTPD010</span>
+                                </div>
+                                <div class="ref-breadcrumb" title="ABEND-HANDLING > AH010">
+                                    <span class="ref-sec">ABEND-HANDLING</span>
+                                    <span class="ref-para">AH010</span>
+                                </div>
                             </div>
                         </td>
                     </tr>
@@ -4644,10 +5062,22 @@
                         <td class="text-center font-mono"><b>8</b></td>
                         <td>
                             <div class="refs-list">
-                                <span class="ref-tag">UAD010</span>
-                                <span class="ref-tag">UADT010</span>
-                                <span class="ref-tag">WTPD010</span>
-                                <span class="ref-tag">AH010</span>
+                                <div class="ref-breadcrumb" title="UPDATE-ACCOUNT-DB2 > UAD010">
+                                    <span class="ref-sec">UPDATE-ACCOUNT-DB2</span>
+                                    <span class="ref-para">UAD010</span>
+                                </div>
+                                <div class="ref-breadcrumb" title="UPDATE-ACCOUNT-DB2-TO > UADT010">
+                                    <span class="ref-sec">UPDATE-ACCOUNT-DB2-TO</span>
+                                    <span class="ref-para">UADT010</span>
+                                </div>
+                                <div class="ref-breadcrumb" title="WRITE-TO-PROCTRAN-DB2 > WTPD010">
+                                    <span class="ref-sec">WRITE-TO-PROCTRAN-DB2</span>
+                                    <span class="ref-para">WTPD010</span>
+                                </div>
+                                <div class="ref-breadcrumb" title="ABEND-HANDLING > AH010">
+                                    <span class="ref-sec">ABEND-HANDLING</span>
+                                    <span class="ref-para">AH010</span>
+                                </div>
                             </div>
                         </td>
                     </tr>
@@ -4665,10 +5095,22 @@
                         <td class="text-center font-mono"><b>8</b></td>
                         <td>
                             <div class="refs-list">
-                                <span class="ref-tag">UAD010</span>
-                                <span class="ref-tag">UADT010</span>
-                                <span class="ref-tag">WTPD010</span>
-                                <span class="ref-tag">AH010</span>
+                                <div class="ref-breadcrumb" title="UPDATE-ACCOUNT-DB2 > UAD010">
+                                    <span class="ref-sec">UPDATE-ACCOUNT-DB2</span>
+                                    <span class="ref-para">UAD010</span>
+                                </div>
+                                <div class="ref-breadcrumb" title="UPDATE-ACCOUNT-DB2-TO > UADT010">
+                                    <span class="ref-sec">UPDATE-ACCOUNT-DB2-TO</span>
+                                    <span class="ref-para">UADT010</span>
+                                </div>
+                                <div class="ref-breadcrumb" title="WRITE-TO-PROCTRAN-DB2 > WTPD010">
+                                    <span class="ref-sec">WRITE-TO-PROCTRAN-DB2</span>
+                                    <span class="ref-para">WTPD010</span>
+                                </div>
+                                <div class="ref-breadcrumb" title="ABEND-HANDLING > AH010">
+                                    <span class="ref-sec">ABEND-HANDLING</span>
+                                    <span class="ref-para">AH010</span>
+                                </div>
                             </div>
                         </td>
                     </tr>
@@ -4686,10 +5128,22 @@
                         <td class="text-center font-mono"><b>600</b></td>
                         <td>
                             <div class="refs-list">
-                                <span class="ref-tag">UAD010</span>
-                                <span class="ref-tag">UADT010</span>
-                                <span class="ref-tag">WTPD010</span>
-                                <span class="ref-tag">AH010</span>
+                                <div class="ref-breadcrumb" title="UPDATE-ACCOUNT-DB2 > UAD010">
+                                    <span class="ref-sec">UPDATE-ACCOUNT-DB2</span>
+                                    <span class="ref-para">UAD010</span>
+                                </div>
+                                <div class="ref-breadcrumb" title="UPDATE-ACCOUNT-DB2-TO > UADT010">
+                                    <span class="ref-sec">UPDATE-ACCOUNT-DB2-TO</span>
+                                    <span class="ref-para">UADT010</span>
+                                </div>
+                                <div class="ref-breadcrumb" title="WRITE-TO-PROCTRAN-DB2 > WTPD010">
+                                    <span class="ref-sec">WRITE-TO-PROCTRAN-DB2</span>
+                                    <span class="ref-para">WTPD010</span>
+                                </div>
+                                <div class="ref-breadcrumb" title="ABEND-HANDLING > AH010">
+                                    <span class="ref-sec">ABEND-HANDLING</span>
+                                    <span class="ref-para">AH010</span>
+                                </div>
                             </div>
                         </td>
                     </tr>

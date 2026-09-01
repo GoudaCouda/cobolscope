@@ -151,14 +151,30 @@
         }
         .cond88-item { margin-top: 0.15rem; }
 
-        .refs-list { display: flex; flex-wrap: wrap; gap: 0.25rem; }
-        .ref-tag {
-            background: #334155;
-            color: #e2e8f0;
-            padding: 0.1rem 0.4rem;
-            border-radius: 0.2rem;
-            font-size: 0.75rem;
+        .refs-list { display: flex; flex-direction: column; gap: 0.3rem; align-items: flex-start; }
+        .ref-breadcrumb {
+            display: inline-flex;
+            flex-direction: column;
+            align-items: flex-start;
+            background: rgba(56, 189, 248, 0.06);
+            border: 1px solid rgba(56, 189, 248, 0.2);
+            border-radius: 0.3rem;
+            padding: 0.25rem 0.55rem 0.2rem;
+            gap: 0;
+        }
+        .ref-sec {
+            font-size: 0.65rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+            color: var(--text-muted);
+            line-height: 1.3;
+        }
+        .ref-para {
             font-family: ui-monospace, SFMono-Regular, monospace;
+            font-size: 0.8rem;
+            color: #e2e8f0;
+            line-height: 1.3;
         }
     </style>
 </head>
@@ -253,7 +269,17 @@
                             {% if r.references %}
                             <div class="refs-list">
                                 {% for ref in r.references %}
-                                <span class="ref-tag">{{ ref }}</span>
+                                {% if " > " in ref %}
+                                {% set parts = ref.split(" > ") %}
+                                <div class="ref-breadcrumb" title="{{ ref }}">
+                                    <span class="ref-sec">{{ parts[0] }}</span>
+                                    <span class="ref-para">{{ parts[1] }}</span>
+                                </div>
+                                {% else %}
+                                <div class="ref-breadcrumb" title="{{ ref }}">
+                                    <span class="ref-para">{{ ref }}</span>
+                                </div>
+                                {% endif %}
                                 {% endfor %}
                             </div>
                             {% else %}

@@ -72,6 +72,22 @@ def format_dot_node(node: CallGraphNode, indent: int = 4) -> str:
         badge_color = "#DC2626" if "TERMINAL" in io_str else ("#107C41" if "READ" in io_str or "WRITE" in io_str else "#5C2D91")
         rows.append(f'<tr><td align="center" cellpadding="1"><font color="{badge_color}" point-size="8"><b>[{html.escape(io_str)}]</b></font></td></tr>')
 
+    # 6. Subtle Data Dictionary Field Lineage
+    raw_field_ids = node.target_field_ids + [f for f in node.source_field_ids if f not in node.target_field_ids]
+    clean_field_names = []
+    for fid in raw_field_ids:
+        fname = fid.split("_")[-1] if "_" in fid else fid
+        if fname and fname not in clean_field_names:
+            clean_field_names.append(fname)
+
+    data_preview = ""
+    if clean_field_names:
+        limit = 2
+        data_preview = ", ".join(clean_field_names[:limit])
+        if len(clean_field_names) > limit:
+            data_preview += f" (+{len(clean_field_names) - limit})"
+        rows.append(f'<tr><td align="center" cellpadding="1"><font color="#64748B" point-size="7.5"><i>data: {html.escape(data_preview)}</i></font></td></tr>')
+
     table_html = (
         f'<<table border="0" cellborder="0" cellspacing="0" cellpadding="2">'
         f'{"".join(rows)}'
@@ -80,6 +96,8 @@ def format_dot_node(node: CallGraphNode, indent: int = 4) -> str:
 
     tooltip_text = f"{node.section} : {node.name}" if has_distinct_section else node.name
     tooltip_text += f" (Lines {node.start_line}-{node.end_line})"
+    if clean_field_names:
+        tooltip_text += f" | Data: {', '.join(clean_field_names[:4])}"
     if node.is_entry_point:
         tooltip_text = f"[START] {tooltip_text}"
 

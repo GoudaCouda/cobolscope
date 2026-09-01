@@ -103,10 +103,15 @@ class ProgramModel(BaseModel):
                     scan_stmts(stmt.when_other_statements, container_name)
 
         for p in self.paragraphs:
-            scan_stmts(p.statements, p.name)
+            if p.section_parent and p.section_parent.strip().upper() != p.name.strip().upper():
+                ref_label = f"{p.section_parent.strip()} > {p.name.strip()}"
+            else:
+                ref_label = p.name.strip()
+            scan_stmts(p.statements, ref_label)
+
         for s in self.sections:
             if s.statements:
-                scan_stmts(s.statements, f"SECTION:{s.name}")
+                scan_stmts(s.statements, s.name.strip())
 
         self._field_usage_index = usage
 
