@@ -9,6 +9,7 @@ from __future__ import annotations
 import argparse
 import json
 import sys
+import time
 from pathlib import Path
 from typing import Optional, Sequence
 
@@ -48,6 +49,12 @@ def build_arg_parser() -> argparse.ArgumentParser:
         "-o",
         "--output",
         help="Output destination path (defaults to stdout).",
+    )
+    parser.add_argument(
+        "-v",
+        "--verbose",
+        action="store_true",
+        help="Enable verbose telemetry and execution timing for each task/pipeline step.",
     )
 
     # ---------------------------------------------------------
@@ -211,13 +218,25 @@ def _write_output(content: str, output_path: Optional[str]) -> None:
 def main(argv: Optional[Sequence[str]] = None) -> int:
     """Main CLI entry point."""
     args = parse_args(argv)
+    verbose = args.verbose
+    overall_start = time.perf_counter()
+
+    def log_verbose(msg: str) -> None:
+        if verbose:
+            sys.stderr.write(f"[DEBUG] {msg}\n")
+            sys.stderr.flush()
 
     input_path = Path(args.input_file)
     if not input_path.exists():
         print(f"ERROR: Input file not found: {input_path}", file=sys.stderr)
         return 2
 
+    log_verbose(f"Starting CobolScope CLI on target: {input_path}")
+    log_verbose(f"Source format: {args.format}")
+
     # 1. Parse COBOL source via Java parser bridge
+    parse_start = time.perf_counter()
+    log_verbose("Invoking ProLeap Java parser bridge...")
     try:
         raw_dict = parse(
             input_file=input_path,
@@ -240,28 +259,54 @@ def main(argv: Optional[Sequence[str]] = None) -> int:
         print(f"ERROR: Parsing failed: {e}", file=sys.stderr)
         return 1
 
+    parse_dur = (time.perf_counter() - parse_start) * 1000
+    log_verbose(f"Java parsing completed in {parse_dur:.2f} ms")
+
     # 2. Dispatch to requested mode
     try:
         # A. Data Dictionary Generation
         if args.generate_dictionary:
+            dict_start = time.perf_counter()
+            log_verbose("Hydrating canonical ProgramModel for Data Dictionary...")
             from cobolscope.models import ProgramModel
             from cobolscope.data_dictionary import generate_data_dictionary
 
             model = ProgramModel.from_dict(raw_dict)
+            model_dur = (time.perf_counter() - dict_start) * 1000
+            log_verbose(f"ProgramModel hydrated in {model_dur:.2f} ms")
+
+            gen_start = time.perf_counter()
+            log_verbose(f"Generating Data Dictionary (format={args.dict_format}, hide_fillers={args.hide_fillers})...")
             content = generate_data_dictionary(
                 model,
                 format=args.dict_format,
                 hide_fillers=args.hide_fillers,
             )
+            gen_dur = (time.perf_counter() - gen_start) * 1000
+            log_verbose(f"Data Dictionary generated in {gen_dur:.2f} ms")
+
+            write_start = time.perf_counter()
             _write_output(content, args.output)
+            write_dur = (time.perf_counter() - write_start) * 1000
+            log_verbose(f"Output written in {write_dur:.2f} ms")
+
+            total_dur = (time.perf_counter() - overall_start) * 1000
+            log_verbose(f"Total pipeline execution time: {total_dur:.2f} ms")
             return 0
 
         # B. Call Graph Generation
         if args.generate_graph:
+            graph_start = time.perf_counter()
+            log_verbose("Hydrating canonical ProgramModel for Call Graph...")
             from cobolscope.models import ProgramModel
             from cobolscope.graph import generate_call_graph
 
             model = ProgramModel.from_dict(raw_dict)
+            model_dur = (time.perf_counter() - graph_start) * 1000
+            log_verbose(f"ProgramModel hydrated in {model_dur:.2f} ms")
+
+            gen_start = time.perf_counter()
+            log_verbose(f"Rendering Call Graph (format={args.graph_format})...")
             content = generate_call_graph(
                 model,
                 format=args.graph_format,
@@ -269,29 +314,65 @@ def main(argv: Optional[Sequence[str]] = None) -> int:
                 collapse_exits=args.collapse_exits,
                 enable_clustering=args.enable_clustering,
             )
+            gen_dur = (time.perf_counter() - gen_start) * 1000
+            log_verbose(f"Call Graph rendered in {gen_dur:.2f} ms")
+
+            write_start = time.perf_counter()
             _write_output(content, args.output)
+            write_dur = (time.perf_counter() - write_start) * 1000
+            log_verbose(f"Output written in {write_dur:.2f} ms")
+
+            total_dur = (time.perf_counter() - overall_start) * 1000
+            log_verbose(f"Total pipeline execution time: {total_dur:.2f} ms")
             return 0
 
         # C. Pushdown Reachability Analysis
         if args.generate_reachability or args.save_transitions:
+            reach_start = time.perf_counter()
+            log_verbose("Hydrating canonical ProgramModel for Pushdown Reachability...")
             from cobolscope.models import ProgramModel
             from cobolscope.reachability import PushdownReachabilityAnalyzer
 
             model = ProgramModel.from_dict(raw_dict)
+            model_dur = (time.perf_counter() - reach_start) * 1000
+            log_verbose(f"ProgramModel hydrated in {model_dur:.2f} ms")
+
+            an_start = time.perf_counter()
+            log_verbose("Running Pushdown Reachability Analysis...")
             analyzer = PushdownReachabilityAnalyzer(model)
             reachability_model = analyzer.analyze()
+            an_dur = (time.perf_counter() - an_start) * 1000
+            log_verbose(f"Pushdown Reachability Analysis completed in {an_dur:.2f} ms")
 
             if args.save_transitions:
+                save_start = time.perf_counter()
+                log_verbose(f"Saving serialized transitions to: {args.save_transitions}")
                 reachability_model.to_json_file(args.save_transitions)
+                save_dur = (time.perf_counter() - save_start) * 1000
+                log_verbose(f"Transitions saved in {save_dur:.2f} ms")
 
             if args.generate_reachability:
                 content = reachability_model.model_dump_json(indent=2)
                 _write_output(content, args.output)
+
+            total_dur = (time.perf_counter() - overall_start) * 1000
+            log_verbose(f"Total pipeline execution time: {total_dur:.2f} ms")
             return 0
 
         # D. Default Mode: Output Canonical IR JSON
+        log_verbose("Serializing Canonical IR to JSON...")
+        json_start = time.perf_counter()
         content = json.dumps(raw_dict, indent=2)
+        json_dur = (time.perf_counter() - json_start) * 1000
+        log_verbose(f"JSON serialization completed in {json_dur:.2f} ms")
+
+        write_start = time.perf_counter()
         _write_output(content, args.output)
+        write_dur = (time.perf_counter() - write_start) * 1000
+        log_verbose(f"Output written in {write_dur:.2f} ms")
+
+        total_dur = (time.perf_counter() - overall_start) * 1000
+        log_verbose(f"Total pipeline execution time: {total_dur:.2f} ms")
         return 0
 
     except Exception as e:

@@ -95,11 +95,20 @@ class EvaluateStatementNode(StatementNode):
 
 class CallStatementNode(StatementNode):
     type: Literal["CALL"] = "CALL"
-    program: str = ""
+    program: str = Field(default="", validation_alias=AliasChoices("program", "target"))
     using_parameters: List[str] = Field(default_factory=list, validation_alias=AliasChoices("usingParameters", "using_parameters", "using"))
     giving: Optional[str] = None
     on_exception_statements: List[AnyStatementNode] = Field(default_factory=list, validation_alias=AliasChoices("onExceptionStatements", "on_exception_statements"))
     not_on_exception_statements: List[AnyStatementNode] = Field(default_factory=list, validation_alias=AliasChoices("notOnExceptionStatements", "not_on_exception_statements"))
+
+    @property
+    def target(self) -> str:
+        """Alias for program call target."""
+        return self.program
+
+    @target.setter
+    def target(self, val: str) -> None:
+        self.program = val
 
     def get_child_statements(self) -> List[AnyStatementNode]:
         return list(self.on_exception_statements) + list(self.not_on_exception_statements)

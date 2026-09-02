@@ -36,6 +36,9 @@ def infer_logical_type(field: DataField) -> str:
       - PIC 9(4) COMP -> SmallInt (16-bit)
       - Group with children -> Group
     """
+    if field.logical_type:
+        return field.logical_type
+
     if field.children:
         if field.occurs_max and field.occurs_max > 1:
             return f"Group Array [{field.occurs_max}]"
@@ -158,6 +161,7 @@ class DictionaryRow:
         references: List[str],
         is_filler: bool,
         depth: int,
+        element_byte_length: int = 0,
     ):
         self.section = section
         self.level = level
@@ -170,6 +174,7 @@ class DictionaryRow:
         self.byte_offset = byte_offset
         self.relative_offset = relative_offset
         self.byte_length = byte_length
+        self.element_byte_length = element_byte_length or byte_length
         self.occurs_str = occurs_str
         self.redefines = redefines
         self.value = value
@@ -191,6 +196,7 @@ class DictionaryRow:
             "byte_offset": self.byte_offset,
             "relative_offset": self.relative_offset,
             "byte_length": self.byte_length,
+            "element_byte_length": self.element_byte_length,
             "occurs": self.occurs_str,
             "redefines": self.redefines,
             "initial_value": self.value,
@@ -344,6 +350,7 @@ class DataDictionaryGenerator:
             byte_offset=field.byte_offset,
             relative_offset=field.relative_offset,
             byte_length=field.byte_length,
+            element_byte_length=field.element_byte_length,
             occurs_str=occurs_str,
             redefines=field.redefines or "",
             value=field.value or "",
@@ -362,7 +369,7 @@ class DataDictionaryGenerator:
         total_fields = len(self.rows)
         total_88s = sum(len(r.conditions_88) for r in self.rows)
         total_redefines = sum(1 for r in self.rows if r.redefines)
-        ws_bytes = sum(
+        ws_bytes = self.program.data_dictionary.working_storage_bytes or sum(
             r.byte_length
             for r in self.rows
             if r.section == "WORKING-STORAGE" and r.level == 1 and not r.redefines

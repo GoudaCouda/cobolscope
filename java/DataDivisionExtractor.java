@@ -30,7 +30,7 @@ public class DataDivisionExtractor {
                 IrModel.DataFieldDto f = mapDataField(root, null);
                 if (f != null) dict.workingStorageSection.add(f);
             }
-            computeMemoryLayout(dict.workingStorageSection, "WS", true, entryToIdMap, nameToIdMap);
+            dict.workingStorageBytes = computeMemoryLayout(dict.workingStorageSection, "WS", true, entryToIdMap, nameToIdMap);
         }
 
         // Linkage Section (Each 01 parameter has its own base offset 0)
@@ -106,6 +106,9 @@ public class DataDivisionExtractor {
                 } else if (group.getRedefinesClause().getCtx() != null) {
                     dto.redefines = CobolTextCleaner.cleanRedefines(CobolTextCleaner.cleanContextText(group.getRedefinesClause().getCtx()));
                 }
+            }
+            if (group.getSignClause() != null && group.getSignClause().isSeparate()) {
+                dto.isSignSeparate = true;
             }
             if (group.getFiller() != null && group.getFiller()) {
                 dto.isFiller = true;
@@ -197,7 +200,7 @@ public class DataDivisionExtractor {
         return c88;
     }
 
-    public static void computeMemoryLayout(
+    public static int computeMemoryLayout(
             List<IrModel.DataFieldDto> rootFields,
             String sectionPrefix,
             boolean sequentialRoots,
@@ -205,10 +208,11 @@ public class DataDivisionExtractor {
             Map<String, String> nameToIdMap) {
 
         Map<String, IrModel.DataFieldDto> nameMap = new LinkedHashMap<>();
+        Map<String, IrModel.DataFieldDto> idToFieldMap = new HashMap<>();
 
         // Pass 1: Build paths, lengths, deterministic line-based IDs, and symbol index
         for (IrModel.DataFieldDto root : rootFields) {
-            buildPathsAndLengths(root, sectionPrefix, null, nameMap, entryToIdMap, nameToIdMap);
+            buildPathsAndLengths(root, sectionPrefix, null, nameMap, entryToIdMap, nameToIdMap, idToFieldMap);
         }
 
         // Pass 2: Calculate absolute and relative offsets
@@ -216,17 +220,7 @@ public class DataDivisionExtractor {
         for (IrModel.DataFieldDto root : rootFields) {
             int rootBaseOffset = 0;
             if (root.redefines != null) {
-                IrModel.DataFieldDto target = null;
-                for (IrModel.DataFieldDto prev : rootFields) {
-                    if (prev == root) break;
-                    if (root.redefines.equalsIgnoreCase(prev.name)) {
-                        target = prev;
-                        break;
-                    }
-                }
-                if (target == null && nameMap.containsKey(root.redefines.toUpperCase())) {
-                    target = nameMap.get(root.redefines.toUpperCase());
-                }
+                IrModel.DataFieldDto target = resolveRedefinesTarget(root, rootFields, nameMap, entryToIdMap, idToFieldMap);
                 if (target != null) {
                     rootBaseOffset = target.byteOffset;
                 }
@@ -234,7 +228,7 @@ public class DataDivisionExtractor {
                 rootBaseOffset = runningSectionOffset;
             }
 
-            calculateOffsets(root, rootBaseOffset, 0, nameMap);
+            calculateOffsets(root, rootBaseOffset, 0, nameMap, entryToIdMap, idToFieldMap);
 
             if (sequentialRoots) {
                 if (root.redefines == null) {
@@ -247,6 +241,54 @@ public class DataDivisionExtractor {
                 }
             }
         }
+        return runningSectionOffset;
+    }
+
+    private static IrModel.DataFieldDto resolveRedefinesTarget(
+            IrModel.DataFieldDto field,
+            List<IrModel.DataFieldDto> searchScope,
+            Map<String, IrModel.DataFieldDto> nameMap,
+            Map<DataDescriptionEntry, String> entryToIdMap,
+            Map<String, IrModel.DataFieldDto> idToFieldMap) {
+
+        // 1. Try native ProLeap ASG semantic resolution
+        if (field.asgEntry instanceof DataDescriptionEntryGroup) {
+            DataDescriptionEntryGroup group = (DataDescriptionEntryGroup) field.asgEntry;
+            if (group.getRedefinesClause() != null && group.getRedefinesClause().getRedefinesCall() != null) {
+                Call call = group.getRedefinesClause().getRedefinesCall();
+                if (call instanceof DataDescriptionEntryCall) {
+                    DataDescriptionEntry targetEntry = ((DataDescriptionEntryCall) call).getDataDescriptionEntry();
+                    if (targetEntry != null && entryToIdMap != null && idToFieldMap != null) {
+                        String targetId = entryToIdMap.get(targetEntry);
+                        if (targetId != null && idToFieldMap.containsKey(targetId)) {
+                            return idToFieldMap.get(targetId);
+                        }
+                    }
+                }
+            }
+        }
+
+        // 2. Search preceding siblings in current scope
+        if (searchScope != null && field.redefines != null) {
+            for (IrModel.DataFieldDto candidate : searchScope) {
+                if (candidate == field) break;
+                if (field.redefines.equalsIgnoreCase(candidate.name)) {
+                    return candidate;
+                }
+            }
+        }
+
+        // 3. Fallback to qualified or flat nameMap
+        if (nameMap != null && field.redefines != null) {
+            String qTarget = (field.qualifiedName != null && field.qualifiedName.contains(".")
+                    ? field.qualifiedName.substring(0, field.qualifiedName.lastIndexOf('.')) + "." + field.redefines
+                    : field.redefines);
+            IrModel.DataFieldDto target = nameMap.get(qTarget.toUpperCase());
+            if (target != null) return target;
+            return nameMap.get(field.redefines.toUpperCase());
+        }
+
+        return null;
     }
 
     private static void buildPathsAndLengths(
@@ -255,7 +297,8 @@ public class DataDivisionExtractor {
             String parentPath,
             Map<String, IrModel.DataFieldDto> nameMap,
             Map<DataDescriptionEntry, String> entryToIdMap,
-            Map<String, String> nameToIdMap) {
+            Map<String, String> nameToIdMap,
+            Map<String, IrModel.DataFieldDto> idToFieldMap) {
 
         String path = parentPath == null ? field.name : parentPath + "." + field.name;
         field.qualifiedName = path;
@@ -266,6 +309,9 @@ public class DataDivisionExtractor {
 
         if (field.asgEntry != null && entryToIdMap != null) {
             entryToIdMap.put(field.asgEntry, field.id);
+        }
+        if (idToFieldMap != null) {
+            idToFieldMap.put(field.id, field);
         }
         if (nameToIdMap != null && !Boolean.TRUE.equals(field.isFiller)) {
             if (!nameToIdMap.containsKey(field.name.toUpperCase())) {
@@ -281,16 +327,20 @@ public class DataDivisionExtractor {
 
         if (field.children.isEmpty()) {
             int elemBytes = calculateElementaryByteLength(field.pic, field.usage);
+            field.elementByteLength = elemBytes;
             field.byteLength = elemBytes * multiplier;
+            field.logicalType = inferLogicalType(field);
         } else {
             int totalGroupBytes = 0;
             for (IrModel.DataFieldDto child : field.children) {
-                buildPathsAndLengths(child, sectionPrefix, path, nameMap, entryToIdMap, nameToIdMap);
+                buildPathsAndLengths(child, sectionPrefix, path, nameMap, entryToIdMap, nameToIdMap, idToFieldMap);
                 if (child.redefines == null) {
                     totalGroupBytes += child.byteLength;
                 }
             }
+            field.elementByteLength = totalGroupBytes;
             field.byteLength = totalGroupBytes * multiplier;
+            field.logicalType = inferLogicalType(field);
         }
     }
 
@@ -298,7 +348,9 @@ public class DataDivisionExtractor {
             IrModel.DataFieldDto field,
             int absoluteOffset,
             int relativeOffset,
-            Map<String, IrModel.DataFieldDto> nameMap) {
+            Map<String, IrModel.DataFieldDto> nameMap,
+            Map<DataDescriptionEntry, String> entryToIdMap,
+            Map<String, IrModel.DataFieldDto> idToFieldMap) {
 
         field.byteOffset = absoluteOffset;
         field.relativeOffset = relativeOffset;
@@ -306,32 +358,102 @@ public class DataDivisionExtractor {
         int childRunningRelOffset = 0;
         for (IrModel.DataFieldDto child : field.children) {
             if (child.redefines != null) {
-                IrModel.DataFieldDto target = null;
-                for (IrModel.DataFieldDto sibling : field.children) {
-                    if (sibling == child) break;
-                    if (child.redefines.equalsIgnoreCase(sibling.name)) {
-                        target = sibling;
-                        break;
-                    }
-                }
-                if (target == null && nameMap != null) {
-                    String qTarget = (field.qualifiedName != null ? field.qualifiedName + "." : "") + child.redefines;
-                    target = nameMap.get(qTarget.toUpperCase());
-                    if (target == null) {
-                        target = nameMap.get(child.redefines.toUpperCase());
-                    }
-                }
+                IrModel.DataFieldDto target = resolveRedefinesTarget(child, field.children, nameMap, entryToIdMap, idToFieldMap);
                 if (target != null) {
-                    calculateOffsets(child, target.byteOffset, target.relativeOffset, nameMap);
+                    calculateOffsets(child, target.byteOffset, target.relativeOffset, nameMap, entryToIdMap, idToFieldMap);
                     continue;
                 }
             }
 
             int childAbs = absoluteOffset + childRunningRelOffset;
             int childRel = childRunningRelOffset;
-            calculateOffsets(child, childAbs, childRel, nameMap);
+            calculateOffsets(child, childAbs, childRel, nameMap, entryToIdMap, idToFieldMap);
             childRunningRelOffset += child.byteLength;
         }
+    }
+
+    public static String inferLogicalType(IrModel.DataFieldDto field) {
+        if (!field.children.isEmpty()) {
+            if (field.occursMax != null && field.occursMax > 1) {
+                return "Group Array [" + field.occursMax + "]";
+            }
+            return "Group";
+        }
+
+        String pic = field.pic != null ? field.pic.toUpperCase().trim() : "";
+        String usage = (field.usage != null ? field.usage : "DISPLAY").toUpperCase().replace("-", "_");
+
+        if (pic.isEmpty()) {
+            if ("POINTER".equals(usage) || "PROCEDURE_POINTER".equals(usage)) {
+                return "Memory Pointer (4 bytes)";
+            }
+            if ("INDEX".equals(usage)) {
+                return "Table Index (4 bytes)";
+            }
+            if ("COMP_1".equals(usage)) {
+                return "Float (Single Precision, 4 bytes)";
+            }
+            if ("COMP_2".equals(usage)) {
+                return "Double (Double Precision, 8 bytes)";
+            }
+            return field.children.isEmpty() ? "Elementary" : "Group";
+        }
+
+        boolean isSigned = pic.contains("S");
+        boolean hasDecimal = pic.contains("V") || pic.contains(".");
+
+        int totalDigits;
+        int decDigits;
+        if (hasDecimal) {
+            String[] parts = pic.contains("V") ? pic.split("V", 2) : pic.split("\\.", 2);
+            String intPart = expandPicRepetitions(parts[0]);
+            String decPart = parts.length > 1 ? expandPicRepetitions(parts[1]) : "";
+            int intDigits = countDigits(intPart);
+            decDigits = countDigits(decPart);
+            totalDigits = intDigits + decDigits;
+        } else {
+            String expanded = expandPicRepetitions(pic);
+            totalDigits = countDigits(expanded);
+            decDigits = 0;
+        }
+
+        if (pic.contains("X") || pic.contains("A")) {
+            String expanded = expandPicRepetitions(pic);
+            int length = expanded.length();
+            return "Alphanumeric (" + length + " chars)";
+        }
+
+        if ("COMP_3".equals(usage) || "PACKED_DECIMAL".equals(usage)) {
+            String signStr = isSigned ? "Signed " : "";
+            if (hasDecimal) {
+                return signStr + "Decimal(" + totalDigits + ", " + decDigits + ") Packed";
+            }
+            return signStr + "Integer(" + totalDigits + ") Packed";
+        }
+
+        if ("COMP".equals(usage) || "COMP_4".equals(usage) || "COMP_5".equals(usage) || "BINARY".equals(usage)) {
+            String signStr = isSigned ? "Signed " : "Unsigned ";
+            if (totalDigits <= 4) {
+                return signStr + "SmallInt (16-bit Binary)";
+            } else if (totalDigits <= 9) {
+                return signStr + "Integer (32-bit Binary)";
+            } else {
+                return signStr + "BigInt (64-bit Binary)";
+            }
+        }
+
+        if ("COMP_1".equals(usage)) {
+            return "Float (Single Precision, 4 bytes)";
+        }
+        if ("COMP_2".equals(usage)) {
+            return "Double (Double Precision, 8 bytes)";
+        }
+
+        String signStr = isSigned ? "Signed " : "";
+        if (hasDecimal) {
+            return signStr + "Decimal Display (" + totalDigits + ", " + decDigits + ")";
+        }
+        return signStr + "Numeric Display (" + totalDigits + " digits)";
     }
 
     public static int calculateElementaryByteLength(String pic, String usage) {

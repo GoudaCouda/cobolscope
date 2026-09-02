@@ -95,6 +95,8 @@ def verify_program_dictionary(cobol_file: str, model: Optional[ProgramModel] = N
         assert row.usage == (expected_field.usage or "DISPLAY"), f"Usage mismatch for '{row.name}'"
         assert row.redefines == (expected_field.redefines or ""), f"Redefines mismatch for '{row.name}'"
         assert row.value == (expected_field.value or ""), f"Value mismatch for '{row.name}'"
+        assert row.logical_type == expected_field.logical_type, f"Logical type mismatch for '{row.name}': {row.logical_type} != {expected_field.logical_type}"
+        assert row.element_byte_length == (expected_field.element_byte_length or expected_field.byte_length), f"Element byte length mismatch for '{row.name}'"
 
         # Check Level-88 preservation
         assert len(row.conditions_88) == len(expected_field.conditions_88), (
@@ -106,10 +108,14 @@ def verify_program_dictionary(cobol_file: str, model: Optional[ProgramModel] = N
             assert row_c88["values"] == c88.values, f"Condition88 values mismatch: {row_c88['values']} != {c88.values}"
 
         # Check procedure references cross-reference parity
-        expected_refs = [r for r in usage_index.get(expected_field.id or "", []) if not r.startswith("SECTION:")]
+        expected_refs = usage_index.get(expected_field.id or "", [])
         assert row.references == expected_refs, (
             f"References mismatch for '{row.name}': dict={row.references}, model={expected_refs}"
         )
+
+    # Validate authoritative working_storage_bytes if working storage exists
+    if model.data_dictionary.working_storage_section:
+        assert model.data_dictionary.working_storage_bytes > 0, "working_storage_bytes should be > 0"
 
     print("  [OK] 1:1 Attribute and memory layout reconciliation verified.")
 

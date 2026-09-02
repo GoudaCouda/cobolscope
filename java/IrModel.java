@@ -81,6 +81,7 @@ public class IrModel {
         public List<DataFieldDto> workingStorageSection = new ArrayList<>();
         public List<DataFieldDto> linkageSection = new ArrayList<>();
         public List<DataFieldDto> localStorageSection = new ArrayList<>();
+        public int workingStorageBytes;
     }
 
     public static class Condition88Dto {
@@ -98,9 +99,11 @@ public class IrModel {
         public String usage;
         public String value;
         public String redefines;
+        public String logicalType;
         public int byteOffset;
         public int relativeOffset;
         public int byteLength;
+        public int elementByteLength;
         public Integer occursMin;
         public Integer occursMax;
         public String dependingOn;
@@ -109,6 +112,7 @@ public class IrModel {
         public Boolean isJustified;
         public Boolean isBlankWhenZero;
         public Boolean isSynchronized;
+        public Boolean isSignSeparate;
         public List<Condition88Dto> conditions88 = new ArrayList<>();
         public List<DataFieldDto> children = new ArrayList<>();
         public SourceLocationDto location;

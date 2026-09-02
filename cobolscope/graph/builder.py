@@ -366,19 +366,26 @@ class CallGraphGenerator:
                                     target_node.called_by.append(src_proc_key)
 
                 # 2C. CALL Statements (Dynamic/External Subprograms)
-                elif isinstance(stmt, CallStatementNode) and stmt.target:
-                    tgt_raw = stmt.target.replace("'", "").replace('"', '').strip()
-                    tgt_proc = symbol_to_proc.get(tgt_raw.upper())
-                    if tgt_proc and tgt_proc in nodes and tgt_proc != src_proc_key:
-                        edge_key = (src_proc_key, tgt_proc, GraphEdgeType.CALL)
-                        if edge_key not in seen_edges:
-                            seen_edges.add(edge_key)
-                            edges.append(CallGraphEdge(
-                                source=src_proc_key,
-                                target=tgt_proc,
-                                edge_type=GraphEdgeType.CALL,
-                                line_number=stmt.location.start_line if stmt.location else None,
-                            ))
+                elif isinstance(stmt, CallStatementNode):
+                    call_tgt = getattr(stmt, "program", None) or getattr(stmt, "target", None)
+                    if call_tgt:
+                        tgt_raw = call_tgt.replace("'", "").replace('"', '').strip()
+                        tgt_proc = symbol_to_proc.get(tgt_raw.upper())
+                        if tgt_proc and tgt_proc in nodes and tgt_proc != src_proc_key:
+                            edge_key = (src_proc_key, tgt_proc, GraphEdgeType.CALL)
+                            if edge_key not in seen_edges:
+                                seen_edges.add(edge_key)
+                                edges.append(CallGraphEdge(
+                                    source=src_proc_key,
+                                    target=tgt_proc,
+                                    edge_type=GraphEdgeType.CALL,
+                                    line_number=stmt.location.start_line if stmt.location else None,
+                                ))
+                                target_node = nodes[tgt_proc]
+                                if tgt_proc not in src_node.successors:
+                                    src_node.successors.append(tgt_proc)
+                                if src_proc_key not in target_node.called_by:
+                                    target_node.called_by.append(src_proc_key)
 
         # 2D. Validated Fallthrough Edges
         if not self.hide_fallthrough:

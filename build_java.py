@@ -72,6 +72,12 @@ def main() -> int:
         )
         update_jar(classes_dir)
 
+        # If lib/ exists, also synchronize classes to avoid stale classpath overrides
+        lib_dir = ROOT / "lib"
+        if lib_dir.exists():
+            for class_file in classes_dir.glob("*.class"):
+                shutil.copy2(class_file, lib_dir / class_file.name)
+
     print(f"Updated Java bridge classes in {JAR_PATH}")
     return 0
 

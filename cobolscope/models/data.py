@@ -37,6 +37,8 @@ class DataField(BaseModel):
     byte_offset: int = Field(default=0, validation_alias=AliasChoices("byteOffset", "byte_offset"))
     relative_offset: int = Field(default=0, validation_alias=AliasChoices("relativeOffset", "relative_offset"))
     byte_length: int = Field(default=0, validation_alias=AliasChoices("byteLength", "byte_length"))
+    element_byte_length: int = Field(default=0, validation_alias=AliasChoices("elementByteLength", "element_byte_length"))
+    logical_type: Optional[str] = Field(default=None, validation_alias=AliasChoices("logicalType", "logical_type"))
 
     # Structural Bindings
     redefines: Optional[str] = None
@@ -50,6 +52,7 @@ class DataField(BaseModel):
     is_justified: bool = Field(default=False, validation_alias=AliasChoices("isJustified", "is_justified"))
     is_blank_when_zero: bool = Field(default=False, validation_alias=AliasChoices("isBlankWhenZero", "is_blank_when_zero"))
     is_synchronized: bool = Field(default=False, validation_alias=AliasChoices("isSynchronized", "is_synchronized"))
+    is_sign_separate: bool = Field(default=False, validation_alias=AliasChoices("isSignSeparate", "is_sign_separate"))
 
     location: Optional[SourceLocation] = None
     conditions: List[Condition88] = Field(default_factory=list, validation_alias=AliasChoices("conditions", "conditions88", "conditions_88"))
@@ -92,3 +95,4 @@ class DataDictionary(BaseModel):
     linkage_section: List[DataField] = Field(default_factory=list, validation_alias=AliasChoices("linkageSection", "linkage_section"))
     local_storage_section: List[DataField] = Field(default_factory=list, validation_alias=AliasChoices("localStorageSection", "local_storage_section"))
     file_section: List[FileDescriptionEntry] = Field(default_factory=list, validation_alias=AliasChoices("fileSection", "file_section"))
+    working_storage_bytes: int = Field(default=0, validation_alias=AliasChoices("workingStorageBytes", "working_storage_bytes"))
