@@ -156,6 +156,32 @@ def build_arg_parser() -> argparse.ArgumentParser:
         default=True,
         help="Disable functional subsystem clustering subgraphs.",
     )
+    graph_group.add_argument(
+        "--cluster-mode",
+        choices=["auto", "none", "sections", "semantic"],
+        default="auto",
+        help="Clustering strategy: 'auto' (clusters by SECTION if present, else unclustered hierarchy), 'sections', 'semantic', or 'none'.",
+    )
+    graph_group.add_argument(
+        "--splines",
+        choices=["spline", "ortho", "polyline", "curved"],
+        default="spline",
+        help="Graphviz edge routing style (spline, ortho, polyline, curved).",
+    )
+    graph_group.add_argument(
+        "--detailed-nodes",
+        action="store_true",
+        dest="detailed_nodes",
+        default=False,
+        help="Render raw data variable lineage directly on node box face (default keeps boxes compact).",
+    )
+    graph_group.add_argument(
+        "--no-concentrate",
+        action="store_false",
+        dest="concentrate",
+        default=True,
+        help="Disable Graphviz edge concentration/trunk merging.",
+    )
 
     # ---------------------------------------------------------
     # Reachability Options
@@ -313,6 +339,10 @@ def main(argv: Optional[Sequence[str]] = None) -> int:
                 hide_fallthrough=not args.show_fallthrough,
                 collapse_exits=args.collapse_exits,
                 enable_clustering=args.enable_clustering,
+                cluster_mode=args.cluster_mode,
+                compact_nodes=not args.detailed_nodes,
+                concentrate=args.concentrate,
+                splines=args.splines,
             )
             gen_dur = (time.perf_counter() - gen_start) * 1000
             log_verbose(f"Call Graph rendered in {gen_dur:.2f} ms")

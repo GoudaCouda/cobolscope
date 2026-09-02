@@ -17,7 +17,7 @@ from .models import CallGraph, CallGraphNode, GraphNodeType, GraphEdgeType
 from .classifier import CLUSTER_THEMES
 
 
-def format_dot_node(node: CallGraphNode, indent: int = 4) -> str:
+def format_dot_node(node: CallGraphNode, indent: int = 4, compact: bool = True) -> str:
     """Formats a single node into Graphviz DOT with an HTML-like table label."""
     ind = " " * indent
     theme = CLUSTER_THEMES.get(node.node_type, CLUSTER_THEMES[GraphNodeType.GENERIC])
@@ -72,7 +72,7 @@ def format_dot_node(node: CallGraphNode, indent: int = 4) -> str:
         badge_color = "#DC2626" if "TERMINAL" in io_str else ("#107C41" if "READ" in io_str or "WRITE" in io_str else "#5C2D91")
         rows.append(f'<tr><td align="center" cellpadding="1"><font color="{badge_color}" point-size="8"><b>[{html.escape(io_str)}]</b></font></td></tr>')
 
-    # 6. Subtle Data Dictionary Field Lineage
+    # 6. Subtle Data Dictionary Field Lineage (rendered on node face when not compact)
     raw_field_ids = node.target_field_ids + [f for f in node.source_field_ids if f not in node.target_field_ids]
     clean_field_names = []
     for fid in raw_field_ids:
@@ -80,8 +80,7 @@ def format_dot_node(node: CallGraphNode, indent: int = 4) -> str:
         if fname and fname not in clean_field_names:
             clean_field_names.append(fname)
 
-    data_preview = ""
-    if clean_field_names:
+    if clean_field_names and not compact:
         limit = 2
         data_preview = ", ".join(clean_field_names[:limit])
         if len(clean_field_names) > limit:
@@ -112,14 +111,23 @@ def format_dot_node(node: CallGraphNode, indent: int = 4) -> str:
     )
 
 
-def render_dot(graph: CallGraph, enable_clustering: bool = True) -> str:
+def render_dot(
+    graph: CallGraph,
+    enable_clustering: bool = True,
+    compact_nodes: bool = True,
+    concentrate: bool = True,
+    splines: str = "spline",
+) -> str:
     """Emits standards-compliant Graphviz .dot syntax with clean vertical hierarchy."""
     lines = []
     lines.append(f'digraph "{graph.program_id}_CallGraph" {{')
     lines.append('    // Global Graph Attributes')
     lines.append('    rankdir=TB;')
     lines.append('    compound=true;')
-    lines.append('    splines=spline;')
+    lines.append('    newrank=true;')
+    if concentrate:
+        lines.append('    concentrate=true;')
+    lines.append(f'    splines={splines};')
     lines.append('    nodesep=0.45;')
     lines.append('    ranksep=0.75;')
     lines.append('    ratio=auto;')
@@ -155,13 +163,13 @@ def render_dot(graph: CallGraph, enable_clustering: bool = True) -> str:
             for node_name in graph.nodes:
                 node = graph.nodes[node_name]
                 if node.id in cluster.node_ids:
-                    lines.append(format_dot_node(node, indent=8))
+                    lines.append(format_dot_node(node, indent=8, compact=compact_nodes))
             lines.append('    }')
             lines.append('')
     else:
         for node_name in graph.nodes:
             node = graph.nodes[node_name]
-            lines.append(format_dot_node(node, indent=4))
+            lines.append(format_dot_node(node, indent=4, compact=compact_nodes))
         lines.append('')
 
     # Emit Edges
@@ -209,6 +217,7 @@ def render_dot(graph: CallGraph, enable_clustering: bool = True) -> str:
             attr_list.append('color="#DC2626"')
             attr_list.append('fontcolor="#DC2626"')
             attr_list.append('penwidth=1.5')
+            attr_list.append('constraint=false')
             attr_list.append('tooltip="Error trap / abend"')
 
         attrs = f" [{', '.join(attr_list)}]" if attr_list else ""

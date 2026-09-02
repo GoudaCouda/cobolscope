@@ -120,10 +120,15 @@ class ParagraphClassifier:
         section: Optional[str] = None,
         statements: Optional[List[AnyStatementNode]] = None,
         is_terminal: bool = False,
+        is_entry_point: bool = False,
     ) -> GraphNodeType:
         name_up = (name or "").strip().upper()
         sec_up = (section or "").strip().upper()
         stmts = statements or []
+
+        # 0. Entry points are explicitly protected as MAIN_DRIVER
+        if is_entry_point:
+            return GraphNodeType.MAIN_DRIVER
 
         # 1. Exit nodes
         if name_up.endswith("-EXIT") or name_up.endswith("_EXIT") or name_up.endswith("999") or name_up.endswith("99"):
@@ -143,10 +148,10 @@ class ParagraphClassifier:
                 and "EXIT" not in name_up and "EXIT" not in sec_up):
             return GraphNodeType.MAIN_DRIVER
 
-        # 4. Wrap-up / Clean Termination
+        # 4. Wrap-up / Clean Termination (only targeted cleanup or short terminal stubs, never large driver blocks)
         if cls._RE_WRAPUP.search(name_up) or cls._RE_WRAPUP.search(sec_up) or "GET-ME-OUT" in name_up or "GET-ME-OUT" in sec_up:
             return GraphNodeType.TERMINATION
-        if is_terminal and any(isinstance(s, (StopStatementNode, GobackStatementNode)) for s in stmts):
+        if is_terminal and len(stmts) <= 10 and any(isinstance(s, (StopStatementNode, GobackStatementNode)) for s in stmts):
             return GraphNodeType.TERMINATION
 
         # 5. Initialization / Housekeeping

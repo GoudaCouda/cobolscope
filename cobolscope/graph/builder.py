@@ -57,11 +57,29 @@ class CallGraphGenerator:
         hide_fallthrough: bool = True,
         collapse_exits: bool = True,
         enable_clustering: bool = True,
+        cluster_mode: str = "auto",
+        compact_nodes: bool = True,
+        concentrate: bool = True,
+        splines: str = "spline",
     ):
         self.model = model
         self.hide_fallthrough = hide_fallthrough
         self.collapse_exits = collapse_exits
-        self.enable_clustering = enable_clustering
+        self.compact_nodes = compact_nodes
+        self.concentrate = concentrate
+        self.splines = splines
+        self.cluster_mode = (cluster_mode or "auto").lower().strip()
+
+        is_section_based = len(self.model.sections) > 0 and any(len(s.paragraph_names) > 0 for s in self.model.sections)
+        if not enable_clustering or self.cluster_mode == "none":
+            self.enable_clustering = False
+        elif self.cluster_mode == "sections":
+            self.enable_clustering = is_section_based
+        elif self.cluster_mode == "semantic":
+            self.enable_clustering = True
+        else:  # "auto"
+            self.enable_clustering = is_section_based
+
         self._dot_cache: Optional[str] = None
         self._svg_cache: Optional[str] = None
         self.graph: CallGraph = self._build_graph()
@@ -415,9 +433,17 @@ class CallGraphGenerator:
             entry_point_name = next(iter(nodes.keys()))
 
         if entry_point_name and entry_point_name in nodes:
-            nodes[entry_point_name].is_entry_point = True
-            if nodes[entry_point_name].node_type == GraphNodeType.GENERIC:
-                nodes[entry_point_name].node_type = GraphNodeType.MAIN_DRIVER
+            ep_node = nodes[entry_point_name]
+            ep_node.is_entry_point = True
+            old_cluster_id = ep_node.cluster_id
+            ep_node.node_type = GraphNodeType.MAIN_DRIVER
+            if self.enable_clustering:
+                new_cluster_id = CLUSTER_THEMES[GraphNodeType.MAIN_DRIVER]["id"]
+                ep_node.cluster_id = new_cluster_id
+                if old_cluster_id in cluster_map and ep_node.id in cluster_map[old_cluster_id].node_ids:
+                    cluster_map[old_cluster_id].node_ids.remove(ep_node.id)
+                if new_cluster_id in cluster_map and ep_node.id not in cluster_map[new_cluster_id].node_ids:
+                    cluster_map[new_cluster_id].node_ids.append(ep_node.id)
 
         # Filter out empty clusters
         active_clusters = [c for c in cluster_map.values() if c.node_ids]
@@ -505,14 +531,33 @@ class CallGraphGenerator:
         max_depth = max((get_depth(r, set()) for r in roots), default=0)
         return max_depth, has_cycles
 
-    def to_dot(self) -> str:
+    def to_dot(
+        self,
+        compact_nodes: Optional[bool] = None,
+        concentrate: Optional[bool] = None,
+        splines: Optional[str] = None,
+    ) -> str:
         if self._dot_cache is None:
-            self._dot_cache = render_dot(self.graph, enable_clustering=self.enable_clustering)
+            c_nodes = self.compact_nodes if compact_nodes is None else compact_nodes
+            conc = self.concentrate if concentrate is None else concentrate
+            spl = self.splines if splines is None else splines
+            self._dot_cache = render_dot(
+                self.graph,
+                enable_clustering=self.enable_clustering,
+                compact_nodes=c_nodes,
+                concentrate=conc,
+                splines=spl,
+            )
         return self._dot_cache
 
-    def to_svg(self) -> str:
+    def to_svg(
+        self,
+        compact_nodes: Optional[bool] = None,
+        concentrate: Optional[bool] = None,
+        splines: Optional[str] = None,
+    ) -> str:
         if self._svg_cache is None:
-            self._svg_cache = render_svg(self.to_dot())
+            self._svg_cache = render_svg(self.to_dot(compact_nodes=compact_nodes, concentrate=concentrate, splines=splines))
         return self._svg_cache
 
     def to_html(self, svg_content: Optional[str] = None) -> str:
@@ -530,6 +575,10 @@ def generate_call_graph(
     hide_fallthrough: bool = True,
     collapse_exits: bool = True,
     enable_clustering: bool = True,
+    cluster_mode: str = "auto",
+    compact_nodes: bool = True,
+    concentrate: bool = True,
+    splines: str = "spline",
     output_path: Optional[Union[str, Path]] = None,
 ) -> str:
     """
@@ -541,6 +590,10 @@ def generate_call_graph(
         hide_fallthrough=hide_fallthrough,
         collapse_exits=collapse_exits,
         enable_clustering=enable_clustering,
+        cluster_mode=cluster_mode,
+        compact_nodes=compact_nodes,
+        concentrate=concentrate,
+        splines=splines,
     )
 
     fmt = format.lower().strip()
