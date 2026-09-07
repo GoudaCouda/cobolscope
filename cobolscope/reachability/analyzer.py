@@ -27,6 +27,8 @@ from .models import (
     StateTransition,
     TransitionKind,
 )
+from cobolscope.graph.termination import TerminationClassifier
+from cobolscope.rules import GlobalRules, EffectiveProgramRules
 
 
 class PushdownReachabilityAnalyzer:
@@ -35,10 +37,17 @@ class PushdownReachabilityAnalyzer:
     reachable control states in COBOL Procedure Divisions.
     """
 
-    def __init__(self, model: ProgramModel, max_stack_depth: int = 32, max_steps: int = 50000):
+    def __init__(
+        self,
+        model: ProgramModel,
+        max_stack_depth: int = 32,
+        max_steps: int = 50000,
+        rules: Optional[Union[GlobalRules, EffectiveProgramRules]] = None,
+    ):
         self.model = model
         self.max_stack_depth = max_stack_depth
         self.max_steps = max_steps
+        self.classifier = TerminationClassifier.for_program(self.model, rules=rules)
 
         # Index paragraphs in physical lexical order
         self.paragraphs = model.paragraphs
@@ -233,7 +242,12 @@ class PushdownReachabilityAnalyzer:
                 else:
                     # Top-Level Sequential Fallthrough (Stack is Empty)
                     curr_para_node = self.para_map[curr_para]
-                    if not curr_para_node.is_terminal:
+                    is_curr_terminal = (
+                        curr_para_node.is_terminal
+                        or curr_para in self.classifier.terminal_paragraphs
+                        or self.classifier.is_paragraph_terminal(curr_para_node)
+                    )
+                    if not is_curr_terminal:
                         curr_idx = self.para_indices.get(curr_para, -1)
                         if curr_idx != -1 and curr_idx + 1 < len(self.para_names):
                             next_para = self.para_names[curr_idx + 1]
@@ -260,8 +274,12 @@ class PushdownReachabilityAnalyzer:
             # Case 2: Statement Execution within Paragraph
             stmt = stmts[curr_stmt_idx]
 
-            # 2A. Terminal Statements (STOP RUN / GOBACK)
-            if isinstance(stmt, (StopStatementNode, GobackStatementNode)):
+            # 2A. Terminal Statements & S0C7 Hardware Crash Idioms
+            is_s0c7 = (
+                curr_stmt_idx + 1 < len(stmts)
+                and self.classifier.is_s0c7_crash_sequence(stmt, stmts[curr_stmt_idx + 1])
+            )
+            if is_s0c7 or self.classifier.is_statement_terminal(stmt):
                 trans = StateTransition(
                     source_paragraph=curr_para,
                     source_stmt_idx=curr_stmt_idx,

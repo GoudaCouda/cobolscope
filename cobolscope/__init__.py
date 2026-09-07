@@ -78,6 +78,19 @@ from cobolscope.reachability import (
     ReachabilityModel,
     PushdownReachabilityAnalyzer,
 )
+from cobolscope.rules import (
+    GlobalRules,
+    EffectiveProgramRules,
+    load_rules,
+    save_rules,
+    get_default_rules,
+    get_effective_rules,
+)
+from cobolscope.rules_generator import (
+    generate_rules_from_models,
+    generate_rules_file,
+    scan_program_for_rules,
+)
 
 __all__ = [
     "parse",
@@ -150,4 +163,13 @@ __all__ = [
     "StateTransition",
     "ReachabilityModel",
     "PushdownReachabilityAnalyzer",
+    "GlobalRules",
+    "EffectiveProgramRules",
+    "load_rules",
+    "save_rules",
+    "get_default_rules",
+    "get_effective_rules",
+    "generate_rules_from_models",
+    "generate_rules_file",
+    "scan_program_for_rules",
 ]

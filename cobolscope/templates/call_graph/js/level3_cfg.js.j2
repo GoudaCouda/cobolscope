@@ -1,0 +1,337 @@
+// Level 3 Intra-Procedure Control Flow Graph (Cytoscape Modal)
+    function openRoutineFlowModal(node) {
+      if (!node) {
+        alert("Please click or select a routine first.");
+        return;
+      }
+      if (!node.is_cfg_eligible) {
+        openLinearCardModal(node);
+        return;
+      }
+      openLevel3Modal(node);
+    }
+
+    function openLevel3Modal(node) {
+      if (!node) node = selectedRoutineNode;
+      if (!node) {
+        alert("Please click or select a routine first.");
+        return;
+      }
+      if (!node.is_cfg_eligible) {
+        openLinearCardModal(node);
+        return;
+      }
+
+      CobolScopeLog.info(`Opening Level 3 CFG modal for routine: ${node.name}`);
+      selectedRoutineNode = node;
+      const modal = document.getElementById("cfgModalBackdrop");
+      if (!modal) return;
+
+      document.getElementById("cfgModalTitle").textContent = `Level 3 Intra-Procedure Flow: ${node.name}`;
+      document.getElementById("cfgModalSubtitle").textContent = `Section: ${node.section || "DEFAULT"} | Complexity (CC): ${node.cyclomatic_complexity} | Statements: ${node.statement_count}`;
+      modal.style.display = "flex";
+
+      const container = document.getElementById("cy-cfg-container");
+      if (cyLevel3) {
+        cyLevel3.destroy();
+        cyLevel3 = null;
+      }
+
+      const rawElements = node.cfg_elements || [];
+      const nodeIds = new Set(rawElements.filter(e => !e.data.source).map(e => e.data.id));
+      const elements = rawElements.filter(e => {
+        if (!e.data.source) return true;
+        return nodeIds.has(e.data.source) && nodeIds.has(e.data.target);
+      });
+
+      try {
+        cyLevel3 = cytoscape({
+          container: container,
+          elements: elements,
+          style: [
+            {
+              selector: "node",
+              style: {
+                "label": "data(label)",
+                "text-wrap": "wrap",
+                "text-valign": "center",
+                "text-halign": "center",
+                "font-family": "-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif",
+                "font-size": 11,
+                "font-weight": "600",
+                "color": "#0F172A",
+                "background-color": "#FFFFFF",
+                "border-width": 2,
+                "border-color": "#64748B",
+                "shape": "round-rectangle",
+                "padding": 12,
+                "width": "label",
+                "height": "label"
+              }
+            },
+            {
+              selector: "node.cfg-entry",
+              style: {
+                "background-color": "#F2F9F4",
+                "border-color": "#107C41",
+                "border-width": 2.5,
+                "color": "#107C41",
+                "shape": "round-rectangle"
+              }
+            },
+            {
+              selector: "node.cfg-exit",
+              style: {
+                "background-color": "#F8FAFC",
+                "border-color": "#475569",
+                "color": "#334155",
+                "shape": "round-rectangle"
+              }
+            },
+            {
+              selector: "node.cfg-terminal",
+              style: {
+                "background-color": "#FEF2F2",
+                "border-color": "#DC2626",
+                "border-width": 2.5,
+                "color": "#DC2626",
+                "shape": "round-rectangle"
+              }
+            },
+            {
+              selector: "node.cfg-decision",
+              style: {
+                "shape": "diamond",
+                "background-color": "#FFFBEB",
+                "border-color": "#D97706",
+                "border-width": 2.5,
+                "color": "#92400E",
+                "padding": 20
+              }
+            },
+            {
+              selector: "node.cfg-loop_header",
+              style: {
+                "shape": "hexagon",
+                "background-color": "#F5F3FF",
+                "border-color": "#7C3AED",
+                "border-width": 2.5,
+                "color": "#5B21B6",
+                "padding": 16
+              }
+            },
+            {
+              selector: "node.cfg-basic_block",
+              style: {
+                "shape": "round-rectangle",
+                "background-color": "#F8FAFC",
+                "border-color": "#3B82F6",
+                "border-width": 2,
+                "color": "#0F172A",
+                "font-family": "ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace",
+                "font-size": 10.5,
+                "text-halign": "center",
+                "padding": 14,
+                "line-height": 1.4
+              }
+            },
+            {
+              selector: "node.cfg-expandable",
+              style: {
+                "cursor": "pointer"
+              }
+            },
+            {
+              selector: "node.cfg-merge",
+              style: {
+                "shape": "round-rectangle",
+                "background-color": "#F1F5F9",
+                "border-color": "#94A3B8",
+                "border-width": 1.5,
+                "font-size": 9.5,
+                "font-weight": "600",
+                "color": "#475569",
+                "padding": 6
+              }
+            },
+            {
+              selector: "node.cfg-unreachable",
+              style: {
+                "background-color": "#FEF2F2",
+                "border-color": "#DC2626",
+                "border-style": "dashed",
+                "border-width": 2,
+                "color": "#991B1B",
+                "shape": "round-rectangle"
+              }
+            },
+            {
+              selector: "node.cfg-call_site",
+              style: {
+                "background-color": "#F5F3FF",
+                "border-color": "#7C3AED",
+                "border-width": 2,
+                "color": "#5B21B6",
+                "shape": "round-rectangle"
+              }
+            },
+            {
+              selector: "edge",
+              style: {
+                "curve-style": "bezier",
+                "target-arrow-shape": "triangle",
+                "arrow-scale": 1.1,
+                "line-color": "#94A3B8",
+                "target-arrow-color": "#94A3B8",
+                "width": 2,
+                "label": "data(label)",
+                "font-size": 9,
+                "font-weight": "700",
+                "text-background-color": "#FFFFFF",
+                "text-background-opacity": 0.85,
+                "text-background-padding": 2,
+                "text-rotation": "autorotate"
+              }
+            },
+            {
+              selector: "edge.cfg-edge-true-branch",
+              style: {
+                "line-color": "#16A34A",
+                "target-arrow-color": "#16A34A",
+                "color": "#15803D",
+                "width": 2.5
+              }
+            },
+            {
+              selector: "edge.cfg-edge-false-branch",
+              style: {
+                "line-color": "#DC2626",
+                "target-arrow-color": "#DC2626",
+                "color": "#B91C1C",
+                "width": 2.5
+              }
+            },
+            {
+              selector: "edge.cfg-edge-when-branch",
+              style: {
+                "line-color": "#0284C7",
+                "target-arrow-color": "#0284C7",
+                "color": "#0369A1"
+              }
+            },
+            {
+              selector: "edge.cfg-edge-loop-body",
+              style: {
+                "line-color": "#7C3AED",
+                "target-arrow-color": "#7C3AED",
+                "color": "#6D28D9"
+              }
+            },
+            {
+              selector: "edge.cfg-edge-exception",
+              style: {
+                "line-color": "#DC2626",
+                "target-arrow-color": "#DC2626",
+                "color": "#B91C1C",
+                "width": 2.5
+              }
+            },
+            {
+              selector: "edge.cfg-edge-fallthrough-default",
+              style: {
+                "line-color": "#64748B",
+                "target-arrow-color": "#64748B",
+                "color": "#475569",
+                "line-style": "dashed"
+              }
+            }
+          ],
+          layout: {
+            name: "dagre",
+            rankDir: "TB",
+            nodeSep: 35,
+            rankSep: 40,
+            padding: 30
+          }
+        });
+
+        // Click on expandable node to reveal all operations without zooming out the screen
+        let isLayoutRunning = false;
+        cyLevel3.on("tap", "node", (evt) => {
+          const n = evt.target;
+          if (n.data("is_expandable") && !isLayoutRunning) {
+            isLayoutRunning = true;
+            const isExp = !n.data("is_expanded");
+            n.data("is_expanded", isExp);
+            n.data("label", isExp ? n.data("full_label") : n.data("short_label"));
+
+            const curZoom = cyLevel3.zoom();
+            const curPan = cyLevel3.pan();
+            const posBefore = { ...n.position() };
+
+            cyLevel3.layout({
+              name: "dagre",
+              rankDir: "TB",
+              nodeSep: 35,
+              rankSep: 40,
+              padding: 30,
+              fit: false,           // Prevent screen from zooming out
+              animate: true,
+              animationDuration: 200,
+              stop: () => {
+                isLayoutRunning = false;
+                // Anchor the expanded node in place
+                const posAfter = n.position();
+                const deltaX = (posBefore.x - posAfter.x) * curZoom;
+                const deltaY = (posBefore.y - posAfter.y) * curZoom;
+                cyLevel3.pan({
+                  x: curPan.x + deltaX,
+                  y: curPan.y + deltaY
+                });
+              }
+            }).run();
+          }
+        });
+
+        cyLevel3.fit(undefined, 30);
+      } catch (err) {
+        CobolScopeLog.error(`Level 3 Cytoscape layout error: ${err.message}`);
+      }
+    }
+
+    function closeLevel3Modal() {
+      const modal = document.getElementById("cfgModalBackdrop");
+      if (modal) modal.style.display = "none";
+      if (cyLevel3) {
+        cyLevel3.destroy();
+        cyLevel3 = null;
+      }
+    }
+
+    document.getElementById("btnCfgClose").addEventListener("click", closeLevel3Modal);
+    document.getElementById("btnCfgFit").addEventListener("click", () => { if (cyLevel3) cyLevel3.fit(undefined, 30); });
+    document.getElementById("btnCfgReset").addEventListener("click", () => { if (cyLevel3) { cyLevel3.reset(); cyLevel3.fit(undefined, 30); } });
+    document.getElementById("btnCfgDownload").addEventListener("click", () => {
+      if (!selectedRoutineNode || !selectedRoutineNode.cfg_elements) return;
+      const jsonStr = JSON.stringify(selectedRoutineNode.cfg_elements, null, 2);
+      const blob = new Blob([jsonStr], { type: "application/json;charset=utf-8" });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = `${selectedRoutineNode.name}_level3_cfg.json`;
+      a.click();
+      URL.revokeObjectURL(url);
+    });
+
+    const btnTopLevel3El = document.getElementById("btnTopLevel3");
+    if (btnTopLevel3El) {
+      btnTopLevel3El.addEventListener("click", () => {
+        openRoutineFlowModal(selectedRoutineNode);
+      });
+    }
+
+    document.getElementById("cfgModalBackdrop").addEventListener("click", (e) => {
+      if (e.target.id === "cfgModalBackdrop") {
+        closeLevel3Modal();
+      }
+    });

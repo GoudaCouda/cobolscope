@@ -1,0 +1,282 @@
+// Cytoscape Call Graph Engine & Styling
+    function initCytoscape() {
+      CobolScopeLog.info("Initializing Cytoscape Level 2 Call Graph...");
+      if (typeof cytoscape === "undefined") {
+        CobolScopeLog.warn("Cytoscape.js could not be loaded. Falling back to Graphviz SVG.");
+        switchEngine("graphviz");
+        return;
+      }
+
+      if (typeof cytoscapeDagre !== "undefined") {
+        cytoscape.use(cytoscapeDagre);
+      }
+
+      try {
+        cy = cytoscape({
+          container: cyContainer,
+          elements: cytoElements,
+          boxSelectionEnabled: false,
+          autounselectify: false,
+          style: [
+            // Parent Cluster Nodes
+            {
+              selector: "node.cluster-node",
+              style: {
+                "label": "data(label)",
+                "text-valign": "top",
+                "text-halign": "center",
+                "text-margin-y": 8,
+                "font-family": "-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif",
+                "font-size": 13,
+                "font-weight": "bold",
+                "color": "data(text_color)",
+                "background-color": "data(fill_color)",
+                "background-opacity": 0.45,
+                "border-width": 2,
+                "border-color": "data(color)",
+                "border-opacity": 0.8,
+                "shape": "round-rectangle",
+                "padding": 18,
+                "z-index": 1
+              }
+            },
+            // Child Routine Nodes
+            {
+              selector: "node.routine-node",
+              style: {
+                "label": function(ele) {
+                  const d = ele.data();
+                  let lines = [d.label];
+                  if (d.type_label) {
+                    lines.push("[" + d.type_label + "]");
+                  }
+                  lines.push(d.lines + " | CC:" + d.cyclomatic_complexity);
+                  if (d.io_badge) {
+                    lines.push(d.io_badge);
+                  }
+                  return lines.join("\n");
+                },
+                "text-wrap": "wrap",
+                "text-valign": "center",
+                "text-halign": "center",
+                "font-family": "-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif",
+                "font-size": 11,
+                "font-weight": "600",
+                "color": "#0F172A",
+                "background-color": "#FFFFFF",
+                "border-width": 2.5,
+                "border-color": "data(color)",
+                "shape": "round-rectangle",
+                "width": "label",
+                "height": "label",
+                "padding": 16,
+                "z-index": 10
+              }
+            },
+            // Subsystem Visual Tinting
+            {
+              selector: "node.type-file_io",
+              style: { "border-color": "#107C41", "background-color": "#F2F9F4" }
+            },
+            {
+              selector: "node.type-database_io",
+              style: { "border-color": "#008272", "background-color": "#F0FDFB" }
+            },
+            {
+              selector: "node.type-business_logic",
+              style: { "border-color": "#0078D4", "background-color": "#F0F8FF" }
+            },
+            {
+              selector: "node.type-initialization",
+              style: { "border-color": "#2C5282", "background-color": "#EBF8FF" }
+            },
+            {
+              selector: "node.type-error_handling",
+              style: { "border-color": "#DC2626", "background-color": "#FEF2F2" }
+            },
+            {
+              selector: "node.type-termination",
+              style: { "border-color": "#475569", "background-color": "#F8FAFC" }
+            },
+            // Entry Point Routine
+            {
+              selector: "node.entry-point",
+              style: {
+                "border-width": 3.5,
+                "border-color": "#0078D4",
+                "background-color": "#EFF6FC",
+                "color": "#004B87"
+              }
+            },
+            // Terminal Routines (STOP RUN, GOBACK)
+            {
+              selector: "node.terminal-node",
+              style: {
+                "border-width": 3.5,
+                "border-color": "#DC2626",
+                "background-color": "#FEF2F2",
+                "color": "#991B1B"
+              }
+            },
+            // Selection & Highlights
+            {
+              selector: "node:selected",
+              style: {
+                "border-width": 4,
+                "border-color": "#F59E0B",
+                "shadow-blur": 12,
+                "shadow-color": "rgba(245, 158, 11, 0.4)",
+                "opacity": 1.0,
+                "z-index": 20
+              }
+            },
+            {
+              selector: "node.neighbor-highlight",
+              style: { "opacity": 1.0, "z-index": 15 }
+            },
+            {
+              selector: ".dimmed",
+              style: { "opacity": 0.15 }
+            },
+            {
+              selector: "node:selected.dimmed, node.neighbor-highlight.dimmed",
+              style: { "opacity": 1.0 }
+            },
+            // Invocations (Edges)
+            {
+              selector: "edge.call-edge",
+              style: {
+                "curve-style": "bezier",
+                "target-arrow-shape": "triangle",
+                "target-arrow-color": "#94A3B8",
+                "line-color": "#CBD5E1",
+                "width": 2,
+                "arrow-scale": 1.2,
+                "opacity": 0.85,
+                "label": "data(label)",
+                "font-size": 9,
+                "color": "#64748B",
+                "text-background-color": "#FFFFFF",
+                "text-background-opacity": 0.8,
+                "text-background-padding": 2
+              }
+            },
+            {
+              selector: "edge.edge-fallthrough",
+              style: {
+                "line-style": "dashed",
+                "line-color": "#94A3B8",
+                "target-arrow-color": "#94A3B8",
+                "width": 1.5,
+                "opacity": 0.6
+              }
+            },
+            {
+              selector: "edge.error-branch",
+              style: {
+                "line-color": "#DC2626",
+                "target-arrow-color": "#DC2626",
+                "line-style": "dashed",
+                "width": 2.5,
+                "opacity": 0.95
+              }
+            }
+          ]
+        });
+
+        applyCytoLayout("dagre");
+
+        cy.on("tap", "node.routine-node", (evt) => {
+          const node = evt.target;
+          const name = node.data("name") || node.data("label");
+          highlightCytoNeighbors(node);
+          selectNode(name);
+        });
+
+        cy.on("dbltap", "node.routine-node", (evt) => {
+          const node = evt.target;
+          const name = node.data("name") || node.data("label");
+          const routine = graphData.nodes[name];
+          if (routine) {
+            selectNode(name);
+            openRoutineFlowModal(routine);
+          }
+        });
+
+        cy.on("tap", (evt) => {
+          if (evt.target === cy) {
+            clearHighlight();
+          }
+        });
+
+        CobolScopeLog.info("Cytoscape Level 2 initialized successfully.");
+      } catch (err) {
+        CobolScopeLog.error(`Cytoscape initialization failed: ${err.message}`);
+        switchEngine("graphviz");
+      }
+    }
+
+    function applyCytoLayout(layoutName) {
+      if (!cy) return;
+      CobolScopeLog.info(`Applying Cytoscape layout: ${layoutName}`);
+      let layoutConfig = { name: layoutName, padding: 40 };
+      if (layoutName === "dagre") {
+        layoutConfig = {
+          name: "dagre",
+          rankDir: "TB",
+          nodeSep: 50,
+          rankSep: 60,
+          padding: 40,
+          animate: true,
+          animationDuration: 300
+        };
+      } else if (layoutName === "breadthfirst") {
+        layoutConfig = {
+          name: "breadthfirst",
+          directed: true,
+          padding: 40,
+          spacingFactor: 1.25,
+          animate: true
+        };
+      } else if (layoutName === "cose") {
+        layoutConfig = {
+          name: "cose",
+          idealEdgeLength: 100,
+          nodeOverlap: 20,
+          refresh: 20,
+          fit: true,
+          padding: 40,
+          randomize: false,
+          componentSpacing: 100,
+          nodeRepulsion: 400000,
+          edgeElasticity: 100,
+          nestingFactor: 5,
+          gravity: 80,
+          numIter: 1000,
+          initialTemp: 200,
+          coolingFactor: 0.95,
+          minTemp: 1.0,
+          animate: true
+        };
+      }
+      cy.layout(layoutConfig).run();
+    }
+
+    if (layoutSelect) {
+      layoutSelect.addEventListener("change", (e) => {
+        applyCytoLayout(e.target.value);
+      });
+    }
+
+    function highlightCytoNeighbors(node) {
+      if (!cy) return;
+      cy.elements().removeClass("dimmed neighbor-highlight");
+      const connectedEdges = node.connectedEdges();
+      const neighborNodes = connectedEdges.connectedNodes();
+      neighborNodes.addClass("neighbor-highlight");
+      node.addClass("neighbor-highlight");
+
+      const focalElements = neighborNodes.union(node).union(connectedEdges);
+      const otherElements = cy.elements().difference(focalElements);
+      otherElements.addClass("dimmed");
+    }

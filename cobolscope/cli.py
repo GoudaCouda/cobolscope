@@ -35,7 +35,9 @@ def build_arg_parser() -> argparse.ArgumentParser:
     # ---------------------------------------------------------
     parser.add_argument(
         "input_file",
-        help="Path to the COBOL source file or copybook to parse.",
+        nargs="?",
+        default=None,
+        help="Path to the COBOL source file or copybook to parse (optional if using --init-rules).",
     )
     parser.add_argument(
         "-f",
@@ -108,6 +110,19 @@ def build_arg_parser() -> argparse.ArgumentParser:
         dest="generate_reachability",
         help="Run Pushdown Reachability Analysis and output verified transitions.",
     )
+    mode_group.add_argument(
+        "--cfg",
+        metavar="PARAGRAPH",
+        dest="cfg_target",
+        help="Generate Level 3 Intra-Procedural CFG for the specified procedure paragraph or 'all'.",
+    )
+    mode_group.add_argument(
+        "--cfg-format",
+        choices=["json", "cytoscape"],
+        default="json",
+        dest="cfg_format",
+        help="Output format for Level 3 CFG (json, cytoscape). Default: json.",
+    )
 
     # ---------------------------------------------------------
     # Data Dictionary Options
@@ -132,8 +147,14 @@ def build_arg_parser() -> argparse.ArgumentParser:
     graph_group.add_argument(
         "--graph-format",
         default="svg",
-        choices=["svg", "dot", "html", "json"],
-        help="Output format for Call Graph.",
+        choices=["svg", "dot", "html", "json", "cytoscape"],
+        help="Output format for Call Graph (svg, dot, html, json, cytoscape).",
+    )
+    graph_group.add_argument(
+        "--graph-engine",
+        choices=["cytoscape", "graphviz"],
+        default="cytoscape",
+        help="Default rendering engine in interactive HTML viewer (cytoscape or graphviz).",
     )
     graph_group.add_argument(
         "--show-fallthrough",
@@ -181,6 +202,24 @@ def build_arg_parser() -> argparse.ArgumentParser:
         dest="concentrate",
         default=True,
         help="Disable Graphviz edge concentration/trunk merging.",
+    )
+
+    # ---------------------------------------------------------
+    # Rules & Termination Options
+    # ---------------------------------------------------------
+    rules_group = parser.add_argument_group("Rules & Abend Options")
+    rules_group.add_argument(
+        "-r",
+        "--rules",
+        metavar="FILE",
+        dest="rules_file",
+        help="Path to custom YAML rules file (defaults to ./cobolscope-rules.yaml or built-in defaults).",
+    )
+    rules_group.add_argument(
+        "--init-rules",
+        action="store_true",
+        dest="init_rules",
+        help="Generate a starter or auto-scanned cobolscope-rules.yaml configuration file.",
     )
 
     # ---------------------------------------------------------
@@ -252,10 +291,49 @@ def main(argv: Optional[Sequence[str]] = None) -> int:
             sys.stderr.write(f"[DEBUG] {msg}\n")
             sys.stderr.flush()
 
+    # 0. Handle --init-rules
+    if args.init_rules:
+        from cobolscope.rules_generator import generate_rules_file
+        from cobolscope.models import ProgramModel
+
+        out_path = Path(args.output) if args.output else Path("cobolscope-rules.yaml")
+        scan_models = []
+        if args.input_file:
+            target = Path(args.input_file)
+            if target.exists():
+                try:
+                    log_verbose(f"Scanning target for rules: {target}")
+                    raw_dict = parse(
+                        input_file=target,
+                        format=args.format,
+                        copybook_dirs=args.copybook_dirs,
+                        copybook_exts=args.copybook_exts,
+                        ignore_syntax_errors=args.ignore_syntax_errors,
+                        jar_path=args.jar,
+                        runner_cp=args.runner_cp,
+                        java_exe=args.java_exe,
+                        extra_java_args=args.java_args,
+                    )
+                    scan_models.append(ProgramModel.from_dict(raw_dict))
+                except Exception as e:
+                    print(f"WARNING: Could not parse target for rules scanning ({e}). Outputting default template.", file=sys.stderr)
+
+        generate_rules_file(out_path, models=scan_models if scan_models else None)
+        print(f"Generated rules configuration: {out_path.resolve()}")
+        return 0
+
+    if not args.input_file:
+        print("ERROR: input_file is required unless using --init-rules.", file=sys.stderr)
+        return 2
+
     input_path = Path(args.input_file)
     if not input_path.exists():
         print(f"ERROR: Input file not found: {input_path}", file=sys.stderr)
         return 2
+
+    from cobolscope.rules import load_rules
+    rules = load_rules(path=args.rules_file)
+    log_verbose(f"Loaded rules (runtime_modules={len(rules.runtime_modules)}, strict_paragraphs={len(rules.paragraph_names.strict)})")
 
     log_verbose(f"Starting CobolScope CLI on target: {input_path}")
     log_verbose(f"Source format: {args.format}")
@@ -343,6 +421,8 @@ def main(argv: Optional[Sequence[str]] = None) -> int:
                 compact_nodes=not args.detailed_nodes,
                 concentrate=args.concentrate,
                 splines=args.splines,
+                initial_engine=args.graph_engine,
+                rules=rules,
             )
             gen_dur = (time.perf_counter() - gen_start) * 1000
             log_verbose(f"Call Graph rendered in {gen_dur:.2f} ms")
@@ -369,7 +449,7 @@ def main(argv: Optional[Sequence[str]] = None) -> int:
 
             an_start = time.perf_counter()
             log_verbose("Running Pushdown Reachability Analysis...")
-            analyzer = PushdownReachabilityAnalyzer(model)
+            analyzer = PushdownReachabilityAnalyzer(model, rules=rules)
             reachability_model = analyzer.analyze()
             an_dur = (time.perf_counter() - an_start) * 1000
             log_verbose(f"Pushdown Reachability Analysis completed in {an_dur:.2f} ms")
@@ -389,7 +469,55 @@ def main(argv: Optional[Sequence[str]] = None) -> int:
             log_verbose(f"Total pipeline execution time: {total_dur:.2f} ms")
             return 0
 
-        # D. Default Mode: Output Canonical IR JSON
+        # D. Level 3 Intra-Procedural CFG Generation
+        if args.cfg_target:
+            cfg_start = time.perf_counter()
+            log_verbose("Hydrating canonical ProgramModel for Level 3 CFG...")
+            from cobolscope.models import ProgramModel, ParagraphNode
+            from cobolscope.graph import build_procedure_cfg
+
+            model = ProgramModel.from_dict(raw_dict)
+            model_dur = (time.perf_counter() - cfg_start) * 1000
+            log_verbose(f"ProgramModel hydrated in {model_dur:.2f} ms")
+
+            target_name = args.cfg_target.strip()
+            if target_name.lower() == "all":
+                log_verbose("Generating Level 3 CFG for all procedures...")
+                all_cfgs = {}
+                for p in model.paragraphs:
+                    p_cfg = build_procedure_cfg(model.program_id, p, rules=rules)
+                    if args.cfg_format == "cytoscape":
+                        all_cfgs[p.name] = p_cfg.to_cytoscape_elements()
+                    else:
+                        all_cfgs[p.name] = p_cfg.model_dump()
+                content = json.dumps(all_cfgs, indent=2)
+            else:
+                log_verbose(f"Generating Level 3 CFG for procedure '{target_name}'...")
+                para = model.get_paragraph(target_name)
+                if not para:
+                    for s in model.sections:
+                        if s.name.upper().strip() == target_name.upper():
+                            para = ParagraphNode(name=s.name, location=s.location, statements=s.statements)
+                            break
+                if not para:
+                    print(f"ERROR: Procedure '{target_name}' not found in program '{model.program_id}'.", file=sys.stderr)
+                    return 2
+
+                p_cfg = build_procedure_cfg(model.program_id, para, rules=rules)
+                if args.cfg_format == "cytoscape":
+                    content = p_cfg.to_cytoscape_json()
+                else:
+                    content = p_cfg.model_dump_json(indent=2)
+
+            write_start = time.perf_counter()
+            _write_output(content, args.output)
+            write_dur = (time.perf_counter() - write_start) * 1000
+            log_verbose(f"Output written in {write_dur:.2f} ms")
+            total_dur = (time.perf_counter() - overall_start) * 1000
+            log_verbose(f"Total pipeline execution time: {total_dur:.2f} ms")
+            return 0
+
+        # E. Default Mode: Output Canonical IR JSON
         log_verbose("Serializing Canonical IR to JSON...")
         json_start = time.perf_counter()
         content = json.dumps(raw_dict, indent=2)

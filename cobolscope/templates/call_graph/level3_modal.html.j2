@@ -1,0 +1,29 @@
+<!-- Level 3 CFG Modal -->
+  <div class="cfg-modal-backdrop" id="cfgModalBackdrop" style="display:none;">
+    <div class="cfg-modal">
+      <div class="cfg-modal-header">
+        <div>
+          <h3 id="cfgModalTitle" style="margin:0; font-size:1.15rem; color:var(--text-primary); font-weight:700;">Level 3 Intra-Procedure Flow</h3>
+          <div id="cfgModalSubtitle" style="font-size:0.8rem; color:var(--text-secondary); margin-top:2px;">Statement-level CFG</div>
+        </div>
+        <div style="display:flex; align-items:center; gap:8px;">
+          <button class="btn" id="btnCfgFit" title="Fit to Screen">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3"/></svg>
+            <span>Fit</span>
+          </button>
+          <button class="btn" id="btnCfgReset" title="Reset View">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/></svg>
+            <span>Reset</span>
+          </button>
+          <button class="btn" id="btnCfgDownload" title="Export Level 3 JSON">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+            <span>Export JSON</span>
+          </button>
+          <button class="btn" id="btnCfgClose" title="Close">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+          </button>
+        </div>
+      </div>
+      <div class="cfg-modal-canvas" id="cy-cfg-container"></div>
+    </div>
+  </div>

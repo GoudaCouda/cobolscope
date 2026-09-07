@@ -9,7 +9,7 @@ from __future__ import annotations
 import html
 import subprocess
 from pathlib import Path
-from typing import Optional
+from typing import Any, Dict, List, Optional
 
 import jinja2
 
@@ -49,7 +49,7 @@ def format_dot_node(node: CallGraphNode, indent: int = 4, compact: bool = True) 
 
     # 1. Entry Point Banner
     if node.is_entry_point:
-        rows.append('<tr><td align="center" bgcolor="#0078D4" cellpadding="3"><font color="#FFFFFF" point-size="9"><b>&#9654; START / ENTRY POINT</b></font></td></tr>')
+        rows.append('<tr><td align="center" bgcolor="#0078D4" cellpadding="3"><font color="#FFFFFF" point-size="9"><b>[ENTRY] START / ENTRY POINT</b></font></td></tr>')
 
     # 2. Section Name & Paragraph Title
     has_distinct_section = bool(node.section and node.section.strip() and node.section.strip().upper() != node.name.strip().upper())
@@ -250,23 +250,43 @@ def render_svg(dot_code: str) -> str:
         ) from e2
 
 
-def render_html(graph: CallGraph, dot_code: str, svg_content: str) -> str:
-    """Renders standalone interactive HTML visualization with pan/zoom and search."""
-    template_path = Path(__file__).resolve().parent.parent / "templates" / "call_graph.html.j2"
+def render_html(
+    graph: CallGraph,
+    dot_code: str,
+    svg_content: str,
+    cyto_elements: Optional[List[Dict[str, Any]]] = None,
+    initial_engine: str = "cytoscape",
+) -> str:
+    """Renders standalone interactive HTML visualization with pan/zoom, search, and Cytoscape/Graphviz engines."""
+    template_dir = Path(__file__).resolve().parent.parent / "templates"
+    try:
+        loader = jinja2.PackageLoader("cobolscope", "templates")
+    except Exception:
+        loader = jinja2.FileSystemLoader(str(template_dir))
 
-    if template_path.exists():
-        template_str = template_path.read_text(encoding="utf-8")
-    else:
-        template_str = _DEFAULT_CALL_GRAPH_HTML_TEMPLATE
+    env = jinja2.Environment(
+        loader=loader,
+        autoescape=jinja2.select_autoescape(["html", "xml"]),
+        trim_blocks=True,
+        lstrip_blocks=True,
+    )
 
-    env = jinja2.Environment(autoescape=True)
-    template = env.from_string(template_str)
+    try:
+        template = env.get_template("call_graph.html.j2")
+    except Exception:
+        template = env.from_string(_DEFAULT_CALL_GRAPH_HTML_TEMPLATE)
+
+    import json
+    cyto_json = json.dumps(cyto_elements or [])
 
     return template.render(
         program_id=graph.program_id,
         graph=graph,
         svg_content=svg_content,
         dot_content=dot_code,
+        cyto_elements=cyto_elements or [],
+        cyto_json=cyto_json,
+        initial_engine=initial_engine,
     )
 
 

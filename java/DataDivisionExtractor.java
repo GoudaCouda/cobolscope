@@ -251,7 +251,17 @@ public class DataDivisionExtractor {
             Map<DataDescriptionEntry, String> entryToIdMap,
             Map<String, IrModel.DataFieldDto> idToFieldMap) {
 
-        // 1. Try native ProLeap ASG semantic resolution
+        // 1. Search preceding siblings in current scope first (standard COBOL scope rule)
+        if (searchScope != null && field.redefines != null) {
+            for (IrModel.DataFieldDto candidate : searchScope) {
+                if (candidate == field) break;
+                if (field.redefines.equalsIgnoreCase(candidate.name)) {
+                    return candidate;
+                }
+            }
+        }
+
+        // 2. Try native ProLeap ASG semantic resolution
         if (field.asgEntry instanceof DataDescriptionEntryGroup) {
             DataDescriptionEntryGroup group = (DataDescriptionEntryGroup) field.asgEntry;
             if (group.getRedefinesClause() != null && group.getRedefinesClause().getRedefinesCall() != null) {
@@ -264,16 +274,6 @@ public class DataDivisionExtractor {
                             return idToFieldMap.get(targetId);
                         }
                     }
-                }
-            }
-        }
-
-        // 2. Search preceding siblings in current scope
-        if (searchScope != null && field.redefines != null) {
-            for (IrModel.DataFieldDto candidate : searchScope) {
-                if (candidate == field) break;
-                if (field.redefines.equalsIgnoreCase(candidate.name)) {
-                    return candidate;
                 }
             }
         }

@@ -1,0 +1,71 @@
+<!-- Node Inspector Sidebar -->
+    <div class="inspector" id="inspector">
+      <div class="inspector-header">
+        <div>
+          <h2 id="inspTitle">Paragraph Inspector</h2>
+          <div id="inspSubtitle" style="font-size:0.8rem; color:var(--text-secondary); margin-top:2px;"></div>
+        </div>
+        <span class="badge" id="inspTypeBadge">GENERIC</span>
+      </div>
+      <div class="inspector-body">
+        <div class="inspector-section">
+          <div class="section-title">Execution Context</div>
+          <div class="meta-grid">
+            <div class="meta-card">
+              <div class="meta-label">Section</div>
+              <div class="meta-val" id="inspSection" style="word-break:break-word; font-size:0.8rem;">-</div>
+            </div>
+            <div class="meta-card">
+              <div class="meta-label">Paragraph</div>
+              <div class="meta-val" id="inspPara" style="font-size:0.8rem;">-</div>
+            </div>
+            <div class="meta-card">
+              <div class="meta-label">Line Span</div>
+              <div class="meta-val" id="inspLines">-</div>
+            </div>
+            <div class="meta-card">
+              <div class="meta-label">Complexity (CC)</div>
+              <div class="meta-val" id="inspCC">-</div>
+            </div>
+            <div class="meta-card">
+              <div class="meta-label">Statements</div>
+              <div class="meta-val" id="inspStmts">-</div>
+            </div>
+            <div class="meta-card">
+              <div class="meta-label">Cluster</div>
+              <div class="meta-val" id="inspCluster">-</div>
+            </div>
+          </div>
+          <!-- Level 3 CFG Action / Linear Summary Card Area -->
+          <div id="inspCfgSection" style="margin-top:14px;"></div>
+        </div>
+
+        <div class="inspector-section">
+          <div class="section-title">Invoked By (Callers)</div>
+          <div class="tag-list" id="inspCallers">
+            <span style="font-size:0.8rem; color:var(--text-muted);">None</span>
+          </div>
+        </div>
+
+        <div class="inspector-section">
+          <div class="section-title">Calls (Successors)</div>
+          <div class="tag-list" id="inspSuccessors">
+            <span style="font-size:0.8rem; color:var(--text-muted);">None</span>
+          </div>
+        </div>
+
+        <div class="inspector-section">
+          <div class="section-title">Variables Read (Source DFG)</div>
+          <div class="tag-list" id="inspReadFields">
+            <span style="font-size:0.8rem; color:var(--text-muted);">No variable reads</span>
+          </div>
+        </div>
+
+        <div class="inspector-section">
+          <div class="section-title">Variables Modified (Target DFG)</div>
+          <div class="tag-list" id="inspWriteFields">
+            <span style="font-size:0.8rem; color:var(--text-muted);">No variable writes</span>
+          </div>
+        </div>
+      </div>
+    </div>

@@ -1,0 +1,159 @@
+// -------------------------------------------------------------
+    // Full Linear Procedure Card Modal
+    // -------------------------------------------------------------
+    function openLinearCardModal(node) {
+      if (!node) node = selectedRoutineNode;
+      if (!node) return;
+
+      const modal = document.getElementById("linearModalBackdrop");
+      if (!modal) return;
+
+      document.getElementById("linearModalTitle").textContent = `Linear Procedure: ${node.name}`;
+      document.getElementById("linearModalSubtitle").textContent = `Section: ${node.section || "DEFAULT"} | Lines: ${node.start_line > 0 ? 'L' + node.start_line + '-' + node.end_line : 'N/A'} | Complexity: CC 1 (Zero Branches)`;
+
+      const stmts = node.cfg_linear_statements || [];
+      document.getElementById("linearModalStmtCount").textContent = stmts.length;
+
+      // Metrics row
+      const metricsEl = document.getElementById("linearModalMetrics");
+      metricsEl.innerHTML = "";
+
+      const verbCounts = {};
+      stmts.forEach(s => {
+        const v = s.verb || "STATEMENT";
+        verbCounts[v] = (verbCounts[v] || 0) + 1;
+      });
+
+      Object.entries(verbCounts).forEach(([verb, count]) => {
+        const pill = document.createElement("span");
+        pill.style.fontSize = "0.75rem";
+        pill.style.fontWeight = "600";
+        pill.style.padding = "4px 10px";
+        pill.style.borderRadius = "6px";
+        pill.style.background = "#F1F5F9";
+        pill.style.color = "#334155";
+        pill.style.border = "1px solid #E2E8F0";
+        pill.textContent = `${verb}: ${count}`;
+        metricsEl.appendChild(pill);
+      });
+
+      // Render Statement Table
+      const tableEl = document.getElementById("linearModalTraceTable");
+      tableEl.innerHTML = "";
+
+      const table = document.createElement("table");
+      table.style.width = "100%";
+      table.style.borderCollapse = "collapse";
+      table.style.fontSize = "0.85rem";
+      table.style.fontFamily = "ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace";
+
+      const thead = document.createElement("thead");
+      thead.innerHTML = `
+        <tr style="background:#F8FAFC; border-bottom:1px solid #E2E8F0; text-align:left; color:#64748B; font-size:0.75rem; text-transform:uppercase;">
+          <th style="padding:10px 14px; width:70px;">Line</th>
+          <th style="padding:10px 14px; width:130px;">Operation</th>
+          <th style="padding:10px 14px;">Statement Source</th>
+        </tr>
+      `;
+      table.appendChild(thead);
+
+      const tbody = document.createElement("tbody");
+      stmts.forEach((s, idx) => {
+        const tr = document.createElement("tr");
+        tr.style.borderBottom = "1px solid #F1F5F9";
+        if (idx % 2 === 1) tr.style.background = "#FAFAFA";
+
+        const tdLine = document.createElement("td");
+        tdLine.style.padding = "9px 14px";
+        tdLine.style.color = "#94A3B8";
+        tdLine.style.fontWeight = "600";
+        tdLine.textContent = s.line ? `L${s.line}` : "L--";
+        tr.appendChild(tdLine);
+
+        const tdVerb = document.createElement("td");
+        tdVerb.style.padding = "9px 14px";
+        const verbSpan = document.createElement("span");
+        verbSpan.style.fontWeight = "700";
+        verbSpan.style.fontSize = "0.75rem";
+        verbSpan.style.padding = "3px 8px";
+        verbSpan.style.borderRadius = "4px";
+
+        if (s.category === "data") {
+          verbSpan.style.background = "#EFF6FC";
+          verbSpan.style.color = "#0078D4";
+        } else if (s.category === "call") {
+          verbSpan.style.background = "#F5F3FF";
+          verbSpan.style.color = "#7C3AED";
+        } else if (s.category === "io") {
+          verbSpan.style.background = "#ECFDF5";
+          verbSpan.style.color = "#059669";
+        } else if (s.category === "terminal") {
+          verbSpan.style.background = "#FEF2F2";
+          verbSpan.style.color = "#DC2626";
+        } else {
+          verbSpan.style.background = "#F1F5F9";
+          verbSpan.style.color = "#475569";
+        }
+        verbSpan.textContent = s.verb || "STMT";
+        tdVerb.appendChild(verbSpan);
+        tr.appendChild(tdVerb);
+
+        const tdText = document.createElement("td");
+        tdText.style.padding = "9px 14px";
+        tdText.style.color = "#0F172A";
+
+        if (s.category === "call" && s.target && graphData.nodes[s.target.toUpperCase()]) {
+          tdText.innerHTML = `${escapeHtml(s.text.replace(s.target, ""))} <a href="#" style="color:#0078D4; font-weight:700; text-decoration:underline;">${escapeHtml(s.target)}</a>`;
+          const a = tdText.querySelector("a");
+          if (a) {
+            a.onclick = (e) => {
+              e.preventDefault();
+              closeLinearCardModal();
+              selectNode(s.target);
+              focusNode(s.target);
+            };
+          }
+        } else {
+          tdText.textContent = s.text;
+        }
+        tr.appendChild(tdText);
+
+        tbody.appendChild(tr);
+      });
+      table.appendChild(tbody);
+      tableEl.appendChild(table);
+
+      const copyBtn = document.getElementById("btnLinearCopy");
+      const copyTextEl = document.getElementById("btnLinearCopyText");
+      if (copyBtn) {
+        copyBtn.onclick = () => {
+          const lines = stmts.map(s => `${s.line ? 'L' + s.line + ': ' : ''}${s.text}`);
+          navigator.clipboard.writeText(lines.join("\\n")).then(() => {
+            const label = copyTextEl || copyBtn;
+            const orig = label.textContent;
+            label.textContent = "Copied!";
+            setTimeout(() => { label.textContent = orig; }, 2000);
+          });
+        };
+      }
+
+      modal.style.display = "flex";
+    }
+
+    function closeLinearCardModal() {
+      const modal = document.getElementById("linearModalBackdrop");
+      if (modal) modal.style.display = "none";
+    }
+
+    const btnLinearCloseEl = document.getElementById("btnLinearClose");
+    if (btnLinearCloseEl) {
+      btnLinearCloseEl.addEventListener("click", closeLinearCardModal);
+    }
+    const linearModalBackdropEl = document.getElementById("linearModalBackdrop");
+    if (linearModalBackdropEl) {
+      linearModalBackdropEl.addEventListener("click", (e) => {
+        if (e.target.id === "linearModalBackdrop") {
+          closeLinearCardModal();
+        }
+      });
+    }

@@ -1,4 +1,4 @@
-{# Reusable Jinja2 macros for COBOL Data Dictionary rendering #}
+{# Reusable Jinja2 macros for COBOL Data Dictionary & Call Graphs #}
 
 {% macro render_badge(redefines, occurs, value) -%}
   {% if redefines %}<span class="badge badge-redefines">REDEFINES {{ redefines }}</span>{% endif %}
@@ -14,4 +14,10 @@
       {% endfor %}
     </div>
   {% endif %}
+{%- endmacro %}
+
+{% macro stat_badge(label, value, variant='default') -%}
+  <div class="badge badge-{{ variant }}">
+    <span>{{ label }}:</span> <b>{{ value }}</b>
+  </div>
 {%- endmacro %}

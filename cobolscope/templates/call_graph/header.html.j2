@@ -1,0 +1,77 @@
+  <!-- Unified Enterprise Navbar (50px) -->
+  <header class="navbar">
+    <div class="navbar-left">
+      <div class="brand">
+        <span class="brand-title">COBOLSCOPE</span>
+        <span class="brand-divider">/</span>
+        <code class="program-title">{{ program_id }}</code>
+      </div>
+      <div class="header-metrics">
+        <span>{{ graph.total_paragraphs }} routines</span>
+        <span class="dot">•</span>
+        <span>{{ graph.total_calls }} calls</span>
+        <span class="dot">•</span>
+        <span>depth {{ graph.max_depth }}</span>
+        {% if graph.entry_point %}
+        <span class="dot">•</span>
+        <span class="entry-metric" id="hdrEntryPoint" title="Click to jump to entry routine">
+          <span class="entry-badge-tag">[ENTRY]</span> {{ graph.entry_point }}
+        </span>
+        {% endif %}
+        {% if graph.has_cycles %}
+        <span class="badge-cycle-warn">
+          <svg class="icon-warning" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+          <span>Cycles</span>
+        </span>
+        {% endif %}
+      </div>
+    </div>
+
+    <div class="navbar-center">
+      <div class="search-box">
+        <svg class="search-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+        <input type="text" id="nodeSearch" placeholder="Search routine... (Press '/' to focus)">
+      </div>
+    </div>
+
+    <div class="navbar-right">
+      <!-- Engine Segmented Switcher -->
+      <div class="engine-switcher">
+        <button class="engine-btn active" id="btnEngineCyto" title="Cytoscape Interactive Graph">Cytoscape</button>
+        <button class="engine-btn" id="btnEngineGraphviz" title="Graphviz Static SVG">Graphviz</button>
+      </div>
+
+      <!-- Layout Dropdown (Cytoscape) -->
+      <div id="cytoLayoutGroup" style="display:flex; align-items:center;">
+        <select class="layout-select" id="layoutSelect" title="Graph Layout Engine">
+          <option value="dagre">Dagre (Hierarchy)</option>
+          <option value="breadthfirst">Breadthfirst (Layers)</option>
+          <option value="cose">COSE (Force)</option>
+          <option value="concentric">Concentric</option>
+          <option value="circle">Circle</option>
+        </select>
+      </div>
+
+      <!-- Unified Export Dropdown -->
+      <div class="dropdown" id="exportDropdown">
+        <button class="btn btn-export" id="btnExportToggle" title="Export Call Graph">
+          <span>Export</span>
+          <svg class="chevron-icon" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+        </button>
+        <div class="dropdown-menu" id="exportMenu" style="display:none;">
+          <button class="dropdown-item" id="btnDownloadSvg">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="18" x="3" y="3" rx="2" ry="2"/><circle cx="9" cy="9" r="2"/><path d="m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21"/></svg>
+            <span>Export SVG Image</span>
+          </button>
+          <button class="dropdown-item" id="btnDownloadDot">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"/><polyline points="14 2 14 8 20 8"/></svg>
+            <span>Export Graphviz DOT</span>
+          </button>
+          <button class="dropdown-item" id="btnDownloadJson">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+            <span>Export Cytoscape JSON</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </header>

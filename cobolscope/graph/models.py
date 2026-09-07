@@ -7,7 +7,7 @@ Data models and enums for Procedure Call Graphs, nodes, edges, and clusters.
 
 from __future__ import annotations
 from enum import Enum
-from typing import Dict, List, Optional
+from typing import Dict, List, Optional, Any
 from pydantic import BaseModel, ConfigDict, Field
 
 
@@ -69,6 +69,10 @@ class CallGraphNode(BaseModel):
     successors: List[str] = Field(default_factory=list)
     fallthrough_successor: Optional[str] = None
     collapsed_exit_nodes: List[str] = Field(default_factory=list)
+    is_cfg_eligible: bool = True
+    cfg_eligibility_reason: str = ""
+    cfg_elements: List[Dict[str, Any]] = Field(default_factory=list)
+    cfg_linear_statements: List[Dict[str, Any]] = Field(default_factory=list)
 
 
 class CallGraphEdge(BaseModel):

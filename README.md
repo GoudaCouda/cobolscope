@@ -16,6 +16,9 @@ CobolScope bridges enterprise mainframe COBOL to modern Python data models, enab
 - **Exact Binary Memory Layout**: Reconstructs exact byte offsets, lengths, and memory overlays (`REDEFINES`) verified against live IBM/GnuCOBOL compiler symbol tables.
 - **Interactive Data Dictionaries**: Exports data definitions into searchable, filterable **HTML reports**, clean **Markdown tables**, **CSV**, and **JSON Schema**.
 - **Level-2 Procedure Call Graphs**: Generates clean architectural control flow diagrams with functional clustering, `PERFORM ... THRU` range expansion, and exit collapsing in **SVG**, **Interactive HTML (pan & zoom)**, and **Graphviz DOT**.
+- **Level-3 Intra-Procedural CFGs**: Generates fine-grained intra-paragraph control flow graphs in **Cytoscape** and **JSON**, modeling decision splits (`IF`, `EVALUATE`), loop constructs, and terminal abend sinks.
+- **Declarative YAML Rules Engine**: Configurable rules (`cobolscope-rules.yaml`) governing abnormal termination (`ABEND`), runtime modules (`CEE3ABD`, `ILBOABN0`, etc.), custom paragraph naming patterns, database condition checks (`SQLCODE NOT = 0`), S0C7 hardware exceptions, and per-program overrides.
+- **Automated Rule Discovery (`--init-rules`)**: Scans codebases to automatically discover abending routines, database check patterns, and runtime modules, outputting pre-populated YAML configuration files.
 - **Pushdown Reachability Analyzer**: Emulates COBOL runtime execution using a Pushdown Automaton to detect dead paragraphs, uncalled abend routines, and unreachable blocks.
 - **Open Polymorphic Statement Architecture**: Strongly typed Pydantic models for rich statements (`MOVE`, `PERFORM`, `IF`, `EVALUATE`, `CALL`, `COMPUTE`, `EXEC SQL`, `EXEC CICS`).
 - **6-Tier Verification Suite**: Audited against mathematical invariant proofs, live GnuCOBOL compiler listings, the official NIST COBOL-85 conformance suite, and open-source enterprise CICS programs ([IBM Bank-of-Z](https://github.com/IBM/Bank-of-Z)).
@@ -75,6 +78,25 @@ cobolscope path/to/program.cbl --graph --graph-format svg -o call_graph.svg
 cobolscope path/to/program.cbl --graph --graph-format dot -o call_graph.dot
 ```
 
+#### Generate Level-3 Intra-Procedural CFGs
+```bash
+# Interactive Cytoscape HTML Control Flow Graph
+cobolscope path/to/program.cbl --cfg --cfg-format html -o cfg.html
+
+# Cytoscape JSON Elements export
+cobolscope path/to/program.cbl --cfg --cfg-format json -o cfg.json
+```
+
+#### Declarative Rules Engine & Rule Discovery
+```bash
+# Automatically discover ABEND routines, runtime modules, and DB checks into a YAML rules file
+cobolscope --init-rules path/to/program.cbl -o cobolscope-rules.yaml
+
+# Apply custom rules to any analysis or visualization command
+cobolscope path/to/program.cbl --graph --rules cobolscope-rules.yaml -o call_graph.html
+cobolscope path/to/program.cbl --reachability -r cobolscope-rules.yaml
+```
+
 #### Run Pushdown Reachability Analysis
 ```bash
 cobolscope path/to/program.cbl --reachability
@@ -88,12 +110,14 @@ cobolscope path/to/program.cbl --reachability
 from cobolscope.parser import parse
 from cobolscope.models import ProgramModel
 from cobolscope.dictionary import DataDictionaryGenerator
-from cobolscope.graph import CallGraphGenerator
+from cobolscope.graph import CallGraphGenerator, build_procedure_cfg, is_paragraph_terminal
 from cobolscope.reachability import PushdownReachabilityAnalyzer
+from cobolscope.rules import load_rules, get_effective_rules
 
-# 1. Parse COBOL Source
+# 1. Parse COBOL Source & Load Rules
 raw_ir = parse("path/to/program.cbl", copybook_dirs=["./copybooks"], format="FIXED")
 model = ProgramModel.from_dict(raw_ir)
+rules = load_rules("cobolscope-rules.yaml")
 
 print(f"Program ID: {model.program_id}")
 print(f"Total Paragraphs: {len(model.paragraphs)}")
@@ -107,14 +131,20 @@ for row in dict_gen.rows:
 md_report = dict_gen.to_markdown()
 html_report = dict_gen.to_html()
 
-# 3. Generate Procedure Call Graph
-graph_gen = CallGraphGenerator(model)
+# 3. Generate Procedure Call Graph with Rules
+graph_gen = CallGraphGenerator(model, rules=rules)
 dot_source = graph_gen.to_dot()
 svg_content = graph_gen.to_svg()
 html_viewer = graph_gen.to_html()
 
-# 4. Run Reachability & Dead Code Detection
-analyzer = PushdownReachabilityAnalyzer(model)
+# 4. Generate Level-3 Intra-Procedural CFGs
+main_para = model.paragraphs[0]
+cfg = build_procedure_cfg(main_para, rules=rules, program_id=model.program_id)
+print(f"CFG Nodes: {len(cfg.nodes)}, Edges: {len(cfg.edges)}")
+cytoscape_elements = cfg.to_cytoscape_elements()
+
+# 5. Run Reachability & Dead Code Detection
+analyzer = PushdownReachabilityAnalyzer(model, rules=rules)
 reach_result = analyzer.analyze()
 print(f"Reachable Paragraphs: {len(reach_result.reachable_paragraphs)}")
 print(f"Dead / Unreachable Code: {reach_result.unreachable_paragraphs}")
@@ -168,13 +198,20 @@ python -m tests.test_nist_suite
 
 ```
 cobolscope/
-├── __init__.py                # Core package entrypoints (parse, models)
+├── __init__.py                # Core package entrypoints (parse, models, rules)
 ├── cli.py                     # Unified CLI with subcommands & argument parser
 ├── models/                    # Typed Pydantic IR data models (AST, DFG, CFG)
 ├── parser/                    # Java subprocess runner & streaming JSON reader
 ├── dictionary/                # Data dictionary engine, offsets, & exporters (HTML, MD, CSV)
-├── graph/                     # Procedure call graph generator & cluster classifier
+├── graph/                     # Procedure call graph & Level-3 CFG builder
+│   ├── builder.py             # Level-2 call graph generator & cluster classifier
+│   ├── cfg_builder.py         # Level-3 intra-procedural CFG builder
+│   ├── cfg_models.py          # Level-3 CFG node & edge data models
+│   ├── termination.py         # ABEND & terminal procedure classification
+│   └── renderers.py           # DOT, SVG, and Cytoscape/HTML renderers
 ├── reachability/              # Pushdown Automaton interprocedural reachability analyzer
+├── rules.py                   # Declarative YAML rules schema & effective rule resolution
+├── rules_generator.py         # Automated rule discovery AST scanner (--init-rules)
 └── templates/                 # Jinja2 templates for interactive HTML visualizers
 
 java/

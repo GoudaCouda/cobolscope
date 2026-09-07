@@ -1,0 +1,48 @@
+    /* Level 3 Intra-Procedure CFG Modal */
+    .cfg-modal-backdrop {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: rgba(15, 23, 42, 0.7);
+      backdrop-filter: blur(5px);
+      z-index: 99999;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+      overflow-y: auto;
+    }
+
+    .cfg-modal {
+      width: 92vw;
+      height: 88vh;
+      max-width: 1440px;
+      max-height: calc(100vh - 48px);
+      background: #FFFFFF;
+      border-radius: 12px;
+      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.35);
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      border: 1px solid #CBD5E1;
+    }
+
+    .cfg-modal-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 14px 20px;
+      background: #F8FAFC;
+      border-bottom: 1px solid #E2E8F0;
+      flex-shrink: 0;
+    }
+
+    .cfg-modal-canvas {
+      flex: 1;
+      width: 100%;
+      height: 100%;
+      background: #FAFAFA;
+      position: relative;
+    }

@@ -74,8 +74,14 @@ class TestPushdownReachability(unittest.TestCase):
         res = analyzer.analyze()
 
         self.assertEqual(res.entrypoint, "P010")
-        self.assertEqual(len(res.reachable_paragraphs), 20)
-        self.assertEqual(len(res.unreachable_paragraphs), 0)
+        self.assertEqual(len(res.reachable_paragraphs), 16)
+        self.assertEqual(len(res.unreachable_paragraphs), 4)
+
+        # Uncalled abend handlers and exit stubs following CICS RETURN are correctly flagged as unreachable
+        self.assertIn("P999", res.unreachable_paragraphs)
+        self.assertIn("GMOFH999", res.unreachable_paragraphs)
+        self.assertIn("AH010", res.unreachable_paragraphs)
+        self.assertIn("AH999", res.unreachable_paragraphs)
 
 
 if __name__ == "__main__":

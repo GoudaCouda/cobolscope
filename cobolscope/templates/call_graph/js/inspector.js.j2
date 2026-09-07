@@ -1,0 +1,361 @@
+// Node Inspector & Enhanced Linear Summary Card
+    function selectNode(nodeName) {
+      const node = graphData.nodes[nodeName.toUpperCase().trim()];
+      if (!node) return;
+
+      selectedRoutineNode = node;
+
+      // Update Header & Badge
+      const hasDistinctSection = Boolean(node.section && node.section.trim() && node.section.trim().toUpperCase() !== node.name.trim().toUpperCase());
+      const displayTitle = hasDistinctSection ? node.section.trim() : node.name;
+      const displaySubtitle = hasDistinctSection ? `¶ Paragraph: ${node.name}` : "";
+
+      document.getElementById("inspTitle").textContent = displayTitle;
+      document.getElementById("inspSubtitle").textContent = displaySubtitle;
+
+      const typeBadge = document.getElementById("inspTypeBadge");
+      if (node.is_entry_point) {
+        typeBadge.textContent = "[ENTRY] " + node.node_type;
+        typeBadge.style.background = "#EFF6FC";
+        typeBadge.style.color = "#0078D4";
+      } else {
+        typeBadge.textContent = node.node_type;
+        typeBadge.style.background = "#F1F5F9";
+        typeBadge.style.color = "var(--text-secondary)";
+      }
+
+      document.getElementById("inspSection").textContent = node.section ? node.section : "—";
+      document.getElementById("inspPara").textContent = node.name;
+      document.getElementById("inspLines").textContent = node.start_line > 0 ? `L${node.start_line}-${node.end_line}` : "N/A";
+      document.getElementById("inspCC").textContent = node.cyclomatic_complexity;
+      document.getElementById("inspStmts").textContent = node.statement_count;
+      document.getElementById("inspCluster").textContent = node.cluster_id.replace("cluster_", "");
+
+      // Render Level 3 Action or Enhanced Linear Summary Card
+      renderCfgInspectorSection(node);
+
+      // Callers List
+      const callersEl = document.getElementById("inspCallers");
+      callersEl.innerHTML = "";
+      if (node.called_by.length > 0) {
+        node.called_by.forEach(caller => {
+          const tag = document.createElement("span");
+          tag.className = "tag";
+          tag.textContent = caller;
+          tag.onclick = () => { selectNode(caller); focusNode(caller); };
+          callersEl.appendChild(tag);
+        });
+      } else {
+        callersEl.innerHTML = '<span style="font-size:0.8rem; color:var(--text-muted);">' + (node.is_entry_point ? '<span style="color:#0078D4; font-weight:600;">[ENTRY]</span> Program Entry Point' : 'Root / Uncalled') + '</span>';
+      }
+
+      // Successors List
+      const succEl = document.getElementById("inspSuccessors");
+      succEl.innerHTML = "";
+      if (node.successors.length > 0) {
+        node.successors.forEach(succ => {
+          const tag = document.createElement("span");
+          tag.className = "tag";
+          tag.textContent = succ;
+          tag.onclick = () => { selectNode(succ); focusNode(succ); };
+          succEl.appendChild(tag);
+        });
+      } else {
+        succEl.innerHTML = '<span style="font-size:0.8rem; color:var(--text-muted);">Terminal / None</span>';
+      }
+
+      // Read Fields
+      const readEl = document.getElementById("inspReadFields");
+      readEl.innerHTML = "";
+      if (node.source_field_ids && node.source_field_ids.length > 0) {
+        node.source_field_ids.slice(0, 15).forEach(f => {
+          const tag = document.createElement("span");
+          tag.className = "tag field-tag-read";
+          tag.textContent = f;
+          readEl.appendChild(tag);
+        });
+      } else {
+        readEl.innerHTML = '<span style="font-size:0.8rem; color:var(--text-muted);">No variable reads</span>';
+      }
+
+      // Write Fields
+      const writeEl = document.getElementById("inspWriteFields");
+      writeEl.innerHTML = "";
+      if (node.target_field_ids && node.target_field_ids.length > 0) {
+        node.target_field_ids.slice(0, 15).forEach(f => {
+          const tag = document.createElement("span");
+          tag.className = "tag field-tag-write";
+          tag.textContent = f;
+          writeEl.appendChild(tag);
+        });
+      } else {
+        writeEl.innerHTML = '<span style="font-size:0.8rem; color:var(--text-muted);">No variable writes</span>';
+      }
+
+      // Sync Selection in Both Engines
+      if (cy) {
+        cy.nodes().unselect();
+        const cyNode = cy.nodes().filter(n => (n.data("name") || n.data("label") || "").toUpperCase() === nodeName.toUpperCase());
+        if (cyNode.length > 0) {
+          cyNode.select();
+        }
+      }
+
+      if (svg) {
+        svg.querySelectorAll("g.node").forEach(g => {
+          g.classList.remove("highlight-selected");
+          const title = g.querySelector("title");
+          if (title && (title.textContent.trim().toUpperCase() === node.id.toUpperCase() || title.textContent.trim().toUpperCase() === nodeName.toUpperCase())) {
+            g.classList.add("highlight-selected");
+          }
+        });
+      }
+    }
+
+    function renderCfgInspectorSection(node) {
+      const secEl = document.getElementById("inspCfgSection");
+      if (!secEl) return;
+      secEl.innerHTML = "";
+
+      if (node.is_cfg_eligible) {
+        // --- Branching Routine (CC > 1): Prompt for Level 3 Flowchart Modal ---
+        const eligibleCard = document.createElement("div");
+        eligibleCard.style.background = "#FFFFFF";
+        eligibleCard.style.border = "1px solid #CBD5E1";
+        eligibleCard.style.borderRadius = "8px";
+        eligibleCard.style.padding = "12px";
+        eligibleCard.style.boxShadow = "0 1px 3px rgba(0,0,0,0.05)";
+
+        const headerDiv = document.createElement("div");
+        headerDiv.style.display = "flex";
+        headerDiv.style.alignItems = "center";
+        headerDiv.style.justifyContent = "space-between";
+        headerDiv.style.marginBottom = "8px";
+
+        const titleDiv = document.createElement("div");
+        titleDiv.style.fontWeight = "700";
+        titleDiv.style.fontSize = "0.85rem";
+        titleDiv.style.color = "#0F172A";
+        titleDiv.style.display = "flex";
+        titleDiv.style.alignItems = "center";
+        titleDiv.style.gap = "6px";
+        titleDiv.innerHTML = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#2563EB" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 3h5v5"/><path d="M4 20 21 3"/><path d="M21 16v5h-5"/><path d="m15 15 6 6"/><path d="M4 4l5 5"/></svg><span>Branching Logic</span>';
+
+        const ccBadge = document.createElement("span");
+        ccBadge.className = "badge";
+        ccBadge.style.background = "#EFF6FC";
+        ccBadge.style.color = "#0078D4";
+        ccBadge.style.borderColor = "#C7E0F4";
+        ccBadge.textContent = `CC: ${node.cyclomatic_complexity}`;
+
+        headerDiv.appendChild(titleDiv);
+        headerDiv.appendChild(ccBadge);
+        eligibleCard.appendChild(headerDiv);
+
+        const descDiv = document.createElement("div");
+        descDiv.style.fontSize = "0.75rem";
+        descDiv.style.color = "#64748B";
+        descDiv.style.marginBottom = "10px";
+        descDiv.textContent = `Contains ${node.cyclomatic_complexity - 1} conditional branch point(s) and decision paths.`;
+        eligibleCard.appendChild(descDiv);
+
+        const btn = document.createElement("button");
+        btn.className = "btn btn-primary";
+        btn.id = "btnOpenLevel3";
+        btn.style.width = "100%";
+        btn.style.display = "flex";
+        btn.style.alignItems = "center";
+        btn.style.justifyContent = "center";
+        btn.style.gap = "8px";
+        btn.style.padding = "9px 12px";
+        btn.style.fontWeight = "600";
+        btn.innerHTML = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="8" height="8" x="3" y="3" rx="2"/><path d="M7 11v4a2 2 0 0 0 2 2h4"/><rect width="8" height="8" x="13" y="13" rx="2"/></svg><span>View Level 3 Flowchart</span>';
+        btn.onclick = () => openLevel3Modal(node);
+        eligibleCard.appendChild(btn);
+
+        secEl.appendChild(eligibleCard);
+      } else {
+        // --- Linear Routine (CC == 1, Zero Conditionals): Enhanced Linear Summary Card ---
+        const linearCard = document.createElement("div");
+        linearCard.style.background = "#FFFFFF";
+        linearCard.style.border = "1px solid #CBD5E1";
+        linearCard.style.borderRadius = "8px";
+        linearCard.style.padding = "12px";
+        linearCard.style.boxShadow = "0 1px 3px rgba(0,0,0,0.05)";
+
+        // 1. Header with Badge
+        const headerDiv = document.createElement("div");
+        headerDiv.style.display = "flex";
+        headerDiv.style.alignItems = "center";
+        headerDiv.style.justifyContent = "space-between";
+        headerDiv.style.marginBottom = "6px";
+
+        const titleDiv = document.createElement("div");
+        titleDiv.style.fontWeight = "700";
+        titleDiv.style.fontSize = "0.85rem";
+        titleDiv.style.color = "#0F172A";
+        titleDiv.style.display = "flex";
+        titleDiv.style.alignItems = "center";
+        titleDiv.style.gap = "6px";
+        titleDiv.innerHTML = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#166534" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/><line x1="3" y1="6" x2="3.01" y2="6"/><line x1="3" y1="12" x2="3.01" y2="12"/><line x1="3" y1="18" x2="3.01" y2="18"/></svg><span>Linear Procedure</span>';
+
+        const badgeDiv = document.createElement("span");
+        badgeDiv.className = "badge";
+        badgeDiv.style.background = "#F0FDF4";
+        badgeDiv.style.color = "#166534";
+        badgeDiv.style.borderColor = "#BBF7D0";
+        badgeDiv.textContent = "CC: 1 (No Branches)";
+
+        headerDiv.appendChild(titleDiv);
+        headerDiv.appendChild(badgeDiv);
+        linearCard.appendChild(headerDiv);
+
+        // 2. Subtitle / Narrative
+        const narrativeDiv = document.createElement("div");
+        narrativeDiv.style.fontSize = "0.75rem";
+        narrativeDiv.style.color = "#64748B";
+        narrativeDiv.style.marginBottom = "10px";
+        narrativeDiv.style.lineHeight = "1.3";
+        narrativeDiv.textContent = "Sequential execution with 0 conditional branches. Straight-line flowchart omitted to preserve focus; statement trace summarized below.";
+        linearCard.appendChild(narrativeDiv);
+
+        const stmts = node.cfg_linear_statements || [];
+
+        // 3. Verb Category Distribution Pills
+        if (stmts.length > 0) {
+          const verbCounts = {};
+          stmts.forEach(s => {
+            const v = s.verb || "STATEMENT";
+            verbCounts[v] = (verbCounts[v] || 0) + 1;
+          });
+
+          const pillsContainer = document.createElement("div");
+          pillsContainer.style.display = "flex";
+          pillsContainer.style.flexWrap = "wrap";
+          pillsContainer.style.gap = "4px";
+          pillsContainer.style.marginBottom = "10px";
+
+          Object.entries(verbCounts).forEach(([verb, count]) => {
+            const pill = document.createElement("span");
+            pill.style.fontSize = "0.68rem";
+            pill.style.fontWeight = "600";
+            pill.style.padding = "2px 6px";
+            pill.style.borderRadius = "4px";
+            pill.style.background = "#F1F5F9";
+            pill.style.color = "#475569";
+            pill.style.border = "1px solid #E2E8F0";
+            pill.textContent = `${verb} (${count})`;
+            pillsContainer.appendChild(pill);
+          });
+          linearCard.appendChild(pillsContainer);
+        }
+
+        // 4. Formatted Interactive Statement Trace
+        if (stmts.length > 0) {
+          const traceHeader = document.createElement("div");
+          traceHeader.style.display = "flex";
+          traceHeader.style.alignItems = "center";
+          traceHeader.style.justifyContent = "space-between";
+          traceHeader.style.fontSize = "0.7rem";
+          traceHeader.style.fontWeight = "700";
+          traceHeader.style.textTransform = "uppercase";
+          traceHeader.style.color = "#94A3B8";
+          traceHeader.style.marginBottom = "4px";
+          traceHeader.innerHTML = `<span>Statement Trace (${stmts.length})</span>`;
+          linearCard.appendChild(traceHeader);
+
+          const traceBox = document.createElement("div");
+          traceBox.style.background = "#F8FAFC";
+          traceBox.style.border = "1px solid #E2E8F0";
+          traceBox.style.borderRadius = "6px";
+          traceBox.style.padding = "6px";
+          traceBox.style.maxHeight = "180px";
+          traceBox.style.overflowY = "auto";
+          traceBox.style.fontFamily = "ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace";
+          traceBox.style.fontSize = "0.72rem";
+
+          stmts.forEach((s, idx) => {
+            const row = document.createElement("div");
+            row.style.display = "flex";
+            row.style.alignItems = "flex-start";
+            row.style.gap = "6px";
+            row.style.padding = "3px 4px";
+            row.style.borderRadius = "3px";
+            if (idx % 2 === 0) row.style.background = "#FFFFFF";
+
+            const lineSpan = document.createElement("span");
+            lineSpan.style.color = "#94A3B8";
+            lineSpan.style.minWidth = "34px";
+            lineSpan.style.fontSize = "0.68rem";
+            lineSpan.textContent = s.line ? `L${s.line}` : "L--";
+
+            const verbSpan = document.createElement("span");
+            verbSpan.style.fontWeight = "700";
+            verbSpan.style.fontSize = "0.68rem";
+            verbSpan.style.padding = "1px 4px";
+            verbSpan.style.borderRadius = "3px";
+
+            if (s.category === "data") {
+              verbSpan.style.background = "#EFF6FC";
+              verbSpan.style.color = "#0078D4";
+            } else if (s.category === "call") {
+              verbSpan.style.background = "#F5F3FF";
+              verbSpan.style.color = "#7C3AED";
+            } else if (s.category === "io") {
+              verbSpan.style.background = "#ECFDF5";
+              verbSpan.style.color = "#059669";
+            } else if (s.category === "terminal") {
+              verbSpan.style.background = "#FEF2F2";
+              verbSpan.style.color = "#DC2626";
+            } else {
+              verbSpan.style.background = "#F1F5F9";
+              verbSpan.style.color = "#475569";
+            }
+            verbSpan.textContent = s.verb || "STMT";
+
+            const textSpan = document.createElement("span");
+            textSpan.style.flex = "1";
+            textSpan.style.wordBreak = "break-word";
+            textSpan.style.color = "#1E293B";
+
+            if (s.category === "call" && s.target && graphData.nodes[s.target.toUpperCase()]) {
+              textSpan.innerHTML = `${escapeHtml(s.text.replace(s.target, ""))} <a href="#" style="color:#0078D4; font-weight:700; text-decoration:underline;">${escapeHtml(s.target)}</a>`;
+              const a = textSpan.querySelector("a");
+              if (a) {
+                a.onclick = (e) => {
+                  e.preventDefault();
+                  selectNode(s.target);
+                  focusNode(s.target);
+                };
+              }
+            } else {
+              textSpan.textContent = s.text;
+            }
+
+            row.appendChild(lineSpan);
+            row.appendChild(verbSpan);
+            row.appendChild(textSpan);
+            traceBox.appendChild(row);
+          });
+
+          linearCard.appendChild(traceBox);
+
+          const btnExpand = document.createElement("button");
+          btnExpand.className = "btn btn-primary";
+          btnExpand.style.width = "100%";
+          btnExpand.style.marginTop = "10px";
+          btnExpand.style.display = "flex";
+          btnExpand.style.alignItems = "center";
+          btnExpand.style.justifyContent = "center";
+          btnExpand.style.gap = "8px";
+          btnExpand.style.padding = "8px 12px";
+          btnExpand.style.fontWeight = "600";
+          btnExpand.style.fontSize = "0.8rem";
+          btnExpand.innerHTML = '<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 3h6v6"/><path d="M9 21H3v-6"/><path d="M21 3l-7 7"/><path d="M3 21l7-7"/></svg><span>Open Full Linear Card</span>';
+          btnExpand.onclick = () => openLinearCardModal(node);
+          linearCard.appendChild(btnExpand);
+        }
+
+        secEl.appendChild(linearCard);
+      }
+    }

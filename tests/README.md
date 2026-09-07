@@ -33,6 +33,9 @@ tests/
 ├── test_asg_parity.py                 # Tier 4: Native ProLeap ASG Metamodel Semantic Parity
 ├── test_call_graph.py                 # Tier 5: Level-2 Call Graph & Visual Exporters
 ├── test_gnucobol_parity.py            # Tier 6: GnuCOBOL (cobc) Live Compiler Parity
+├── test_cfg.py                        # Level-3 Cytoscape Intra-Procedural CFG Suite
+├── test_rules.py                      # Declarative Rules Engine & Discovery Scanner Suite
+├── test_termination.py                # ABEND & Terminal Procedure Classifier Suite
 ├── test_reachability.py               # Pushdown Automaton Interprocedural Reachability
 └── test_nist_suite.py                 # NIST COBOL-85 Standard Conformance Suite
 ```
@@ -69,17 +72,30 @@ tests/
 - **Methodology**: Standard Industry Conformance Testing
 - **Coverage**: Executes the parser across official NIST COBOL-85 programs in `tests/nistcobol85/src/` (covering core language modules: `NC` Nucleus, `IF` Sequential I/O, `IX` Indexed I/O, `RL` Relative I/O, `ST` String/Unstring, `SM` Source Text Manipulation).
 
+### 7. Level-3 Intra-Procedural CFGs (`test_cfg.py`)
+- **Methodology**: Fine-Grained Intra-Paragraph Flow Topology Testing
+- **Coverage**: Validates statement linear sequencing, decision branch fanout (`IF`/`EVALUATE`), merge nodes, and dead-end terminal sink pruning for abnormal termination routines.
+
+### 8. Declarative YAML Rules Engine (`test_rules.py`)
+- **Methodology**: Schema Validation, Rule Merging, and Discovery Testing
+- **Coverage**: Validates `cobolscope-rules.yaml` loading, program-level override cascades, `--init-rules` automated scanner discovery, and edge case fallbacks.
+
+### 9. ABEND & Terminal Procedure Classifier (`test_termination.py`)
+- **Methodology**: Multi-Heuristic Pattern Matching & Semantic Classification
+- **Coverage**: Audits strict paragraph naming, regex matching, runtime module invocations (`CEE3ABD`, etc.), S0C7 hardware exceptions, and database status check patterns.
+
 ---
 
 ## 3. Running the Test Suites
 
-### Run All Standard Verification Tests
+### Run Full Test Suite via Unittest
 ```powershell
-python tests/test_pipeline.py
-python tests/test_data_dictionary.py
-python tests/test_invariants.py
-python tests/test_gnucobol_parity.py
-python tests/test_asg_parity.py
+python -m unittest discover -s tests
+```
+
+### Run All Standard Verification Tiers (Unified Runner)
+```powershell
+python tests/run_all_tests.py
 ```
 
 ### Run NIST COBOL-85 Conformance Suite

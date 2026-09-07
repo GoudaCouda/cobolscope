@@ -1,0 +1,29 @@
+<!-- Canvas Viewports -->
+    <div class="canvas-container" id="canvas">
+      <div id="cy-container"></div>
+
+      <div id="svg-container">
+        <div id="svg-wrapper">
+          {{ svg_content | safe }}
+        </div>
+      </div>
+
+      <!-- Color Subsystem Legend -->
+      <div class="cyto-legend" id="cytoLegend">
+        <span class="legend-item"><span class="legend-swatch" style="background:#107C41;"></span>File I/O</span>
+        <span class="legend-item"><span class="legend-swatch" style="background:#008272;"></span>DB / Subsystem</span>
+        <span class="legend-item"><span class="legend-swatch" style="background:#0078D4;"></span>Business Logic</span>
+        <span class="legend-item"><span class="legend-swatch" style="background:#1A365D;"></span>Main Driver</span>
+        <span class="legend-item"><span class="legend-swatch" style="background:#5C2D91;"></span>Table Lookup</span>
+        <span class="legend-item"><span class="legend-swatch" style="background:#DC2626;"></span>Error Handling</span>
+      </div>
+
+      <div class="zoom-toolbar">
+        <button id="btnZoomIn" title="Zoom In (+)">+</button>
+        <button id="btnZoomOut" title="Zoom Out (−)">−</button>
+        <button id="btnFit" title="Fit to Viewport">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3"/></svg>
+        </button>
+        <button id="btnZoomReset" title="Reset Viewport (1:1)">1:1</button>
+      </div>
+    </div>

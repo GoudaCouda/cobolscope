@@ -1,0 +1,120 @@
+// Graphviz SVG Fallback & Pan/Zoom
+    function updateTransform() {
+      if (svgWrapper) {
+        svgWrapper.style.transform = `translate(${panX}px, ${panY}px) scale(${scale})`;
+      }
+    }
+
+    function zoom(delta, clientX, clientY) {
+      const oldScale = scale;
+      scale = Math.min(Math.max(0.1, scale * delta), 5.0);
+      if (clientX !== undefined && clientY !== undefined) {
+        const rect = svgContainer.getBoundingClientRect();
+        const offsetX = clientX - rect.left;
+        const offsetY = clientY - rect.top;
+        panX = offsetX - ((offsetX - panX) * scale) / oldScale;
+        panY = offsetY - ((offsetY - panY) * scale) / oldScale;
+      }
+      updateTransform();
+    }
+
+    if (svgContainer) {
+      svgContainer.addEventListener("wheel", (e) => {
+        e.preventDefault();
+        const delta = e.deltaY < 0 ? 1.15 : 0.85;
+        zoom(delta, e.clientX, e.clientY);
+      }, { passive: false });
+
+      svgContainer.addEventListener("mousedown", (e) => {
+        if (e.target.closest("g.node") || e.target.closest("g.edge")) return;
+        isDragging = true;
+        startX = e.clientX - panX;
+        startY = e.clientY - panY;
+      });
+
+      window.addEventListener("mousemove", (e) => {
+        if (!isDragging) return;
+        panX = e.clientX - startX;
+        panY = e.clientY - startY;
+        updateTransform();
+      });
+
+      window.addEventListener("mouseup", () => {
+        isDragging = false;
+      });
+    }
+
+    function fitToScreen() {
+      if (!svg) return;
+      const containerRect = svgContainer.getBoundingClientRect();
+      const bbox = svg.getBBox();
+      if (bbox.width === 0 || bbox.height === 0) return;
+      const scaleX = (containerRect.width - 60) / bbox.width;
+      const scaleY = (containerRect.height - 60) / bbox.height;
+      scale = Math.min(scaleX, scaleY, 1.2);
+      panX = (containerRect.width - bbox.width * scale) / 2 - bbox.x * scale;
+      panY = (containerRect.height - bbox.height * scale) / 2 - bbox.y * scale;
+      updateTransform();
+    }
+
+    function focusNode(nodeName) {
+      if (currentEngine === "cytoscape" && cy) {
+        const cyNode = cy.nodes().filter(n => (n.data("name") || n.data("label") || "").toUpperCase() === nodeName.toUpperCase());
+        if (cyNode.length > 0) {
+          cy.animate({
+            center: { eles: cyNode },
+            zoom: Math.max(cy.zoom(), 1.1),
+            duration: 400
+          });
+        }
+        return;
+      }
+      if (!svg) return;
+      let targetG = null;
+      svg.querySelectorAll("g.node").forEach(g => {
+        const title = g.querySelector("title");
+        if (title && (title.textContent.trim().toUpperCase() === nodeName.toUpperCase() || title.textContent.trim().toUpperCase() === "P_" + nodeName.toUpperCase())) {
+          targetG = g;
+        }
+      });
+      if (!targetG) return;
+      const bbox = targetG.getBBox();
+      const canvasRect = svgContainer.getBoundingClientRect();
+      scale = 1.2;
+      const centerX = bbox.x + bbox.width / 2;
+      const centerY = bbox.y + bbox.height / 2;
+      panX = (canvasRect.width / 2) - (centerX * scale);
+      panY = (canvasRect.height / 2) - (centerY * scale);
+      updateTransform();
+    }
+
+    if (svg) {
+      svg.querySelectorAll("g.node").forEach(g => {
+        g.style.cursor = "pointer";
+        const getRoutineName = () => {
+          const title = g.querySelector("title");
+          if (title) {
+            const rawName = title.textContent.trim().replace(/^p_/, "").replace(/_/g, "-");
+            for (const k in graphData.nodes) {
+              if (graphData.nodes[k].id === title.textContent.trim() || k === rawName.toUpperCase()) {
+                return k;
+              }
+            }
+          }
+          return null;
+        };
+
+        g.addEventListener("click", () => {
+          const routineName = getRoutineName();
+          if (routineName) selectNode(routineName);
+        });
+
+        g.addEventListener("dblclick", () => {
+          const routineName = getRoutineName();
+          if (routineName) {
+            selectNode(routineName);
+            openRoutineFlowModal(graphData.nodes[routineName]);
+          }
+        });
+      });
+    }

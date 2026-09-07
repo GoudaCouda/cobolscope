@@ -1,0 +1,258 @@
+// Toolbar, Search, and View Controls
+    function switchEngine(engine) {
+      currentEngine = engine;
+      const btnCyto = document.getElementById("btnEngineCyto");
+      const btnGv = document.getElementById("btnEngineGraphviz");
+
+      if (engine === "cytoscape") {
+        btnCyto.classList.add("active");
+        btnGv.classList.remove("active");
+        cyContainer.style.display = "block";
+        svgContainer.style.display = "none";
+        if (cytoLayoutGroup) cytoLayoutGroup.style.display = "flex";
+        if (!cy) {
+          initCytoscape();
+        } else {
+          cy.resize();
+        }
+      } else {
+        btnGv.classList.add("active");
+        btnCyto.classList.remove("active");
+        cyContainer.style.display = "none";
+        svgContainer.style.display = "block";
+        if (cytoLayoutGroup) cytoLayoutGroup.style.display = "none";
+        fitToScreen();
+      }
+    }
+
+    document.getElementById("btnEngineCyto").addEventListener("click", () => switchEngine("cytoscape"));
+    document.getElementById("btnEngineGraphviz").addEventListener("click", () => switchEngine("graphviz"));
+
+    document.getElementById("btnZoomIn").addEventListener("click", () => {
+      if (currentEngine === "cytoscape" && cy) {
+        cy.zoom(cy.zoom() * 1.2);
+      } else {
+        zoom(1.2);
+      }
+    });
+
+    document.getElementById("btnZoomOut").addEventListener("click", () => {
+      if (currentEngine === "cytoscape" && cy) {
+        cy.zoom(cy.zoom() * 0.8);
+      } else {
+        zoom(0.8);
+      }
+    });
+
+    const btnZoomReset = document.getElementById("btnZoomReset");
+    if (btnZoomReset) {
+      btnZoomReset.addEventListener("click", () => {
+        clearHighlight();
+        if (currentEngine === "cytoscape" && cy) {
+          cy.reset();
+          cy.fit(undefined, 40);
+        } else {
+          scale = 1.0;
+          panX = 0;
+          panY = 0;
+          updateTransform();
+        }
+      });
+    }
+
+    const btnFit = document.getElementById("btnFit");
+    if (btnFit) {
+      btnFit.addEventListener("click", () => {
+        if (currentEngine === "cytoscape" && cy) {
+          cy.fit(undefined, 40);
+        } else {
+          fitToScreen();
+        }
+      });
+    }
+
+    function clearHighlight() {
+      if (cy) {
+        cy.elements().removeClass("dimmed neighbor-highlight");
+        cy.nodes().unselect();
+      }
+      if (svg) {
+        svg.querySelectorAll("g.node").forEach(g => {
+          g.classList.remove("highlight-selected", "highlight-match", "dimmed");
+        });
+      }
+    }
+
+    const btnJump = document.getElementById("btnJumpStart");
+    if (btnJump) {
+      btnJump.addEventListener("click", () => {
+        const startKey = graphData.entry_point || Object.keys(graphData.nodes)[0];
+        if (startKey) {
+          selectNode(startKey);
+          focusNode(startKey);
+        }
+      });
+    }
+
+    const searchInput = document.getElementById("nodeSearch");
+    if (searchInput) {
+      searchInput.addEventListener("input", (e) => {
+        const q = e.target.value.trim().toUpperCase();
+        if (!q) {
+          clearHighlight();
+          return;
+        }
+
+        if (currentEngine === "cytoscape" && cy) {
+          cy.elements().removeClass("dimmed neighbor-highlight");
+          const matches = cy.nodes().filter(n => {
+            const name = (n.data("name") || "").toUpperCase();
+            const label = (n.data("label") || "").toUpperCase();
+            const sec = (n.data("section") || "").toUpperCase();
+            return name.includes(q) || label.includes(q) || sec.includes(q);
+          });
+          if (matches.length > 0) {
+            cy.elements().difference(matches).addClass("dimmed");
+            matches.addClass("neighbor-highlight");
+            const first = matches[0];
+            selectNode(first.data("name") || first.data("label"));
+          }
+        } else if (svg) {
+          let firstMatchKey = null;
+          svg.querySelectorAll("g.node").forEach(g => {
+            const title = g.querySelector("title");
+            const text = g.textContent.toUpperCase();
+            let isMatch = text.includes(q);
+            if (!isMatch && title) {
+              isMatch = title.textContent.toUpperCase().includes(q);
+            }
+
+            if (isMatch) {
+              g.classList.remove("dimmed");
+              g.classList.add("highlight-match");
+              if (!firstMatchKey && title) {
+                for (const k in graphData.nodes) {
+                  const nd = graphData.nodes[k];
+                  if (nd.id === title.textContent.trim() || k === title.textContent.trim().toUpperCase()
+                      || (nd.section && nd.section.toUpperCase().includes(q))
+                      || nd.name.toUpperCase().includes(q)) {
+                    firstMatchKey = k;
+                    break;
+                  }
+                }
+              }
+            } else {
+              g.classList.remove("highlight-match");
+              g.classList.add("dimmed");
+            }
+          });
+
+          if (firstMatchKey) {
+            selectNode(firstMatchKey);
+          }
+        }
+      });
+    }
+
+    // Export Dropdown Toggle
+    const btnExportToggle = document.getElementById("btnExportToggle");
+    const exportMenu = document.getElementById("exportMenu");
+    if (btnExportToggle && exportMenu) {
+      btnExportToggle.addEventListener("click", (e) => {
+        e.stopPropagation();
+        exportMenu.style.display = exportMenu.style.display === "none" ? "flex" : "none";
+      });
+
+      document.addEventListener("click", (e) => {
+        if (!exportMenu.contains(e.target) && !btnExportToggle.contains(e.target)) {
+          exportMenu.style.display = "none";
+        }
+      });
+    }
+
+    // Header entry point click
+    const hdrEntry = document.getElementById("hdrEntryPoint");
+    if (hdrEntry && graphData.entry_point) {
+      hdrEntry.addEventListener("click", () => {
+        selectNode(graphData.entry_point);
+        focusNode(graphData.entry_point);
+      });
+    }
+
+    const btnDownloadSvgEl = document.getElementById("btnDownloadSvg");
+    if (btnDownloadSvgEl) {
+      btnDownloadSvgEl.addEventListener("click", () => {
+        if (exportMenu) exportMenu.style.display = "none";
+        if (!svg) return;
+        const svgData = new XMLSerializer().serializeToString(svg);
+        const blob = new Blob([svgData], { type: "image/svg+xml;charset=utf-8" });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement("a");
+        a.href = url;
+        a.download = `${graphData.program_id}_CallGraph.svg`;
+        a.click();
+        URL.revokeObjectURL(url);
+      });
+    }
+
+    const btnDownloadDotEl = document.getElementById("btnDownloadDot");
+    if (btnDownloadDotEl) {
+      btnDownloadDotEl.addEventListener("click", () => {
+        if (exportMenu) exportMenu.style.display = "none";
+        const dot = document.getElementById("dotSource").value;
+        const blob = new Blob([dot], { type: "text/vnd.graphviz;charset=utf-8" });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement("a");
+        a.href = url;
+        a.download = `${graphData.program_id}_CallGraph.dot`;
+        a.click();
+        URL.revokeObjectURL(url);
+      });
+    }
+
+    const btnDownloadJsonEl = document.getElementById("btnDownloadJson");
+    if (btnDownloadJsonEl) {
+      btnDownloadJsonEl.addEventListener("click", () => {
+        if (exportMenu) exportMenu.style.display = "none";
+        const jsonStr = JSON.stringify(cytoElements, null, 2);
+        const blob = new Blob([jsonStr], { type: "application/json;charset=utf-8" });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement("a");
+        a.href = url;
+        a.download = `${graphData.program_id}_Cytoscape.json`;
+        a.click();
+        URL.revokeObjectURL(url);
+      });
+    }
+
+    // Keyboard Shortcuts (/ to search, Escape to close modals)
+    window.addEventListener("keydown", (e) => {
+      if (e.key === "/" && document.activeElement !== searchInput) {
+        e.preventDefault();
+        if (searchInput) searchInput.focus();
+      } else if (e.key === "Escape") {
+        if (exportMenu) exportMenu.style.display = "none";
+        if (typeof closeLevel3Modal === "function") closeLevel3Modal();
+        if (typeof closeLinearCardModal === "function") closeLinearCardModal();
+      }
+    });
+
+    function escapeHtml(text) {
+      if (!text) return "";
+      return String(text)
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#039;");
+    }
+
+    // Initialize View on DOM Ready
+    window.addEventListener("DOMContentLoaded", () => {
+      CobolScopeLog.info("DOM Ready. Switching to initial engine:", currentEngine);
+      switchEngine(currentEngine);
+      const startKey = graphData.entry_point || Object.keys(graphData.nodes)[0];
+      if (startKey) {
+        selectNode(startKey);
+      }
+    });

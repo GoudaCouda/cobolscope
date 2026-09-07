@@ -8,7 +8,7 @@ Core CallGraphGenerator constructing structured Level-2 Call Graphs from Program
 from __future__ import annotations
 import re
 from pathlib import Path
-from typing import Dict, List, Optional, Set, Tuple, Union
+from typing import Any, Dict, List, Optional, Set, Tuple, Union
 
 from cobolscope.models import (
     AnyStatementNode,
@@ -43,6 +43,9 @@ from .models import (
 )
 from .classifier import CLUSTER_THEMES, ParagraphClassifier
 from .renderers import render_dot, render_svg, render_html
+from .cfg_builder import build_procedure_cfg, IntraprocedureCfg
+from .termination import TerminationClassifier
+from cobolscope.rules import GlobalRules, EffectiveProgramRules
 
 
 class CallGraphGenerator:
@@ -61,8 +64,10 @@ class CallGraphGenerator:
         compact_nodes: bool = True,
         concentrate: bool = True,
         splines: str = "spline",
+        rules: Optional[Union[GlobalRules, EffectiveProgramRules]] = None,
     ):
         self.model = model
+        self.rules = rules
         self.hide_fallthrough = hide_fallthrough
         self.collapse_exits = collapse_exits
         self.compact_nodes = compact_nodes
@@ -82,7 +87,37 @@ class CallGraphGenerator:
 
         self._dot_cache: Optional[str] = None
         self._svg_cache: Optional[str] = None
+        self._cfg_cache: Dict[str, IntraprocedureCfg] = {}
         self.graph: CallGraph = self._build_graph()
+
+    @staticmethod
+    def _extract_linear_statement_item(stmt: AnyStatementNode) -> Dict[str, Any]:
+        verb = (stmt.type or "STATEMENT").upper()
+        raw = (stmt.raw_text or "").strip()
+        target = getattr(stmt, "target", "") or ""
+        line = stmt.location.start_line if stmt.location else 0
+        if not raw:
+            raw = f"{verb} {target}".strip()
+
+        category = "other"
+        if verb in ("MOVE", "INITIALIZE", "SET", "INSPECT"):
+            category = "data"
+        elif verb in ("PERFORM", "CALL", "INVOKE"):
+            category = "call"
+        elif verb in ("READ", "WRITE", "REWRITE", "DELETE", "START", "OPEN", "CLOSE") or "SQL" in verb or "CICS" in verb:
+            category = "io"
+        elif verb in ("ADD", "SUBTRACT", "MULTIPLY", "DIVIDE", "COMPUTE"):
+            category = "math"
+        elif verb in ("GOBACK", "STOP", "EXIT"):
+            category = "terminal"
+
+        return {
+            "line": line,
+            "verb": verb,
+            "category": category,
+            "text": raw,
+            "target": target,
+        }
 
     def _build_graph(self) -> CallGraph:
         program_id = self.model.program_id or "COBOL_PROGRAM"
@@ -102,8 +137,9 @@ class CallGraphGenerator:
                 node_ids=[],
             )
 
-        # 0. Execute Pushdown Reachability Analysis
-        reachability_engine = PushdownReachabilityAnalyzer(self.model)
+        # 0. Initialize Multi-Layer Termination Classifier & Reachability
+        self.termination_classifier = TerminationClassifier.for_program(self.model, rules=self.rules)
+        reachability_engine = PushdownReachabilityAnalyzer(self.model, rules=self.rules)
         reachability_model = reachability_engine.analyze()
 
         # 1. Determine whether program is Section-Structured or Paragraph-Structured
@@ -172,15 +208,16 @@ class CallGraphGenerator:
                     elif isinstance(stmt, CallStatementNode):
                         io_summary["CALL"] += 1
 
-                    if isinstance(stmt, (StopStatementNode, GobackStatementNode)):
-                        has_terminal = True
-                    elif isinstance(stmt, ExecCicsStatementNode) and "RETURN" in (stmt.raw_payload or "").upper():
+                    if self.termination_classifier.is_statement_terminal(stmt):
                         has_terminal = True
 
                     for fid in getattr(stmt, "source_field_ids", None) or []:
                         src_fields.add(fid)
                     for fid in getattr(stmt, "target_field_ids", None) or []:
                         tgt_fields.add(fid)
+
+                if self.termination_classifier.is_paragraph_terminal(s):
+                    has_terminal = True
 
                 io_summary = {k: v for k, v in io_summary.items() if v > 0}
 
@@ -196,6 +233,19 @@ class CallGraphGenerator:
 
                 start_line = s.location.start_line if s.location else 0
                 end_line = s.location.end_line if s.location else 0
+
+                # Compute Level 3 Intra-Procedural CFG metadata for Section
+                pseudo_p = ParagraphNode(name=s.name, location=s.location, statements=all_stmts)
+                paras_in_sec = [p_obj for pn in s.paragraph_names if (p_obj := self.model.get_paragraph(pn))]
+                s_cfg = build_procedure_cfg(
+                    self.model.program_id,
+                    pseudo_p,
+                    paragraphs_in_section=paras_in_sec if paras_in_sec else None,
+                    classifier=self.termination_classifier,
+                )
+                self._cfg_cache[proc_key] = s_cfg
+                s_cfg_elements = s_cfg.to_cytoscape_elements() if s_cfg.is_eligible else []
+                s_linear_stmts = [self._extract_linear_statement_item(stm) for stm in all_stmts]
 
                 node = CallGraphNode(
                     id=self._sanitize_id(s.name),
@@ -214,6 +264,10 @@ class CallGraphGenerator:
                     source_field_ids=sorted(list(src_fields)),
                     target_field_ids=sorted(list(tgt_fields)),
                     collapsed_exit_nodes=exit_paras,
+                    is_cfg_eligible=s_cfg.is_eligible,
+                    cfg_eligibility_reason=s_cfg.eligibility_reason,
+                    cfg_elements=s_cfg_elements,
+                    cfg_linear_statements=s_linear_stmts,
                 )
                 nodes[proc_key] = node
                 if cluster_id in cluster_map:
@@ -267,15 +321,16 @@ class CallGraphGenerator:
                     elif isinstance(stmt, CallStatementNode):
                         io_summary["CALL"] += 1
 
-                    if isinstance(stmt, (StopStatementNode, GobackStatementNode)):
-                        has_terminal = True
-                    elif isinstance(stmt, ExecCicsStatementNode) and "RETURN" in (stmt.raw_payload or "").upper():
+                    if self.termination_classifier.is_statement_terminal(stmt):
                         has_terminal = True
 
                     for fid in getattr(stmt, "source_field_ids", None) or []:
                         src_fields.add(fid)
                     for fid in getattr(stmt, "target_field_ids", None) or []:
                         tgt_fields.add(fid)
+
+                if self.termination_classifier.is_paragraph_terminal(p):
+                    has_terminal = True
 
                 io_summary = {k: v for k, v in io_summary.items() if v > 0}
 
@@ -291,6 +346,18 @@ class CallGraphGenerator:
                 start_line = p.location.start_line if p.location else 0
                 end_line = p.location.end_line if p.location else 0
                 is_unreachable = p_name_up in reachability_model.unreachable_paragraphs
+
+                # Compute Level 3 Intra-Procedural CFG metadata
+                p_cfg = build_procedure_cfg(
+                    self.model.program_id,
+                    p,
+                    classifier=self.termination_classifier,
+                )
+                self._cfg_cache[p_name_up] = p_cfg
+                is_cfg_eligible = p_cfg.is_eligible
+                cfg_eligibility_reason = p_cfg.eligibility_reason
+                cfg_elements = p_cfg.to_cytoscape_elements() if p_cfg.is_eligible else []
+                cfg_linear_stmts = [self._extract_linear_statement_item(s) for s in p.statements]
 
                 node = CallGraphNode(
                     id=self._sanitize_id(p.name),
@@ -311,6 +378,10 @@ class CallGraphGenerator:
                     called_by=list(p.called_by),
                     successors=list(p.successors),
                     fallthrough_successor=p.fallthrough_successor,
+                    is_cfg_eligible=is_cfg_eligible,
+                    cfg_eligibility_reason=cfg_eligibility_reason,
+                    cfg_elements=cfg_elements,
+                    cfg_linear_statements=cfg_linear_stmts,
                 )
                 nodes[p_name_up] = node
                 if cluster_id in cluster_map:
@@ -322,6 +393,9 @@ class CallGraphGenerator:
         def is_error_trap(node_obj: CallGraphNode) -> bool:
             if node_obj.node_type == GraphNodeType.ERROR_HANDLING:
                 return True
+            if node_obj.is_terminal and getattr(self, "termination_classifier", None):
+                if node_obj.name.upper().strip() in self.termination_classifier.terminal_paragraphs:
+                    return True
             n_up = node_obj.name.upper()
             return any(k in n_up for k in ("ABEND", "ERROR", "SYS-ERR", "FATAL", "TRAP", "EXCEPTION"))
 
@@ -560,10 +634,179 @@ class CallGraphGenerator:
             self._svg_cache = render_svg(self.to_dot(compact_nodes=compact_nodes, concentrate=concentrate, splines=splines))
         return self._svg_cache
 
-    def to_html(self, svg_content: Optional[str] = None) -> str:
+    def get_procedure_cfg(self, proc_name: str) -> Optional[IntraprocedureCfg]:
+        """
+        Builds and returns the Level 3 Intra-Procedural CFG for the specified procedure.
+        Uses cached CFGs computed during graph build whenever available.
+        """
+        name_up = proc_name.upper().strip()
+        if name_up in self._cfg_cache:
+            return self._cfg_cache[name_up]
+
+        term_clf = getattr(self, "termination_classifier", None)
+        para = self.model.get_paragraph(proc_name)
+        if para:
+            cfg = build_procedure_cfg(self.graph.program_id, para, classifier=term_clf)
+            self._cfg_cache[name_up] = cfg
+            return cfg
+
+        for s in self.model.sections:
+            if s.name.upper().strip() == name_up:
+                pseudo_p = ParagraphNode(
+                    name=s.name,
+                    location=s.location,
+                    statements=s.statements,
+                )
+                paras_in_sec = [p_obj for pn in s.paragraph_names if (p_obj := self.model.get_paragraph(pn))]
+                cfg = build_procedure_cfg(
+                    self.graph.program_id,
+                    pseudo_p,
+                    paragraphs_in_section=paras_in_sec if paras_in_sec else None,
+                    classifier=term_clf,
+                )
+                self._cfg_cache[name_up] = cfg
+                return cfg
+        return None
+
+    def to_cytoscape_elements(self) -> List[Dict[str, Any]]:
+        """
+        Converts the CallGraph into a list of Cytoscape.js elements (compound parent
+        clusters, routine nodes, and directed control transfer edges).
+        """
+        elements: List[Dict[str, Any]] = []
+
+        # 1. Emit Parent Compound Cluster Nodes
+        if self.enable_clustering:
+            for cluster in self.graph.clusters:
+                if not cluster.node_ids:
+                    continue
+                elements.append({
+                    "data": {
+                        "id": cluster.id,
+                        "label": cluster.name,
+                        "name": cluster.name,
+                        "color": cluster.color,
+                        "fill_color": cluster.fill_color,
+                        "text_color": cluster.text_color,
+                        "is_cluster": True,
+                    },
+                    "classes": "cluster-node",
+                })
+
+        # 2. Emit Child Routine Nodes
+        for node_name, node in self.graph.nodes.items():
+            theme = CLUSTER_THEMES.get(node.node_type, CLUSTER_THEMES[GraphNodeType.GENERIC])
+            
+            # Format I/O badge summary
+            io_parts = []
+            if node.statement_count > 0:
+                for k in ("READ", "WRITE", "REWRITE", "DELETE", "SQL", "CICS", "CALL"):
+                    c = node.io_summary.get(k, 0)
+                    if c > 0:
+                        io_parts.append(f"{k}:{c}")
+            if node.is_terminal:
+                io_parts.append("TERMINAL")
+            io_str = " | ".join(io_parts)
+
+            parent_id = node.cluster_id if (self.enable_clustering and node.cluster_id) else None
+            # Validate parent actually exists in active clusters
+            if parent_id and not any(c.id == parent_id for c in self.graph.clusters):
+                parent_id = None
+
+            node_data = {
+                "id": node.id,
+                "label": node.name,
+                "name": node.name,
+                "section": node.section or "",
+                "node_type": node.node_type.value,
+                "type_label": theme["name"].split(" ")[0].upper() if theme and "name" in theme else node.node_type.value,
+                "cluster_name": theme["name"] if theme and "name" in theme else "",
+                "cluster_id": node.cluster_id,
+                "start_line": node.start_line,
+                "end_line": node.end_line,
+                "lines": f"L{node.start_line}-{node.end_line}",
+                "statement_count": node.statement_count,
+                "cyclomatic_complexity": node.cyclomatic_complexity,
+                "is_entry_point": node.is_entry_point,
+                "is_terminal": node.is_terminal,
+                "color": theme["color"],
+                "fill_color": theme["fill_color"],
+                "text_color": theme["text_color"],
+                "io_badge": io_str,
+                "source_field_ids": node.source_field_ids,
+                "target_field_ids": node.target_field_ids,
+                "called_by": node.called_by,
+                "successors": node.successors,
+            }
+
+            # Attach Level 3 Intra-Procedural CFG and Readability Heuristic Metadata
+            node_data["is_cfg_eligible"] = node.is_cfg_eligible
+            node_data["cfg_eligibility_reason"] = node.cfg_eligibility_reason
+            node_data["cfg_elements"] = node.cfg_elements
+            node_data["cfg_linear_statements"] = node.cfg_linear_statements
+
+            if parent_id:
+                node_data["parent"] = parent_id
+
+            node_classes = ["routine-node", f"type-{node.node_type.value.lower()}"]
+            if node.is_entry_point:
+                node_classes.append("entry-point")
+            if node.is_terminal:
+                node_classes.append("terminal-node")
+
+            elements.append({
+                "data": node_data,
+                "classes": " ".join(node_classes),
+            })
+
+        # 3. Emit Directed Control Edges
+        for edge in self.graph.edges:
+            src_node = self.graph.nodes.get(edge.source)
+            tgt_node = self.graph.nodes.get(edge.target)
+            if not src_node or not tgt_node:
+                continue
+
+            edge_data = {
+                "id": f"{src_node.id}->{tgt_node.id}::{edge.edge_type.value}",
+                "source": src_node.id,
+                "target": tgt_node.id,
+                "edge_type": edge.edge_type.value,
+                "label": edge.label or "",
+                "line_number": edge.line_number,
+                "is_error": edge.edge_type == GraphEdgeType.ERROR_BRANCH,
+            }
+
+            edge_classes = ["call-edge", f"edge-{edge.edge_type.value.lower()}"]
+            if edge.edge_type == GraphEdgeType.ERROR_BRANCH:
+                edge_classes.append("error-branch")
+
+            elements.append({
+                "data": edge_data,
+                "classes": " ".join(edge_classes),
+            })
+
+        return elements
+
+    def to_cytoscape_json(self, indent: int = 2) -> str:
+        """Returns the Cytoscape.js elements serialized as a JSON string."""
+        import json
+        return json.dumps(self.to_cytoscape_elements(), indent=indent)
+
+    def to_html(
+        self,
+        svg_content: Optional[str] = None,
+        initial_engine: str = "cytoscape",
+    ) -> str:
         if svg_content is None:
             svg_content = self.to_svg()
-        return render_html(self.graph, self.to_dot(), svg_content)
+        cyto_elements = self.to_cytoscape_elements()
+        return render_html(
+            self.graph,
+            self.to_dot(),
+            svg_content,
+            cyto_elements=cyto_elements,
+            initial_engine=initial_engine,
+        )
 
     def to_json(self, indent: int = 2) -> str:
         return self.graph.model_dump_json(indent=indent)
@@ -579,11 +822,13 @@ def generate_call_graph(
     compact_nodes: bool = True,
     concentrate: bool = True,
     splines: str = "spline",
+    initial_engine: str = "cytoscape",
+    rules: Optional[Union[GlobalRules, EffectiveProgramRules]] = None,
     output_path: Optional[Union[str, Path]] = None,
 ) -> str:
     """
     Convenience functional API to generate Level-2 Procedure Call Graphs
-    in SVG, DOT, HTML, or JSON formats.
+    in SVG, DOT, HTML, Cytoscape JSON, or JSON formats.
     """
     generator = CallGraphGenerator(
         model=model,
@@ -594,6 +839,7 @@ def generate_call_graph(
         compact_nodes=compact_nodes,
         concentrate=concentrate,
         splines=splines,
+        rules=rules,
     )
 
     fmt = format.lower().strip()
@@ -602,7 +848,9 @@ def generate_call_graph(
     elif fmt in ("dot", "gv", "graphviz"):
         content = generator.to_dot()
     elif fmt in ("html", "htm"):
-        content = generator.to_html()
+        content = generator.to_html(initial_engine=initial_engine)
+    elif fmt in ("cytoscape", "cyto"):
+        content = generator.to_cytoscape_json()
     elif fmt in ("json", "ir"):
         content = generator.to_json()
     else:
