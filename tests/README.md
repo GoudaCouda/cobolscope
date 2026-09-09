@@ -34,6 +34,7 @@ tests/
 ├── test_call_graph.py                 # Tier 5: Level-2 Call Graph & Visual Exporters
 ├── test_gnucobol_parity.py            # Tier 6: GnuCOBOL (cobc) Live Compiler Parity
 ├── test_cfg.py                        # Level-3 Cytoscape Intra-Procedural CFG Suite
+├── test_graph_utils.py                # Zero-Dependency Graph Algorithms (Tarjan SCC & ipdom)
 ├── test_rules.py                      # Declarative Rules Engine & Discovery Scanner Suite
 ├── test_termination.py                # ABEND & Terminal Procedure Classifier Suite
 ├── test_reachability.py               # Pushdown Automaton Interprocedural Reachability
@@ -83,6 +84,10 @@ tests/
 ### 9. ABEND & Terminal Procedure Classifier (`test_termination.py`)
 - **Methodology**: Multi-Heuristic Pattern Matching & Semantic Classification
 - **Coverage**: Audits strict paragraph naming, regex matching, runtime module invocations (`CEE3ABD`, etc.), S0C7 hardware exceptions, and database status check patterns.
+
+### 10. Zero-Dependency Graph Algorithms (`test_graph_utils.py`)
+- **Methodology**: Formal Graph Theory Verification (Cycle Detection & Dominance Trees)
+- **Coverage**: Audits Tarjan's SCC cycle detection, self-loops, and condensation DAG depth; Cooper-Harvey-Kennedy (2001) forward dominators (`idom`) and dead-code reachability; and dual-graph immediate post-dominators (`ipdom`) with virtual exit routing.
 
 ---
 

@@ -208,6 +208,7 @@ cobolscope/
 │   ├── cfg_builder.py         # Level-3 intra-procedural CFG builder
 │   ├── cfg_models.py          # Level-3 CFG node & edge data models
 │   ├── termination.py         # ABEND & terminal procedure classification
+│   ├── utils.py               # Zero-dependency graph algorithms (Tarjan SCC & ipdom)
 │   └── renderers.py           # DOT, SVG, and Cytoscape/HTML renderers
 ├── reachability/              # Pushdown Automaton interprocedural reachability analyzer
 ├── rules.py                   # Declarative YAML rules schema & effective rule resolution

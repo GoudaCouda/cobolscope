@@ -23,6 +23,14 @@ from .cfg_models import (
 )
 from .cfg_builder import IntraprocedureCfgBuilder, build_procedure_cfg
 from .termination import TerminationClassifier
+from .utils import (
+    SccResult,
+    DominatorResult,
+    PostDominatorResult,
+    tarjan_scc,
+    compute_dominators,
+    compute_post_dominators,
+)
 
 __all__ = [
     "GraphNodeType",
@@ -47,4 +55,10 @@ __all__ = [
     "IntraprocedureCfgBuilder",
     "build_procedure_cfg",
     "TerminationClassifier",
+    "SccResult",
+    "DominatorResult",
+    "PostDominatorResult",
+    "tarjan_scc",
+    "compute_dominators",
+    "compute_post_dominators",
 ]

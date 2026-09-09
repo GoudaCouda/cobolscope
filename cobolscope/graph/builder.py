@@ -46,6 +46,7 @@ from .renderers import render_dot, render_svg, render_html
 from .cfg_builder import build_procedure_cfg, IntraprocedureCfg
 from .termination import TerminationClassifier
 from cobolscope.rules import GlobalRules, EffectiveProgramRules
+from .utils import tarjan_scc
 
 
 class CallGraphGenerator:
@@ -90,8 +91,7 @@ class CallGraphGenerator:
         self._cfg_cache: Dict[str, IntraprocedureCfg] = {}
         self.graph: CallGraph = self._build_graph()
 
-    @staticmethod
-    def _extract_linear_statement_item(stmt: AnyStatementNode) -> Dict[str, Any]:
+    def _extract_linear_statement_item(self, stmt: AnyStatementNode) -> Dict[str, Any]:
         verb = (stmt.type or "STATEMENT").upper()
         raw = (stmt.raw_text or "").strip()
         target = getattr(stmt, "target", "") or ""
@@ -100,15 +100,29 @@ class CallGraphGenerator:
             raw = f"{verb} {target}".strip()
 
         category = "other"
-        if verb in ("MOVE", "INITIALIZE", "SET", "INSPECT"):
+        classifier = getattr(self, "termination_classifier", None)
+        if classifier and classifier.is_statement_terminal(stmt, raw):
+            category = "terminal"
+        elif verb in ("MOVE", "INITIALIZE", "SET", "INSPECT"):
             category = "data"
-        elif verb in ("PERFORM", "CALL", "INVOKE"):
-            category = "call"
+        elif verb in ("PERFORM", "CALL", "INVOKE", "GO TO", "GOTO"):
+            if target and classifier and (
+                target.upper().strip() in classifier.terminal_paragraphs
+                or classifier.effective_rules.is_terminal_name(target)
+            ):
+                category = "terminal"
+            else:
+                category = "call"
         elif verb in ("READ", "WRITE", "REWRITE", "DELETE", "START", "OPEN", "CLOSE") or "SQL" in verb or "CICS" in verb:
             category = "io"
         elif verb in ("ADD", "SUBTRACT", "MULTIPLY", "DIVIDE", "COMPUTE"):
             category = "math"
         elif verb in ("GOBACK", "STOP", "EXIT"):
+            category = "terminal"
+        elif target and classifier and (
+            target.upper().strip() in classifier.terminal_paragraphs
+            or classifier.effective_rules.is_terminal_name(target)
+        ):
             category = "terminal"
 
         return {
@@ -393,11 +407,15 @@ class CallGraphGenerator:
         def is_error_trap(node_obj: CallGraphNode) -> bool:
             if node_obj.node_type == GraphNodeType.ERROR_HANDLING:
                 return True
-            if node_obj.is_terminal and getattr(self, "termination_classifier", None):
-                if node_obj.name.upper().strip() in self.termination_classifier.terminal_paragraphs:
+            n_clean = node_obj.name.upper().strip()
+            if getattr(self, "termination_classifier", None):
+                if (
+                    node_obj.is_terminal
+                    or n_clean in self.termination_classifier.terminal_paragraphs
+                    or self.termination_classifier.effective_rules.is_terminal_name(n_clean)
+                ):
                     return True
-            n_up = node_obj.name.upper()
-            return any(k in n_up for k in ("ABEND", "ERROR", "SYS-ERR", "FATAL", "TRAP", "EXCEPTION"))
+            return any(k in n_clean for k in ("ABEND", "ERROR", "SYS-ERR", "FATAL", "TRAP", "EXCEPTION"))
 
         for src_proc_key, src_node in nodes.items():
             stmts = proc_statements.get(src_proc_key, [])
@@ -522,8 +540,8 @@ class CallGraphGenerator:
         # Filter out empty clusters
         active_clusters = [c for c in cluster_map.values() if c.node_ids]
 
-        # Calculate max depth and cycle detection
-        max_depth, has_cycles = self._analyze_graph_topology(nodes, edges)
+        # Calculate max depth, cycles, and SCCs via Tarjan's algorithm
+        max_depth, has_cycles, cycles, sccs = self._analyze_graph_topology(nodes, edges)
 
         return CallGraph(
             program_id=program_id,
@@ -535,6 +553,8 @@ class CallGraphGenerator:
             total_calls=len([e for e in edges if e.edge_type in (GraphEdgeType.PERFORM, GraphEdgeType.CALL, GraphEdgeType.GO_TO)]),
             max_depth=max_depth,
             has_cycles=has_cycles,
+            cycles=cycles,
+            sccs=sccs,
             reachability_transitions_count=len(reachability_model.state_transitions),
         )
 
@@ -550,60 +570,19 @@ class CallGraphGenerator:
         clean = re.sub(r"[^A-Za-z0-9_]", "_", name.strip())
         return f"p_{clean}"
 
-    def _analyze_graph_topology(self, nodes: Dict[str, CallGraphNode], edges: List[CallGraphEdge]) -> Tuple[int, bool]:
-        """Calculates longest path depth and checks for cycles via DFS."""
+    def _analyze_graph_topology(
+        self, nodes: Dict[str, CallGraphNode], edges: List[CallGraphEdge]
+    ) -> Tuple[int, bool, List[List[str]], List[List[str]]]:
+        """Calculates longest path depth, cycles, and SCCs using Tarjan's algorithm."""
         adj: Dict[str, List[str]] = {k: [] for k in nodes}
-        in_degree: Dict[str, int] = {k: 0 for k in nodes}
 
         for e in edges:
             if e.edge_type in (GraphEdgeType.PERFORM, GraphEdgeType.CALL, GraphEdgeType.GO_TO):
                 if e.source in adj and e.target in adj:
                     adj[e.source].append(e.target)
-                    in_degree[e.target] += 1
 
-        visited: Set[str] = set()
-        rec_stack: Set[str] = set()
-        has_cycles = False
-
-        def dfs_cycle(u: str) -> bool:
-            visited.add(u)
-            rec_stack.add(u)
-            for v in adj.get(u, []):
-                if v not in visited:
-                    if dfs_cycle(v):
-                        return True
-                elif v in rec_stack:
-                    return True
-            rec_stack.remove(u)
-            return False
-
-        for n in nodes:
-            if n not in visited:
-                if dfs_cycle(n):
-                    has_cycles = True
-                    break
-
-        memo: Dict[str, int] = {}
-
-        def get_depth(u: str, path: Set[str]) -> int:
-            if u in path:
-                return 0
-            if u in memo:
-                return memo[u]
-            d = 1
-            path.add(u)
-            for v in adj.get(u, []):
-                d = max(d, 1 + get_depth(v, path))
-            path.remove(u)
-            memo[u] = d
-            return d
-
-        roots = [n for n, deg in in_degree.items() if deg == 0]
-        if not roots:
-            roots = list(nodes.keys())
-
-        max_depth = max((get_depth(r, set()) for r in roots), default=0)
-        return max_depth, has_cycles
+        scc_res = tarjan_scc(nodes.keys(), lambda u: adj.get(u, []))
+        return scc_res.max_depth, scc_res.has_cycles, scc_res.cycles, scc_res.sccs
 
     def to_dot(
         self,

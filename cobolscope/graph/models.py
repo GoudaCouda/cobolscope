@@ -99,4 +99,6 @@ class CallGraph(BaseModel):
     total_calls: int = 0
     max_depth: int = 0
     has_cycles: bool = False
+    cycles: List[List[str]] = Field(default_factory=list)
+    sccs: List[List[str]] = Field(default_factory=list)
     reachability_transitions_count: int = 0

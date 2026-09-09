@@ -318,7 +318,7 @@
             textSpan.style.wordBreak = "break-word";
             textSpan.style.color = "#1E293B";
 
-            if (s.category === "call" && s.target && graphData.nodes[s.target.toUpperCase()]) {
+            if ((s.category === "call" || s.category === "terminal") && s.target && graphData.nodes[s.target.toUpperCase()]) {
               textSpan.innerHTML = `${escapeHtml(s.text.replace(s.target, ""))} <a href="#" style="color:#0078D4; font-weight:700; text-decoration:underline;">${escapeHtml(s.target)}</a>`;
               const a = textSpan.querySelector("a");
               if (a) {

@@ -102,7 +102,7 @@
         tdText.style.padding = "9px 14px";
         tdText.style.color = "#0F172A";
 
-        if (s.category === "call" && s.target && graphData.nodes[s.target.toUpperCase()]) {
+        if ((s.category === "call" || s.category === "terminal") && s.target && graphData.nodes[s.target.toUpperCase()]) {
           tdText.innerHTML = `${escapeHtml(s.text.replace(s.target, ""))} <a href="#" style="color:#0078D4; font-weight:700; text-decoration:underline;">${escapeHtml(s.target)}</a>`;
           const a = tdText.querySelector("a");
           if (a) {

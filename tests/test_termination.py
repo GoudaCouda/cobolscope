@@ -267,6 +267,34 @@ class TestTerminationClassifier(unittest.TestCase):
         clf_inq = TerminationClassifier.for_program(model_inq)
         self.assertIn("GMOFH010", clf_inq.terminal_paragraphs)
 
+    def test_goto_terminal_statement(self):
+        """GO TO referencing an abend paragraph is recognized as a terminal statement."""
+        from cobolscope.models import GoToStatementNode
+        goto_abend = GoToStatementNode(
+            type="GO_TO", location=_loc(), raw_text="GO TO 999-ABEND",
+            target_field_ids=[], source_field_ids=[], target="999-ABEND"
+        )
+        goto_normal = GoToStatementNode(
+            type="GO_TO", location=_loc(), raw_text="GO TO 100-PROCESS",
+            target_field_ids=[], source_field_ids=[], target="100-PROCESS"
+        )
+        p_abend = ParagraphNode(
+            name="999-ABEND", section_parent=None, location=_loc(),
+            called_by=[], successors=[], is_terminal=True, fallthrough_successor=None,
+            statements=[StopStatementNode(type="STOP", location=_loc(), raw_text="STOP RUN", target_field_ids=[], source_field_ids=[])]
+        )
+        model = ProgramModel(
+            program_id="TESTGOTO",
+            paragraphs=[p_abend],
+            sections=[],
+            data_division_summary=None,
+            source_file="TESTGOTO.cbl"
+        )
+        clf = TerminationClassifier.for_program(model)
+        self.assertTrue(clf.is_statement_terminal(goto_abend))
+        self.assertFalse(clf.is_statement_terminal(goto_normal))
+        self.assertEqual(clf.get_terminal_label(goto_abend), "GO TO 999-ABEND")
+
 
 if __name__ == "__main__":
     unittest.main()

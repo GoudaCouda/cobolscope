@@ -92,6 +92,10 @@ class IntraprocedureCfg(BaseModel):
     edges: List[CfgEdge] = Field(default_factory=list)
     entry_node_id: str = "entry"
     exit_node_ids: List[str] = Field(default_factory=list)
+    dominators: Dict[str, Optional[str]] = Field(default_factory=dict)
+    post_dominators: Dict[str, Optional[str]] = Field(default_factory=dict)
+    dead_code_nodes: List[str] = Field(default_factory=list)
+    terminal_node_ids: List[str] = Field(default_factory=list)
 
     def to_cytoscape_elements(self) -> List[Dict[str, Any]]:
         """

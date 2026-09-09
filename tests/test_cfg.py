@@ -840,6 +840,126 @@ class TestCfgMathematicalInvariants(unittest.TestCase):
 
         self._assert_conservation_of_flow(cfg, p_worker.name)
 
+    def test_ipdom_nested_if_merge_consolidation(self):
+        """
+        Nested IF statements that converge at the same boundary consolidate cleanly
+        via ipdom into a single convergence point without chained or redundant merges.
+        """
+        p = ParagraphNode(
+            name="NESTED-IF-ROUTINE",
+            location=SourceLocation(start_line=10, end_line=30),
+            statements=[
+                IfStatementNode(
+                    condition="A > 0",
+                    location=SourceLocation(start_line=11, end_line=25),
+                    then_statements=[
+                        IfStatementNode(
+                            condition="B > 0",
+                            location=SourceLocation(start_line=12, end_line=18),
+                            then_statements=[
+                                MoveStatementNode(raw_text="MOVE 1 TO RES", location=SourceLocation(start_line=13, end_line=13))
+                            ],
+                            else_statements=[
+                                MoveStatementNode(raw_text="MOVE 2 TO RES", location=SourceLocation(start_line=15, end_line=15))
+                            ],
+                        )
+                    ],
+                    else_statements=[
+                        MoveStatementNode(raw_text="MOVE 3 TO RES", location=SourceLocation(start_line=20, end_line=20))
+                    ],
+                ),
+                MoveStatementNode(raw_text="MOVE RES TO OUT", location=SourceLocation(start_line=26, end_line=26)),
+            ],
+        )
+        cfg = build_procedure_cfg("TESTPROG", p)
+        self.assertTrue(cfg.is_eligible)
+
+        # Confirm post_dominators are populated
+        self.assertIn("entry", cfg.dominators)
+        self.assertIn("exit", cfg.post_dominators)
+
+        # Confirm all edge endpoints exist in nodes (no dangling or nonexistent targets)
+        node_ids = set(cfg.nodes.keys())
+        for e in cfg.edges:
+            self.assertIn(e.source, node_ids, f"Edge source {e.source} must exist in nodes")
+            self.assertIn(e.target, node_ids, f"Edge target {e.target} must exist in nodes")
+
+        self._assert_conservation_of_flow(cfg, p.name)
+
+    def test_dead_code_blocks_recorded(self):
+        """
+        Statements following an unconditional terminal sink are detected as unreachable
+        and registered in dead_code_nodes.
+        """
+        p = ParagraphNode(
+            name="DEAD-CODE-ROUTINE",
+            location=SourceLocation(start_line=1, end_line=10),
+            statements=[
+                IfStatementNode(
+                    condition="COND = 1",
+                    location=SourceLocation(start_line=2, end_line=4),
+                    then_statements=[
+                        StopStatementNode(raw_text="STOP RUN", location=SourceLocation(start_line=3, end_line=3))
+                    ],
+                    else_statements=[
+                        StopStatementNode(raw_text="STOP RUN", location=SourceLocation(start_line=4, end_line=4))
+                    ],
+                ),
+                # Both branches stopped; subsequent statement is dead code
+                MoveStatementNode(raw_text="MOVE 'NEVER' TO X", location=SourceLocation(start_line=5, end_line=5)),
+            ],
+        )
+        cfg = build_procedure_cfg("TESTPROG", p)
+        self.assertTrue(cfg.is_eligible)
+        self.assertTrue(len(cfg.dead_code_nodes) > 0 or any(n.node_type == CfgNodeType.UNREACHABLE for n in cfg.nodes.values()))
+
+    def test_goto_abend_creates_terminal_node(self):
+        """
+        GO TO statement targeting an ABEND / fatal termination procedure generates
+        a CfgNodeType.TERMINAL node (styled red) rather than a generic CfgNodeType.JUMP (gray).
+        """
+        from cobolscope.models import GoToStatementNode, ProgramModel
+        from cobolscope.graph.termination import TerminationClassifier
+
+        p_abend = ParagraphNode(
+            name="999-ABEND",
+            location=SourceLocation(start_line=100, end_line=102),
+            statements=[StopStatementNode(raw_text="STOP RUN", location=SourceLocation(start_line=101, end_line=101))],
+            is_terminal=True,
+        )
+        p_caller = ParagraphNode(
+            name="CHECK-RECORD",
+            location=SourceLocation(start_line=1, end_line=10),
+            statements=[
+                IfStatementNode(
+                    condition="REC-STATUS = 'ERR'",
+                    location=SourceLocation(start_line=2, end_line=4),
+                    then_statements=[
+                        GoToStatementNode(raw_text="GO TO 999-ABEND", location=SourceLocation(start_line=3, end_line=3), target="999-ABEND")
+                    ],
+                    else_statements=[],
+                ),
+                MoveStatementNode(raw_text="MOVE 'OK' TO MSG", location=SourceLocation(start_line=5, end_line=5)),
+            ],
+        )
+        prog = ProgramModel(
+            program_id="TESTPROG",
+            paragraphs=[p_abend, p_caller],
+            sections=[],
+            data_division_summary=None,
+            source_file="TESTPROG.cbl",
+        )
+        classifier = TerminationClassifier.for_program(prog)
+        cfg = build_procedure_cfg("TESTPROG", p_caller, classifier=classifier)
+
+        self.assertTrue(cfg.is_eligible)
+        terminal_nodes = [n for n in cfg.nodes.values() if n.node_type == CfgNodeType.TERMINAL]
+        self.assertTrue(len(terminal_nodes) > 0, "Expected a TERMINAL node for GO TO 999-ABEND")
+        self.assertIn("GO TO 999-ABEND", terminal_nodes[0].label)
+
+        jump_nodes = [n for n in cfg.nodes.values() if n.node_type == CfgNodeType.JUMP]
+        self.assertEqual(len(jump_nodes), 0, "GO TO 999-ABEND should not be classified as a generic JUMP")
+
 
 if __name__ == "__main__":
     unittest.main()

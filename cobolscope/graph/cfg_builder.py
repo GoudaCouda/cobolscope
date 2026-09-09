@@ -47,6 +47,12 @@ from .cfg_models import (
 )
 from .termination import TerminationClassifier
 from cobolscope.rules import GlobalRules, EffectiveProgramRules
+from .utils import (
+    compute_dominators,
+    compute_post_dominators,
+    DominatorResult,
+    PostDominatorResult,
+)
 
 
 def format_statement_text(stmt: AnyStatementNode) -> str:
@@ -248,8 +254,8 @@ class IntraprocedureCfgBuilder:
         else:
             cfg.exit_node_ids = terminal_nodes
 
-        # Prune redundant 1:1 intermediate MERGE nodes
-        self._prune_redundant_merges()
+        # Consolidate merges, compute dominators/post-dominators, and record dead-code & terminal metrics
+        self._consolidate_merges_with_ipdom(cfg)
 
         cfg.nodes = self.nodes
         cfg.edges = self.edges
@@ -789,49 +795,104 @@ class IntraprocedureCfgBuilder:
         flush_block()
         return current_sources
 
-    def _prune_redundant_merges(self) -> None:
+    def _consolidate_merges_with_ipdom(self, cfg: IntraprocedureCfg) -> None:
         """
-        Prunes 1:1 pass-through MERGE nodes.
-        If a MERGE node has exactly 1 incoming edge and 1 outgoing edge,
-        bypasses it to declutter the graph. Iteratively resolves cascades
-        and validates that all edge endpoints reference existing nodes.
+        Consolidates merge points using Immediate Post-Dominance (ipdom) analysis.
+        Eliminates pass-through 1:1 merge nodes and merges that share the same immediate
+        post-dominating convergence point atomically without mutating edges during iteration.
+        Calculates and stores forward dominators, post-dominators, and dead-code reachability.
         """
-        while True:
-            in_edges: Dict[str, List[CfgEdge]] = {nid: [] for nid in self.nodes}
-            out_edges: Dict[str, List[CfgEdge]] = {nid: [] for nid in self.nodes}
+        exit_ids = cfg.exit_node_ids if cfg.exit_node_ids else ["exit"]
 
-            for e in self.edges:
-                if e.target in in_edges:
-                    in_edges[e.target].append(e)
-                if e.source in out_edges:
-                    out_edges[e.source].append(e)
+        # 1. Build initial successor / predecessor maps
+        succ_map: Dict[str, List[str]] = {nid: [] for nid in self.nodes}
+        pred_map: Dict[str, List[str]] = {nid: [] for nid in self.nodes}
+        for e in self.edges:
+            if e.source in succ_map and e.target in pred_map:
+                succ_map[e.source].append(e.target)
+                pred_map[e.target].append(e.source)
 
-            pruned_any = False
-            for nid, node in list(self.nodes.items()):
-                if node.node_type == CfgNodeType.MERGE:
-                    in_e = in_edges.get(nid, [])
-                    out_e = out_edges.get(nid, [])
-                    if len(in_e) == 1 and len(out_e) == 1:
-                        src_edge = in_e[0]
-                        tgt_edge = out_e[0]
-                        src_edge.target = tgt_edge.target
-                        if not src_edge.label and tgt_edge.label:
-                            src_edge.label = tgt_edge.label
-                        if tgt_edge in self.edges:
-                            self.edges.remove(tgt_edge)
-                        del self.nodes[nid]
-                        pruned_any = True
-                        break
+        # 2. Identify redundant MERGE nodes
+        alias_map: Dict[str, str] = {}
+        for nid, node in list(self.nodes.items()):
+            if node.node_type == CfgNodeType.MERGE:
+                preds = pred_map.get(nid, [])
+                succs = succ_map.get(nid, [])
+                # Pass-through merge with at most 1 outgoing target
+                if len(preds) <= 1 and len(succs) == 1:
+                    alias_map[nid] = succs[0]
+                # Chained merge where successor is also a MERGE node
+                elif len(succs) == 1 and succs[0] in self.nodes and self.nodes[succs[0]].node_type == CfgNodeType.MERGE:
+                    alias_map[nid] = succs[0]
 
-            if not pruned_any:
-                break
+        # 3. Resolve transitive alias chains
+        def resolve_alias(n: str) -> str:
+            seen: Set[str] = set()
+            curr = n
+            while curr in alias_map and curr not in seen:
+                seen.add(curr)
+                curr = alias_map[curr]
+            return curr
 
-        # Safety filter: ensure no edges point to or originate from pruned or non-existent nodes
-        valid_node_ids = set(self.nodes.keys())
-        self.edges = [
-            e for e in self.edges
-            if e.source in valid_node_ids and e.target in valid_node_ids
-        ]
+        for k in list(alias_map.keys()):
+            alias_map[k] = resolve_alias(k)
+
+        # 4. Atomically rewrite edges and drop redundant self-loops
+        new_edges: List[CfgEdge] = []
+        seen_edges: Set[Tuple[str, str, str, Optional[str]]] = set()
+
+        for e in self.edges:
+            new_src = alias_map.get(e.source, e.source)
+            new_tgt = alias_map.get(e.target, e.target)
+
+            # Skip self-loops resulting from collapsed merge nodes
+            if new_src == new_tgt:
+                continue
+
+            sig = (new_src, new_tgt, e.edge_type.value, e.label)
+            if sig in seen_edges:
+                continue
+            seen_edges.add(sig)
+
+            e.source = new_src
+            e.target = new_tgt
+            new_edges.append(e)
+
+        self.edges = new_edges
+
+        # 5. Remove collapsed merge nodes from self.nodes
+        for deleted_id in alias_map:
+            if deleted_id in self.nodes:
+                del self.nodes[deleted_id]
+
+        # 6. Safety validation: ensure all edge endpoints exist in self.nodes
+        valid_ids = set(self.nodes.keys())
+        self.edges = [e for e in self.edges if e.source in valid_ids and e.target in valid_ids]
+
+        # 7. Compute final dominators and post-dominators (ipdom)
+        final_succ: Dict[str, List[str]] = {nid: [] for nid in self.nodes}
+        final_pred: Dict[str, List[str]] = {nid: [] for nid in self.nodes}
+        for e in self.edges:
+            final_succ[e.source].append(e.target)
+            final_pred[e.target].append(e.source)
+
+        dom_res = compute_dominators(
+            nodes=self.nodes.keys(),
+            successors=lambda u: final_succ.get(u, []),
+            predecessors=lambda u: final_pred.get(u, []),
+            entry="entry",
+        )
+        pdom_res = compute_post_dominators(
+            nodes=self.nodes.keys(),
+            successors=lambda u: final_succ.get(u, []),
+            predecessors=lambda u: final_pred.get(u, []),
+            exits=exit_ids,
+        )
+
+        cfg.dominators = dom_res.idom
+        cfg.post_dominators = pdom_res.ipdom
+        cfg.dead_code_nodes = sorted(list(dom_res.unreachable_nodes))
+        cfg.terminal_node_ids = sorted([nid for nid, node in self.nodes.items() if node.is_terminal])
 
 
 def build_procedure_cfg(

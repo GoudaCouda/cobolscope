@@ -293,9 +293,9 @@ class TerminationClassifier:
             if re.search(r"\bBY\s+0(?:\s|$|\.)", raw) or re.search(r"\/\s*0(?:\s|$|\.)", expr):
                 return True
 
-        # --- Layer 4: Out-of-line Invocations of Terminal Procedures ---
-        if isinstance(stmt, PerformStatementNode):
-            if stmt.is_inline:
+        # --- Layer 4: Out-of-line Invocations of Terminal Procedures (PERFORM / GO TO) ---
+        if isinstance(stmt, (PerformStatementNode, GoToStatementNode)):
+            if isinstance(stmt, PerformStatementNode) and stmt.is_inline:
                 return False
             tgt = (getattr(stmt, "target", "") or "").strip().upper()
             thru = (getattr(stmt, "thru", "") or "").strip().upper()
@@ -318,7 +318,7 @@ class TerminationClassifier:
         if any(h in txt for h in self.effective_rules.cics_exclude_handlers):
             return False
         s_type = (getattr(stmt, "type", "") or "").upper()
-        if s_type in ("PERFORM", "CALL", "GENERIC") and self.effective_rules.is_terminal_name(txt):
+        if s_type in ("PERFORM", "CALL", "GO TO", "GOTO", "GENERIC") and self.effective_rules.is_terminal_name(txt):
             return True
 
         return False
@@ -343,6 +343,9 @@ class TerminationClassifier:
         if isinstance(stmt, PerformStatementNode):
             tgt = getattr(stmt, "target", "") or ""
             return f"PERFORM {tgt}" if tgt else "PERFORM ABEND"
+        if isinstance(stmt, GoToStatementNode):
+            tgt = getattr(stmt, "target", "") or ""
+            return f"GO TO {tgt}" if tgt else "GO TO ABEND"
         txt = (raw_txt or getattr(stmt, "raw_text", "") or "").strip()
         return txt[:40] if txt else getattr(stmt, "type", "TERMINAL")
 
