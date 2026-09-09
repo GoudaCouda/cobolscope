@@ -252,12 +252,12 @@ def render_svg(dot_code: str) -> str:
 
 def render_html(
     graph: CallGraph,
-    dot_code: str,
-    svg_content: str,
+    dot_code: Optional[str] = None,
+    svg_content: Optional[str] = None,
     cyto_elements: Optional[List[Dict[str, Any]]] = None,
     initial_engine: str = "cytoscape",
 ) -> str:
-    """Renders standalone interactive HTML visualization with pan/zoom, search, and Cytoscape/Graphviz engines."""
+    """Renders standalone interactive HTML visualization powered by Cytoscape.js."""
     template_dir = Path(__file__).resolve().parent.parent / "templates"
     try:
         loader = jinja2.PackageLoader("cobolscope", "templates")
@@ -282,8 +282,8 @@ def render_html(
     return template.render(
         program_id=graph.program_id,
         graph=graph,
-        svg_content=svg_content,
-        dot_content=dot_code,
+        svg_content=svg_content or "",
+        dot_content=dot_code or "",
         cyto_elements=cyto_elements or [],
         cyto_json=cyto_json,
         initial_engine=initial_engine,

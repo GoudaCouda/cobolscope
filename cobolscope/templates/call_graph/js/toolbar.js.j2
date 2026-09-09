@@ -1,46 +1,12 @@
-// Toolbar, Search, and View Controls
-    function switchEngine(engine) {
-      currentEngine = engine;
-      const btnCyto = document.getElementById("btnEngineCyto");
-      const btnGv = document.getElementById("btnEngineGraphviz");
-
-      if (engine === "cytoscape") {
-        btnCyto.classList.add("active");
-        btnGv.classList.remove("active");
-        cyContainer.style.display = "block";
-        svgContainer.style.display = "none";
-        if (cytoLayoutGroup) cytoLayoutGroup.style.display = "flex";
-        if (!cy) {
-          initCytoscape();
-        } else {
-          cy.resize();
-        }
-      } else {
-        btnGv.classList.add("active");
-        btnCyto.classList.remove("active");
-        cyContainer.style.display = "none";
-        svgContainer.style.display = "block";
-        if (cytoLayoutGroup) cytoLayoutGroup.style.display = "none";
-        fitToScreen();
-      }
-    }
-
-    document.getElementById("btnEngineCyto").addEventListener("click", () => switchEngine("cytoscape"));
-    document.getElementById("btnEngineGraphviz").addEventListener("click", () => switchEngine("graphviz"));
-
     document.getElementById("btnZoomIn").addEventListener("click", () => {
-      if (currentEngine === "cytoscape" && cy) {
+      if (cy) {
         cy.zoom(cy.zoom() * 1.2);
-      } else {
-        zoom(1.2);
       }
     });
 
     document.getElementById("btnZoomOut").addEventListener("click", () => {
-      if (currentEngine === "cytoscape" && cy) {
+      if (cy) {
         cy.zoom(cy.zoom() * 0.8);
-      } else {
-        zoom(0.8);
       }
     });
 
@@ -48,14 +14,9 @@
     if (btnZoomReset) {
       btnZoomReset.addEventListener("click", () => {
         clearHighlight();
-        if (currentEngine === "cytoscape" && cy) {
+        if (cy) {
           cy.reset();
           cy.fit(undefined, 40);
-        } else {
-          scale = 1.0;
-          panX = 0;
-          panY = 0;
-          updateTransform();
         }
       });
     }
@@ -63,10 +24,8 @@
     const btnFit = document.getElementById("btnFit");
     if (btnFit) {
       btnFit.addEventListener("click", () => {
-        if (currentEngine === "cytoscape" && cy) {
+        if (cy) {
           cy.fit(undefined, 40);
-        } else {
-          fitToScreen();
         }
       });
     }
@@ -75,11 +34,6 @@
       if (cy) {
         cy.elements().removeClass("dimmed neighbor-highlight");
         cy.nodes().unselect();
-      }
-      if (svg) {
-        svg.querySelectorAll("g.node").forEach(g => {
-          g.classList.remove("highlight-selected", "highlight-match", "dimmed");
-        });
       }
     }
 
@@ -103,7 +57,7 @@
           return;
         }
 
-        if (currentEngine === "cytoscape" && cy) {
+        if (cy) {
           cy.elements().removeClass("dimmed neighbor-highlight");
           const matches = cy.nodes().filter(n => {
             const name = (n.data("name") || "").toUpperCase();
@@ -116,39 +70,6 @@
             matches.addClass("neighbor-highlight");
             const first = matches[0];
             selectNode(first.data("name") || first.data("label"));
-          }
-        } else if (svg) {
-          let firstMatchKey = null;
-          svg.querySelectorAll("g.node").forEach(g => {
-            const title = g.querySelector("title");
-            const text = g.textContent.toUpperCase();
-            let isMatch = text.includes(q);
-            if (!isMatch && title) {
-              isMatch = title.textContent.toUpperCase().includes(q);
-            }
-
-            if (isMatch) {
-              g.classList.remove("dimmed");
-              g.classList.add("highlight-match");
-              if (!firstMatchKey && title) {
-                for (const k in graphData.nodes) {
-                  const nd = graphData.nodes[k];
-                  if (nd.id === title.textContent.trim() || k === title.textContent.trim().toUpperCase()
-                      || (nd.section && nd.section.toUpperCase().includes(q))
-                      || nd.name.toUpperCase().includes(q)) {
-                    firstMatchKey = k;
-                    break;
-                  }
-                }
-              }
-            } else {
-              g.classList.remove("highlight-match");
-              g.classList.add("dimmed");
-            }
-          });
-
-          if (firstMatchKey) {
-            selectNode(firstMatchKey);
           }
         }
       });
@@ -176,37 +97,6 @@
       hdrEntry.addEventListener("click", () => {
         selectNode(graphData.entry_point);
         focusNode(graphData.entry_point);
-      });
-    }
-
-    const btnDownloadSvgEl = document.getElementById("btnDownloadSvg");
-    if (btnDownloadSvgEl) {
-      btnDownloadSvgEl.addEventListener("click", () => {
-        if (exportMenu) exportMenu.style.display = "none";
-        if (!svg) return;
-        const svgData = new XMLSerializer().serializeToString(svg);
-        const blob = new Blob([svgData], { type: "image/svg+xml;charset=utf-8" });
-        const url = URL.createObjectURL(blob);
-        const a = document.createElement("a");
-        a.href = url;
-        a.download = `${graphData.program_id}_CallGraph.svg`;
-        a.click();
-        URL.revokeObjectURL(url);
-      });
-    }
-
-    const btnDownloadDotEl = document.getElementById("btnDownloadDot");
-    if (btnDownloadDotEl) {
-      btnDownloadDotEl.addEventListener("click", () => {
-        if (exportMenu) exportMenu.style.display = "none";
-        const dot = document.getElementById("dotSource").value;
-        const blob = new Blob([dot], { type: "text/vnd.graphviz;charset=utf-8" });
-        const url = URL.createObjectURL(blob);
-        const a = document.createElement("a");
-        a.href = url;
-        a.download = `${graphData.program_id}_CallGraph.dot`;
-        a.click();
-        URL.revokeObjectURL(url);
       });
     }
 
@@ -249,8 +139,8 @@
 
     // Initialize View on DOM Ready
     window.addEventListener("DOMContentLoaded", () => {
-      CobolScopeLog.info("DOM Ready. Switching to initial engine:", currentEngine);
-      switchEngine(currentEngine);
+      CobolScopeLog.info("DOM Ready. Initializing Cytoscape...");
+      initCytoscape();
       const startKey = graphData.entry_point || Object.keys(graphData.nodes)[0];
       if (startKey) {
         selectNode(startKey);

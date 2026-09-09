@@ -146,9 +146,9 @@ def build_arg_parser() -> argparse.ArgumentParser:
     graph_group = parser.add_argument_group("Call Graph Options (used with --graph)")
     graph_group.add_argument(
         "--graph-format",
-        default="svg",
-        choices=["svg", "dot", "html", "json", "cytoscape"],
-        help="Output format for Call Graph (svg, dot, html, json, cytoscape).",
+        default="html",
+        choices=["html", "cytoscape", "svg", "dot", "json"],
+        help="Output format for Call Graph (html, cytoscape, svg, dot, json). Default: html.",
     )
     graph_group.add_argument(
         "--graph-engine",

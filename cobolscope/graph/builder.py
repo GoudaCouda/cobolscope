@@ -776,13 +776,11 @@ class CallGraphGenerator:
         svg_content: Optional[str] = None,
         initial_engine: str = "cytoscape",
     ) -> str:
-        if svg_content is None:
-            svg_content = self.to_svg()
         cyto_elements = self.to_cytoscape_elements()
         return render_html(
             self.graph,
-            self.to_dot(),
-            svg_content,
+            dot_code=self._dot_cache if self._dot_cache is not None else "",
+            svg_content=svg_content or self._svg_cache or "",
             cyto_elements=cyto_elements,
             initial_engine=initial_engine,
         )
@@ -793,7 +791,7 @@ class CallGraphGenerator:
 
 def generate_call_graph(
     model: ProgramModel,
-    format: str = "svg",
+    format: str = "html",
     hide_fallthrough: bool = True,
     collapse_exits: bool = True,
     enable_clustering: bool = True,
@@ -807,7 +805,7 @@ def generate_call_graph(
 ) -> str:
     """
     Convenience functional API to generate Level-2 Procedure Call Graphs
-    in SVG, DOT, HTML, Cytoscape JSON, or JSON formats.
+    in HTML (default Cytoscape), SVG, DOT, Cytoscape JSON, or JSON formats.
     """
     generator = CallGraphGenerator(
         model=model,
@@ -822,18 +820,18 @@ def generate_call_graph(
     )
 
     fmt = format.lower().strip()
-    if fmt in ("svg", "image"):
-        content = generator.to_svg()
-    elif fmt in ("dot", "gv", "graphviz"):
-        content = generator.to_dot()
-    elif fmt in ("html", "htm"):
+    if fmt in ("html", "htm"):
         content = generator.to_html(initial_engine=initial_engine)
     elif fmt in ("cytoscape", "cyto"):
         content = generator.to_cytoscape_json()
+    elif fmt in ("svg", "image"):
+        content = generator.to_svg()
+    elif fmt in ("dot", "gv", "graphviz"):
+        content = generator.to_dot()
     elif fmt in ("json", "ir"):
         content = generator.to_json()
     else:
-        content = generator.to_svg()
+        content = generator.to_html(initial_engine=initial_engine)
 
     if output_path:
         out_file = Path(output_path)

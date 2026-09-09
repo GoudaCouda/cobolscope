@@ -2,8 +2,7 @@
     function initCytoscape() {
       CobolScopeLog.info("Initializing Cytoscape Level 2 Call Graph...");
       if (typeof cytoscape === "undefined") {
-        CobolScopeLog.warn("Cytoscape.js could not be loaded. Falling back to Graphviz SVG.");
-        switchEngine("graphviz");
+        CobolScopeLog.error("Cytoscape.js could not be loaded.");
         return;
       }
 
@@ -212,7 +211,6 @@
         CobolScopeLog.info("Cytoscape Level 2 initialized successfully.");
       } catch (err) {
         CobolScopeLog.error(`Cytoscape initialization failed: ${err.message}`);
-        switchEngine("graphviz");
       }
     }
 
@@ -279,4 +277,16 @@
       const focalElements = neighborNodes.union(node).union(connectedEdges);
       const otherElements = cy.elements().difference(focalElements);
       otherElements.addClass("dimmed");
+    }
+
+    function focusNode(nodeName) {
+      if (!cy) return;
+      const cyNode = cy.nodes().filter(n => (n.data("name") || n.data("label") || "").toUpperCase() === nodeName.toUpperCase());
+      if (cyNode.length > 0) {
+        cy.animate({
+          center: { eles: cyNode },
+          zoom: Math.max(cy.zoom(), 1.1),
+          duration: 400
+        });
+      }
     }

@@ -69,7 +69,8 @@ def verify_program_call_graph(cobol_file: str, model: Optional[ProgramModel] = N
     assert "id=\"canvas\"" in html_str
     assert "id=\"nodeSearch\"" in html_str
     assert "id=\"inspector\"" in html_str
-    assert "<svg" in html_str
+    assert "id=\"cy-container\"" in html_str
+    assert "cytoElements" in html_str
     print("  [OK] Interactive HTML viewer structure verified.")
 
     # 5. Test JSON Export

@@ -22,7 +22,6 @@
   </div>
   {% include "call_graph/level3_modal.html.j2" %}
   {% include "call_graph/linear_modal.html.j2" %}
-  <textarea id="dotSource" style="display:none;">{{ dot_content }}</textarea>
 {% endblock %}
 
 {% block scripts %}
@@ -35,28 +34,16 @@
 
     CobolScopeLog.info(`Loaded graphData for ${graphData.program_id}: ${graphData.total_paragraphs} paragraphs, ${cytoElements.length} Cytoscape elements.`);
 
-    let currentEngine = initialEnginePreference || "cytoscape";
+    let currentEngine = "cytoscape";
     let cy = null;
     let cyLevel3 = null;
     let selectedRoutineNode = null;
 
-    // SVG Viewport Pan / Zoom State
-    let scale = 1.0;
-    let panX = 0;
-    let panY = 0;
-    let isDragging = false;
-    let startX = 0;
-    let startY = 0;
-
-    const svgContainer = document.getElementById("svg-container");
-    const svgWrapper = document.getElementById("svg-wrapper");
-    const svg = svgWrapper ? svgWrapper.querySelector("svg") : null;
     const cyContainer = document.getElementById("cy-container");
     const layoutSelect = document.getElementById("layoutSelect");
     const cytoLayoutGroup = document.getElementById("cytoLayoutGroup");
 
     {% include "call_graph/js/cyto_call_graph.js.j2" %}
-    {% include "call_graph/js/svg_viewer.js.j2" %}
     {% include "call_graph/js/inspector.js.j2" %}
     {% include "call_graph/js/linear_modal.js.j2" %}
     {% include "call_graph/js/level3_cfg.js.j2" %}
