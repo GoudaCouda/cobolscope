@@ -92,23 +92,13 @@
         writeEl.innerHTML = '<span style="font-size:0.8rem; color:var(--text-muted);">No variable writes</span>';
       }
 
-      // Sync Selection in Both Engines
+      // Sync Selection in Cytoscape
       if (cy) {
         cy.nodes().unselect();
         const cyNode = cy.nodes().filter(n => (n.data("name") || n.data("label") || "").toUpperCase() === nodeName.toUpperCase());
         if (cyNode.length > 0) {
           cyNode.select();
         }
-      }
-
-      if (svg) {
-        svg.querySelectorAll("g.node").forEach(g => {
-          g.classList.remove("highlight-selected");
-          const title = g.querySelector("title");
-          if (title && (title.textContent.trim().toUpperCase() === node.id.toUpperCase() || title.textContent.trim().toUpperCase() === nodeName.toUpperCase())) {
-            g.classList.add("highlight-selected");
-          }
-        });
       }
     }
 
