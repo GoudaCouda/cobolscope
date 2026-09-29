@@ -124,6 +124,14 @@ def build_arg_parser() -> argparse.ArgumentParser:
         dest="cfg_format",
         help="Output format for Level 3 CFG (json, cytoscape). Default: json.",
     )
+    mode_group.add_argument(
+        "--portal",
+        metavar="TARGET",
+        nargs="?",
+        const="",
+        dest="portal_target",
+        help="Generate or regenerate HTML documentation portal (index.html) from a batch output directory or manifest.json.",
+    )
 
     # ---------------------------------------------------------
     # Data Dictionary Options
@@ -310,13 +318,13 @@ def _run_batch_directory(
     def on_parser_progress(channel: str, line: str) -> None:
         if line.startswith("PARSED: "):
             info = line[len("PARSED: "):]
-            log_info(f"  ✓ {info}")
+            log_info(f"  [OK] {info}")
         elif line.startswith("ERROR: "):
             err = line[len("ERROR: "):]
-            log_info(f"  ⚠ {err}")
+            log_info(f"  [ERR] {err}")
         elif line.startswith("WARNING: "):
             warn = line[len("WARNING: "):]
-            log_info(f"  ⚠ {warn}")
+            log_info(f"  [WARN] {warn}")
         else:
             log_verbose(f"[Java {channel}] {line}")
 
@@ -408,6 +416,18 @@ def _run_batch_directory(
                 dict_path.write_text(dict_content, encoding="utf-8")
                 artifacts["data_dictionary"] = dict_filename
 
+                # Also generate interactive HTML data dictionary for portal embedding if not already HTML
+                if args.dict_format != "html":
+                    html_dict_filename = f"{prog_id}_dict.html"
+                    html_dict_path = out_dir / html_dict_filename
+                    html_dict_content = generate_data_dictionary(
+                        model,
+                        format="html",
+                        hide_fillers=args.hide_fillers,
+                    )
+                    html_dict_path.write_text(html_dict_content, encoding="utf-8")
+                    artifacts["data_dictionary_html"] = html_dict_filename
+
             # B. Call Graph Generation
             if args.generate_graph:
                 from cobolscope.graph import generate_call_graph
@@ -497,7 +517,7 @@ def _run_batch_directory(
                 "error": str(e),
                 "artifacts": {},
             })
-            log_info(f"  ⚠ [{idx}/{len(cobol_files)}] {cobol_file.name}: {e}")
+            log_info(f"  [ERR] [{idx}/{len(cobol_files)}] {cobol_file.name}: {e}")
 
     total_dur_ms = round((time.perf_counter() - overall_start) * 1000, 2)
     manifest = {
@@ -514,8 +534,19 @@ def _run_batch_directory(
     manifest_file = out_dir / "manifest.json"
     manifest_file.write_text(json.dumps(manifest, indent=2), encoding="utf-8")
 
+    portal_file = out_dir / "index.html"
+    try:
+        from cobolscope.portal import generate_portal
+        generate_portal(manifest, output_path=portal_file)
+        manifest["batch_summary"]["portal"] = portal_file.name
+        manifest_file.write_text(json.dumps(manifest, indent=2), encoding="utf-8")
+        portal_note = f", portal: {portal_file.name}"
+    except Exception as e:
+        log_verbose(f"Failed to generate documentation portal: {e}")
+        portal_note = ""
+
     total_s = total_dur_ms / 1000.0
-    log_info(f"Batch completed: {success_count}/{len(cobol_files)} programs processed in {total_s:.2f}s -> {out_dir.resolve()} (manifest: {manifest_file.name})")
+    log_info(f"Batch completed: {success_count}/{len(cobol_files)} programs processed in {total_s:.2f}s -> {out_dir.resolve()} (manifest: {manifest_file.name}{portal_note})")
     return 0 if fail_count == 0 else 1
 
 
@@ -565,8 +596,29 @@ def main(argv: Optional[Sequence[str]] = None) -> int:
         print(f"Generated rules configuration: {out_path.resolve()}")
         return 0
 
+    # 0b. Handle --portal
+    if args.portal_target is not None:
+        from cobolscope.portal import generate_portal
+        target_str = args.portal_target or args.input_file
+        if not target_str:
+            print("ERROR: Directory or manifest.json path required for --portal.", file=sys.stderr)
+            return 2
+        target_path = Path(target_str)
+        if not target_path.exists():
+            print(f"ERROR: Target path not found for --portal: {target_path}", file=sys.stderr)
+            return 2
+        try:
+            out_target = Path(args.output) if args.output else None
+            generate_portal(target_path, output_path=out_target)
+            out_file = out_target or (target_path / "index.html" if target_path.is_dir() else target_path.parent / "index.html")
+            log_info(f"Documentation portal generated: {out_file.resolve()}")
+            return 0
+        except Exception as e:
+            print(f"ERROR: Failed to generate documentation portal: {e}", file=sys.stderr)
+            return 1
+
     if not args.input_file:
-        print("ERROR: input_file is required unless using --init-rules.", file=sys.stderr)
+        print("ERROR: input_file is required unless using --init-rules or --portal.", file=sys.stderr)
         return 2
 
     input_path = Path(args.input_file)

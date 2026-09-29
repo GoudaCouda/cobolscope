@@ -1,0 +1,1215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CobolScope Documentation Portal - {{ title | default('Batch Overview') }}</title>
+  <style>
+    :root {
+      --bg-primary: #F8FAFC;
+      --bg-surface: #FFFFFF;
+      --border-color: #E2E8F0;
+      --border-subtle: #F1F5F9;
+      --text-primary: #0F172A;
+      --text-secondary: #475569;
+      --text-muted: #94A3B8;
+      --primary: #0078D4;
+      --primary-hover: #106EBE;
+      --primary-light: #EFF6FC;
+      --success: #16A34A;
+      --success-light: #F0FDF4;
+      --warning: #D97706;
+      --warning-light: #FFFBEB;
+      --danger: #DC2626;
+      --danger-light: #FEF2F2;
+      --sidebar-width: 330px;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      background: var(--bg-primary);
+      color: var(--text-primary);
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+    }
+
+    /* Enterprise Navigation Header */
+    header.portal-header {
+      height: 50px;
+      background: var(--bg-surface);
+      border-bottom: 1px solid var(--border-color);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 16px;
+      flex-shrink: 0;
+      z-index: 10;
+    }
+
+    .brand-section {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .brand-title {
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--text-primary);
+      letter-spacing: -0.2px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .brand-title span.badge-doc {
+      font-size: 11px;
+      font-weight: 600;
+      background: var(--primary-light);
+      color: var(--primary);
+      padding: 2px 7px;
+      border-radius: 4px;
+      border: 1px solid rgba(0, 120, 212, 0.2);
+    }
+
+    .source-path {
+      font-size: 12px;
+      color: var(--text-muted);
+      font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      max-width: 320px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .header-stats {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      font-size: 12px;
+    }
+
+    .stat-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 3px 9px;
+      border-radius: 12px;
+      background: var(--bg-primary);
+      border: 1px solid var(--border-color);
+      color: var(--text-secondary);
+      font-weight: 500;
+    }
+
+    .stat-pill.success {
+      background: var(--success-light);
+      border-color: rgba(22, 163, 74, 0.2);
+      color: var(--success);
+    }
+
+    .stat-pill.danger {
+      background: var(--danger-light);
+      border-color: rgba(220, 38, 38, 0.2);
+      color: var(--danger);
+    }
+
+    .header-actions {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .segmented-control {
+      display: inline-flex;
+      background: var(--bg-primary);
+      border: 1px solid var(--border-color);
+      border-radius: 6px;
+      padding: 2px;
+    }
+
+    .segmented-btn {
+      border: none;
+      background: transparent;
+      padding: 4px 12px;
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--text-secondary);
+      border-radius: 4px;
+      cursor: pointer;
+      transition: all 0.15s ease;
+    }
+
+    .segmented-btn.active {
+      background: var(--bg-surface);
+      color: var(--primary);
+      box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+    }
+
+    /* Main Workspace Layout */
+    .portal-main {
+      flex: 1;
+      display: flex;
+      overflow: hidden;
+      position: relative;
+    }
+
+    /* Left Sidebar */
+    .portal-sidebar {
+      width: var(--sidebar-width);
+      background: var(--bg-primary);
+      border-right: 1px solid var(--border-color);
+      display: flex;
+      flex-direction: column;
+      flex-shrink: 0;
+      overflow: hidden;
+    }
+
+    .sidebar-search-box {
+      padding: 10px 12px;
+      border-bottom: 1px solid var(--border-color);
+      background: var(--bg-surface);
+    }
+
+    .search-input-wrapper {
+      position: relative;
+      display: flex;
+      align-items: center;
+    }
+
+    .search-input-wrapper input {
+      width: 100%;
+      height: 32px;
+      padding: 0 28px 0 10px;
+      border: 1px solid var(--border-color);
+      border-radius: 6px;
+      font-size: 13px;
+      color: var(--text-primary);
+      background: var(--bg-primary);
+      outline: none;
+      transition: border-color 0.15s;
+    }
+
+    .search-input-wrapper input:focus {
+      border-color: var(--primary);
+      background: #FFFFFF;
+    }
+
+    .search-clear-btn {
+      position: absolute;
+      right: 8px;
+      border: none;
+      background: transparent;
+      color: var(--text-muted);
+      cursor: pointer;
+      font-size: 14px;
+      line-height: 1;
+      display: none;
+    }
+
+    .sidebar-filter-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 8px 12px;
+      font-size: 11px;
+      color: var(--text-muted);
+      background: var(--bg-primary);
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    .filter-tags {
+      display: flex;
+      gap: 4px;
+    }
+
+    .filter-chip {
+      border: none;
+      background: transparent;
+      padding: 2px 6px;
+      border-radius: 4px;
+      font-size: 11px;
+      color: var(--text-secondary);
+      cursor: pointer;
+      font-weight: 500;
+    }
+
+    .filter-chip.active {
+      background: var(--border-color);
+      color: var(--text-primary);
+      font-weight: 600;
+    }
+
+    .program-list {
+      flex: 1;
+      overflow-y: auto;
+      padding: 4px 0;
+    }
+
+    .program-item {
+      padding: 9px 14px;
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+      border-left: 3px solid transparent;
+      cursor: pointer;
+      transition: background 0.1s;
+      border-bottom: 1px solid rgba(226, 232, 240, 0.4);
+    }
+
+    .program-item:hover {
+      background: #F1F5F9;
+    }
+
+    .program-item.active {
+      background: var(--primary-light);
+      border-left-color: var(--primary);
+    }
+
+    .program-item-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .program-id {
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--text-primary);
+      font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    }
+
+    .program-item.active .program-id {
+      color: var(--primary);
+    }
+
+    .program-file {
+      font-size: 11px;
+      color: var(--text-secondary);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .program-meta-row {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      margin-top: 2px;
+    }
+
+    .badge {
+      font-size: 10px;
+      padding: 1px 5px;
+      border-radius: 3px;
+      font-weight: 500;
+      border: 1px solid transparent;
+    }
+
+    .badge-metric {
+      background: #FFFFFF;
+      border-color: var(--border-color);
+      color: var(--text-secondary);
+    }
+
+    .badge-artifact {
+      background: #E2E8F0;
+      color: var(--text-secondary);
+    }
+
+    .badge-status-ok {
+      color: var(--success);
+    }
+
+    .badge-status-fail {
+      color: var(--danger);
+      background: var(--danger-light);
+      border-color: rgba(220, 38, 38, 0.2);
+    }
+
+    /* Right Viewer Content Area */
+    .portal-content {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      background: var(--bg-surface);
+    }
+
+    .content-toolbar {
+      height: 48px;
+      background: var(--bg-surface);
+      border-bottom: 1px solid var(--border-color);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 16px;
+      flex-shrink: 0;
+    }
+
+    .prog-header-details {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      min-width: 0;
+    }
+
+    .prog-title {
+      font-size: 15px;
+      font-weight: 700;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      color: var(--text-primary);
+    }
+
+    .prog-header-chips {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .chip {
+      font-size: 11px;
+      background: var(--bg-primary);
+      border: 1px solid var(--border-color);
+      color: var(--text-secondary);
+      padding: 2px 7px;
+      border-radius: 4px;
+    }
+
+    .artifact-tab-group {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      background: var(--bg-primary);
+      border: 1px solid var(--border-color);
+      padding: 2px;
+      border-radius: 6px;
+    }
+
+    .tab-btn {
+      border: none;
+      background: transparent;
+      padding: 5px 12px;
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--text-secondary);
+      border-radius: 4px;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.1s ease;
+    }
+
+    .tab-btn:hover:not(:disabled) {
+      color: var(--text-primary);
+    }
+
+    .tab-btn.active {
+      background: var(--bg-surface);
+      color: var(--primary);
+      box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+    }
+
+    .tab-btn:disabled {
+      opacity: 0.4;
+      cursor: not-allowed;
+    }
+
+    .content-actions {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .action-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      font-size: 12px;
+      font-weight: 500;
+      color: var(--primary);
+      text-decoration: none;
+      padding: 4px 8px;
+      border-radius: 4px;
+      border: 1px solid rgba(0, 120, 212, 0.2);
+      background: var(--primary-light);
+      transition: background 0.15s;
+    }
+
+    .action-link:hover {
+      background: #E0F2FE;
+    }
+
+    .viewer-frame-container {
+      flex: 1;
+      position: relative;
+      background: #FFFFFF;
+      overflow: hidden;
+    }
+
+    iframe#content-frame {
+      width: 100%;
+      height: 100%;
+      border: none;
+      display: block;
+      background: #FFFFFF;
+    }
+
+    /* Fallback / Error Message Container */
+    .message-container {
+      display: none;
+      height: 100%;
+      align-items: center;
+      justify-content: center;
+      padding: 40px;
+      text-align: center;
+      background: var(--bg-primary);
+    }
+
+    .message-card {
+      max-width: 580px;
+      background: #FFFFFF;
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      padding: 32px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+      text-align: left;
+    }
+
+    .message-card h3 {
+      font-size: 16px;
+      font-weight: 700;
+      margin-bottom: 8px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .message-card.error h3 { color: var(--danger); }
+    .message-card.info h3 { color: var(--text-primary); }
+
+    .message-card p {
+      font-size: 13px;
+      color: var(--text-secondary);
+      line-height: 1.5;
+      margin-bottom: 12px;
+    }
+
+    .error-trace {
+      background: #1E293B;
+      color: #F8FAFC;
+      padding: 12px;
+      border-radius: 6px;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      font-size: 12px;
+      white-space: pre-wrap;
+      word-break: break-all;
+      max-height: 240px;
+      overflow-y: auto;
+      margin-top: 12px;
+    }
+
+    /* Canonical IR JSON Pre Area */
+    .json-container {
+      display: none;
+      height: 100%;
+      overflow: auto;
+      padding: 20px;
+      background: #0F172A;
+    }
+
+    .json-container pre {
+      font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      font-size: 12px;
+      color: #F8FAFC;
+      line-height: 1.45;
+    }
+
+    /* Catalog / Table View Layout */
+    .catalog-view {
+      display: none;
+      flex: 1;
+      overflow-y: auto;
+      padding: 24px 32px;
+      background: var(--bg-primary);
+    }
+
+    .catalog-container {
+      max-width: 1400px;
+      margin: 0 auto;
+      background: #FFFFFF;
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+    }
+
+    .catalog-header {
+      padding: 16px 20px;
+      border-bottom: 1px solid var(--border-color);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .catalog-title {
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--text-primary);
+    }
+
+    table.catalog-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 13px;
+      text-align: left;
+    }
+
+    table.catalog-table th {
+      background: var(--bg-primary);
+      padding: 10px 16px;
+      font-weight: 600;
+      color: var(--text-secondary);
+      border-bottom: 1px solid var(--border-color);
+      font-size: 12px;
+      white-space: nowrap;
+    }
+
+    table.catalog-table td {
+      padding: 11px 16px;
+      border-bottom: 1px solid var(--border-color);
+      color: var(--text-primary);
+    }
+
+    table.catalog-table tr:hover td {
+      background: #F8FAFC;
+    }
+
+    .table-prog-link {
+      font-weight: 700;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      color: var(--primary);
+      cursor: pointer;
+      text-decoration: none;
+    }
+
+    .table-prog-link:hover {
+      text-decoration: underline;
+    }
+
+    .table-actions {
+      display: flex;
+      gap: 6px;
+    }
+
+    .btn-sm {
+      font-size: 11px;
+      padding: 3px 8px;
+      border-radius: 4px;
+      text-decoration: none;
+      font-weight: 500;
+      border: 1px solid var(--border-color);
+      background: var(--bg-primary);
+      color: var(--text-secondary);
+      cursor: pointer;
+      transition: all 0.1s;
+    }
+
+    .btn-sm:hover {
+      background: #E2E8F0;
+      color: var(--text-primary);
+    }
+
+    .btn-sm.primary {
+      background: var(--primary-light);
+      border-color: rgba(0, 120, 212, 0.2);
+      color: var(--primary);
+    }
+
+    .btn-sm.primary:hover {
+      background: #E0F2FE;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Top Enterprise Header -->
+  <header class="portal-header">
+    <div class="brand-section">
+      <div class="brand-title">
+        CobolScope
+        <span class="badge-doc">Documentation Portal</span>
+      </div>
+      <div class="source-path" title="{{ manifest.batch_summary.source_directory | default('') }}">
+        {{ manifest.batch_summary.source_directory | default('Batch Repository') }}
+      </div>
+    </div>
+
+    <div class="header-stats">
+      <div class="stat-pill">
+        <span>Programs:</span>
+        <strong id="stat-total">{{ manifest.batch_summary.total_programs_found | default(0) }}</strong>
+      </div>
+      <div class="stat-pill success">
+        <span>Succeeded:</span>
+        <strong id="stat-succeeded">{{ manifest.batch_summary.succeeded | default(0) }}</strong>
+      </div>
+      {% if manifest.batch_summary.failed and manifest.batch_summary.failed > 0 %}
+      <div class="stat-pill danger">
+        <span>Failed:</span>
+        <strong id="stat-failed">{{ manifest.batch_summary.failed }}</strong>
+      </div>
+      {% endif %}
+    </div>
+
+    <div class="header-actions">
+      <div class="segmented-control">
+        <button id="view-mode-viewer" class="segmented-btn active" onclick="setPortalMode('viewer')">Viewer</button>
+        <button id="view-mode-catalog" class="segmented-btn" onclick="setPortalMode('catalog')">Catalog</button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Container -->
+  <main class="portal-main">
+
+    <!-- Split Viewer Mode -->
+    <div id="viewer-container" style="display:flex; width:100%; height:100%;">
+      <!-- Left Sidebar: Program List -->
+      <aside class="portal-sidebar">
+        <div class="sidebar-search-box">
+          <div class="search-input-wrapper">
+            <input type="search" id="prog-search" placeholder="Search programs (ID, name)..." oninput="onSearchInput()" autocomplete="off" />
+            <button class="search-clear-btn" id="search-clear" onclick="clearSearch()" title="Clear">x</button>
+          </div>
+        </div>
+
+        <div class="sidebar-filter-bar">
+          <div class="filter-tags">
+            <button class="filter-chip active" id="filter-all" onclick="setStatusFilter('all')">All</button>
+            <button class="filter-chip" id="filter-success" onclick="setStatusFilter('success')">OK</button>
+            <button class="filter-chip" id="filter-failed" onclick="setStatusFilter('failed')">Failed</button>
+          </div>
+          <span id="prog-count-label">Showing {{ manifest.programs | length }}</span>
+        </div>
+
+        <div class="program-list" id="program-list">
+          <!-- Dynamically populated via JS from embedded manifest -->
+        </div>
+      </aside>
+
+      <!-- Right Content Area: Viewer Pane -->
+      <section class="portal-content">
+        <div class="content-toolbar">
+          <div class="prog-header-details">
+            <span class="prog-title" id="current-title">—</span>
+            <div class="prog-header-chips" id="current-chips">
+              <!-- Dynamically populated chips -->
+            </div>
+          </div>
+
+          <div class="artifact-tab-group" id="artifact-tabs">
+            <button id="tab-graph" class="tab-btn active" onclick="switchArtifact('call_graph')">Call Graph</button>
+            <button id="tab-dict" class="tab-btn" onclick="switchArtifact('data_dictionary')">Data Dictionary</button>
+            <button id="tab-ir" class="tab-btn" onclick="switchArtifact('ir')">IR JSON</button>
+          </div>
+
+          <div class="content-actions">
+            <a id="open-tab-btn" class="action-link" href="#" target="_blank" title="Open artifact in standalone browser tab">
+              Open in New Tab
+            </a>
+          </div>
+        </div>
+
+        <div class="viewer-frame-container">
+          <iframe id="content-frame" src="about:blank"></iframe>
+
+          <div class="message-container" id="message-container">
+            <div class="message-card" id="message-card">
+              <h3 id="message-title">Notice</h3>
+              <p id="message-text">Please select a program from the sidebar to inspect its Call Graph or Data Dictionary.</p>
+              <div class="error-trace" id="message-trace" style="display:none;"></div>
+            </div>
+          </div>
+
+          <div class="json-container" id="json-container">
+            <pre id="json-pre"></pre>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <!-- Catalog Table Mode -->
+    <div class="catalog-view" id="catalog-container">
+      <div class="catalog-container">
+        <div class="catalog-header">
+          <div class="catalog-title">Program Catalog ({{ manifest.programs | length }} items)</div>
+          <div class="catalog-filter">
+            <input type="search" id="catalog-search" placeholder="Filter catalog..." oninput="onCatalogSearch()" style="padding:6px 10px; border:1px solid var(--border-color); border-radius:6px; font-size:12px; width:220px;" />
+          </div>
+        </div>
+        <table class="catalog-table">
+          <thead>
+            <tr>
+              <th>Program ID</th>
+              <th>Source File</th>
+              <th>Status</th>
+              <th>Paragraphs</th>
+              <th>Statements</th>
+              <th>Max CC</th>
+              <th>Entry Point</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody id="catalog-table-body">
+            <!-- Dynamically populated -->
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- Embedded Manifest Data for Synchronous Zero-CORS Loading -->
+  <script id="cobolscope-manifest" type="application/json">
+    {{ manifest | tojson }}
+  </script>
+
+  <!-- Zero-Dependency Portal Controller Logic -->
+  <script>
+    // 1. Data Initialization
+    let manifestData = {};
+    try {
+      const manifestEl = document.getElementById("cobolscope-manifest");
+      manifestData = JSON.parse(manifestEl.textContent.trim());
+    } catch (e) {
+      console.error("Failed to parse embedded manifest:", e);
+    }
+
+    const programs = manifestData.programs || [];
+    let selectedProgramId = null;
+    let activeArtifactType = "call_graph"; // "call_graph" | "data_dictionary" | "ir"
+    let currentStatusFilter = "all";
+    let searchQuery = "";
+    let portalMode = "viewer";
+
+    // 2. DOM Elements
+    const programListEl = document.getElementById("program-list");
+    const progSearchInput = document.getElementById("prog-search");
+    const searchClearBtn = document.getElementById("search-clear");
+    const progCountLabel = document.getElementById("prog-count-label");
+    const currentTitleEl = document.getElementById("current-title");
+    const currentChipsEl = document.getElementById("current-chips");
+    const contentFrame = document.getElementById("content-frame");
+    const messageContainer = document.getElementById("message-container");
+    const messageTitle = document.getElementById("message-title");
+    const messageText = document.getElementById("message-text");
+    const messageTrace = document.getElementById("message-trace");
+    const messageCard = document.getElementById("message-card");
+    const jsonContainer = document.getElementById("json-container");
+    const jsonPre = document.getElementById("json-pre");
+    const openTabBtn = document.getElementById("open-tab-btn");
+    const tabGraph = document.getElementById("tab-graph");
+    const tabDict = document.getElementById("tab-dict");
+    const tabIr = document.getElementById("tab-ir");
+    const viewerContainer = document.getElementById("viewer-container");
+    const catalogContainer = document.getElementById("catalog-container");
+    const viewModeViewer = document.getElementById("view-mode-viewer");
+    const viewModeCatalog = document.getElementById("view-mode-catalog");
+    const catalogTableBody = document.getElementById("catalog-table-body");
+    const catalogSearchInput = document.getElementById("catalog-search");
+
+    // 3. Render Program List in Sidebar
+    function renderProgramList() {
+      const q = searchQuery.toLowerCase().trim();
+      const filtered = programs.filter(p => {
+        if (currentStatusFilter === "success" && p.status !== "SUCCESS") return false;
+        if (currentStatusFilter === "failed" && p.status === "SUCCESS") return false;
+        if (!q) return true;
+        return (
+          (p.program_id && p.program_id.toLowerCase().includes(q)) ||
+          (p.source_file && p.source_file.toLowerCase().includes(q)) ||
+          (p.entry_point && p.entry_point.toLowerCase().includes(q))
+        );
+      });
+
+      progCountLabel.textContent = `Showing ${filtered.length} of ${programs.length}`;
+      programListEl.innerHTML = "";
+
+      if (filtered.length === 0) {
+        programListEl.innerHTML = `
+          <div style="padding: 24px; text-align: center; color: var(--text-muted); font-size: 12px;">
+            No matching programs found.
+          </div>
+        `;
+        return;
+      }
+
+      filtered.forEach(p => {
+        const item = document.createElement("div");
+        item.className = "program-item" + (p.program_id === selectedProgramId ? " active" : "");
+        item.dataset.id = p.program_id;
+        item.onclick = () => selectProgram(p.program_id);
+
+        const hasGraph = !!(p.artifacts && p.artifacts.call_graph);
+        const hasDict = !!(p.artifacts && (p.artifacts.data_dictionary_html || p.artifacts.data_dictionary));
+        const isOk = p.status === "SUCCESS";
+
+        item.innerHTML = `
+          <div class="program-item-header">
+            <span class="program-id">${escapeHtml(p.program_id || p.source_file)}</span>
+            <span class="badge ${isOk ? 'badge-status-ok' : 'badge-status-fail'}">${isOk ? 'OK' : 'ERR'}</span>
+          </div>
+          <div class="program-file">${escapeHtml(p.relative_source || p.source_file)}</div>
+          <div class="program-meta-row">
+            ${isOk ? `
+              <span class="badge badge-metric">${p.total_paragraphs || 0} para</span>
+              <span class="badge badge-metric">CC: ${p.max_cyclomatic_complexity || 1}</span>
+              ${hasGraph ? '<span class="badge badge-artifact">Graph</span>' : ''}
+              ${hasDict ? '<span class="badge badge-artifact">Dict</span>' : ''}
+            ` : `
+              <span class="badge badge-status-fail">Parsing error</span>
+            `}
+          </div>
+        `;
+        programListEl.appendChild(item);
+      });
+    }
+
+    // 4. Select Program
+    function selectProgram(progId, preferredArtifact = null) {
+      selectedProgramId = progId;
+      const prog = programs.find(p => p.program_id === progId);
+      if (!prog) return;
+
+      // Update sidebar active selection
+      document.querySelectorAll(".program-item").forEach(el => {
+        el.classList.toggle("active", el.dataset.id === progId);
+      });
+
+      // Update Toolbar Header
+      currentTitleEl.textContent = prog.program_id || prog.source_file;
+      currentChipsEl.innerHTML = "";
+
+      if (prog.status === "SUCCESS") {
+        currentChipsEl.innerHTML = `
+          <span class="chip" title="Source File">${escapeHtml(prog.relative_source || prog.source_file)}</span>
+          <span class="chip">${prog.total_paragraphs || 0} paragraphs</span>
+          <span class="chip">${prog.total_statements || 0} statements</span>
+          <span class="chip">Max CC: ${prog.max_cyclomatic_complexity || 1}</span>
+          ${prog.entry_point ? `<span class="chip">Entry: ${escapeHtml(prog.entry_point)}</span>` : ''}
+        `;
+      } else {
+        currentChipsEl.innerHTML = `
+          <span class="chip" style="color:var(--danger); background:var(--danger-light); border-color:rgba(220,38,38,0.2);">
+            Extraction Failed
+          </span>
+          <span class="chip">${escapeHtml(prog.source_file)}</span>
+        `;
+      }
+
+      // Check available artifacts
+      const artifacts = prog.artifacts || {};
+      const hasGraph = !!artifacts.call_graph;
+      const hasDict = !!(artifacts.data_dictionary_html || artifacts.data_dictionary);
+      const hasIr = !!artifacts.ir;
+
+      tabGraph.disabled = !hasGraph;
+      tabDict.disabled = !hasDict;
+      tabIr.disabled = !hasIr;
+
+      // Pick active artifact
+      if (preferredArtifact && (
+        (preferredArtifact === "call_graph" && hasGraph) ||
+        (preferredArtifact === "data_dictionary" && hasDict) ||
+        (preferredArtifact === "ir" && hasIr)
+      )) {
+        activeArtifactType = preferredArtifact;
+      } else if (hasGraph) {
+        activeArtifactType = "call_graph";
+      } else if (hasDict) {
+        activeArtifactType = "data_dictionary";
+      } else if (hasIr) {
+        activeArtifactType = "ir";
+      } else {
+        activeArtifactType = "call_graph";
+      }
+
+      updateArtifactTabsUI();
+      loadActiveArtifact(prog);
+      updateUrlHash();
+    }
+
+    // 5. Update Artifact Tabs UI
+    function updateArtifactTabsUI() {
+      tabGraph.classList.toggle("active", activeArtifactType === "call_graph");
+      tabDict.classList.toggle("active", activeArtifactType === "data_dictionary");
+      tabIr.classList.toggle("active", activeArtifactType === "ir");
+    }
+
+    // 6. Switch Active Artifact
+    function switchArtifact(type) {
+      activeArtifactType = type;
+      updateArtifactTabsUI();
+      const prog = programs.find(p => p.program_id === selectedProgramId);
+      if (prog) {
+        loadActiveArtifact(prog);
+        updateUrlHash();
+      }
+    }
+
+    // 7. Load Active Artifact into Frame / Viewer
+    function loadActiveArtifact(prog) {
+      if (!prog) return;
+
+      // If program failed parsing
+      if (prog.status !== "SUCCESS") {
+        showErrorMessage(
+          "COBOL Extraction Failed",
+          `ProLeap parser could not parse ${prog.source_file}. This usually occurs when referenced copybooks are not in the copybook search paths (-I).`,
+          prog.error || "No error details reported."
+        );
+        openTabBtn.style.display = "none";
+        return;
+      }
+
+      const artifacts = prog.artifacts || {};
+      let targetUrl = null;
+
+      if (activeArtifactType === "call_graph") {
+        targetUrl = artifacts.call_graph;
+      } else if (activeArtifactType === "data_dictionary") {
+        targetUrl = artifacts.data_dictionary_html || artifacts.data_dictionary;
+      } else if (activeArtifactType === "ir") {
+        targetUrl = artifacts.ir;
+      }
+
+      if (!targetUrl) {
+        showErrorMessage(
+          "Artifact Not Generated",
+          `No ${activeArtifactType.replace('_', ' ')} artifact was produced for ${prog.program_id}.`,
+          null
+        );
+        openTabBtn.style.display = "none";
+        return;
+      }
+
+      openTabBtn.style.display = "inline-flex";
+      openTabBtn.href = targetUrl;
+
+      // Special handling for IR JSON
+      if (activeArtifactType === "ir" || targetUrl.endsWith(".json")) {
+        fetchJsonContent(targetUrl);
+        return;
+      }
+
+      // Default: Load inside iframe
+      jsonContainer.style.display = "none";
+      messageContainer.style.display = "none";
+      contentFrame.style.display = "block";
+      contentFrame.src = targetUrl;
+    }
+
+    // Helper: Show Error / Status Message in Canvas
+    function showErrorMessage(title, text, trace) {
+      contentFrame.style.display = "none";
+      jsonContainer.style.display = "none";
+      messageContainer.style.display = "flex";
+
+      messageTitle.textContent = title;
+      messageText.textContent = text;
+
+      if (trace) {
+        messageTrace.style.display = "block";
+        messageTrace.textContent = trace;
+      } else {
+        messageTrace.style.display = "none";
+      }
+    }
+
+    // Helper: Display Formatted JSON
+    function fetchJsonContent(url) {
+      contentFrame.style.display = "none";
+      messageContainer.style.display = "none";
+      jsonContainer.style.display = "block";
+      jsonPre.textContent = "Loading Canonical IR...";
+
+      fetch(url)
+        .then(res => res.json())
+        .then(data => {
+          jsonPre.textContent = JSON.stringify(data, null, 2);
+        })
+        .catch(err => {
+          // If fetch blocked by file:// CORS, fallback to iframe
+          jsonContainer.style.display = "none";
+          contentFrame.style.display = "block";
+          contentFrame.src = url;
+        });
+    }
+
+    // 8. Render Catalog Table
+    function renderCatalogTable() {
+      const q = (catalogSearchInput.value || "").toLowerCase().trim();
+      const filtered = programs.filter(p => {
+        if (!q) return true;
+        return (
+          (p.program_id && p.program_id.toLowerCase().includes(q)) ||
+          (p.source_file && p.source_file.toLowerCase().includes(q)) ||
+          (p.entry_point && p.entry_point.toLowerCase().includes(q))
+        );
+      });
+
+      catalogTableBody.innerHTML = "";
+      filtered.forEach(p => {
+        const tr = document.createElement("tr");
+        const hasGraph = p.artifacts && p.artifacts.call_graph;
+        const hasDict = p.artifacts && (p.artifacts.data_dictionary_html || p.artifacts.data_dictionary);
+        const hasIr = p.artifacts && p.artifacts.ir;
+        const isOk = p.status === "SUCCESS";
+
+        tr.innerHTML = `
+          <td>
+            <a class="table-prog-link" onclick="openProgramInViewer('${p.program_id}')">
+              ${escapeHtml(p.program_id || p.source_file)}
+            </a>
+          </td>
+          <td style="font-family:ui-monospace, monospace; font-size:12px; color:var(--text-secondary);">
+            ${escapeHtml(p.relative_source || p.source_file)}
+          </td>
+          <td>
+            <span class="badge ${isOk ? 'badge-status-ok' : 'badge-status-fail'}">
+              ${isOk ? 'SUCCESS' : 'FAILED'}
+            </span>
+          </td>
+          <td>${p.total_paragraphs || 0}</td>
+          <td>${p.total_statements || 0}</td>
+          <td>${p.max_cyclomatic_complexity || 1}</td>
+          <td style="font-family:ui-monospace, monospace; font-size:12px;">${escapeHtml(p.entry_point || '—')}</td>
+          <td>
+            <div class="table-actions">
+              ${hasGraph ? `<a class="btn-sm primary" href="${p.artifacts.call_graph}" target="_blank">Graph</a>` : ''}
+              ${hasDict ? `<a class="btn-sm" href="${p.artifacts.data_dictionary_html || p.artifacts.data_dictionary}" target="_blank">Dict</a>` : ''}
+              ${hasIr ? `<a class="btn-sm" href="${p.artifacts.ir}" target="_blank">IR</a>` : ''}
+              <button class="btn-sm" onclick="openProgramInViewer('${p.program_id}')">Inspect</button>
+            </div>
+          </td>
+        `;
+        catalogTableBody.appendChild(tr);
+      });
+    }
+
+    function openProgramInViewer(progId) {
+      setPortalMode("viewer");
+      selectProgram(progId);
+    }
+
+    // 9. View Mode Controller
+    function setPortalMode(mode) {
+      portalMode = mode;
+      if (mode === "viewer") {
+        viewerContainer.style.display = "flex";
+        catalogContainer.style.display = "none";
+        viewModeViewer.classList.add("active");
+        viewModeCatalog.classList.remove("active");
+      } else {
+        viewerContainer.style.display = "none";
+        catalogContainer.style.display = "block";
+        viewModeViewer.classList.remove("active");
+        viewModeCatalog.classList.add("active");
+        renderCatalogTable();
+      }
+      updateUrlHash();
+    }
+
+    // 10. Filters & Search Handlers
+    function onSearchInput() {
+      searchQuery = progSearchInput.value;
+      searchClearBtn.style.display = searchQuery ? "block" : "none";
+      renderProgramList();
+    }
+
+    function clearSearch() {
+      progSearchInput.value = "";
+      searchQuery = "";
+      searchClearBtn.style.display = "none";
+      renderProgramList();
+    }
+
+    function setStatusFilter(filter) {
+      currentStatusFilter = filter;
+      document.getElementById("filter-all").classList.toggle("active", filter === "all");
+      document.getElementById("filter-success").classList.toggle("active", filter === "success");
+      document.getElementById("filter-failed").classList.toggle("active", filter === "failed");
+      renderProgramList();
+    }
+
+    function onCatalogSearch() {
+      renderCatalogTable();
+    }
+
+    // 11. URL Hash Deep Linking
+    function updateUrlHash() {
+      if (portalMode === "catalog") {
+        location.hash = "mode=catalog";
+      } else if (selectedProgramId) {
+        location.hash = `program=${encodeURIComponent(selectedProgramId)}&tab=${encodeURIComponent(activeArtifactType)}`;
+      }
+    }
+
+    function parseUrlHash() {
+      const hash = location.hash.replace(/^#/, "");
+      if (!hash) return;
+
+      const params = new URLSearchParams(hash);
+      if (params.get("mode") === "catalog") {
+        setPortalMode("catalog");
+        return;
+      }
+
+      const progId = params.get("program");
+      const tab = params.get("tab");
+
+      if (progId) {
+        setPortalMode("viewer");
+        selectProgram(progId, tab);
+      }
+    }
+
+    function escapeHtml(str) {
+      if (!str) return "";
+      return String(str)
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#039;");
+    }
+
+    // 12. Bootstrap on Page Load
+    window.addEventListener("DOMContentLoaded", () => {
+      renderProgramList();
+      renderCatalogTable();
+
+      // Check if URL hash specifies initial selection
+      if (location.hash) {
+        parseUrlHash();
+      } else if (programs.length > 0) {
+        // Pick first successful program, or first program
+        const firstOk = programs.find(p => p.status === "SUCCESS") || programs[0];
+        selectProgram(firstOk.program_id);
+      } else {
+        showErrorMessage(
+          "No Programs Found",
+          "The batch manifest does not contain any COBOL programs.",
+          null
+        );
+      }
+    });
+
+    window.addEventListener("hashchange", parseUrlHash);
+  </script>
+</body>
+</html>

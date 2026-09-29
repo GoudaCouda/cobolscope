@@ -86,7 +86,8 @@ class TestBatchProcessing(unittest.TestCase):
 
         self.assertEqual(manifest["batch_summary"]["total_programs_found"], 2)
         self.assertEqual(manifest["batch_summary"]["succeeded"], 2)
-        self.assertEqual(manifest["batch_summary"]["failed"], 0)
+        self.assertEqual(manifest["batch_summary"]["portal"], "index.html")
+        self.assertTrue((out_dir / "index.html").exists())
 
         # Verify artifacts for both programs
         for prog in manifest["programs"]:
@@ -94,10 +95,12 @@ class TestBatchProcessing(unittest.TestCase):
             artifacts = prog["artifacts"]
             self.assertIn("call_graph", artifacts)
             self.assertIn("data_dictionary", artifacts)
+            self.assertIn("data_dictionary_html", artifacts)
             self.assertIn("ir", artifacts)
 
             self.assertTrue((out_dir / artifacts["call_graph"]).exists())
             self.assertTrue((out_dir / artifacts["data_dictionary"]).exists())
+            self.assertTrue((out_dir / artifacts["data_dictionary_html"]).exists())
             self.assertTrue((out_dir / artifacts["ir"]).exists())
 
 

@@ -97,8 +97,10 @@ from cobolscope.rules_generator import (
     generate_rules_file,
     scan_program_for_rules,
 )
+from cobolscope.portal import generate_portal
 
 __all__ = [
+    "generate_portal",
     "parse",
     "SourceLocation",
     "FieldUsage",
