@@ -173,3 +173,103 @@ def parse(
                 os.remove(tmp_output_path)
             except OSError:
                 pass
+
+
+def parse_batch(
+    input_files: List[Union[str, Path]],
+    output_dir: Union[str, Path],
+    format: str = "FIXED",
+    copybook_dirs: Optional[List[Union[str, Path]]] = None,
+    copybook_exts: Optional[List[str]] = None,
+    ignore_syntax_errors: bool = False,
+    jar_path: Optional[Union[str, Path]] = None,
+    runner_cp: Optional[Union[str, Path]] = None,
+    java_exe: str = "java",
+    extra_java_args: Optional[List[str]] = None,
+) -> Dict[str, Path]:
+    """
+    Parse multiple COBOL source files in a single JVM run and write Canonical IR JSON files.
+
+    Args:
+        input_files: List of file paths to parse.
+        output_dir: Destination folder to write parsed JSON files.
+        format: COBOL source format ("FIXED", "TANDEM", or "VARIABLE").
+        copybook_dirs: Optional list of directories containing copybooks.
+        copybook_exts: Optional list of file extensions for copybooks.
+        ignore_syntax_errors: Whether to ignore minor syntax errors.
+        jar_path: Optional path to proleap jar.
+        runner_cp: Optional path to compiled ProLeapCliRunner directory.
+        java_exe: Java executable name/path.
+        extra_java_args: Optional list of JVM options.
+
+    Returns:
+        Dict mapping source file path string to generated output JSON Path.
+    """
+    if not input_files:
+        return {}
+
+    fmt = format.upper()
+    if fmt not in VALID_FORMATS:
+        raise ValueError(f"Invalid format '{format}'. Must be one of {VALID_FORMATS}")
+
+    check_java_available(java_exe)
+    resolved_jar = find_jar(jar_path)
+    resolved_cp = find_runner_classpath(runner_cp)
+    classpath = build_classpath(resolved_cp, resolved_jar)
+
+    out_path = Path(output_dir).resolve()
+    out_path.mkdir(parents=True, exist_ok=True)
+
+    with tempfile.NamedTemporaryFile(mode="w", suffix=".txt", delete=False, encoding="utf-8") as manifest_file:
+        for f in input_files:
+            p = Path(f).resolve()
+            if p.exists():
+                manifest_file.write(str(p) + "\n")
+        manifest_path = Path(manifest_file.name)
+
+    try:
+        cmd = [java_exe]
+        if extra_java_args:
+            cmd.extend(extra_java_args)
+        cmd.extend([
+            "-cp", classpath, JAVA_MAIN_CLASS,
+            "--manifest", str(manifest_path),
+            fmt,
+            "--output-dir", str(out_path)
+        ])
+
+        if copybook_dirs:
+            for cp_dir in copybook_dirs:
+                cmd.extend(["-I", str(Path(cp_dir).resolve())])
+        if copybook_exts:
+            cmd.extend(["--copybook-ext", ",".join(copybook_exts)])
+        if ignore_syntax_errors:
+            cmd.append("--ignore-syntax-errors")
+
+        result = subprocess.run(
+            cmd,
+            stdout=subprocess.PIPE,
+            stderr=subprocess.PIPE,
+            text=True,
+        )
+
+        if result.returncode != 0:
+            err_msg = result.stderr.strip() or result.stdout.strip()
+            raise RuntimeError(f"ProLeap batch parser failed (exit code {result.returncode}):\n{err_msg}")
+
+        results: Dict[str, Path] = {}
+        for f in input_files:
+            p = Path(f).resolve()
+            json_file = out_path / f"{p.stem}.json"
+            if json_file.exists():
+                results[str(p)] = json_file
+
+        return results
+
+    finally:
+        if manifest_path.exists():
+            try:
+                os.remove(manifest_path)
+            except OSError:
+                pass
+

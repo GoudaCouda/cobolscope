@@ -8,6 +8,7 @@ import io.proleap.cobol.preprocessor.CobolPreprocessor.CobolSourceFormatEnum;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.PrintWriter;
+import java.nio.file.Files;
 import java.util.*;
 
 /**
@@ -38,9 +39,12 @@ public class ProLeapCliRunner {
     // =========================================================================
 
     public static void main(String[] args) {
-        if (args.length < 2) {
-            System.err.println("Usage: java ProLeapCliRunner <inputFile> <format> [outputFile] [options]");
+        if (args.length < 1) {
+            System.err.println("Usage: java ProLeapCliRunner <inputFileOrDir> [format] [outputFileOrDir] [options]");
             System.err.println("Options:");
+            System.err.println("  --batch                     Process folder or list of files in a single JVM run");
+            System.err.println("  --manifest <manifestFile>   File containing list of input COBOL files to parse");
+            System.err.println("  --output-dir <dir>          Directory to write parsed JSON files");
             System.err.println("  -I, --copybook-dir <dir>    Directory containing copybooks (repeatable or delimiter-separated)");
             System.err.println("  --copybook-ext <exts>       Comma-separated copybook extensions (default: cpy,cbl,cob,copy,inc,txt)");
             System.err.println("  --ignore-syntax-errors      Ignore minor syntax errors during ASG construction");
@@ -51,6 +55,9 @@ public class ProLeapCliRunner {
         String inputPath = null;
         String formatArg = null;
         String outputPath = null;
+        String manifestPath = null;
+        File outputDir = null;
+        boolean isBatch = false;
         List<File> copyBookDirs = new ArrayList<>();
         List<String> copyBookExts = new ArrayList<>();
         boolean ignoreSyntaxErrors = false;
@@ -73,25 +80,25 @@ public class ProLeapCliRunner {
                 }
             } else if ("--ignore-syntax-errors".equals(arg)) {
                 ignoreSyntaxErrors = true;
-            } else if (inputPath == null) {
+            } else if ("--batch".equals(arg)) {
+                isBatch = true;
+            } else if ("--manifest".equals(arg) && i + 1 < args.length) {
+                manifestPath = args[++i];
+                isBatch = true;
+            } else if ("--output-dir".equals(arg) && i + 1 < args.length) {
+                outputDir = new File(args[++i]);
+                isBatch = true;
+            } else if (inputPath == null && !arg.startsWith("-")) {
                 inputPath = arg;
-            } else if (formatArg == null) {
+            } else if (formatArg == null && !arg.startsWith("-")) {
                 formatArg = arg.toUpperCase();
-            } else if (outputPath == null) {
+            } else if (outputPath == null && !arg.startsWith("-")) {
                 outputPath = arg;
             }
         }
 
-        if (inputPath == null || formatArg == null) {
-            System.err.println("ERROR: Missing required input file or format arguments.");
-            System.exit(1);
-            return;
-        }
-
-        File inputFile = new File(inputPath);
-        if (!inputFile.exists()) {
-            System.err.println("ERROR: Input file does not exist: " + inputPath);
-            System.exit(2);
+        if (formatArg == null) {
+            formatArg = "FIXED";
         }
 
         CobolSourceFormatEnum format;
@@ -103,38 +110,128 @@ public class ProLeapCliRunner {
             return;
         }
 
-        try {
-            io.proleap.cobol.asg.params.impl.CobolParserParamsImpl params = new io.proleap.cobol.asg.params.impl.CobolParserParamsImpl();
-            params.setFormat(format);
-            params.setIgnoreSyntaxErrors(ignoreSyntaxErrors);
+        File inputFile = inputPath != null ? new File(inputPath) : null;
+        if (inputFile != null && inputFile.isDirectory()) {
+            isBatch = true;
+        }
 
-            if (!copyBookDirs.isEmpty()) {
-                params.setCopyBookDirectories(copyBookDirs);
-            }
-            if (!copyBookExts.isEmpty()) {
-                params.setCopyBookExtensions(copyBookExts);
-            } else {
-                params.setCopyBookExtensions(Arrays.asList("cpy", "cbl", "cob", "copy", "inc", "txt", ""));
+        if (!isBatch && manifestPath == null) {
+            if (inputFile == null || !inputFile.exists()) {
+                System.err.println("ERROR: Input file does not exist: " + inputPath);
+                System.exit(2);
+                return;
             }
 
-            Program program = new CobolParserRunnerImpl().analyzeFile(inputFile, params);
-            IrModel.ProgramModelDto model = extractProgramModel(program, inputFile, format);
+            try {
+                io.proleap.cobol.asg.params.impl.CobolParserParamsImpl params = new io.proleap.cobol.asg.params.impl.CobolParserParamsImpl();
+                params.setFormat(format);
+                params.setIgnoreSyntaxErrors(ignoreSyntaxErrors);
 
-            String jsonOutput = IrJsonWriter.toJson(model);
+                if (!copyBookDirs.isEmpty()) {
+                    params.setCopyBookDirectories(copyBookDirs);
+                }
+                if (!copyBookExts.isEmpty()) {
+                    params.setCopyBookExtensions(copyBookExts);
+                } else {
+                    params.setCopyBookExtensions(Arrays.asList("cpy", "cbl", "cob", "copy", "inc", "txt", ""));
+                }
 
-            if (outputPath != null && !outputPath.equals("-")) {
-                try (PrintWriter writer = new PrintWriter(new FileWriter(outputPath))) {
+                Program program = new CobolParserRunnerImpl().analyzeFile(inputFile, params);
+                IrModel.ProgramModelDto model = extractProgramModel(program, inputFile, format);
+
+                String jsonOutput = IrJsonWriter.toJson(model);
+
+                if (outputPath != null && !outputPath.equals("-")) {
+                    try (PrintWriter writer = new PrintWriter(new FileWriter(outputPath))) {
+                        writer.print(jsonOutput);
+                    }
+                } else {
+                    System.out.println(jsonOutput);
+                }
+
+            } catch (Exception e) {
+                System.err.println("ERROR: Extraction failed: " + e.getMessage());
+                e.printStackTrace(System.err);
+                System.exit(4);
+            }
+            return;
+        }
+
+        // --- Batch Execution Mode ---
+        if (outputDir == null) {
+            outputDir = (outputPath != null) ? new File(outputPath) : new File(".");
+        }
+        outputDir.mkdirs();
+
+        List<File> filesToProcess = new ArrayList<>();
+        if (manifestPath != null) {
+            try {
+                List<String> lines = Files.readAllLines(new File(manifestPath).toPath());
+                for (String line : lines) {
+                    line = line.trim();
+                    if (!line.isEmpty() && !line.startsWith("#")) {
+                        filesToProcess.add(new File(line));
+                    }
+                }
+            } catch (Exception e) {
+                System.err.println("ERROR: Could not read manifest " + manifestPath + ": " + e.getMessage());
+                System.exit(2);
+                return;
+            }
+        } else if (inputFile != null && inputFile.isDirectory()) {
+            File[] listed = inputFile.listFiles();
+            if (listed != null) {
+                for (File f : listed) {
+                    if (f.isFile()) {
+                        String name = f.getName().toLowerCase();
+                        if (name.endsWith(".cbl") || name.endsWith(".cob") || name.endsWith(".cobol")) {
+                            filesToProcess.add(f);
+                        }
+                    }
+                }
+            }
+        }
+
+        if (filesToProcess.isEmpty()) {
+            System.err.println("WARNING: No COBOL source files found to process.");
+            return;
+        }
+
+        final List<String> effectiveExts = !copyBookExts.isEmpty()
+            ? copyBookExts
+            : Arrays.asList("cpy", "cbl", "cob", "copy", "inc", "txt", "");
+        final File finalOutputDir = outputDir;
+        final boolean finalIgnoreSyntaxErrors = ignoreSyntaxErrors;
+
+        // Process all files in parallel within the single JVM instance
+        filesToProcess.parallelStream().forEach(file -> {
+            if (!file.exists() || !file.isFile()) {
+                System.err.println("WARNING: File not found: " + file.getAbsolutePath());
+                return;
+            }
+            try {
+                io.proleap.cobol.asg.params.impl.CobolParserParamsImpl params = new io.proleap.cobol.asg.params.impl.CobolParserParamsImpl();
+                params.setFormat(format);
+                params.setIgnoreSyntaxErrors(finalIgnoreSyntaxErrors);
+                if (!copyBookDirs.isEmpty()) {
+                    params.setCopyBookDirectories(copyBookDirs);
+                }
+                params.setCopyBookExtensions(effectiveExts);
+
+                Program program = new CobolParserRunnerImpl().analyzeFile(file, params);
+                IrModel.ProgramModelDto model = extractProgramModel(program, file, format);
+                String jsonOutput = IrJsonWriter.toJson(model);
+
+                String baseName = file.getName().replaceFirst("\\.[^.]+$", "");
+                File outFile = new File(finalOutputDir, baseName + ".json");
+                try (PrintWriter writer = new PrintWriter(new FileWriter(outFile))) {
                     writer.print(jsonOutput);
                 }
-            } else {
-                System.out.println(jsonOutput);
+                System.out.println("PARSED: " + file.getName() + " -> " + outFile.getName());
+            } catch (Exception e) {
+                System.err.println("ERROR parsing " + file.getName() + ": " + e.getMessage());
             }
-
-        } catch (Exception e) {
-            System.err.println("ERROR: Extraction failed: " + e.getMessage());
-            e.printStackTrace(System.err);
-            System.exit(4);
-        }
+        });
     }
 
     // =========================================================================

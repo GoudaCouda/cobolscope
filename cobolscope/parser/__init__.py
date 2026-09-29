@@ -4,6 +4,7 @@ cobolscope.parser - Python bridge to the ProLeap Java COBOL parser.
 
 from .runner import (
     parse,
+    parse_batch,
     find_jar,
     find_runner_classpath,
     check_java_available,
@@ -14,6 +15,7 @@ from .runner import (
 
 __all__ = [
     "parse",
+    "parse_batch",
     "find_jar",
     "find_runner_classpath",
     "check_java_available",

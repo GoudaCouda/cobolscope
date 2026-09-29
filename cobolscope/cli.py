@@ -19,6 +19,7 @@ from cobolscope.parser import (
     find_jar,
     find_runner_classpath,
     parse,
+    parse_batch,
 )
 
 
@@ -280,6 +281,211 @@ def _write_output(content: str, output_path: Optional[str]) -> None:
             pass
 
 
+def _run_batch_directory(
+    input_path: Path,
+    args: argparse.Namespace,
+    rules: Any,
+    log_verbose: Any,
+    overall_start: float,
+) -> int:
+    """Execute CobolScope in batch mode on a directory of COBOL programs using a single JVM run."""
+    cobol_exts = (".cbl", ".cob", ".cobol")
+    cobol_files = sorted([
+        p for p in input_path.rglob("*")
+        if p.is_file() and p.suffix.lower() in cobol_exts
+    ])
+    if not cobol_files:
+        print(f"ERROR: No COBOL source files (*.cbl, *.cob, *.cobol) found in {input_path}", file=sys.stderr)
+        return 2
+
+    out_dir = (Path(args.output) if args.output else Path("output") / input_path.name).resolve()
+    out_dir.mkdir(parents=True, exist_ok=True)
+    ir_dir = out_dir / "ir"
+    ir_dir.mkdir(parents=True, exist_ok=True)
+
+    log_verbose(f"Discovered {len(cobol_files)} COBOL programs in {input_path}")
+    log_verbose(f"Batch parsing via single Java ProLeap JVM...")
+
+    parse_start = time.perf_counter()
+    try:
+        batch_results = parse_batch(
+            input_files=cobol_files,
+            output_dir=ir_dir,
+            format=args.format,
+            copybook_dirs=args.copybook_dirs,
+            copybook_exts=args.copybook_exts,
+            ignore_syntax_errors=args.ignore_syntax_errors,
+            jar_path=args.jar,
+            runner_cp=args.runner_cp,
+            java_exe=args.java_exe,
+            extra_java_args=args.java_args,
+        )
+    except (FileNotFoundError, EnvironmentError) as e:
+        print(f"ERROR: Environment setup error: {e}", file=sys.stderr)
+        return 5
+    except RuntimeError as e:
+        print(f"ERROR: {e}", file=sys.stderr)
+        return 4
+    except Exception as e:
+        print(f"ERROR: Batch parsing failed: {e}", file=sys.stderr)
+        return 1
+
+    parse_dur = (time.perf_counter() - parse_start) * 1000
+    log_verbose(f"Java batch parsing completed in {parse_dur:.2f} ms ({len(batch_results)} files succeeded)")
+
+    from cobolscope.models import ProgramModel
+
+    manifest_programs = []
+    success_count = 0
+    fail_count = 0
+
+    for cobol_file in cobol_files:
+        src_key = str(cobol_file.resolve())
+        json_file = batch_results.get(src_key)
+
+        if not json_file or not json_file.exists():
+            fail_count += 1
+            manifest_programs.append({
+                "program_id": cobol_file.stem,
+                "source_file": cobol_file.name,
+                "relative_source": str(cobol_file.relative_to(input_path)).replace("\\", "/"),
+                "status": "FAILED",
+                "error": "Failed during Java AST extraction or missing copybook",
+                "artifacts": {},
+            })
+            continue
+
+        try:
+            with open(json_file, "r", encoding="utf-8") as f:
+                raw_dict = json.load(f)
+            model = ProgramModel.from_dict(raw_dict)
+            prog_id = model.program_id or cobol_file.stem
+
+            artifacts = {
+                "ir": str(json_file.relative_to(out_dir)).replace("\\", "/")
+            }
+
+            # A. Data Dictionary Generation
+            if args.generate_dictionary:
+                from cobolscope.data_dictionary import generate_data_dictionary
+                ext = "md" if args.dict_format in ("markdown", "md") else args.dict_format
+                dict_filename = f"{prog_id}_dict.{ext}"
+                dict_path = out_dir / dict_filename
+                dict_content = generate_data_dictionary(
+                    model,
+                    format=args.dict_format,
+                    hide_fillers=args.hide_fillers,
+                )
+                dict_path.write_text(dict_content, encoding="utf-8")
+                artifacts["data_dictionary"] = dict_filename
+
+            # B. Call Graph Generation
+            if args.generate_graph:
+                from cobolscope.graph import generate_call_graph
+                ext = args.graph_format
+                graph_filename = f"{prog_id}.{ext}"
+                graph_path = out_dir / graph_filename
+                graph_content = generate_call_graph(
+                    model,
+                    format=args.graph_format,
+                    hide_fallthrough=not args.show_fallthrough,
+                    collapse_exits=args.collapse_exits,
+                    enable_clustering=args.enable_clustering,
+                    cluster_mode=args.cluster_mode,
+                    compact_nodes=not args.detailed_nodes,
+                    concentrate=args.concentrate,
+                    splines=args.splines,
+                    initial_engine=args.graph_engine,
+                    rules=rules,
+                )
+                graph_path.write_text(graph_content, encoding="utf-8")
+                artifacts["call_graph"] = graph_filename
+
+            # C. Reachability
+            if args.generate_reachability or args.save_transitions:
+                from cobolscope.reachability import PushdownReachabilityAnalyzer
+                analyzer = PushdownReachabilityAnalyzer(model, rules=rules)
+                reachability_model = analyzer.analyze()
+                reach_filename = f"{prog_id}_reachability.json"
+                reach_path = out_dir / reach_filename
+                reach_path.write_text(reachability_model.model_dump_json(indent=2), encoding="utf-8")
+                artifacts["reachability"] = reach_filename
+
+            # D. Level 3 CFG
+            if args.cfg_target:
+                from cobolscope.graph import build_procedure_cfg
+                from cobolscope.models import ParagraphNode
+                target_name = args.cfg_target.strip()
+                cfg_filename = f"{prog_id}_cfg.json"
+                cfg_path = out_dir / cfg_filename
+                if target_name.lower() == "all":
+                    all_cfgs = {}
+                    for p in model.paragraphs:
+                        p_cfg = build_procedure_cfg(model.program_id, p, rules=rules)
+                        all_cfgs[p.name] = p_cfg.to_cytoscape_elements() if args.cfg_format == "cytoscape" else p_cfg.model_dump()
+                    cfg_path.write_text(json.dumps(all_cfgs, indent=2), encoding="utf-8")
+                else:
+                    para = model.get_paragraph(target_name)
+                    if not para:
+                        for s in model.sections:
+                            if s.name.upper().strip() == target_name.upper():
+                                para = ParagraphNode(name=s.name, location=s.location, statements=s.statements)
+                                break
+                    if para:
+                        p_cfg = build_procedure_cfg(model.program_id, para, rules=rules)
+                        content = p_cfg.to_cytoscape_json() if args.cfg_format == "cytoscape" else p_cfg.model_dump_json(indent=2)
+                        cfg_path.write_text(content, encoding="utf-8")
+                artifacts["cfg"] = cfg_filename
+
+            # Stats calculation
+            from cobolscope.graph.cfg_builder import compute_cyclomatic_complexity
+            total_stmts = sum(len(p.statements) for p in model.paragraphs)
+            max_cc = max((compute_cyclomatic_complexity(p.statements) for p in model.paragraphs), default=1)
+
+            manifest_programs.append({
+                "program_id": prog_id,
+                "source_file": cobol_file.name,
+                "relative_source": str(cobol_file.relative_to(input_path)).replace("\\", "/"),
+                "total_paragraphs": len(model.paragraphs),
+                "total_statements": total_stmts,
+                "max_cyclomatic_complexity": max_cc,
+                "entry_point": model.paragraphs[0].name if model.paragraphs else None,
+                "status": "SUCCESS",
+                "artifacts": artifacts,
+            })
+            success_count += 1
+
+        except Exception as e:
+            fail_count += 1
+            manifest_programs.append({
+                "program_id": cobol_file.stem,
+                "source_file": cobol_file.name,
+                "relative_source": str(cobol_file.relative_to(input_path)).replace("\\", "/"),
+                "status": "ERROR",
+                "error": str(e),
+                "artifacts": {},
+            })
+
+    total_dur_ms = round((time.perf_counter() - overall_start) * 1000, 2)
+    manifest = {
+        "batch_summary": {
+            "source_directory": str(input_path.resolve()),
+            "total_programs_found": len(cobol_files),
+            "succeeded": success_count,
+            "failed": fail_count,
+            "format": args.format,
+            "duration_ms": total_dur_ms,
+        },
+        "programs": manifest_programs,
+    }
+    manifest_file = out_dir / "manifest.json"
+    manifest_file.write_text(json.dumps(manifest, indent=2), encoding="utf-8")
+
+    total_s = total_dur_ms / 1000.0
+    print(f"[COBOLSCOPE] Batch completed: {success_count}/{len(cobol_files)} programs processed in {total_s:.2f}s -> {out_dir.resolve()} (manifest: {manifest_file.name})")
+    return 0 if fail_count == 0 else 1
+
+
 def main(argv: Optional[Sequence[str]] = None) -> int:
     """Main CLI entry point."""
     args = parse_args(argv)
@@ -334,6 +540,9 @@ def main(argv: Optional[Sequence[str]] = None) -> int:
     from cobolscope.rules import load_rules
     rules = load_rules(path=args.rules_file)
     log_verbose(f"Loaded rules (runtime_modules={len(rules.runtime_modules)}, strict_paragraphs={len(rules.paragraph_names.strict)})")
+
+    if input_path.is_dir():
+        return _run_batch_directory(input_path, args, rules, log_verbose, overall_start)
 
     log_verbose(f"Starting CobolScope CLI on target: {input_path}")
     log_verbose(f"Source format: {args.format}")
