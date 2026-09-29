@@ -285,6 +285,7 @@ def _run_batch_directory(
     input_path: Path,
     args: argparse.Namespace,
     rules: Any,
+    log_info: Any,
     log_verbose: Any,
     overall_start: float,
 ) -> int:
@@ -303,8 +304,21 @@ def _run_batch_directory(
     ir_dir = out_dir / "ir"
     ir_dir.mkdir(parents=True, exist_ok=True)
 
-    log_verbose(f"Discovered {len(cobol_files)} COBOL programs in {input_path}")
-    log_verbose(f"Batch parsing via single Java ProLeap JVM...")
+    log_info(f"Target directory: {input_path.resolve()} ({len(cobol_files)} COBOL programs found)")
+    log_info("Parsing COBOL sources via single-JVM ProLeap bridge (streaming)...")
+
+    def on_parser_progress(channel: str, line: str) -> None:
+        if line.startswith("PARSED: "):
+            info = line[len("PARSED: "):]
+            log_info(f"  ✓ {info}")
+        elif line.startswith("ERROR: "):
+            err = line[len("ERROR: "):]
+            log_info(f"  ⚠ {err}")
+        elif line.startswith("WARNING: "):
+            warn = line[len("WARNING: "):]
+            log_info(f"  ⚠ {warn}")
+        else:
+            log_verbose(f"[Java {channel}] {line}")
 
     parse_start = time.perf_counter()
     try:
@@ -319,6 +333,7 @@ def _run_batch_directory(
             runner_cp=args.runner_cp,
             java_exe=args.java_exe,
             extra_java_args=args.java_args,
+            on_progress=on_parser_progress,
         )
     except (FileNotFoundError, EnvironmentError) as e:
         print(f"ERROR: Environment setup error: {e}", file=sys.stderr)
@@ -331,7 +346,7 @@ def _run_batch_directory(
         return 1
 
     parse_dur = (time.perf_counter() - parse_start) * 1000
-    log_verbose(f"Java batch parsing completed in {parse_dur:.2f} ms ({len(batch_results)} files succeeded)")
+    log_info(f"Java batch parsing completed in {parse_dur:.2f} ms ({len(batch_results)}/{len(cobol_files)} succeeded)")
 
     from cobolscope.models import ProgramModel
 
@@ -339,7 +354,21 @@ def _run_batch_directory(
     success_count = 0
     fail_count = 0
 
-    for cobol_file in cobol_files:
+    active_modes = []
+    if args.generate_graph:
+        active_modes.append(f"Call Graph ({args.graph_format})")
+    if args.generate_dictionary:
+        active_modes.append(f"Data Dict ({args.dict_format})")
+    if args.generate_reachability or args.save_transitions:
+        active_modes.append("Reachability")
+    if args.cfg_target:
+        active_modes.append(f"CFG ({args.cfg_target})")
+    if not active_modes:
+        active_modes.append("Canonical IR")
+
+    log_info(f"Generating artifacts [{', '.join(active_modes)}] for {len(batch_results)} programs...")
+
+    for idx, cobol_file in enumerate(cobol_files, 1):
         src_key = str(cobol_file.resolve())
         json_file = batch_results.get(src_key)
 
@@ -454,6 +483,9 @@ def _run_batch_directory(
                 "artifacts": artifacts,
             })
             success_count += 1
+            generated_list = [k for k in artifacts if k != "ir"]
+            summary_str = f"generated {', '.join(generated_list)}" if generated_list else "IR saved"
+            log_info(f"  -> [{idx}/{len(cobol_files)}] {prog_id}: {summary_str}")
 
         except Exception as e:
             fail_count += 1
@@ -465,6 +497,7 @@ def _run_batch_directory(
                 "error": str(e),
                 "artifacts": {},
             })
+            log_info(f"  ⚠ [{idx}/{len(cobol_files)}] {cobol_file.name}: {e}")
 
     total_dur_ms = round((time.perf_counter() - overall_start) * 1000, 2)
     manifest = {
@@ -482,7 +515,7 @@ def _run_batch_directory(
     manifest_file.write_text(json.dumps(manifest, indent=2), encoding="utf-8")
 
     total_s = total_dur_ms / 1000.0
-    print(f"[COBOLSCOPE] Batch completed: {success_count}/{len(cobol_files)} programs processed in {total_s:.2f}s -> {out_dir.resolve()} (manifest: {manifest_file.name})")
+    log_info(f"Batch completed: {success_count}/{len(cobol_files)} programs processed in {total_s:.2f}s -> {out_dir.resolve()} (manifest: {manifest_file.name})")
     return 0 if fail_count == 0 else 1
 
 
@@ -496,6 +529,10 @@ def main(argv: Optional[Sequence[str]] = None) -> int:
         if verbose:
             sys.stderr.write(f"[DEBUG] {msg}\n")
             sys.stderr.flush()
+
+    def log_info(msg: str) -> None:
+        sys.stderr.write(f"[COBOLSCOPE] {msg}\n")
+        sys.stderr.flush()
 
     # 0. Handle --init-rules
     if args.init_rules:
@@ -542,14 +579,13 @@ def main(argv: Optional[Sequence[str]] = None) -> int:
     log_verbose(f"Loaded rules (runtime_modules={len(rules.runtime_modules)}, strict_paragraphs={len(rules.paragraph_names.strict)})")
 
     if input_path.is_dir():
-        return _run_batch_directory(input_path, args, rules, log_verbose, overall_start)
+        return _run_batch_directory(input_path, args, rules, log_info, log_verbose, overall_start)
 
-    log_verbose(f"Starting CobolScope CLI on target: {input_path}")
-    log_verbose(f"Source format: {args.format}")
+    log_info(f"Target: {input_path.name} (format: {args.format})")
+    log_info("Parsing AST via Java ProLeap bridge...")
 
     # 1. Parse COBOL source via Java parser bridge
     parse_start = time.perf_counter()
-    log_verbose("Invoking ProLeap Java parser bridge...")
     try:
         raw_dict = parse(
             input_file=input_path,
@@ -573,7 +609,8 @@ def main(argv: Optional[Sequence[str]] = None) -> int:
         return 1
 
     parse_dur = (time.perf_counter() - parse_start) * 1000
-    log_verbose(f"Java parsing completed in {parse_dur:.2f} ms")
+    para_count = len(raw_dict.get("paragraphs", []))
+    log_info(f"AST parsed ({para_count} paragraphs) in {parse_dur:.2f} ms")
 
     # 2. Dispatch to requested mode
     try:
@@ -588,8 +625,8 @@ def main(argv: Optional[Sequence[str]] = None) -> int:
             model_dur = (time.perf_counter() - dict_start) * 1000
             log_verbose(f"ProgramModel hydrated in {model_dur:.2f} ms")
 
+            log_info(f"Generating Data Dictionary (format={args.dict_format}, hide_fillers={args.hide_fillers})...")
             gen_start = time.perf_counter()
-            log_verbose(f"Generating Data Dictionary (format={args.dict_format}, hide_fillers={args.hide_fillers})...")
             content = generate_data_dictionary(
                 model,
                 format=args.dict_format,
@@ -604,7 +641,8 @@ def main(argv: Optional[Sequence[str]] = None) -> int:
             log_verbose(f"Output written in {write_dur:.2f} ms")
 
             total_dur = (time.perf_counter() - overall_start) * 1000
-            log_verbose(f"Total pipeline execution time: {total_dur:.2f} ms")
+            out_desc = args.output if args.output else "stdout"
+            log_info(f"Data Dictionary completed in {total_dur:.2f} ms -> {out_desc}")
             return 0
 
         # B. Call Graph Generation
@@ -618,8 +656,8 @@ def main(argv: Optional[Sequence[str]] = None) -> int:
             model_dur = (time.perf_counter() - graph_start) * 1000
             log_verbose(f"ProgramModel hydrated in {model_dur:.2f} ms")
 
+            log_info(f"Rendering Call Graph (format={args.graph_format})...")
             gen_start = time.perf_counter()
-            log_verbose(f"Rendering Call Graph (format={args.graph_format})...")
             content = generate_call_graph(
                 model,
                 format=args.graph_format,
@@ -642,7 +680,8 @@ def main(argv: Optional[Sequence[str]] = None) -> int:
             log_verbose(f"Output written in {write_dur:.2f} ms")
 
             total_dur = (time.perf_counter() - overall_start) * 1000
-            log_verbose(f"Total pipeline execution time: {total_dur:.2f} ms")
+            out_desc = args.output if args.output else "stdout"
+            log_info(f"Call Graph completed in {total_dur:.2f} ms -> {out_desc}")
             return 0
 
         # C. Pushdown Reachability Analysis
@@ -656,8 +695,8 @@ def main(argv: Optional[Sequence[str]] = None) -> int:
             model_dur = (time.perf_counter() - reach_start) * 1000
             log_verbose(f"ProgramModel hydrated in {model_dur:.2f} ms")
 
+            log_info("Running Pushdown Reachability Analysis...")
             an_start = time.perf_counter()
-            log_verbose("Running Pushdown Reachability Analysis...")
             analyzer = PushdownReachabilityAnalyzer(model, rules=rules)
             reachability_model = analyzer.analyze()
             an_dur = (time.perf_counter() - an_start) * 1000
@@ -669,13 +708,15 @@ def main(argv: Optional[Sequence[str]] = None) -> int:
                 reachability_model.to_json_file(args.save_transitions)
                 save_dur = (time.perf_counter() - save_start) * 1000
                 log_verbose(f"Transitions saved in {save_dur:.2f} ms")
+                log_info(f"Transitions saved -> {args.save_transitions}")
 
             if args.generate_reachability:
                 content = reachability_model.model_dump_json(indent=2)
                 _write_output(content, args.output)
 
             total_dur = (time.perf_counter() - overall_start) * 1000
-            log_verbose(f"Total pipeline execution time: {total_dur:.2f} ms")
+            out_desc = args.output if args.output else "stdout"
+            log_info(f"Reachability analysis completed in {total_dur:.2f} ms -> {out_desc}")
             return 0
 
         # D. Level 3 Intra-Procedural CFG Generation
@@ -690,8 +731,8 @@ def main(argv: Optional[Sequence[str]] = None) -> int:
             log_verbose(f"ProgramModel hydrated in {model_dur:.2f} ms")
 
             target_name = args.cfg_target.strip()
+            log_info(f"Generating Level 3 CFG (target='{target_name}', format={args.cfg_format})...")
             if target_name.lower() == "all":
-                log_verbose("Generating Level 3 CFG for all procedures...")
                 all_cfgs = {}
                 for p in model.paragraphs:
                     p_cfg = build_procedure_cfg(model.program_id, p, rules=rules)
@@ -701,7 +742,6 @@ def main(argv: Optional[Sequence[str]] = None) -> int:
                         all_cfgs[p.name] = p_cfg.model_dump()
                 content = json.dumps(all_cfgs, indent=2)
             else:
-                log_verbose(f"Generating Level 3 CFG for procedure '{target_name}'...")
                 para = model.get_paragraph(target_name)
                 if not para:
                     for s in model.sections:
@@ -723,11 +763,12 @@ def main(argv: Optional[Sequence[str]] = None) -> int:
             write_dur = (time.perf_counter() - write_start) * 1000
             log_verbose(f"Output written in {write_dur:.2f} ms")
             total_dur = (time.perf_counter() - overall_start) * 1000
-            log_verbose(f"Total pipeline execution time: {total_dur:.2f} ms")
+            out_desc = args.output if args.output else "stdout"
+            log_info(f"CFG generation completed in {total_dur:.2f} ms -> {out_desc}")
             return 0
 
         # E. Default Mode: Output Canonical IR JSON
-        log_verbose("Serializing Canonical IR to JSON...")
+        log_info("Serializing Canonical IR to JSON...")
         json_start = time.perf_counter()
         content = json.dumps(raw_dict, indent=2)
         json_dur = (time.perf_counter() - json_start) * 1000
@@ -739,7 +780,8 @@ def main(argv: Optional[Sequence[str]] = None) -> int:
         log_verbose(f"Output written in {write_dur:.2f} ms")
 
         total_dur = (time.perf_counter() - overall_start) * 1000
-        log_verbose(f"Total pipeline execution time: {total_dur:.2f} ms")
+        out_desc = args.output if args.output else "stdout"
+        log_info(f"Canonical IR JSON generated in {total_dur:.2f} ms -> {out_desc}")
         return 0
 
     except Exception as e:

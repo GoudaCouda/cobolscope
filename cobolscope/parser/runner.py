@@ -6,8 +6,9 @@ import json
 import os
 import subprocess
 import tempfile
+import threading
 from pathlib import Path
-from typing import Any, Dict, List, Optional, Union
+from typing import Any, Callable, Dict, List, Optional, Union
 
 VALID_FORMATS = ("FIXED", "TANDEM", "VARIABLE")
 JAVA_MAIN_CLASS = "ProLeapCliRunner"
@@ -186,6 +187,7 @@ def parse_batch(
     runner_cp: Optional[Union[str, Path]] = None,
     java_exe: str = "java",
     extra_java_args: Optional[List[str]] = None,
+    on_progress: Optional[Callable[[str, str], None]] = None,
 ) -> Dict[str, Path]:
     """
     Parse multiple COBOL source files in a single JVM run and write Canonical IR JSON files.
@@ -201,6 +203,7 @@ def parse_batch(
         runner_cp: Optional path to compiled ProLeapCliRunner directory.
         java_exe: Java executable name/path.
         extra_java_args: Optional list of JVM options.
+        on_progress: Optional callback invoked with (channel, line) as progress updates arrive in real-time.
 
     Returns:
         Dict mapping source file path string to generated output JSON Path.
@@ -246,16 +249,46 @@ def parse_batch(
         if ignore_syntax_errors:
             cmd.append("--ignore-syntax-errors")
 
-        result = subprocess.run(
+        proc = subprocess.Popen(
             cmd,
             stdout=subprocess.PIPE,
             stderr=subprocess.PIPE,
             text=True,
+            bufsize=1,
         )
 
-        if result.returncode != 0:
-            err_msg = result.stderr.strip() or result.stdout.strip()
-            raise RuntimeError(f"ProLeap batch parser failed (exit code {result.returncode}):\n{err_msg}")
+        stderr_lines: List[str] = []
+
+        def stream_stderr():
+            if proc.stderr:
+                try:
+                    for line in proc.stderr:
+                        s = line.rstrip()
+                        if s:
+                            stderr_lines.append(s)
+                            if on_progress:
+                                on_progress("stderr", s)
+                finally:
+                    proc.stderr.close()
+
+        err_thread = threading.Thread(target=stream_stderr, daemon=True)
+        err_thread.start()
+
+        if proc.stdout:
+            try:
+                for line in proc.stdout:
+                    s = line.rstrip()
+                    if s and on_progress:
+                        on_progress("stdout", s)
+            finally:
+                proc.stdout.close()
+
+        proc.wait()
+        err_thread.join(timeout=2.0)
+
+        if proc.returncode != 0:
+            err_msg = "\n".join(stderr_lines).strip()
+            raise RuntimeError(f"ProLeap batch parser failed (exit code {proc.returncode}):\n{err_msg}")
 
         results: Dict[str, Path] = {}
         for f in input_files:

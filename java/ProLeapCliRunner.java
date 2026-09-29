@@ -202,13 +202,17 @@ public class ProLeapCliRunner {
             : Arrays.asList("cpy", "cbl", "cob", "copy", "inc", "txt", "");
         final File finalOutputDir = outputDir;
         final boolean finalIgnoreSyntaxErrors = ignoreSyntaxErrors;
+        final java.util.concurrent.atomic.AtomicInteger processedCounter = new java.util.concurrent.atomic.AtomicInteger(0);
+        final int totalFiles = filesToProcess.size();
 
         // Process all files in parallel within the single JVM instance
         filesToProcess.parallelStream().forEach(file -> {
             if (!file.exists() || !file.isFile()) {
                 System.err.println("WARNING: File not found: " + file.getAbsolutePath());
+                System.err.flush();
                 return;
             }
+            long t0 = System.currentTimeMillis();
             try {
                 io.proleap.cobol.asg.params.impl.CobolParserParamsImpl params = new io.proleap.cobol.asg.params.impl.CobolParserParamsImpl();
                 params.setFormat(format);
@@ -227,9 +231,15 @@ public class ProLeapCliRunner {
                 try (PrintWriter writer = new PrintWriter(new FileWriter(outFile))) {
                     writer.print(jsonOutput);
                 }
-                System.out.println("PARSED: " + file.getName() + " -> " + outFile.getName());
+                long elapsed = System.currentTimeMillis() - t0;
+                int current = processedCounter.incrementAndGet();
+                int paraCount = model.paragraphs != null ? model.paragraphs.size() : 0;
+                System.out.println("PARSED: [" + current + "/" + totalFiles + "] " + file.getName() + " in " + elapsed + "ms (" + paraCount + " paragraphs)");
+                System.out.flush();
             } catch (Exception e) {
-                System.err.println("ERROR parsing " + file.getName() + ": " + e.getMessage());
+                int current = processedCounter.incrementAndGet();
+                System.err.println("ERROR: [" + current + "/" + totalFiles + "] " + file.getName() + ": " + e.getMessage());
+                System.err.flush();
             }
         });
     }
