@@ -24,6 +24,12 @@
           <span>Cycles</span>
         </span>
         {% endif %}
+        {% if graph.hidden_error_nodes %}
+        <span class="dot">•</span>
+        <span title="{{ graph.hidden_error_nodes|length }} error trap routine(s) hidden: {{ graph.hidden_error_nodes|join(', ') }}">
+          {{ graph.hidden_error_nodes|length }} error trap(s) hidden
+        </span>
+        {% endif %}
       </div>
     </div>
 

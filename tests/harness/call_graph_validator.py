@@ -55,6 +55,8 @@ class CallGraphValidator:
         if is_section_based:
             model_secs = {s.name.upper().strip() for s in self.model.sections}
             graph_nodes = set(self.graph.nodes.keys())
+            if self.generator.hide_error_traps:
+                graph_nodes.update(self.generator.hidden_error_nodes)
             missing = model_secs - graph_nodes
             assert not missing, f"Missing sections in call graph: {missing}"
         else:
@@ -64,6 +66,8 @@ class CallGraphValidator:
                 for node in self.graph.nodes.values():
                     for exit_name in node.collapsed_exit_nodes:
                         graph_nodes.add(exit_name.upper().strip())
+            if self.generator.hide_error_traps:
+                graph_nodes.update(self.generator.hidden_error_nodes)
             missing = model_paras - graph_nodes
             assert not missing, f"Missing paragraphs in call graph: {missing}"
         return True
@@ -116,6 +120,11 @@ class CallGraphValidator:
         for (caller, target) in ast_calls:
             caller_proc = symbol_to_proc.get(caller, caller)
             target_proc = symbol_to_proc.get(target, target)
+
+            if self.generator.hide_error_traps and (target_proc in self.generator.hidden_error_nodes or target.upper().strip() in self.generator.hidden_error_nodes):
+                continue
+            if self.generator.hide_error_traps and (caller_proc in self.generator.hidden_error_nodes or caller.upper().strip() in self.generator.hidden_error_nodes):
+                continue
 
             if caller_proc != target_proc and target_proc in self.graph.nodes:
                 assert (caller_proc, target_proc) in graph_edges, (

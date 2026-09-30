@@ -69,7 +69,7 @@ def format_dot_node(node: CallGraphNode, indent: int = 4, compact: bool = True) 
 
     # 5. I/O Badges
     if io_str:
-        badge_color = "#DC2626" if "TERMINAL" in io_str else ("#107C41" if "READ" in io_str or "WRITE" in io_str else "#5C2D91")
+        badge_color = "#475569" if "TERMINAL" in io_str else ("#107C41" if "READ" in io_str or "WRITE" in io_str else "#5C2D91")
         rows.append(f'<tr><td align="center" cellpadding="1"><font color="{badge_color}" point-size="8"><b>[{html.escape(io_str)}]</b></font></td></tr>')
 
     # 6. Subtle Data Dictionary Field Lineage (rendered on node face when not compact)

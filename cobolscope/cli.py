@@ -212,6 +212,13 @@ def build_arg_parser() -> argparse.ArgumentParser:
         default=True,
         help="Disable Graphviz edge concentration/trunk merging.",
     )
+    graph_group.add_argument(
+        "--show-error-traps",
+        action="store_true",
+        dest="show_error_traps",
+        default=False,
+        help="Include error trap / abend handling procedures and relationships in the call graph (hidden by default).",
+    )
 
     # ---------------------------------------------------------
     # Rules & Termination Options
@@ -446,6 +453,7 @@ def _run_batch_directory(
                     splines=args.splines,
                     initial_engine=args.graph_engine,
                     rules=rules,
+                    hide_error_traps=not args.show_error_traps,
                 )
                 graph_path.write_text(graph_content, encoding="utf-8")
                 artifacts["call_graph"] = graph_filename
@@ -722,6 +730,7 @@ def main(argv: Optional[Sequence[str]] = None) -> int:
                 splines=args.splines,
                 initial_engine=args.graph_engine,
                 rules=rules,
+                hide_error_traps=not args.show_error_traps,
             )
             gen_dur = (time.perf_counter() - gen_start) * 1000
             log_verbose(f"Call Graph rendered in {gen_dur:.2f} ms")

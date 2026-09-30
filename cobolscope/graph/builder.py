@@ -66,6 +66,7 @@ class CallGraphGenerator:
         concentrate: bool = True,
         splines: str = "spline",
         rules: Optional[Union[GlobalRules, EffectiveProgramRules]] = None,
+        hide_error_traps: bool = True,
     ):
         self.model = model
         self.rules = rules
@@ -75,6 +76,8 @@ class CallGraphGenerator:
         self.concentrate = concentrate
         self.splines = splines
         self.cluster_mode = (cluster_mode or "auto").lower().strip()
+        self.hide_error_traps = hide_error_traps
+        self.hidden_error_nodes: Set[str] = set()
 
         is_section_based = len(self.model.sections) > 0 and any(len(s.paragraph_names) > 0 for s in self.model.sections)
         if not enable_clustering or self.cluster_mode == "none":
@@ -409,13 +412,33 @@ class CallGraphGenerator:
                 return True
             n_clean = node_obj.name.upper().strip()
             if getattr(self, "termination_classifier", None):
-                if (
-                    node_obj.is_terminal
-                    or n_clean in self.termination_classifier.terminal_paragraphs
-                    or self.termination_classifier.effective_rules.is_terminal_name(n_clean)
-                ):
+                if self.termination_classifier.is_abend_procedure(node_obj):
                     return True
-            return any(k in n_clean for k in ("ABEND", "ERROR", "SYS-ERR", "FATAL", "TRAP", "EXCEPTION"))
+                if self.termination_classifier.effective_rules.is_terminal_name(n_clean):
+                    return True
+                if self.termination_classifier.effective_rules.is_runtime_abend_module(n_clean):
+                    return True
+            return any(k in n_clean for k in ("ABEND", "FATAL", "SYS-ERR", "KILL", "ABORT", "CANCEL"))
+
+        self.hidden_error_nodes = set()
+        if self.hide_error_traps:
+            for p_name_up, node in list(nodes.items()):
+                if len(nodes) > 1 and is_error_trap(node):
+                    self.hidden_error_nodes.add(p_name_up)
+                    del nodes[p_name_up]
+                    if node.cluster_id in cluster_map and node.id in cluster_map[node.cluster_id].node_ids:
+                        cluster_map[node.cluster_id].node_ids.remove(node.id)
+
+            # Clean up successors and called_by lists for retained nodes
+            for node in nodes.values():
+                node.successors = [
+                    s for s in node.successors
+                    if symbol_to_proc.get(s.upper().strip(), s.upper().strip()) not in self.hidden_error_nodes
+                ]
+                node.called_by = [
+                    c for c in node.called_by
+                    if symbol_to_proc.get(c.upper().strip(), c.upper().strip()) not in self.hidden_error_nodes
+                ]
 
         for src_proc_key, src_node in nodes.items():
             stmts = proc_statements.get(src_proc_key, [])
@@ -556,6 +579,7 @@ class CallGraphGenerator:
             cycles=cycles,
             sccs=sccs,
             reachability_transitions_count=len(reachability_model.state_transitions),
+            hidden_error_nodes=sorted(list(self.hidden_error_nodes)),
         )
 
     def _collect_all_statements(self, stmts: List[AnyStatementNode]) -> List[AnyStatementNode]:
@@ -802,6 +826,7 @@ def generate_call_graph(
     initial_engine: str = "cytoscape",
     rules: Optional[Union[GlobalRules, EffectiveProgramRules]] = None,
     output_path: Optional[Union[str, Path]] = None,
+    hide_error_traps: bool = True,
 ) -> str:
     """
     Convenience functional API to generate Level-2 Procedure Call Graphs
@@ -817,6 +842,7 @@ def generate_call_graph(
         concentrate=concentrate,
         splines=splines,
         rules=rules,
+        hide_error_traps=hide_error_traps,
     )
 
     fmt = format.lower().strip()

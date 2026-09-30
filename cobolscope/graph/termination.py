@@ -391,6 +391,62 @@ class TerminationClassifier:
 
         return False
 
+    def is_abend_procedure(self, name_or_para: Union[str, ParagraphNode, SectionNode, Any]) -> bool:
+        """
+        Determines whether a procedure is specifically an abnormal termination / error trap routine
+        (e.g., 999-ABEND, CEE3ABD, deliberate crash sequence, EXEC CICS ABEND),
+        as opposed to normal clean termination (STOP RUN, GOBACK, EXIT PROGRAM, EXEC CICS RETURN).
+        """
+        if isinstance(name_or_para, str):
+            p_name = name_or_para.upper().strip()
+            stmts = []
+        elif hasattr(name_or_para, "name"):
+            p_name = getattr(name_or_para, "name", "").upper().strip()
+            stmts = getattr(name_or_para, "statements", []) or []
+        else:
+            return False
+
+        # Step 0: Check per-program exclusions
+        if self.effective_rules.is_excluded(p_name):
+            return False
+
+        # Step 1: Configured strict abend paragraphs & patterns from rules (e.g. 999-ABEND, FATAL-ERROR, *-ABEND)
+        if self.effective_rules.is_strict_terminal(p_name) or self.effective_rules.matches_terminal_pattern(p_name):
+            return True
+
+        # Step 2: Runtime abend module name (e.g. CEE3ABD, ILBOABN0, ABNDPROC, ABORT, CANCL)
+        if self.effective_rules.is_runtime_abend_module(p_name) or p_name in self.known_abend_programs:
+            return True
+
+        # Step 3: Inspect procedure statements for explicit abend module calls or CICS ABEND
+        for s in stmts:
+            if isinstance(s, CallStatementNode):
+                prog = (getattr(s, "program", "") or getattr(s, "target", "") or "").strip().strip("'\"").upper()
+                if self.effective_rules.is_runtime_abend_module(prog) or prog in self.known_abend_programs:
+                    return True
+                if prog == "CBLTDLI":
+                    params = [
+                        p.strip().strip("'\"").upper()
+                        for p in getattr(s, "using_parameters", []) or []
+                    ]
+                    if any(p in ("ROLL", "ROLS") for p in params):
+                        return True
+            elif isinstance(s, ExecCicsStatementNode):
+                payload = (getattr(s, "raw_payload", "") or "").upper()
+                txt = (getattr(s, "raw_text", "") or "").upper()
+                if re.search(r"\b(?:EXEC\s+CICS\s+)?ABEND\b", f"{payload} {txt}"):
+                    return True
+
+        # Step 4: Deliberate S0C7 crash sequence
+        if self.effective_rules.detect_s0c7_idioms and self.has_deliberate_s0c7_idiom(stmts):
+            return True
+
+        # Step 5: Heuristic regex match on routine name
+        if _RE_ABEND_NAME.search(p_name):
+            return True
+
+        return False
+
     @classmethod
     def for_program(
         cls,
