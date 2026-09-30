@@ -31,6 +31,21 @@
       document.getElementById("inspStmts").textContent = node.statement_count;
       document.getElementById("inspCluster").textContent = node.cluster_id.replace("cluster_", "");
 
+      const btnViewCode = document.getElementById("btnViewRoutineCode");
+      if (btnViewCode) {
+        if (node.start_line > 0) {
+          btnViewCode.disabled = false;
+          btnViewCode.querySelector("span").textContent = `View Routine Code (L${node.start_line}-L${node.end_line})`;
+        } else {
+          btnViewCode.disabled = true;
+          btnViewCode.querySelector("span").textContent = `View Routine Code (Line info unavailable)`;
+        }
+      }
+
+      if (typeof highlightRoutineInCode === "function") {
+        highlightRoutineInCode(node.start_line, node.end_line, node.name);
+      }
+
       // Render Level 3 Action or Enhanced Linear Summary Card
       renderCfgInspectorSection(node);
 

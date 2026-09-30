@@ -450,6 +450,202 @@
       overflow: hidden;
     }
 
+    .portal-splitter {
+      width: 6px;
+      background: var(--border-color);
+      cursor: col-resize;
+      user-select: none;
+      touch-action: none;
+      position: relative;
+      z-index: 20;
+      transition: background 0.15s;
+      flex-shrink: 0;
+    }
+
+    .portal-splitter:hover,
+    .portal-splitter.active {
+      background: var(--primary);
+    }
+
+    .drag-shield {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      z-index: 999;
+      cursor: col-resize;
+      background: transparent;
+    }
+
+    .pane-view {
+      display: flex;
+      width: 100%;
+      height: 100%;
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* Dual Pane Comparison View */
+    .dual-pane-view {
+      display: flex;
+      width: 100%;
+      height: 100%;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .dual-pane-left,
+    .dual-pane-right {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      background: #FFFFFF;
+      min-width: 250px;
+    }
+
+    .dual-pane-splitter {
+      width: 6px;
+      background: var(--border-color);
+      cursor: col-resize;
+      user-select: none;
+      touch-action: none;
+      position: relative;
+      z-index: 20;
+      transition: background 0.15s;
+      flex-shrink: 0;
+    }
+
+    .dual-pane-splitter:hover,
+    .dual-pane-splitter.active {
+      background: var(--primary);
+    }
+
+    .dual-pane-header {
+      height: 34px;
+      min-height: 34px;
+      background: #F8FAFC;
+      border-bottom: 1px solid var(--border-color);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 12px;
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--text-secondary);
+    }
+
+    .dual-select {
+      font-size: 11px;
+      padding: 2px 8px;
+      border: 1px solid var(--border-color);
+      border-radius: 4px;
+      background: #FFFFFF;
+      color: var(--text-primary);
+      outline: none;
+      cursor: pointer;
+    }
+
+    .dual-frame {
+      flex: 1;
+      width: 100%;
+      height: 100%;
+      border: none;
+      display: block;
+      background: #FFFFFF;
+    }
+
+    /* Portal Source Code Viewer Container */
+    .source-container {
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      background: #FFFFFF;
+    }
+
+    .source-toolbar {
+      height: 30px;
+      background: #F8FAFC;
+      border-bottom: 1px solid var(--border-color);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 12px;
+      font-size: 11px;
+      color: var(--text-muted);
+    }
+
+    .cobol-columns-indicator {
+      display: flex;
+      gap: 8px;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+      font-size: 11px;
+    }
+
+    .col-guide {
+      color: #94A3B8;
+    }
+
+    .source-search-box input {
+      height: 22px;
+      width: 160px;
+      font-size: 11px;
+      padding: 2px 6px;
+      border: 1px solid var(--border-color);
+      border-radius: 4px;
+      outline: none;
+      background: #FFFFFF;
+    }
+
+    .source-table-wrap {
+      flex: 1;
+      overflow: auto;
+      background: #FFFFFF;
+    }
+
+    table.cobol-code-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+      font-size: 12px;
+      line-height: 1.5;
+    }
+
+    table.cobol-code-table tr:hover td {
+      background-color: #F8FAFC;
+    }
+
+    td.code-line-num {
+      width: 55px;
+      min-width: 55px;
+      text-align: right;
+      padding: 0 8px;
+      color: #94A3B8;
+      background: #F8FAFC;
+      border-right: 1px solid var(--border-color);
+      user-select: none;
+      font-size: 11px;
+    }
+
+    td.code-line-text {
+      padding: 0 10px;
+      white-space: pre;
+      color: #1E293B;
+    }
+
+    tr.line-highlighted td.code-line-text {
+      background: #EFF6FC !important;
+    }
+
+    tr.line-highlighted td.code-line-num {
+      background: #E0F2FE !important;
+      color: var(--primary);
+      font-weight: 700;
+    }
+
     iframe#content-frame {
       width: 100%;
       height: 100%;
@@ -679,7 +875,7 @@
     <!-- Split Viewer Mode -->
     <div id="viewer-container" style="display:flex; width:100%; height:100%;">
       <!-- Left Sidebar: Program List -->
-      <aside class="portal-sidebar">
+      <aside class="portal-sidebar" id="portal-sidebar">
         <div class="sidebar-search-box">
           <div class="search-input-wrapper">
             <input type="search" id="prog-search" placeholder="Search programs (ID, name)..." oninput="onSearchInput()" autocomplete="off" />
@@ -701,6 +897,9 @@
         </div>
       </aside>
 
+      <!-- Resizable Sidebar Splitter -->
+      <div class="portal-splitter" id="sidebar-splitter" title="Drag to resize sidebar"></div>
+
       <!-- Right Content Area: Viewer Pane -->
       <section class="portal-content">
         <div class="content-toolbar">
@@ -713,30 +912,89 @@
 
           <div class="artifact-tab-group" id="artifact-tabs">
             <button id="tab-graph" class="tab-btn active" onclick="switchArtifact('call_graph')">Call Graph</button>
+            <button id="tab-source" class="tab-btn" onclick="switchArtifact('source')">Source Code</button>
             <button id="tab-dict" class="tab-btn" onclick="switchArtifact('data_dictionary')">Data Dictionary</button>
             <button id="tab-ir" class="tab-btn" onclick="switchArtifact('ir')">IR JSON</button>
           </div>
 
           <div class="content-actions">
+            <button id="btn-dual-pane" class="tab-btn" onclick="togglePortalDualPane()" title="Compare two artifacts side-by-side" style="margin-right:4px;">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="12" y1="3" x2="12" y2="21"/></svg>
+              <span>Dual Pane</span>
+            </button>
             <a id="open-tab-btn" class="action-link" href="#" target="_blank" title="Open artifact in standalone browser tab">
               Open in New Tab
             </a>
           </div>
         </div>
 
-        <div class="viewer-frame-container">
-          <iframe id="content-frame" src="about:blank"></iframe>
+        <div class="viewer-frame-container" id="viewer-frame-container">
+          <div id="drag-shield" class="drag-shield" style="display:none;"></div>
 
-          <div class="message-container" id="message-container">
-            <div class="message-card" id="message-card">
-              <h3 id="message-title">Notice</h3>
-              <p id="message-text">Please select a program from the sidebar to inspect its Call Graph or Data Dictionary.</p>
-              <div class="error-trace" id="message-trace" style="display:none;"></div>
+          <!-- Single Pane View -->
+          <div class="pane-view" id="single-pane-view">
+            <iframe id="content-frame" src="about:blank"></iframe>
+
+            <div class="source-container" id="source-container" style="display:none;">
+              <div class="source-toolbar">
+                <div class="cobol-columns-indicator">
+                  <span class="col-guide" title="Columns 1-6: Sequence Number">1-6</span>
+                  <span class="col-guide" title="Column 7: Indicator Area">7</span>
+                  <span class="col-guide" title="Columns 8-11: Area A">8-11 Area A</span>
+                  <span class="col-guide" title="Columns 12-72: Area B">12-72 Area B</span>
+                  <span class="col-guide" title="Columns 73-80: Identification">73-80</span>
+                </div>
+                <div class="source-search-box">
+                  <input type="text" id="portal-source-search" placeholder="Jump to line / text..." onkeydown="onPortalSourceSearch(event)" />
+                </div>
+              </div>
+              <div class="source-table-wrap">
+                <table class="cobol-code-table" id="portal-source-table">
+                  <tbody id="portal-source-tbody"></tbody>
+                </table>
+              </div>
+            </div>
+
+            <div class="message-container" id="message-container">
+              <div class="message-card" id="message-card">
+                <h3 id="message-title">Notice</h3>
+                <p id="message-text">Please select a program from the sidebar to inspect its Call Graph, Source Code, or Data Dictionary.</p>
+                <div class="error-trace" id="message-trace" style="display:none;"></div>
+              </div>
+            </div>
+
+            <div class="json-container" id="json-container">
+              <pre id="json-pre"></pre>
             </div>
           </div>
 
-          <div class="json-container" id="json-container">
-            <pre id="json-pre"></pre>
+          <!-- Dual Pane View -->
+          <div class="dual-pane-view" id="dual-pane-view" style="display:none;">
+            <div class="dual-pane-left" id="dual-pane-left">
+              <div class="dual-pane-header">
+                <span class="dual-pane-title" id="dual-left-title">Pane 1 (Call Graph)</span>
+                <select id="dual-left-select" class="dual-select" onchange="onDualPaneSelect('left', this.value)">
+                  <option value="call_graph" selected>Call Graph</option>
+                  <option value="source">Source Code</option>
+                  <option value="data_dictionary">Data Dictionary</option>
+                  <option value="ir">IR JSON</option>
+                </select>
+              </div>
+              <iframe id="dual-left-frame" class="dual-frame" src="about:blank"></iframe>
+            </div>
+            <div class="dual-pane-splitter" id="dual-pane-splitter" title="Drag to resize panels"></div>
+            <div class="dual-pane-right" id="dual-pane-right">
+              <div class="dual-pane-header">
+                <span class="dual-pane-title" id="dual-right-title">Pane 2 (Source Code)</span>
+                <select id="dual-right-select" class="dual-select" onchange="onDualPaneSelect('right', this.value)">
+                  <option value="call_graph">Call Graph</option>
+                  <option value="source" selected>Source Code</option>
+                  <option value="data_dictionary">Data Dictionary</option>
+                  <option value="ir">IR JSON</option>
+                </select>
+              </div>
+              <iframe id="dual-right-frame" class="dual-frame" src="about:blank"></iframe>
+            </div>
           </div>
         </div>
       </section>
@@ -791,10 +1049,16 @@
 
     const programs = manifestData.programs || [];
     let selectedProgramId = null;
-    let activeArtifactType = "call_graph"; // "call_graph" | "data_dictionary" | "ir"
+    let activeArtifactType = "call_graph"; // "call_graph" | "source" | "data_dictionary" | "ir"
     let currentStatusFilter = "all";
     let searchQuery = "";
     let portalMode = "viewer";
+
+    // Dual-Pane Comparison State
+    let isDualPane = false;
+    let dualLeftType = "call_graph";
+    let dualRightType = "source";
+    const cachedSources = {};
 
     // 2. DOM Elements
     const programListEl = document.getElementById("program-list");
@@ -803,6 +1067,8 @@
     const progCountLabel = document.getElementById("prog-count-label");
     const currentTitleEl = document.getElementById("current-title");
     const currentChipsEl = document.getElementById("current-chips");
+    const portalSidebar = document.getElementById("portal-sidebar");
+    const sidebarSplitter = document.getElementById("sidebar-splitter");
     const contentFrame = document.getElementById("content-frame");
     const messageContainer = document.getElementById("message-container");
     const messageTitle = document.getElementById("message-title");
@@ -813,14 +1079,31 @@
     const jsonPre = document.getElementById("json-pre");
     const openTabBtn = document.getElementById("open-tab-btn");
     const tabGraph = document.getElementById("tab-graph");
+    const tabSource = document.getElementById("tab-source");
     const tabDict = document.getElementById("tab-dict");
     const tabIr = document.getElementById("tab-ir");
+    const btnDualPane = document.getElementById("btn-dual-pane");
     const viewerContainer = document.getElementById("viewer-container");
     const catalogContainer = document.getElementById("catalog-container");
     const viewModeViewer = document.getElementById("view-mode-viewer");
     const viewModeCatalog = document.getElementById("view-mode-catalog");
     const catalogTableBody = document.getElementById("catalog-table-body");
     const catalogSearchInput = document.getElementById("catalog-search");
+    const dragShield = document.getElementById("drag-shield");
+    const singlePaneView = document.getElementById("single-pane-view");
+    const dualPaneView = document.getElementById("dual-pane-view");
+    const dualPaneLeft = document.getElementById("dual-pane-left");
+    const dualPaneRight = document.getElementById("dual-pane-right");
+    const dualPaneSplitter = document.getElementById("dual-pane-splitter");
+    const dualLeftFrame = document.getElementById("dual-left-frame");
+    const dualRightFrame = document.getElementById("dual-right-frame");
+    const dualLeftSelect = document.getElementById("dual-left-select");
+    const dualRightSelect = document.getElementById("dual-right-select");
+    const dualLeftTitle = document.getElementById("dual-left-title");
+    const dualRightTitle = document.getElementById("dual-right-title");
+    const sourceContainer = document.getElementById("source-container");
+    const portalSourceTbody = document.getElementById("portal-source-tbody");
+    const portalSourceSearch = document.getElementById("portal-source-search");
 
     // 3. Render Program List in Sidebar
     function renderProgramList() {
@@ -855,6 +1138,7 @@
         item.onclick = () => selectProgram(p.program_id);
 
         const hasGraph = !!(p.artifacts && p.artifacts.call_graph);
+        const hasSource = !!(p.artifacts && p.artifacts.source);
         const hasDict = !!(p.artifacts && (p.artifacts.data_dictionary_html || p.artifacts.data_dictionary));
         const isOk = p.status === "SUCCESS";
 
@@ -869,6 +1153,7 @@
               <span class="badge badge-metric">${p.total_paragraphs || 0} para</span>
               <span class="badge badge-metric">CC: ${p.max_cyclomatic_complexity || 1}</span>
               ${hasGraph ? '<span class="badge badge-artifact">Graph</span>' : ''}
+              ${hasSource ? '<span class="badge badge-artifact">Source</span>' : ''}
               ${hasDict ? '<span class="badge badge-artifact">Dict</span>' : ''}
             ` : `
               <span class="badge badge-status-fail">Parsing error</span>
@@ -914,22 +1199,27 @@
       // Check available artifacts
       const artifacts = prog.artifacts || {};
       const hasGraph = !!artifacts.call_graph;
+      const hasSource = !!artifacts.source;
       const hasDict = !!(artifacts.data_dictionary_html || artifacts.data_dictionary);
       const hasIr = !!artifacts.ir;
 
       tabGraph.disabled = !hasGraph;
+      tabSource.disabled = !hasSource;
       tabDict.disabled = !hasDict;
       tabIr.disabled = !hasIr;
 
       // Pick active artifact
       if (preferredArtifact && (
         (preferredArtifact === "call_graph" && hasGraph) ||
+        (preferredArtifact === "source" && hasSource) ||
         (preferredArtifact === "data_dictionary" && hasDict) ||
         (preferredArtifact === "ir" && hasIr)
       )) {
         activeArtifactType = preferredArtifact;
       } else if (hasGraph) {
         activeArtifactType = "call_graph";
+      } else if (hasSource) {
+        activeArtifactType = "source";
       } else if (hasDict) {
         activeArtifactType = "data_dictionary";
       } else if (hasIr) {
@@ -939,13 +1229,19 @@
       }
 
       updateArtifactTabsUI();
-      loadActiveArtifact(prog);
+
+      if (isDualPane) {
+        updateDualPaneView();
+      } else {
+        loadActiveArtifact(prog);
+      }
       updateUrlHash();
     }
 
     // 5. Update Artifact Tabs UI
     function updateArtifactTabsUI() {
       tabGraph.classList.toggle("active", activeArtifactType === "call_graph");
+      tabSource.classList.toggle("active", activeArtifactType === "source");
       tabDict.classList.toggle("active", activeArtifactType === "data_dictionary");
       tabIr.classList.toggle("active", activeArtifactType === "ir");
     }
@@ -956,12 +1252,16 @@
       updateArtifactTabsUI();
       const prog = programs.find(p => p.program_id === selectedProgramId);
       if (prog) {
-        loadActiveArtifact(prog);
+        if (isDualPane) {
+          updateDualPaneView();
+        } else {
+          loadActiveArtifact(prog);
+        }
         updateUrlHash();
       }
     }
 
-    // 7. Load Active Artifact into Frame / Viewer
+    // 7. Load Active Artifact into Single-Pane View
     function loadActiveArtifact(prog) {
       if (!prog) return;
 
@@ -981,6 +1281,8 @@
 
       if (activeArtifactType === "call_graph") {
         targetUrl = artifacts.call_graph;
+      } else if (activeArtifactType === "source") {
+        targetUrl = artifacts.source;
       } else if (activeArtifactType === "data_dictionary") {
         targetUrl = artifacts.data_dictionary_html || artifacts.data_dictionary;
       } else if (activeArtifactType === "ir") {
@@ -1000,6 +1302,12 @@
       openTabBtn.style.display = "inline-flex";
       openTabBtn.href = targetUrl;
 
+      // Source Code Rendering
+      if (activeArtifactType === "source") {
+        renderPortalSource(targetUrl);
+        return;
+      }
+
       // Special handling for IR JSON
       if (activeArtifactType === "ir" || targetUrl.endsWith(".json")) {
         fetchJsonContent(targetUrl);
@@ -1007,15 +1315,94 @@
       }
 
       // Default: Load inside iframe
+      sourceContainer.style.display = "none";
       jsonContainer.style.display = "none";
       messageContainer.style.display = "none";
       contentFrame.style.display = "block";
       contentFrame.src = targetUrl;
     }
 
+    // Source Code Viewer Rendering in Portal
+    function renderPortalSource(url) {
+      contentFrame.style.display = "none";
+      jsonContainer.style.display = "none";
+      messageContainer.style.display = "none";
+      sourceContainer.style.display = "flex";
+
+      if (cachedSources[url]) {
+        populatePortalSourceTable(cachedSources[url]);
+        return;
+      }
+
+      portalSourceTbody.innerHTML = `<tr><td colspan="2" style="padding:24px; text-align:center; color:var(--text-muted);">Loading source file...</td></tr>`;
+
+      fetch(url)
+        .then(res => {
+          if (!res.ok) throw new Error(`HTTP ${res.status}`);
+          return res.text();
+        })
+        .then(text => {
+          cachedSources[url] = text;
+          populatePortalSourceTable(text);
+        })
+        .catch(() => {
+          // If fetch fails (e.g. file:// CORS), fallback to loading raw file into iframe
+          sourceContainer.style.display = "none";
+          contentFrame.style.display = "block";
+          contentFrame.src = url;
+        });
+    }
+
+    function populatePortalSourceTable(text) {
+      const lines = text ? text.split(/\r?\n/) : [];
+      const fragment = document.createDocumentFragment();
+
+      for (let i = 0; i < lines.length; i++) {
+        const lineNum = i + 1;
+        const lineText = lines[i];
+
+        const tr = document.createElement("tr");
+        tr.id = `portal-line-${lineNum}`;
+
+        const tdNum = document.createElement("td");
+        tdNum.className = "code-line-num";
+        tdNum.textContent = lineNum;
+
+        const tdText = document.createElement("td");
+        tdText.className = "code-line-text";
+        const codeEl = document.createElement("code");
+        codeEl.textContent = lineText;
+        tdText.appendChild(codeEl);
+
+        tr.appendChild(tdNum);
+        tr.appendChild(tdText);
+        fragment.appendChild(tr);
+      }
+
+      portalSourceTbody.innerHTML = "";
+      portalSourceTbody.appendChild(fragment);
+    }
+
+    function onPortalSourceSearch(e) {
+      if (e.key !== "Enter") return;
+      e.preventDefault();
+      const val = (portalSourceSearch.value || "").trim();
+      if (!val) return;
+
+      if (/^\d+$/.test(val)) {
+        const targetLine = document.getElementById(`portal-line-${val}`);
+        if (targetLine) {
+          document.querySelectorAll("#portal-source-tbody tr.line-highlighted").forEach(r => r.classList.remove("line-highlighted"));
+          targetLine.classList.add("line-highlighted");
+          targetLine.scrollIntoView({ behavior: "smooth", block: "center" });
+        }
+      }
+    }
+
     // Helper: Show Error / Status Message in Canvas
     function showErrorMessage(title, text, trace) {
       contentFrame.style.display = "none";
+      sourceContainer.style.display = "none";
       jsonContainer.style.display = "none";
       messageContainer.style.display = "flex";
 
@@ -1033,6 +1420,7 @@
     // Helper: Display Formatted JSON
     function fetchJsonContent(url) {
       contentFrame.style.display = "none";
+      sourceContainer.style.display = "none";
       messageContainer.style.display = "none";
       jsonContainer.style.display = "block";
       jsonPre.textContent = "Loading Canonical IR...";
@@ -1048,6 +1436,156 @@
           contentFrame.style.display = "block";
           contentFrame.src = url;
         });
+    }
+
+    // Dual-Pane View Controller
+    function togglePortalDualPane() {
+      isDualPane = !isDualPane;
+      btnDualPane.classList.toggle("active", isDualPane);
+
+      if (isDualPane) {
+        singlePaneView.style.display = "none";
+        dualPaneView.style.display = "flex";
+
+        // Restore dual pane ratio
+        let ratio = 50;
+        const savedRatio = localStorage.getItem("cobolscope_portal_dual_ratio");
+        if (savedRatio) {
+          const parsed = parseFloat(savedRatio);
+          if (!isNaN(parsed) && parsed >= 20 && parsed <= 80) ratio = parsed;
+        }
+        dualPaneLeft.style.flex = `${ratio} 1 0px`;
+        dualPaneRight.style.flex = `${100 - ratio} 1 0px`;
+
+        updateDualPaneView();
+      } else {
+        dualPaneView.style.display = "none";
+        singlePaneView.style.display = "flex";
+        const prog = programs.find(p => p.program_id === selectedProgramId);
+        if (prog) loadActiveArtifact(prog);
+      }
+    }
+
+    function onDualPaneSelect(side, type) {
+      if (side === "left") {
+        dualLeftType = type;
+      } else {
+        dualRightType = type;
+      }
+      updateDualPaneView();
+    }
+
+    function updateDualPaneView() {
+      const prog = programs.find(p => p.program_id === selectedProgramId);
+      if (!prog || prog.status !== "SUCCESS") return;
+
+      const artifacts = prog.artifacts || {};
+
+      function getUrlForType(t) {
+        if (t === "call_graph") return artifacts.call_graph;
+        if (t === "source") return artifacts.source;
+        if (t === "data_dictionary") return artifacts.data_dictionary_html || artifacts.data_dictionary;
+        if (t === "ir") return artifacts.ir;
+        return null;
+      }
+
+      const leftUrl = getUrlForType(dualLeftType);
+      const rightUrl = getUrlForType(dualRightType);
+
+      dualLeftTitle.textContent = `Pane 1 (${dualLeftType.replace('_', ' ')})`;
+      dualRightTitle.textContent = `Pane 2 (${dualRightType.replace('_', ' ')})`;
+      dualLeftSelect.value = dualLeftType;
+      dualRightSelect.value = dualRightType;
+
+      if (leftUrl) dualLeftFrame.src = leftUrl;
+      if (rightUrl) dualRightFrame.src = rightUrl;
+    }
+
+    // Sidebar Resizer Interaction
+    function setupSidebarSplitter() {
+      if (!sidebarSplitter || !portalSidebar) return;
+
+      // Restore saved sidebar width
+      const savedWidth = localStorage.getItem("cobolscope_portal_sidebar_width");
+      if (savedWidth) {
+        const parsed = parseInt(savedWidth, 10);
+        if (!isNaN(parsed) && parsed >= 220 && parsed <= 600) {
+          portalSidebar.style.width = `${parsed}px`;
+        }
+      }
+
+      let isDragging = false;
+
+      sidebarSplitter.addEventListener("pointerdown", (e) => {
+        isDragging = true;
+        sidebarSplitter.setPointerCapture(e.pointerId);
+        sidebarSplitter.classList.add("active");
+        dragShield.style.display = "block";
+        document.body.classList.add("is-resizing");
+        e.preventDefault();
+      });
+
+      sidebarSplitter.addEventListener("pointermove", (e) => {
+        if (!isDragging) return;
+        const newWidth = e.clientX;
+        const clampedWidth = Math.max(220, Math.min(600, newWidth));
+        portalSidebar.style.width = `${clampedWidth}px`;
+        localStorage.setItem("cobolscope_portal_sidebar_width", clampedWidth.toString());
+      });
+
+      const stopDrag = (e) => {
+        if (isDragging) {
+          isDragging = false;
+          sidebarSplitter.classList.remove("active");
+          dragShield.style.display = "none";
+          document.body.classList.remove("is-resizing");
+          try { sidebarSplitter.releasePointerCapture(e.pointerId); } catch (_) {}
+        }
+      };
+
+      sidebarSplitter.addEventListener("pointerup", stopDrag);
+      sidebarSplitter.addEventListener("pointercancel", stopDrag);
+    }
+
+    // Dual-Pane Resizer Interaction
+    function setupDualPaneSplitter() {
+      if (!dualPaneSplitter || !dualPaneLeft || !dualPaneRight || !dualPaneView) return;
+
+      let isDragging = false;
+
+      dualPaneSplitter.addEventListener("pointerdown", (e) => {
+        isDragging = true;
+        dualPaneSplitter.setPointerCapture(e.pointerId);
+        dualPaneSplitter.classList.add("active");
+        dragShield.style.display = "block";
+        document.body.classList.add("is-resizing");
+        e.preventDefault();
+      });
+
+      dualPaneSplitter.addEventListener("pointermove", (e) => {
+        if (!isDragging) return;
+        const rect = dualPaneView.getBoundingClientRect();
+        const currentX = e.clientX - rect.left;
+        let ratio = (currentX / rect.width) * 100;
+        ratio = Math.max(20, Math.min(80, ratio));
+
+        dualPaneLeft.style.flex = `${ratio} 1 0px`;
+        dualPaneRight.style.flex = `${100 - ratio} 1 0px`;
+        localStorage.setItem("cobolscope_portal_dual_ratio", ratio.toFixed(1));
+      });
+
+      const stopDrag = (e) => {
+        if (isDragging) {
+          isDragging = false;
+          dualPaneSplitter.classList.remove("active");
+          dragShield.style.display = "none";
+          document.body.classList.remove("is-resizing");
+          try { dualPaneSplitter.releasePointerCapture(e.pointerId); } catch (_) {}
+        }
+      };
+
+      dualPaneSplitter.addEventListener("pointerup", stopDrag);
+      dualPaneSplitter.addEventListener("pointercancel", stopDrag);
     }
 
     // 8. Render Catalog Table
@@ -1190,6 +1728,8 @@
 
     // 12. Bootstrap on Page Load
     window.addEventListener("DOMContentLoaded", () => {
+      setupSidebarSplitter();
+      setupDualPaneSplitter();
       renderProgramList();
       renderCatalogTable();
 

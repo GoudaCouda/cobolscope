@@ -103,3 +103,4 @@ class CallGraph(BaseModel):
     sccs: List[List[str]] = Field(default_factory=list)
     reachability_transitions_count: int = 0
     hidden_error_nodes: List[str] = Field(default_factory=list)
+    source_code: Optional[str] = None

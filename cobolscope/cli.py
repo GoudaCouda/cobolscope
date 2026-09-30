@@ -405,9 +405,22 @@ def _run_batch_directory(
             model = ProgramModel.from_dict(raw_dict)
             prog_id = model.program_id or cobol_file.stem
 
+            source_text = None
+            artifacts_source = None
+            try:
+                source_text = cobol_file.read_text(encoding="utf-8", errors="replace")
+                model.source_code = source_text
+                source_filename = f"{prog_id}.cbl"
+                (out_dir / source_filename).write_text(source_text, encoding="utf-8")
+                artifacts_source = source_filename
+            except Exception:
+                pass
+
             artifacts = {
                 "ir": str(json_file.relative_to(out_dir)).replace("\\", "/")
             }
+            if artifacts_source:
+                artifacts["source"] = artifacts_source
 
             # A. Data Dictionary Generation
             if args.generate_dictionary:
@@ -454,6 +467,7 @@ def _run_batch_directory(
                     initial_engine=args.graph_engine,
                     rules=rules,
                     hide_error_traps=not args.show_error_traps,
+                    source_code=source_text,
                 )
                 graph_path.write_text(graph_content, encoding="utf-8")
                 artifacts["call_graph"] = graph_filename
@@ -713,6 +727,18 @@ def main(argv: Optional[Sequence[str]] = None) -> int:
             from cobolscope.graph import generate_call_graph
 
             model = ProgramModel.from_dict(raw_dict)
+            source_text = None
+            if args.input_file:
+                try:
+                    src_p = Path(args.input_file)
+                    if src_p.is_file() and src_p.suffix.lower() not in (".json",):
+                        source_text = src_p.read_text(encoding="utf-8", errors="replace")
+                        model.source_code = source_text
+                except Exception:
+                    pass
+            if not source_text and hasattr(model, "get_source_text"):
+                source_text = model.get_source_text()
+
             model_dur = (time.perf_counter() - graph_start) * 1000
             log_verbose(f"ProgramModel hydrated in {model_dur:.2f} ms")
 
@@ -731,6 +757,7 @@ def main(argv: Optional[Sequence[str]] = None) -> int:
                 initial_engine=args.graph_engine,
                 rules=rules,
                 hide_error_traps=not args.show_error_traps,
+                source_code=source_text,
             )
             gen_dur = (time.perf_counter() - gen_start) * 1000
             log_verbose(f"Call Graph rendered in {gen_dur:.2f} ms")

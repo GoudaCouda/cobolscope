@@ -1,0 +1,348 @@
+// Split-Screen Source Code Viewer & Workspace Resizers
+(function() {
+  const sourceCode = typeof sourceCodeRaw !== "undefined" ? sourceCodeRaw : "";
+  const codeLines = sourceCode ? sourceCode.split(/\r?\n/) : [];
+
+  const canvasEl = document.getElementById("canvas");
+  const codeSplitPane = document.getElementById("codeSplitPane");
+  const splitterCanvasCode = document.getElementById("splitterCanvasCode");
+  const splitterInspector = document.getElementById("splitterInspector");
+  const inspectorEl = document.getElementById("inspector");
+  const workspaceMain = document.getElementById("workspaceMain");
+  const btnToggleCodeSplit = document.getElementById("btnToggleCodeSplit");
+  const btnCloseCodeSplit = document.getElementById("btnCloseCodeSplit");
+  const btnSyncRoutineCode = document.getElementById("btnSyncRoutineCode");
+  const codeJumpLineInput = document.getElementById("codeJumpLineInput");
+  const codeCurrentRoutineBadge = document.getElementById("codeCurrentRoutineBadge");
+  const codeLineCountInfo = document.getElementById("codeLineCountInfo");
+  const codeEmptyState = document.getElementById("codeEmptyState");
+  const cobolCodeTable = document.getElementById("cobolCodeTable");
+  const cobolCodeTbody = document.getElementById("cobolCodeTbody");
+  const btnViewRoutineCode = document.getElementById("btnViewRoutineCode");
+
+  let isCodeSplitOpen = false;
+  let currentStartLine = 0;
+  let currentEndLine = 0;
+
+  // 1. Initial Render of Code Lines
+  function renderSourceLines() {
+    if (!codeLines || codeLines.length === 0) {
+      if (codeEmptyState) codeEmptyState.style.display = "block";
+      if (cobolCodeTable) cobolCodeTable.style.display = "none";
+      if (codeLineCountInfo) codeLineCountInfo.textContent = "0 lines";
+      return;
+    }
+
+    if (codeEmptyState) codeEmptyState.style.display = "none";
+    if (cobolCodeTable) cobolCodeTable.style.display = "table";
+    if (codeLineCountInfo) codeLineCountInfo.textContent = `${codeLines.length} lines`;
+
+    const fragment = document.createDocumentFragment();
+    for (let i = 0; i < codeLines.length; i++) {
+      const lineNum = i + 1;
+      const rawText = codeLines[i];
+
+      const tr = document.createElement("tr");
+      tr.id = `code-line-${lineNum}`;
+      tr.className = "code-line-row";
+
+      const tdNum = document.createElement("td");
+      tdNum.className = "code-line-num";
+      tdNum.textContent = lineNum;
+      tdNum.title = `Line ${lineNum} (Click to select)`;
+      tdNum.onclick = () => focusSingleLine(lineNum);
+
+      const tdText = document.createElement("td");
+      tdText.className = "code-line-text";
+
+      const codeEl = document.createElement("code");
+      codeEl.textContent = rawText;
+      tdText.appendChild(codeEl);
+
+      tr.appendChild(tdNum);
+      tr.appendChild(tdText);
+      fragment.appendChild(tr);
+    }
+
+    cobolCodeTbody.innerHTML = "";
+    cobolCodeTbody.appendChild(fragment);
+  }
+
+  // 2. Toggle Code Split Pane (Default: 65% Graph / 35% Code)
+  window.toggleCodeSplit = function(forceState) {
+    const targetState = forceState !== undefined ? forceState : !isCodeSplitOpen;
+    isCodeSplitOpen = targetState;
+
+    if (isCodeSplitOpen) {
+      codeSplitPane.style.display = "flex";
+      splitterCanvasCode.style.display = "block";
+      if (btnToggleCodeSplit) btnToggleCodeSplit.classList.add("active");
+
+      // Retrieve persisted ratio or use strict 65% Graph / 35% Code default
+      let ratio = 65;
+      const savedRatio = localStorage.getItem("cobolscope_code_split_ratio");
+      if (savedRatio) {
+        const parsed = parseFloat(savedRatio);
+        if (!isNaN(parsed) && parsed >= 20 && parsed <= 80) {
+          ratio = parsed;
+        }
+      }
+
+      canvasEl.style.flex = `${ratio} 1 0px`;
+      codeSplitPane.style.flex = `${100 - ratio} 1 0px`;
+
+      if (cy) {
+        setTimeout(() => cy.resize(), 30);
+      }
+
+      if (selectedRoutineNode) {
+        highlightRoutineInCode(selectedRoutineNode.start_line, selectedRoutineNode.end_line, selectedRoutineNode.name);
+      }
+    } else {
+      codeSplitPane.style.display = "none";
+      splitterCanvasCode.style.display = "none";
+      canvasEl.style.flex = "1 1 0px";
+      if (btnToggleCodeSplit) btnToggleCodeSplit.classList.remove("active");
+
+      if (cy) {
+        setTimeout(() => cy.resize(), 30);
+      }
+    }
+
+    localStorage.setItem("cobolscope_code_split_open", isCodeSplitOpen ? "true" : "false");
+  };
+
+  // 3. Highlight Procedure / Routine Lines
+  window.highlightRoutineInCode = function(startLine, endLine, routineName) {
+    if (!codeLines || codeLines.length === 0) return;
+
+    // Clear previous line highlights
+    const prevHighlighted = cobolCodeTbody.querySelectorAll(".line-highlighted, .line-highlight-start");
+    prevHighlighted.forEach(el => el.classList.remove("line-highlighted", "line-highlight-start"));
+
+    currentStartLine = startLine || 0;
+    currentEndLine = endLine || 0;
+
+    if (routineName) {
+      const lineSpanText = currentStartLine > 0 ? `(L${currentStartLine}-L${currentEndLine})` : "";
+      codeCurrentRoutineBadge.textContent = `[ROUTINE] ${routineName} ${lineSpanText}`.trim();
+    } else {
+      codeCurrentRoutineBadge.textContent = "No routine selected";
+    }
+
+    if (currentStartLine > 0 && currentEndLine >= currentStartLine) {
+      for (let l = currentStartLine; l <= currentEndLine; l++) {
+        const row = document.getElementById(`code-line-${l}`);
+        if (row) {
+          row.classList.add("line-highlighted");
+          if (l === currentStartLine) {
+            row.classList.add("line-highlight-start");
+          }
+        }
+      }
+
+      // Scroll smoothly to start line
+      const firstRow = document.getElementById(`code-line-${currentStartLine}`);
+      if (firstRow) {
+        firstRow.scrollIntoView({ behavior: "smooth", block: "center" });
+      }
+    }
+  };
+
+  function focusSingleLine(lineNum) {
+    const prevHighlighted = cobolCodeTbody.querySelectorAll(".line-highlighted, .line-highlight-start");
+    prevHighlighted.forEach(el => el.classList.remove("line-highlighted", "line-highlight-start"));
+
+    const row = document.getElementById(`code-line-${lineNum}`);
+    if (row) {
+      row.classList.add("line-highlighted", "line-highlight-start");
+      row.scrollIntoView({ behavior: "smooth", block: "center" });
+      codeCurrentRoutineBadge.textContent = `[LINE] ${lineNum}`;
+    }
+  }
+
+  // 4. Jump to Line or Search in Code
+  function handleCodeJumpOrSearch() {
+    const val = (codeJumpLineInput.value || "").trim();
+    if (!val) return;
+
+    if (/^\d+$/.test(val)) {
+      const lineNum = parseInt(val, 10);
+      if (lineNum >= 1 && lineNum <= codeLines.length) {
+        focusSingleLine(lineNum);
+      }
+    } else {
+      // Text search in source lines
+      const q = val.toUpperCase();
+      let foundLine = 0;
+      for (let i = 0; i < codeLines.length; i++) {
+        if (codeLines[i].toUpperCase().includes(q)) {
+          foundLine = i + 1;
+          break;
+        }
+      }
+      if (foundLine > 0) {
+        focusSingleLine(foundLine);
+      }
+    }
+  }
+
+  if (codeJumpLineInput) {
+    codeJumpLineInput.addEventListener("keydown", (e) => {
+      if (e.key === "Enter") {
+        e.preventDefault();
+        handleCodeJumpOrSearch();
+      }
+    });
+  }
+
+  if (btnSyncRoutineCode) {
+    btnSyncRoutineCode.addEventListener("click", () => {
+      if (selectedRoutineNode) {
+        highlightRoutineInCode(selectedRoutineNode.start_line, selectedRoutineNode.end_line, selectedRoutineNode.name);
+      }
+    });
+  }
+
+  if (btnCloseCodeSplit) {
+    btnCloseCodeSplit.addEventListener("click", () => toggleCodeSplit(false));
+  }
+
+  if (btnToggleCodeSplit) {
+    btnToggleCodeSplit.addEventListener("click", () => toggleCodeSplit());
+  }
+
+  if (btnViewRoutineCode) {
+    btnViewRoutineCode.addEventListener("click", () => {
+      if (!isCodeSplitOpen) {
+        toggleCodeSplit(true);
+      }
+      if (selectedRoutineNode) {
+        highlightRoutineInCode(selectedRoutineNode.start_line, selectedRoutineNode.end_line, selectedRoutineNode.name);
+      }
+    });
+  }
+
+  // 5. Draggable Divider: Graph Canvas <-> Code Split Pane
+  function setupCanvasCodeSplitter() {
+    if (!splitterCanvasCode || !canvasEl || !codeSplitPane || !workspaceMain) return;
+
+    let isDragging = false;
+
+    splitterCanvasCode.addEventListener("pointerdown", (e) => {
+      isDragging = true;
+      splitterCanvasCode.setPointerCapture(e.pointerId);
+      document.body.classList.add("is-resizing");
+      splitterCanvasCode.classList.add("active");
+      e.preventDefault();
+    });
+
+    splitterCanvasCode.addEventListener("pointermove", (e) => {
+      if (!isDragging) return;
+      const rect = workspaceMain.getBoundingClientRect();
+      const currentX = e.clientX - rect.left;
+      let ratio = (currentX / rect.width) * 100;
+
+      // Bound ratio strictly between 20% and 80%
+      ratio = Math.max(20, Math.min(80, ratio));
+
+      canvasEl.style.flex = `${ratio} 1 0px`;
+      codeSplitPane.style.flex = `${100 - ratio} 1 0px`;
+
+      localStorage.setItem("cobolscope_code_split_ratio", ratio.toFixed(1));
+
+      if (cy) {
+        cy.resize();
+      }
+    });
+
+    const stopDrag = (e) => {
+      if (isDragging) {
+        isDragging = false;
+        document.body.classList.remove("is-resizing");
+        splitterCanvasCode.classList.remove("active");
+        try { splitterCanvasCode.releasePointerCapture(e.pointerId); } catch (_) {}
+        if (cy) {
+          cy.resize();
+        }
+      }
+    };
+
+    splitterCanvasCode.addEventListener("pointerup", stopDrag);
+    splitterCanvasCode.addEventListener("pointercancel", stopDrag);
+  }
+
+  // 6. Draggable Divider: Workspace Main <-> Inspector Sidebar
+  function setupInspectorSplitter() {
+    if (!splitterInspector || !inspectorEl) return;
+
+    let isDragging = false;
+
+    // Restore saved inspector width
+    const savedWidth = localStorage.getItem("cobolscope_inspector_width");
+    if (savedWidth) {
+      const parsed = parseInt(savedWidth, 10);
+      if (!isNaN(parsed) && parsed >= 260 && parsed <= 600) {
+        inspectorEl.style.width = `${parsed}px`;
+      }
+    }
+
+    splitterInspector.addEventListener("pointerdown", (e) => {
+      isDragging = true;
+      splitterInspector.setPointerCapture(e.pointerId);
+      document.body.classList.add("is-resizing");
+      splitterInspector.classList.add("active");
+      e.preventDefault();
+    });
+
+    splitterInspector.addEventListener("pointermove", (e) => {
+      if (!isDragging) return;
+      const workspaceRect = document.querySelector(".workspace").getBoundingClientRect();
+      const newWidth = workspaceRect.right - e.clientX;
+
+      // Bounds: 260px - 600px
+      const clampedWidth = Math.max(260, Math.min(600, newWidth));
+      inspectorEl.style.width = `${clampedWidth}px`;
+
+      localStorage.setItem("cobolscope_inspector_width", clampedWidth.toString());
+
+      if (cy) {
+        cy.resize();
+      }
+    });
+
+    const stopDrag = (e) => {
+      if (isDragging) {
+        isDragging = false;
+        document.body.classList.remove("is-resizing");
+        splitterInspector.classList.remove("active");
+        try { splitterInspector.releasePointerCapture(e.pointerId); } catch (_) {}
+        if (cy) {
+          cy.resize();
+        }
+      }
+    };
+
+    splitterInspector.addEventListener("pointerup", stopDrag);
+    splitterInspector.addEventListener("pointercancel", stopDrag);
+  }
+
+  // 7. Global Keyboard Shortcut [Alt+C] to toggle Code View
+  document.addEventListener("keydown", (e) => {
+    if (e.altKey && (e.key === "c" || e.key === "C")) {
+      e.preventDefault();
+      toggleCodeSplit();
+    }
+  });
+
+  // Initialize
+  renderSourceLines();
+  setupCanvasCodeSplitter();
+  setupInspectorSplitter();
+
+  // Restore split view state if user previously had it open and source exists
+  const wasOpen = localStorage.getItem("cobolscope_code_split_open") === "true";
+  if (wasOpen && sourceCode) {
+    toggleCodeSplit(true);
+  }
+})();

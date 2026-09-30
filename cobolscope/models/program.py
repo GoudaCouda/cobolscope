@@ -4,6 +4,7 @@ Provides fast O(1) hash indexing, field lookup, qualification resolution, and se
 """
 
 from __future__ import annotations
+from pathlib import Path
 from typing import List, Dict, Optional, Any, Union
 from pydantic import BaseModel, ConfigDict, Field, PrivateAttr, model_validator, AliasChoices
 from .data import DataField, DataDictionary
@@ -48,6 +49,7 @@ class ProgramModel(BaseModel):
     date_written: Optional[str] = Field(default=None, validation_alias=AliasChoices("dateWritten", "date_written"))
     date_compiled: Optional[str] = Field(default=None, validation_alias=AliasChoices("dateCompiled", "date_compiled"))
     source_file_path: str = Field(default="", validation_alias=AliasChoices("sourceFile", "source_file_path", "source_file"))
+    source_code: Optional[str] = Field(default=None, validation_alias=AliasChoices("sourceCode", "source_code"))
     format: str = "FIXED"
     data_dictionary: DataDictionary = Field(default_factory=DataDictionary, validation_alias=AliasChoices("dataDictionary", "data_dictionary"))
     sections: List[SectionNode] = Field(default_factory=list)
@@ -60,6 +62,19 @@ class ProgramModel(BaseModel):
     _field_qualified_map: Dict[str, DataField] = PrivateAttr(default_factory=dict)
     _paragraph_map: Dict[str, ParagraphNode] = PrivateAttr(default_factory=dict)
     _field_usage_index: Dict[str, List[str]] = PrivateAttr(default_factory=dict)
+
+    def get_source_text(self) -> str:
+        """Returns the raw source code text from memory or loads it from disk if available."""
+        if self.source_code:
+            return self.source_code
+        if self.source_file_path:
+            p = Path(self.source_file_path)
+            if p.is_file():
+                try:
+                    return p.read_text(encoding="utf-8", errors="replace")
+                except Exception:
+                    return ""
+        return ""
 
     @model_validator(mode="before")
     @classmethod

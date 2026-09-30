@@ -287,6 +287,7 @@ def render_html(
         cyto_elements=cyto_elements or [],
         cyto_json=cyto_json,
         initial_engine=initial_engine,
+        source_code=graph.source_code or "",
     )
 
 

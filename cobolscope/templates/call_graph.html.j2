@@ -17,7 +17,16 @@
 {% block content %}
   {% include "call_graph/header.html.j2" %}
   <div class="workspace">
-    {% include "call_graph/canvas.html.j2" %}
+    <div class="workspace-main" id="workspaceMain">
+      {% include "call_graph/canvas.html.j2" %}
+      <div class="workspace-splitter" id="splitterCanvasCode" style="display:none;" title="Drag to resize Graph and Code panes">
+        <div class="splitter-handle"></div>
+      </div>
+      {% include "call_graph/code_viewer.html.j2" %}
+    </div>
+    <div class="workspace-splitter" id="splitterInspector" title="Drag to resize Inspector Sidebar">
+      <div class="splitter-handle"></div>
+    </div>
     {% include "call_graph/inspector.html.j2" %}
   </div>
   {% include "call_graph/level3_modal.html.j2" %}
@@ -31,6 +40,7 @@
     const graphData = {{ graph.model_dump_json() | safe }};
     const cytoElements = {{ cyto_json | safe }};
     const initialEnginePreference = "{{ initial_engine }}";
+    const sourceCodeRaw = {{ (source_code or graph.source_code or "") | tojson }};
 
     CobolScopeLog.info(`Loaded graphData for ${graphData.program_id}: ${graphData.total_paragraphs} paragraphs, ${cytoElements.length} Cytoscape elements.`);
 
@@ -48,5 +58,6 @@
     {% include "call_graph/js/linear_modal.js.j2" %}
     {% include "call_graph/js/level3_cfg.js.j2" %}
     {% include "call_graph/js/toolbar.js.j2" %}
+    {% include "call_graph/js/code_viewer.js.j2" %}
   </script>
 {% endblock %}

@@ -67,9 +67,16 @@ class CallGraphGenerator:
         splines: str = "spline",
         rules: Optional[Union[GlobalRules, EffectiveProgramRules]] = None,
         hide_error_traps: bool = True,
+        source_code: Optional[str] = None,
     ):
         self.model = model
         self.rules = rules
+        if source_code is not None:
+            self.source_code = source_code
+        else:
+            self.source_code = getattr(self.model, "source_code", None)
+            if not self.source_code and hasattr(self.model, "get_source_text"):
+                self.source_code = self.model.get_source_text()
         self.hide_fallthrough = hide_fallthrough
         self.collapse_exits = collapse_exits
         self.compact_nodes = compact_nodes
@@ -580,6 +587,7 @@ class CallGraphGenerator:
             sccs=sccs,
             reachability_transitions_count=len(reachability_model.state_transitions),
             hidden_error_nodes=sorted(list(self.hidden_error_nodes)),
+            source_code=self.source_code,
         )
 
     def _collect_all_statements(self, stmts: List[AnyStatementNode]) -> List[AnyStatementNode]:
@@ -827,6 +835,7 @@ def generate_call_graph(
     rules: Optional[Union[GlobalRules, EffectiveProgramRules]] = None,
     output_path: Optional[Union[str, Path]] = None,
     hide_error_traps: bool = True,
+    source_code: Optional[str] = None,
 ) -> str:
     """
     Convenience functional API to generate Level-2 Procedure Call Graphs
@@ -843,6 +852,7 @@ def generate_call_graph(
         splines=splines,
         rules=rules,
         hide_error_traps=hide_error_traps,
+        source_code=source_code,
     )
 
     fmt = format.lower().strip()

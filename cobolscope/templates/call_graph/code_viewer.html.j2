@@ -1,0 +1,38 @@
+<!-- Code Split Pane (Default: 35% width, 65% Graph Canvas) -->
+<div class="code-split-pane" id="codeSplitPane" style="display:none;">
+  <div class="code-pane-header">
+    <div class="code-pane-title-area">
+      <span class="code-pane-label">SOURCE CODE</span>
+      <span class="code-routine-badge" id="codeCurrentRoutineBadge">No routine selected</span>
+    </div>
+    <div class="code-pane-actions">
+      <div class="code-search-box">
+        <input type="text" id="codeJumpLineInput" placeholder="Jump to line / search..." title="Type a line number (e.g. 45) or text and press Enter" />
+      </div>
+      <button class="code-btn-action" id="btnSyncRoutineCode" title="Re-sync code view with currently selected routine">Sync</button>
+      <button class="code-btn-close" id="btnCloseCodeSplit" title="Close Code Split View (Alt+C)">✕</button>
+    </div>
+  </div>
+
+  <div class="code-pane-subbar">
+    <div class="cobol-columns-indicator">
+      <span class="col-guide col-seq" title="Columns 1-6: Sequence Number">1-6</span>
+      <span class="col-guide col-ind" title="Column 7: Indicator Area (*, -, D)">7</span>
+      <span class="col-guide col-area-a" title="Columns 8-11: Area A (Divisions, Sections, Paragraphs, 01/77 levels)">8-11 Area A</span>
+      <span class="col-guide col-area-b" title="Columns 12-72: Area B (Statements, clauses)">12-72 Area B</span>
+      <span class="col-guide col-ident" title="Columns 73-80: Identification Area">73-80</span>
+    </div>
+    <div class="code-line-info" id="codeLineCountInfo">0 lines</div>
+  </div>
+
+  <div class="code-pane-content" id="codePaneContent">
+    <div class="code-empty-state" id="codeEmptyState" style="display:none;">
+      COBOL source code was not embedded or not available for this program.
+    </div>
+    <table class="cobol-code-table" id="cobolCodeTable">
+      <tbody id="cobolCodeTbody">
+        <!-- Rendered dynamically -->
+      </tbody>
+    </table>
+  </div>
+</div>
