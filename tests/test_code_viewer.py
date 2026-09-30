@@ -92,7 +92,10 @@ class TestCodeViewerAndSplitView(unittest.TestCase):
         self.assertIn("splitterCanvasCode", html)
         self.assertIn("splitterInspector", html)
         self.assertIn("btnToggleCodeSplit", html)
+        self.assertIn("btnToggleInspector", html)
+        self.assertIn("btnCloseInspector", html)
         self.assertIn("btnViewRoutineCode", html)
+        self.assertIn("btn-view-routine-code", html)
 
         # Verify 65/35 ratio default in code_viewer script
         self.assertIn("ratio = 65", html)
@@ -148,10 +151,13 @@ class TestCodeViewerAndSplitView(unittest.TestCase):
 
         portal_html = generate_portal(manifest)
 
-        # 1. Resizable sidebar
+        # 1. Resizable & Collapsible sidebar
         self.assertIn('id="sidebar-splitter"', portal_html)
         self.assertIn("setupSidebarSplitter", portal_html)
         self.assertIn("cobolscope_portal_sidebar_width", portal_html)
+        self.assertIn('id="sidebar-rail-indicator"', portal_html)
+        self.assertIn('id="btn-toggle-sidebar"', portal_html)
+        self.assertIn("collapseSidebar", portal_html)
 
         # 2. Source Code Tab
         self.assertIn('id="tab-source"', portal_html)

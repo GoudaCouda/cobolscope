@@ -5,6 +5,15 @@
 
       selectedRoutineNode = node;
 
+      const inspectorEl = document.getElementById("inspector");
+      if (inspectorEl && inspectorEl.style.display === "none") {
+        if (typeof toggleInspector === "function") {
+          toggleInspector(true);
+        } else {
+          inspectorEl.style.display = "flex";
+        }
+      }
+
       // Update Header & Badge
       const hasDistinctSection = Boolean(node.section && node.section.trim() && node.section.trim().toUpperCase() !== node.name.trim().toUpperCase());
       const displayTitle = hasDistinctSection ? node.section.trim() : node.name;
@@ -363,4 +372,39 @@
 
         secEl.appendChild(linearCard);
       }
+    }
+
+    // Inspector Sidebar Toggle & Close Handling
+    window.toggleInspector = function(forceOpen) {
+      const inspector = document.getElementById("inspector");
+      const splitter = document.getElementById("splitterInspector");
+      const btnToggle = document.getElementById("btnToggleInspector");
+      if (!inspector) return;
+
+      const isHidden = inspector.style.display === "none";
+      const shouldOpen = forceOpen !== undefined ? forceOpen : isHidden;
+
+      if (shouldOpen) {
+        inspector.style.display = "flex";
+        if (splitter) splitter.style.display = "block";
+        if (btnToggle) btnToggle.classList.add("active");
+      } else {
+        inspector.style.display = "none";
+        if (splitter) splitter.style.display = "none";
+        if (btnToggle) btnToggle.classList.remove("active");
+      }
+
+      if (cy) {
+        setTimeout(() => cy.resize(), 30);
+      }
+    };
+
+    const btnCloseInspector = document.getElementById("btnCloseInspector");
+    if (btnCloseInspector) {
+      btnCloseInspector.addEventListener("click", () => toggleInspector(false));
+    }
+
+    const btnToggleInspector = document.getElementById("btnToggleInspector");
+    if (btnToggleInspector) {
+      btnToggleInspector.addEventListener("click", () => toggleInspector());
     }
