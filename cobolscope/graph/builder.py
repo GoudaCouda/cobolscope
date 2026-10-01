@@ -498,6 +498,10 @@ class CallGraphGenerator:
                         tgt_proc = symbol_to_proc.get(raw_tgt)
                         if tgt_proc and tgt_proc in nodes and tgt_proc != src_proc_key:
                             target_node = nodes[tgt_proc]
+                            collapsed_exits_up = {e.upper().strip() for e in target_node.collapsed_exit_nodes}
+                            if raw_tgt.upper().strip() in collapsed_exits_up:
+                                continue
+
                             edge_type = GraphEdgeType.ERROR_BRANCH if is_error_trap(target_node) else GraphEdgeType.GO_TO
                             edge_key = (src_proc_key, tgt_proc, edge_type)
 

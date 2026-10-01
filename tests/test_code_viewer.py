@@ -11,7 +11,14 @@ import tempfile
 import unittest
 from pathlib import Path
 
-from cobolscope.models import ProgramModel, ParagraphNode, SourceLocation, PerformStatementNode
+from cobolscope.models import (
+    ProgramModel,
+    ParagraphNode,
+    SourceLocation,
+    PerformStatementNode,
+    GoToStatementNode,
+    ExitStatementNode,
+)
 from cobolscope.graph import CallGraphGenerator, generate_call_graph
 from cobolscope.portal import generate_portal
 
@@ -244,6 +251,60 @@ class TestCodeViewerAndSplitView(unittest.TestCase):
             # In the file, 1000-PROCESS is exactly on line 10, and 1000-PROCESS-EXIT is on line 12
             self.assertEqual(para_map["1000-PROCESS"]["location"]["startLine"], 10)
             self.assertEqual(para_map["1000-PROCESS-EXIT"]["location"]["startLine"], 12)
+
+    def test_child_goto_parent_exit_no_cycle(self):
+        """Verify that GO TO <parent>-EXIT from an invoked child routine does not create false recursion cycles."""
+        main_p = ParagraphNode(
+            name="999-DRIVER",
+            location=SourceLocation(start_line=1, end_line=5),
+            statements=[
+                PerformStatementNode(target="999-CHILD-READ"),
+            ],
+        )
+        main_exit = ParagraphNode(
+            name="999-DRIVER-EXIT",
+            location=SourceLocation(start_line=6, end_line=8),
+            statements=[
+                ExitStatementNode(),
+            ],
+        )
+        child_p = ParagraphNode(
+            name="999-CHILD-READ",
+            location=SourceLocation(start_line=9, end_line=15),
+            statements=[
+                GoToStatementNode(target="999-DRIVER-EXIT"),
+            ],
+        )
+        model = ProgramModel(
+            program_id="TESTCYCLE",
+            paragraphs=[main_p, main_exit, child_p],
+        )
+
+        gen_collapsed = CallGraphGenerator(model, collapse_exits=True)
+        cg_collapsed = gen_collapsed.graph
+
+        self.assertIn("999-DRIVER", cg_collapsed.nodes)
+        self.assertNotIn("999-DRIVER-EXIT", cg_collapsed.nodes)
+        self.assertIn("999-CHILD-READ", cg_collapsed.nodes)
+        self.assertIn("999-DRIVER-EXIT", cg_collapsed.nodes["999-DRIVER"].collapsed_exit_nodes)
+
+        # Ensure no edge 999-CHILD-READ -> 999-DRIVER exists
+        child_to_driver = [
+            e for e in cg_collapsed.edges
+            if e.source == "999-CHILD-READ" and e.target == "999-DRIVER"
+        ]
+        self.assertEqual(len(child_to_driver), 0)
+        self.assertFalse(cg_collapsed.has_cycles)
+        self.assertEqual(cg_collapsed.cycles, [])
+
+        # Also verify with TT05943N fixture if present
+        tt_path = Path("mini_test/TT05943N.cbl")
+        if tt_path.exists():
+            from tests.harness.test_cache import get_test_model
+            tt_model = get_test_model(str(tt_path))
+            tt_cg = CallGraphGenerator(tt_model, collapse_exits=True).graph
+            self.assertFalse(tt_cg.has_cycles)
+            self.assertEqual(tt_cg.cycles, [])
 
 
 if __name__ == "__main__":
