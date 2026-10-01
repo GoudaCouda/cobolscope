@@ -497,6 +497,54 @@ class TestCodeViewerAndSplitView(unittest.TestCase):
         # 3. Verify #dictTable td is scoped so it does not bleed onto code table
         self.assertIn("#dictTable td", dd_html)
 
+    def test_sharepoint_aspx_generation(self):
+        """Verify that portal, call graph, and data dictionary support native SharePoint ASPX generation."""
+        model = ProgramModel(
+            program_id="SPTEST",
+            source_code=SAMPLE_COBOL_SOURCE,
+        )
+
+        # 1. Call Graph ASPX
+        cg_aspx = generate_call_graph(model, format="aspx")
+        self.assertTrue(cg_aspx.startswith('<%@ Page Language="C#" %>\n'))
+        self.assertIn("SPTEST", cg_aspx)
+        self.assertIn("codeSplitPane", cg_aspx)
+
+        # 2. Data Dictionary ASPX
+        dd_aspx = generate_data_dictionary(model, format="aspx", source_code=model.source_code)
+        self.assertTrue(dd_aspx.startswith('<%@ Page Language="C#" %>\n'))
+        self.assertIn("dictWorkspace", dd_aspx)
+
+        # 3. Portal ASPX companion generation
+        with tempfile.TemporaryDirectory() as td:
+            out_html = Path(td) / "index.html"
+            generate_portal(
+                {
+                    "batch_summary": {"total_programs_found": 1, "succeeded": 1, "failed": 0},
+                    "programs": [
+                        {
+                            "program_id": "SPTEST",
+                            "status": "SUCCESS",
+                            "artifacts": {
+                                "call_graph": "SPTEST.html",
+                                "call_graph_aspx": "SPTEST.aspx",
+                                "data_dictionary_html": "SPTEST_dict.html",
+                                "data_dictionary_aspx": "SPTEST_dict.aspx",
+                            },
+                        }
+                    ],
+                },
+                output_path=out_html,
+            )
+            out_aspx = Path(td) / "portal.aspx"
+            self.assertTrue(out_html.exists())
+            self.assertTrue(out_aspx.exists())
+
+            aspx_text = out_aspx.read_text(encoding="utf-8")
+            self.assertTrue(aspx_text.startswith('<%@ Page Language="C#" %>\n'))
+            self.assertIn("isAspx", aspx_text)
+            self.assertIn("SPTEST.aspx", aspx_text)
+
 
 if __name__ == "__main__":
     unittest.main()

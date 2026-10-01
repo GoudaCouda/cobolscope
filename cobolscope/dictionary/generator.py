@@ -521,8 +521,11 @@ def generate_data_dictionary(
 
     gen = DataDictionaryGenerator(model, hide_fillers=hide_fillers, source_code=source_code)
     fmt = format.lower().strip()
+    is_aspx = fmt == "aspx" or (output_path is not None and Path(output_path).suffix.lower() == ".aspx")
 
-    if fmt in ("md", "markdown"):
+    if is_aspx:
+        content = '<%@ Page Language="C#" %>\n' + gen.to_html()
+    elif fmt in ("md", "markdown"):
         content = gen.to_markdown()
     elif fmt == "html":
         content = gen.to_html()
@@ -531,7 +534,7 @@ def generate_data_dictionary(
     elif fmt == "json":
         content = gen.to_json()
     else:
-        raise ValueError(f"Unknown format '{format}'. Supported: markdown, html, csv, json")
+        raise ValueError(f"Unknown format '{format}'. Supported: markdown, html, csv, json, aspx")
 
     if output_path:
         out = Path(output_path)

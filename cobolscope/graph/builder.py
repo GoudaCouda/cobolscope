@@ -758,7 +758,11 @@ def generate_call_graph(
     )
 
     fmt = format.lower().strip()
-    if fmt in ("html", "htm"):
+    is_aspx = fmt == "aspx" or (output_path is not None and Path(output_path).suffix.lower() == ".aspx")
+    if is_aspx:
+        html_content = generator.to_html(initial_engine=initial_engine)
+        content = '<%@ Page Language="C#" %>\n' + html_content
+    elif fmt in ("html", "htm"):
         content = generator.to_html(initial_engine=initial_engine)
     elif fmt in ("cytoscape", "cyto"):
         content = generator.to_cytoscape_json()

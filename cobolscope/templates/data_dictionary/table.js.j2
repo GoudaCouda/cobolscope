@@ -444,10 +444,13 @@
                 return;
             }
 
-            // 2. If running standalone, navigate to companion Call Graph HTML
+            // 2. If running standalone, navigate to companion Call Graph HTML/ASPX
             const curPath = window.location.pathname;
             if (curPath.endsWith('_dict.html')) {
                 const graphPath = curPath.replace(/_dict\.html$/, '.html');
+                window.location.href = graphPath + '#routine=' + encodeURIComponent(targetPara);
+            } else if (curPath.endsWith('_dict.aspx')) {
+                const graphPath = curPath.replace(/_dict\.aspx$/, '.aspx');
                 window.location.href = graphPath + '#routine=' + encodeURIComponent(targetPara);
             } else {
                 window.location.hash = 'routine=' + encodeURIComponent(targetPara);

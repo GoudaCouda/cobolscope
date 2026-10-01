@@ -83,13 +83,21 @@
 
       const artifacts = prog.artifacts || {};
       let targetUrl = null;
+      const isAspx = window.location.pathname.toLowerCase().endsWith(".aspx");
 
       if (activeArtifactType === "call_graph") {
-        targetUrl = artifacts.call_graph;
+        targetUrl = (isAspx && artifacts.call_graph_aspx) ? artifacts.call_graph_aspx : artifacts.call_graph;
+        if (isAspx && targetUrl && targetUrl.endsWith(".html")) {
+          targetUrl = targetUrl.replace(/\.html$/, ".aspx");
+        }
       } else if (activeArtifactType === "source") {
         targetUrl = artifacts.source;
       } else if (activeArtifactType === "data_dictionary") {
-        targetUrl = artifacts.data_dictionary_html || artifacts.data_dictionary;
+        const dictTarget = artifacts.data_dictionary_html || artifacts.data_dictionary;
+        targetUrl = (isAspx && artifacts.data_dictionary_aspx) ? artifacts.data_dictionary_aspx : dictTarget;
+        if (isAspx && targetUrl && targetUrl.endsWith(".html")) {
+          targetUrl = targetUrl.replace(/\.html$/, ".aspx");
+        }
       }
 
       if (!targetUrl) {
@@ -107,7 +115,7 @@
 
       // Source Code Rendering
       if (activeArtifactType === "source") {
-        renderPortalSource(targetUrl);
+        renderPortalSource(targetUrl, prog);
         return;
       }
 
@@ -118,10 +126,17 @@
       contentFrame.src = targetUrl;
     }
 
-    function renderPortalSource(url) {
+    function renderPortalSource(url, progObj) {
       contentFrame.style.display = "none";
       messageContainer.style.display = "none";
       sourceContainer.style.display = "flex";
+
+      // 1. If source is already embedded in the program manifest, render synchronously without network calls
+      const prog = progObj || programs.find(p => p.program_id === selectedProgramId);
+      if (prog && prog.source_code) {
+        populatePortalSourceTable(prog.source_code);
+        return;
+      }
 
       if (cachedSources[url]) {
         populatePortalSourceTable(cachedSources[url]);

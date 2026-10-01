@@ -183,18 +183,27 @@ def run_batch_directory(
                 dict_path.write_text(dict_content, encoding="utf-8")
                 artifacts["data_dictionary"] = dict_filename
 
+                html_dict_text = dict_content if dict_fmt == "html" else None
+
                 # Also generate interactive HTML data dictionary for portal embedding if not already HTML
                 if dict_fmt != "html":
                     html_dict_filename = f"{prog_id}_dict.html"
                     html_dict_path = out_dir / html_dict_filename
-                    html_dict_content = generate_data_dictionary(
+                    html_dict_text = generate_data_dictionary(
                         model,
                         format="html",
                         hide_fillers=getattr(args, "hide_fillers", False),
                         source_code=source_text,
                     )
-                    html_dict_path.write_text(html_dict_content, encoding="utf-8")
+                    html_dict_path.write_text(html_dict_text, encoding="utf-8")
                     artifacts["data_dictionary_html"] = html_dict_filename
+
+                # Generate companion ASPX data dictionary for native SharePoint execution
+                if html_dict_text:
+                    aspx_dict_filename = f"{prog_id}_dict.aspx"
+                    aspx_dict_path = out_dir / aspx_dict_filename
+                    aspx_dict_path.write_text('<%@ Page Language="C#" %>\n' + html_dict_text, encoding="utf-8")
+                    artifacts["data_dictionary_aspx"] = aspx_dict_filename
 
             # B. Call Graph Generation
             if getattr(args, "generate_graph", False):
@@ -218,6 +227,13 @@ def run_batch_directory(
                 )
                 graph_path.write_text(graph_content, encoding="utf-8")
                 artifacts["call_graph"] = graph_filename
+
+                # Generate companion ASPX call graph for native SharePoint execution
+                if graph_fmt == "html":
+                    aspx_graph_filename = f"{prog_id}.aspx"
+                    aspx_graph_path = out_dir / aspx_graph_filename
+                    aspx_graph_path.write_text('<%@ Page Language="C#" %>\n' + graph_content, encoding="utf-8")
+                    artifacts["call_graph_aspx"] = aspx_graph_filename
 
             # C. Reachability
             if getattr(args, "generate_reachability", False) or getattr(args, "save_transitions", False):
@@ -258,13 +274,16 @@ def run_batch_directory(
             # Stats calculation
             total_stmts = sum(len(p.statements) for p in model.paragraphs)
 
-            manifest_programs.append({
+            prog_entry = {
                 "program_id": prog_id,
                 "total_paragraphs": len(model.paragraphs),
                 "total_statements": total_stmts,
                 "status": "SUCCESS",
                 "artifacts": artifacts,
-            })
+            }
+            if source_text is not None:
+                prog_entry["source_code"] = source_text
+            manifest_programs.append(prog_entry)
             success_count += 1
             generated_list = [k for k in artifacts if k != "ir"]
             summary_str = f"generated {', '.join(generated_list)}" if generated_list else "IR saved"
@@ -298,11 +317,34 @@ def run_batch_directory(
     try:
         generate_portal(manifest, output_path=portal_file)
         manifest["batch_summary"]["portal"] = portal_file.name
+        if (out_dir / "portal.aspx").exists():
+            manifest["batch_summary"]["portal_aspx"] = "portal.aspx"
         manifest_file.write_text(json.dumps(manifest, indent=2), encoding="utf-8")
-        portal_note = f", portal: {portal_file.name}"
+        portal_note = f", portal: {portal_file.name} (SharePoint: portal.aspx)"
     except Exception as e:
         log_verbose(f"Failed to generate documentation portal: {e}")
         portal_note = ""
+
+    # Generate SharePoint deployment instructions guide
+    sp_guide = out_dir / "SHAREPOINT_DEPLOYMENT.md"
+    try:
+        sp_guide.write_text(
+            "# SharePoint Online Deployment Guide\n\n"
+            "This folder contains pre-configured, native `.aspx` documentation artifacts ready for hosting on SharePoint Online (e.g., `coboldocs.sharepoint.com`).\n\n"
+            "## 3-Step Deployment\n\n"
+            "1. **Upload Folder to SharePoint Library**:\n"
+            "   - Navigate to your SharePoint Document Library (e.g. `Site Assets` or `Documents`).\n"
+            "   - Drag and drop this entire output directory into the SharePoint library.\n\n"
+            "2. **Open the Documentation Portal**:\n"
+            "   - Click on `portal.aspx` inside SharePoint.\n"
+            "   - SharePoint will render `portal.aspx` directly in the browser as an interactive web application without prompting for downloads.\n\n"
+            "3. **Navigation & Offline Parity**:\n"
+            "   - All call graphs (`[PROGRAM].aspx`), data dictionaries (`[PROGRAM]_dict.aspx`), and source code viewers are pre-configured to execute inline within SharePoint frames.\n"
+            "   - If hosting on standard web servers (Apache, Nginx, GitHub Pages), use `index.html`.\n",
+            encoding="utf-8"
+        )
+    except Exception as e:
+        log_verbose(f"Failed to write SharePoint deployment guide: {e}")
 
     total_s = total_dur_ms / 1000.0
     log_info(f"Batch completed: {success_count}/{len(cobol_files)} programs processed in {total_s:.2f}s -> {out_dir.resolve()} (manifest: {manifest_file.name}{portal_note})")

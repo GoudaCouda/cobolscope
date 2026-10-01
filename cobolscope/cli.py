@@ -59,6 +59,13 @@ def build_arg_parser() -> argparse.ArgumentParser:
         action="store_true",
         help="Enable verbose telemetry and execution timing for each task/pipeline step.",
     )
+    parser.add_argument(
+        "--sharepoint",
+        "--aspx",
+        action="store_true",
+        dest="sharepoint",
+        help="Generate native SharePoint Online compatible .aspx output artifacts instead of .html.",
+    )
 
     # ---------------------------------------------------------
     # Preprocessor & Copybook Resolution
@@ -140,7 +147,7 @@ def build_arg_parser() -> argparse.ArgumentParser:
     dict_group.add_argument(
         "--dict-format",
         default="markdown",
-        choices=["markdown", "md", "html", "csv", "json"],
+        choices=["markdown", "md", "html", "aspx", "csv", "json"],
         help="Output format for Data Dictionary.",
     )
     dict_group.add_argument(
@@ -156,8 +163,8 @@ def build_arg_parser() -> argparse.ArgumentParser:
     graph_group.add_argument(
         "--graph-format",
         default="html",
-        choices=["html", "cytoscape", "svg", "dot", "json"],
-        help="Output format for Call Graph (html, cytoscape, svg, dot, json). Default: html.",
+        choices=["html", "aspx", "cytoscape", "svg", "dot", "json"],
+        help="Output format for Call Graph (html, aspx, cytoscape, svg, dot, json). Default: html.",
     )
     graph_group.add_argument(
         "--graph-engine",
@@ -376,8 +383,10 @@ def main(argv: Optional[Sequence[str]] = None) -> int:
             return 2
         try:
             out_target = Path(args.output) if args.output else None
-            generate_portal(target_path, output_path=out_target)
-            out_file = out_target or (target_path / "index.html" if target_path.is_dir() else target_path.parent / "index.html")
+            is_aspx = getattr(args, "sharepoint", False) or (out_target is not None and str(out_target).lower().endswith(".aspx"))
+            generate_portal(target_path, output_path=out_target, aspx=is_aspx)
+            default_out = "portal.aspx" if is_aspx else "index.html"
+            out_file = out_target or (target_path / default_out if target_path.is_dir() else target_path.parent / default_out)
             log_info(f"Documentation portal generated: {out_file.resolve()}")
             return 0
         except Exception as e:
@@ -433,6 +442,15 @@ def main(argv: Optional[Sequence[str]] = None) -> int:
 
     # 2. Dispatch to requested mode
     try:
+        source_text = None
+        if args.input_file:
+            try:
+                src_p = Path(args.input_file)
+                if src_p.is_file() and src_p.suffix.lower() not in (".json",):
+                    source_text = src_p.read_text(encoding="utf-8", errors="replace")
+            except Exception:
+                pass
+
         # A. Data Dictionary Generation
         if args.generate_dictionary:
             dict_start = time.perf_counter()
@@ -441,15 +459,24 @@ def main(argv: Optional[Sequence[str]] = None) -> int:
             from cobolscope.data_dictionary import generate_data_dictionary
 
             model = ProgramModel.from_dict(raw_dict)
+            if source_text:
+                model.source_code = source_text
             model_dur = (time.perf_counter() - dict_start) * 1000
             log_verbose(f"ProgramModel hydrated in {model_dur:.2f} ms")
 
-            log_info(f"Generating Data Dictionary (format={args.dict_format}, hide_fillers={args.hide_fillers})...")
+            dict_fmt = args.dict_format
+            if args.sharepoint and dict_fmt in ("markdown", "md", "html"):
+                dict_fmt = "aspx"
+            elif args.output and str(args.output).lower().endswith(".aspx"):
+                dict_fmt = "aspx"
+
+            log_info(f"Generating Data Dictionary (format={dict_fmt}, hide_fillers={args.hide_fillers})...")
             gen_start = time.perf_counter()
             content = generate_data_dictionary(
                 model,
-                format=args.dict_format,
+                format=dict_fmt,
                 hide_fillers=args.hide_fillers,
+                source_code=source_text,
             )
             gen_dur = (time.perf_counter() - gen_start) * 1000
             log_verbose(f"Data Dictionary generated in {gen_dur:.2f} ms")
@@ -472,26 +499,25 @@ def main(argv: Optional[Sequence[str]] = None) -> int:
             from cobolscope.graph import generate_call_graph
 
             model = ProgramModel.from_dict(raw_dict)
-            source_text = None
-            if args.input_file:
-                try:
-                    src_p = Path(args.input_file)
-                    if src_p.is_file() and src_p.suffix.lower() not in (".json",):
-                        source_text = src_p.read_text(encoding="utf-8", errors="replace")
-                        model.source_code = source_text
-                except Exception:
-                    pass
-            if not source_text and hasattr(model, "get_source_text"):
+            if source_text:
+                model.source_code = source_text
+            elif hasattr(model, "get_source_text"):
                 source_text = model.get_source_text()
 
             model_dur = (time.perf_counter() - graph_start) * 1000
             log_verbose(f"ProgramModel hydrated in {model_dur:.2f} ms")
 
-            log_info(f"Rendering Call Graph (format={args.graph_format})...")
+            graph_fmt = args.graph_format
+            if args.sharepoint and graph_fmt == "html":
+                graph_fmt = "aspx"
+            elif args.output and str(args.output).lower().endswith(".aspx"):
+                graph_fmt = "aspx"
+
+            log_info(f"Rendering Call Graph (format={graph_fmt})...")
             gen_start = time.perf_counter()
             content = generate_call_graph(
                 model,
-                format=args.graph_format,
+                format=graph_fmt,
                 hide_fallthrough=not args.show_fallthrough,
                 collapse_exits=args.collapse_exits,
                 enable_clustering=args.enable_clustering,
