@@ -410,6 +410,11 @@ table.cobol-code-table tr {
     transition: background-color 0.1s ease;
 }
 
+table.cobol-code-table tr td {
+    border-bottom: none !important;
+    padding: 0;
+}
+
 table.cobol-code-table tr:hover td {
     background-color: #F8FAFC;
 }
@@ -418,13 +423,16 @@ td.code-line-num {
     width: 50px;
     min-width: 50px;
     text-align: right;
-    padding: 0 8px;
+    padding: 0 8px !important;
     color: #94A3B8;
     background: #F8FAFC;
     border-right: 1px solid var(--border-color);
+    border-bottom: none !important;
     user-select: none;
     cursor: pointer;
     font-size: 0.72rem;
+    line-height: 1.5;
+    vertical-align: middle;
 }
 
 td.code-line-num:hover {
@@ -432,9 +440,12 @@ td.code-line-num:hover {
 }
 
 td.code-line-text {
-    padding: 0 10px;
+    padding: 0 10px !important;
     white-space: pre;
     color: #1E293B;
+    border-bottom: none !important;
+    line-height: 1.5;
+    vertical-align: middle;
 }
 
 tr.line-highlighted td.code-line-text {
@@ -490,14 +501,14 @@ tr.selected-var-row td:first-child {
     border-left: 3px solid var(--primary);
 }
 
-table {
+#dictTable {
     width: 100%;
     border-collapse: collapse;
     text-align: left;
     font-size: 0.85rem;
 }
 
-th {
+#dictTable th {
     background-color: #F8FAFC;
     color: var(--text-secondary);
     font-size: 0.74rem;
@@ -511,23 +522,23 @@ th {
     transition: color 0.1s, background-color 0.1s;
 }
 
-th:hover {
+#dictTable th:hover {
     color: var(--primary);
     background-color: #F1F5F9;
 }
 
-td {
+#dictTable td {
     padding: 10px 14px;
     border-bottom: 1px solid var(--border-color);
     vertical-align: middle;
     color: var(--text-primary);
 }
 
-tr:last-child td {
+#dictTable tr:last-child td {
     border-bottom: none;
 }
 
-tr:hover {
+#dictTable tr:hover {
     background-color: var(--surface-hover);
 }
 

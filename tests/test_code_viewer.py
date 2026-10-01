@@ -477,6 +477,26 @@ class TestCodeViewerAndSplitView(unittest.TestCase):
         self.assertIn(".code-word.var-highlight", portal_html)
         self.assertIn("highlightPortalWord", portal_html)
 
+    def test_code_viewer_quotes_and_table_border_styling(self):
+        """Verify quote preservation without entity distortion and borderless code lines in data dictionary."""
+        model = ProgramModel(
+            program_id="QUOTETEST",
+            source_code="003240     MOVE 'N' TO EOF-FLAG.\n003241     IF JCL-TYPE-RUN-FLAG = 'Q'\n",
+        )
+        dd_html = generate_data_dictionary(model, format="html", source_code=model.source_code)
+        cg_html = generate_call_graph(model, format="html")
+
+        # 1. Verify quotes are not transformed into &#039; in the rendered JS or source scripts
+        self.assertNotIn("&#039;", dd_html)
+        self.assertNotIn("&#039;", cg_html)
+
+        # 2. Verify table.cobol-code-table tr td has border-bottom: none !important
+        self.assertIn("table.cobol-code-table tr td", dd_html)
+        self.assertIn("border-bottom: none !important", dd_html)
+
+        # 3. Verify #dictTable td is scoped so it does not bleed onto code table
+        self.assertIn("#dictTable td", dd_html)
+
 
 if __name__ == "__main__":
     unittest.main()
