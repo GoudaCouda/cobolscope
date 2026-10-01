@@ -57,6 +57,11 @@ public class CobolDocumentParserImpl implements CobolDocumentParser {
 		return new CobolDocumentParserListenerImpl(params, tokens, sourceFileName, sourceMap);
 	}
 
+	protected CobolDocumentParserListener createDocumentParserListener(final CobolParserParams params,
+			final CommonTokenStream tokens, final String sourceFileName, final CobolSourceMap sourceMap, final int[] lineMap) {
+		return new CobolDocumentParserListenerImpl(params, tokens, sourceFileName, sourceMap, lineMap);
+	}
+
 	@Override
 	public String processLines(final String code, final CobolParserParams params) {
 		return processLinesWithSourceMap(code, params, "", new CobolSourceMap("")).code;
@@ -64,29 +69,39 @@ public class CobolDocumentParserImpl implements CobolDocumentParser {
 
 	public CobolPreprocessorResult processLinesWithSourceMap(final String code, final CobolParserParams params,
 			final String sourceFileName, final CobolSourceMap sourceMap) {
+		return processLinesWithSourceMap(code, params, sourceFileName, sourceMap, null);
+	}
+
+	public CobolPreprocessorResult processLinesWithSourceMap(final String code, final CobolParserParams params,
+			final String sourceFileName, final CobolSourceMap sourceMap, final int[] lineMap) {
 		final boolean requiresProcessorExecution = containsTrigger(code, triggers);
 		final String result;
 
 		if (requiresProcessorExecution) {
-			result = processWithParser(code, params, sourceFileName, sourceMap);
+			result = processWithParser(code, params, sourceFileName, sourceMap, lineMap);
 		} else {
 			result = code;
 			int lines = 1;
 			for (int i = 0; i < code.length(); i++) {
 				if (code.charAt(i) == '\n') lines++;
 			}
-			sourceMap.addEntry(1, lines, sourceFileName, 1, lines);
+			CobolDocumentParserListenerImpl.addCodeSegments(sourceMap, 1, lines, 1, lines, sourceFileName, lineMap);
 		}
 
 		return new CobolPreprocessorResult(result, sourceMap);
 	}
 
 	protected String processWithParser(final String code, final CobolParserParams params) {
-		return processWithParser(code, params, "", new CobolSourceMap(""));
+		return processWithParser(code, params, "", new CobolSourceMap(""), null);
 	}
 
 	protected String processWithParser(final String code, final CobolParserParams params,
 			final String sourceFileName, final CobolSourceMap sourceMap) {
+		return processWithParser(code, params, sourceFileName, sourceMap, null);
+	}
+
+	protected String processWithParser(final String code, final CobolParserParams params,
+			final String sourceFileName, final CobolSourceMap sourceMap, final int[] lineMap) {
 		// run the lexer
 		final CobolPreprocessorLexer lexer = new CobolPreprocessorLexer(CharStreams.fromString(code));
 
@@ -112,7 +127,7 @@ public class CobolDocumentParserImpl implements CobolDocumentParser {
 		final StartRuleContext startRule = parser.startRule();
 
 		// analyze contained copy books
-		final CobolDocumentParserListener listener = createDocumentParserListener(params, tokens, sourceFileName, sourceMap);
+		final CobolDocumentParserListener listener = createDocumentParserListener(params, tokens, sourceFileName, sourceMap, lineMap);
 		final ParseTreeWalker walker = new ParseTreeWalker();
 
 		walker.walk(listener, startRule);

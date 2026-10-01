@@ -102,10 +102,22 @@ public class CobolPreprocessorImpl implements CobolPreprocessor {
 			final String sourceFileName, final CobolSourceMap sourceMap) {
 		final List<CobolLine> lines = readLines(cobolCode, params);
 		final List<CobolLine> rewrittenLines = rewriteLines(lines);
-		final String code = createLineWriter().serialize(rewrittenLines);
+		final CobolLineWriter lineWriter = createLineWriter();
+		final String code;
+		final int[] lineMap;
+
+		if (lineWriter instanceof CobolLineWriterImpl) {
+			final CobolLineWriterImpl.SerializationResult sr = ((CobolLineWriterImpl) lineWriter).serializeWithLineMap(rewrittenLines);
+			code = sr.code;
+			lineMap = sr.lineMap;
+		} else {
+			code = lineWriter.serialize(rewrittenLines);
+			lineMap = null;
+		}
+
 		final CobolDocumentParser docParser = createDocumentParser();
 		if (docParser instanceof CobolDocumentParserImpl) {
-			return ((CobolDocumentParserImpl) docParser).processLinesWithSourceMap(code, params, sourceFileName, sourceMap);
+			return ((CobolDocumentParserImpl) docParser).processLinesWithSourceMap(code, params, sourceFileName, sourceMap, lineMap);
 		}
 		final String result = docParser.processLines(code, params);
 		return new CobolPreprocessorResult(result, sourceMap);

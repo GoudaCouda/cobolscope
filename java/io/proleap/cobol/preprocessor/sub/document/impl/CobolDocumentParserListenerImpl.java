@@ -63,19 +63,58 @@ public class CobolDocumentParserListenerImpl extends CobolPreprocessorBaseListen
 
 	private int origChunkStart = 1;
 
+	private final int[] lineMap;
+
 	public CobolDocumentParserListenerImpl(final CobolParserParams params, final BufferedTokenStream tokens) {
-		this(params, tokens, "", new CobolSourceMap(""));
+		this(params, tokens, "", new CobolSourceMap(""), null);
 	}
 
 	public CobolDocumentParserListenerImpl(final CobolParserParams params, final BufferedTokenStream tokens,
 			final String sourceFileName, final CobolSourceMap sourceMap) {
+		this(params, tokens, sourceFileName, sourceMap, null);
+	}
+
+	public CobolDocumentParserListenerImpl(final CobolParserParams params, final BufferedTokenStream tokens,
+			final String sourceFileName, final CobolSourceMap sourceMap, final int[] lineMap) {
 		this.params = params;
 		this.tokens = tokens;
 		this.sourceFileName = sourceFileName != null ? sourceFileName : "";
 		this.sourceMap = sourceMap != null ? sourceMap : new CobolSourceMap(this.sourceFileName);
 		this.sourceMap.setPrimarySourceFile(this.sourceFileName);
+		this.lineMap = lineMap;
 
 		contexts.push(new CobolDocumentContext());
+	}
+
+	public static void addCodeSegments(final CobolSourceMap sourceMap, final int prepStart, final int prepEnd,
+			final int codeStart, final int codeEnd, final String sourceFile, final int[] lineMap) {
+		if (prepEnd < prepStart || codeEnd < codeStart) {
+			return;
+		}
+
+		if (lineMap == null || lineMap.length == 0) {
+			sourceMap.addEntry(prepStart, prepEnd, sourceFile, codeStart, codeEnd);
+			return;
+		}
+
+		int currPrepSegStart = prepStart;
+		int currOrigSegStart = (codeStart < lineMap.length && lineMap[codeStart] > 0) ? lineMap[codeStart] : codeStart;
+		int prevOrigLine = currOrigSegStart;
+
+		for (int i = 1; i <= (prepEnd - prepStart); i++) {
+			int c = codeStart + i;
+			int p = prepStart + i;
+			int origLine = (c < lineMap.length && lineMap[c] > 0) ? lineMap[c] : c;
+
+			if (origLine != prevOrigLine + 1) {
+				sourceMap.addEntry(currPrepSegStart, p - 1, sourceFile, currOrigSegStart, prevOrigLine);
+				currPrepSegStart = p;
+				currOrigSegStart = origLine;
+			}
+			prevOrigLine = origLine;
+		}
+
+		sourceMap.addEntry(currPrepSegStart, prepEnd, sourceFile, currOrigSegStart, prevOrigLine);
 	}
 
 	@Override
@@ -135,7 +174,7 @@ public class CobolDocumentParserListenerImpl extends CobolPreprocessorBaseListen
 			int prepCopyStart = context().getLineCount();
 			int origCopyStart = ctx.getStart() != null ? ctx.getStart().getLine() : origChunkStart;
 			if (prepCopyStart > prepChunkStart && origCopyStart >= origChunkStart) {
-				sourceMap.addEntry(prepChunkStart, prepCopyStart - 1, sourceFileName, origChunkStart, origCopyStart - 1);
+				addCodeSegments(sourceMap, prepChunkStart, prepCopyStart - 1, origChunkStart, origCopyStart - 1, sourceFileName, lineMap);
 			}
 		}
 
@@ -266,7 +305,7 @@ public class CobolDocumentParserListenerImpl extends CobolPreprocessorBaseListen
 			int totalPrepLines = context().getLineCount();
 			if (totalPrepLines >= prepChunkStart) {
 				int count = totalPrepLines - prepChunkStart;
-				sourceMap.addEntry(prepChunkStart, totalPrepLines, sourceFileName, origChunkStart, origChunkStart + count);
+				addCodeSegments(sourceMap, prepChunkStart, totalPrepLines, origChunkStart, origChunkStart + count, sourceFileName, lineMap);
 			}
 		}
 	}

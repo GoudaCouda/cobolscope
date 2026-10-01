@@ -213,6 +213,39 @@ class TestCodeViewerAndSplitView(unittest.TestCase):
         self.assertEqual(node_elem["data"].get("source_file"), "ABNDPROC.cbl")
         self.assertEqual(node_elem["data"].get("start_line"), 131)
 
+    def test_continuation_lines_source_mapping(self):
+        """Verify that continuation lines in WORKING-STORAGE do not shift Procedure Division line mappings."""
+        cobol_source = (
+            "000001 IDENTIFICATION DIVISION.                                             ORIG\n"
+            "000002 PROGRAM-ID. TESTCONT.                                                ORIG\n"
+            "000003 DATA DIVISION.                                                       ORIG\n"
+            "000004 WORKING-STORAGE SECTION.                                             ORIG\n"
+            "000005 01 WS-LONG-TEXT PIC X(40) VALUE 'HELLO WORLD                         ORIG\n"
+            "000006-                                ' CONTINUED'.                        ORIG\n"
+            "000007 01 WS-OTHER PIC X(40) VALUE 'SECOND LINE                             ORIG\n"
+            "000008-                                ' AGAIN CONTINUED'.                  ORIG\n"
+            "000009 PROCEDURE DIVISION.                                                  ORIG\n"
+            "000010 1000-PROCESS.                                                        ORIG\n"
+            "000011     DISPLAY WS-LONG-TEXT.                                            ORIG\n"
+            "000012 1000-PROCESS-EXIT.                                                   ORIG\n"
+            "000013     EXIT.                                                            ORIG\n"
+        )
+        with tempfile.TemporaryDirectory() as td:
+            cbl_file = Path(td) / "TESTCONT.CBL"
+            cbl_file.write_text(cobol_source, encoding="utf-8")
+
+            from cobolscope.parser import parse
+            raw_ir = parse(cbl_file)
+            para_map = {p["name"]: p for p in raw_ir.get("paragraphs", [])}
+
+            self.assertIn("1000-PROCESS", para_map)
+            self.assertIn("1000-PROCESS-EXIT", para_map)
+
+            # In the file, 1000-PROCESS is exactly on line 10, and 1000-PROCESS-EXIT is on line 12
+            self.assertEqual(para_map["1000-PROCESS"]["location"]["startLine"], 10)
+            self.assertEqual(para_map["1000-PROCESS-EXIT"]["location"]["startLine"], 12)
+
 
 if __name__ == "__main__":
     unittest.main()
+
