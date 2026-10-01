@@ -6,10 +6,7 @@
             <button id="btn-toggle-sidebar" class="tab-btn" onclick="toggleSidebar()" title="Toggle Program List Sidebar" style="padding:4px 8px; margin-right:8px;">
               <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="9" y1="3" x2="9" y2="21"/></svg>
               <span>Programs</span>
-              <span id="stat-total" class="sidebar-count-pill">{{ manifest.batch_summary.total_programs_found | default(0) }}</span>
             </button>
-            <span class="prog-title" id="current-title">—</span>
-            <div class="prog-header-chips" id="current-chips"></div>
           </div>
 
           <div class="artifact-tab-group" id="artifact-tabs">
@@ -53,6 +50,9 @@
 
             <div class="source-container" id="source-container" style="display:none;">
               <div class="source-toolbar">
+                <div class="source-title-area">
+                  <code class="source-prog-title" id="sourceProgTitle"></code>
+                </div>
                 <div class="cobol-columns-indicator">
                   <span class="col-guide" title="Columns 1-6: Sequence Number">1-6</span>
                   <span class="col-guide" title="Column 7: Indicator Area">7</span>

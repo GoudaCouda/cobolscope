@@ -78,10 +78,44 @@
       });
     }
 
+    // Program Details Popover Controller
+    const btnProgramInfo = document.getElementById("btnProgramInfo");
+    const programInfoPopover = document.getElementById("programInfoPopover");
+    const btnCloseProgramInfo = document.getElementById("btnCloseProgramInfo");
+
+    function toggleProgramInfoPopover(forceState) {
+      if (!programInfoPopover) return;
+      const shouldOpen = forceState !== undefined ? forceState : (programInfoPopover.style.display === "none");
+      programInfoPopover.style.display = shouldOpen ? "block" : "none";
+    }
+
+    if (btnProgramInfo) {
+      btnProgramInfo.addEventListener("click", (e) => {
+        e.stopPropagation();
+        toggleProgramInfoPopover();
+      });
+    }
+
+    if (btnCloseProgramInfo) {
+      btnCloseProgramInfo.addEventListener("click", (e) => {
+        e.stopPropagation();
+        toggleProgramInfoPopover(false);
+      });
+    }
+
+    document.addEventListener("click", (e) => {
+      if (programInfoPopover && programInfoPopover.style.display !== "none") {
+        if (!programInfoPopover.contains(e.target) && e.target !== btnProgramInfo && !btnProgramInfo.contains(e.target)) {
+          toggleProgramInfoPopover(false);
+        }
+      }
+    });
+
     // Header entry point click
     const hdrEntry = document.getElementById("hdrEntryPoint");
     if (hdrEntry && graphData.entry_point) {
       hdrEntry.addEventListener("click", () => {
+        toggleProgramInfoPopover(false);
         selectNode(graphData.entry_point);
         focusNode(graphData.entry_point);
       });
@@ -93,6 +127,7 @@
         e.preventDefault();
         if (searchInput) searchInput.focus();
       } else if (e.key === "Escape") {
+        toggleProgramInfoPopover(false);
         if (typeof closeLevel3Modal === "function") closeLevel3Modal();
         if (typeof closeLinearCardModal === "function") closeLinearCardModal();
       }

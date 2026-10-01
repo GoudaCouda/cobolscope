@@ -11,7 +11,6 @@
   const workspaceMain = document.getElementById("workspaceMain");
   const btnToggleCodeSplit = document.getElementById("btnToggleCodeSplit");
   const btnCloseCodeSplit = document.getElementById("btnCloseCodeSplit");
-  const btnSyncRoutineCode = document.getElementById("btnSyncRoutineCode");
   const codeJumpLineInput = document.getElementById("codeJumpLineInput");
   const codeCurrentRoutineBadge = document.getElementById("codeCurrentRoutineBadge");
   const codeLineCountInfo = document.getElementById("codeLineCountInfo");
@@ -199,14 +198,6 @@
       if (e.key === "Enter") {
         e.preventDefault();
         handleCodeJumpOrSearch();
-      }
-    });
-  }
-
-  if (btnSyncRoutineCode) {
-    btnSyncRoutineCode.addEventListener("click", () => {
-      if (selectedRoutineNode) {
-        highlightRoutineInCode(selectedRoutineNode.start_line, selectedRoutineNode.end_line, selectedRoutineNode.name, selectedRoutineNode.source_file);
       }
     });
   }

@@ -19,7 +19,8 @@ body {
       z-index: 10;
     }
 
-    html.in-portal-iframe .navbar .brand {
+    html.in-portal-iframe .navbar .brand-title,
+    html.in-portal-iframe .navbar .brand-divider {
       display: none !important;
     }
 
@@ -62,52 +63,119 @@ body {
       font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
     }
 
-    .header-metrics {
+    .program-info-wrapper {
+      position: relative;
+      display: inline-flex;
+      align-items: center;
+    }
+
+    .program-title-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      background: transparent;
+      border: 1px solid transparent;
+      border-radius: 4px;
+      padding: 2px 6px;
+      cursor: pointer;
+      color: inherit;
+      transition: all 0.15s ease;
+    }
+
+    .program-title-btn:hover {
+      background: #F1F5F9;
+      border-color: var(--border-color);
+    }
+
+    .program-title-btn .info-icon {
+      color: #94A3B8;
+      transition: color 0.15s ease;
+    }
+
+    .program-title-btn:hover .info-icon {
+      color: var(--primary);
+    }
+
+    .program-info-popover {
+      position: absolute;
+      top: calc(100% + 6px);
+      left: 0;
+      width: 270px;
+      background: #FFFFFF;
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+      z-index: 1000;
+      padding: 12px 14px;
+      font-size: 12px;
+      color: var(--text-primary);
+    }
+
+    .popover-header {
       display: flex;
       align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid var(--border-subtle);
+      padding-bottom: 8px;
+      margin-bottom: 10px;
+    }
+
+    .popover-title {
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--text-secondary);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .popover-close-btn {
+      background: transparent;
+      border: none;
+      color: var(--text-muted);
+      cursor: pointer;
+      font-size: 12px;
+      line-height: 1;
+      padding: 2px;
+    }
+
+    .popover-close-btn:hover {
+      color: var(--text-primary);
+    }
+
+    .popover-body {
+      display: flex;
+      flex-direction: column;
       gap: 6px;
-      font-size: 0.75rem;
-      color: #64748B;
     }
 
-    .header-metrics .dot {
-      color: #CBD5E1;
-      font-size: 0.65rem;
+    .popover-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 12px;
     }
 
-    .entry-metric {
-      color: #0078D4;
+    .popover-label {
+      color: var(--text-secondary);
+    }
+
+    .popover-val {
       font-weight: 600;
+      color: var(--text-primary);
+    }
+
+    .popover-val.entry-link {
+      color: var(--primary);
       cursor: pointer;
       text-decoration: underline dotted;
     }
 
-    .entry-metric:hover {
-      color: #106EBE;
+    .popover-val.entry-link:hover {
+      color: var(--primary-hover);
     }
 
-    .entry-badge-tag {
-      font-size: 0.68rem;
-      font-weight: 700;
-      color: #0078D4;
-      background: #EFF6FC;
-      border: 1px solid #C7E0F4;
-      padding: 1px 4px;
-      border-radius: 3px;
-      margin-right: 2px;
-    }
-
-    .badge-cycle-warn {
-      background: #FEF2F2;
-      color: #DC2626;
-      border: 1px solid #FEE2E2;
-      border-radius: 4px;
-      padding: 1px 6px;
-      font-weight: 600;
-      font-size: 0.7rem;
-      display: inline-flex;
-      align-items: center;
-      gap: 4px;
+    .popover-val.text-warning {
+      color: var(--warning);
     }
 
     .icon-warning {

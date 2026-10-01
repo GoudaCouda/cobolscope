@@ -1,35 +1,57 @@
-  <!-- Unified Enterprise Navbar (50px) -->
+  <!-- Unified Enterprise Navbar (48px) -->
   <header class="navbar">
     <div class="navbar-left">
       <div class="brand">
         <span class="brand-title">COBOLSCOPE</span>
         <span class="brand-divider">/</span>
-        <code class="program-title">{{ program_id }}</code>
-      </div>
-      <div class="header-metrics">
-        <span>{{ graph.total_paragraphs }} routines</span>
-        <span class="dot">•</span>
-        <span>{{ graph.total_calls }} calls</span>
-        <span class="dot">•</span>
-        <span>depth {{ graph.max_depth }}</span>
-        {% if graph.entry_point %}
-        <span class="dot">•</span>
-        <span class="entry-metric" id="hdrEntryPoint" title="Click to jump to entry routine">
-          <span class="entry-badge-tag">[ENTRY]</span> {{ graph.entry_point }}
-        </span>
-        {% endif %}
-        {% if graph.has_cycles %}
-        <span class="badge-cycle-warn">
-          <svg class="icon-warning" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
-          <span>Cycles</span>
-        </span>
-        {% endif %}
-        {% if graph.hidden_error_nodes %}
-        <span class="dot">•</span>
-        <span title="{{ graph.hidden_error_nodes|length }} error trap routine(s) hidden: {{ graph.hidden_error_nodes|join(', ') }}">
-          {{ graph.hidden_error_nodes|length }} error trap(s) hidden
-        </span>
-        {% endif %}
+        <div class="program-info-wrapper">
+          <button class="program-title-btn" id="btnProgramInfo" title="Click for program details and metrics">
+            <code class="program-title">{{ program_id }}</code>
+            <svg class="info-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="10"></circle>
+              <line x1="12" y1="16" x2="12" y2="12"></line>
+              <line x1="12" y1="8" x2="12.01" y2="8"></line>
+            </svg>
+          </button>
+
+          <!-- Popover showing program metrics/details on click -->
+          <div class="program-info-popover" id="programInfoPopover" style="display:none;">
+            <div class="popover-header">
+              <span class="popover-title">Program Details</span>
+              <button class="popover-close-btn" id="btnCloseProgramInfo" title="Close">✕</button>
+            </div>
+            <div class="popover-body">
+              <div class="popover-row">
+                <span class="popover-label">Program:</span>
+                <code class="popover-val font-mono">{{ program_id }}</code>
+              </div>
+              {% if graph.entry_point %}
+              <div class="popover-row">
+                <span class="popover-label">Entry Routine:</span>
+                <span class="popover-val entry-link" id="hdrEntryPoint" title="Click to jump to entry routine">{{ graph.entry_point }}</span>
+              </div>
+              {% endif %}
+              <div class="popover-row">
+                <span class="popover-label">Routines:</span>
+                <span class="popover-val font-mono">{{ graph.total_paragraphs }}</span>
+              </div>
+              <div class="popover-row">
+                <span class="popover-label">Routine Calls:</span>
+                <span class="popover-val font-mono">{{ graph.total_calls }}</span>
+              </div>
+              <div class="popover-row">
+                <span class="popover-label">Call Depth:</span>
+                <span class="popover-val font-mono">{{ graph.max_depth }}</span>
+              </div>
+              <div class="popover-row">
+                <span class="popover-label">Recursion / Cycles:</span>
+                <span class="popover-val {% if graph.has_cycles %}text-warning{% endif %}">
+                  {{ "Detected" if graph.has_cycles else "None" }}
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
 
