@@ -21,6 +21,7 @@ from cobolscope.models import (
 )
 from cobolscope.graph import CallGraphGenerator, generate_call_graph
 from cobolscope.portal import generate_portal
+from cobolscope.dictionary.generator import generate_data_dictionary
 
 
 SAMPLE_COBOL_SOURCE = """       IDENTIFICATION DIVISION.
@@ -305,6 +306,92 @@ class TestCodeViewerAndSplitView(unittest.TestCase):
             tt_cg = CallGraphGenerator(tt_model, collapse_exits=True).graph
             self.assertFalse(tt_cg.has_cycles)
             self.assertEqual(tt_cg.cycles, [])
+
+    def test_procedure_details_popover_and_no_l3_cc(self):
+        """Verify that routine details are in a popover, meta-grid is removed from body, and L3 card has no CC counter."""
+        model = ProgramModel(
+            program_id="POPOVERTEST",
+            paragraphs=[
+                ParagraphNode(
+                    name="1000-PROCESS",
+                    section_parent="MAIN-SECTION",
+                    location=SourceLocation(start_line=10, end_line=20),
+                    statements=[
+                        PerformStatementNode(target="2000-CALC"),
+                    ],
+                ),
+                ParagraphNode(
+                    name="2000-CALC",
+                    section_parent="CALC-SECTION",
+                    location=SourceLocation(start_line=21, end_line=30),
+                ),
+            ],
+        )
+        html = generate_call_graph(model, format="html")
+
+        # 1. Popover elements exist in header
+        self.assertIn('id="btnRoutineInfo"', html)
+        self.assertIn('id="routineInfoPopover"', html)
+        self.assertIn('id="inspPara"', html)
+        self.assertIn('id="inspSection"', html)
+        self.assertIn('id="inspLines"', html)
+        self.assertIn('id="inspCC"', html)
+        self.assertIn('id="inspStmts"', html)
+        self.assertIn('id="inspCluster"', html)
+
+        # 2. meta-grid removed from inspector body
+        self.assertNotIn('class="meta-grid"', html)
+
+        # 3. L3 card has no CC counter badges
+        self.assertNotIn("CC: 1 (No Branches)", html)
+        self.assertNotIn("ccBadge", html)
+
+    def test_data_dictionary_where_used_jump(self):
+        """Verify that Data Dictionary Where-Used breadcrumbs have jumpToRoutine and portal message handler."""
+        from cobolscope.models import DataDictionary, DataField
+        dd = DataDictionary(
+            working_storage_section=[
+                DataField(
+                    id="WS_COUNT",
+                    name="WS-COUNT",
+                    pic="9(4)",
+                    byte_length=4,
+                    byte_offset=0,
+                )
+            ]
+        )
+        model = ProgramModel(
+            program_id="DICTJUMP",
+            data_dictionary=dd,
+            paragraphs=[
+                ParagraphNode(
+                    name="1000-PROCESS",
+                    statements=[
+                        PerformStatementNode(target="2000-CALC", source_field_ids=["WS_COUNT"]),
+                    ],
+                )
+            ],
+        )
+
+        dd_html = generate_data_dictionary(model, format="html")
+        self.assertIn("jumpToRoutine", dd_html)
+        self.assertIn("COBOLSCOPE_JUMP_TO_ROUTINE", dd_html)
+        self.assertIn("ref-breadcrumb", dd_html)
+
+        portal_html = generate_portal({
+            "programs": [
+                {
+                    "program_id": "DICTJUMP",
+                    "status": "SUCCESS",
+                    "artifacts": {
+                        "call_graph": "DICTJUMP.html",
+                        "data_dictionary_html": "DICTJUMP_dict.html",
+                    },
+                }
+            ]
+        })
+        self.assertIn("handleJumpToRoutine", portal_html)
+        self.assertIn("COBOLSCOPE_SELECT_ROUTINE", portal_html)
 
 
 if __name__ == "__main__":

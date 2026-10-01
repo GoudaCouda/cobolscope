@@ -65,3 +65,33 @@
                 }
             }
         }
+
+        function jumpToRoutine(paraName, secName) {
+            if (!paraName) return;
+            const targetPara = paraName.trim();
+            const targetSec = (secName || '').trim();
+
+            // 1. If running inside Portal iframe, notify parent portal
+            if (window.parent && window.parent !== window) {
+                window.parent.postMessage({
+                    type: 'COBOLSCOPE_JUMP_TO_ROUTINE',
+                    routine: targetPara,
+                    section: targetSec
+                }, '*');
+                try {
+                    if (typeof window.parent.handleJumpToRoutine === 'function') {
+                        window.parent.handleJumpToRoutine(targetPara, targetSec);
+                    }
+                } catch (e) {}
+                return;
+            }
+
+            // 2. If running standalone, navigate to companion Call Graph HTML
+            const curPath = window.location.pathname;
+            if (curPath.endsWith('_dict.html')) {
+                const graphPath = curPath.replace(/_dict\.html$/, '.html');
+                window.location.href = graphPath + '#routine=' + encodeURIComponent(targetPara);
+            } else {
+                window.location.hash = 'routine=' + encodeURIComponent(targetPara);
+            }
+        }

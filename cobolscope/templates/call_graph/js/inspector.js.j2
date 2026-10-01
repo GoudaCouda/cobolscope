@@ -164,3 +164,36 @@
     if (btnToggleInspector) {
       btnToggleInspector.addEventListener("click", () => toggleInspector());
     }
+
+    // Procedure Details Popover Controller
+    const btnRoutineInfo = document.getElementById("btnRoutineInfo");
+    const routineInfoPopover = document.getElementById("routineInfoPopover");
+    const btnCloseRoutineInfo = document.getElementById("btnCloseRoutineInfo");
+
+    function toggleRoutineInfoPopover(forceState) {
+      if (!routineInfoPopover) return;
+      const shouldOpen = forceState !== undefined ? forceState : (routineInfoPopover.style.display === "none");
+      routineInfoPopover.style.display = shouldOpen ? "block" : "none";
+    }
+
+    if (btnRoutineInfo) {
+      btnRoutineInfo.addEventListener("click", (e) => {
+        e.stopPropagation();
+        toggleRoutineInfoPopover();
+      });
+    }
+
+    if (btnCloseRoutineInfo) {
+      btnCloseRoutineInfo.addEventListener("click", (e) => {
+        e.stopPropagation();
+        toggleRoutineInfoPopover(false);
+      });
+    }
+
+    document.addEventListener("click", (e) => {
+      if (routineInfoPopover && routineInfoPopover.style.display !== "none") {
+        if (!routineInfoPopover.contains(e.target) && e.target !== btnRoutineInfo && !btnRoutineInfo.contains(e.target)) {
+          toggleRoutineInfoPopover(false);
+        }
+      }
+    });

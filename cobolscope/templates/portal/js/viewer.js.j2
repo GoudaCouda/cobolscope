@@ -208,3 +208,31 @@
         messageTrace.style.display = "none";
       }
     }
+
+    // Handle routine jump requests from embedded data dictionary iframe
+    window.handleJumpToRoutine = function(routine, section) {
+      if (!routine) return;
+      switchArtifact("call_graph");
+
+      function sendSelection() {
+        try {
+          if (contentFrame && contentFrame.contentWindow) {
+            contentFrame.contentWindow.postMessage({
+              type: "COBOLSCOPE_SELECT_ROUTINE",
+              routine: routine,
+              section: section
+            }, "*");
+          }
+        } catch (err) {}
+      }
+
+      sendSelection();
+      setTimeout(sendSelection, 100);
+      contentFrame.addEventListener("load", sendSelection, { once: true });
+    };
+
+    window.addEventListener("message", (e) => {
+      if (e.data && e.data.type === "COBOLSCOPE_JUMP_TO_ROUTINE") {
+        window.handleJumpToRoutine(e.data.routine, e.data.section);
+      }
+    });

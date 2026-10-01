@@ -128,6 +128,7 @@
         if (searchInput) searchInput.focus();
       } else if (e.key === "Escape") {
         toggleProgramInfoPopover(false);
+        if (typeof toggleRoutineInfoPopover === "function") toggleRoutineInfoPopover(false);
         if (typeof closeLevel3Modal === "function") closeLevel3Modal();
         if (typeof closeLinearCardModal === "function") closeLinearCardModal();
       }
@@ -143,12 +144,97 @@
         .replace(/'/g, "&#039;");
     }
 
+    function selectAndFocusRoutine(routineName, sectionName) {
+      if (!routineName && !sectionName) return;
+      const rUp = (routineName || "").trim().toUpperCase();
+      const sUp = (sectionName || "").trim().toUpperCase();
+
+      // 1. Direct match by node key
+      if (rUp && graphData.nodes && graphData.nodes[rUp]) {
+        selectNode(rUp);
+        focusNode(rUp);
+        return;
+      }
+
+      // 2. Direct match by section name in graphData.nodes
+      if (sUp && graphData.nodes && graphData.nodes[sUp]) {
+        selectNode(sUp);
+        focusNode(sUp);
+        return;
+      }
+
+      // 3. Match by node.name or node.section
+      if (graphData.nodes) {
+        for (const [k, n] of Object.entries(graphData.nodes)) {
+          const nName = (n.name || "").trim().toUpperCase();
+          const nSec = (n.section || "").trim().toUpperCase();
+          if (rUp && (nName === rUp || nSec === rUp)) {
+            selectNode(k);
+            focusNode(k);
+            return;
+          }
+          if (sUp && (nName === sUp || nSec === sUp)) {
+            selectNode(k);
+            focusNode(k);
+            return;
+          }
+        }
+      }
+
+      // 4. Match in Cytoscape nodes
+      if (cy) {
+        const found = cy.nodes(".routine-node").filter(n => {
+          const name = (n.data("name") || "").toUpperCase();
+          const label = (n.data("label") || "").toUpperCase();
+          const sec = (n.data("section") || "").toUpperCase();
+          return (rUp && (name === rUp || label === rUp || sec === rUp)) ||
+                 (sUp && (name === sUp || label === sUp || sec === sUp));
+        });
+        if (found.length > 0) {
+          const first = found[0];
+          const key = first.data("name") || first.data("label");
+          selectNode(key);
+          focusNode(key);
+        }
+      }
+    }
+
+    // Listen for postMessage from parent portal or other windows
+    window.addEventListener("message", (e) => {
+      if (e.data && e.data.type === "COBOLSCOPE_SELECT_ROUTINE") {
+        selectAndFocusRoutine(e.data.routine, e.data.section);
+      }
+    });
+
+    // Check URL hash/params for routine selection
+    function checkUrlForRoutineSelection() {
+      const hash = window.location.hash;
+      const params = new URLSearchParams(window.location.search);
+      let targetRoutine = params.get("routine");
+      if (!targetRoutine && hash && hash.includes("routine=")) {
+        const match = hash.match(/routine=([^&]+)/);
+        if (match && match[1]) {
+          targetRoutine = decodeURIComponent(match[1]);
+        }
+      }
+      if (targetRoutine) {
+        selectAndFocusRoutine(targetRoutine);
+        return true;
+      }
+      return false;
+    }
+
+    window.addEventListener("hashchange", checkUrlForRoutineSelection);
+
     // Initialize View on DOM Ready
     window.addEventListener("DOMContentLoaded", () => {
       CobolScopeLog.info("DOM Ready. Initializing Cytoscape...");
       initCytoscape();
-      const startKey = graphData.entry_point || Object.keys(graphData.nodes)[0];
-      if (startKey) {
-        selectNode(startKey);
+      const hasUrlRoutine = checkUrlForRoutineSelection();
+      if (!hasUrlRoutine) {
+        const startKey = graphData.entry_point || Object.keys(graphData.nodes)[0];
+        if (startKey) {
+          selectNode(startKey);
+        }
       }
     });

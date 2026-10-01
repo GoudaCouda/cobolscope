@@ -105,13 +105,13 @@
                                 {% for ref in r.references %}
                                 {% if " > " in ref %}
                                 {% set parts = ref.split(" > ") %}
-                                <div class="ref-breadcrumb" title="{{ ref }}">
+                                <div class="ref-breadcrumb" title="Click to view routine in Call Graph" onclick="jumpToRoutine('{{ parts[1] }}', '{{ parts[0] }}')">
                                     <span class="ref-sec">{{ parts[0] }}</span>
                                     <span class="ref-sep">&rsaquo;</span>
                                     <span class="ref-para">{{ parts[1] }}</span>
                                 </div>
                                 {% else %}
-                                <div class="ref-breadcrumb" title="{{ ref }}">
+                                <div class="ref-breadcrumb" title="Click to view routine in Call Graph" onclick="jumpToRoutine('{{ ref }}', '')">
                                     <span class="ref-para">{{ ref }}</span>
                                 </div>
                                 {% endif %}
