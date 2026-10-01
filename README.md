@@ -25,6 +25,8 @@ CobolScope bridges enterprise mainframe COBOL to modern Python data models, enab
 
 ---
 
+> Looking for the complete visual walkthrough and end-user guide? Check out the **[CobolScope User Guide](USER_GUIDE.md)**!
+
 ## Quick Start
 
 ### Prerequisites
