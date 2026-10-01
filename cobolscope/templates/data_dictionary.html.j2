@@ -62,71 +62,115 @@
             </select>
         </div>
 
-        <div class="table-container">
-            <table id="dictTable">
-                <thead>
-                    <tr>
-                        <th onclick="sortTable(0)" class="text-center" style="width: 70px;">Lvl</th>
-                        <th onclick="sortTable(1)">Field Name / Structure</th>
-                        <th onclick="sortTable(2)">Business Type</th>
-                        <th onclick="sortTable(3)">PIC / Usage</th>
-                        <th onclick="sortTable(4)" class="text-center">Offset</th>
-                        <th onclick="sortTable(5)" class="text-center">Length</th>
-                        <th>Where-Used (Paragraphs)</th>
-                    </tr>
-                </thead>
-                <tbody id="dictTableBody">
-                    {% for r in rows %}
-                    <tr class="{% if r.is_filler %}filler-row{% endif %}" data-section="{{ r.section }}" data-name="{{ r.name | upper }}" data-path="{{ r.qualified_name | upper }}" data-type="{{ r.logical_type }}">
-                        <td class="text-center font-mono"><b>{{ "%02d" | format(r.level) }}</b></td>
-                        <td>
-                            <div style="padding-left: {{ r.depth * 18 }}px;">
-                                <span class="field-name font-mono">{{ r.name }}</span>
-                                {% if r.redefines %}<span class="badge badge-redefines">REDEFINES {{ r.redefines }}</span>{% endif %}
-                                {% if r.occurs_str %}<span class="badge badge-occurs">OCCURS {{ r.occurs_str }}</span>{% endif %}
-                                {% if r.value %}<span class="badge badge-value">VALUE {{ r.value }}</span>{% endif %}
-                                <div class="field-path font-mono text-muted">{{ r.qualified_name }}</div>
-                                {% if r.conditions_88 %}
-                                <div class="cond88-block">
-                                    {% for c in r.conditions_88 %}
-                                    <div class="cond88-item"><b>88 {{ c['name'] }}:</b> {{ c['values'] | join(', ') }}</div>
+        <div class="dict-workspace" id="dictWorkspace">
+            <div class="table-container" id="dictTableContainer">
+                <table id="dictTable">
+                    <thead>
+                        <tr>
+                            <th onclick="sortTable(0)" class="text-center" style="width: 70px;">Lvl</th>
+                            <th onclick="sortTable(1)">Field Name / Structure</th>
+                            <th onclick="sortTable(2)">Business Type</th>
+                            <th onclick="sortTable(3)">PIC / Usage</th>
+                            <th onclick="sortTable(4)" class="text-center">Offset</th>
+                            <th onclick="sortTable(5)" class="text-center">Length</th>
+                            <th>Where-Used (Paragraphs)</th>
+                        </tr>
+                    </thead>
+                    <tbody id="dictTableBody">
+                        {% for r in rows %}
+                        <tr class="{% if r.is_filler %}filler-row{% endif %} dict-row-clickable" data-section="{{ r.section }}" data-name="{{ r.name | upper }}" data-var-name="{{ r.name }}" data-path="{{ r.qualified_name | upper }}" data-type="{{ r.logical_type }}" data-start-line="{{ r.start_line or '' }}" data-end-line="{{ r.end_line or '' }}">
+                            <td class="text-center font-mono"><b>{{ "%02d" | format(r.level) }}</b></td>
+                            <td>
+                                <div style="padding-left: {{ r.depth * 18 }}px;">
+                                    <span class="field-name font-mono">{{ r.name }}</span>
+                                    {% if r.redefines %}<span class="badge badge-redefines">REDEFINES {{ r.redefines }}</span>{% endif %}
+                                    {% if r.occurs_str %}<span class="badge badge-occurs">OCCURS {{ r.occurs_str }}</span>{% endif %}
+                                    {% if r.value %}<span class="badge badge-value">VALUE {{ r.value }}</span>{% endif %}
+                                    <div class="field-path font-mono text-muted">{{ r.qualified_name }}</div>
+                                    {% if r.conditions_88 %}
+                                    <div class="cond88-block">
+                                        {% for c in r.conditions_88 %}
+                                        <div class="cond88-item"><b>88 {{ c['name'] }}:</b> {{ c['values'] | join(', ') }}</div>
+                                        {% endfor %}
+                                    </div>
+                                    {% endif %}
+                                </div>
+                            </td>
+                            <td><span class="type-pill">{{ r.logical_type }}</span></td>
+                            <td class="font-mono text-sm">{{ r.pic or '—' }}<br/><span class="text-muted">{{ r.usage }}</span></td>
+                            <td class="text-center font-mono">{{ r.byte_offset }}</td>
+                            <td class="text-center font-mono"><b>{{ r.byte_length }}</b></td>
+                            <td>
+                                {% if r.references %}
+                                <div class="refs-list">
+                                    {% for ref in r.references %}
+                                    {% if " > " in ref %}
+                                    {% set parts = ref.split(" > ") %}
+                                    <div class="ref-breadcrumb" title="Click to view routine in Code (Ctrl+Click to open Call Graph)" onclick="handleBreadcrumbClick(event, '{{ parts[1] }}', '{{ parts[0] }}', '{{ r.name }}')">
+                                        <span class="ref-sec">{{ parts[0] }}</span>
+                                        <span class="ref-sep">&rsaquo;</span>
+                                        <span class="ref-para">{{ parts[1] }}</span>
+                                    </div>
+                                    {% else %}
+                                    <div class="ref-breadcrumb" title="Click to view routine in Code (Ctrl+Click to open Call Graph)" onclick="handleBreadcrumbClick(event, '{{ ref }}', '', '{{ r.name }}')">
+                                        <span class="ref-para">{{ ref }}</span>
+                                    </div>
+                                    {% endif %}
                                     {% endfor %}
                                 </div>
-                                {% endif %}
-                            </div>
-                        </td>
-                        <td><span class="type-pill">{{ r.logical_type }}</span></td>
-                        <td class="font-mono text-sm">{{ r.pic or '—' }}<br/><span class="text-muted">{{ r.usage }}</span></td>
-                        <td class="text-center font-mono">{{ r.byte_offset }}</td>
-                        <td class="text-center font-mono"><b>{{ r.byte_length }}</b></td>
-                        <td>
-                            {% if r.references %}
-                            <div class="refs-list">
-                                {% for ref in r.references %}
-                                {% if " > " in ref %}
-                                {% set parts = ref.split(" > ") %}
-                                <div class="ref-breadcrumb" title="Click to view routine in Call Graph" onclick="jumpToRoutine('{{ parts[1] }}', '{{ parts[0] }}')">
-                                    <span class="ref-sec">{{ parts[0] }}</span>
-                                    <span class="ref-sep">&rsaquo;</span>
-                                    <span class="ref-para">{{ parts[1] }}</span>
-                                </div>
                                 {% else %}
-                                <div class="ref-breadcrumb" title="Click to view routine in Call Graph" onclick="jumpToRoutine('{{ ref }}', '')">
-                                    <span class="ref-para">{{ ref }}</span>
-                                </div>
+                                <span class="text-muted">—</span>
                                 {% endif %}
-                                {% endfor %}
-                            </div>
-                            {% else %}
-                            <span class="text-muted">—</span>
-                            {% endif %}
-                        </td>
-                    </tr>
-                    {% endfor %}
-                </tbody>
-            </table>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="dict-splitter" id="dictSplitter" style="display:none;"></div>
+
+            <div class="dict-code-pane" id="dictCodePane" style="display:none;">
+                <div class="dict-code-header">
+                    <div class="dict-code-title-area">
+                        <span class="dict-code-label">SOURCE CODE</span>
+                        <span class="dict-var-badge" id="dictCurrentBadge">No item selected</span>
+                    </div>
+                    <div class="dict-code-actions">
+                        <div class="code-search-box">
+                            <input type="text" id="dictCodeJumpLineInput" placeholder="Jump line / search..." title="Type a line number or word and press Enter" />
+                        </div>
+                        <button class="code-btn-close" id="btnCloseDictCode" title="Close Code Split View (Esc)">✕</button>
+                    </div>
+                </div>
+
+                <div class="code-pane-subbar">
+                    <div class="cobol-columns-indicator">
+                        <span class="col-guide col-seq" title="Columns 1-6: Sequence Number">1-6</span>
+                        <span class="col-guide col-ind" title="Column 7: Indicator Area (*, -, D)">7</span>
+                        <span class="col-guide col-area-a" title="Columns 8-11: Area A (Divisions, Sections, Paragraphs, 01/77 levels)">8-11 Area A</span>
+                        <span class="col-guide col-area-b" title="Columns 12-72: Area B (Statements, clauses)">12-72 Area B</span>
+                        <span class="col-guide col-ident" title="Columns 73-80: Identification Area">73-80</span>
+                    </div>
+                    <div class="code-line-info" id="dictCodeLineCountInfo">0 lines</div>
+                </div>
+
+                <div class="code-pane-content" id="dictCodePaneContent">
+                    <div class="code-empty-state" id="dictCodeEmptyState" style="display:none;">
+                        COBOL source code was not embedded or not available for this program.
+                    </div>
+                    <table class="cobol-code-table" id="dictCobolCodeTable">
+                        <tbody id="dictCobolCodeTbody">
+                            <!-- Rendered dynamically -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
         </div>
     </div>
+
+    <script id="embeddedSourceCode" type="application/json">{{ source_code | tojson }}</script>
+    <script id="embeddedParagraphLocations" type="application/json">{{ paragraph_locations | tojson }}</script>
 
     <script>
         if (window.self !== window.top) {

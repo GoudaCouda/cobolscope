@@ -162,6 +162,8 @@ class DictionaryRow:
         is_filler: bool,
         depth: int,
         element_byte_length: int = 0,
+        start_line: int = 0,
+        end_line: int = 0,
     ):
         self.section = section
         self.level = level
@@ -182,6 +184,8 @@ class DictionaryRow:
         self.references = references
         self.is_filler = is_filler
         self.depth = depth
+        self.start_line = start_line
+        self.end_line = end_line
 
     def to_dict(self) -> Dict[str, Any]:
         return {
@@ -203,6 +207,8 @@ class DictionaryRow:
             "conditions_88": self.conditions_88,
             "references": self.references,
             "is_filler": self.is_filler,
+            "start_line": self.start_line,
+            "end_line": self.end_line,
         }
 
 
@@ -289,9 +295,15 @@ def get_jinja_env() -> jinja2.Environment:
 class DataDictionaryGenerator:
     """Generates comprehensive multi-format data dictionaries from a ProgramModel."""
 
-    def __init__(self, program: ProgramModel, hide_fillers: bool = False):
+    def __init__(self, program: ProgramModel, hide_fillers: bool = False, source_code: Optional[str] = None):
         self.program = program
         self.hide_fillers = hide_fillers
+        if source_code is not None:
+            self.source_code = source_code
+        else:
+            self.source_code = getattr(program, "source_code", None)
+            if not self.source_code and hasattr(program, "get_source_text"):
+                self.source_code = program.get_source_text()
         self.usage_index = program.get_field_usage_index()
         self.rows: List[DictionaryRow] = []
         self._collect_rows()
@@ -338,6 +350,9 @@ class DataDictionaryGenerator:
         refs = self.usage_index.get(field.id or "", [])
         clean_refs = list(dict.fromkeys(r for r in refs if not r.startswith("SECTION:")))
 
+        start_line = field.location.start_line if field.location else 0
+        end_line = field.location.end_line if field.location else 0
+
         row = DictionaryRow(
             section=section,
             level=field.level,
@@ -358,6 +373,8 @@ class DataDictionaryGenerator:
             references=clean_refs,
             is_filler=field.is_filler,
             depth=depth,
+            start_line=start_line,
+            end_line=end_line,
         )
         self.rows.append(row)
 
@@ -382,8 +399,18 @@ class DataDictionaryGenerator:
         available_sections = list(sections.keys())
         available_types = sorted({r.logical_type for r in self.rows if r.logical_type})
 
+        para_locs = {}
+        for p in getattr(self.program, "paragraphs", []):
+            if p.location:
+                para_locs[p.name.upper().strip()] = {
+                    "start_line": p.location.start_line,
+                    "end_line": p.location.end_line,
+                }
+
         return {
             "program": self.program,
+            "source_code": self.source_code or "",
+            "paragraph_locations": para_locs,
             "summary": {
                 "total_fields": total_fields,
                 "total_88s": total_88s,
@@ -475,6 +502,7 @@ def generate_data_dictionary(
     format: str = "markdown",
     hide_fillers: bool = False,
     output_path: Optional[str | Path] = None,
+    source_code: Optional[str] = None,
 ) -> str:
     """
     High-level entry point to generate a data dictionary in any format.
@@ -491,7 +519,7 @@ def generate_data_dictionary(
             data = parse(str(path))
             model = ProgramModel.from_dict(data)
 
-    gen = DataDictionaryGenerator(model, hide_fillers=hide_fillers)
+    gen = DataDictionaryGenerator(model, hide_fillers=hide_fillers, source_code=source_code)
     fmt = format.lower().strip()
 
     if fmt in ("md", "markdown"):

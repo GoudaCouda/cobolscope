@@ -100,3 +100,26 @@
       color: var(--primary);
       font-weight: 700;
     }
+
+    .code-word {
+      cursor: pointer;
+      border-radius: 2px;
+      transition: background-color 0.12s ease, box-shadow 0.12s ease;
+    }
+
+    .code-word:hover {
+      background-color: rgba(0, 120, 212, 0.12);
+    }
+
+    .code-word.var-highlight {
+      background-color: #FEF08A !important;
+      color: #854D0E !important;
+      font-weight: 700;
+      border-radius: 3px;
+      box-shadow: 0 0 0 1.5px #FDE047;
+    }
+
+    .code-comment {
+      color: #64748B;
+      font-style: italic;
+    }

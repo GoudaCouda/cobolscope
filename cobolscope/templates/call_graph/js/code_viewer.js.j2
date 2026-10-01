@@ -23,6 +23,52 @@
   let currentStartLine = 0;
   let currentEndLine = 0;
 
+  function escapeHtml(text) {
+    if (!text) return "";
+    return String(text)
+      .replace(/&/g, "&amp;")
+      .replace(/</g, "&lt;")
+      .replace(/>/g, "&gt;")
+      .replace(/"/g, "&quot;")
+      .replace(/'/g, "&#039;");
+  }
+
+  function formatCodeLineHtml(lineText) {
+    if (!lineText) return "";
+    if (lineText.length >= 7 && (lineText[6] === "*" || lineText[6] === "/")) {
+      return `<span class="code-comment">${escapeHtml(lineText)}</span>`;
+    }
+    const escaped = escapeHtml(lineText);
+    return escaped.replace(/\b([A-Za-z0-9]+(?:-[A-Za-z0-9]+)*)\b/g, (match) => {
+      return `<span class="code-word" data-word="${match.toUpperCase()}">${match}</span>`;
+    });
+  }
+
+  let activeHighlightedWord = null;
+
+  window.highlightWordInCode = function(wordToHighlight, forceState) {
+    const norm = (wordToHighlight || "").toUpperCase().trim();
+    if (!cobolCodeTbody) return;
+
+    cobolCodeTbody.querySelectorAll(".code-word.var-highlight").forEach(el => {
+      el.classList.remove("var-highlight");
+    });
+
+    if (!norm) {
+      activeHighlightedWord = null;
+      return;
+    }
+
+    if (forceState === undefined && norm === activeHighlightedWord) {
+      activeHighlightedWord = null;
+      return;
+    }
+
+    activeHighlightedWord = norm;
+    const matches = cobolCodeTbody.querySelectorAll(`.code-word[data-word="${norm}"]`);
+    matches.forEach(el => el.classList.add("var-highlight"));
+  };
+
   // 1. Initial Render of Code Lines
   function renderSourceLines() {
     if (!codeLines || codeLines.length === 0) {
@@ -55,7 +101,7 @@
       tdText.className = "code-line-text";
 
       const codeEl = document.createElement("code");
-      codeEl.textContent = rawText;
+      codeEl.innerHTML = formatCodeLineHtml(rawText);
       tdText.appendChild(codeEl);
 
       tr.appendChild(tdNum);
@@ -65,6 +111,18 @@
 
     cobolCodeTbody.innerHTML = "";
     cobolCodeTbody.appendChild(fragment);
+
+    cobolCodeTbody.onclick = (e) => {
+      const wordEl = e.target.closest(".code-word");
+      if (wordEl && wordEl.dataset.word) {
+        const w = wordEl.dataset.word;
+        if (w.length >= 2 || /^[A-Z0-9]/.test(w)) {
+          highlightWordInCode(w);
+        }
+      } else if (!e.target.closest(".code-line-num")) {
+        highlightWordInCode(null);
+      }
+    };
   }
 
   // 2. Toggle Code Split Pane (Default: 65% Graph / 35% Code)

@@ -178,6 +178,7 @@ def run_batch_directory(
                     model,
                     format=dict_fmt,
                     hide_fillers=getattr(args, "hide_fillers", False),
+                    source_code=source_text,
                 )
                 dict_path.write_text(dict_content, encoding="utf-8")
                 artifacts["data_dictionary"] = dict_filename
@@ -190,6 +191,7 @@ def run_batch_directory(
                         model,
                         format="html",
                         hide_fillers=getattr(args, "hide_fillers", False),
+                        source_code=source_text,
                     )
                     html_dict_path.write_text(html_dict_content, encoding="utf-8")
                     artifacts["data_dictionary_html"] = html_dict_filename

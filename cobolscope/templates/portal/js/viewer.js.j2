@@ -147,6 +147,52 @@
         });
     }
 
+    function escapeHtml(text) {
+      if (!text) return "";
+      return String(text)
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#039;");
+    }
+
+    function formatCodeLineHtml(lineText) {
+      if (!lineText) return "";
+      if (lineText.length >= 7 && (lineText[6] === "*" || lineText[6] === "/")) {
+        return `<span class="code-comment">${escapeHtml(lineText)}</span>`;
+      }
+      const escaped = escapeHtml(lineText);
+      return escaped.replace(/\b([A-Za-z0-9]+(?:-[A-Za-z0-9]+)*)\b/g, (match) => {
+        return `<span class="code-word" data-word="${match.toUpperCase()}">${match}</span>`;
+      });
+    }
+
+    let activePortalHighlightedWord = null;
+
+    function highlightPortalWord(wordToHighlight, forceState) {
+      const norm = (wordToHighlight || "").toUpperCase().trim();
+      if (!portalSourceTbody) return;
+
+      portalSourceTbody.querySelectorAll(".code-word.var-highlight").forEach(el => {
+        el.classList.remove("var-highlight");
+      });
+
+      if (!norm) {
+        activePortalHighlightedWord = null;
+        return;
+      }
+
+      if (forceState === undefined && norm === activePortalHighlightedWord) {
+        activePortalHighlightedWord = null;
+        return;
+      }
+
+      activePortalHighlightedWord = norm;
+      const matches = portalSourceTbody.querySelectorAll(`.code-word[data-word="${norm}"]`);
+      matches.forEach(el => el.classList.add("var-highlight"));
+    }
+
     function populatePortalSourceTable(text) {
       const lines = text ? text.split(/\r?\n/) : [];
       const fragment = document.createDocumentFragment();
@@ -165,7 +211,7 @@
         const tdText = document.createElement("td");
         tdText.className = "code-line-text";
         const codeEl = document.createElement("code");
-        codeEl.textContent = lineText;
+        codeEl.innerHTML = formatCodeLineHtml(lineText);
         tdText.appendChild(codeEl);
 
         tr.appendChild(tdNum);
@@ -175,6 +221,18 @@
 
       portalSourceTbody.innerHTML = "";
       portalSourceTbody.appendChild(fragment);
+
+      portalSourceTbody.onclick = (e) => {
+        const wordEl = e.target.closest(".code-word");
+        if (wordEl && wordEl.dataset.word) {
+          const w = wordEl.dataset.word;
+          if (w.length >= 2 || /^[A-Z0-9]/.test(w)) {
+            highlightPortalWord(w);
+          }
+        } else if (!e.target.closest(".code-line-num")) {
+          highlightPortalWord(null);
+        }
+      };
     }
 
     function onPortalSourceSearch(e) {

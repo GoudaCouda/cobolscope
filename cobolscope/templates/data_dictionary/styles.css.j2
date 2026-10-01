@@ -201,13 +201,293 @@ html.in-portal-iframe .header {
     box-shadow: 0 0 0 3px rgba(0, 120, 212, 0.15);
 }
 
-/* Data Dictionary Table */
+/* Split-Screen Data Dictionary & Code Workspace */
+.dict-workspace {
+    display: flex;
+    flex-direction: row;
+    align-items: stretch;
+    width: 100%;
+    height: calc(100vh - 280px);
+    min-height: 520px;
+    gap: 0;
+    position: relative;
+}
+
+html.in-portal-iframe .dict-workspace {
+    height: calc(100vh - 230px);
+}
+
 .table-container {
+    flex: 1 1 0px;
     background-color: var(--bg-surface);
     border: 1px solid var(--border-color);
     border-radius: 8px;
-    overflow-x: auto;
+    overflow: auto;
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.03);
+    min-width: 320px;
+    height: 100%;
+}
+
+.table-container thead th {
+    position: sticky;
+    top: 0;
+    z-index: 2;
+    background-color: #F8FAFC;
+    box-shadow: 0 1px 0 var(--border-color);
+}
+
+/* Splitter Divider */
+.dict-splitter {
+    width: 8px;
+    min-width: 8px;
+    cursor: col-resize;
+    background: transparent;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    user-select: none;
+    touch-action: none;
+    z-index: 10;
+    flex-shrink: 0;
+    margin: 0 2px;
+}
+
+.dict-splitter::after {
+    content: "";
+    width: 2px;
+    height: 36px;
+    background: var(--border-color);
+    border-radius: 2px;
+    transition: background-color 0.15s ease, height 0.15s ease, width 0.15s ease;
+}
+
+.dict-splitter:hover::after,
+.dict-splitter.active::after {
+    background: var(--primary);
+    width: 4px;
+    height: 100%;
+}
+
+/* Code Split Pane in Data Dictionary */
+.dict-code-pane {
+    flex: 1 1 0px;
+    background: var(--bg-surface);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+    min-width: 300px;
+    height: 100%;
+}
+
+.dict-code-header {
+    height: 38px;
+    min-height: 38px;
+    background: #F8FAFC;
+    border-bottom: 1px solid var(--border-color);
+    padding: 0 12px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+}
+
+.dict-code-title-area {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    overflow: hidden;
+    min-width: 0;
+}
+
+.dict-code-label {
+    font-size: 0.72rem;
+    font-weight: 800;
+    letter-spacing: 0.06em;
+    color: var(--text-secondary);
+    flex-shrink: 0;
+}
+
+.dict-var-badge {
+    font-size: 0.72rem;
+    font-weight: 600;
+    color: var(--primary);
+    background: var(--primary-light);
+    border: 1px solid rgba(0, 120, 212, 0.25);
+    padding: 1px 6px;
+    border-radius: 4px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 260px;
+}
+
+.dict-code-actions {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    flex-shrink: 0;
+}
+
+.code-btn-close {
+    height: 24px;
+    width: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.85rem;
+    background: transparent;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    color: var(--text-muted);
+}
+
+.code-btn-close:hover {
+    background: #F1F5F9;
+    color: var(--text-primary);
+}
+
+.code-pane-subbar {
+    height: 24px;
+    background: #F1F5F9;
+    border-bottom: 1px solid var(--border-color);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 12px;
+    font-size: 0.68rem;
+    color: var(--text-muted);
+}
+
+.cobol-columns-indicator {
+    display: flex;
+    gap: 8px;
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    font-size: 0.65rem;
+}
+
+.col-guide {
+    color: #94A3B8;
+}
+
+.col-guide:hover {
+    color: var(--text-secondary);
+}
+
+.code-line-info {
+    font-size: 0.68rem;
+    font-weight: 500;
+    color: var(--text-secondary);
+}
+
+.code-pane-content {
+    flex: 1;
+    overflow: auto;
+    background: #FFFFFF;
+    position: relative;
+}
+
+.code-empty-state {
+    padding: 40px 20px;
+    text-align: center;
+    color: var(--text-muted);
+    font-size: 0.8rem;
+}
+
+table.cobol-code-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    font-size: 0.78rem;
+    line-height: 1.5;
+}
+
+table.cobol-code-table tr {
+    transition: background-color 0.1s ease;
+}
+
+table.cobol-code-table tr:hover td {
+    background-color: #F8FAFC;
+}
+
+td.code-line-num {
+    width: 50px;
+    min-width: 50px;
+    text-align: right;
+    padding: 0 8px;
+    color: #94A3B8;
+    background: #F8FAFC;
+    border-right: 1px solid var(--border-color);
+    user-select: none;
+    cursor: pointer;
+    font-size: 0.72rem;
+}
+
+td.code-line-num:hover {
+    color: var(--primary);
+}
+
+td.code-line-text {
+    padding: 0 10px;
+    white-space: pre;
+    color: #1E293B;
+}
+
+tr.line-highlighted td.code-line-text {
+    background: #EFF6FC !important;
+    color: #0F172A;
+}
+
+tr.line-highlighted td.code-line-num {
+    background: #E0F2FE !important;
+    color: var(--primary);
+    font-weight: 700;
+}
+
+tr.line-highlight-start td.code-line-text {
+    border-left: 3px solid var(--primary);
+    font-weight: 600;
+}
+
+/* Subtle word/variable occurrence highlighting */
+.code-word {
+    cursor: pointer;
+    border-radius: 2px;
+    transition: background-color 0.12s ease, box-shadow 0.12s ease;
+}
+
+.code-word:hover {
+    background-color: rgba(0, 120, 212, 0.12);
+}
+
+.code-word.var-highlight {
+    background-color: #FEF08A !important;
+    color: #854D0E !important;
+    font-weight: 700;
+    border-radius: 3px;
+    box-shadow: 0 0 0 1.5px #FDE047;
+}
+
+.code-comment {
+    color: #64748B;
+    font-style: italic;
+}
+
+/* Clickable Table Rows and Selected State */
+tr.dict-row-clickable {
+    cursor: pointer;
+}
+
+tr.selected-var-row {
+    background-color: #EFF6FC !important;
+}
+
+tr.selected-var-row td:first-child {
+    border-left: 3px solid var(--primary);
 }
 
 table {

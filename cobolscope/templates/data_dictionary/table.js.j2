@@ -3,6 +3,30 @@
         const typeFilter = document.getElementById('typeFilter');
         const rows = document.querySelectorAll('#dictTable tbody tr');
 
+        // Split Code Pane Elements
+        const dictWorkspace = document.getElementById('dictWorkspace');
+        const dictTableContainer = document.getElementById('dictTableContainer');
+        const dictSplitter = document.getElementById('dictSplitter');
+        const dictCodePane = document.getElementById('dictCodePane');
+        const dictCurrentBadge = document.getElementById('dictCurrentBadge');
+        const dictCodeJumpLineInput = document.getElementById('dictCodeJumpLineInput');
+        const btnCloseDictCode = document.getElementById('btnCloseDictCode');
+        const dictCodeLineCountInfo = document.getElementById('dictCodeLineCountInfo');
+        const dictCodeEmptyState = document.getElementById('dictCodeEmptyState');
+        const dictCobolCodeTable = document.getElementById('dictCobolCodeTable');
+        const dictCobolCodeTbody = document.getElementById('dictCobolCodeTbody');
+
+        // Embedded source code & routine locations
+        const embeddedSourceEl = document.getElementById('embeddedSourceCode');
+        const rawSource = embeddedSourceEl ? JSON.parse(embeddedSourceEl.textContent || '""') : '';
+        const codeLines = rawSource ? rawSource.split(/\r?\n/) : [];
+
+        const embeddedLocsEl = document.getElementById('embeddedParagraphLocations');
+        const paragraphLocations = embeddedLocsEl ? JSON.parse(embeddedLocsEl.textContent || '{}') : {};
+
+        let isCodeSplitOpen = false;
+        let activeHighlightedWord = null;
+
         function filterRows() {
             const query = searchInput.value.toLowerCase().trim();
             const sec = sectionFilter.value;
@@ -66,6 +90,339 @@
             }
         }
 
+        function escapeHtml(text) {
+            if (!text) return "";
+            return String(text)
+                .replace(/&/g, "&amp;")
+                .replace(/</g, "&lt;")
+                .replace(/>/g, "&gt;")
+                .replace(/"/g, "&quot;")
+                .replace(/'/g, "&#039;");
+        }
+
+        function formatCodeLineHtml(lineText) {
+            if (!lineText) return "";
+            if (lineText.length >= 7 && (lineText[6] === "*" || lineText[6] === "/")) {
+                return `<span class="code-comment">${escapeHtml(lineText)}</span>`;
+            }
+            const escaped = escapeHtml(lineText);
+            return escaped.replace(/\b([A-Za-z0-9]+(?:-[A-Za-z0-9]+)*)\b/g, (match) => {
+                return `<span class="code-word" data-word="${match.toUpperCase()}">${match}</span>`;
+            });
+        }
+
+        // Render source lines
+        function renderSourceLines() {
+            if (!dictCobolCodeTbody) return;
+
+            if (!codeLines || codeLines.length === 0) {
+                if (dictCodeEmptyState) dictCodeEmptyState.style.display = "block";
+                if (dictCobolCodeTable) dictCobolCodeTable.style.display = "none";
+                if (dictCodeLineCountInfo) dictCodeLineCountInfo.textContent = "0 lines";
+                return;
+            }
+
+            if (dictCodeEmptyState) dictCodeEmptyState.style.display = "none";
+            if (dictCobolCodeTable) dictCobolCodeTable.style.display = "table";
+            if (dictCodeLineCountInfo) dictCodeLineCountInfo.textContent = `${codeLines.length} lines`;
+
+            const fragment = document.createDocumentFragment();
+            for (let i = 0; i < codeLines.length; i++) {
+                const lineNum = i + 1;
+                const rawText = codeLines[i];
+
+                const tr = document.createElement("tr");
+                tr.id = `dict-code-line-${lineNum}`;
+                tr.className = "code-line-row";
+
+                const tdNum = document.createElement("td");
+                tdNum.className = "code-line-num";
+                tdNum.textContent = lineNum;
+                tdNum.title = `Line ${lineNum}`;
+                tdNum.onclick = () => focusSingleLine(lineNum);
+
+                const tdText = document.createElement("td");
+                tdText.className = "code-line-text";
+
+                const codeEl = document.createElement("code");
+                codeEl.innerHTML = formatCodeLineHtml(rawText);
+                tdText.appendChild(codeEl);
+
+                tr.appendChild(tdNum);
+                tr.appendChild(tdText);
+                fragment.appendChild(tr);
+            }
+
+            dictCobolCodeTbody.innerHTML = "";
+            dictCobolCodeTbody.appendChild(fragment);
+
+            // Word occurrence click handler
+            dictCobolCodeTbody.onclick = (e) => {
+                const wordEl = e.target.closest(".code-word");
+                if (wordEl && wordEl.dataset.word) {
+                    const w = wordEl.dataset.word;
+                    if (w.length >= 2 || /^[A-Z0-9]/.test(w)) {
+                        if (w === activeHighlightedWord) {
+                            highlightWordInCode(null);
+                        } else {
+                            highlightWordInCode(w, true);
+                        }
+                    }
+                } else if (!e.target.closest(".code-line-num")) {
+                    highlightWordInCode(null);
+                }
+            };
+        }
+
+        function highlightWordInCode(wordToHighlight, forceState) {
+            const norm = (wordToHighlight || "").toUpperCase().trim();
+            if (!dictCobolCodeTbody) return;
+
+            dictCobolCodeTbody.querySelectorAll(".code-word.var-highlight").forEach(el => {
+                el.classList.remove("var-highlight");
+            });
+
+            if (!norm) {
+                activeHighlightedWord = null;
+                return;
+            }
+
+            if (forceState === undefined && norm === activeHighlightedWord) {
+                activeHighlightedWord = null;
+                return;
+            }
+
+            activeHighlightedWord = norm;
+            const matches = dictCobolCodeTbody.querySelectorAll(`.code-word[data-word="${norm}"]`);
+            matches.forEach(el => el.classList.add("var-highlight"));
+        }
+
+        function highlightCodeLines(startLine, endLine) {
+            if (!dictCobolCodeTbody) return;
+
+            const prev = dictCobolCodeTbody.querySelectorAll(".line-highlighted, .line-highlight-start");
+            prev.forEach(el => el.classList.remove("line-highlighted", "line-highlight-start"));
+
+            if (startLine > 0) {
+                const effectiveEnd = (endLine && endLine >= startLine) ? endLine : startLine;
+                for (let l = startLine; l <= effectiveEnd; l++) {
+                    const row = document.getElementById(`dict-code-line-${l}`);
+                    if (row) {
+                        row.classList.add("line-highlighted");
+                        if (l === startLine) {
+                            row.classList.add("line-highlight-start");
+                        }
+                    }
+                }
+
+                const firstRow = document.getElementById(`dict-code-line-${startLine}`);
+                if (firstRow) {
+                    firstRow.scrollIntoView({ behavior: "smooth", block: "center" });
+                }
+            }
+        }
+
+        function focusSingleLine(lineNum) {
+            highlightCodeLines(lineNum, lineNum);
+            if (dictCurrentBadge) {
+                dictCurrentBadge.textContent = `[LINE] ${lineNum}`;
+            }
+        }
+
+        function findAndFocusWord(word) {
+            if (!word || !codeLines || codeLines.length === 0) return;
+            const q = word.toUpperCase();
+            let foundLine = 0;
+            for (let i = 0; i < codeLines.length; i++) {
+                if (codeLines[i].toUpperCase().includes(q)) {
+                    foundLine = i + 1;
+                    break;
+                }
+            }
+            if (foundLine > 0) {
+                highlightCodeLines(foundLine, foundLine);
+            }
+        }
+
+        function openDictCodePane() {
+            if (!dictCodePane || !dictSplitter) return;
+            isCodeSplitOpen = true;
+            dictCodePane.style.display = "flex";
+            dictSplitter.style.display = "flex";
+
+            let ratio = 55;
+            const savedRatio = localStorage.getItem("cobolscope_dict_split_ratio");
+            if (savedRatio) {
+                const parsed = parseFloat(savedRatio);
+                if (!isNaN(parsed) && parsed >= 25 && parsed <= 75) {
+                    ratio = parsed;
+                }
+            }
+
+            if (dictTableContainer) dictTableContainer.style.flex = `${ratio} 1 0px`;
+            dictCodePane.style.flex = `${100 - ratio} 1 0px`;
+        }
+
+        function closeDictCodePane() {
+            if (!dictCodePane || !dictSplitter) return;
+            isCodeSplitOpen = false;
+            dictCodePane.style.display = "none";
+            dictSplitter.style.display = "none";
+            if (dictTableContainer) dictTableContainer.style.flex = "1 1 0px";
+
+            rows.forEach(r => r.classList.remove("selected-var-row"));
+            highlightWordInCode(null);
+            if (dictCobolCodeTbody) {
+                dictCobolCodeTbody.querySelectorAll(".line-highlighted, .line-highlight-start").forEach(el => {
+                    el.classList.remove("line-highlighted", "line-highlight-start");
+                });
+            }
+        }
+
+        function setupDictSplitter() {
+            if (!dictSplitter || !dictWorkspace || !dictTableContainer || !dictCodePane) return;
+            let isDragging = false;
+
+            dictSplitter.addEventListener("pointerdown", (e) => {
+                isDragging = true;
+                dictSplitter.setPointerCapture(e.pointerId);
+                document.body.classList.add("is-resizing");
+                dictSplitter.classList.add("active");
+                e.preventDefault();
+            });
+
+            dictSplitter.addEventListener("pointermove", (e) => {
+                if (!isDragging) return;
+                const rect = dictWorkspace.getBoundingClientRect();
+                const currentX = e.clientX - rect.left;
+                let ratio = (currentX / rect.width) * 100;
+                ratio = Math.max(25, Math.min(75, ratio));
+
+                dictTableContainer.style.flex = `${ratio} 1 0px`;
+                dictCodePane.style.flex = `${100 - ratio} 1 0px`;
+
+                localStorage.setItem("cobolscope_dict_split_ratio", ratio.toFixed(1));
+            });
+
+            const stopDrag = (e) => {
+                if (isDragging) {
+                    isDragging = false;
+                    document.body.classList.remove("is-resizing");
+                    dictSplitter.classList.remove("active");
+                    try { dictSplitter.releasePointerCapture(e.pointerId); } catch (_) {}
+                }
+            };
+
+            dictSplitter.addEventListener("pointerup", stopDrag);
+            dictSplitter.addEventListener("pointercancel", stopDrag);
+        }
+
+        // Open code for a variable row
+        function openCodeForVar(rowEl) {
+            if (!rowEl) return;
+            const varName = rowEl.getAttribute("data-var-name") || "";
+            const startLine = parseInt(rowEl.getAttribute("data-start-line"), 10) || 0;
+            const endLine = parseInt(rowEl.getAttribute("data-end-line"), 10) || 0;
+
+            rows.forEach(r => r.classList.remove("selected-var-row"));
+            rowEl.classList.add("selected-var-row");
+
+            openDictCodePane();
+
+            const lineSpanText = startLine > 0 ? ` (L${startLine}${endLine > startLine ? `-L${endLine}` : ""})` : "";
+            if (dictCurrentBadge) {
+                dictCurrentBadge.textContent = `[VARIABLE] ${varName}${lineSpanText}`;
+            }
+
+            if (startLine > 0) {
+                highlightCodeLines(startLine, endLine || startLine);
+            } else {
+                findAndFocusWord(varName);
+            }
+
+            if (varName) {
+                highlightWordInCode(varName, true);
+            }
+        }
+
+        // Handle Where-Used routine breadcrumb click
+        window.handleBreadcrumbClick = function(event, paraName, secName, varName) {
+            if (event) {
+                event.stopPropagation();
+            }
+
+            if (event && (event.ctrlKey || event.metaKey)) {
+                jumpToRoutine(paraName, secName);
+                return;
+            }
+
+            openDictCodePane();
+
+            const cleanPara = (paraName || "").toUpperCase().trim();
+            const loc = paragraphLocations[cleanPara];
+            const targetVar = varName || "";
+            const varSuffix = targetVar ? ` • ${targetVar}` : "";
+
+            if (loc && loc.start_line > 0) {
+                if (dictCurrentBadge) {
+                    dictCurrentBadge.textContent = `[ROUTINE] ${cleanPara} (L${loc.start_line}-L${loc.end_line})${varSuffix}`;
+                }
+                highlightCodeLines(loc.start_line, loc.end_line);
+            } else {
+                if (dictCurrentBadge) {
+                    dictCurrentBadge.textContent = `[ROUTINE] ${cleanPara}${varSuffix}`;
+                }
+                findAndFocusWord(cleanPara);
+            }
+
+            if (targetVar) {
+                highlightWordInCode(targetVar, true);
+            }
+        };
+
+        // Table row click delegation
+        const dictTableBody = document.getElementById("dictTableBody");
+        if (dictTableBody) {
+            dictTableBody.addEventListener("click", (e) => {
+                if (e.target.closest(".ref-breadcrumb")) {
+                    return; // Handled by handleBreadcrumbClick
+                }
+                const row = e.target.closest("tr.dict-row-clickable");
+                if (row) {
+                    openCodeForVar(row);
+                }
+            });
+        }
+
+        if (btnCloseDictCode) {
+            btnCloseDictCode.addEventListener("click", closeDictCodePane);
+        }
+
+        if (dictCodeJumpLineInput) {
+            dictCodeJumpLineInput.addEventListener("keydown", (e) => {
+                if (e.key === "Enter") {
+                    e.preventDefault();
+                    const val = (dictCodeJumpLineInput.value || "").trim();
+                    if (!val) return;
+                    if (/^\d+$/.test(val)) {
+                        const lineNum = parseInt(val, 10);
+                        if (lineNum >= 1 && lineNum <= codeLines.length) {
+                            focusSingleLine(lineNum);
+                        }
+                    } else {
+                        findAndFocusWord(val);
+                        highlightWordInCode(val, true);
+                    }
+                }
+            });
+        }
+
+        document.addEventListener("keydown", (e) => {
+            if (e.key === "Escape" && isCodeSplitOpen) {
+                closeDictCodePane();
+            }
+        });
+
         function jumpToRoutine(paraName, secName) {
             if (!paraName) return;
             const targetPara = paraName.trim();
@@ -95,3 +452,7 @@
                 window.location.hash = 'routine=' + encodeURIComponent(targetPara);
             }
         }
+
+        // Initialize code viewer and splitter
+        renderSourceLines();
+        setupDictSplitter();

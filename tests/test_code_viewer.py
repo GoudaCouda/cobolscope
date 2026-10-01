@@ -393,6 +393,90 @@ class TestCodeViewerAndSplitView(unittest.TestCase):
         self.assertIn("handleJumpToRoutine", portal_html)
         self.assertIn("COBOLSCOPE_SELECT_ROUTINE", portal_html)
 
+    def test_data_dictionary_split_code_pane_and_occurrence_highlighting(self):
+        """Verify that Data Dictionary HTML includes split code pane, embedded source, and occurrence styles."""
+        from cobolscope.models import DataDictionary, DataField
+        dd = DataDictionary(
+            working_storage_section=[
+                DataField(
+                    id="WS_TOTAL",
+                    name="WS-TOTAL",
+                    pic="9(5)",
+                    byte_length=5,
+                    byte_offset=0,
+                    location=SourceLocation(start_line=5, end_line=5),
+                )
+            ]
+        )
+        model = ProgramModel(
+            program_id="DICTCODE",
+            data_dictionary=dd,
+            paragraphs=[
+                ParagraphNode(
+                    name="1000-PROCESS",
+                    location=SourceLocation(start_line=10, end_line=20),
+                    statements=[
+                        PerformStatementNode(target="2000-PRINT", source_field_ids=["WS_TOTAL"]),
+                    ],
+                )
+            ],
+            source_code=SAMPLE_COBOL_SOURCE,
+        )
+
+        dd_html = generate_data_dictionary(model, format="html", source_code=SAMPLE_COBOL_SOURCE)
+
+        # 1. Structure elements
+        self.assertIn('id="dictWorkspace"', dd_html)
+        self.assertIn('id="dictSplitter"', dd_html)
+        self.assertIn('id="dictCodePane"', dd_html)
+        self.assertIn('id="dictCobolCodeTable"', dd_html)
+        self.assertIn('id="dictCurrentBadge"', dd_html)
+        self.assertIn('id="btnCloseDictCode"', dd_html)
+
+        # 2. Embedded source code and paragraph locations
+        self.assertIn('id="embeddedSourceCode"', dd_html)
+        self.assertIn('id="embeddedParagraphLocations"', dd_html)
+        self.assertIn("HELLO-SPLIT", dd_html)
+        self.assertIn("1000-PROCESS", dd_html)
+
+        # 3. Row data attributes
+        self.assertIn('data-var-name="WS-TOTAL"', dd_html)
+        self.assertIn('data-start-line="5"', dd_html)
+        self.assertIn('data-end-line="5"', dd_html)
+        self.assertIn('dict-row-clickable', dd_html)
+
+        # 4. Occurrence styling and breadcrumb handling
+        self.assertIn('.code-word.var-highlight', dd_html)
+        self.assertIn('tr.selected-var-row', dd_html)
+        self.assertIn('handleBreadcrumbClick', dd_html)
+
+    def test_call_graph_and_portal_word_occurrence_highlighting(self):
+        """Verify word occurrence highlighting classes and functions exist in Call Graph and Portal."""
+        model = ProgramModel(
+            program_id="WORDHILITE",
+            source_code=SAMPLE_COBOL_SOURCE,
+        )
+        cg_html = generate_call_graph(model, format="html")
+        self.assertIn(".code-word", cg_html)
+        self.assertIn(".code-word.var-highlight", cg_html)
+        self.assertIn("highlightWordInCode", cg_html)
+
+        portal_html = generate_portal({
+            "programs": [
+                {
+                    "program_id": "WORDHILITE",
+                    "status": "SUCCESS",
+                    "artifacts": {
+                        "call_graph": "WORDHILITE.html",
+                        "source_code": SAMPLE_COBOL_SOURCE,
+                    },
+                }
+            ]
+        })
+        self.assertIn(".code-word", portal_html)
+        self.assertIn(".code-word.var-highlight", portal_html)
+        self.assertIn("highlightPortalWord", portal_html)
+
 
 if __name__ == "__main__":
     unittest.main()
