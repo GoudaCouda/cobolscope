@@ -122,10 +122,9 @@ class TestCodeViewerAndSplitView(unittest.TestCase):
         self.assertIn("splitterCanvasCode", html)
 
     def test_portal_html_source_tab_and_resizable_splitters(self):
-        """Verify Portal HTML contains resizable sidebar splitter, source tab, and dual pane comparison."""
+        """Verify Portal HTML contains resizable sidebar splitter and source tab."""
         manifest = {
             "batch_summary": {
-                "source_directory": "C:/COBOL/SRC",
                 "total_programs_found": 1,
                 "succeeded": 1,
                 "failed": 0,
@@ -133,12 +132,9 @@ class TestCodeViewerAndSplitView(unittest.TestCase):
             "programs": [
                 {
                     "program_id": "TESTPROG",
-                    "source_file": "TESTPROG.CBL",
-                    "relative_source": "TESTPROG.CBL",
                     "status": "SUCCESS",
                     "total_paragraphs": 3,
                     "total_statements": 5,
-                    "max_cyclomatic_complexity": 2,
                     "artifacts": {
                         "call_graph": "TESTPROG.html",
                         "source": "TESTPROG.cbl",
@@ -164,13 +160,58 @@ class TestCodeViewerAndSplitView(unittest.TestCase):
         self.assertIn("Source Code", portal_html)
         self.assertIn('id="source-container"', portal_html)
 
-        # 3. Dual Pane Mode
-        self.assertIn('id="btn-dual-pane"', portal_html)
-        self.assertIn('id="dual-pane-view"', portal_html)
-        self.assertIn('id="dual-pane-splitter"', portal_html)
-        self.assertIn('id="drag-shield"', portal_html)
-        self.assertIn("togglePortalDualPane", portal_html)
-        self.assertIn("setupDualPaneSplitter", portal_html)
+    def test_source_map_exact_line_resolution(self):
+        """Verify that ProLeap compiler source mapping resolves exact physical lines across copybooks."""
+        cbl_path = Path("tests/fixtures/bank_of_z/cobol/ABNDPROC.cbl")
+        copy_dir = Path("tests/fixtures/bank_of_z/copy")
+        if not cbl_path.exists() or not copy_dir.exists():
+            self.skipTest("ABNDPROC.cbl fixture or copybook dir not found")
+
+        from cobolscope.parser import parse
+        from cobolscope.graph import CallGraphGenerator
+        from cobolscope.graph.renderers import render_cytoscape_elements
+
+        raw_ir = parse(cbl_path, copybook_dirs=[copy_dir])
+        self.assertIsInstance(raw_ir, dict)
+
+        para_map = {p["name"]: p for p in raw_ir.get("paragraphs", [])}
+        self.assertIn("A010", para_map)
+        self.assertIn("A999", para_map)
+        self.assertIn("GMOOH010", para_map)
+        self.assertIn("GMOOH999", para_map)
+
+        # Exact physical line assertions in ABNDPROC.cbl
+        self.assertEqual(para_map["A010"]["location"]["startLine"], 132)
+        self.assertEqual(para_map["A999"]["location"]["startLine"], 165)
+        self.assertEqual(para_map["GMOOH010"]["location"]["startLine"], 170)
+        self.assertEqual(para_map["GMOOH999"]["location"]["startLine"], 175)
+        self.assertEqual(para_map["A010"]["location"]["sourceFile"], "ABNDPROC.cbl")
+
+        # Verify copybook field location resolution
+        dd = raw_ir.get("dataDictionary", {})
+        ws_fields = dd.get("workingStorageSection", [])
+        abnd_area = next((f for f in ws_fields if f.get("name") == "WS-ABND-AREA"), None)
+        self.assertIsNotNone(abnd_area)
+        self.assertEqual(abnd_area["location"]["startLine"], 37)
+        self.assertEqual(abnd_area["location"]["sourceFile"], "ABNDPROC.cbl")
+
+        vsam_key = next((c for c in abnd_area.get("children", []) if c.get("name") == "ABND-VSAM-KEY"), None)
+        self.assertIsNotNone(vsam_key)
+        self.assertEqual(vsam_key["location"]["startLine"], 7)
+        self.assertEqual(vsam_key["location"]["sourceFile"], "ABNDINFO.cpy")
+
+        # Verify CallGraphNode and Cytoscape elements carry source_file
+        model = ProgramModel.model_validate(raw_ir)
+        gen = CallGraphGenerator(model)
+        self.assertIn("PREMIERE", gen.graph.nodes)
+        self.assertEqual(gen.graph.nodes["PREMIERE"].source_file, "ABNDPROC.cbl")
+        self.assertEqual(gen.graph.nodes["PREMIERE"].start_line, 131)
+
+        cyto_elements = render_cytoscape_elements(gen.graph)
+        node_elem = next((e for e in cyto_elements if e["data"].get("name") == "PREMIERE"), None)
+        self.assertIsNotNone(node_elem)
+        self.assertEqual(node_elem["data"].get("source_file"), "ABNDPROC.cbl")
+        self.assertEqual(node_elem["data"].get("start_line"), 131)
 
 
 if __name__ == "__main__":

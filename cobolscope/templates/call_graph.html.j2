@@ -35,6 +35,10 @@
 
 {% block scripts %}
   <script>
+    if (window.self !== window.top) {
+      document.documentElement.classList.add("in-portal-iframe");
+    }
+
     {% include "call_graph/js/diagnostics.js.j2" %}
 
     const graphData = {{ graph.model_dump_json() | safe }};
@@ -54,6 +58,7 @@
     const cytoLayoutGroup = document.getElementById("cytoLayoutGroup");
 
     {% include "call_graph/js/cyto_call_graph.js.j2" %}
+    {% include "call_graph/js/linear_card.js.j2" %}
     {% include "call_graph/js/inspector.js.j2" %}
     {% include "call_graph/js/linear_modal.js.j2" %}
     {% include "call_graph/js/level3_cfg.js.j2" %}

@@ -250,6 +250,140 @@ def render_svg(dot_code: str) -> str:
         ) from e2
 
 
+def render_cytoscape_elements(
+    graph: CallGraph,
+    enable_clustering: bool = True,
+) -> List[Dict[str, Any]]:
+    """
+    Converts a CallGraph into a list of Cytoscape.js elements (compound parent
+    clusters, routine nodes, and directed control transfer edges).
+    """
+    elements: List[Dict[str, Any]] = []
+
+    # 1. Emit Parent Compound Cluster Nodes
+    if enable_clustering:
+        for cluster in graph.clusters:
+            if not cluster.node_ids:
+                continue
+            elements.append({
+                "data": {
+                    "id": cluster.id,
+                    "label": cluster.name,
+                    "name": cluster.name,
+                    "color": cluster.color,
+                    "fill_color": cluster.fill_color,
+                    "text_color": cluster.text_color,
+                    "is_cluster": True,
+                },
+                "classes": "cluster-node",
+            })
+
+    # 2. Emit Child Routine Nodes
+    for node_name, node in graph.nodes.items():
+        theme = CLUSTER_THEMES.get(node.node_type, CLUSTER_THEMES[GraphNodeType.GENERIC])
+
+        # Format I/O badge summary
+        io_parts = []
+        if node.statement_count > 0:
+            for k in ("READ", "WRITE", "REWRITE", "DELETE", "SQL", "CICS", "CALL"):
+                c = node.io_summary.get(k, 0)
+                if c > 0:
+                    io_parts.append(f"{k}:{c}")
+        if node.is_terminal:
+            io_parts.append("TERMINAL")
+        io_str = " | ".join(io_parts)
+
+        parent_id = node.cluster_id if (enable_clustering and node.cluster_id) else None
+        # Validate parent actually exists in active clusters
+        if parent_id and not any(c.id == parent_id for c in graph.clusters):
+            parent_id = None
+
+        node_data = {
+            "id": node.id,
+            "label": node.name,
+            "name": node.name,
+            "section": node.section or "",
+            "node_type": node.node_type.value,
+            "type_label": theme["name"].split(" ")[0].upper() if theme and "name" in theme else node.node_type.value,
+            "cluster_name": theme["name"] if theme and "name" in theme else "",
+            "cluster_id": node.cluster_id,
+            "start_line": node.start_line,
+            "end_line": node.end_line,
+            "source_file": node.source_file or "",
+            "lines": f"L{node.start_line}-{node.end_line}",
+            "statement_count": node.statement_count,
+            "cyclomatic_complexity": node.cyclomatic_complexity,
+            "is_entry_point": node.is_entry_point,
+            "is_terminal": node.is_terminal,
+            "color": theme["color"],
+            "fill_color": theme["fill_color"],
+            "text_color": theme["text_color"],
+            "io_badge": io_str,
+            "source_field_ids": node.source_field_ids,
+            "target_field_ids": node.target_field_ids,
+            "called_by": node.called_by,
+            "successors": node.successors,
+        }
+
+        # Attach Level 3 Intra-Procedural CFG and Readability Heuristic Metadata
+        node_data["is_cfg_eligible"] = node.is_cfg_eligible
+        node_data["cfg_eligibility_reason"] = node.cfg_eligibility_reason
+        node_data["cfg_elements"] = node.cfg_elements
+        node_data["cfg_linear_statements"] = node.cfg_linear_statements
+
+        if parent_id:
+            node_data["parent"] = parent_id
+
+        node_classes = ["routine-node", f"type-{node.node_type.value.lower()}"]
+        if node.is_entry_point:
+            node_classes.append("entry-point")
+        if node.is_terminal:
+            node_classes.append("terminal-node")
+
+        elements.append({
+            "data": node_data,
+            "classes": " ".join(node_classes),
+        })
+
+    # 3. Emit Directed Control Edges
+    for edge in graph.edges:
+        src_node = graph.nodes.get(edge.source)
+        tgt_node = graph.nodes.get(edge.target)
+        if not src_node or not tgt_node:
+            continue
+
+        edge_data = {
+            "id": f"{src_node.id}->{tgt_node.id}::{edge.edge_type.value}",
+            "source": src_node.id,
+            "target": tgt_node.id,
+            "edge_type": edge.edge_type.value,
+            "label": edge.label or "",
+            "line_number": edge.line_number,
+            "is_error": edge.edge_type == GraphEdgeType.ERROR_BRANCH,
+        }
+
+        edge_classes = ["call-edge", f"edge-{edge.edge_type.value.lower()}"]
+        if edge.edge_type == GraphEdgeType.ERROR_BRANCH:
+            edge_classes.append("error-branch")
+
+        elements.append({
+            "data": edge_data,
+            "classes": " ".join(edge_classes),
+        })
+
+    return elements
+
+
+def render_cytoscape_json(
+    graph: CallGraph,
+    enable_clustering: bool = True,
+    indent: int = 2,
+) -> str:
+    """Returns Cytoscape.js elements serialized as a JSON string."""
+    import json
+    return json.dumps(render_cytoscape_elements(graph, enable_clustering=enable_clustering), indent=indent)
+
+
 def render_html(
     graph: CallGraph,
     dot_code: Optional[str] = None,

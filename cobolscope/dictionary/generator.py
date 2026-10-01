@@ -461,7 +461,6 @@ class DataDictionaryGenerator:
         """Renders structured JSON representation."""
         data = {
             "program_id": self.program.program_id,
-            "source_file": self.program.source_file_path,
             "fields": [r.to_dict() for r in self.rows],
         }
         return json.dumps(data, indent=indent)

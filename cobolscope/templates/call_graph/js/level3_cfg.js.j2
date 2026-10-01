@@ -311,17 +311,6 @@
     document.getElementById("btnCfgClose").addEventListener("click", closeLevel3Modal);
     document.getElementById("btnCfgFit").addEventListener("click", () => { if (cyLevel3) cyLevel3.fit(undefined, 30); });
     document.getElementById("btnCfgReset").addEventListener("click", () => { if (cyLevel3) { cyLevel3.reset(); cyLevel3.fit(undefined, 30); } });
-    document.getElementById("btnCfgDownload").addEventListener("click", () => {
-      if (!selectedRoutineNode || !selectedRoutineNode.cfg_elements) return;
-      const jsonStr = JSON.stringify(selectedRoutineNode.cfg_elements, null, 2);
-      const blob = new Blob([jsonStr], { type: "application/json;charset=utf-8" });
-      const url = URL.createObjectURL(blob);
-      const a = document.createElement("a");
-      a.href = url;
-      a.download = `${selectedRoutineNode.name}_level3_cfg.json`;
-      a.click();
-      URL.revokeObjectURL(url);
-    });
 
     const btnTopLevel3El = document.getElementById("btnTopLevel3");
     if (btnTopLevel3El) {

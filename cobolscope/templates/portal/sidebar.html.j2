@@ -1,0 +1,37 @@
+      <!-- Left Sidebar: Program List -->
+      <aside class="portal-sidebar" id="portal-sidebar">
+        <!-- Collapsed Rail View (barely on screen) -->
+        <div class="sidebar-rail-indicator" id="sidebar-rail-indicator" onclick="toggleSidebar(true)" title="Click to expand Program List">
+          <button class="rail-toggle-btn" title="Expand Program List">»</button>
+          <span class="rail-vertical-text">PROGRAMS</span>
+        </div>
+
+        <!-- Expanded Sidebar Header -->
+        <div class="sidebar-header-row">
+          <span class="sidebar-header-title">PROGRAMS</span>
+          <button class="sidebar-collapse-btn" onclick="toggleSidebar(false)" title="Collapse Program List">«</button>
+        </div>
+
+        <div class="sidebar-search-box">
+          <div class="search-input-wrapper">
+            <input type="search" id="prog-search" placeholder="Search programs (ID, name)..." oninput="onSearchInput()" autocomplete="off" />
+            <button class="search-clear-btn" id="search-clear" onclick="clearSearch()" title="Clear">x</button>
+          </div>
+        </div>
+
+        <div class="sidebar-filter-bar">
+          <div class="filter-tags">
+            <button class="filter-chip active" id="filter-all" onclick="setStatusFilter('all')">All</button>
+            <button class="filter-chip" id="filter-success" onclick="setStatusFilter('success')">OK</button>
+            <button class="filter-chip" id="filter-failed" onclick="setStatusFilter('failed')">Failed</button>
+          </div>
+          <span id="prog-count-label">Showing {{ manifest.programs | length }}</span>
+        </div>
+
+        <div class="program-list" id="program-list">
+          <!-- Dynamically populated via JS from embedded manifest -->
+        </div>
+      </aside>
+
+      <!-- Resizable Sidebar Splitter -->
+      <div class="portal-splitter" id="sidebar-splitter" title="Drag to resize sidebar"></div>

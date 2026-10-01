@@ -1,0 +1,43 @@
+    // Draggable Splitters Controller
+    function setupSidebarSplitter() {
+      if (!sidebarSplitter || !portalSidebar) return;
+
+      // Restore saved sidebar width
+      const savedWidth = localStorage.getItem("cobolscope_portal_sidebar_width");
+      if (savedWidth) {
+        const parsed = parseInt(savedWidth, 10);
+        if (!isNaN(parsed) && parsed >= 220 && parsed <= 600) {
+          portalSidebar.style.width = `${parsed}px`;
+        }
+      }
+
+      let isDragging = false;
+
+      sidebarSplitter.addEventListener("pointerdown", (e) => {
+        isDragging = true;
+        sidebarSplitter.setPointerCapture(e.pointerId);
+        sidebarSplitter.classList.add("active");
+        document.body.classList.add("is-resizing");
+        e.preventDefault();
+      });
+
+      sidebarSplitter.addEventListener("pointermove", (e) => {
+        if (!isDragging) return;
+        const newWidth = e.clientX;
+        const clampedWidth = Math.max(220, Math.min(600, newWidth));
+        portalSidebar.style.width = `${clampedWidth}px`;
+        localStorage.setItem("cobolscope_portal_sidebar_width", clampedWidth.toString());
+      });
+
+      const stopDrag = (e) => {
+        if (isDragging) {
+          isDragging = false;
+          sidebarSplitter.classList.remove("active");
+          document.body.classList.remove("is-resizing");
+          try { sidebarSplitter.releasePointerCapture(e.pointerId); } catch (_) {}
+        }
+      };
+
+      sidebarSplitter.addEventListener("pointerup", stopDrag);
+      sidebarSplitter.addEventListener("pointercancel", stopDrag);
+    }

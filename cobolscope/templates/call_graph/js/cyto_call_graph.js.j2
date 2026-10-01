@@ -129,27 +129,50 @@
             },
             // Selection & Highlights
             {
-              selector: "node:selected",
+              selector: "node.routine-node:selected",
               style: {
                 "border-width": 4,
                 "border-color": "#F59E0B",
-                "shadow-blur": 12,
-                "shadow-color": "rgba(245, 158, 11, 0.4)",
+                "shadow-blur": 14,
+                "shadow-color": "rgba(245, 158, 11, 0.45)",
                 "opacity": 1.0,
-                "z-index": 20
+                "z-index": 50
               }
             },
             {
-              selector: "node.neighbor-highlight",
-              style: { "opacity": 1.0, "z-index": 15 }
+              selector: "node.routine-node.neighbor-highlight",
+              style: {
+                "opacity": 1.0,
+                "z-index": 40
+              }
             },
             {
-              selector: ".dimmed",
-              style: { "opacity": 0.15 }
+              selector: "edge.neighbor-highlight",
+              style: {
+                "opacity": 1.0,
+                "width": 3,
+                "line-color": "#0078D4",
+                "target-arrow-color": "#0078D4",
+                "z-index": 35
+              }
             },
             {
-              selector: "node:selected.dimmed, node.neighbor-highlight.dimmed",
-              style: { "opacity": 1.0 }
+              selector: "node.routine-node.dimmed",
+              style: {
+                "opacity": 0.2
+              }
+            },
+            {
+              selector: "edge.dimmed",
+              style: {
+                "opacity": 0.12
+              }
+            },
+            {
+              selector: "node.routine-node:selected.dimmed, node.routine-node.neighbor-highlight.dimmed",
+              style: {
+                "opacity": 1.0
+              }
             },
             // Invocations (Edges)
             {
@@ -279,20 +302,33 @@
     function highlightCytoNeighbors(node) {
       if (!cy) return;
       cy.elements().removeClass("dimmed neighbor-highlight");
-      const connectedEdges = node.connectedEdges();
-      const neighborNodes = connectedEdges.connectedNodes();
-      neighborNodes.addClass("neighbor-highlight");
-      node.addClass("neighbor-highlight");
 
-      const focalElements = neighborNodes.union(node).union(connectedEdges);
-      const otherElements = cy.elements().difference(focalElements);
-      otherElements.addClass("dimmed");
+      const connectedEdges = node.connectedEdges();
+      const neighborNodes = connectedEdges.connectedNodes(".routine-node");
+      const focalNodes = neighborNodes.union(node);
+
+      // Add highlight to focal routines and their connecting edges
+      focalNodes.addClass("neighbor-highlight");
+      connectedEdges.addClass("neighbor-highlight");
+
+      // Mark the clicked node as selected
+      cy.nodes().unselect();
+      node.select();
+
+      // Only dim other routine nodes and other edges
+      // NEVER dim cluster nodes (compound parents), as parent opacity dims children in Cytoscape
+      const otherRoutines = cy.nodes(".routine-node").difference(focalNodes);
+      const otherEdges = cy.edges().difference(connectedEdges);
+
+      otherRoutines.addClass("dimmed");
+      otherEdges.addClass("dimmed");
     }
 
     function focusNode(nodeName) {
       if (!cy) return;
-      const cyNode = cy.nodes().filter(n => (n.data("name") || n.data("label") || "").toUpperCase() === nodeName.toUpperCase());
+      const cyNode = cy.nodes(".routine-node").filter(n => (n.data("name") || n.data("label") || "").toUpperCase() === nodeName.toUpperCase());
       if (cyNode.length > 0) {
+        highlightCytoNeighbors(cyNode[0]);
         cy.animate({
           center: { eles: cyNode },
           zoom: Math.max(cy.zoom(), 1.1),

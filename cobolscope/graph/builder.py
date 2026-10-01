@@ -42,7 +42,13 @@ from .models import (
     GraphNodeType,
 )
 from .classifier import CLUSTER_THEMES, ParagraphClassifier
-from .renderers import render_dot, render_svg, render_html
+from .renderers import (
+    render_dot,
+    render_svg,
+    render_html,
+    render_cytoscape_elements,
+    render_cytoscape_json,
+)
 from .cfg_builder import build_procedure_cfg, IntraprocedureCfg
 from .termination import TerminationClassifier
 from cobolscope.rules import GlobalRules, EffectiveProgramRules
@@ -257,6 +263,7 @@ class CallGraphGenerator:
 
                 start_line = s.location.start_line if s.location else 0
                 end_line = s.location.end_line if s.location else 0
+                source_file = s.location.source_file if (s.location and s.location.source_file) else ""
 
                 # Compute Level 3 Intra-Procedural CFG metadata for Section
                 pseudo_p = ParagraphNode(name=s.name, location=s.location, statements=all_stmts)
@@ -279,6 +286,7 @@ class CallGraphGenerator:
                     cluster_id=cluster_id,
                     start_line=start_line,
                     end_line=end_line,
+                    source_file=source_file,
                     statement_count=stmt_count,
                     cyclomatic_complexity=cc,
                     is_terminal=has_terminal,
@@ -369,6 +377,7 @@ class CallGraphGenerator:
 
                 start_line = p.location.start_line if p.location else 0
                 end_line = p.location.end_line if p.location else 0
+                source_file = p.location.source_file if (p.location and p.location.source_file) else ""
                 is_unreachable = p_name_up in reachability_model.unreachable_paragraphs
 
                 # Compute Level 3 Intra-Procedural CFG metadata
@@ -391,6 +400,7 @@ class CallGraphGenerator:
                     cluster_id=cluster_id,
                     start_line=start_line,
                     end_line=end_line,
+                    source_file=source_file,
                     statement_count=stmt_count,
                     cyclomatic_complexity=cc,
                     is_terminal=has_terminal,
@@ -587,6 +597,7 @@ class CallGraphGenerator:
             sccs=sccs,
             reachability_transitions_count=len(reachability_model.state_transitions),
             hidden_error_nodes=sorted(list(self.hidden_error_nodes)),
+            source_file=getattr(self.model, "source_file", "") or "",
             source_code=self.source_code,
         )
 
@@ -684,124 +695,11 @@ class CallGraphGenerator:
         Converts the CallGraph into a list of Cytoscape.js elements (compound parent
         clusters, routine nodes, and directed control transfer edges).
         """
-        elements: List[Dict[str, Any]] = []
-
-        # 1. Emit Parent Compound Cluster Nodes
-        if self.enable_clustering:
-            for cluster in self.graph.clusters:
-                if not cluster.node_ids:
-                    continue
-                elements.append({
-                    "data": {
-                        "id": cluster.id,
-                        "label": cluster.name,
-                        "name": cluster.name,
-                        "color": cluster.color,
-                        "fill_color": cluster.fill_color,
-                        "text_color": cluster.text_color,
-                        "is_cluster": True,
-                    },
-                    "classes": "cluster-node",
-                })
-
-        # 2. Emit Child Routine Nodes
-        for node_name, node in self.graph.nodes.items():
-            theme = CLUSTER_THEMES.get(node.node_type, CLUSTER_THEMES[GraphNodeType.GENERIC])
-            
-            # Format I/O badge summary
-            io_parts = []
-            if node.statement_count > 0:
-                for k in ("READ", "WRITE", "REWRITE", "DELETE", "SQL", "CICS", "CALL"):
-                    c = node.io_summary.get(k, 0)
-                    if c > 0:
-                        io_parts.append(f"{k}:{c}")
-            if node.is_terminal:
-                io_parts.append("TERMINAL")
-            io_str = " | ".join(io_parts)
-
-            parent_id = node.cluster_id if (self.enable_clustering and node.cluster_id) else None
-            # Validate parent actually exists in active clusters
-            if parent_id and not any(c.id == parent_id for c in self.graph.clusters):
-                parent_id = None
-
-            node_data = {
-                "id": node.id,
-                "label": node.name,
-                "name": node.name,
-                "section": node.section or "",
-                "node_type": node.node_type.value,
-                "type_label": theme["name"].split(" ")[0].upper() if theme and "name" in theme else node.node_type.value,
-                "cluster_name": theme["name"] if theme and "name" in theme else "",
-                "cluster_id": node.cluster_id,
-                "start_line": node.start_line,
-                "end_line": node.end_line,
-                "lines": f"L{node.start_line}-{node.end_line}",
-                "statement_count": node.statement_count,
-                "cyclomatic_complexity": node.cyclomatic_complexity,
-                "is_entry_point": node.is_entry_point,
-                "is_terminal": node.is_terminal,
-                "color": theme["color"],
-                "fill_color": theme["fill_color"],
-                "text_color": theme["text_color"],
-                "io_badge": io_str,
-                "source_field_ids": node.source_field_ids,
-                "target_field_ids": node.target_field_ids,
-                "called_by": node.called_by,
-                "successors": node.successors,
-            }
-
-            # Attach Level 3 Intra-Procedural CFG and Readability Heuristic Metadata
-            node_data["is_cfg_eligible"] = node.is_cfg_eligible
-            node_data["cfg_eligibility_reason"] = node.cfg_eligibility_reason
-            node_data["cfg_elements"] = node.cfg_elements
-            node_data["cfg_linear_statements"] = node.cfg_linear_statements
-
-            if parent_id:
-                node_data["parent"] = parent_id
-
-            node_classes = ["routine-node", f"type-{node.node_type.value.lower()}"]
-            if node.is_entry_point:
-                node_classes.append("entry-point")
-            if node.is_terminal:
-                node_classes.append("terminal-node")
-
-            elements.append({
-                "data": node_data,
-                "classes": " ".join(node_classes),
-            })
-
-        # 3. Emit Directed Control Edges
-        for edge in self.graph.edges:
-            src_node = self.graph.nodes.get(edge.source)
-            tgt_node = self.graph.nodes.get(edge.target)
-            if not src_node or not tgt_node:
-                continue
-
-            edge_data = {
-                "id": f"{src_node.id}->{tgt_node.id}::{edge.edge_type.value}",
-                "source": src_node.id,
-                "target": tgt_node.id,
-                "edge_type": edge.edge_type.value,
-                "label": edge.label or "",
-                "line_number": edge.line_number,
-                "is_error": edge.edge_type == GraphEdgeType.ERROR_BRANCH,
-            }
-
-            edge_classes = ["call-edge", f"edge-{edge.edge_type.value.lower()}"]
-            if edge.edge_type == GraphEdgeType.ERROR_BRANCH:
-                edge_classes.append("error-branch")
-
-            elements.append({
-                "data": edge_data,
-                "classes": " ".join(edge_classes),
-            })
-
-        return elements
+        return render_cytoscape_elements(self.graph, enable_clustering=self.enable_clustering)
 
     def to_cytoscape_json(self, indent: int = 2) -> str:
         """Returns the Cytoscape.js elements serialized as a JSON string."""
-        import json
-        return json.dumps(self.to_cytoscape_elements(), indent=indent)
+        return render_cytoscape_json(self.graph, enable_clustering=self.enable_clustering, indent=indent)
 
     def to_html(
         self,

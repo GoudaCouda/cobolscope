@@ -1,0 +1,125 @@
+    // 1. Data Initialization & Manifest Parsing
+    let manifestData = {};
+    try {
+      const manifestEl = document.getElementById("cobolscope-manifest");
+      manifestData = JSON.parse(manifestEl.textContent.trim());
+    } catch (e) {
+      console.error("Failed to parse embedded manifest:", e);
+    }
+
+    const programs = manifestData.programs || [];
+    let selectedProgramId = null;
+    let activeArtifactType = "call_graph"; // "call_graph" | "source" | "data_dictionary"
+    let currentStatusFilter = "all";
+    let searchQuery = "";
+
+    const cachedSources = {};
+
+    // 2. DOM Elements Cache
+    const programListEl = document.getElementById("program-list");
+    const progSearchInput = document.getElementById("prog-search");
+    const searchClearBtn = document.getElementById("search-clear");
+    const progCountLabel = document.getElementById("prog-count-label");
+    const currentTitleEl = document.getElementById("current-title");
+    const currentChipsEl = document.getElementById("current-chips");
+    const portalSidebar = document.getElementById("portal-sidebar");
+    const sidebarSplitter = document.getElementById("sidebar-splitter");
+    const contentFrame = document.getElementById("content-frame");
+    const messageContainer = document.getElementById("message-container");
+    const messageTitle = document.getElementById("message-title");
+    const messageText = document.getElementById("message-text");
+    const messageTrace = document.getElementById("message-trace");
+    const messageCard = document.getElementById("message-card");
+    const openTabBtn = document.getElementById("open-tab-btn");
+    const tabGraph = document.getElementById("tab-graph");
+    const tabSource = document.getElementById("tab-source");
+    const tabDict = document.getElementById("tab-dict");
+    const viewerContainer = document.getElementById("viewer-container");
+    const singlePaneView = document.getElementById("single-pane-view");
+    const sourceContainer = document.getElementById("source-container");
+    const portalSourceTbody = document.getElementById("portal-source-tbody");
+    const portalSourceSearch = document.getElementById("portal-source-search");
+
+    // HTML Entity Escaping Utility
+    function escapeHtml(str) {
+      if (!str) return "";
+      return String(str)
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#039;");
+    }
+
+    // URL Hash Deep Linking
+    function updateUrlHash() {
+      if (selectedProgramId) {
+        location.hash = `program=${encodeURIComponent(selectedProgramId)}&tab=${encodeURIComponent(activeArtifactType)}`;
+      }
+    }
+
+    function parseUrlHash() {
+      const hash = location.hash.replace(/^#/, "");
+      if (!hash) return;
+
+      const params = new URLSearchParams(hash);
+      const progId = params.get("program");
+      const tab = params.get("tab");
+
+      if (progId) {
+        selectProgram(progId, tab);
+      }
+    }
+
+    function showBlankState() {
+      selectedProgramId = null;
+      document.querySelectorAll(".program-item").forEach(el => el.classList.remove("active"));
+      if (currentTitleEl) currentTitleEl.textContent = "—";
+      if (currentChipsEl) currentChipsEl.innerHTML = "";
+      if (tabGraph) {
+        tabGraph.disabled = true;
+        tabGraph.classList.remove("active");
+      }
+      if (tabSource) {
+        tabSource.disabled = true;
+        tabSource.classList.remove("active");
+      }
+      if (tabDict) {
+        tabDict.disabled = true;
+        tabDict.classList.remove("active");
+      }
+      if (openTabBtn) openTabBtn.style.display = "none";
+
+      if (contentFrame) {
+        contentFrame.style.display = "none";
+        contentFrame.src = "about:blank";
+      }
+      if (sourceContainer) sourceContainer.style.display = "none";
+      if (messageContainer) messageContainer.style.display = "none";
+      if (singlePaneView) singlePaneView.style.display = "flex";
+
+      const blankStateEl = document.getElementById("blank-state-container");
+      if (blankStateEl) blankStateEl.style.display = "flex";
+    }
+
+    // Bootstrap Lifecycle on Page Load
+    window.addEventListener("DOMContentLoaded", () => {
+      setupSidebarSplitter();
+      renderProgramList();
+
+      // Check if URL hash specifies initial selection
+      if (location.hash) {
+        parseUrlHash();
+      } else if (programs.length > 0) {
+        // Start blank: require user to click onto a program first
+        showBlankState();
+      } else {
+        showErrorMessage(
+          "No Programs Found",
+          "The batch manifest does not contain any COBOL programs.",
+          null
+        );
+      }
+    });
+
+    window.addEventListener("hashchange", parseUrlHash);

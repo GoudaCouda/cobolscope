@@ -59,34 +59,21 @@
 
         if (cy) {
           cy.elements().removeClass("dimmed neighbor-highlight");
-          const matches = cy.nodes().filter(n => {
+          const matches = cy.nodes(".routine-node").filter(n => {
             const name = (n.data("name") || "").toUpperCase();
             const label = (n.data("label") || "").toUpperCase();
             const sec = (n.data("section") || "").toUpperCase();
             return name.includes(q) || label.includes(q) || sec.includes(q);
           });
           if (matches.length > 0) {
-            cy.elements().difference(matches).addClass("dimmed");
+            const otherRoutines = cy.nodes(".routine-node").difference(matches);
+            otherRoutines.addClass("dimmed");
+            cy.edges().addClass("dimmed");
             matches.addClass("neighbor-highlight");
             const first = matches[0];
             selectNode(first.data("name") || first.data("label"));
+            first.select();
           }
-        }
-      });
-    }
-
-    // Export Dropdown Toggle
-    const btnExportToggle = document.getElementById("btnExportToggle");
-    const exportMenu = document.getElementById("exportMenu");
-    if (btnExportToggle && exportMenu) {
-      btnExportToggle.addEventListener("click", (e) => {
-        e.stopPropagation();
-        exportMenu.style.display = exportMenu.style.display === "none" ? "flex" : "none";
-      });
-
-      document.addEventListener("click", (e) => {
-        if (!exportMenu.contains(e.target) && !btnExportToggle.contains(e.target)) {
-          exportMenu.style.display = "none";
         }
       });
     }
@@ -100,28 +87,12 @@
       });
     }
 
-    const btnDownloadJsonEl = document.getElementById("btnDownloadJson");
-    if (btnDownloadJsonEl) {
-      btnDownloadJsonEl.addEventListener("click", () => {
-        if (exportMenu) exportMenu.style.display = "none";
-        const jsonStr = JSON.stringify(cytoElements, null, 2);
-        const blob = new Blob([jsonStr], { type: "application/json;charset=utf-8" });
-        const url = URL.createObjectURL(blob);
-        const a = document.createElement("a");
-        a.href = url;
-        a.download = `${graphData.program_id}_Cytoscape.json`;
-        a.click();
-        URL.revokeObjectURL(url);
-      });
-    }
-
     // Keyboard Shortcuts (/ to search, Escape to close modals)
     window.addEventListener("keydown", (e) => {
       if (e.key === "/" && document.activeElement !== searchInput) {
         e.preventDefault();
         if (searchInput) searchInput.focus();
       } else if (e.key === "Escape") {
-        if (exportMenu) exportMenu.style.display = "none";
         if (typeof closeLevel3Modal === "function") closeLevel3Modal();
         if (typeof closeLinearCardModal === "function") closeLinearCardModal();
       }

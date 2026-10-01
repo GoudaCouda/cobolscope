@@ -96,7 +96,7 @@
       }
 
       if (selectedRoutineNode) {
-        highlightRoutineInCode(selectedRoutineNode.start_line, selectedRoutineNode.end_line, selectedRoutineNode.name);
+        highlightRoutineInCode(selectedRoutineNode.start_line, selectedRoutineNode.end_line, selectedRoutineNode.name, selectedRoutineNode.source_file);
       }
     } else {
       codeSplitPane.style.display = "none";
@@ -113,7 +113,7 @@
   };
 
   // 3. Highlight Procedure / Routine Lines
-  window.highlightRoutineInCode = function(startLine, endLine, routineName) {
+  window.highlightRoutineInCode = function(startLine, endLine, routineName, sourceFile) {
     if (!codeLines || codeLines.length === 0) return;
 
     // Clear previous line highlights
@@ -123,14 +123,21 @@
     currentStartLine = startLine || 0;
     currentEndLine = endLine || 0;
 
+    const mainFile = (typeof graphData !== "undefined" && graphData.source_file) ? graphData.source_file : "";
+    const isCopybook = Boolean(sourceFile && mainFile && !mainFile.endsWith(sourceFile) && !sourceFile.endsWith(mainFile));
+
     if (routineName) {
       const lineSpanText = currentStartLine > 0 ? `(L${currentStartLine}-L${currentEndLine})` : "";
-      codeCurrentRoutineBadge.textContent = `[ROUTINE] ${routineName} ${lineSpanText}`.trim();
+      if (isCopybook) {
+        codeCurrentRoutineBadge.textContent = `[COPYBOOK: ${sourceFile}] ${routineName} ${lineSpanText}`.trim();
+      } else {
+        codeCurrentRoutineBadge.textContent = `[ROUTINE] ${routineName} ${lineSpanText}`.trim();
+      }
     } else {
       codeCurrentRoutineBadge.textContent = "No routine selected";
     }
 
-    if (currentStartLine > 0 && currentEndLine >= currentStartLine) {
+    if (!isCopybook && currentStartLine > 0 && currentEndLine >= currentStartLine) {
       for (let l = currentStartLine; l <= currentEndLine; l++) {
         const row = document.getElementById(`code-line-${l}`);
         if (row) {
@@ -199,7 +206,7 @@
   if (btnSyncRoutineCode) {
     btnSyncRoutineCode.addEventListener("click", () => {
       if (selectedRoutineNode) {
-        highlightRoutineInCode(selectedRoutineNode.start_line, selectedRoutineNode.end_line, selectedRoutineNode.name);
+        highlightRoutineInCode(selectedRoutineNode.start_line, selectedRoutineNode.end_line, selectedRoutineNode.name, selectedRoutineNode.source_file);
       }
     });
   }
@@ -218,7 +225,7 @@
         toggleCodeSplit(true);
       }
       if (selectedRoutineNode) {
-        highlightRoutineInCode(selectedRoutineNode.start_line, selectedRoutineNode.end_line, selectedRoutineNode.name);
+        highlightRoutineInCode(selectedRoutineNode.start_line, selectedRoutineNode.end_line, selectedRoutineNode.name, selectedRoutineNode.source_file);
       }
     });
   }

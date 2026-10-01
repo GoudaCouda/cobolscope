@@ -250,7 +250,7 @@ public class ProLeapCliRunner {
 
     public static IrModel.ProgramModelDto extractProgramModel(Program program, File inputFile, CobolSourceFormatEnum format) {
         IrModel.ProgramModelDto model = new IrModel.ProgramModelDto();
-        model.sourceFile = inputFile.getAbsolutePath();
+        model.sourceFile = null;
         model.format = format.name();
 
         List<CompilationUnit> cus = program.getCompilationUnits();

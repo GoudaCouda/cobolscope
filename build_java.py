@@ -11,7 +11,7 @@ from pathlib import Path
 
 
 ROOT = Path(__file__).resolve().parent
-JAVA_SOURCES = sorted((ROOT / "java").glob("*.java"))
+JAVA_SOURCES = sorted((ROOT / "java").rglob("*.java"))
 JAR_PATH = ROOT / "cobolscope" / "lib" / "proleap-cobol-parser.jar"
 
 
@@ -75,8 +75,11 @@ def main() -> int:
         # If lib/ exists, also synchronize classes to avoid stale classpath overrides
         lib_dir = ROOT / "lib"
         if lib_dir.exists():
-            for class_file in classes_dir.glob("*.class"):
-                shutil.copy2(class_file, lib_dir / class_file.name)
+            for class_file in classes_dir.rglob("*.class"):
+                rel_path = class_file.relative_to(classes_dir)
+                dest = lib_dir / rel_path
+                dest.parent.mkdir(parents=True, exist_ok=True)
+                shutil.copy2(class_file, dest)
 
     print(f"Updated Java bridge classes in {JAR_PATH}")
     return 0

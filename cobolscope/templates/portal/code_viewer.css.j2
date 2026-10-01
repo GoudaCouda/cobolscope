@@ -1,0 +1,89 @@
+    /* Portal Source Code Viewer Container */
+    .source-container {
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      background: #FFFFFF;
+    }
+
+    .source-toolbar {
+      height: 30px;
+      background: #F8FAFC;
+      border-bottom: 1px solid var(--border-color);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 12px;
+      font-size: 11px;
+      color: var(--text-muted);
+    }
+
+    .cobol-columns-indicator {
+      display: flex;
+      gap: 8px;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+      font-size: 11px;
+    }
+
+    .col-guide {
+      color: #94A3B8;
+    }
+
+    .source-search-box input {
+      height: 22px;
+      width: 160px;
+      font-size: 11px;
+      padding: 2px 6px;
+      border: 1px solid var(--border-color);
+      border-radius: 4px;
+      outline: none;
+      background: #FFFFFF;
+    }
+
+    .source-table-wrap {
+      flex: 1;
+      overflow: auto;
+      background: #FFFFFF;
+    }
+
+    table.cobol-code-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+      font-size: 12px;
+      line-height: 1.5;
+    }
+
+    table.cobol-code-table tr:hover td {
+      background-color: #F8FAFC;
+    }
+
+    td.code-line-num {
+      width: 55px;
+      min-width: 55px;
+      text-align: right;
+      padding: 0 8px;
+      color: #94A3B8;
+      background: #F8FAFC;
+      border-right: 1px solid var(--border-color);
+      user-select: none;
+      font-size: 11px;
+    }
+
+    td.code-line-text {
+      padding: 0 10px;
+      white-space: pre;
+      color: #1E293B;
+    }
+
+    tr.line-highlighted td.code-line-text {
+      background: #EFF6FC !important;
+    }
+
+    tr.line-highlighted td.code-line-num {
+      background: #E0F2FE !important;
+      color: var(--primary);
+      font-weight: 700;
+    }

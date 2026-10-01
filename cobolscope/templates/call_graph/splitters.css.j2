@@ -1,0 +1,42 @@
+    /* Workspace Splitters & Resizing */
+    .workspace-splitter {
+      width: 6px;
+      background: var(--border-color);
+      cursor: col-resize;
+      position: relative;
+      user-select: none;
+      touch-action: none;
+      z-index: 15;
+      transition: background 0.15s ease;
+      flex-shrink: 0;
+    }
+
+    .workspace-splitter:hover,
+    .workspace-splitter.active {
+      background: var(--primary);
+    }
+
+    .splitter-handle {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 2px;
+      height: 24px;
+      background: rgba(0, 0, 0, 0.2);
+      border-radius: 1px;
+    }
+
+    .workspace-splitter:hover .splitter-handle,
+    .workspace-splitter.active .splitter-handle {
+      background: #FFFFFF;
+    }
+
+    body.is-resizing {
+      cursor: col-resize !important;
+      user-select: none !important;
+    }
+
+    body.is-resizing * {
+      user-select: none !important;
+    }

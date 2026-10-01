@@ -56,6 +56,7 @@ class CallGraphNode(BaseModel):
     cluster_id: str = "cluster_generic"
     start_line: int = 0
     end_line: int = 0
+    source_file: str = ""
     statement_count: int = 0
     cyclomatic_complexity: int = 1
     is_entry_point: bool = False
@@ -103,4 +104,5 @@ class CallGraph(BaseModel):
     sccs: List[List[str]] = Field(default_factory=list)
     reachability_transitions_count: int = 0
     hidden_error_nodes: List[str] = Field(default_factory=list)
+    source_file: str = ""
     source_code: Optional[str] = None

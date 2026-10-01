@@ -56,26 +56,9 @@
       <!-- Layout Dropdown (Cytoscape) -->
       <div id="cytoLayoutGroup" style="display:flex; align-items:center;">
         <select class="layout-select" id="layoutSelect" title="Graph Layout Engine">
-          <option value="dagre">Dagre (Hierarchy)</option>
+          <option value="dagre" selected>Dagre (Hierarchy)</option>
           <option value="breadthfirst">Breadthfirst (Layers)</option>
-          <option value="cose">COSE (Force)</option>
-          <option value="concentric">Concentric</option>
-          <option value="circle">Circle</option>
         </select>
-      </div>
-
-      <!-- Unified Export Dropdown -->
-      <div class="dropdown" id="exportDropdown">
-        <button class="btn btn-export" id="btnExportToggle" title="Export Call Graph">
-          <span>Export</span>
-          <svg class="chevron-icon" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
-        </button>
-        <div class="dropdown-menu" id="exportMenu" style="display:none;">
-          <button class="dropdown-item" id="btnDownloadJson">
-            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
-            <span>Export Cytoscape JSON</span>
-          </button>
-        </div>
       </div>
     </div>
   </header>

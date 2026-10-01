@@ -13,19 +13,36 @@ public class IrModel {
         public int endLine;
         public int startColumn;
         public int endColumn;
+        public String sourceFile;
 
         public SourceLocationDto() {}
 
         public SourceLocationDto(ParserRuleContext ctx) {
+            this(ctx, io.proleap.cobol.preprocessor.CobolSourceMapContext.get());
+        }
+
+        public SourceLocationDto(ParserRuleContext ctx, io.proleap.cobol.preprocessor.CobolSourceMap sourceMap) {
             if (ctx != null && ctx.getStart() != null) {
-                this.startLine = ctx.getStart().getLine();
-                this.startColumn = ctx.getStart().getCharPositionInLine();
-                if (ctx.getStop() != null) {
-                    this.endLine = ctx.getStop().getLine();
-                    this.endColumn = ctx.getStop().getCharPositionInLine();
+                int pStartLine = ctx.getStart().getLine();
+                int pStartCol = ctx.getStart().getCharPositionInLine();
+                int pEndLine = ctx.getStop() != null ? ctx.getStop().getLine() : pStartLine;
+                int pEndCol = ctx.getStop() != null ? ctx.getStop().getCharPositionInLine() : pStartCol;
+
+                if (sourceMap != null && !sourceMap.isEmpty()) {
+                    io.proleap.cobol.preprocessor.CobolSourceMap.ResolvedLocation startLoc = sourceMap.resolve(pStartLine, pStartCol);
+                    io.proleap.cobol.preprocessor.CobolSourceMap.ResolvedLocation endLoc = sourceMap.resolve(pEndLine, pEndCol);
+
+                    this.startLine = startLoc.line;
+                    this.startColumn = startLoc.column;
+                    this.sourceFile = (startLoc.sourceFile != null && !startLoc.sourceFile.isEmpty()) ? startLoc.sourceFile : null;
+
+                    this.endLine = endLoc.line;
+                    this.endColumn = endLoc.column;
                 } else {
-                    this.endLine = this.startLine;
-                    this.endColumn = this.startColumn;
+                    this.startLine = pStartLine;
+                    this.startColumn = pStartCol;
+                    this.endLine = pEndLine;
+                    this.endColumn = pEndCol;
                 }
             }
         }

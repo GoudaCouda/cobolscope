@@ -1,0 +1,218 @@
+    function selectProgram(progId, preferredArtifact = null) {
+      selectedProgramId = progId;
+      const prog = programs.find(p => p.program_id === progId);
+      if (!prog) return;
+
+      const blankStateEl = document.getElementById("blank-state-container");
+      if (blankStateEl) blankStateEl.style.display = "none";
+
+      // Update sidebar active selection
+      document.querySelectorAll(".program-item").forEach(el => {
+        el.classList.toggle("active", el.dataset.id === progId);
+      });
+
+      // Update Toolbar Header
+      currentTitleEl.textContent = prog.program_id || "";
+      currentChipsEl.innerHTML = "";
+
+      if (prog.status !== "SUCCESS") {
+        currentChipsEl.innerHTML = `
+          <span class="chip" style="color:var(--danger); background:var(--danger-light); border-color:rgba(220,38,38,0.2);">
+            Extraction Failed
+          </span>
+        `;
+      }
+
+      // Check available artifacts
+      const artifacts = prog.artifacts || {};
+      const hasGraph = !!artifacts.call_graph;
+      const hasSource = !!artifacts.source;
+      const hasDict = !!(artifacts.data_dictionary_html || artifacts.data_dictionary);
+
+      tabGraph.disabled = !hasGraph;
+      tabSource.disabled = !hasSource;
+      tabDict.disabled = !hasDict;
+
+      // Pick active artifact
+      if (preferredArtifact && (
+        (preferredArtifact === "call_graph" && hasGraph) ||
+        (preferredArtifact === "source" && hasSource) ||
+        (preferredArtifact === "data_dictionary" && hasDict)
+      )) {
+        activeArtifactType = preferredArtifact;
+      } else if (hasGraph) {
+        activeArtifactType = "call_graph";
+      } else if (hasSource) {
+        activeArtifactType = "source";
+      } else if (hasDict) {
+        activeArtifactType = "data_dictionary";
+      } else {
+        activeArtifactType = "call_graph";
+      }
+
+      updateArtifactTabsUI();
+
+      loadActiveArtifact(prog);
+      updateUrlHash();
+
+      // Auto-collapse sidebar after user selects a program
+      collapseSidebar();
+    }
+
+    function updateArtifactTabsUI() {
+      tabGraph.classList.toggle("active", activeArtifactType === "call_graph");
+      tabSource.classList.toggle("active", activeArtifactType === "source");
+      tabDict.classList.toggle("active", activeArtifactType === "data_dictionary");
+    }
+
+    function switchArtifact(type) {
+      activeArtifactType = type;
+      updateArtifactTabsUI();
+      const prog = programs.find(p => p.program_id === selectedProgramId);
+      if (prog) {
+        loadActiveArtifact(prog);
+        updateUrlHash();
+      }
+    }
+
+    function loadActiveArtifact(prog) {
+      if (!prog) return;
+
+      // If program failed parsing
+      if (prog.status !== "SUCCESS") {
+        showErrorMessage(
+          "COBOL Extraction Failed",
+          `ProLeap parser could not parse ${prog.program_id}. This usually occurs when referenced copybooks are not in the copybook search paths (-I).`,
+          prog.error || "No error details reported."
+        );
+        openTabBtn.style.display = "none";
+        return;
+      }
+
+      const artifacts = prog.artifacts || {};
+      let targetUrl = null;
+
+      if (activeArtifactType === "call_graph") {
+        targetUrl = artifacts.call_graph;
+      } else if (activeArtifactType === "source") {
+        targetUrl = artifacts.source;
+      } else if (activeArtifactType === "data_dictionary") {
+        targetUrl = artifacts.data_dictionary_html || artifacts.data_dictionary;
+      }
+
+      if (!targetUrl) {
+        showErrorMessage(
+          "Artifact Not Generated",
+          `No ${activeArtifactType.replace('_', ' ')} artifact was produced for ${prog.program_id}.`,
+          null
+        );
+        openTabBtn.style.display = "none";
+        return;
+      }
+
+      openTabBtn.style.display = "inline-flex";
+      openTabBtn.href = targetUrl;
+
+      // Source Code Rendering
+      if (activeArtifactType === "source") {
+        renderPortalSource(targetUrl);
+        return;
+      }
+
+      // Default: Load inside iframe
+      sourceContainer.style.display = "none";
+      messageContainer.style.display = "none";
+      contentFrame.style.display = "block";
+      contentFrame.src = targetUrl;
+    }
+
+    function renderPortalSource(url) {
+      contentFrame.style.display = "none";
+      messageContainer.style.display = "none";
+      sourceContainer.style.display = "flex";
+
+      if (cachedSources[url]) {
+        populatePortalSourceTable(cachedSources[url]);
+        return;
+      }
+
+      portalSourceTbody.innerHTML = `<tr><td colspan="2" style="padding:24px; text-align:center; color:var(--text-muted);">Loading source file...</td></tr>`;
+
+      fetch(url)
+        .then(res => {
+          if (!res.ok) throw new Error(`HTTP ${res.status}`);
+          return res.text();
+        })
+        .then(text => {
+          cachedSources[url] = text;
+          populatePortalSourceTable(text);
+        })
+        .catch(() => {
+          // If fetch fails (e.g. file:// CORS), fallback to loading raw file into iframe
+          sourceContainer.style.display = "none";
+          contentFrame.style.display = "block";
+          contentFrame.src = url;
+        });
+    }
+
+    function populatePortalSourceTable(text) {
+      const lines = text ? text.split(/\r?\n/) : [];
+      const fragment = document.createDocumentFragment();
+
+      for (let i = 0; i < lines.length; i++) {
+        const lineNum = i + 1;
+        const lineText = lines[i];
+
+        const tr = document.createElement("tr");
+        tr.id = `portal-line-${lineNum}`;
+
+        const tdNum = document.createElement("td");
+        tdNum.className = "code-line-num";
+        tdNum.textContent = lineNum;
+
+        const tdText = document.createElement("td");
+        tdText.className = "code-line-text";
+        const codeEl = document.createElement("code");
+        codeEl.textContent = lineText;
+        tdText.appendChild(codeEl);
+
+        tr.appendChild(tdNum);
+        tr.appendChild(tdText);
+        fragment.appendChild(tr);
+      }
+
+      portalSourceTbody.innerHTML = "";
+      portalSourceTbody.appendChild(fragment);
+    }
+
+    function onPortalSourceSearch(e) {
+      if (e.key !== "Enter") return;
+      e.preventDefault();
+      const val = (portalSourceSearch.value || "").trim();
+      if (!val) return;
+
+      if (/^\d+$/.test(val)) {
+        const targetLine = document.getElementById(`portal-line-${val}`);
+        if (targetLine) {
+          document.querySelectorAll("#portal-source-tbody tr.line-highlighted").forEach(r => r.classList.remove("line-highlighted"));
+          targetLine.classList.add("line-highlighted");
+          targetLine.scrollIntoView({ behavior: "smooth", block: "center" });
+        }
+      }
+    }
+
+    function showErrorMessage(title, text, trace) {
+      contentFrame.style.display = "none";
+      sourceContainer.style.display = "none";
+      messageContainer.style.display = "flex";
+
+      messageTitle.textContent = title;
+      messageText.textContent = text;
+
+      if (trace) {
+        messageTrace.style.display = "block";
+        messageTrace.textContent = trace;
+      } else {
+        messageTrace.style.display = "none";
+      }
+    }

@@ -1,0 +1,67 @@
+        const searchInput = document.getElementById('searchInput');
+        const sectionFilter = document.getElementById('sectionFilter');
+        const typeFilter = document.getElementById('typeFilter');
+        const rows = document.querySelectorAll('#dictTable tbody tr');
+
+        function filterRows() {
+            const query = searchInput.value.toLowerCase().trim();
+            const sec = sectionFilter.value;
+            const typ = typeFilter.value;
+
+            rows.forEach(r => {
+                const text = r.textContent.toLowerCase();
+                const rSec = r.getAttribute('data-section');
+                const rTyp = r.getAttribute('data-type');
+
+                const matchQuery = !query || text.includes(query);
+                const matchSec = sec === 'ALL' || rSec === sec;
+                const matchTyp = typ === 'ALL' || rTyp === typ;
+
+                r.style.display = (matchQuery && matchSec && matchTyp) ? '' : 'none';
+            });
+        }
+
+        searchInput.addEventListener('input', filterRows);
+        sectionFilter.addEventListener('change', filterRows);
+        typeFilter.addEventListener('change', filterRows);
+
+        function sortTable(n) {
+            const table = document.getElementById("dictTable");
+            let rows, switching = true, i, x, y, shouldSwitch, dir = "asc", switchcount = 0;
+            
+            while (switching) {
+                switching = false;
+                rows = table.rows;
+                for (i = 1; i < (rows.length - 1); i++) {
+                    shouldSwitch = false;
+                    x = rows[i].getElementsByTagName("TD")[n];
+                    y = rows[i + 1].getElementsByTagName("TD")[n];
+                    
+                    let xVal = x.textContent.trim();
+                    let yVal = y.textContent.trim();
+
+                    // Check if numeric
+                    let xNum = parseFloat(xVal.replace(/[^0-9.-]+/g,""));
+                    let yNum = parseFloat(yVal.replace(/[^0-9.-]+/g,""));
+
+                    let cmpX = isNaN(xNum) ? xVal.toLowerCase() : xNum;
+                    let cmpY = isNaN(yNum) ? yVal.toLowerCase() : yNum;
+
+                    if (dir == "asc") {
+                        if (cmpX > cmpY) { shouldSwitch = true; break; }
+                    } else if (dir == "desc") {
+                        if (cmpX < cmpY) { shouldSwitch = true; break; }
+                    }
+                }
+                if (shouldSwitch) {
+                    rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+                    switching = true;
+                    switchcount++;
+                } else {
+                    if (switchcount == 0 && dir == "asc") {
+                        dir = "desc";
+                        switching = true;
+                    }
+                }
+            }
+        }

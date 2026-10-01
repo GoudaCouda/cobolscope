@@ -1,0 +1,95 @@
+    // Sidebar Program List Controller & Filtering
+    function renderProgramList() {
+      const q = searchQuery.toLowerCase().trim();
+      const filtered = programs.filter(p => {
+        if (currentStatusFilter === "success" && p.status !== "SUCCESS") return false;
+        if (currentStatusFilter === "failed" && p.status === "SUCCESS") return false;
+        if (!q) return true;
+        return (
+          p.program_id && p.program_id.toLowerCase().includes(q)
+        );
+      });
+
+      progCountLabel.textContent = `Showing ${filtered.length} of ${programs.length}`;
+      programListEl.innerHTML = "";
+
+      if (filtered.length === 0) {
+        programListEl.innerHTML = `
+          <div style="padding: 24px; text-align: center; color: var(--text-muted); font-size: 12px;">
+            No matching programs found.
+          </div>
+        `;
+        return;
+      }
+
+      filtered.forEach(p => {
+        const item = document.createElement("div");
+        item.className = "program-item" + (p.program_id === selectedProgramId ? " active" : "");
+        item.dataset.id = p.program_id;
+        item.onclick = () => selectProgram(p.program_id);
+
+        const hasGraph = !!(p.artifacts && p.artifacts.call_graph);
+        const hasSource = !!(p.artifacts && p.artifacts.source);
+        const hasDict = !!(p.artifacts && (p.artifacts.data_dictionary_html || p.artifacts.data_dictionary));
+        const isOk = p.status === "SUCCESS";
+
+        item.innerHTML = `
+          <div class="program-item-header">
+            <span class="program-id">${escapeHtml(p.program_id || "")}</span>
+            <span class="badge ${isOk ? 'badge-status-ok' : 'badge-status-fail'}">${isOk ? 'OK' : 'ERR'}</span>
+          </div>
+          <div class="program-meta-row">
+            ${isOk ? `
+              <span class="badge badge-metric">${p.total_paragraphs || 0} routines</span>
+              ${hasGraph ? '<span class="badge badge-artifact">Graph</span>' : ''}
+              ${hasSource ? '<span class="badge badge-artifact">Source</span>' : ''}
+              ${hasDict ? '<span class="badge badge-artifact">Dict</span>' : ''}
+            ` : `
+              <span class="badge badge-status-fail">Parsing error</span>
+            `}
+          </div>
+        `;
+        programListEl.appendChild(item);
+      });
+    }
+
+    function toggleSidebar(forceOpen) {
+      if (!portalSidebar) return;
+      const isCurrentlyCollapsed = portalSidebar.classList.contains("collapsed");
+      const shouldOpen = forceOpen !== undefined ? forceOpen : isCurrentlyCollapsed;
+
+      if (shouldOpen) {
+        portalSidebar.classList.remove("collapsed");
+        if (sidebarSplitter) sidebarSplitter.style.display = "block";
+        const savedWidth = localStorage.getItem("cobolscope_portal_sidebar_width") || "320";
+        portalSidebar.style.width = `${savedWidth}px`;
+      } else {
+        portalSidebar.classList.add("collapsed");
+        if (sidebarSplitter) sidebarSplitter.style.display = "none";
+      }
+    }
+
+    function collapseSidebar() {
+      toggleSidebar(false);
+    }
+
+    function onSearchInput() {
+      searchQuery = progSearchInput.value;
+      searchClearBtn.style.display = searchQuery ? "block" : "none";
+      renderProgramList();
+    }
+
+    function clearSearch() {
+      progSearchInput.value = "";
+      searchQuery = "";
+      searchClearBtn.style.display = "none";
+      renderProgramList();
+    }
+
+    function setStatusFilter(filter) {
+      currentStatusFilter = filter;
+      document.getElementById("filter-all").classList.toggle("active", filter === "all");
+      document.getElementById("filter-success").classList.toggle("active", filter === "success");
+      document.getElementById("filter-failed").classList.toggle("active", filter === "failed");
+      renderProgramList();
+    }
