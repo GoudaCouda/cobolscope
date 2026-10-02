@@ -219,6 +219,51 @@ def build_arg_parser() -> argparse.ArgumentParser:
         default=False,
         help="Include error trap / abend handling procedures and relationships in the call graph (hidden by default).",
     )
+    graph_group.add_argument(
+        "--enable-cloning",
+        action="store_true",
+        dest="enable_cloning",
+        default=False,
+        help="Disentangle high in-degree utility routines by cloning them locally per caller or section.",
+    )
+    graph_group.add_argument(
+        "--clone-mode",
+        choices=["section", "caller"],
+        default="section",
+        help="Cloning strategy: 'section' (replicates per calling section) or 'caller' (replicates per calling routine). Default: section.",
+    )
+    graph_group.add_argument(
+        "--clone-threshold",
+        type=int,
+        default=3,
+        help="Minimum in-degree (caller count) required to qualify a utility node for cloning. Default: 3.",
+    )
+    graph_group.add_argument(
+        "--ranker",
+        choices=["network-simplex", "tight-tree", "longest-path"],
+        default=None,
+        help="Graphviz ranking algorithm override (network-simplex, tight-tree, longest-path). Default: dynamically chosen.",
+    )
+    graph_group.add_argument(
+        "--nodesep",
+        type=float,
+        default=None,
+        help="Horizontal routine spacing in inches (overrides dynamic heuristics).",
+    )
+    graph_group.add_argument(
+        "--ranksep",
+        type=float,
+        default=None,
+        help="Vertical rank separation in inches (overrides dynamic heuristics).",
+    )
+    graph_group.add_argument(
+        "--no-dynamic-heuristics",
+        action="store_false",
+        dest="dynamic_heuristics",
+        default=True,
+        help="Disable dynamic topology-based layout heuristics (forces fixed defaults).",
+    )
+
 
     # ---------------------------------------------------------
     # Rules & Termination Options
@@ -503,7 +548,15 @@ def main(argv: Optional[Sequence[str]] = None) -> int:
                 rules=rules,
                 hide_error_traps=not args.show_error_traps,
                 source_code=source_text,
+                enable_cloning=args.enable_cloning,
+                clone_mode=args.clone_mode,
+                clone_threshold=args.clone_threshold,
+                ranker=args.ranker,
+                nodesep=args.nodesep,
+                ranksep=args.ranksep,
+                dynamic_heuristics=args.dynamic_heuristics,
             )
+
             gen_dur = (time.perf_counter() - gen_start) * 1000
             log_verbose(f"Call Graph rendered in {gen_dur:.2f} ms")
 

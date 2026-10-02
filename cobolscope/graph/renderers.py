@@ -50,6 +50,9 @@ def format_dot_node(node: CallGraphNode, indent: int = 4, compact: bool = True) 
     # 1. Entry Point Banner
     if node.is_entry_point:
         rows.append('<tr><td align="center" bgcolor="#0078D4" cellpadding="3"><font color="#FFFFFF" point-size="9"><b>[ENTRY] START / ENTRY POINT</b></font></td></tr>')
+    elif node.is_clone:
+        total_str = f"/{node.clone_total}" if node.clone_total > 1 else ""
+        rows.append(f'<tr><td align="center" bgcolor="#F1F5F9" cellpadding="2"><font color="#475569" point-size="8"><b>[CLONE {node.clone_index}{total_str}]</b></font></td></tr>')
 
     # 2. Section Name & Paragraph Title
     has_distinct_section = bool(node.section and node.section.strip() and node.section.strip().upper() != node.name.strip().upper())
@@ -99,6 +102,10 @@ def format_dot_node(node: CallGraphNode, indent: int = 4, compact: bool = True) 
         tooltip_text += f" | Data: {', '.join(clean_field_names[:4])}"
     if node.is_entry_point:
         tooltip_text = f"[START] {tooltip_text}"
+    if node.is_clone:
+        tooltip_text = f"[CLONE of {node.original_name}] {tooltip_text}"
+
+    node_style = "dashed,filled" if node.is_clone else "filled,rounded"
 
     return (
         f'{ind}{node.id} ['
@@ -106,6 +113,7 @@ def format_dot_node(node: CallGraphNode, indent: int = 4, compact: bool = True) 
         f'fillcolor="{bg_color}", '
         f'color="{border_color}", '
         f'penwidth={penwidth}, '
+        f'style="{node_style}", '
         f'tooltip="{html.escape(tooltip_text)}"'
         f'];'
     )
@@ -117,8 +125,33 @@ def render_dot(
     compact_nodes: bool = True,
     concentrate: bool = True,
     splines: str = "spline",
+    ranker: Optional[str] = None,
+    nodesep: Optional[float] = None,
+    ranksep: Optional[float] = None,
+    dynamic_heuristics: bool = True,
 ) -> str:
-    """Emits standards-compliant Graphviz .dot syntax with clean vertical hierarchy."""
+    """Emits standards-compliant Graphviz .dot syntax with clean vertical hierarchy and dynamic heuristics."""
+    from .heuristics import compute_graph_metrics, calculate_layout_heuristics
+
+    if dynamic_heuristics:
+        metrics = compute_graph_metrics(graph)
+        heuristics = calculate_layout_heuristics(
+            metrics,
+            compact_nodes=compact_nodes,
+            requested_splines=splines if splines != "spline" else None,
+            requested_ranker=ranker,
+        )
+        active_ranker = ranker or heuristics.ranker
+        active_splines = splines if splines else heuristics.splines
+
+        active_nodesep = nodesep if nodesep is not None else heuristics.nodesep_in
+        active_ranksep = ranksep if ranksep is not None else heuristics.ranksep_in
+    else:
+        active_ranker = ranker or "network-simplex"
+        active_splines = splines
+        active_nodesep = nodesep if nodesep is not None else 0.45
+        active_ranksep = ranksep if ranksep is not None else 0.75
+
     lines = []
     lines.append(f'digraph "{graph.program_id}_CallGraph" {{')
     lines.append('    // Global Graph Attributes')
@@ -127,9 +160,11 @@ def render_dot(
     lines.append('    newrank=true;')
     if concentrate:
         lines.append('    concentrate=true;')
-    lines.append(f'    splines={splines};')
-    lines.append('    nodesep=0.45;')
-    lines.append('    ranksep=0.75;')
+    lines.append(f'    ranker="{active_ranker}";')
+    lines.append(f'    splines="{active_splines}";')
+
+    lines.append(f'    nodesep={active_nodesep};')
+    lines.append(f'    ranksep={active_ranksep};')
     lines.append('    ratio=auto;')
     lines.append('    bgcolor="#FFFFFF";')
     lines.append('    fontname="Segoe UI, -apple-system, BlinkMacSystemFont, Roboto, Helvetica, Arial, sans-serif";')
@@ -138,9 +173,10 @@ def render_dot(
     lines.append('    // Top-Level Program Header Title')
     lines.append('    labelloc="t";')
     lines.append('    labeljust="c";')
+    cloned_note = f" | {graph.cloned_node_count} Cloned Utilities" if getattr(graph, "cloned_node_count", 0) > 0 else ""
     lines.append(f'    label=<<table border="0" cellborder="0" cellspacing="0" cellpadding="3">'
                  f'<tr><td><font point-size="15" color="#0F172A"><b>Procedure Call Graph: {html.escape(graph.program_id)}</b></font></td></tr>'
-                 f'<tr><td><font point-size="9" color="#64748B">{len(graph.nodes)} Procedures | {len(graph.edges)} Calls &amp; Transfers | Max Depth: {graph.max_depth}</font></td></tr>'
+                 f'<tr><td><font point-size="9" color="#64748B">{len(graph.nodes)} Procedures | {len(graph.edges)} Calls &amp; Transfers{cloned_note} | Max Depth: {graph.max_depth}</font></td></tr>'
                  f'</table>>;')
     lines.append('')
     lines.append('    node [fontname="Segoe UI, Helvetica, Arial, sans-serif", fontsize=10, shape=box, style="filled,rounded", penwidth=1.5, margin="0.15,0.08"];')
@@ -325,6 +361,13 @@ def render_cytoscape_elements(
             "successors": node.successors,
         }
 
+        # Clone Metadata
+        node_data["is_clone"] = node.is_clone
+        node_data["original_name"] = node.original_name or node.name
+        node_data["clone_index"] = node.clone_index
+        node_data["clone_total"] = node.clone_total
+        node_data["clone_caller"] = node.clone_caller or ""
+
         # Attach Level 3 Intra-Procedural CFG and Readability Heuristic Metadata
         node_data["is_cfg_eligible"] = node.is_cfg_eligible
         node_data["cfg_eligibility_reason"] = node.cfg_eligibility_reason
@@ -339,6 +382,8 @@ def render_cytoscape_elements(
             node_classes.append("entry-point")
         if node.is_terminal:
             node_classes.append("terminal-node")
+        if node.is_clone:
+            node_classes.append("clone-node")
 
         elements.append({
             "data": node_data,
@@ -390,8 +435,19 @@ def render_html(
     svg_content: Optional[str] = None,
     cyto_elements: Optional[List[Dict[str, Any]]] = None,
     initial_engine: str = "cytoscape",
+    heuristics: Optional[Any] = None,
+    metrics: Optional[Any] = None,
+    cloned_elements: Optional[List[Dict[str, Any]]] = None,
+    canonical_elements: Optional[List[Dict[str, Any]]] = None,
+    enable_cloning: bool = False,
 ) -> str:
-    """Renders standalone interactive HTML visualization powered by Cytoscape.js."""
+    """Renders standalone interactive HTML visualization powered by Cytoscape.js with dynamic heuristics."""
+    from .heuristics import compute_graph_metrics, calculate_layout_heuristics
+    if metrics is None:
+        metrics = compute_graph_metrics(graph)
+    if heuristics is None:
+        heuristics = calculate_layout_heuristics(metrics, compact_nodes=True)
+
     template_dir = Path(__file__).resolve().parent.parent / "templates"
     try:
         loader = jinja2.PackageLoader("cobolscope", "templates")
@@ -412,6 +468,9 @@ def render_html(
 
     import json
     cyto_json = json.dumps(cyto_elements or [])
+    cloned_json = json.dumps(cloned_elements or [])
+    canonical_json = json.dumps(canonical_elements or (cyto_elements if not enable_cloning else []))
+    clone_count = len([e for e in (cloned_elements or []) if e.get("data", {}).get("is_clone")])
 
     return template.render(
         program_id=graph.program_id,
@@ -420,9 +479,19 @@ def render_html(
         dot_content=dot_code or "",
         cyto_elements=cyto_elements or [],
         cyto_json=cyto_json,
+        cloned_elements=cloned_elements or [],
+        cloned_json=cloned_json,
+        canonical_elements=canonical_elements or [],
+        canonical_json=canonical_json,
+        clone_count=clone_count,
+        enable_cloning=enable_cloning,
         initial_engine=initial_engine,
         source_code=graph.source_code or "",
+        heuristics=heuristics,
+        metrics=metrics,
     )
+
+
 
 
 _DEFAULT_CALL_GRAPH_HTML_TEMPLATE = """<!DOCTYPE html>

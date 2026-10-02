@@ -8,7 +8,10 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/cytoscape/3.28.1/cytoscape.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/dagre@0.8.5/dist/dagre.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/cytoscape-dagre@2.5.0/cytoscape-dagre.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/elkjs@0.9.3/lib/elk.bundled.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/cytoscape-elk@2.1.0/dist/cytoscape-elk.min.js"></script>
 {% endblock %}
+
 
 {% block styles %}
   {% include "call_graph/styles.css.j2" %}
@@ -42,11 +45,16 @@
     {% include "call_graph/js/diagnostics.js.j2" %}
 
     const graphData = {{ graph.model_dump_json() | safe }};
-    const cytoElements = {{ cyto_json | safe }};
+    let cytoElements = {{ cyto_json | safe }};
+    const canonicalElements = {{ canonical_json | safe }};
+    const clonedElements = {{ cloned_json | safe }};
+    const initialEnableCloning = {{ "true" if enable_cloning else "false" }};
+    const layoutHeuristics = {{ (heuristics.to_dict() if heuristics else {}) | tojson }};
     const initialEnginePreference = "{{ initial_engine }}";
     const sourceCodeRaw = {{ (source_code or graph.source_code or "") | tojson }};
 
-    CobolScopeLog.info(`Loaded graphData for ${graphData.program_id}: ${graphData.total_paragraphs} paragraphs, ${cytoElements.length} Cytoscape elements.`);
+    CobolScopeLog.info(`Loaded graphData for ${graphData.program_id}: ${graphData.total_paragraphs} paragraphs, ${cytoElements.length} Cytoscape elements, initial cloning=${initialEnableCloning}.`);
+
 
     let currentEngine = "cytoscape";
     let cy = null;

@@ -215,6 +215,13 @@ def run_batch_directory(
                     rules=rules,
                     hide_error_traps=not getattr(args, "show_error_traps", False),
                     source_code=source_text,
+                    enable_cloning=getattr(args, "enable_cloning", False),
+                    clone_mode=getattr(args, "clone_mode", "section"),
+                    clone_threshold=getattr(args, "clone_threshold", 3),
+                    ranker=getattr(args, "ranker", None),
+                    nodesep=getattr(args, "nodesep", None),
+                    ranksep=getattr(args, "ranksep", None),
+                    dynamic_heuristics=getattr(args, "dynamic_heuristics", True),
                 )
                 graph_path.write_text(graph_content, encoding="utf-8")
                 artifacts["call_graph"] = graph_filename

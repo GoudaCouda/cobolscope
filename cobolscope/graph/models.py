@@ -74,6 +74,11 @@ class CallGraphNode(BaseModel):
     cfg_eligibility_reason: str = ""
     cfg_elements: List[Dict[str, Any]] = Field(default_factory=list)
     cfg_linear_statements: List[Dict[str, Any]] = Field(default_factory=list)
+    is_clone: bool = False
+    original_name: Optional[str] = None
+    clone_index: int = 0
+    clone_total: int = 0
+    clone_caller: Optional[str] = None
 
 
 class CallGraphEdge(BaseModel):
@@ -104,5 +109,6 @@ class CallGraph(BaseModel):
     sccs: List[List[str]] = Field(default_factory=list)
     reachability_transitions_count: int = 0
     hidden_error_nodes: List[str] = Field(default_factory=list)
+    cloned_node_count: int = 0
     source_file: str = ""
     source_code: Optional[str] = None

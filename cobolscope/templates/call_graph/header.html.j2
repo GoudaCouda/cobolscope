@@ -75,12 +75,20 @@
         <span>Inspector</span>
       </button>
 
-      <!-- Layout Dropdown (Cytoscape) -->
-      <div id="cytoLayoutGroup" style="display:flex; align-items:center;">
+      <!-- Layout Dropdown (Cytoscape) & Disentangle Toggle -->
+      <div id="cytoLayoutGroup" style="display:flex; align-items:center; gap:8px;">
         <select class="layout-select" id="layoutSelect" title="Graph Layout Engine">
-          <option value="dagre" selected>Dagre (Hierarchy)</option>
+          <option value="elk-layered"{% if heuristics and heuristics.recommend_elk %} selected{% endif %}>ELK (Layered)</option>
+          <option value="dagre"{% if not (heuristics and heuristics.recommend_elk) %} selected{% endif %}>Dagre (Hierarchy)</option>
           <option value="breadthfirst">Breadthfirst (Layers)</option>
         </select>
+        {% if clone_count and clone_count > 0 %}
+        <label class="toggle-clone-label" id="lblCloneUtilities" title="Disentangle high in-degree utility routines by replicating them locally per caller/section" style="display:inline-flex; align-items:center; font-size:12px; gap:4px; cursor:pointer; color:var(--text-secondary); user-select:none; margin-left:4px;">
+          <input type="checkbox" id="toggleCloneUtilities"{% if enable_cloning %} checked{% endif %}>
+          <span>Disentangle ({{ clone_count }} clones)</span>
+        </label>
+        {% endif %}
       </div>
+
     </div>
   </header>

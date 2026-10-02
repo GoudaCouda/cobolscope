@@ -53,6 +53,8 @@ from .cfg_builder import build_procedure_cfg, IntraprocedureCfg
 from .termination import TerminationClassifier
 from cobolscope.rules import GlobalRules, EffectiveProgramRules
 from .utils import tarjan_scc
+from .heuristics import compute_graph_metrics, calculate_layout_heuristics, GraphMetrics, LayoutHeuristics
+from .cloning import identify_clone_candidates, apply_node_cloning
 
 
 class CallGraphGenerator:
@@ -74,6 +76,13 @@ class CallGraphGenerator:
         rules: Optional[Union[GlobalRules, EffectiveProgramRules]] = None,
         hide_error_traps: bool = True,
         source_code: Optional[str] = None,
+        enable_cloning: bool = False,
+        clone_mode: str = "section",
+        clone_threshold: int = 3,
+        ranker: Optional[str] = None,
+        nodesep: Optional[float] = None,
+        ranksep: Optional[float] = None,
+        dynamic_heuristics: bool = True,
     ):
         self.model = model
         self.rules = rules
@@ -92,6 +101,14 @@ class CallGraphGenerator:
         self.hide_error_traps = hide_error_traps
         self.hidden_error_nodes: Set[str] = set()
 
+        self.enable_cloning = enable_cloning
+        self.clone_mode = clone_mode
+        self.clone_threshold = clone_threshold
+        self.ranker = ranker
+        self.nodesep = nodesep
+        self.ranksep = ranksep
+        self.dynamic_heuristics = dynamic_heuristics
+
         is_section_based = len(self.model.sections) > 0 and any(len(s.paragraph_names) > 0 for s in self.model.sections)
         if not enable_clustering or self.cluster_mode == "none":
             self.enable_clustering = False
@@ -105,7 +122,50 @@ class CallGraphGenerator:
         self._dot_cache: Optional[str] = None
         self._svg_cache: Optional[str] = None
         self._cfg_cache: Dict[str, IntraprocedureCfg] = {}
-        self.graph: CallGraph = self._build_graph()
+        self.canonical_graph: CallGraph = self._build_graph()
+
+        self.clone_candidates = identify_clone_candidates(
+            self.canonical_graph,
+            min_in_degree=self.clone_threshold,
+        )
+        if self.clone_candidates:
+            self.cloned_graph = apply_node_cloning(
+                self.canonical_graph,
+                mode=self.clone_mode,
+                min_in_degree=self.clone_threshold,
+            )
+        else:
+            self.cloned_graph = self.canonical_graph
+
+        if self.enable_cloning and self.cloned_graph.cloned_node_count > 0:
+            self.graph = self.cloned_graph
+        else:
+            self.graph = self.canonical_graph
+
+        self.metrics: GraphMetrics = compute_graph_metrics(self.graph)
+        self.heuristics: LayoutHeuristics = calculate_layout_heuristics(
+            self.metrics,
+            compact_nodes=self.compact_nodes,
+            requested_splines=self.splines if self.splines != "spline" else None,
+            requested_ranker=self.ranker,
+        )
+        if self.nodesep is not None:
+            self.heuristics.nodesep_in = self.nodesep
+        if self.ranksep is not None:
+            self.heuristics.ranksep_in = self.ranksep
+        if self.ranker is not None:
+            self.heuristics.ranker = self.ranker
+
+        self.canonical_cyto_elements = render_cytoscape_elements(
+            self.canonical_graph, enable_clustering=self.enable_clustering
+        )
+        if self.cloned_graph.cloned_node_count > 0:
+            self.cloned_cyto_elements = render_cytoscape_elements(
+                self.cloned_graph, enable_clustering=self.enable_clustering
+            )
+        else:
+            self.cloned_cyto_elements = []
+
 
     def _extract_linear_statement_item(self, stmt: AnyStatementNode) -> Dict[str, Any]:
         verb = (stmt.type or "STATEMENT").upper()
@@ -636,29 +696,51 @@ class CallGraphGenerator:
         compact_nodes: Optional[bool] = None,
         concentrate: Optional[bool] = None,
         splines: Optional[str] = None,
+        ranker: Optional[str] = None,
+        nodesep: Optional[float] = None,
+        ranksep: Optional[float] = None,
+        dynamic_heuristics: Optional[bool] = None,
     ) -> str:
-        if self._dot_cache is None:
-            c_nodes = self.compact_nodes if compact_nodes is None else compact_nodes
-            conc = self.concentrate if concentrate is None else concentrate
-            spl = self.splines if splines is None else splines
-            self._dot_cache = render_dot(
-                self.graph,
-                enable_clustering=self.enable_clustering,
-                compact_nodes=c_nodes,
-                concentrate=conc,
-                splines=spl,
-            )
-        return self._dot_cache
+        c_nodes = self.compact_nodes if compact_nodes is None else compact_nodes
+        conc = self.concentrate if concentrate is None else concentrate
+        spl = self.splines if splines is None else splines
+        rnk = self.ranker if ranker is None else ranker
+        nsep = self.nodesep if nodesep is None else nodesep
+        rsep = self.ranksep if ranksep is None else ranksep
+        dyn = self.dynamic_heuristics if dynamic_heuristics is None else dynamic_heuristics
+
+        return render_dot(
+            self.graph,
+            enable_clustering=self.enable_clustering,
+            compact_nodes=c_nodes,
+            concentrate=conc,
+            splines=spl,
+            ranker=rnk,
+            nodesep=nsep,
+            ranksep=rsep,
+            dynamic_heuristics=dyn,
+        )
 
     def to_svg(
         self,
         compact_nodes: Optional[bool] = None,
         concentrate: Optional[bool] = None,
         splines: Optional[str] = None,
+        ranker: Optional[str] = None,
+        nodesep: Optional[float] = None,
+        ranksep: Optional[float] = None,
+        dynamic_heuristics: Optional[bool] = None,
     ) -> str:
-        if self._svg_cache is None:
-            self._svg_cache = render_svg(self.to_dot(compact_nodes=compact_nodes, concentrate=concentrate, splines=splines))
-        return self._svg_cache
+        dot_code = self.to_dot(
+            compact_nodes=compact_nodes,
+            concentrate=concentrate,
+            splines=splines,
+            ranker=ranker,
+            nodesep=nodesep,
+            ranksep=ranksep,
+            dynamic_heuristics=dynamic_heuristics,
+        )
+        return render_svg(dot_code)
 
     def get_procedure_cfg(self, proc_name: str) -> Optional[IntraprocedureCfg]:
         """
@@ -717,6 +799,11 @@ class CallGraphGenerator:
             svg_content=svg_content or self._svg_cache or "",
             cyto_elements=cyto_elements,
             initial_engine=initial_engine,
+            heuristics=self.heuristics,
+            metrics=self.metrics,
+            cloned_elements=self.cloned_cyto_elements,
+            canonical_elements=self.canonical_cyto_elements,
+            enable_cloning=self.enable_cloning,
         )
 
     def to_json(self, indent: int = 2) -> str:
@@ -738,6 +825,13 @@ def generate_call_graph(
     output_path: Optional[Union[str, Path]] = None,
     hide_error_traps: bool = True,
     source_code: Optional[str] = None,
+    enable_cloning: bool = False,
+    clone_mode: str = "section",
+    clone_threshold: int = 3,
+    ranker: Optional[str] = None,
+    nodesep: Optional[float] = None,
+    ranksep: Optional[float] = None,
+    dynamic_heuristics: bool = True,
 ) -> str:
     """
     Convenience functional API to generate Level-2 Procedure Call Graphs
@@ -755,7 +849,15 @@ def generate_call_graph(
         rules=rules,
         hide_error_traps=hide_error_traps,
         source_code=source_code,
+        enable_cloning=enable_cloning,
+        clone_mode=clone_mode,
+        clone_threshold=clone_threshold,
+        ranker=ranker,
+        nodesep=nodesep,
+        ranksep=ranksep,
+        dynamic_heuristics=dynamic_heuristics,
     )
+
 
     fmt = format.lower().strip()
     if fmt in ("html", "htm"):

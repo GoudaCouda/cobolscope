@@ -9,6 +9,11 @@
       if (typeof cytoscapeDagre !== "undefined") {
         cytoscape.use(cytoscapeDagre);
       }
+      if (typeof cytoscapeElk !== "undefined") {
+        cytoscape.use(cytoscapeElk);
+      } else if (typeof window !== "undefined" && typeof window.cytoscapeElk !== "undefined") {
+        cytoscape.use(window.cytoscapeElk);
+      }
 
       try {
         cy = cytoscape({
@@ -45,7 +50,13 @@
               style: {
                 "label": function(ele) {
                   const d = ele.data();
-                  let lines = [d.label];
+                  let lines = [];
+                  if (d.is_clone) {
+                    const totalStr = d.clone_total > 1 ? "/" + d.clone_total : "";
+                    lines.push(d.label + " [CLONE " + d.clone_index + totalStr + "]");
+                  } else {
+                    lines.push(d.label);
+                  }
                   if (d.type_label) {
                     lines.push("[" + d.type_label + "]");
                   }
@@ -72,6 +83,17 @@
                 "z-index": 10
               }
             },
+            // Cloned Utility Nodes
+            {
+              selector: "node.clone-node",
+              style: {
+                "border-style": "dashed",
+                "border-width": 2.5,
+                "background-opacity": 0.88,
+                "opacity": 0.92
+              }
+            },
+
             // Subsystem Visual Tinting
             {
               selector: "node.type-file_io",
@@ -216,21 +238,22 @@
           ]
         });
 
-        applyCytoLayout("dagre");
+        const initialLayout = layoutSelect ? layoutSelect.value : "dagre";
+        applyCytoLayout(initialLayout);
 
         cy.on("tap", "node.routine-node", (evt) => {
           const node = evt.target;
-          const name = node.data("name") || node.data("label");
+          const origName = node.data("original_name") || node.data("name") || node.data("label");
           highlightCytoNeighbors(node);
-          selectNode(name);
+          selectNode(origName);
         });
 
         cy.on("dbltap", "node.routine-node", (evt) => {
           const node = evt.target;
-          const name = node.data("name") || node.data("label");
-          const routine = graphData.nodes[name];
+          const origName = node.data("original_name") || node.data("name") || node.data("label");
+          const routine = graphData.nodes[origName] || graphData.nodes[node.data("name")];
           if (routine) {
-            selectNode(name);
+            selectNode(origName);
             openRoutineFlowModal(routine);
           }
         });
@@ -250,16 +273,40 @@
     function applyCytoLayout(layoutName) {
       if (!cy) return;
       CobolScopeLog.info(`Applying Cytoscape layout: ${layoutName}`);
+
+      const nSep = (typeof layoutHeuristics !== "undefined" && layoutHeuristics && layoutHeuristics.cyto_nodesep) ? layoutHeuristics.cyto_nodesep : 50;
+      const rSep = (typeof layoutHeuristics !== "undefined" && layoutHeuristics && layoutHeuristics.cyto_ranksep) ? layoutHeuristics.cyto_ranksep : 60;
+      const rankerAlg = (typeof layoutHeuristics !== "undefined" && layoutHeuristics && layoutHeuristics.ranker) ? layoutHeuristics.ranker : "network-simplex";
+
       let layoutConfig = { name: layoutName, padding: 40 };
       if (layoutName === "dagre") {
         layoutConfig = {
           name: "dagre",
           rankDir: "TB",
-          nodeSep: 50,
-          rankSep: 60,
+          nodeSep: nSep,
+          rankSep: rSep,
+          ranker: rankerAlg,
           padding: 40,
           animate: true,
           animationDuration: 300
+        };
+      } else if (layoutName === "elk-layered" || layoutName === "elk") {
+        layoutConfig = {
+          name: "elk",
+          elk: {
+            "algorithm": "layered",
+            "elk.direction": "DOWN",
+            "elk.spacing.nodeNodeBetweenLayers": rSep,
+            "elk.spacing.nodeNode": nSep,
+            "elk.layered.crossingMinimization.strategy": "LAYER_SWEEP",
+            "elk.layered.nodePlacement.strategy": "BRANDES_KOEPF",
+            "elk.layered.cycleBreaking.strategy": "GREEDY",
+            "elk.layered.spacing.edgeEdgeBetweenLayers": 12,
+            "elk.edgeRouting": "ORTHOGONAL"
+          },
+          padding: 40,
+          animate: true,
+          animationDuration: 350
         };
       } else if (layoutName === "breadthfirst") {
         layoutConfig = {
@@ -290,12 +337,40 @@
           animate: true
         };
       }
-      cy.layout(layoutConfig).run();
+
+      try {
+        cy.layout(layoutConfig).run();
+      } catch (err) {
+        CobolScopeLog.warn(`Layout '${layoutName}' failed: ${err.message}. Falling back to 'dagre'.`);
+        if (layoutName !== "dagre") {
+          applyCytoLayout("dagre");
+        }
+      }
     }
 
     if (layoutSelect) {
       layoutSelect.addEventListener("change", (e) => {
         applyCytoLayout(e.target.value);
+      });
+    }
+
+    const toggleCloneUtilities = document.getElementById("toggleCloneUtilities");
+    if (toggleCloneUtilities) {
+      toggleCloneUtilities.addEventListener("change", (e) => {
+        const useClones = e.target.checked;
+        CobolScopeLog.info(`Toggling Disentangle Utilities: ${useClones}`);
+        if (!cy) return;
+
+        const targetElements = useClones ? clonedElements : canonicalElements;
+        if (!targetElements || targetElements.length === 0) return;
+
+        cy.batch(() => {
+          cy.elements().remove();
+          cy.add(targetElements);
+        });
+
+        const activeLayout = layoutSelect ? layoutSelect.value : "dagre";
+        applyCytoLayout(activeLayout);
       });
     }
 
@@ -305,7 +380,18 @@
 
       const connectedEdges = node.connectedEdges();
       const neighborNodes = connectedEdges.connectedNodes(".routine-node");
-      const focalNodes = neighborNodes.union(node);
+      let focalNodes = neighborNodes.union(node);
+
+      // If clicked node is a clone or has clones, highlight sister clones too
+      const isClone = node.data("is_clone");
+      const origName = node.data("original_name") || node.data("name") || node.data("label");
+      if (isClone || (origName && (clonedElements || []).length > 0)) {
+        const sisters = cy.nodes(".routine-node").filter(n => {
+          const nOrig = n.data("original_name") || n.data("name") || n.data("label");
+          return nOrig && nOrig.toUpperCase() === origName.toUpperCase();
+        });
+        focalNodes = focalNodes.union(sisters);
+      }
 
       // Add highlight to focal routines and their connecting edges
       focalNodes.addClass("neighbor-highlight");
@@ -326,13 +412,19 @@
 
     function focusNode(nodeName) {
       if (!cy) return;
-      const cyNode = cy.nodes(".routine-node").filter(n => (n.data("name") || n.data("label") || "").toUpperCase() === nodeName.toUpperCase());
+      const cyNode = cy.nodes(".routine-node").filter(n => {
+        const nName = (n.data("name") || n.data("label") || "").toUpperCase();
+        const origName = (n.data("original_name") || "").toUpperCase();
+        const target = nodeName.toUpperCase();
+        return nName === target || origName === target;
+      });
       if (cyNode.length > 0) {
         highlightCytoNeighbors(cyNode[0]);
         cy.animate({
-          center: { eles: cyNode },
+          center: { eles: cyNode[0] },
           zoom: Math.max(cy.zoom(), 1.1),
           duration: 400
         });
       }
     }
+

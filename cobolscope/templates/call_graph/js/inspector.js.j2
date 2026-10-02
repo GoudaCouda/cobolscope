@@ -1,7 +1,20 @@
 // Node Inspector & Enhanced Linear Summary Card
     function selectNode(nodeName) {
-      const node = graphData.nodes[nodeName.toUpperCase().trim()];
+      if (!nodeName) return;
+      const lookupKey = nodeName.toUpperCase().trim();
+      let node = graphData.nodes[lookupKey];
+      if (!node) {
+        for (const k in graphData.nodes) {
+          const candidate = graphData.nodes[k];
+          if ((candidate.original_name && candidate.original_name.toUpperCase().trim() === lookupKey) ||
+              (candidate.name && candidate.name.toUpperCase().trim() === lookupKey)) {
+            node = candidate;
+            break;
+          }
+        }
+      }
       if (!node) return;
+
 
       selectedRoutineNode = node;
 
