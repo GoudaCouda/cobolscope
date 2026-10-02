@@ -1,0 +1,185 @@
+{
+  "programId": "GETSCODE",
+  "author": "*>CE James O'Grady. *>CE *>CE",
+  "format": "FIXED",
+  "dataDictionary": {
+    "workingStorageSection": [
+      {
+        "id": "WS_L7_LITERAL-SORTCODE",
+        "qualifiedName": "LITERAL-SORTCODE",
+        "level": 77,
+        "name": "LITERAL-SORTCODE",
+        "pic": "9(6)",
+        "usage": "DISPLAY",
+        "value": "987654",
+        "logicalType": "Numeric Display (6 digits)",
+        "byteOffset": 0,
+        "relativeOffset": 0,
+        "byteLength": 6,
+        "elementByteLength": 6,
+        "location": {
+          "startLine": 7,
+          "endLine": 7,
+          "startColumn": 7,
+          "endColumn": 58,
+          "sourceFile": "SORTCODE.cpy"
+        }
+      }
+    ],
+    "linkageSection": [
+      {
+        "id": "LK_L32_DFHCOMMAREA",
+        "qualifiedName": "DFHCOMMAREA",
+        "level": 1,
+        "name": "DFHCOMMAREA",
+        "usage": "DISPLAY",
+        "logicalType": "Group",
+        "byteOffset": 0,
+        "relativeOffset": 0,
+        "byteLength": 6,
+        "elementByteLength": 6,
+        "children": [
+          {
+            "id": "LK_L7_GETSORTCODEOperation",
+            "qualifiedName": "DFHCOMMAREA.GETSORTCODEOperation",
+            "level": 3,
+            "name": "GETSORTCODEOperation",
+            "usage": "DISPLAY",
+            "logicalType": "Group",
+            "byteOffset": 0,
+            "relativeOffset": 0,
+            "byteLength": 6,
+            "elementByteLength": 6,
+            "children": [
+              {
+                "id": "LK_L8_SORTCODE",
+                "qualifiedName": "DFHCOMMAREA.GETSORTCODEOperation.SORTCODE",
+                "level": 6,
+                "name": "SORTCODE",
+                "pic": "xXXXXX",
+                "usage": "DISPLAY",
+                "logicalType": "Alphanumeric (6 chars)",
+                "byteOffset": 0,
+                "relativeOffset": 0,
+                "byteLength": 6,
+                "elementByteLength": 6,
+                "location": {
+                  "startLine": 8,
+                  "endLine": 8,
+                  "startColumn": 13,
+                  "endColumn": 35,
+                  "sourceFile": "GETSCODE.cpy"
+                }
+              }
+            ],
+            "location": {
+              "startLine": 7,
+              "endLine": 7,
+              "startColumn": 11,
+              "endColumn": 34,
+              "sourceFile": "GETSCODE.cpy"
+            }
+          }
+        ],
+        "location": {
+          "startLine": 32,
+          "endLine": 32,
+          "startColumn": 7,
+          "endColumn": 21,
+          "sourceFile": "GETSCODE.cbl"
+        }
+      }
+    ],
+    "workingStorageBytes": 6
+  },
+  "sections": [
+    {
+      "name": "PREMIERE",
+      "location": {
+        "startLine": 37,
+        "endLine": 46,
+        "startColumn": 7,
+        "endColumn": 17,
+        "sourceFile": "GETSCODE.cbl"
+      },
+      "paragraphNames": [
+        "A010"
+      ]
+    }
+  ],
+  "paragraphs": [
+    {
+      "name": "A010",
+      "sectionParent": "PREMIERE",
+      "location": {
+        "startLine": 38,
+        "endLine": 46,
+        "startColumn": 7,
+        "endColumn": 17,
+        "sourceFile": "GETSCODE.cbl"
+      },
+      "isTerminal": true,
+      "statements": [
+        {
+          "type": "MOVE",
+          "location": {
+            "startLine": 39,
+            "endLine": 40,
+            "startColumn": 11,
+            "endColumn": 26,
+            "sourceFile": "GETSCODE.cbl"
+          },
+          "rawText": "MOVE LITERAL-SORTCODE TO SORTCODE OF DFHCOMMAREA",
+          "sourceFieldIds": [
+            "WS_L7_LITERAL-SORTCODE"
+          ],
+          "targetFieldIds": [
+            "LK_L8_SORTCODE"
+          ],
+          "fromExpr": "LITERAL-SORTCODE",
+          "toTargets": [
+            "SORTCODE"
+          ]
+        },
+        {
+          "type": "EXEC_CICS",
+          "location": {
+            "startLine": 43,
+            "endLine": 44,
+            "startColumn": 6,
+            "endColumn": 6,
+            "sourceFile": "GETSCODE.cbl"
+          },
+          "rawText": "*>EXECCICS EXEC CICS RETURN *>EXECCICS END-EXEC }",
+          "subsystem": "CICS",
+          "rawPayload": "EXEC CICS RETURN END-EXEC"
+        },
+        {
+          "type": "GOBACK",
+          "location": {
+            "startLine": 46,
+            "endLine": 46,
+            "startColumn": 11,
+            "endColumn": 11,
+            "sourceFile": "GETSCODE.cbl"
+          },
+          "rawText": "GOBACK",
+          "operation": "GOBACK"
+        }
+      ]
+    }
+  ],
+  "asgAuditSummary": {
+    "totalAsgDataEntries": 4,
+    "totalAsgLevel88Entries": 0,
+    "totalAsgParagraphs": 1,
+    "totalAsgStatements": 3,
+    "totalAsgCalls": 2,
+    "asgVariableNames": [
+      "LITERAL-SORTCODE",
+      "DFHCOMMAREA",
+      "GETSORTCODEOPERATION",
+      "SORTCODE"
+    ]
+  }
+}

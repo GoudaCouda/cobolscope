@@ -1,0 +1,3792 @@
+{
+  "programId": "INQACCS",
+  "author": "*>CE Bank of Z. *>CE *>CE",
+  "format": "FIXED",
+  "dataDictionary": {
+    "workingStorageSection": [
+      {
+        "id": "WS_L7_SORTCODE",
+        "qualifiedName": "SORTCODE",
+        "level": 77,
+        "name": "SORTCODE",
+        "pic": "9(6)",
+        "usage": "DISPLAY",
+        "value": "987654",
+        "logicalType": "Numeric Display (6 digits)",
+        "byteOffset": 0,
+        "relativeOffset": 0,
+        "byteLength": 6,
+        "elementByteLength": 6,
+        "location": {
+          "startLine": 7,
+          "endLine": 7,
+          "startColumn": 7,
+          "endColumn": 50,
+          "sourceFile": "SORTCODE.cpy"
+        }
+      },
+      {
+        "id": "WS_L37_FILLER",
+        "qualifiedName": "FILLER",
+        "level": 1,
+        "name": "FILLER",
+        "logicalType": "Elementary",
+        "byteOffset": 6,
+        "relativeOffset": 0,
+        "byteLength": 0,
+        "elementByteLength": 0,
+        "location": {
+          "startLine": 37,
+          "endLine": 39,
+          "startColumn": 6,
+          "endColumn": 26,
+          "sourceFile": "INQACCS.cbl"
+        }
+      },
+      {
+        "id": "WS_L42_HOST-ACCOUNT-ROW",
+        "qualifiedName": "HOST-ACCOUNT-ROW",
+        "level": 1,
+        "name": "HOST-ACCOUNT-ROW",
+        "usage": "DISPLAY",
+        "logicalType": "Group",
+        "byteOffset": 6,
+        "relativeOffset": 0,
+        "byteLength": 88,
+        "elementByteLength": 88,
+        "children": [
+          {
+            "id": "WS_L43_HV-ACCOUNT-EYECATCHER",
+            "qualifiedName": "HOST-ACCOUNT-ROW.HV-ACCOUNT-EYECATCHER",
+            "level": 3,
+            "name": "HV-ACCOUNT-EYECATCHER",
+            "pic": "X(4)",
+            "usage": "DISPLAY",
+            "logicalType": "Alphanumeric (4 chars)",
+            "byteOffset": 6,
+            "relativeOffset": 0,
+            "byteLength": 4,
+            "elementByteLength": 4,
+            "location": {
+              "startLine": 43,
+              "endLine": 43,
+              "startColumn": 10,
+              "endColumn": 50,
+              "sourceFile": "INQACCS.cbl"
+            }
+          },
+          {
+            "id": "WS_L44_HV-ACCOUNT-CUST-NO",
+            "qualifiedName": "HOST-ACCOUNT-ROW.HV-ACCOUNT-CUST-NO",
+            "level": 3,
+            "name": "HV-ACCOUNT-CUST-NO",
+            "pic": "X(10)",
+            "usage": "DISPLAY",
+            "logicalType": "Alphanumeric (10 chars)",
+            "byteOffset": 10,
+            "relativeOffset": 4,
+            "byteLength": 10,
+            "elementByteLength": 10,
+            "location": {
+              "startLine": 44,
+              "endLine": 44,
+              "startColumn": 10,
+              "endColumn": 51,
+              "sourceFile": "INQACCS.cbl"
+            }
+          },
+          {
+            "id": "WS_L45_HV-ACCOUNT-SORTCODE",
+            "qualifiedName": "HOST-ACCOUNT-ROW.HV-ACCOUNT-SORTCODE",
+            "level": 3,
+            "name": "HV-ACCOUNT-SORTCODE",
+            "pic": "X(6)",
+            "usage": "DISPLAY",
+            "logicalType": "Alphanumeric (6 chars)",
+            "byteOffset": 20,
+            "relativeOffset": 14,
+            "byteLength": 6,
+            "elementByteLength": 6,
+            "location": {
+              "startLine": 45,
+              "endLine": 45,
+              "startColumn": 10,
+              "endColumn": 50,
+              "sourceFile": "INQACCS.cbl"
+            }
+          },
+          {
+            "id": "WS_L46_HV-ACCOUNT-ACC-NO",
+            "qualifiedName": "HOST-ACCOUNT-ROW.HV-ACCOUNT-ACC-NO",
+            "level": 3,
+            "name": "HV-ACCOUNT-ACC-NO",
+            "pic": "X(8)",
+            "usage": "DISPLAY",
+            "logicalType": "Alphanumeric (8 chars)",
+            "byteOffset": 26,
+            "relativeOffset": 20,
+            "byteLength": 8,
+            "elementByteLength": 8,
+            "location": {
+              "startLine": 46,
+              "endLine": 46,
+              "startColumn": 10,
+              "endColumn": 50,
+              "sourceFile": "INQACCS.cbl"
+            }
+          },
+          {
+            "id": "WS_L47_HV-ACCOUNT-ACC-TYPE",
+            "qualifiedName": "HOST-ACCOUNT-ROW.HV-ACCOUNT-ACC-TYPE",
+            "level": 3,
+            "name": "HV-ACCOUNT-ACC-TYPE",
+            "pic": "X(8)",
+            "usage": "DISPLAY",
+            "logicalType": "Alphanumeric (8 chars)",
+            "byteOffset": 34,
+            "relativeOffset": 28,
+            "byteLength": 8,
+            "elementByteLength": 8,
+            "location": {
+              "startLine": 47,
+              "endLine": 47,
+              "startColumn": 10,
+              "endColumn": 50,
+              "sourceFile": "INQACCS.cbl"
+            }
+          },
+          {
+            "id": "WS_L48_HV-ACCOUNT-INT-RATE",
+            "qualifiedName": "HOST-ACCOUNT-ROW.HV-ACCOUNT-INT-RATE",
+            "level": 3,
+            "name": "HV-ACCOUNT-INT-RATE",
+            "pic": "S9(4)V99",
+            "usage": "COMP_3",
+            "logicalType": "Signed Decimal(6, 2) Packed",
+            "byteOffset": 42,
+            "relativeOffset": 36,
+            "byteLength": 4,
+            "elementByteLength": 4,
+            "location": {
+              "startLine": 48,
+              "endLine": 48,
+              "startColumn": 10,
+              "endColumn": 61,
+              "sourceFile": "INQACCS.cbl"
+            }
+          },
+          {
+            "id": "WS_L49_HV-ACCOUNT-OPENED",
+            "qualifiedName": "HOST-ACCOUNT-ROW.HV-ACCOUNT-OPENED",
+            "level": 3,
+            "name": "HV-ACCOUNT-OPENED",
+            "pic": "X(10)",
+            "usage": "DISPLAY",
+            "logicalType": "Alphanumeric (10 chars)",
+            "byteOffset": 46,
+            "relativeOffset": 40,
+            "byteLength": 10,
+            "elementByteLength": 10,
+            "location": {
+              "startLine": 49,
+              "endLine": 49,
+              "startColumn": 10,
+              "endColumn": 51,
+              "sourceFile": "INQACCS.cbl"
+            }
+          },
+          {
+            "id": "WS_L50_HV-ACCOUNT-OVERDRAFT-LIM",
+            "qualifiedName": "HOST-ACCOUNT-ROW.HV-ACCOUNT-OVERDRAFT-LIM",
+            "level": 3,
+            "name": "HV-ACCOUNT-OVERDRAFT-LIM",
+            "pic": "S9(9)",
+            "usage": "COMP",
+            "logicalType": "Signed Integer (32-bit Binary)",
+            "byteOffset": 56,
+            "relativeOffset": 50,
+            "byteLength": 4,
+            "elementByteLength": 4,
+            "location": {
+              "startLine": 50,
+              "endLine": 50,
+              "startColumn": 10,
+              "endColumn": 56,
+              "sourceFile": "INQACCS.cbl"
+            }
+          },
+          {
+            "id": "WS_L51_HV-ACCOUNT-LAST-STMT",
+            "qualifiedName": "HOST-ACCOUNT-ROW.HV-ACCOUNT-LAST-STMT",
+            "level": 3,
+            "name": "HV-ACCOUNT-LAST-STMT",
+            "pic": "X(10)",
+            "usage": "DISPLAY",
+            "logicalType": "Alphanumeric (10 chars)",
+            "byteOffset": 60,
+            "relativeOffset": 54,
+            "byteLength": 10,
+            "elementByteLength": 10,
+            "location": {
+              "startLine": 51,
+              "endLine": 51,
+              "startColumn": 10,
+              "endColumn": 51,
+              "sourceFile": "INQACCS.cbl"
+            }
+          },
+          {
+            "id": "WS_L52_HV-ACCOUNT-NEXT-STMT",
+            "qualifiedName": "HOST-ACCOUNT-ROW.HV-ACCOUNT-NEXT-STMT",
+            "level": 3,
+            "name": "HV-ACCOUNT-NEXT-STMT",
+            "pic": "X(10)",
+            "usage": "DISPLAY",
+            "logicalType": "Alphanumeric (10 chars)",
+            "byteOffset": 70,
+            "relativeOffset": 64,
+            "byteLength": 10,
+            "elementByteLength": 10,
+            "location": {
+              "startLine": 52,
+              "endLine": 52,
+              "startColumn": 10,
+              "endColumn": 51,
+              "sourceFile": "INQACCS.cbl"
+            }
+          },
+          {
+            "id": "WS_L53_HV-ACCOUNT-AVAIL-BAL",
+            "qualifiedName": "HOST-ACCOUNT-ROW.HV-ACCOUNT-AVAIL-BAL",
+            "level": 3,
+            "name": "HV-ACCOUNT-AVAIL-BAL",
+            "pic": "S9(10)V99",
+            "usage": "COMP_3",
+            "logicalType": "Signed Decimal(12, 2) Packed",
+            "byteOffset": 80,
+            "relativeOffset": 74,
+            "byteLength": 7,
+            "elementByteLength": 7,
+            "location": {
+              "startLine": 53,
+              "endLine": 53,
+              "startColumn": 10,
+              "endColumn": 62,
+              "sourceFile": "INQACCS.cbl"
+            }
+          },
+          {
+            "id": "WS_L54_HV-ACCOUNT-ACTUAL-BAL",
+            "qualifiedName": "HOST-ACCOUNT-ROW.HV-ACCOUNT-ACTUAL-BAL",
+            "level": 3,
+            "name": "HV-ACCOUNT-ACTUAL-BAL",
+            "pic": "S9(10)V99",
+            "usage": "COMP_3",
+            "logicalType": "Signed Decimal(12, 2) Packed",
+            "byteOffset": 87,
+            "relativeOffset": 81,
+            "byteLength": 7,
+            "elementByteLength": 7,
+            "location": {
+              "startLine": 54,
+              "endLine": 54,
+              "startColumn": 10,
+              "endColumn": 62,
+              "sourceFile": "INQACCS.cbl"
+            }
+          }
+        ],
+        "location": {
+          "startLine": 42,
+          "endLine": 42,
+          "startColumn": 7,
+          "endColumn": 26,
+          "sourceFile": "INQACCS.cbl"
+        }
+      },
+      {
+        "id": "WS_L56_EIBRCODE-NICE",
+        "qualifiedName": "EIBRCODE-NICE",
+        "level": 1,
+        "name": "EIBRCODE-NICE",
+        "usage": "DISPLAY",
+        "logicalType": "Group",
+        "byteOffset": 94,
+        "relativeOffset": 0,
+        "byteLength": 6,
+        "elementByteLength": 6,
+        "children": [
+          {
+            "id": "WS_L57_EIBRCODE-FIRST",
+            "qualifiedName": "EIBRCODE-NICE.EIBRCODE-FIRST",
+            "level": 3,
+            "name": "EIBRCODE-FIRST",
+            "pic": "X",
+            "usage": "DISPLAY",
+            "logicalType": "Alphanumeric (1 chars)",
+            "byteOffset": 94,
+            "relativeOffset": 0,
+            "byteLength": 1,
+            "elementByteLength": 1,
+            "location": {
+              "startLine": 57,
+              "endLine": 57,
+              "startColumn": 10,
+              "endColumn": 47,
+              "sourceFile": "INQACCS.cbl"
+            }
+          },
+          {
+            "id": "WS_L58_EIBRCODE-SECOND",
+            "qualifiedName": "EIBRCODE-NICE.EIBRCODE-SECOND",
+            "level": 3,
+            "name": "EIBRCODE-SECOND",
+            "pic": "X",
+            "usage": "DISPLAY",
+            "logicalType": "Alphanumeric (1 chars)",
+            "byteOffset": 95,
+            "relativeOffset": 1,
+            "byteLength": 1,
+            "elementByteLength": 1,
+            "location": {
+              "startLine": 58,
+              "endLine": 58,
+              "startColumn": 10,
+              "endColumn": 47,
+              "sourceFile": "INQACCS.cbl"
+            }
+          },
+          {
+            "id": "WS_L59_EIBRCODE-THIRD",
+            "qualifiedName": "EIBRCODE-NICE.EIBRCODE-THIRD",
+            "level": 3,
+            "name": "EIBRCODE-THIRD",
+            "pic": "X",
+            "usage": "DISPLAY",
+            "logicalType": "Alphanumeric (1 chars)",
+            "byteOffset": 96,
+            "relativeOffset": 2,
+            "byteLength": 1,
+            "elementByteLength": 1,
+            "location": {
+              "startLine": 59,
+              "endLine": 59,
+              "startColumn": 10,
+              "endColumn": 47,
+              "sourceFile": "INQACCS.cbl"
+            }
+          },
+          {
+            "id": "WS_L60_EIBRCODE-FOURTH",
+            "qualifiedName": "EIBRCODE-NICE.EIBRCODE-FOURTH",
+            "level": 3,
+            "name": "EIBRCODE-FOURTH",
+            "pic": "X",
+            "usage": "DISPLAY",
+            "logicalType": "Alphanumeric (1 chars)",
+            "byteOffset": 97,
+            "relativeOffset": 3,
+            "byteLength": 1,
+            "elementByteLength": 1,
+            "location": {
+              "startLine": 60,
+              "endLine": 60,
+              "startColumn": 10,
+              "endColumn": 47,
+              "sourceFile": "INQACCS.cbl"
+            }
+          },
+          {
+            "id": "WS_L61_EIBRCODE-FIFTH",
+            "qualifiedName": "EIBRCODE-NICE.EIBRCODE-FIFTH",
+            "level": 3,
+            "name": "EIBRCODE-FIFTH",
+            "pic": "X",
+            "usage": "DISPLAY",
+            "logicalType": "Alphanumeric (1 chars)",
+            "byteOffset": 98,
+            "relativeOffset": 4,
+            "byteLength": 1,
+            "elementByteLength": 1,
+            "location": {
+              "startLine": 61,
+              "endLine": 61,
+              "startColumn": 10,
+              "endColumn": 47,
+              "sourceFile": "INQACCS.cbl"
+            }
+          },
+          {
+            "id": "WS_L62_EIBRCODE-SIXTH",
+            "qualifiedName": "EIBRCODE-NICE.EIBRCODE-SIXTH",
+            "level": 3,
+            "name": "EIBRCODE-SIXTH",
+            "pic": "X",
+            "usage": "DISPLAY",
+            "logicalType": "Alphanumeric (1 chars)",
+            "byteOffset": 99,
+            "relativeOffset": 5,
+            "byteLength": 1,
+            "elementByteLength": 1,
+            "location": {
+              "startLine": 62,
+              "endLine": 62,
+              "startColumn": 10,
+              "endColumn": 47,
+              "sourceFile": "INQACCS.cbl"
+            }
+          }
+        ],
+        "location": {
+          "startLine": 56,
+          "endLine": 56,
+          "startColumn": 7,
+          "endColumn": 23,
+          "sourceFile": "INQACCS.cbl"
+        }
+      },
+      {
+        "id": "WS_L65_FILLER",
+        "qualifiedName": "FILLER",
+        "level": 1,
+        "name": "FILLER",
+        "logicalType": "Elementary",
+        "byteOffset": 100,
+        "relativeOffset": 0,
+        "byteLength": 0,
+        "elementByteLength": 0,
+        "location": {
+          "startLine": 65,
+          "endLine": 67,
+          "startColumn": 6,
+          "endColumn": 26,
+          "sourceFile": "INQACCS.cbl"
+        }
+      },
+      {
+        "id": "WS_L71_FILLER",
+        "qualifiedName": "FILLER",
+        "level": 1,
+        "name": "FILLER",
+        "logicalType": "Elementary",
+        "byteOffset": 100,
+        "relativeOffset": 0,
+        "byteLength": 0,
+        "elementByteLength": 0,
+        "location": {
+          "startLine": 71,
+          "endLine": 88,
+          "startColumn": 6,
+          "endColumn": 26,
+          "sourceFile": "INQACCS.cbl"
+        }
+      },
+      {
+        "id": "WS_L91_WS-CICS-WORK-AREA",
+        "qualifiedName": "WS-CICS-WORK-AREA",
+        "level": 1,
+        "name": "WS-CICS-WORK-AREA",
+        "usage": "DISPLAY",
+        "logicalType": "Group",
+        "byteOffset": 100,
+        "relativeOffset": 0,
+        "byteLength": 8,
+        "elementByteLength": 8,
+        "children": [
+          {
+            "id": "WS_L92_WS-CICS-RESP",
+            "qualifiedName": "WS-CICS-WORK-AREA.WS-CICS-RESP",
+            "level": 3,
+            "name": "WS-CICS-RESP",
+            "pic": "S9(8)",
+            "usage": "COMP",
+            "logicalType": "Signed Integer (32-bit Binary)",
+            "byteOffset": 100,
+            "relativeOffset": 0,
+            "byteLength": 4,
+            "elementByteLength": 4,
+            "location": {
+              "startLine": 92,
+              "endLine": 92,
+              "startColumn": 10,
+              "endColumn": 56,
+              "sourceFile": "INQACCS.cbl"
+            }
+          },
+          {
+            "id": "WS_L93_WS-CICS-RESP2",
+            "qualifiedName": "WS-CICS-WORK-AREA.WS-CICS-RESP2",
+            "level": 3,
+            "name": "WS-CICS-RESP2",
+            "pic": "S9(8)",
+            "usage": "COMP",
+            "logicalType": "Signed Integer (32-bit Binary)",
+            "byteOffset": 104,
+            "relativeOffset": 4,
+            "byteLength": 4,
+            "elementByteLength": 4,
+            "location": {
+              "startLine": 93,
+              "endLine": 93,
+              "startColumn": 10,
+              "endColumn": 56,
+              "sourceFile": "INQACCS.cbl"
+            }
+          }
+        ],
+        "location": {
+          "startLine": 91,
+          "endLine": 91,
+          "startColumn": 7,
+          "endColumn": 27,
+          "sourceFile": "INQACCS.cbl"
+        }
+      },
+      {
+        "id": "WS_L95_DB2-DATE-REFORMAT",
+        "qualifiedName": "DB2-DATE-REFORMAT",
+        "level": 1,
+        "name": "DB2-DATE-REFORMAT",
+        "usage": "DISPLAY",
+        "logicalType": "Group",
+        "byteOffset": 108,
+        "relativeOffset": 0,
+        "byteLength": 10,
+        "elementByteLength": 10,
+        "children": [
+          {
+            "id": "WS_L96_DB2-DATE-REF-YR",
+            "qualifiedName": "DB2-DATE-REFORMAT.DB2-DATE-REF-YR",
+            "level": 3,
+            "name": "DB2-DATE-REF-YR",
+            "pic": "9(4)",
+            "usage": "DISPLAY",
+            "logicalType": "Numeric Display (4 digits)",
+            "byteOffset": 108,
+            "relativeOffset": 0,
+            "byteLength": 4,
+            "elementByteLength": 4,
+            "location": {
+              "startLine": 96,
+              "endLine": 96,
+              "startColumn": 10,
+              "endColumn": 50,
+              "sourceFile": "INQACCS.cbl"
+            }
+          },
+          {
+            "id": "WS_L97_FILLER",
+            "qualifiedName": "DB2-DATE-REFORMAT.FILLER",
+            "level": 3,
+            "name": "FILLER",
+            "pic": "X",
+            "usage": "DISPLAY",
+            "logicalType": "Alphanumeric (1 chars)",
+            "byteOffset": 112,
+            "relativeOffset": 4,
+            "byteLength": 1,
+            "elementByteLength": 1,
+            "isFiller": true,
+            "location": {
+              "startLine": 97,
+              "endLine": 97,
+              "startColumn": 10,
+              "endColumn": 47,
+              "sourceFile": "INQACCS.cbl"
+            }
+          },
+          {
+            "id": "WS_L98_DB2-DATE-REF-MNTH",
+            "qualifiedName": "DB2-DATE-REFORMAT.DB2-DATE-REF-MNTH",
+            "level": 3,
+            "name": "DB2-DATE-REF-MNTH",
+            "pic": "99",
+            "usage": "DISPLAY",
+            "logicalType": "Numeric Display (2 digits)",
+            "byteOffset": 113,
+            "relativeOffset": 5,
+            "byteLength": 2,
+            "elementByteLength": 2,
+            "location": {
+              "startLine": 98,
+              "endLine": 98,
+              "startColumn": 10,
+              "endColumn": 48,
+              "sourceFile": "INQACCS.cbl"
+            }
+          },
+          {
+            "id": "WS_L99_FILLER",
+            "qualifiedName": "DB2-DATE-REFORMAT.FILLER",
+            "level": 3,
+            "name": "FILLER",
+            "pic": "X",
+            "usage": "DISPLAY",
+            "logicalType": "Alphanumeric (1 chars)",
+            "byteOffset": 115,
+            "relativeOffset": 7,
+            "byteLength": 1,
+            "elementByteLength": 1,
+            "isFiller": true,
+            "location": {
+              "startLine": 99,
+              "endLine": 99,
+              "startColumn": 10,
+              "endColumn": 47,
+              "sourceFile": "INQACCS.cbl"
+            }
+          },
+          {
+            "id": "WS_L100_DB2-DATE-REF-DAY",
+            "qualifiedName": "DB2-DATE-REFORMAT.DB2-DATE-REF-DAY",
+            "level": 3,
+            "name": "DB2-DATE-REF-DAY",
+            "pic": "99",
+            "usage": "DISPLAY",
+            "logicalType": "Numeric Display (2 digits)",
+            "byteOffset": 116,
+            "relativeOffset": 8,
+            "byteLength": 2,
+            "elementByteLength": 2,
+            "location": {
+              "startLine": 100,
+              "endLine": 100,
+              "startColumn": 10,
+              "endColumn": 48,
+              "sourceFile": "INQACCS.cbl"
+            }
+          }
+        ],
+        "location": {
+          "startLine": 95,
+          "endLine": 95,
+          "startColumn": 7,
+          "endColumn": 27,
+          "sourceFile": "INQACCS.cbl"
+        }
+      },
+      {
+        "id": "WS_L102_SQLCODE-DISPLAY",
+        "qualifiedName": "SQLCODE-DISPLAY",
+        "level": 1,
+        "name": "SQLCODE-DISPLAY",
+        "pic": "S9(8)",
+        "usage": "DISPLAY",
+        "logicalType": "Signed Numeric Display (8 digits)",
+        "byteOffset": 118,
+        "relativeOffset": 0,
+        "byteLength": 8,
+        "elementByteLength": 8,
+        "isSignSeparate": true,
+        "location": {
+          "startLine": 102,
+          "endLine": 103,
+          "startColumn": 7,
+          "endColumn": 63,
+          "sourceFile": "INQACCS.cbl"
+        }
+      },
+      {
+        "id": "WS_L105_MY-ABEND-CODE",
+        "qualifiedName": "MY-ABEND-CODE",
+        "level": 1,
+        "name": "MY-ABEND-CODE",
+        "pic": "XXXX",
+        "usage": "DISPLAY",
+        "logicalType": "Alphanumeric (4 chars)",
+        "byteOffset": 126,
+        "relativeOffset": 0,
+        "byteLength": 4,
+        "elementByteLength": 4,
+        "location": {
+          "startLine": 105,
+          "endLine": 105,
+          "startColumn": 7,
+          "endColumn": 50,
+          "sourceFile": "INQACCS.cbl"
+        }
+      },
+      {
+        "id": "WS_L107_WS-STORM-DRAIN",
+        "qualifiedName": "WS-STORM-DRAIN",
+        "level": 1,
+        "name": "WS-STORM-DRAIN",
+        "pic": "X",
+        "usage": "DISPLAY",
+        "value": "N",
+        "logicalType": "Alphanumeric (1 chars)",
+        "byteOffset": 130,
+        "relativeOffset": 0,
+        "byteLength": 1,
+        "elementByteLength": 1,
+        "location": {
+          "startLine": 107,
+          "endLine": 107,
+          "startColumn": 7,
+          "endColumn": 57,
+          "sourceFile": "INQACCS.cbl"
+        }
+      },
+      {
+        "id": "WS_L109_STORM-DRAIN-CONDITION",
+        "qualifiedName": "STORM-DRAIN-CONDITION",
+        "level": 1,
+        "name": "STORM-DRAIN-CONDITION",
+        "pic": "X(20)",
+        "usage": "DISPLAY",
+        "logicalType": "Alphanumeric (20 chars)",
+        "byteOffset": 131,
+        "relativeOffset": 0,
+        "byteLength": 20,
+        "elementByteLength": 20,
+        "location": {
+          "startLine": 109,
+          "endLine": 109,
+          "startColumn": 7,
+          "endColumn": 51,
+          "sourceFile": "INQACCS.cbl"
+        }
+      },
+      {
+        "id": "WS_L111_WS-U-TIME",
+        "qualifiedName": "WS-U-TIME",
+        "level": 1,
+        "name": "WS-U-TIME",
+        "pic": "S9(15)",
+        "usage": "COMP_3",
+        "logicalType": "Signed Integer(15) Packed",
+        "byteOffset": 151,
+        "relativeOffset": 0,
+        "byteLength": 8,
+        "elementByteLength": 8,
+        "location": {
+          "startLine": 111,
+          "endLine": 111,
+          "startColumn": 7,
+          "endColumn": 59,
+          "sourceFile": "INQACCS.cbl"
+        }
+      },
+      {
+        "id": "WS_L112_WS-ORIG-DATE",
+        "qualifiedName": "WS-ORIG-DATE",
+        "level": 1,
+        "name": "WS-ORIG-DATE",
+        "pic": "X(10)",
+        "usage": "DISPLAY",
+        "logicalType": "Alphanumeric (10 chars)",
+        "byteOffset": 159,
+        "relativeOffset": 0,
+        "byteLength": 10,
+        "elementByteLength": 10,
+        "location": {
+          "startLine": 112,
+          "endLine": 112,
+          "startColumn": 7,
+          "endColumn": 51,
+          "sourceFile": "INQACCS.cbl"
+        }
+      },
+      {
+        "id": "WS_L113_WS-ORIG-DATE-GRP",
+        "qualifiedName": "WS-ORIG-DATE-GRP",
+        "level": 1,
+        "name": "WS-ORIG-DATE-GRP",
+        "usage": "DISPLAY",
+        "redefines": "WS-ORIG-DATE",
+        "logicalType": "Group",
+        "byteOffset": 159,
+        "relativeOffset": 0,
+        "byteLength": 10,
+        "elementByteLength": 10,
+        "children": [
+          {
+            "id": "WS_L114_WS-ORIG-DATE-DD",
+            "qualifiedName": "WS-ORIG-DATE-GRP.WS-ORIG-DATE-DD",
+            "level": 3,
+            "name": "WS-ORIG-DATE-DD",
+            "pic": "99",
+            "usage": "DISPLAY",
+            "logicalType": "Numeric Display (2 digits)",
+            "byteOffset": 159,
+            "relativeOffset": 0,
+            "byteLength": 2,
+            "elementByteLength": 2,
+            "location": {
+              "startLine": 114,
+              "endLine": 114,
+              "startColumn": 10,
+              "endColumn": 51,
+              "sourceFile": "INQACCS.cbl"
+            }
+          },
+          {
+            "id": "WS_L115_FILLER",
+            "qualifiedName": "WS-ORIG-DATE-GRP.FILLER",
+            "level": 3,
+            "name": "FILLER",
+            "pic": "X",
+            "usage": "DISPLAY",
+            "logicalType": "Alphanumeric (1 chars)",
+            "byteOffset": 161,
+            "relativeOffset": 2,
+            "byteLength": 1,
+            "elementByteLength": 1,
+            "isFiller": true,
+            "location": {
+              "startLine": 115,
+              "endLine": 115,
+              "startColumn": 10,
+              "endColumn": 50,
+              "sourceFile": "INQACCS.cbl"
+            }
+          },
+          {
+            "id": "WS_L116_WS-ORIG-DATE-MM",
+            "qualifiedName": "WS-ORIG-DATE-GRP.WS-ORIG-DATE-MM",
+            "level": 3,
+            "name": "WS-ORIG-DATE-MM",
+            "pic": "99",
+            "usage": "DISPLAY",
+            "logicalType": "Numeric Display (2 digits)",
+            "byteOffset": 162,
+            "relativeOffset": 3,
+            "byteLength": 2,
+            "elementByteLength": 2,
+            "location": {
+              "startLine": 116,
+              "endLine": 116,
+              "startColumn": 10,
+              "endColumn": 51,
+              "sourceFile": "INQACCS.cbl"
+            }
+          },
+          {
+            "id": "WS_L117_FILLER",
+            "qualifiedName": "WS-ORIG-DATE-GRP.FILLER",
+            "level": 3,
+            "name": "FILLER",
+            "pic": "X",
+            "usage": "DISPLAY",
+            "logicalType": "Alphanumeric (1 chars)",
+            "byteOffset": 164,
+            "relativeOffset": 5,
+            "byteLength": 1,
+            "elementByteLength": 1,
+            "isFiller": true,
+            "location": {
+              "startLine": 117,
+              "endLine": 117,
+              "startColumn": 10,
+              "endColumn": 50,
+              "sourceFile": "INQACCS.cbl"
+            }
+          },
+          {
+            "id": "WS_L118_WS-ORIG-DATE-YYYY",
+            "qualifiedName": "WS-ORIG-DATE-GRP.WS-ORIG-DATE-YYYY",
+            "level": 3,
+            "name": "WS-ORIG-DATE-YYYY",
+            "pic": "9999",
+            "usage": "DISPLAY",
+            "logicalType": "Numeric Display (4 digits)",
+            "byteOffset": 165,
+            "relativeOffset": 6,
+            "byteLength": 4,
+            "elementByteLength": 4,
+            "location": {
+              "startLine": 118,
+              "endLine": 118,
+              "startColumn": 10,
+              "endColumn": 53,
+              "sourceFile": "INQACCS.cbl"
+            }
+          }
+        ],
+        "location": {
+          "startLine": 113,
+          "endLine": 113,
+          "startColumn": 7,
+          "endColumn": 49,
+          "sourceFile": "INQACCS.cbl"
+        }
+      },
+      {
+        "id": "WS_L120_WS-TIME-DATA",
+        "qualifiedName": "WS-TIME-DATA",
+        "level": 1,
+        "name": "WS-TIME-DATA",
+        "usage": "DISPLAY",
+        "logicalType": "Group",
+        "byteOffset": 169,
+        "relativeOffset": 0,
+        "byteLength": 6,
+        "elementByteLength": 6,
+        "children": [
+          {
+            "id": "WS_L121_WS-TIME-NOW",
+            "qualifiedName": "WS-TIME-DATA.WS-TIME-NOW",
+            "level": 3,
+            "name": "WS-TIME-NOW",
+            "pic": "9(6)",
+            "usage": "DISPLAY",
+            "logicalType": "Numeric Display (6 digits)",
+            "byteOffset": 169,
+            "relativeOffset": 0,
+            "byteLength": 6,
+            "elementByteLength": 6,
+            "location": {
+              "startLine": 121,
+              "endLine": 121,
+              "startColumn": 11,
+              "endColumn": 50,
+              "sourceFile": "INQACCS.cbl"
+            }
+          },
+          {
+            "id": "WS_L122_WS-TIME-NOW-GRP",
+            "qualifiedName": "WS-TIME-DATA.WS-TIME-NOW-GRP",
+            "level": 3,
+            "name": "WS-TIME-NOW-GRP",
+            "usage": "DISPLAY",
+            "redefines": "WS-TIME-NOW",
+            "logicalType": "Group",
+            "byteOffset": 169,
+            "relativeOffset": 0,
+            "byteLength": 6,
+            "elementByteLength": 6,
+            "children": [
+              {
+                "id": "WS_L123_WS-TIME-NOW-GRP-HH",
+                "qualifiedName": "WS-TIME-DATA.WS-TIME-NOW-GRP.WS-TIME-NOW-GRP-HH",
+                "level": 5,
+                "name": "WS-TIME-NOW-GRP-HH",
+                "pic": "99",
+                "usage": "DISPLAY",
+                "logicalType": "Numeric Display (2 digits)",
+                "byteOffset": 169,
+                "relativeOffset": 0,
+                "byteLength": 2,
+                "elementByteLength": 2,
+                "location": {
+                  "startLine": 123,
+                  "endLine": 123,
+                  "startColumn": 14,
+                  "endColumn": 51,
+                  "sourceFile": "INQACCS.cbl"
+                }
+              },
+              {
+                "id": "WS_L124_WS-TIME-NOW-GRP-MM",
+                "qualifiedName": "WS-TIME-DATA.WS-TIME-NOW-GRP.WS-TIME-NOW-GRP-MM",
+                "level": 5,
+                "name": "WS-TIME-NOW-GRP-MM",
+                "pic": "99",
+                "usage": "DISPLAY",
+                "logicalType": "Numeric Display (2 digits)",
+                "byteOffset": 171,
+                "relativeOffset": 2,
+                "byteLength": 2,
+                "elementByteLength": 2,
+                "location": {
+                  "startLine": 124,
+                  "endLine": 124,
+                  "startColumn": 14,
+                  "endColumn": 51,
+                  "sourceFile": "INQACCS.cbl"
+                }
+              },
+              {
+                "id": "WS_L125_WS-TIME-NOW-GRP-SS",
+                "qualifiedName": "WS-TIME-DATA.WS-TIME-NOW-GRP.WS-TIME-NOW-GRP-SS",
+                "level": 5,
+                "name": "WS-TIME-NOW-GRP-SS",
+                "pic": "99",
+                "usage": "DISPLAY",
+                "logicalType": "Numeric Display (2 digits)",
+                "byteOffset": 173,
+                "relativeOffset": 4,
+                "byteLength": 2,
+                "elementByteLength": 2,
+                "location": {
+                  "startLine": 125,
+                  "endLine": 125,
+                  "startColumn": 14,
+                  "endColumn": 51,
+                  "sourceFile": "INQACCS.cbl"
+                }
+              }
+            ],
+            "location": {
+              "startLine": 122,
+              "endLine": 122,
+              "startColumn": 11,
+              "endColumn": 51,
+              "sourceFile": "INQACCS.cbl"
+            }
+          }
+        ],
+        "location": {
+          "startLine": 120,
+          "endLine": 120,
+          "startColumn": 7,
+          "endColumn": 22,
+          "sourceFile": "INQACCS.cbl"
+        }
+      },
+      {
+        "id": "WS_L127_WS-ABEND-PGM",
+        "qualifiedName": "WS-ABEND-PGM",
+        "level": 1,
+        "name": "WS-ABEND-PGM",
+        "pic": "X(8)",
+        "usage": "DISPLAY",
+        "value": "ABNDPROC",
+        "logicalType": "Alphanumeric (8 chars)",
+        "byteOffset": 175,
+        "relativeOffset": 0,
+        "byteLength": 8,
+        "elementByteLength": 8,
+        "location": {
+          "startLine": 127,
+          "endLine": 127,
+          "startColumn": 7,
+          "endColumn": 70,
+          "sourceFile": "INQACCS.cbl"
+        }
+      },
+      {
+        "id": "WS_L129_ABNDINFO-REC",
+        "qualifiedName": "ABNDINFO-REC",
+        "level": 1,
+        "name": "ABNDINFO-REC",
+        "usage": "DISPLAY",
+        "logicalType": "Group",
+        "byteOffset": 183,
+        "relativeOffset": 0,
+        "byteLength": 678,
+        "elementByteLength": 678,
+        "children": [
+          {
+            "id": "WS_L7_ABND-VSAM-KEY",
+            "qualifiedName": "ABNDINFO-REC.ABND-VSAM-KEY",
+            "level": 3,
+            "name": "ABND-VSAM-KEY",
+            "usage": "DISPLAY",
+            "logicalType": "Group",
+            "byteOffset": 183,
+            "relativeOffset": 0,
+            "byteLength": 12,
+            "elementByteLength": 12,
+            "children": [
+              {
+                "id": "WS_L8_ABND-UTIME-KEY",
+                "qualifiedName": "ABNDINFO-REC.ABND-VSAM-KEY.ABND-UTIME-KEY",
+                "level": 5,
+                "name": "ABND-UTIME-KEY",
+                "pic": "S9(15)",
+                "usage": "COMP_3",
+                "logicalType": "Signed Integer(15) Packed",
+                "byteOffset": 183,
+                "relativeOffset": 0,
+                "byteLength": 8,
+                "elementByteLength": 8,
+                "location": {
+                  "startLine": 8,
+                  "endLine": 8,
+                  "startColumn": 14,
+                  "endColumn": 66,
+                  "sourceFile": "ABNDINFO.cpy"
+                }
+              },
+              {
+                "id": "WS_L9_ABND-TASKNO-KEY",
+                "qualifiedName": "ABNDINFO-REC.ABND-VSAM-KEY.ABND-TASKNO-KEY",
+                "level": 5,
+                "name": "ABND-TASKNO-KEY",
+                "pic": "9(4)",
+                "usage": "DISPLAY",
+                "logicalType": "Numeric Display (4 digits)",
+                "byteOffset": 191,
+                "relativeOffset": 8,
+                "byteLength": 4,
+                "elementByteLength": 4,
+                "location": {
+                  "startLine": 9,
+                  "endLine": 9,
+                  "startColumn": 14,
+                  "endColumn": 57,
+                  "sourceFile": "ABNDINFO.cpy"
+                }
+              }
+            ],
+            "location": {
+              "startLine": 7,
+              "endLine": 7,
+              "startColumn": 11,
+              "endColumn": 27,
+              "sourceFile": "ABNDINFO.cpy"
+            }
+          },
+          {
+            "id": "WS_L10_ABND-APPLID",
+            "qualifiedName": "ABNDINFO-REC.ABND-APPLID",
+            "level": 3,
+            "name": "ABND-APPLID",
+            "pic": "X(8)",
+            "usage": "DISPLAY",
+            "logicalType": "Alphanumeric (8 chars)",
+            "byteOffset": 195,
+            "relativeOffset": 12,
+            "byteLength": 8,
+            "elementByteLength": 8,
+            "location": {
+              "startLine": 10,
+              "endLine": 10,
+              "startColumn": 11,
+              "endColumn": 57,
+              "sourceFile": "ABNDINFO.cpy"
+            }
+          },
+          {
+            "id": "WS_L11_ABND-TRANID",
+            "qualifiedName": "ABNDINFO-REC.ABND-TRANID",
+            "level": 3,
+            "name": "ABND-TRANID",
+            "pic": "X(4)",
+            "usage": "DISPLAY",
+            "logicalType": "Alphanumeric (4 chars)",
+            "byteOffset": 203,
+            "relativeOffset": 20,
+            "byteLength": 4,
+            "elementByteLength": 4,
+            "location": {
+              "startLine": 11,
+              "endLine": 11,
+              "startColumn": 11,
+              "endColumn": 57,
+              "sourceFile": "ABNDINFO.cpy"
+            }
+          },
+          {
+            "id": "WS_L12_ABND-DATE",
+            "qualifiedName": "ABNDINFO-REC.ABND-DATE",
+            "level": 3,
+            "name": "ABND-DATE",
+            "pic": "X(10)",
+            "usage": "DISPLAY",
+            "logicalType": "Alphanumeric (10 chars)",
+            "byteOffset": 207,
+            "relativeOffset": 24,
+            "byteLength": 10,
+            "elementByteLength": 10,
+            "location": {
+              "startLine": 12,
+              "endLine": 12,
+              "startColumn": 11,
+              "endColumn": 58,
+              "sourceFile": "ABNDINFO.cpy"
+            }
+          },
+          {
+            "id": "WS_L13_ABND-TIME",
+            "qualifiedName": "ABNDINFO-REC.ABND-TIME",
+            "level": 3,
+            "name": "ABND-TIME",
+            "pic": "X(8)",
+            "usage": "DISPLAY",
+            "logicalType": "Alphanumeric (8 chars)",
+            "byteOffset": 217,
+            "relativeOffset": 34,
+            "byteLength": 8,
+            "elementByteLength": 8,
+            "location": {
+              "startLine": 13,
+              "endLine": 13,
+              "startColumn": 11,
+              "endColumn": 57,
+              "sourceFile": "ABNDINFO.cpy"
+            }
+          },
+          {
+            "id": "WS_L14_ABND-CODE",
+            "qualifiedName": "ABNDINFO-REC.ABND-CODE",
+            "level": 3,
+            "name": "ABND-CODE",
+            "pic": "X(4)",
+            "usage": "DISPLAY",
+            "logicalType": "Alphanumeric (4 chars)",
+            "byteOffset": 225,
+            "relativeOffset": 42,
+            "byteLength": 4,
+            "elementByteLength": 4,
+            "location": {
+              "startLine": 14,
+              "endLine": 14,
+              "startColumn": 11,
+              "endColumn": 57,
+              "sourceFile": "ABNDINFO.cpy"
+            }
+          },
+          {
+            "id": "WS_L15_ABND-PROGRAM",
+            "qualifiedName": "ABNDINFO-REC.ABND-PROGRAM",
+            "level": 3,
+            "name": "ABND-PROGRAM",
+            "pic": "X(8)",
+            "usage": "DISPLAY",
+            "logicalType": "Alphanumeric (8 chars)",
+            "byteOffset": 229,
+            "relativeOffset": 46,
+            "byteLength": 8,
+            "elementByteLength": 8,
+            "location": {
+              "startLine": 15,
+              "endLine": 15,
+              "startColumn": 11,
+              "endColumn": 57,
+              "sourceFile": "ABNDINFO.cpy"
+            }
+          },
+          {
+            "id": "WS_L16_ABND-RESPCODE",
+            "qualifiedName": "ABNDINFO-REC.ABND-RESPCODE",
+            "level": 3,
+            "name": "ABND-RESPCODE",
+            "pic": "S9(8)",
+            "usage": "DISPLAY",
+            "logicalType": "Signed Numeric Display (8 digits)",
+            "byteOffset": 237,
+            "relativeOffset": 54,
+            "byteLength": 8,
+            "elementByteLength": 8,
+            "isSignSeparate": true,
+            "location": {
+              "startLine": 16,
+              "endLine": 17,
+              "startColumn": 11,
+              "endColumn": 39,
+              "sourceFile": "ABNDINFO.cpy"
+            }
+          },
+          {
+            "id": "WS_L18_ABND-RESP2CODE",
+            "qualifiedName": "ABNDINFO-REC.ABND-RESP2CODE",
+            "level": 3,
+            "name": "ABND-RESP2CODE",
+            "pic": "S9(8)",
+            "usage": "DISPLAY",
+            "logicalType": "Signed Numeric Display (8 digits)",
+            "byteOffset": 245,
+            "relativeOffset": 62,
+            "byteLength": 8,
+            "elementByteLength": 8,
+            "isSignSeparate": true,
+            "location": {
+              "startLine": 18,
+              "endLine": 19,
+              "startColumn": 11,
+              "endColumn": 39,
+              "sourceFile": "ABNDINFO.cpy"
+            }
+          },
+          {
+            "id": "WS_L20_ABND-SQLCODE",
+            "qualifiedName": "ABNDINFO-REC.ABND-SQLCODE",
+            "level": 3,
+            "name": "ABND-SQLCODE",
+            "pic": "S9(8)",
+            "usage": "DISPLAY",
+            "logicalType": "Signed Numeric Display (8 digits)",
+            "byteOffset": 253,
+            "relativeOffset": 70,
+            "byteLength": 8,
+            "elementByteLength": 8,
+            "isSignSeparate": true,
+            "location": {
+              "startLine": 20,
+              "endLine": 21,
+              "startColumn": 11,
+              "endColumn": 39,
+              "sourceFile": "ABNDINFO.cpy"
+            }
+          },
+          {
+            "id": "WS_L22_ABND-FREEFORM",
+            "qualifiedName": "ABNDINFO-REC.ABND-FREEFORM",
+            "level": 3,
+            "name": "ABND-FREEFORM",
+            "pic": "X(600)",
+            "usage": "DISPLAY",
+            "logicalType": "Alphanumeric (600 chars)",
+            "byteOffset": 261,
+            "relativeOffset": 78,
+            "byteLength": 600,
+            "elementByteLength": 600,
+            "location": {
+              "startLine": 22,
+              "endLine": 22,
+              "startColumn": 11,
+              "endColumn": 59,
+              "sourceFile": "ABNDINFO.cpy"
+            }
+          }
+        ],
+        "location": {
+          "startLine": 129,
+          "endLine": 129,
+          "startColumn": 7,
+          "endColumn": 22,
+          "sourceFile": "INQACCS.cbl"
+        }
+      }
+    ],
+    "linkageSection": [
+      {
+        "id": "LK_L133_DFHCOMMAREA",
+        "qualifiedName": "DFHCOMMAREA",
+        "level": 1,
+        "name": "DFHCOMMAREA",
+        "usage": "DISPLAY",
+        "logicalType": "Group",
+        "byteOffset": 0,
+        "relativeOffset": 0,
+        "byteLength": 1970,
+        "elementByteLength": 1970,
+        "children": [
+          {
+            "id": "LK_L7_NUMBER-OF-ACCOUNTS",
+            "qualifiedName": "DFHCOMMAREA.NUMBER-OF-ACCOUNTS",
+            "level": 3,
+            "name": "NUMBER-OF-ACCOUNTS",
+            "pic": "S9(8)",
+            "usage": "BINARY",
+            "logicalType": "Signed Integer (32-bit Binary)",
+            "byteOffset": 0,
+            "relativeOffset": 0,
+            "byteLength": 4,
+            "elementByteLength": 4,
+            "location": {
+              "startLine": 7,
+              "endLine": 7,
+              "startColumn": 10,
+              "endColumn": 55,
+              "sourceFile": "INQACCS.cpy"
+            }
+          },
+          {
+            "id": "LK_L8_COMM-SUCCESS",
+            "qualifiedName": "DFHCOMMAREA.COMM-SUCCESS",
+            "level": 3,
+            "name": "COMM-SUCCESS",
+            "pic": "X",
+            "usage": "DISPLAY",
+            "logicalType": "Alphanumeric (1 chars)",
+            "byteOffset": 4,
+            "relativeOffset": 4,
+            "byteLength": 1,
+            "elementByteLength": 1,
+            "location": {
+              "startLine": 8,
+              "endLine": 8,
+              "startColumn": 10,
+              "endColumn": 44,
+              "sourceFile": "INQACCS.cpy"
+            }
+          },
+          {
+            "id": "LK_L9_COMM-FAIL-CODE",
+            "qualifiedName": "DFHCOMMAREA.COMM-FAIL-CODE",
+            "level": 3,
+            "name": "COMM-FAIL-CODE",
+            "pic": "X",
+            "usage": "DISPLAY",
+            "logicalType": "Alphanumeric (1 chars)",
+            "byteOffset": 5,
+            "relativeOffset": 5,
+            "byteLength": 1,
+            "elementByteLength": 1,
+            "location": {
+              "startLine": 9,
+              "endLine": 9,
+              "startColumn": 10,
+              "endColumn": 44,
+              "sourceFile": "INQACCS.cpy"
+            }
+          },
+          {
+            "id": "LK_L10_COMM-PCB-POINTER",
+            "qualifiedName": "DFHCOMMAREA.COMM-PCB-POINTER",
+            "level": 3,
+            "name": "COMM-PCB-POINTER",
+            "pic": "X(4)",
+            "usage": "DISPLAY",
+            "logicalType": "Alphanumeric (4 chars)",
+            "byteOffset": 6,
+            "relativeOffset": 6,
+            "byteLength": 4,
+            "elementByteLength": 4,
+            "location": {
+              "startLine": 10,
+              "endLine": 10,
+              "startColumn": 10,
+              "endColumn": 47,
+              "sourceFile": "INQACCS.cpy"
+            }
+          },
+          {
+            "id": "LK_L11_ACCOUNT-DETAILS",
+            "qualifiedName": "DFHCOMMAREA.ACCOUNT-DETAILS",
+            "level": 3,
+            "name": "ACCOUNT-DETAILS",
+            "usage": "DISPLAY",
+            "logicalType": "Group Array [20]",
+            "byteOffset": 10,
+            "relativeOffset": 10,
+            "byteLength": 1960,
+            "elementByteLength": 98,
+            "occursMin": 1,
+            "occursMax": 20,
+            "dependingOn": "NUMBER-OF-ACCOUNTS",
+            "children": [
+              {
+                "id": "LK_L13_COMM-EYE",
+                "qualifiedName": "DFHCOMMAREA.ACCOUNT-DETAILS.COMM-EYE",
+                "level": 5,
+                "name": "COMM-EYE",
+                "pic": "X(4)",
+                "usage": "DISPLAY",
+                "logicalType": "Alphanumeric (4 chars)",
+                "byteOffset": 10,
+                "relativeOffset": 0,
+                "byteLength": 4,
+                "elementByteLength": 4,
+                "location": {
+                  "startLine": 13,
+                  "endLine": 13,
+                  "startColumn": 12,
+                  "endColumn": 49,
+                  "sourceFile": "INQACCS.cpy"
+                }
+              },
+              {
+                "id": "LK_L14_COMM-CUSTNO",
+                "qualifiedName": "DFHCOMMAREA.ACCOUNT-DETAILS.COMM-CUSTNO",
+                "level": 5,
+                "name": "COMM-CUSTNO",
+                "pic": "X(10)",
+                "usage": "DISPLAY",
+                "logicalType": "Alphanumeric (10 chars)",
+                "byteOffset": 14,
+                "relativeOffset": 4,
+                "byteLength": 10,
+                "elementByteLength": 10,
+                "location": {
+                  "startLine": 14,
+                  "endLine": 14,
+                  "startColumn": 12,
+                  "endColumn": 50,
+                  "sourceFile": "INQACCS.cpy"
+                }
+              },
+              {
+                "id": "LK_L15_COMM-SCODE",
+                "qualifiedName": "DFHCOMMAREA.ACCOUNT-DETAILS.COMM-SCODE",
+                "level": 5,
+                "name": "COMM-SCODE",
+                "pic": "X(6)",
+                "usage": "DISPLAY",
+                "logicalType": "Alphanumeric (6 chars)",
+                "byteOffset": 24,
+                "relativeOffset": 14,
+                "byteLength": 6,
+                "elementByteLength": 6,
+                "location": {
+                  "startLine": 15,
+                  "endLine": 15,
+                  "startColumn": 12,
+                  "endColumn": 49,
+                  "sourceFile": "INQACCS.cpy"
+                }
+              },
+              {
+                "id": "LK_L16_COMM-ACCNO",
+                "qualifiedName": "DFHCOMMAREA.ACCOUNT-DETAILS.COMM-ACCNO",
+                "level": 5,
+                "name": "COMM-ACCNO",
+                "pic": "9(8)",
+                "usage": "DISPLAY",
+                "logicalType": "Numeric Display (8 digits)",
+                "byteOffset": 30,
+                "relativeOffset": 20,
+                "byteLength": 8,
+                "elementByteLength": 8,
+                "location": {
+                  "startLine": 16,
+                  "endLine": 16,
+                  "startColumn": 12,
+                  "endColumn": 49,
+                  "sourceFile": "INQACCS.cpy"
+                }
+              },
+              {
+                "id": "LK_L17_COMM-ACC-TYPE",
+                "qualifiedName": "DFHCOMMAREA.ACCOUNT-DETAILS.COMM-ACC-TYPE",
+                "level": 5,
+                "name": "COMM-ACC-TYPE",
+                "pic": "X(8)",
+                "usage": "DISPLAY",
+                "logicalType": "Alphanumeric (8 chars)",
+                "byteOffset": 38,
+                "relativeOffset": 28,
+                "byteLength": 8,
+                "elementByteLength": 8,
+                "location": {
+                  "startLine": 17,
+                  "endLine": 17,
+                  "startColumn": 12,
+                  "endColumn": 49,
+                  "sourceFile": "INQACCS.cpy"
+                }
+              },
+              {
+                "id": "LK_L18_COMM-INT-RATE",
+                "qualifiedName": "DFHCOMMAREA.ACCOUNT-DETAILS.COMM-INT-RATE",
+                "level": 5,
+                "name": "COMM-INT-RATE",
+                "pic": "9(4)V99",
+                "usage": "DISPLAY",
+                "logicalType": "Decimal Display (6, 2)",
+                "byteOffset": 46,
+                "relativeOffset": 36,
+                "byteLength": 6,
+                "elementByteLength": 6,
+                "location": {
+                  "startLine": 18,
+                  "endLine": 18,
+                  "startColumn": 12,
+                  "endColumn": 52,
+                  "sourceFile": "INQACCS.cpy"
+                }
+              },
+              {
+                "id": "LK_L19_COMM-OPENED",
+                "qualifiedName": "DFHCOMMAREA.ACCOUNT-DETAILS.COMM-OPENED",
+                "level": 5,
+                "name": "COMM-OPENED",
+                "pic": "9(8)",
+                "usage": "DISPLAY",
+                "logicalType": "Numeric Display (8 digits)",
+                "byteOffset": 52,
+                "relativeOffset": 42,
+                "byteLength": 8,
+                "elementByteLength": 8,
+                "location": {
+                  "startLine": 19,
+                  "endLine": 19,
+                  "startColumn": 12,
+                  "endColumn": 49,
+                  "sourceFile": "INQACCS.cpy"
+                }
+              },
+              {
+                "id": "LK_L20_COMM-OPENED-GROUP",
+                "qualifiedName": "DFHCOMMAREA.ACCOUNT-DETAILS.COMM-OPENED-GROUP",
+                "level": 5,
+                "name": "COMM-OPENED-GROUP",
+                "usage": "DISPLAY",
+                "redefines": "COMM-OPENED",
+                "logicalType": "Group",
+                "byteOffset": 52,
+                "relativeOffset": 42,
+                "byteLength": 8,
+                "elementByteLength": 8,
+                "children": [
+                  {
+                    "id": "LK_L21_COMM-OPENED-DAY",
+                    "qualifiedName": "DFHCOMMAREA.ACCOUNT-DETAILS.COMM-OPENED-GROUP.COMM-OPENED-DAY",
+                    "level": 7,
+                    "name": "COMM-OPENED-DAY",
+                    "pic": "99",
+                    "usage": "DISPLAY",
+                    "logicalType": "Numeric Display (2 digits)",
+                    "byteOffset": 52,
+                    "relativeOffset": 0,
+                    "byteLength": 2,
+                    "elementByteLength": 2,
+                    "location": {
+                      "startLine": 21,
+                      "endLine": 21,
+                      "startColumn": 14,
+                      "endColumn": 39,
+                      "sourceFile": "INQACCS.cpy"
+                    }
+                  },
+                  {
+                    "id": "LK_L22_COMM-OPENED-MONTH",
+                    "qualifiedName": "DFHCOMMAREA.ACCOUNT-DETAILS.COMM-OPENED-GROUP.COMM-OPENED-MONTH",
+                    "level": 7,
+                    "name": "COMM-OPENED-MONTH",
+                    "pic": "99",
+                    "usage": "DISPLAY",
+                    "logicalType": "Numeric Display (2 digits)",
+                    "byteOffset": 54,
+                    "relativeOffset": 2,
+                    "byteLength": 2,
+                    "elementByteLength": 2,
+                    "location": {
+                      "startLine": 22,
+                      "endLine": 22,
+                      "startColumn": 14,
+                      "endColumn": 41,
+                      "sourceFile": "INQACCS.cpy"
+                    }
+                  },
+                  {
+                    "id": "LK_L23_COMM-OPENED-YEAR",
+                    "qualifiedName": "DFHCOMMAREA.ACCOUNT-DETAILS.COMM-OPENED-GROUP.COMM-OPENED-YEAR",
+                    "level": 7,
+                    "name": "COMM-OPENED-YEAR",
+                    "pic": "9999",
+                    "usage": "DISPLAY",
+                    "logicalType": "Numeric Display (4 digits)",
+                    "byteOffset": 56,
+                    "relativeOffset": 4,
+                    "byteLength": 4,
+                    "elementByteLength": 4,
+                    "location": {
+                      "startLine": 23,
+                      "endLine": 23,
+                      "startColumn": 14,
+                      "endColumn": 42,
+                      "sourceFile": "INQACCS.cpy"
+                    }
+                  }
+                ],
+                "location": {
+                  "startLine": 20,
+                  "endLine": 20,
+                  "startColumn": 12,
+                  "endColumn": 54,
+                  "sourceFile": "INQACCS.cpy"
+                }
+              },
+              {
+                "id": "LK_L24_COMM-OVERDRAFT",
+                "qualifiedName": "DFHCOMMAREA.ACCOUNT-DETAILS.COMM-OVERDRAFT",
+                "level": 5,
+                "name": "COMM-OVERDRAFT",
+                "pic": "9(8)",
+                "usage": "DISPLAY",
+                "logicalType": "Numeric Display (8 digits)",
+                "byteOffset": 60,
+                "relativeOffset": 50,
+                "byteLength": 8,
+                "elementByteLength": 8,
+                "location": {
+                  "startLine": 24,
+                  "endLine": 24,
+                  "startColumn": 12,
+                  "endColumn": 49,
+                  "sourceFile": "INQACCS.cpy"
+                }
+              },
+              {
+                "id": "LK_L25_COMM-LAST-STMT-DT",
+                "qualifiedName": "DFHCOMMAREA.ACCOUNT-DETAILS.COMM-LAST-STMT-DT",
+                "level": 5,
+                "name": "COMM-LAST-STMT-DT",
+                "pic": "9(8)",
+                "usage": "DISPLAY",
+                "logicalType": "Numeric Display (8 digits)",
+                "byteOffset": 68,
+                "relativeOffset": 58,
+                "byteLength": 8,
+                "elementByteLength": 8,
+                "location": {
+                  "startLine": 25,
+                  "endLine": 25,
+                  "startColumn": 12,
+                  "endColumn": 49,
+                  "sourceFile": "INQACCS.cpy"
+                }
+              },
+              {
+                "id": "LK_L26_COMM-LAST-STMT-GROUP",
+                "qualifiedName": "DFHCOMMAREA.ACCOUNT-DETAILS.COMM-LAST-STMT-GROUP",
+                "level": 5,
+                "name": "COMM-LAST-STMT-GROUP",
+                "usage": "DISPLAY",
+                "redefines": "COMM-LAST-STMT-DT",
+                "logicalType": "Group",
+                "byteOffset": 68,
+                "relativeOffset": 58,
+                "byteLength": 8,
+                "elementByteLength": 8,
+                "children": [
+                  {
+                    "id": "LK_L27_COMM-LAST-STMT-DAY",
+                    "qualifiedName": "DFHCOMMAREA.ACCOUNT-DETAILS.COMM-LAST-STMT-GROUP.COMM-LAST-STMT-DAY",
+                    "level": 7,
+                    "name": "COMM-LAST-STMT-DAY",
+                    "pic": "99",
+                    "usage": "DISPLAY",
+                    "logicalType": "Numeric Display (2 digits)",
+                    "byteOffset": 68,
+                    "relativeOffset": 0,
+                    "byteLength": 2,
+                    "elementByteLength": 2,
+                    "location": {
+                      "startLine": 27,
+                      "endLine": 27,
+                      "startColumn": 14,
+                      "endColumn": 42,
+                      "sourceFile": "INQACCS.cpy"
+                    }
+                  },
+                  {
+                    "id": "LK_L28_COMM-LAST-STMT-MONTH",
+                    "qualifiedName": "DFHCOMMAREA.ACCOUNT-DETAILS.COMM-LAST-STMT-GROUP.COMM-LAST-STMT-MONTH",
+                    "level": 7,
+                    "name": "COMM-LAST-STMT-MONTH",
+                    "pic": "99",
+                    "usage": "DISPLAY",
+                    "logicalType": "Numeric Display (2 digits)",
+                    "byteOffset": 70,
+                    "relativeOffset": 2,
+                    "byteLength": 2,
+                    "elementByteLength": 2,
+                    "location": {
+                      "startLine": 28,
+                      "endLine": 28,
+                      "startColumn": 14,
+                      "endColumn": 44,
+                      "sourceFile": "INQACCS.cpy"
+                    }
+                  },
+                  {
+                    "id": "LK_L29_COMM-LAST-STMT-YEAR",
+                    "qualifiedName": "DFHCOMMAREA.ACCOUNT-DETAILS.COMM-LAST-STMT-GROUP.COMM-LAST-STMT-YEAR",
+                    "level": 7,
+                    "name": "COMM-LAST-STMT-YEAR",
+                    "pic": "9999",
+                    "usage": "DISPLAY",
+                    "logicalType": "Numeric Display (4 digits)",
+                    "byteOffset": 72,
+                    "relativeOffset": 4,
+                    "byteLength": 4,
+                    "elementByteLength": 4,
+                    "location": {
+                      "startLine": 29,
+                      "endLine": 29,
+                      "startColumn": 14,
+                      "endColumn": 45,
+                      "sourceFile": "INQACCS.cpy"
+                    }
+                  }
+                ],
+                "location": {
+                  "startLine": 26,
+                  "endLine": 26,
+                  "startColumn": 12,
+                  "endColumn": 63,
+                  "sourceFile": "INQACCS.cpy"
+                }
+              },
+              {
+                "id": "LK_L30_COMM-NEXT-STMT-DT",
+                "qualifiedName": "DFHCOMMAREA.ACCOUNT-DETAILS.COMM-NEXT-STMT-DT",
+                "level": 5,
+                "name": "COMM-NEXT-STMT-DT",
+                "pic": "9(8)",
+                "usage": "DISPLAY",
+                "logicalType": "Numeric Display (8 digits)",
+                "byteOffset": 76,
+                "relativeOffset": 66,
+                "byteLength": 8,
+                "elementByteLength": 8,
+                "location": {
+                  "startLine": 30,
+                  "endLine": 30,
+                  "startColumn": 12,
+                  "endColumn": 49,
+                  "sourceFile": "INQACCS.cpy"
+                }
+              },
+              {
+                "id": "LK_L31_COMM-NEXT-STMT-GROUP",
+                "qualifiedName": "DFHCOMMAREA.ACCOUNT-DETAILS.COMM-NEXT-STMT-GROUP",
+                "level": 5,
+                "name": "COMM-NEXT-STMT-GROUP",
+                "usage": "DISPLAY",
+                "redefines": "COMM-NEXT-STMT-DT",
+                "logicalType": "Group",
+                "byteOffset": 76,
+                "relativeOffset": 66,
+                "byteLength": 8,
+                "elementByteLength": 8,
+                "children": [
+                  {
+                    "id": "LK_L32_COMM-NEXT-STMT-DAY",
+                    "qualifiedName": "DFHCOMMAREA.ACCOUNT-DETAILS.COMM-NEXT-STMT-GROUP.COMM-NEXT-STMT-DAY",
+                    "level": 7,
+                    "name": "COMM-NEXT-STMT-DAY",
+                    "pic": "99",
+                    "usage": "DISPLAY",
+                    "logicalType": "Numeric Display (2 digits)",
+                    "byteOffset": 76,
+                    "relativeOffset": 0,
+                    "byteLength": 2,
+                    "elementByteLength": 2,
+                    "location": {
+                      "startLine": 32,
+                      "endLine": 32,
+                      "startColumn": 14,
+                      "endColumn": 42,
+                      "sourceFile": "INQACCS.cpy"
+                    }
+                  },
+                  {
+                    "id": "LK_L33_COMM-NEXT-STMT-MONTH",
+                    "qualifiedName": "DFHCOMMAREA.ACCOUNT-DETAILS.COMM-NEXT-STMT-GROUP.COMM-NEXT-STMT-MONTH",
+                    "level": 7,
+                    "name": "COMM-NEXT-STMT-MONTH",
+                    "pic": "99",
+                    "usage": "DISPLAY",
+                    "logicalType": "Numeric Display (2 digits)",
+                    "byteOffset": 78,
+                    "relativeOffset": 2,
+                    "byteLength": 2,
+                    "elementByteLength": 2,
+                    "location": {
+                      "startLine": 33,
+                      "endLine": 33,
+                      "startColumn": 14,
+                      "endColumn": 44,
+                      "sourceFile": "INQACCS.cpy"
+                    }
+                  },
+                  {
+                    "id": "LK_L34_COMM-NEXT-STMT-YEAR",
+                    "qualifiedName": "DFHCOMMAREA.ACCOUNT-DETAILS.COMM-NEXT-STMT-GROUP.COMM-NEXT-STMT-YEAR",
+                    "level": 7,
+                    "name": "COMM-NEXT-STMT-YEAR",
+                    "pic": "9999",
+                    "usage": "DISPLAY",
+                    "logicalType": "Numeric Display (4 digits)",
+                    "byteOffset": 80,
+                    "relativeOffset": 4,
+                    "byteLength": 4,
+                    "elementByteLength": 4,
+                    "location": {
+                      "startLine": 34,
+                      "endLine": 34,
+                      "startColumn": 14,
+                      "endColumn": 45,
+                      "sourceFile": "INQACCS.cpy"
+                    }
+                  }
+                ],
+                "location": {
+                  "startLine": 31,
+                  "endLine": 31,
+                  "startColumn": 12,
+                  "endColumn": 63,
+                  "sourceFile": "INQACCS.cpy"
+                }
+              },
+              {
+                "id": "LK_L35_COMM-AVAIL-BAL",
+                "qualifiedName": "DFHCOMMAREA.ACCOUNT-DETAILS.COMM-AVAIL-BAL",
+                "level": 5,
+                "name": "COMM-AVAIL-BAL",
+                "pic": "S9(10)V99",
+                "usage": "DISPLAY",
+                "logicalType": "Signed Decimal Display (12, 2)",
+                "byteOffset": 84,
+                "relativeOffset": 74,
+                "byteLength": 12,
+                "elementByteLength": 12,
+                "location": {
+                  "startLine": 35,
+                  "endLine": 35,
+                  "startColumn": 12,
+                  "endColumn": 54,
+                  "sourceFile": "INQACCS.cpy"
+                }
+              },
+              {
+                "id": "LK_L36_COMM-ACTUAL-BAL",
+                "qualifiedName": "DFHCOMMAREA.ACCOUNT-DETAILS.COMM-ACTUAL-BAL",
+                "level": 5,
+                "name": "COMM-ACTUAL-BAL",
+                "pic": "S9(10)V99",
+                "usage": "DISPLAY",
+                "logicalType": "Signed Decimal Display (12, 2)",
+                "byteOffset": 96,
+                "relativeOffset": 86,
+                "byteLength": 12,
+                "elementByteLength": 12,
+                "location": {
+                  "startLine": 36,
+                  "endLine": 36,
+                  "startColumn": 12,
+                  "endColumn": 54,
+                  "sourceFile": "INQACCS.cpy"
+                }
+              }
+            ],
+            "location": {
+              "startLine": 11,
+              "endLine": 12,
+              "startColumn": 10,
+              "endColumn": 32,
+              "sourceFile": "INQACCS.cpy"
+            }
+          }
+        ],
+        "location": {
+          "startLine": 133,
+          "endLine": 133,
+          "startColumn": 7,
+          "endColumn": 21,
+          "sourceFile": "INQACCS.cbl"
+        }
+      }
+    ],
+    "workingStorageBytes": 861
+  },
+  "sections": [
+    {
+      "name": "PREMIERE",
+      "location": {
+        "startLine": 137,
+        "endLine": 153,
+        "startColumn": 7,
+        "endColumn": 15,
+        "sourceFile": "INQACCS.cbl"
+      },
+      "paragraphNames": [
+        "A010",
+        "A999"
+      ]
+    },
+    {
+      "name": "READ-ACCOUNT-DB2",
+      "location": {
+        "startLine": 156,
+        "endLine": 211,
+        "startColumn": 7,
+        "endColumn": 15,
+        "sourceFile": "INQACCS.cbl"
+      },
+      "paragraphNames": [
+        "RAD010",
+        "RAD999"
+      ]
+    },
+    {
+      "name": "FETCH-DATA",
+      "location": {
+        "startLine": 214,
+        "endLine": 315,
+        "startColumn": 7,
+        "endColumn": 15,
+        "sourceFile": "INQACCS.cbl"
+      },
+      "paragraphNames": [
+        "FD010",
+        "FD999"
+      ]
+    },
+    {
+      "name": "GET-ME-OUT-OF-HERE",
+      "location": {
+        "startLine": 317,
+        "endLine": 325,
+        "startColumn": 7,
+        "endColumn": 15,
+        "sourceFile": "INQACCS.cbl"
+      },
+      "paragraphNames": [
+        "GMOFH010",
+        "GMOFH999"
+      ]
+    },
+    {
+      "name": "CHECK-FOR-STORM-DRAIN-DB2",
+      "location": {
+        "startLine": 328,
+        "endLine": 350,
+        "startColumn": 7,
+        "endColumn": 15,
+        "sourceFile": "INQACCS.cbl"
+      },
+      "paragraphNames": [
+        "CFSDD010",
+        "CFSDD999"
+      ]
+    },
+    {
+      "name": "ABEND-HANDLING",
+      "location": {
+        "startLine": 353,
+        "endLine": 395,
+        "startColumn": 7,
+        "endColumn": 15,
+        "sourceFile": "INQACCS.cbl"
+      },
+      "paragraphNames": [
+        "AH010",
+        "AH999"
+      ]
+    },
+    {
+      "name": "POPULATE-TIME-DATE",
+      "location": {
+        "startLine": 398,
+        "endLine": 413,
+        "startColumn": 7,
+        "endColumn": 15,
+        "sourceFile": "INQACCS.cbl"
+      },
+      "paragraphNames": [
+        "PTD010",
+        "PTD999"
+      ]
+    }
+  ],
+  "paragraphs": [
+    {
+      "name": "A010",
+      "sectionParent": "PREMIERE",
+      "location": {
+        "startLine": 138,
+        "endLine": 150,
+        "startColumn": 7,
+        "endColumn": 37,
+        "sourceFile": "INQACCS.cbl"
+      },
+      "successors": [
+        "READ-ACCOUNT-DB2",
+        "GET-ME-OUT-OF-HERE"
+      ],
+      "fallthroughSuccessor": "A999",
+      "statements": [
+        {
+          "type": "MOVE",
+          "location": {
+            "startLine": 139,
+            "endLine": 139,
+            "startColumn": 11,
+            "endColumn": 23,
+            "sourceFile": "INQACCS.cbl"
+          },
+          "rawText": "MOVE 'N' TO COMM-SUCCESS",
+          "targetFieldIds": [
+            "LK_L8_COMM-SUCCESS"
+          ],
+          "fromExpr": "'N'",
+          "toTargets": [
+            "COMM-SUCCESS"
+          ]
+        },
+        {
+          "type": "MOVE",
+          "location": {
+            "startLine": 140,
+            "endLine": 140,
+            "startColumn": 11,
+            "endColumn": 23,
+            "sourceFile": "INQACCS.cbl"
+          },
+          "rawText": "MOVE '0' TO COMM-FAIL-CODE",
+          "targetFieldIds": [
+            "LK_L9_COMM-FAIL-CODE"
+          ],
+          "fromExpr": "'0'",
+          "toTargets": [
+            "COMM-FAIL-CODE"
+          ]
+        },
+        {
+          "type": "EXEC_CICS",
+          "location": {
+            "startLine": 142,
+            "endLine": 144,
+            "startColumn": 6,
+            "endColumn": 6,
+            "sourceFile": "INQACCS.cbl"
+          },
+          "rawText": "*>EXECCICS EXEC CICS HANDLE ABEND *>EXECCICS LABEL(ABEND-HANDLING) *>EXECCICS END-EXEC }",
+          "subsystem": "CICS",
+          "rawPayload": "EXEC CICS HANDLE ABEND LABEL(ABEND-HANDLING) END-EXEC"
+        },
+        {
+          "type": "MOVE",
+          "location": {
+            "startLine": 146,
+            "endLine": 146,
+            "startColumn": 11,
+            "endColumn": 28,
+            "sourceFile": "INQACCS.cbl"
+          },
+          "rawText": "MOVE SORTCODE TO HV-ACCOUNT-SORTCODE",
+          "sourceFieldIds": [
+            "WS_L7_SORTCODE"
+          ],
+          "targetFieldIds": [
+            "WS_L45_HV-ACCOUNT-SORTCODE"
+          ],
+          "fromExpr": "SORTCODE",
+          "toTargets": [
+            "HV-ACCOUNT-SORTCODE"
+          ]
+        },
+        {
+          "type": "PERFORM",
+          "location": {
+            "startLine": 148,
+            "endLine": 148,
+            "startColumn": 11,
+            "endColumn": 19,
+            "sourceFile": "INQACCS.cbl"
+          },
+          "rawText": "PERFORM READ-ACCOUNT-DB2",
+          "target": "READ-ACCOUNT-DB2"
+        },
+        {
+          "type": "PERFORM",
+          "location": {
+            "startLine": 150,
+            "endLine": 150,
+            "startColumn": 11,
+            "endColumn": 19,
+            "sourceFile": "INQACCS.cbl"
+          },
+          "rawText": "PERFORM GET-ME-OUT-OF-HERE",
+          "target": "GET-ME-OUT-OF-HERE"
+        }
+      ]
+    },
+    {
+      "name": "A999",
+      "sectionParent": "PREMIERE",
+      "location": {
+        "startLine": 152,
+        "endLine": 153,
+        "startColumn": 7,
+        "endColumn": 15,
+        "sourceFile": "INQACCS.cbl"
+      },
+      "fallthroughSuccessor": "RAD010",
+      "statements": [
+        {
+          "type": "EXIT",
+          "location": {
+            "startLine": 153,
+            "endLine": 153,
+            "startColumn": 11,
+            "endColumn": 11,
+            "sourceFile": "INQACCS.cbl"
+          },
+          "rawText": "EXIT",
+          "operation": "EXIT"
+        }
+      ]
+    },
+    {
+      "name": "RAD010",
+      "sectionParent": "READ-ACCOUNT-DB2",
+      "location": {
+        "startLine": 157,
+        "endLine": 208,
+        "startColumn": 7,
+        "endColumn": 35,
+        "sourceFile": "INQACCS.cbl"
+      },
+      "successors": [
+        "CHECK-FOR-STORM-DRAIN-DB2",
+        "RAD999",
+        "FETCH-DATA"
+      ],
+      "fallthroughSuccessor": "RAD999",
+      "statements": [
+        {
+          "type": "EXEC_SQL",
+          "location": {
+            "startLine": 159,
+            "endLine": 161,
+            "startColumn": 6,
+            "endColumn": 6,
+            "sourceFile": "INQACCS.cbl"
+          },
+          "rawText": "*>EXECSQL EXEC SQL OPEN *>EXECSQL ACC-ALL-CURSOR *>EXECSQL END-EXEC }",
+          "subsystem": "SQL",
+          "rawPayload": "EXEC SQL OPEN ACC-ALL-CURSOR END-EXEC"
+        },
+        {
+          "type": "MOVE",
+          "location": {
+            "startLine": 163,
+            "endLine": 163,
+            "startColumn": 11,
+            "endColumn": 27,
+            "sourceFile": "INQACCS.cbl"
+          },
+          "rawText": "MOVE SQLCODE TO SQLCODE-DISPLAY",
+          "targetFieldIds": [
+            "WS_L102_SQLCODE-DISPLAY"
+          ],
+          "fromExpr": "SQLCODE",
+          "toTargets": [
+            "SQLCODE-DISPLAY"
+          ]
+        },
+        {
+          "type": "IF",
+          "location": {
+            "startLine": 165,
+            "endLine": 180,
+            "startColumn": 11,
+            "endColumn": 11,
+            "sourceFile": "INQACCS.cbl"
+          },
+          "rawText": "IF SQLCODE NOT = 0 MOVE SQLCODE TO SQLCODE-DISPLAY PERFORM CHECK-FOR-STORM-DRAIN-DB2 MOVE 'N' TO COMM-SUCCESS MOVE '2' TO COMM-FAIL-CODE MOVE ZERO TO NUMBER-OF-ACCOUNTS *>EXECCICS EXEC CICS SYNCPOINT ROLLBACK *>EXECCICS RESP(WS-CICS-RESP) *>EXECCICS RESP2(WS-CICS-RESP2) *>EXECCICS END-EXEC } GO TO RAD999 END-IF",
+          "condition": "SQLCODE NOT = 0",
+          "thenStatements": [
+            {
+              "type": "MOVE",
+              "location": {
+                "startLine": 166,
+                "endLine": 166,
+                "startColumn": 14,
+                "endColumn": 30,
+                "sourceFile": "INQACCS.cbl"
+              },
+              "rawText": "MOVE SQLCODE TO SQLCODE-DISPLAY",
+              "targetFieldIds": [
+                "WS_L102_SQLCODE-DISPLAY"
+              ],
+              "fromExpr": "SQLCODE",
+              "toTargets": [
+                "SQLCODE-DISPLAY"
+              ]
+            },
+            {
+              "type": "PERFORM",
+              "location": {
+                "startLine": 168,
+                "endLine": 168,
+                "startColumn": 14,
+                "endColumn": 22,
+                "sourceFile": "INQACCS.cbl"
+              },
+              "rawText": "PERFORM CHECK-FOR-STORM-DRAIN-DB2",
+              "target": "CHECK-FOR-STORM-DRAIN-DB2"
+            },
+            {
+              "type": "MOVE",
+              "location": {
+                "startLine": 170,
+                "endLine": 170,
+                "startColumn": 14,
+                "endColumn": 27,
+                "sourceFile": "INQACCS.cbl"
+              },
+              "rawText": "MOVE 'N' TO COMM-SUCCESS",
+              "targetFieldIds": [
+                "LK_L8_COMM-SUCCESS"
+              ],
+              "fromExpr": "'N'",
+              "toTargets": [
+                "COMM-SUCCESS"
+              ]
+            },
+            {
+              "type": "MOVE",
+              "location": {
+                "startLine": 171,
+                "endLine": 171,
+                "startColumn": 14,
+                "endColumn": 27,
+                "sourceFile": "INQACCS.cbl"
+              },
+              "rawText": "MOVE '2' TO COMM-FAIL-CODE",
+              "targetFieldIds": [
+                "LK_L9_COMM-FAIL-CODE"
+              ],
+              "fromExpr": "'2'",
+              "toTargets": [
+                "COMM-FAIL-CODE"
+              ]
+            },
+            {
+              "type": "MOVE",
+              "location": {
+                "startLine": 172,
+                "endLine": 172,
+                "startColumn": 14,
+                "endColumn": 27,
+                "sourceFile": "INQACCS.cbl"
+              },
+              "rawText": "MOVE ZERO TO NUMBER-OF-ACCOUNTS",
+              "targetFieldIds": [
+                "LK_L7_NUMBER-OF-ACCOUNTS"
+              ],
+              "fromExpr": "ZERO",
+              "toTargets": [
+                "NUMBER-OF-ACCOUNTS"
+              ]
+            },
+            {
+              "type": "EXEC_CICS",
+              "location": {
+                "startLine": 174,
+                "endLine": 177,
+                "startColumn": 6,
+                "endColumn": 6,
+                "sourceFile": "INQACCS.cbl"
+              },
+              "rawText": "*>EXECCICS EXEC CICS SYNCPOINT ROLLBACK *>EXECCICS RESP(WS-CICS-RESP) *>EXECCICS RESP2(WS-CICS-RESP2) *>EXECCICS END-EXEC }",
+              "subsystem": "CICS",
+              "rawPayload": "EXEC CICS SYNCPOINT ROLLBACK RESP(WS-CICS-RESP) RESP2(WS-CICS-RESP2) END-EXEC"
+            },
+            {
+              "type": "GO_TO",
+              "location": {
+                "startLine": 179,
+                "endLine": 179,
+                "startColumn": 14,
+                "endColumn": 20,
+                "sourceFile": "INQACCS.cbl"
+              },
+              "rawText": "GO TO RAD999",
+              "target": "RAD999",
+              "operation": "GO_TO"
+            }
+          ]
+        },
+        {
+          "type": "PERFORM",
+          "location": {
+            "startLine": 182,
+            "endLine": 182,
+            "startColumn": 11,
+            "endColumn": 19,
+            "sourceFile": "INQACCS.cbl"
+          },
+          "rawText": "PERFORM FETCH-DATA",
+          "target": "FETCH-DATA"
+        },
+        {
+          "type": "EXEC_SQL",
+          "location": {
+            "startLine": 184,
+            "endLine": 186,
+            "startColumn": 6,
+            "endColumn": 6,
+            "sourceFile": "INQACCS.cbl"
+          },
+          "rawText": "*>EXECSQL EXEC SQL CLOSE *>EXECSQL ACC-ALL-CURSOR *>EXECSQL END-EXEC }",
+          "subsystem": "SQL",
+          "rawPayload": "EXEC SQL CLOSE ACC-ALL-CURSOR END-EXEC"
+        },
+        {
+          "type": "IF",
+          "location": {
+            "startLine": 188,
+            "endLine": 206,
+            "startColumn": 11,
+            "endColumn": 11,
+            "sourceFile": "INQACCS.cbl"
+          },
+          "rawText": "IF SQLCODE NOT = 0 MOVE SQLCODE TO SQLCODE-DISPLAY DISPLAY 'Failure when attempting to close the DB2 CURSOR' ' ACC-ALL-CURSOR. With SQL code=' SQLCODE-DISPLAY PERFORM CHECK-FOR-STORM-DRAIN-DB2 MOVE 'N' TO COMM-SUCCESS MOVE '4' TO COMM-FAIL-CODE *>EXECCICS EXEC CICS SYNCPOINT *>EXECCICS ROLLBACK *>EXECCICS RESP(WS-CICS-RESP) *>EXECCICS RESP2(WS-CICS-RESP2) *>EXECCICS END-EXEC } GO TO RAD999 END-IF",
+          "condition": "SQLCODE NOT = 0",
+          "thenStatements": [
+            {
+              "type": "MOVE",
+              "location": {
+                "startLine": 189,
+                "endLine": 189,
+                "startColumn": 14,
+                "endColumn": 30,
+                "sourceFile": "INQACCS.cbl"
+              },
+              "rawText": "MOVE SQLCODE TO SQLCODE-DISPLAY",
+              "targetFieldIds": [
+                "WS_L102_SQLCODE-DISPLAY"
+              ],
+              "fromExpr": "SQLCODE",
+              "toTargets": [
+                "SQLCODE-DISPLAY"
+              ]
+            },
+            {
+              "type": "DISPLAY",
+              "location": {
+                "startLine": 190,
+                "endLine": 192,
+                "startColumn": 14,
+                "endColumn": 18,
+                "sourceFile": "INQACCS.cbl"
+              },
+              "rawText": "DISPLAY 'Failure when attempting to close the DB2 CURSOR' ' ACC-ALL-CURSOR. With SQL code=' SQLCODE-DISPLAY",
+              "sourceFieldIds": [
+                "WS_L102_SQLCODE-DISPLAY"
+              ],
+              "operands": [
+                "'Failure when attempting to close the DB2 CURSOR'",
+                "' ACC-ALL-CURSOR. With SQL code='",
+                "SQLCODE-DISPLAY"
+              ]
+            },
+            {
+              "type": "PERFORM",
+              "location": {
+                "startLine": 194,
+                "endLine": 194,
+                "startColumn": 14,
+                "endColumn": 22,
+                "sourceFile": "INQACCS.cbl"
+              },
+              "rawText": "PERFORM CHECK-FOR-STORM-DRAIN-DB2",
+              "target": "CHECK-FOR-STORM-DRAIN-DB2"
+            },
+            {
+              "type": "MOVE",
+              "location": {
+                "startLine": 196,
+                "endLine": 196,
+                "startColumn": 14,
+                "endColumn": 26,
+                "sourceFile": "INQACCS.cbl"
+              },
+              "rawText": "MOVE 'N' TO COMM-SUCCESS",
+              "targetFieldIds": [
+                "LK_L8_COMM-SUCCESS"
+              ],
+              "fromExpr": "'N'",
+              "toTargets": [
+                "COMM-SUCCESS"
+              ]
+            },
+            {
+              "type": "MOVE",
+              "location": {
+                "startLine": 197,
+                "endLine": 197,
+                "startColumn": 14,
+                "endColumn": 26,
+                "sourceFile": "INQACCS.cbl"
+              },
+              "rawText": "MOVE '4' TO COMM-FAIL-CODE",
+              "targetFieldIds": [
+                "LK_L9_COMM-FAIL-CODE"
+              ],
+              "fromExpr": "'4'",
+              "toTargets": [
+                "COMM-FAIL-CODE"
+              ]
+            },
+            {
+              "type": "EXEC_CICS",
+              "location": {
+                "startLine": 199,
+                "endLine": 203,
+                "startColumn": 6,
+                "endColumn": 6,
+                "sourceFile": "INQACCS.cbl"
+              },
+              "rawText": "*>EXECCICS EXEC CICS SYNCPOINT *>EXECCICS ROLLBACK *>EXECCICS RESP(WS-CICS-RESP) *>EXECCICS RESP2(WS-CICS-RESP2) *>EXECCICS END-EXEC }",
+              "subsystem": "CICS",
+              "rawPayload": "EXEC CICS SYNCPOINT ROLLBACK RESP(WS-CICS-RESP) RESP2(WS-CICS-RESP2) END-EXEC"
+            },
+            {
+              "type": "GO_TO",
+              "location": {
+                "startLine": 205,
+                "endLine": 205,
+                "startColumn": 14,
+                "endColumn": 20,
+                "sourceFile": "INQACCS.cbl"
+              },
+              "rawText": "GO TO RAD999",
+              "target": "RAD999",
+              "operation": "GO_TO"
+            }
+          ]
+        },
+        {
+          "type": "MOVE",
+          "location": {
+            "startLine": 208,
+            "endLine": 208,
+            "startColumn": 11,
+            "endColumn": 23,
+            "sourceFile": "INQACCS.cbl"
+          },
+          "rawText": "MOVE 'Y' TO COMM-SUCCESS",
+          "targetFieldIds": [
+            "LK_L8_COMM-SUCCESS"
+          ],
+          "fromExpr": "'Y'",
+          "toTargets": [
+            "COMM-SUCCESS"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "RAD999",
+      "sectionParent": "READ-ACCOUNT-DB2",
+      "location": {
+        "startLine": 210,
+        "endLine": 211,
+        "startColumn": 7,
+        "endColumn": 15,
+        "sourceFile": "INQACCS.cbl"
+      },
+      "calledBy": [
+        "RAD010"
+      ],
+      "fallthroughSuccessor": "FD010",
+      "statements": [
+        {
+          "type": "EXIT",
+          "location": {
+            "startLine": 211,
+            "endLine": 211,
+            "startColumn": 11,
+            "endColumn": 11,
+            "sourceFile": "INQACCS.cbl"
+          },
+          "rawText": "EXIT",
+          "operation": "EXIT"
+        }
+      ]
+    },
+    {
+      "name": "FD010",
+      "sectionParent": "FETCH-DATA",
+      "location": {
+        "startLine": 215,
+        "endLine": 312,
+        "startColumn": 7,
+        "endColumn": 22,
+        "sourceFile": "INQACCS.cbl"
+      },
+      "successors": [
+        "FD999",
+        "CHECK-FOR-STORM-DRAIN-DB2"
+      ],
+      "fallthroughSuccessor": "FD999",
+      "statements": [
+        {
+          "type": "MOVE",
+          "location": {
+            "startLine": 216,
+            "endLine": 216,
+            "startColumn": 11,
+            "endColumn": 24,
+            "sourceFile": "INQACCS.cbl"
+          },
+          "rawText": "MOVE ZERO TO NUMBER-OF-ACCOUNTS",
+          "targetFieldIds": [
+            "LK_L7_NUMBER-OF-ACCOUNTS"
+          ],
+          "fromExpr": "ZERO",
+          "toTargets": [
+            "NUMBER-OF-ACCOUNTS"
+          ]
+        },
+        {
+          "type": "PERFORM",
+          "location": {
+            "startLine": 218,
+            "endLine": 312,
+            "startColumn": 11,
+            "endColumn": 11,
+            "sourceFile": "INQACCS.cbl"
+          },
+          "rawText": "PERFORM UNTIL SQLCODE NOT = 0 OR NUMBER-OF-ACCOUNTS = 20 *>EXECSQL EXEC SQL FETCH FROM ACC-ALL-CURSOR *>EXECSQL INTO :HV-ACCOUNT-EYECATCHER, *>EXECSQL :HV-ACCOUNT-CUST-NO, *>EXECSQL :HV-ACCOUNT-SORTCODE, *>EXECSQL :HV-ACCOUNT-ACC-NO, *>EXECSQL :HV-ACCOUNT-ACC-TYPE, *>EXECSQL :HV-ACCOUNT-INT-RATE, *>EXECSQL :HV-ACCOUNT-OPENED, *>EXECSQL :HV-ACCOUNT-OVERDRAFT-LIM, *>EXECSQL :HV-ACCOUNT-LAST-STMT, *>EXECSQL :HV-ACCOUNT-NEXT-STMT, *>EXECSQL :HV-ACCOUNT-AVAIL-BAL, *>EXECSQL :HV-ACCOUNT-ACTUAL-BAL *>EXECSQL END-EXEC } IF SQLCODE = +100 MOVE 'Y' TO COMM-SUCCESS GO TO FD999 END-IF IF SQLCODE NOT = 0 MOVE SQLCODE TO SQLCODE-DISPLAY DISPLAY 'Failure when attempting to FETCH from the' ' DB2 CURSOR ACC-ALL-CURSOR. With SQL code=' SQLCODE-DISPLAY PERFORM CHECK-FOR-STORM-DRAIN-DB2 MOVE 'N' TO COMM-SUCCESS MOVE ZERO TO NUMBER-OF-ACCOUNTS MOVE '3' TO COMM-FAIL-CODE *>EXECCICS EXEC CICS SYNCPOINT *>EXECCICS ROLLBACK *>EXECCICS RESP(WS-CICS-RESP) *>EXECCICS RESP2(WS-CICS-RESP2) *>EXECCICS END-EXEC } GO TO FD999 END-IF ADD 1 TO NUMBER-OF-ACCOUNTS GIVING NUMBER-OF-ACCOUNTS MOVE HV-ACCOUNT-EYECATCHER TO COMM-EYE(NUMBER-OF-ACCOUNTS) MOVE HV-ACCOUNT-CUST-NO TO COMM-CUSTNO(NUMBER-OF-ACCOUNTS) MOVE HV-ACCOUNT-SORTCODE TO COMM-SCODE(NUMBER-OF-ACCOUNTS) MOVE HV-ACCOUNT-ACC-NO TO COMM-ACCNO(NUMBER-OF-ACCOUNTS) MOVE HV-ACCOUNT-ACC-TYPE TO COMM-ACC-TYPE(NUMBER-OF-ACCOUNTS) MOVE HV-ACCOUNT-INT-RATE TO COMM-INT-RATE(NUMBER-OF-ACCOUNTS) MOVE HV-ACCOUNT-OPENED TO DB2-DATE-REFORMAT STRING DB2-DATE-REF-DAY DB2-DATE-REF-MNTH DB2-DATE-REF-YR DELIMITED BY SIZE INTO COMM-OPENED(NUMBER-OF-ACCOUNTS) END-STRING MOVE HV-ACCOUNT-OVERDRAFT-LIM TO COMM-OVERDRAFT(NUMBER-OF-ACCOUNTS) MOVE HV-ACCOUNT-LAST-STMT TO DB2-DATE-REFORMAT STRING DB2-DATE-REF-DAY DB2-DATE-REF-MNTH DB2-DATE-REF-YR DELIMITED BY SIZE INTO COMM-LAST-STMT-DT(NUMBER-OF-ACCOUNTS) END-STRING MOVE HV-ACCOUNT-NEXT-STMT TO DB2-DATE-REFORMAT STRING DB2-DATE-REF-DAY DB2-DATE-REF-MNTH DB2-DATE-REF-YR DELIMITED BY SIZE INTO COMM-NEXT-STMT-DT(NUMBER-OF-ACCOUNTS) END-STRING MOVE HV-ACCOUNT-ACTUAL-BAL TO COMM-ACTUAL-BAL(NUMBER-OF-ACCOUNTS) MOVE HV-ACCOUNT-AVAIL-BAL TO COMM-AVAIL-BAL(NUMBER-OF-ACCOUNTS) END-PERFORM",
+          "sourceFieldIds": [
+            "LK_L7_NUMBER-OF-ACCOUNTS"
+          ],
+          "performType": "UNTIL",
+          "untilCondition": "UNTIL SQLCODE NOT = 0 OR NUMBER-OF-ACCOUNTS = 20",
+          "isInline": true,
+          "nestedStatements": [
+            {
+              "type": "EXEC_SQL",
+              "location": {
+                "startLine": 221,
+                "endLine": 234,
+                "startColumn": 6,
+                "endColumn": 6,
+                "sourceFile": "INQACCS.cbl"
+              },
+              "rawText": "*>EXECSQL EXEC SQL FETCH FROM ACC-ALL-CURSOR *>EXECSQL INTO :HV-ACCOUNT-EYECATCHER, *>EXECSQL :HV-ACCOUNT-CUST-NO, *>EXECSQL :HV-ACCOUNT-SORTCODE, *>EXECSQL :HV-ACCOUNT-ACC-NO, *>EXECSQL :HV-ACCOUNT-ACC-TYPE, *>EXECSQL :HV-ACCOUNT-INT-RATE, *>EXECSQL :HV-ACCOUNT-OPENED, *>EXECSQL :HV-ACCOUNT-OVERDRAFT-LIM, *>EXECSQL :HV-ACCOUNT-LAST-STMT, *>EXECSQL :HV-ACCOUNT-NEXT-STMT, *>EXECSQL :HV-ACCOUNT-AVAIL-BAL, *>EXECSQL :HV-ACCOUNT-ACTUAL-BAL *>EXECSQL END-EXEC }",
+              "subsystem": "SQL",
+              "rawPayload": "EXEC SQL FETCH FROM ACC-ALL-CURSOR INTO :HV-ACCOUNT-EYECATCHER, :HV-ACCOUNT-CUST-NO, :HV-ACCOUNT-SORTCODE, :HV-ACCOUNT-ACC-NO, :HV-ACCOUNT-ACC-TYPE, :HV-ACCOUNT-INT-RATE, :HV-ACCOUNT-OPENED, :HV-ACCOUNT-OVERDRAFT-LIM, :HV-ACCOUNT-LAST-STMT, :HV-ACCOUNT-NEXT-STMT, :HV-ACCOUNT-AVAIL-BAL, :HV-ACCOUNT-ACTUAL-BAL END-EXEC"
+            },
+            {
+              "type": "IF",
+              "location": {
+                "startLine": 236,
+                "endLine": 239,
+                "startColumn": 14,
+                "endColumn": 14,
+                "sourceFile": "INQACCS.cbl"
+              },
+              "rawText": "IF SQLCODE = +100 MOVE 'Y' TO COMM-SUCCESS GO TO FD999 END-IF",
+              "condition": "SQLCODE = +100",
+              "thenStatements": [
+                {
+                  "type": "MOVE",
+                  "location": {
+                    "startLine": 237,
+                    "endLine": 237,
+                    "startColumn": 18,
+                    "endColumn": 30,
+                    "sourceFile": "INQACCS.cbl"
+                  },
+                  "rawText": "MOVE 'Y' TO COMM-SUCCESS",
+                  "targetFieldIds": [
+                    "LK_L8_COMM-SUCCESS"
+                  ],
+                  "fromExpr": "'Y'",
+                  "toTargets": [
+                    "COMM-SUCCESS"
+                  ]
+                },
+                {
+                  "type": "GO_TO",
+                  "location": {
+                    "startLine": 238,
+                    "endLine": 238,
+                    "startColumn": 18,
+                    "endColumn": 24,
+                    "sourceFile": "INQACCS.cbl"
+                  },
+                  "rawText": "GO TO FD999",
+                  "target": "FD999",
+                  "operation": "GO_TO"
+                }
+              ]
+            },
+            {
+              "type": "IF",
+              "location": {
+                "startLine": 241,
+                "endLine": 262,
+                "startColumn": 14,
+                "endColumn": 14,
+                "sourceFile": "INQACCS.cbl"
+              },
+              "rawText": "IF SQLCODE NOT = 0 MOVE SQLCODE TO SQLCODE-DISPLAY DISPLAY 'Failure when attempting to FETCH from the' ' DB2 CURSOR ACC-ALL-CURSOR. With SQL code=' SQLCODE-DISPLAY PERFORM CHECK-FOR-STORM-DRAIN-DB2 MOVE 'N' TO COMM-SUCCESS MOVE ZERO TO NUMBER-OF-ACCOUNTS MOVE '3' TO COMM-FAIL-CODE *>EXECCICS EXEC CICS SYNCPOINT *>EXECCICS ROLLBACK *>EXECCICS RESP(WS-CICS-RESP) *>EXECCICS RESP2(WS-CICS-RESP2) *>EXECCICS END-EXEC } GO TO FD999 END-IF",
+              "condition": "SQLCODE NOT = 0",
+              "thenStatements": [
+                {
+                  "type": "MOVE",
+                  "location": {
+                    "startLine": 242,
+                    "endLine": 242,
+                    "startColumn": 17,
+                    "endColumn": 33,
+                    "sourceFile": "INQACCS.cbl"
+                  },
+                  "rawText": "MOVE SQLCODE TO SQLCODE-DISPLAY",
+                  "targetFieldIds": [
+                    "WS_L102_SQLCODE-DISPLAY"
+                  ],
+                  "fromExpr": "SQLCODE",
+                  "toTargets": [
+                    "SQLCODE-DISPLAY"
+                  ]
+                },
+                {
+                  "type": "DISPLAY",
+                  "location": {
+                    "startLine": 244,
+                    "endLine": 246,
+                    "startColumn": 17,
+                    "endColumn": 20,
+                    "sourceFile": "INQACCS.cbl"
+                  },
+                  "rawText": "DISPLAY 'Failure when attempting to FETCH from the' ' DB2 CURSOR ACC-ALL-CURSOR. With SQL code=' SQLCODE-DISPLAY",
+                  "sourceFieldIds": [
+                    "WS_L102_SQLCODE-DISPLAY"
+                  ],
+                  "operands": [
+                    "'Failure when attempting to FETCH from the'",
+                    "' DB2 CURSOR ACC-ALL-CURSOR. With SQL code='",
+                    "SQLCODE-DISPLAY"
+                  ]
+                },
+                {
+                  "type": "PERFORM",
+                  "location": {
+                    "startLine": 248,
+                    "endLine": 248,
+                    "startColumn": 17,
+                    "endColumn": 25,
+                    "sourceFile": "INQACCS.cbl"
+                  },
+                  "rawText": "PERFORM CHECK-FOR-STORM-DRAIN-DB2",
+                  "target": "CHECK-FOR-STORM-DRAIN-DB2"
+                },
+                {
+                  "type": "MOVE",
+                  "location": {
+                    "startLine": 250,
+                    "endLine": 250,
+                    "startColumn": 17,
+                    "endColumn": 30,
+                    "sourceFile": "INQACCS.cbl"
+                  },
+                  "rawText": "MOVE 'N' TO COMM-SUCCESS",
+                  "targetFieldIds": [
+                    "LK_L8_COMM-SUCCESS"
+                  ],
+                  "fromExpr": "'N'",
+                  "toTargets": [
+                    "COMM-SUCCESS"
+                  ]
+                },
+                {
+                  "type": "MOVE",
+                  "location": {
+                    "startLine": 251,
+                    "endLine": 251,
+                    "startColumn": 17,
+                    "endColumn": 30,
+                    "sourceFile": "INQACCS.cbl"
+                  },
+                  "rawText": "MOVE ZERO TO NUMBER-OF-ACCOUNTS",
+                  "targetFieldIds": [
+                    "LK_L7_NUMBER-OF-ACCOUNTS"
+                  ],
+                  "fromExpr": "ZERO",
+                  "toTargets": [
+                    "NUMBER-OF-ACCOUNTS"
+                  ]
+                },
+                {
+                  "type": "MOVE",
+                  "location": {
+                    "startLine": 252,
+                    "endLine": 252,
+                    "startColumn": 17,
+                    "endColumn": 29,
+                    "sourceFile": "INQACCS.cbl"
+                  },
+                  "rawText": "MOVE '3' TO COMM-FAIL-CODE",
+                  "targetFieldIds": [
+                    "LK_L9_COMM-FAIL-CODE"
+                  ],
+                  "fromExpr": "'3'",
+                  "toTargets": [
+                    "COMM-FAIL-CODE"
+                  ]
+                },
+                {
+                  "type": "EXEC_CICS",
+                  "location": {
+                    "startLine": 254,
+                    "endLine": 258,
+                    "startColumn": 6,
+                    "endColumn": 6,
+                    "sourceFile": "INQACCS.cbl"
+                  },
+                  "rawText": "*>EXECCICS EXEC CICS SYNCPOINT *>EXECCICS ROLLBACK *>EXECCICS RESP(WS-CICS-RESP) *>EXECCICS RESP2(WS-CICS-RESP2) *>EXECCICS END-EXEC }",
+                  "subsystem": "CICS",
+                  "rawPayload": "EXEC CICS SYNCPOINT ROLLBACK RESP(WS-CICS-RESP) RESP2(WS-CICS-RESP2) END-EXEC"
+                },
+                {
+                  "type": "GO_TO",
+                  "location": {
+                    "startLine": 260,
+                    "endLine": 260,
+                    "startColumn": 17,
+                    "endColumn": 23,
+                    "sourceFile": "INQACCS.cbl"
+                  },
+                  "rawText": "GO TO FD999",
+                  "target": "FD999",
+                  "operation": "GO_TO"
+                }
+              ]
+            },
+            {
+              "type": "ADD",
+              "location": {
+                "startLine": 264,
+                "endLine": 264,
+                "startColumn": 14,
+                "endColumn": 49,
+                "sourceFile": "INQACCS.cbl"
+              },
+              "rawText": "ADD 1 TO NUMBER-OF-ACCOUNTS GIVING NUMBER-OF-ACCOUNTS",
+              "sourceFieldIds": [
+                "LK_L7_NUMBER-OF-ACCOUNTS"
+              ],
+              "operation": "ADD",
+              "expression": "ADD 1 TO NUMBER-OF-ACCOUNTS GIVING NUMBER-OF-ACCOUNTS"
+            },
+            {
+              "type": "MOVE",
+              "location": {
+                "startLine": 266,
+                "endLine": 267,
+                "startColumn": 14,
+                "endColumn": 47,
+                "sourceFile": "INQACCS.cbl"
+              },
+              "rawText": "MOVE HV-ACCOUNT-EYECATCHER TO COMM-EYE(NUMBER-OF-ACCOUNTS)",
+              "sourceFieldIds": [
+                "WS_L43_HV-ACCOUNT-EYECATCHER"
+              ],
+              "targetFieldIds": [
+                "LK_L13_COMM-EYE"
+              ],
+              "fromExpr": "HV-ACCOUNT-EYECATCHER",
+              "toTargets": [
+                "COMM-EYE"
+              ]
+            },
+            {
+              "type": "MOVE",
+              "location": {
+                "startLine": 268,
+                "endLine": 269,
+                "startColumn": 14,
+                "endColumn": 51,
+                "sourceFile": "INQACCS.cbl"
+              },
+              "rawText": "MOVE HV-ACCOUNT-CUST-NO TO COMM-CUSTNO(NUMBER-OF-ACCOUNTS)",
+              "sourceFieldIds": [
+                "WS_L44_HV-ACCOUNT-CUST-NO"
+              ],
+              "targetFieldIds": [
+                "LK_L14_COMM-CUSTNO"
+              ],
+              "fromExpr": "HV-ACCOUNT-CUST-NO",
+              "toTargets": [
+                "COMM-CUSTNO"
+              ]
+            },
+            {
+              "type": "MOVE",
+              "location": {
+                "startLine": 270,
+                "endLine": 271,
+                "startColumn": 14,
+                "endColumn": 50,
+                "sourceFile": "INQACCS.cbl"
+              },
+              "rawText": "MOVE HV-ACCOUNT-SORTCODE TO COMM-SCODE(NUMBER-OF-ACCOUNTS)",
+              "sourceFieldIds": [
+                "WS_L45_HV-ACCOUNT-SORTCODE"
+              ],
+              "targetFieldIds": [
+                "LK_L15_COMM-SCODE"
+              ],
+              "fromExpr": "HV-ACCOUNT-SORTCODE",
+              "toTargets": [
+                "COMM-SCODE"
+              ]
+            },
+            {
+              "type": "MOVE",
+              "location": {
+                "startLine": 272,
+                "endLine": 273,
+                "startColumn": 14,
+                "endColumn": 50,
+                "sourceFile": "INQACCS.cbl"
+              },
+              "rawText": "MOVE HV-ACCOUNT-ACC-NO TO COMM-ACCNO(NUMBER-OF-ACCOUNTS)",
+              "sourceFieldIds": [
+                "WS_L46_HV-ACCOUNT-ACC-NO"
+              ],
+              "targetFieldIds": [
+                "LK_L16_COMM-ACCNO"
+              ],
+              "fromExpr": "HV-ACCOUNT-ACC-NO",
+              "toTargets": [
+                "COMM-ACCNO"
+              ]
+            },
+            {
+              "type": "MOVE",
+              "location": {
+                "startLine": 274,
+                "endLine": 275,
+                "startColumn": 14,
+                "endColumn": 53,
+                "sourceFile": "INQACCS.cbl"
+              },
+              "rawText": "MOVE HV-ACCOUNT-ACC-TYPE TO COMM-ACC-TYPE(NUMBER-OF-ACCOUNTS)",
+              "sourceFieldIds": [
+                "WS_L47_HV-ACCOUNT-ACC-TYPE"
+              ],
+              "targetFieldIds": [
+                "LK_L17_COMM-ACC-TYPE"
+              ],
+              "fromExpr": "HV-ACCOUNT-ACC-TYPE",
+              "toTargets": [
+                "COMM-ACC-TYPE"
+              ]
+            },
+            {
+              "type": "MOVE",
+              "location": {
+                "startLine": 276,
+                "endLine": 277,
+                "startColumn": 14,
+                "endColumn": 53,
+                "sourceFile": "INQACCS.cbl"
+              },
+              "rawText": "MOVE HV-ACCOUNT-INT-RATE TO COMM-INT-RATE(NUMBER-OF-ACCOUNTS)",
+              "sourceFieldIds": [
+                "WS_L48_HV-ACCOUNT-INT-RATE"
+              ],
+              "targetFieldIds": [
+                "LK_L18_COMM-INT-RATE"
+              ],
+              "fromExpr": "HV-ACCOUNT-INT-RATE",
+              "toTargets": [
+                "COMM-INT-RATE"
+              ]
+            },
+            {
+              "type": "MOVE",
+              "location": {
+                "startLine": 278,
+                "endLine": 278,
+                "startColumn": 14,
+                "endColumn": 40,
+                "sourceFile": "INQACCS.cbl"
+              },
+              "rawText": "MOVE HV-ACCOUNT-OPENED TO DB2-DATE-REFORMAT",
+              "sourceFieldIds": [
+                "WS_L49_HV-ACCOUNT-OPENED"
+              ],
+              "targetFieldIds": [
+                "WS_L95_DB2-DATE-REFORMAT"
+              ],
+              "fromExpr": "HV-ACCOUNT-OPENED",
+              "toTargets": [
+                "DB2-DATE-REFORMAT"
+              ]
+            },
+            {
+              "type": "STRING",
+              "location": {
+                "startLine": 280,
+                "endLine": 285,
+                "startColumn": 14,
+                "endColumn": 14,
+                "sourceFile": "INQACCS.cbl"
+              },
+              "rawText": "STRING DB2-DATE-REF-DAY DB2-DATE-REF-MNTH DB2-DATE-REF-YR DELIMITED BY SIZE INTO COMM-OPENED(NUMBER-OF-ACCOUNTS) END-STRING",
+              "sourceFieldIds": [
+                "WS_L100_DB2-DATE-REF-DAY",
+                "WS_L98_DB2-DATE-REF-MNTH",
+                "WS_L96_DB2-DATE-REF-YR",
+                "LK_L19_COMM-OPENED",
+                "LK_L7_NUMBER-OF-ACCOUNTS"
+              ],
+              "operation": "STRING",
+              "expression": "STRING DB2-DATE-REF-DAY DB2-DATE-REF-MNTH DB2-DATE-REF-YR DELIMITED BY SIZE INTO COMM-OPENED(NUMBER-OF-ACCOUNTS) END-STRING"
+            },
+            {
+              "type": "MOVE",
+              "location": {
+                "startLine": 287,
+                "endLine": 288,
+                "startColumn": 14,
+                "endColumn": 53,
+                "sourceFile": "INQACCS.cbl"
+              },
+              "rawText": "MOVE HV-ACCOUNT-OVERDRAFT-LIM TO COMM-OVERDRAFT(NUMBER-OF-ACCOUNTS)",
+              "sourceFieldIds": [
+                "WS_L50_HV-ACCOUNT-OVERDRAFT-LIM"
+              ],
+              "targetFieldIds": [
+                "LK_L24_COMM-OVERDRAFT"
+              ],
+              "fromExpr": "HV-ACCOUNT-OVERDRAFT-LIM",
+              "toTargets": [
+                "COMM-OVERDRAFT"
+              ]
+            },
+            {
+              "type": "MOVE",
+              "location": {
+                "startLine": 289,
+                "endLine": 289,
+                "startColumn": 14,
+                "endColumn": 43,
+                "sourceFile": "INQACCS.cbl"
+              },
+              "rawText": "MOVE HV-ACCOUNT-LAST-STMT TO DB2-DATE-REFORMAT",
+              "sourceFieldIds": [
+                "WS_L51_HV-ACCOUNT-LAST-STMT"
+              ],
+              "targetFieldIds": [
+                "WS_L95_DB2-DATE-REFORMAT"
+              ],
+              "fromExpr": "HV-ACCOUNT-LAST-STMT",
+              "toTargets": [
+                "DB2-DATE-REFORMAT"
+              ]
+            },
+            {
+              "type": "STRING",
+              "location": {
+                "startLine": 291,
+                "endLine": 296,
+                "startColumn": 14,
+                "endColumn": 14,
+                "sourceFile": "INQACCS.cbl"
+              },
+              "rawText": "STRING DB2-DATE-REF-DAY DB2-DATE-REF-MNTH DB2-DATE-REF-YR DELIMITED BY SIZE INTO COMM-LAST-STMT-DT(NUMBER-OF-ACCOUNTS) END-STRING",
+              "sourceFieldIds": [
+                "WS_L100_DB2-DATE-REF-DAY",
+                "WS_L98_DB2-DATE-REF-MNTH",
+                "WS_L96_DB2-DATE-REF-YR",
+                "LK_L25_COMM-LAST-STMT-DT",
+                "LK_L7_NUMBER-OF-ACCOUNTS"
+              ],
+              "operation": "STRING",
+              "expression": "STRING DB2-DATE-REF-DAY DB2-DATE-REF-MNTH DB2-DATE-REF-YR DELIMITED BY SIZE INTO COMM-LAST-STMT-DT(NUMBER-OF-ACCOUNTS) END-STRING"
+            },
+            {
+              "type": "MOVE",
+              "location": {
+                "startLine": 298,
+                "endLine": 298,
+                "startColumn": 14,
+                "endColumn": 43,
+                "sourceFile": "INQACCS.cbl"
+              },
+              "rawText": "MOVE HV-ACCOUNT-NEXT-STMT TO DB2-DATE-REFORMAT",
+              "sourceFieldIds": [
+                "WS_L52_HV-ACCOUNT-NEXT-STMT"
+              ],
+              "targetFieldIds": [
+                "WS_L95_DB2-DATE-REFORMAT"
+              ],
+              "fromExpr": "HV-ACCOUNT-NEXT-STMT",
+              "toTargets": [
+                "DB2-DATE-REFORMAT"
+              ]
+            },
+            {
+              "type": "STRING",
+              "location": {
+                "startLine": 300,
+                "endLine": 305,
+                "startColumn": 14,
+                "endColumn": 14,
+                "sourceFile": "INQACCS.cbl"
+              },
+              "rawText": "STRING DB2-DATE-REF-DAY DB2-DATE-REF-MNTH DB2-DATE-REF-YR DELIMITED BY SIZE INTO COMM-NEXT-STMT-DT(NUMBER-OF-ACCOUNTS) END-STRING",
+              "sourceFieldIds": [
+                "WS_L100_DB2-DATE-REF-DAY",
+                "WS_L98_DB2-DATE-REF-MNTH",
+                "WS_L96_DB2-DATE-REF-YR",
+                "LK_L30_COMM-NEXT-STMT-DT",
+                "LK_L7_NUMBER-OF-ACCOUNTS"
+              ],
+              "operation": "STRING",
+              "expression": "STRING DB2-DATE-REF-DAY DB2-DATE-REF-MNTH DB2-DATE-REF-YR DELIMITED BY SIZE INTO COMM-NEXT-STMT-DT(NUMBER-OF-ACCOUNTS) END-STRING"
+            },
+            {
+              "type": "MOVE",
+              "location": {
+                "startLine": 307,
+                "endLine": 308,
+                "startColumn": 14,
+                "endColumn": 54,
+                "sourceFile": "INQACCS.cbl"
+              },
+              "rawText": "MOVE HV-ACCOUNT-ACTUAL-BAL TO COMM-ACTUAL-BAL(NUMBER-OF-ACCOUNTS)",
+              "sourceFieldIds": [
+                "WS_L54_HV-ACCOUNT-ACTUAL-BAL"
+              ],
+              "targetFieldIds": [
+                "LK_L36_COMM-ACTUAL-BAL"
+              ],
+              "fromExpr": "HV-ACCOUNT-ACTUAL-BAL",
+              "toTargets": [
+                "COMM-ACTUAL-BAL"
+              ]
+            },
+            {
+              "type": "MOVE",
+              "location": {
+                "startLine": 309,
+                "endLine": 310,
+                "startColumn": 14,
+                "endColumn": 53,
+                "sourceFile": "INQACCS.cbl"
+              },
+              "rawText": "MOVE HV-ACCOUNT-AVAIL-BAL TO COMM-AVAIL-BAL(NUMBER-OF-ACCOUNTS)",
+              "sourceFieldIds": [
+                "WS_L53_HV-ACCOUNT-AVAIL-BAL"
+              ],
+              "targetFieldIds": [
+                "LK_L35_COMM-AVAIL-BAL"
+              ],
+              "fromExpr": "HV-ACCOUNT-AVAIL-BAL",
+              "toTargets": [
+                "COMM-AVAIL-BAL"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "FD999",
+      "sectionParent": "FETCH-DATA",
+      "location": {
+        "startLine": 314,
+        "endLine": 315,
+        "startColumn": 7,
+        "endColumn": 15,
+        "sourceFile": "INQACCS.cbl"
+      },
+      "calledBy": [
+        "FD010"
+      ],
+      "fallthroughSuccessor": "GMOFH010",
+      "statements": [
+        {
+          "type": "EXIT",
+          "location": {
+            "startLine": 315,
+            "endLine": 315,
+            "startColumn": 11,
+            "endColumn": 11,
+            "sourceFile": "INQACCS.cbl"
+          },
+          "rawText": "EXIT",
+          "operation": "EXIT"
+        }
+      ]
+    },
+    {
+      "name": "GMOFH010",
+      "sectionParent": "GET-ME-OUT-OF-HERE",
+      "location": {
+        "startLine": 318,
+        "endLine": 322,
+        "startColumn": 7,
+        "endColumn": 17,
+        "sourceFile": "INQACCS.cbl"
+      },
+      "isTerminal": true,
+      "statements": [
+        {
+          "type": "EXEC_CICS",
+          "location": {
+            "startLine": 319,
+            "endLine": 320,
+            "startColumn": 6,
+            "endColumn": 6,
+            "sourceFile": "INQACCS.cbl"
+          },
+          "rawText": "*>EXECCICS EXEC CICS RETURN *>EXECCICS END-EXEC }",
+          "subsystem": "CICS",
+          "rawPayload": "EXEC CICS RETURN END-EXEC"
+        },
+        {
+          "type": "GOBACK",
+          "location": {
+            "startLine": 322,
+            "endLine": 322,
+            "startColumn": 11,
+            "endColumn": 11,
+            "sourceFile": "INQACCS.cbl"
+          },
+          "rawText": "GOBACK",
+          "operation": "GOBACK"
+        }
+      ]
+    },
+    {
+      "name": "GMOFH999",
+      "sectionParent": "GET-ME-OUT-OF-HERE",
+      "location": {
+        "startLine": 324,
+        "endLine": 325,
+        "startColumn": 7,
+        "endColumn": 15,
+        "sourceFile": "INQACCS.cbl"
+      },
+      "fallthroughSuccessor": "CFSDD010",
+      "statements": [
+        {
+          "type": "EXIT",
+          "location": {
+            "startLine": 325,
+            "endLine": 325,
+            "startColumn": 11,
+            "endColumn": 11,
+            "sourceFile": "INQACCS.cbl"
+          },
+          "rawText": "EXIT",
+          "operation": "EXIT"
+        }
+      ]
+    },
+    {
+      "name": "CFSDD010",
+      "sectionParent": "CHECK-FOR-STORM-DRAIN-DB2",
+      "location": {
+        "startLine": 329,
+        "endLine": 347,
+        "startColumn": 7,
+        "endColumn": 17,
+        "sourceFile": "INQACCS.cbl"
+      },
+      "fallthroughSuccessor": "CFSDD999",
+      "statements": [
+        {
+          "type": "EVALUATE",
+          "location": {
+            "startLine": 331,
+            "endLine": 339,
+            "startColumn": 11,
+            "endColumn": 11,
+            "sourceFile": "INQACCS.cbl"
+          },
+          "rawText": "EVALUATE SQLCODE WHEN 923 MOVE 'DB2 Connection lost ' TO STORM-DRAIN-CONDITION WHEN OTHER MOVE 'Not Storm Drain ' TO STORM-DRAIN-CONDITION END-EVALUATE",
+          "subjects": [
+            "SQLCODE"
+          ],
+          "whenBranches": [
+            {
+              "conditions": [
+                "WHEN 923"
+              ],
+              "statements": [
+                {
+                  "type": "MOVE",
+                  "location": {
+                    "startLine": 334,
+                    "endLine": 334,
+                    "startColumn": 17,
+                    "endColumn": 48,
+                    "sourceFile": "INQACCS.cbl"
+                  },
+                  "rawText": "MOVE 'DB2 Connection lost ' TO STORM-DRAIN-CONDITION",
+                  "targetFieldIds": [
+                    "WS_L109_STORM-DRAIN-CONDITION"
+                  ],
+                  "fromExpr": "'DB2 Connection lost '",
+                  "toTargets": [
+                    "STORM-DRAIN-CONDITION"
+                  ]
+                }
+              ]
+            }
+          ],
+          "whenOtherStatements": [
+            {
+              "type": "MOVE",
+              "location": {
+                "startLine": 337,
+                "endLine": 337,
+                "startColumn": 17,
+                "endColumn": 48,
+                "sourceFile": "INQACCS.cbl"
+              },
+              "rawText": "MOVE 'Not Storm Drain ' TO STORM-DRAIN-CONDITION",
+              "targetFieldIds": [
+                "WS_L109_STORM-DRAIN-CONDITION"
+              ],
+              "fromExpr": "'Not Storm Drain '",
+              "toTargets": [
+                "STORM-DRAIN-CONDITION"
+              ]
+            }
+          ]
+        },
+        {
+          "type": "IF",
+          "location": {
+            "startLine": 341,
+            "endLine": 347,
+            "startColumn": 11,
+            "endColumn": 11,
+            "sourceFile": "INQACCS.cbl"
+          },
+          "rawText": "IF STORM-DRAIN-CONDITION NOT EQUAL 'Not Storm Drain ' DISPLAY 'INQACCS: Check-For-Storm-Drain-DB2: Storm ' 'Drain condition (' STORM-DRAIN-CONDITION ') ' 'has been met (' SQLCODE-DISPLAY ').' ELSE CONTINUE END-IF",
+          "sourceFieldIds": [
+            "WS_L109_STORM-DRAIN-CONDITION"
+          ],
+          "condition": "STORM-DRAIN-CONDITION NOT EQUAL 'Not Storm Drain '",
+          "thenStatements": [
+            {
+              "type": "DISPLAY",
+              "location": {
+                "startLine": 342,
+                "endLine": 344,
+                "startColumn": 14,
+                "endColumn": 55,
+                "sourceFile": "INQACCS.cbl"
+              },
+              "rawText": "DISPLAY 'INQACCS: Check-For-Storm-Drain-DB2: Storm ' 'Drain condition (' STORM-DRAIN-CONDITION ') ' 'has been met (' SQLCODE-DISPLAY ').'",
+              "sourceFieldIds": [
+                "WS_L109_STORM-DRAIN-CONDITION",
+                "WS_L102_SQLCODE-DISPLAY"
+              ],
+              "operands": [
+                "'INQACCS: Check-For-Storm-Drain-DB2: Storm '",
+                "'Drain condition ('",
+                "STORM-DRAIN-CONDITION",
+                "') '",
+                "'has been met ('",
+                "SQLCODE-DISPLAY",
+                "').'"
+              ]
+            }
+          ],
+          "elseStatements": [
+            {
+              "type": "CONTINUE",
+              "location": {
+                "startLine": 346,
+                "endLine": 346,
+                "startColumn": 14,
+                "endColumn": 14,
+                "sourceFile": "INQACCS.cbl"
+              },
+              "rawText": "CONTINUE"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "CFSDD999",
+      "sectionParent": "CHECK-FOR-STORM-DRAIN-DB2",
+      "location": {
+        "startLine": 349,
+        "endLine": 350,
+        "startColumn": 7,
+        "endColumn": 15,
+        "sourceFile": "INQACCS.cbl"
+      },
+      "fallthroughSuccessor": "AH010",
+      "statements": [
+        {
+          "type": "EXIT",
+          "location": {
+            "startLine": 350,
+            "endLine": 350,
+            "startColumn": 11,
+            "endColumn": 11,
+            "sourceFile": "INQACCS.cbl"
+          },
+          "rawText": "EXIT",
+          "operation": "EXIT"
+        }
+      ]
+    },
+    {
+      "name": "AH010",
+      "sectionParent": "ABEND-HANDLING",
+      "location": {
+        "startLine": 354,
+        "endLine": 392,
+        "startColumn": 7,
+        "endColumn": 17,
+        "sourceFile": "INQACCS.cbl"
+      },
+      "fallthroughSuccessor": "AH999",
+      "statements": [
+        {
+          "type": "EXEC_CICS",
+          "location": {
+            "startLine": 356,
+            "endLine": 358,
+            "startColumn": 6,
+            "endColumn": 6,
+            "sourceFile": "INQACCS.cbl"
+          },
+          "rawText": "*>EXECCICS EXEC CICS ASSIGN *>EXECCICS ABCODE(MY-ABEND-CODE) *>EXECCICS END-EXEC }",
+          "subsystem": "CICS",
+          "rawPayload": "EXEC CICS ASSIGN ABCODE(MY-ABEND-CODE) END-EXEC"
+        },
+        {
+          "type": "EVALUATE",
+          "location": {
+            "startLine": 360,
+            "endLine": 384,
+            "startColumn": 11,
+            "endColumn": 11,
+            "sourceFile": "INQACCS.cbl"
+          },
+          "rawText": "EVALUATE MY-ABEND-CODE WHEN 'AD2Z' MOVE SQLCODE TO SQLCODE-DISPLAY DISPLAY 'DB2 DEADLOCK DETECTED IN INQACCS, SQLCODE=' SQLCODE-DISPLAY WHEN 'AFCR' WHEN 'AFCS' WHEN 'AFCT' MOVE 'Y' TO WS-STORM-DRAIN *>EXECCICS EXEC CICS SYNCPOINT ROLLBACK *>EXECCICS RESP(WS-CICS-RESP) *>EXECCICS RESP2(WS-CICS-RESP2) *>EXECCICS END-EXEC } MOVE 'N' TO COMM-SUCCESS *>EXECCICS EXEC CICS RETURN *>EXECCICS END-EXEC } END-EVALUATE",
+          "sourceFieldIds": [
+            "WS_L105_MY-ABEND-CODE"
+          ],
+          "subjects": [
+            "MY-ABEND-CODE"
+          ],
+          "whenBranches": [
+            {
+              "conditions": [
+                "WHEN 'AD2Z'"
+              ],
+              "statements": [
+                {
+                  "type": "MOVE",
+                  "location": {
+                    "startLine": 363,
+                    "endLine": 363,
+                    "startColumn": 17,
+                    "endColumn": 33,
+                    "sourceFile": "INQACCS.cbl"
+                  },
+                  "rawText": "MOVE SQLCODE TO SQLCODE-DISPLAY",
+                  "targetFieldIds": [
+                    "WS_L102_SQLCODE-DISPLAY"
+                  ],
+                  "fromExpr": "SQLCODE",
+                  "toTargets": [
+                    "SQLCODE-DISPLAY"
+                  ]
+                },
+                {
+                  "type": "DISPLAY",
+                  "location": {
+                    "startLine": 364,
+                    "endLine": 365,
+                    "startColumn": 17,
+                    "endColumn": 20,
+                    "sourceFile": "INQACCS.cbl"
+                  },
+                  "rawText": "DISPLAY 'DB2 DEADLOCK DETECTED IN INQACCS, SQLCODE=' SQLCODE-DISPLAY",
+                  "sourceFieldIds": [
+                    "WS_L102_SQLCODE-DISPLAY"
+                  ],
+                  "operands": [
+                    "'DB2 DEADLOCK DETECTED IN INQACCS, SQLCODE='",
+                    "SQLCODE-DISPLAY"
+                  ]
+                }
+              ]
+            },
+            {
+              "conditions": [
+                "WHEN 'AFCR'",
+                "WHEN 'AFCS'",
+                "WHEN 'AFCT'"
+              ],
+              "statements": [
+                {
+                  "type": "MOVE",
+                  "location": {
+                    "startLine": 372,
+                    "endLine": 372,
+                    "startColumn": 17,
+                    "endColumn": 29,
+                    "sourceFile": "INQACCS.cbl"
+                  },
+                  "rawText": "MOVE 'Y' TO WS-STORM-DRAIN",
+                  "targetFieldIds": [
+                    "WS_L107_WS-STORM-DRAIN"
+                  ],
+                  "fromExpr": "'Y'",
+                  "toTargets": [
+                    "WS-STORM-DRAIN"
+                  ]
+                },
+                {
+                  "type": "EXEC_CICS",
+                  "location": {
+                    "startLine": 374,
+                    "endLine": 377,
+                    "startColumn": 6,
+                    "endColumn": 6,
+                    "sourceFile": "INQACCS.cbl"
+                  },
+                  "rawText": "*>EXECCICS EXEC CICS SYNCPOINT ROLLBACK *>EXECCICS RESP(WS-CICS-RESP) *>EXECCICS RESP2(WS-CICS-RESP2) *>EXECCICS END-EXEC }",
+                  "subsystem": "CICS",
+                  "rawPayload": "EXEC CICS SYNCPOINT ROLLBACK RESP(WS-CICS-RESP) RESP2(WS-CICS-RESP2) END-EXEC"
+                },
+                {
+                  "type": "MOVE",
+                  "location": {
+                    "startLine": 379,
+                    "endLine": 379,
+                    "startColumn": 17,
+                    "endColumn": 29,
+                    "sourceFile": "INQACCS.cbl"
+                  },
+                  "rawText": "MOVE 'N' TO COMM-SUCCESS",
+                  "targetFieldIds": [
+                    "LK_L8_COMM-SUCCESS"
+                  ],
+                  "fromExpr": "'N'",
+                  "toTargets": [
+                    "COMM-SUCCESS"
+                  ]
+                },
+                {
+                  "type": "EXEC_CICS",
+                  "location": {
+                    "startLine": 381,
+                    "endLine": 382,
+                    "startColumn": 6,
+                    "endColumn": 6,
+                    "sourceFile": "INQACCS.cbl"
+                  },
+                  "rawText": "*>EXECCICS EXEC CICS RETURN *>EXECCICS END-EXEC }",
+                  "subsystem": "CICS",
+                  "rawPayload": "EXEC CICS RETURN END-EXEC"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "IF",
+          "location": {
+            "startLine": 386,
+            "endLine": 392,
+            "startColumn": 11,
+            "endColumn": 11,
+            "sourceFile": "INQACCS.cbl"
+          },
+          "rawText": "IF WS-STORM-DRAIN = 'N' *>EXECCICS EXEC CICS ABEND *>EXECCICS ABCODE( MY-ABEND-CODE) *>EXECCICS NODUMP *>EXECCICS CANCEL *>EXECCICS END-EXEC } END-IF",
+          "sourceFieldIds": [
+            "WS_L107_WS-STORM-DRAIN"
+          ],
+          "condition": "WS-STORM-DRAIN = 'N'",
+          "thenStatements": [
+            {
+              "type": "EXEC_CICS",
+              "location": {
+                "startLine": 387,
+                "endLine": 391,
+                "startColumn": 6,
+                "endColumn": 6,
+                "sourceFile": "INQACCS.cbl"
+              },
+              "rawText": "*>EXECCICS EXEC CICS ABEND *>EXECCICS ABCODE( MY-ABEND-CODE) *>EXECCICS NODUMP *>EXECCICS CANCEL *>EXECCICS END-EXEC }",
+              "subsystem": "CICS",
+              "rawPayload": "EXEC CICS ABEND ABCODE( MY-ABEND-CODE) NODUMP CANCEL END-EXEC"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "AH999",
+      "sectionParent": "ABEND-HANDLING",
+      "location": {
+        "startLine": 394,
+        "endLine": 395,
+        "startColumn": 7,
+        "endColumn": 15,
+        "sourceFile": "INQACCS.cbl"
+      },
+      "fallthroughSuccessor": "PTD010",
+      "statements": [
+        {
+          "type": "EXIT",
+          "location": {
+            "startLine": 395,
+            "endLine": 395,
+            "startColumn": 11,
+            "endColumn": 11,
+            "sourceFile": "INQACCS.cbl"
+          },
+          "rawText": "EXIT",
+          "operation": "EXIT"
+        }
+      ]
+    },
+    {
+      "name": "PTD010",
+      "sectionParent": "POPULATE-TIME-DATE",
+      "location": {
+        "startLine": 399,
+        "endLine": 410,
+        "startColumn": 7,
+        "endColumn": 27,
+        "sourceFile": "INQACCS.cbl"
+      },
+      "fallthroughSuccessor": "PTD999",
+      "statements": [
+        {
+          "type": "EXEC_CICS",
+          "location": {
+            "startLine": 401,
+            "endLine": 403,
+            "startColumn": 6,
+            "endColumn": 6,
+            "sourceFile": "INQACCS.cbl"
+          },
+          "rawText": "*>EXECCICS EXEC CICS ASKTIME *>EXECCICS ABSTIME(WS-U-TIME) *>EXECCICS END-EXEC }",
+          "subsystem": "CICS",
+          "rawPayload": "EXEC CICS ASKTIME ABSTIME(WS-U-TIME) END-EXEC"
+        },
+        {
+          "type": "EXEC_CICS",
+          "location": {
+            "startLine": 405,
+            "endLine": 410,
+            "startColumn": 6,
+            "endColumn": 6,
+            "sourceFile": "INQACCS.cbl"
+          },
+          "rawText": "*>EXECCICS EXEC CICS FORMATTIME *>EXECCICS ABSTIME(WS-U-TIME) *>EXECCICS DDMMYYYY(WS-ORIG-DATE) *>EXECCICS TIME(WS-TIME-NOW) *>EXECCICS DATESEP *>EXECCICS END-EXEC }",
+          "subsystem": "CICS",
+          "rawPayload": "EXEC CICS FORMATTIME ABSTIME(WS-U-TIME) DDMMYYYY(WS-ORIG-DATE) TIME(WS-TIME-NOW) DATESEP END-EXEC"
+        }
+      ]
+    },
+    {
+      "name": "PTD999",
+      "sectionParent": "POPULATE-TIME-DATE",
+      "location": {
+        "startLine": 412,
+        "endLine": 413,
+        "startColumn": 7,
+        "endColumn": 15,
+        "sourceFile": "INQACCS.cbl"
+      },
+      "statements": [
+        {
+          "type": "EXIT",
+          "location": {
+            "startLine": 413,
+            "endLine": 413,
+            "startColumn": 11,
+            "endColumn": 11,
+            "sourceFile": "INQACCS.cbl"
+          },
+          "rawText": "EXIT",
+          "operation": "EXIT"
+        }
+      ]
+    }
+  ],
+  "asgAuditSummary": {
+    "totalAsgDataEntries": 96,
+    "totalAsgLevel88Entries": 0,
+    "totalAsgParagraphs": 14,
+    "totalAsgStatements": 31,
+    "totalAsgCalls": 90,
+    "asgVariableNames": [
+      "SORTCODE",
+      "HOST-ACCOUNT-ROW",
+      "HV-ACCOUNT-EYECATCHER",
+      "HV-ACCOUNT-CUST-NO",
+      "HV-ACCOUNT-SORTCODE",
+      "HV-ACCOUNT-ACC-NO",
+      "HV-ACCOUNT-ACC-TYPE",
+      "HV-ACCOUNT-INT-RATE",
+      "HV-ACCOUNT-OPENED",
+      "HV-ACCOUNT-OVERDRAFT-LIM",
+      "HV-ACCOUNT-LAST-STMT",
+      "HV-ACCOUNT-NEXT-STMT",
+      "HV-ACCOUNT-AVAIL-BAL",
+      "HV-ACCOUNT-ACTUAL-BAL",
+      "EIBRCODE-NICE",
+      "EIBRCODE-FIRST",
+      "EIBRCODE-SECOND",
+      "EIBRCODE-THIRD",
+      "EIBRCODE-FOURTH",
+      "EIBRCODE-FIFTH",
+      "EIBRCODE-SIXTH",
+      "WS-CICS-WORK-AREA",
+      "WS-CICS-RESP",
+      "WS-CICS-RESP2",
+      "DB2-DATE-REFORMAT",
+      "DB2-DATE-REF-YR",
+      "DB2-DATE-REF-MNTH",
+      "DB2-DATE-REF-DAY",
+      "SQLCODE-DISPLAY",
+      "MY-ABEND-CODE",
+      "WS-STORM-DRAIN",
+      "STORM-DRAIN-CONDITION",
+      "WS-U-TIME",
+      "WS-ORIG-DATE",
+      "WS-ORIG-DATE-GRP",
+      "WS-ORIG-DATE-DD",
+      "WS-ORIG-DATE-MM",
+      "WS-ORIG-DATE-YYYY",
+      "WS-TIME-DATA",
+      "WS-TIME-NOW",
+      "WS-TIME-NOW-GRP",
+      "WS-TIME-NOW-GRP-HH",
+      "WS-TIME-NOW-GRP-MM",
+      "WS-TIME-NOW-GRP-SS",
+      "WS-ABEND-PGM",
+      "ABNDINFO-REC",
+      "ABND-VSAM-KEY",
+      "ABND-UTIME-KEY",
+      "ABND-TASKNO-KEY",
+      "ABND-APPLID",
+      "ABND-TRANID",
+      "ABND-DATE",
+      "ABND-TIME",
+      "ABND-CODE",
+      "ABND-PROGRAM",
+      "ABND-RESPCODE",
+      "ABND-RESP2CODE",
+      "ABND-SQLCODE",
+      "ABND-FREEFORM",
+      "DFHCOMMAREA",
+      "NUMBER-OF-ACCOUNTS",
+      "COMM-SUCCESS",
+      "COMM-FAIL-CODE",
+      "COMM-PCB-POINTER",
+      "ACCOUNT-DETAILS",
+      "COMM-EYE",
+      "COMM-CUSTNO",
+      "COMM-SCODE",
+      "COMM-ACCNO",
+      "COMM-ACC-TYPE",
+      "COMM-INT-RATE",
+      "COMM-OPENED",
+      "COMM-OPENED-GROUP",
+      "COMM-OPENED-DAY",
+      "COMM-OPENED-MONTH",
+      "COMM-OPENED-YEAR",
+      "COMM-OVERDRAFT",
+      "COMM-LAST-STMT-DT",
+      "COMM-LAST-STMT-GROUP",
+      "COMM-LAST-STMT-DAY",
+      "COMM-LAST-STMT-MONTH",
+      "COMM-LAST-STMT-YEAR",
+      "COMM-NEXT-STMT-DT",
+      "COMM-NEXT-STMT-GROUP",
+      "COMM-NEXT-STMT-DAY",
+      "COMM-NEXT-STMT-MONTH",
+      "COMM-NEXT-STMT-YEAR",
+      "COMM-AVAIL-BAL",
+      "COMM-ACTUAL-BAL"
+    ],
+    "asgParagraphCalls": {
+      "RAD999": [
+        "RAD999",
+        "RAD999"
+      ],
+      "FD999": [
+        "FD999",
+        "FD999"
+      ]
+    }
+  }
+}

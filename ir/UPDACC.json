@@ -1,0 +1,4019 @@
+{
+  "programId": "UPDACC",
+  "author": "*>CE Jon Collett. *>CE",
+  "format": "FIXED",
+  "dataDictionary": {
+    "workingStorageSection": [
+      {
+        "id": "WS_L7_SORTCODE",
+        "qualifiedName": "SORTCODE",
+        "level": 77,
+        "name": "SORTCODE",
+        "pic": "9(6)",
+        "usage": "DISPLAY",
+        "value": "987654",
+        "logicalType": "Numeric Display (6 digits)",
+        "byteOffset": 0,
+        "relativeOffset": 0,
+        "byteLength": 6,
+        "elementByteLength": 6,
+        "location": {
+          "startLine": 7,
+          "endLine": 7,
+          "startColumn": 7,
+          "endColumn": 50,
+          "sourceFile": "SORTCODE.cpy"
+        }
+      },
+      {
+        "id": "WS_L53_SYSIDERR-RETRY",
+        "qualifiedName": "SYSIDERR-RETRY",
+        "level": 77,
+        "name": "SYSIDERR-RETRY",
+        "pic": "999",
+        "usage": "DISPLAY",
+        "logicalType": "Numeric Display (3 digits)",
+        "byteOffset": 6,
+        "relativeOffset": 0,
+        "byteLength": 3,
+        "elementByteLength": 3,
+        "location": {
+          "startLine": 53,
+          "endLine": 53,
+          "startColumn": 7,
+          "endColumn": 47,
+          "sourceFile": "UPDACC.cbl"
+        }
+      },
+      {
+        "id": "WS_L56_FILLER",
+        "qualifiedName": "FILLER",
+        "level": 1,
+        "name": "FILLER",
+        "logicalType": "Elementary",
+        "byteOffset": 9,
+        "relativeOffset": 0,
+        "byteLength": 0,
+        "elementByteLength": 0,
+        "location": {
+          "startLine": 56,
+          "endLine": 58,
+          "startColumn": 6,
+          "endColumn": 26,
+          "sourceFile": "UPDACC.cbl"
+        }
+      },
+      {
+        "id": "WS_L61_HOST-ACCOUNT-ROW",
+        "qualifiedName": "HOST-ACCOUNT-ROW",
+        "level": 1,
+        "name": "HOST-ACCOUNT-ROW",
+        "usage": "DISPLAY",
+        "logicalType": "Group",
+        "byteOffset": 9,
+        "relativeOffset": 0,
+        "byteLength": 88,
+        "elementByteLength": 88,
+        "children": [
+          {
+            "id": "WS_L62_HV-ACCOUNT-EYECATCHER",
+            "qualifiedName": "HOST-ACCOUNT-ROW.HV-ACCOUNT-EYECATCHER",
+            "level": 3,
+            "name": "HV-ACCOUNT-EYECATCHER",
+            "pic": "X(4)",
+            "usage": "DISPLAY",
+            "logicalType": "Alphanumeric (4 chars)",
+            "byteOffset": 9,
+            "relativeOffset": 0,
+            "byteLength": 4,
+            "elementByteLength": 4,
+            "location": {
+              "startLine": 62,
+              "endLine": 62,
+              "startColumn": 10,
+              "endColumn": 48,
+              "sourceFile": "UPDACC.cbl"
+            }
+          },
+          {
+            "id": "WS_L63_HV-ACCOUNT-CUST-NO",
+            "qualifiedName": "HOST-ACCOUNT-ROW.HV-ACCOUNT-CUST-NO",
+            "level": 3,
+            "name": "HV-ACCOUNT-CUST-NO",
+            "pic": "X(10)",
+            "usage": "DISPLAY",
+            "logicalType": "Alphanumeric (10 chars)",
+            "byteOffset": 13,
+            "relativeOffset": 4,
+            "byteLength": 10,
+            "elementByteLength": 10,
+            "location": {
+              "startLine": 63,
+              "endLine": 63,
+              "startColumn": 10,
+              "endColumn": 49,
+              "sourceFile": "UPDACC.cbl"
+            }
+          },
+          {
+            "id": "WS_L64_HV-ACCOUNT-KEY",
+            "qualifiedName": "HOST-ACCOUNT-ROW.HV-ACCOUNT-KEY",
+            "level": 3,
+            "name": "HV-ACCOUNT-KEY",
+            "usage": "DISPLAY",
+            "logicalType": "Group",
+            "byteOffset": 23,
+            "relativeOffset": 14,
+            "byteLength": 14,
+            "elementByteLength": 14,
+            "children": [
+              {
+                "id": "WS_L65_HV-ACCOUNT-SORTCODE",
+                "qualifiedName": "HOST-ACCOUNT-ROW.HV-ACCOUNT-KEY.HV-ACCOUNT-SORTCODE",
+                "level": 5,
+                "name": "HV-ACCOUNT-SORTCODE",
+                "pic": "X(6)",
+                "usage": "DISPLAY",
+                "logicalType": "Alphanumeric (6 chars)",
+                "byteOffset": 23,
+                "relativeOffset": 0,
+                "byteLength": 6,
+                "elementByteLength": 6,
+                "location": {
+                  "startLine": 65,
+                  "endLine": 65,
+                  "startColumn": 13,
+                  "endColumn": 48,
+                  "sourceFile": "UPDACC.cbl"
+                }
+              },
+              {
+                "id": "WS_L66_HV-ACCOUNT-ACC-NO",
+                "qualifiedName": "HOST-ACCOUNT-ROW.HV-ACCOUNT-KEY.HV-ACCOUNT-ACC-NO",
+                "level": 5,
+                "name": "HV-ACCOUNT-ACC-NO",
+                "pic": "X(8)",
+                "usage": "DISPLAY",
+                "logicalType": "Alphanumeric (8 chars)",
+                "byteOffset": 29,
+                "relativeOffset": 6,
+                "byteLength": 8,
+                "elementByteLength": 8,
+                "location": {
+                  "startLine": 66,
+                  "endLine": 66,
+                  "startColumn": 13,
+                  "endColumn": 48,
+                  "sourceFile": "UPDACC.cbl"
+                }
+              }
+            ],
+            "location": {
+              "startLine": 64,
+              "endLine": 64,
+              "startColumn": 10,
+              "endColumn": 27,
+              "sourceFile": "UPDACC.cbl"
+            }
+          },
+          {
+            "id": "WS_L67_HV-ACCOUNT-ACC-TYPE",
+            "qualifiedName": "HOST-ACCOUNT-ROW.HV-ACCOUNT-ACC-TYPE",
+            "level": 3,
+            "name": "HV-ACCOUNT-ACC-TYPE",
+            "pic": "X(8)",
+            "usage": "DISPLAY",
+            "logicalType": "Alphanumeric (8 chars)",
+            "byteOffset": 37,
+            "relativeOffset": 28,
+            "byteLength": 8,
+            "elementByteLength": 8,
+            "location": {
+              "startLine": 67,
+              "endLine": 67,
+              "startColumn": 10,
+              "endColumn": 48,
+              "sourceFile": "UPDACC.cbl"
+            }
+          },
+          {
+            "id": "WS_L68_HV-ACCOUNT-INT-RATE",
+            "qualifiedName": "HOST-ACCOUNT-ROW.HV-ACCOUNT-INT-RATE",
+            "level": 3,
+            "name": "HV-ACCOUNT-INT-RATE",
+            "pic": "S9(4)V99",
+            "usage": "COMP_3",
+            "logicalType": "Signed Decimal(6, 2) Packed",
+            "byteOffset": 45,
+            "relativeOffset": 36,
+            "byteLength": 4,
+            "elementByteLength": 4,
+            "location": {
+              "startLine": 68,
+              "endLine": 68,
+              "startColumn": 10,
+              "endColumn": 59,
+              "sourceFile": "UPDACC.cbl"
+            }
+          },
+          {
+            "id": "WS_L69_HV-ACCOUNT-OPENED",
+            "qualifiedName": "HOST-ACCOUNT-ROW.HV-ACCOUNT-OPENED",
+            "level": 3,
+            "name": "HV-ACCOUNT-OPENED",
+            "pic": "X(10)",
+            "usage": "DISPLAY",
+            "logicalType": "Alphanumeric (10 chars)",
+            "byteOffset": 49,
+            "relativeOffset": 40,
+            "byteLength": 10,
+            "elementByteLength": 10,
+            "location": {
+              "startLine": 69,
+              "endLine": 69,
+              "startColumn": 10,
+              "endColumn": 49,
+              "sourceFile": "UPDACC.cbl"
+            }
+          },
+          {
+            "id": "WS_L70_HV-ACCOUNT-OVERDRAFT-LIM",
+            "qualifiedName": "HOST-ACCOUNT-ROW.HV-ACCOUNT-OVERDRAFT-LIM",
+            "level": 3,
+            "name": "HV-ACCOUNT-OVERDRAFT-LIM",
+            "pic": "S9(9)",
+            "usage": "COMP",
+            "logicalType": "Signed Integer (32-bit Binary)",
+            "byteOffset": 59,
+            "relativeOffset": 50,
+            "byteLength": 4,
+            "elementByteLength": 4,
+            "location": {
+              "startLine": 70,
+              "endLine": 70,
+              "startColumn": 10,
+              "endColumn": 54,
+              "sourceFile": "UPDACC.cbl"
+            }
+          },
+          {
+            "id": "WS_L71_HV-ACCOUNT-LAST-STMT",
+            "qualifiedName": "HOST-ACCOUNT-ROW.HV-ACCOUNT-LAST-STMT",
+            "level": 3,
+            "name": "HV-ACCOUNT-LAST-STMT",
+            "pic": "X(10)",
+            "usage": "DISPLAY",
+            "logicalType": "Alphanumeric (10 chars)",
+            "byteOffset": 63,
+            "relativeOffset": 54,
+            "byteLength": 10,
+            "elementByteLength": 10,
+            "location": {
+              "startLine": 71,
+              "endLine": 71,
+              "startColumn": 10,
+              "endColumn": 49,
+              "sourceFile": "UPDACC.cbl"
+            }
+          },
+          {
+            "id": "WS_L72_HV-ACCOUNT-NEXT-STMT",
+            "qualifiedName": "HOST-ACCOUNT-ROW.HV-ACCOUNT-NEXT-STMT",
+            "level": 3,
+            "name": "HV-ACCOUNT-NEXT-STMT",
+            "pic": "X(10)",
+            "usage": "DISPLAY",
+            "logicalType": "Alphanumeric (10 chars)",
+            "byteOffset": 73,
+            "relativeOffset": 64,
+            "byteLength": 10,
+            "elementByteLength": 10,
+            "location": {
+              "startLine": 72,
+              "endLine": 72,
+              "startColumn": 10,
+              "endColumn": 49,
+              "sourceFile": "UPDACC.cbl"
+            }
+          },
+          {
+            "id": "WS_L73_HV-ACCOUNT-AVAIL-BAL",
+            "qualifiedName": "HOST-ACCOUNT-ROW.HV-ACCOUNT-AVAIL-BAL",
+            "level": 3,
+            "name": "HV-ACCOUNT-AVAIL-BAL",
+            "pic": "S9(10)V99",
+            "usage": "COMP_3",
+            "logicalType": "Signed Decimal(12, 2) Packed",
+            "byteOffset": 83,
+            "relativeOffset": 74,
+            "byteLength": 7,
+            "elementByteLength": 7,
+            "location": {
+              "startLine": 73,
+              "endLine": 73,
+              "startColumn": 10,
+              "endColumn": 60,
+              "sourceFile": "UPDACC.cbl"
+            }
+          },
+          {
+            "id": "WS_L74_HV-ACCOUNT-ACTUAL-BAL",
+            "qualifiedName": "HOST-ACCOUNT-ROW.HV-ACCOUNT-ACTUAL-BAL",
+            "level": 3,
+            "name": "HV-ACCOUNT-ACTUAL-BAL",
+            "pic": "S9(10)V99",
+            "usage": "COMP_3",
+            "logicalType": "Signed Decimal(12, 2) Packed",
+            "byteOffset": 90,
+            "relativeOffset": 81,
+            "byteLength": 7,
+            "elementByteLength": 7,
+            "location": {
+              "startLine": 74,
+              "endLine": 74,
+              "startColumn": 10,
+              "endColumn": 60,
+              "sourceFile": "UPDACC.cbl"
+            }
+          }
+        ],
+        "location": {
+          "startLine": 61,
+          "endLine": 61,
+          "startColumn": 7,
+          "endColumn": 26,
+          "sourceFile": "UPDACC.cbl"
+        }
+      },
+      {
+        "id": "WS_L78_FILLER",
+        "qualifiedName": "FILLER",
+        "level": 1,
+        "name": "FILLER",
+        "logicalType": "Elementary",
+        "byteOffset": 97,
+        "relativeOffset": 0,
+        "byteLength": 0,
+        "elementByteLength": 0,
+        "location": {
+          "startLine": 78,
+          "endLine": 80,
+          "startColumn": 6,
+          "endColumn": 26,
+          "sourceFile": "UPDACC.cbl"
+        }
+      },
+      {
+        "id": "WS_L82_SQLCODE-DISPLAY",
+        "qualifiedName": "SQLCODE-DISPLAY",
+        "level": 1,
+        "name": "SQLCODE-DISPLAY",
+        "pic": "S9(8)",
+        "usage": "DISPLAY",
+        "logicalType": "Signed Numeric Display (8 digits)",
+        "byteOffset": 97,
+        "relativeOffset": 0,
+        "byteLength": 8,
+        "elementByteLength": 8,
+        "isSignSeparate": true,
+        "location": {
+          "startLine": 82,
+          "endLine": 83,
+          "startColumn": 8,
+          "endColumn": 33,
+          "sourceFile": "UPDACC.cbl"
+        }
+      },
+      {
+        "id": "WS_L85_WS-CICS-WORK-AREA",
+        "qualifiedName": "WS-CICS-WORK-AREA",
+        "level": 1,
+        "name": "WS-CICS-WORK-AREA",
+        "usage": "DISPLAY",
+        "logicalType": "Group",
+        "byteOffset": 105,
+        "relativeOffset": 0,
+        "byteLength": 8,
+        "elementByteLength": 8,
+        "children": [
+          {
+            "id": "WS_L86_WS-CICS-RESP",
+            "qualifiedName": "WS-CICS-WORK-AREA.WS-CICS-RESP",
+            "level": 5,
+            "name": "WS-CICS-RESP",
+            "pic": "S9(8)",
+            "usage": "COMP",
+            "logicalType": "Signed Integer (32-bit Binary)",
+            "byteOffset": 105,
+            "relativeOffset": 0,
+            "byteLength": 4,
+            "elementByteLength": 4,
+            "location": {
+              "startLine": 86,
+              "endLine": 86,
+              "startColumn": 10,
+              "endColumn": 54,
+              "sourceFile": "UPDACC.cbl"
+            }
+          },
+          {
+            "id": "WS_L87_WS-CICS-RESP2",
+            "qualifiedName": "WS-CICS-WORK-AREA.WS-CICS-RESP2",
+            "level": 5,
+            "name": "WS-CICS-RESP2",
+            "pic": "S9(8)",
+            "usage": "COMP",
+            "logicalType": "Signed Integer (32-bit Binary)",
+            "byteOffset": 109,
+            "relativeOffset": 4,
+            "byteLength": 4,
+            "elementByteLength": 4,
+            "location": {
+              "startLine": 87,
+              "endLine": 87,
+              "startColumn": 10,
+              "endColumn": 54,
+              "sourceFile": "UPDACC.cbl"
+            }
+          }
+        ],
+        "location": {
+          "startLine": 85,
+          "endLine": 85,
+          "startColumn": 7,
+          "endColumn": 27,
+          "sourceFile": "UPDACC.cbl"
+        }
+      }
+    ],
+    "linkageSection": [
+      {
+        "id": "LK_L154_DFHCOMMAREA",
+        "qualifiedName": "DFHCOMMAREA",
+        "level": 1,
+        "name": "DFHCOMMAREA",
+        "usage": "DISPLAY",
+        "logicalType": "Group",
+        "byteOffset": 0,
+        "relativeOffset": 0,
+        "byteLength": 99,
+        "elementByteLength": 99,
+        "children": [
+          {
+            "id": "LK_L7_COMM-EYE",
+            "qualifiedName": "DFHCOMMAREA.COMM-EYE",
+            "level": 3,
+            "name": "COMM-EYE",
+            "pic": "X(4)",
+            "usage": "DISPLAY",
+            "logicalType": "Alphanumeric (4 chars)",
+            "byteOffset": 0,
+            "relativeOffset": 0,
+            "byteLength": 4,
+            "elementByteLength": 4,
+            "location": {
+              "startLine": 7,
+              "endLine": 7,
+              "startColumn": 10,
+              "endColumn": 47,
+              "sourceFile": "UPDACC.cpy"
+            }
+          },
+          {
+            "id": "LK_L8_COMM-CUSTNO",
+            "qualifiedName": "DFHCOMMAREA.COMM-CUSTNO",
+            "level": 3,
+            "name": "COMM-CUSTNO",
+            "pic": "X(10)",
+            "usage": "DISPLAY",
+            "logicalType": "Alphanumeric (10 chars)",
+            "byteOffset": 4,
+            "relativeOffset": 4,
+            "byteLength": 10,
+            "elementByteLength": 10,
+            "location": {
+              "startLine": 8,
+              "endLine": 8,
+              "startColumn": 10,
+              "endColumn": 48,
+              "sourceFile": "UPDACC.cpy"
+            }
+          },
+          {
+            "id": "LK_L9_COMM-SCODE",
+            "qualifiedName": "DFHCOMMAREA.COMM-SCODE",
+            "level": 3,
+            "name": "COMM-SCODE",
+            "pic": "X(6)",
+            "usage": "DISPLAY",
+            "logicalType": "Alphanumeric (6 chars)",
+            "byteOffset": 14,
+            "relativeOffset": 14,
+            "byteLength": 6,
+            "elementByteLength": 6,
+            "location": {
+              "startLine": 9,
+              "endLine": 9,
+              "startColumn": 10,
+              "endColumn": 47,
+              "sourceFile": "UPDACC.cpy"
+            }
+          },
+          {
+            "id": "LK_L10_COMM-ACCNO",
+            "qualifiedName": "DFHCOMMAREA.COMM-ACCNO",
+            "level": 3,
+            "name": "COMM-ACCNO",
+            "pic": "9(8)",
+            "usage": "DISPLAY",
+            "logicalType": "Numeric Display (8 digits)",
+            "byteOffset": 20,
+            "relativeOffset": 20,
+            "byteLength": 8,
+            "elementByteLength": 8,
+            "location": {
+              "startLine": 10,
+              "endLine": 10,
+              "startColumn": 10,
+              "endColumn": 47,
+              "sourceFile": "UPDACC.cpy"
+            }
+          },
+          {
+            "id": "LK_L11_COMM-ACC-TYPE",
+            "qualifiedName": "DFHCOMMAREA.COMM-ACC-TYPE",
+            "level": 3,
+            "name": "COMM-ACC-TYPE",
+            "pic": "X(8)",
+            "usage": "DISPLAY",
+            "logicalType": "Alphanumeric (8 chars)",
+            "byteOffset": 28,
+            "relativeOffset": 28,
+            "byteLength": 8,
+            "elementByteLength": 8,
+            "location": {
+              "startLine": 11,
+              "endLine": 11,
+              "startColumn": 10,
+              "endColumn": 47,
+              "sourceFile": "UPDACC.cpy"
+            }
+          },
+          {
+            "id": "LK_L12_COMM-INT-RATE",
+            "qualifiedName": "DFHCOMMAREA.COMM-INT-RATE",
+            "level": 3,
+            "name": "COMM-INT-RATE",
+            "pic": "9(4)V99",
+            "usage": "DISPLAY",
+            "logicalType": "Decimal Display (6, 2)",
+            "byteOffset": 36,
+            "relativeOffset": 36,
+            "byteLength": 6,
+            "elementByteLength": 6,
+            "location": {
+              "startLine": 12,
+              "endLine": 12,
+              "startColumn": 10,
+              "endColumn": 50,
+              "sourceFile": "UPDACC.cpy"
+            }
+          },
+          {
+            "id": "LK_L13_COMM-OPENED",
+            "qualifiedName": "DFHCOMMAREA.COMM-OPENED",
+            "level": 3,
+            "name": "COMM-OPENED",
+            "pic": "9(8)",
+            "usage": "DISPLAY",
+            "logicalType": "Numeric Display (8 digits)",
+            "byteOffset": 42,
+            "relativeOffset": 42,
+            "byteLength": 8,
+            "elementByteLength": 8,
+            "location": {
+              "startLine": 13,
+              "endLine": 13,
+              "startColumn": 10,
+              "endColumn": 47,
+              "sourceFile": "UPDACC.cpy"
+            }
+          },
+          {
+            "id": "LK_L14_COMM-OPENED-GROUP",
+            "qualifiedName": "DFHCOMMAREA.COMM-OPENED-GROUP",
+            "level": 3,
+            "name": "COMM-OPENED-GROUP",
+            "usage": "DISPLAY",
+            "redefines": "COMM-OPENED",
+            "logicalType": "Group",
+            "byteOffset": 42,
+            "relativeOffset": 42,
+            "byteLength": 8,
+            "elementByteLength": 8,
+            "children": [
+              {
+                "id": "LK_L15_COMM-OPENED-DAY",
+                "qualifiedName": "DFHCOMMAREA.COMM-OPENED-GROUP.COMM-OPENED-DAY",
+                "level": 5,
+                "name": "COMM-OPENED-DAY",
+                "pic": "99",
+                "usage": "DISPLAY",
+                "logicalType": "Numeric Display (2 digits)",
+                "byteOffset": 42,
+                "relativeOffset": 0,
+                "byteLength": 2,
+                "elementByteLength": 2,
+                "location": {
+                  "startLine": 15,
+                  "endLine": 15,
+                  "startColumn": 13,
+                  "endColumn": 51,
+                  "sourceFile": "UPDACC.cpy"
+                }
+              },
+              {
+                "id": "LK_L16_COMM-OPENED-MONTH",
+                "qualifiedName": "DFHCOMMAREA.COMM-OPENED-GROUP.COMM-OPENED-MONTH",
+                "level": 5,
+                "name": "COMM-OPENED-MONTH",
+                "pic": "99",
+                "usage": "DISPLAY",
+                "logicalType": "Numeric Display (2 digits)",
+                "byteOffset": 44,
+                "relativeOffset": 2,
+                "byteLength": 2,
+                "elementByteLength": 2,
+                "location": {
+                  "startLine": 16,
+                  "endLine": 16,
+                  "startColumn": 13,
+                  "endColumn": 51,
+                  "sourceFile": "UPDACC.cpy"
+                }
+              },
+              {
+                "id": "LK_L17_COMM-OPENED-YEAR",
+                "qualifiedName": "DFHCOMMAREA.COMM-OPENED-GROUP.COMM-OPENED-YEAR",
+                "level": 5,
+                "name": "COMM-OPENED-YEAR",
+                "pic": "9999",
+                "usage": "DISPLAY",
+                "logicalType": "Numeric Display (4 digits)",
+                "byteOffset": 46,
+                "relativeOffset": 4,
+                "byteLength": 4,
+                "elementByteLength": 4,
+                "location": {
+                  "startLine": 17,
+                  "endLine": 17,
+                  "startColumn": 13,
+                  "endColumn": 53,
+                  "sourceFile": "UPDACC.cpy"
+                }
+              }
+            ],
+            "location": {
+              "startLine": 14,
+              "endLine": 14,
+              "startColumn": 10,
+              "endColumn": 52,
+              "sourceFile": "UPDACC.cpy"
+            }
+          },
+          {
+            "id": "LK_L18_COMM-OVERDRAFT",
+            "qualifiedName": "DFHCOMMAREA.COMM-OVERDRAFT",
+            "level": 3,
+            "name": "COMM-OVERDRAFT",
+            "pic": "9(8)",
+            "usage": "DISPLAY",
+            "logicalType": "Numeric Display (8 digits)",
+            "byteOffset": 50,
+            "relativeOffset": 50,
+            "byteLength": 8,
+            "elementByteLength": 8,
+            "location": {
+              "startLine": 18,
+              "endLine": 18,
+              "startColumn": 10,
+              "endColumn": 47,
+              "sourceFile": "UPDACC.cpy"
+            }
+          },
+          {
+            "id": "LK_L19_COMM-LAST-STMT-DT",
+            "qualifiedName": "DFHCOMMAREA.COMM-LAST-STMT-DT",
+            "level": 3,
+            "name": "COMM-LAST-STMT-DT",
+            "pic": "9(8)",
+            "usage": "DISPLAY",
+            "logicalType": "Numeric Display (8 digits)",
+            "byteOffset": 58,
+            "relativeOffset": 58,
+            "byteLength": 8,
+            "elementByteLength": 8,
+            "location": {
+              "startLine": 19,
+              "endLine": 19,
+              "startColumn": 10,
+              "endColumn": 47,
+              "sourceFile": "UPDACC.cpy"
+            }
+          },
+          {
+            "id": "LK_L20_COMM-LAST-STMNT-GROUP",
+            "qualifiedName": "DFHCOMMAREA.COMM-LAST-STMNT-GROUP",
+            "level": 3,
+            "name": "COMM-LAST-STMNT-GROUP",
+            "usage": "DISPLAY",
+            "redefines": "COMM-LAST-STMT-DT",
+            "logicalType": "Group",
+            "byteOffset": 58,
+            "relativeOffset": 58,
+            "byteLength": 8,
+            "elementByteLength": 8,
+            "children": [
+              {
+                "id": "LK_L21_COMM-LASTST-DAY",
+                "qualifiedName": "DFHCOMMAREA.COMM-LAST-STMNT-GROUP.COMM-LASTST-DAY",
+                "level": 5,
+                "name": "COMM-LASTST-DAY",
+                "pic": "99",
+                "usage": "DISPLAY",
+                "logicalType": "Numeric Display (2 digits)",
+                "byteOffset": 58,
+                "relativeOffset": 0,
+                "byteLength": 2,
+                "elementByteLength": 2,
+                "location": {
+                  "startLine": 21,
+                  "endLine": 21,
+                  "startColumn": 13,
+                  "endColumn": 52,
+                  "sourceFile": "UPDACC.cpy"
+                }
+              },
+              {
+                "id": "LK_L22_COMM-LASTST-MONTH",
+                "qualifiedName": "DFHCOMMAREA.COMM-LAST-STMNT-GROUP.COMM-LASTST-MONTH",
+                "level": 5,
+                "name": "COMM-LASTST-MONTH",
+                "pic": "99",
+                "usage": "DISPLAY",
+                "logicalType": "Numeric Display (2 digits)",
+                "byteOffset": 60,
+                "relativeOffset": 2,
+                "byteLength": 2,
+                "elementByteLength": 2,
+                "location": {
+                  "startLine": 22,
+                  "endLine": 22,
+                  "startColumn": 13,
+                  "endColumn": 52,
+                  "sourceFile": "UPDACC.cpy"
+                }
+              },
+              {
+                "id": "LK_L23_COMM-LASTST-YEAR",
+                "qualifiedName": "DFHCOMMAREA.COMM-LAST-STMNT-GROUP.COMM-LASTST-YEAR",
+                "level": 5,
+                "name": "COMM-LASTST-YEAR",
+                "pic": "9999",
+                "usage": "DISPLAY",
+                "logicalType": "Numeric Display (4 digits)",
+                "byteOffset": 62,
+                "relativeOffset": 4,
+                "byteLength": 4,
+                "elementByteLength": 4,
+                "location": {
+                  "startLine": 23,
+                  "endLine": 23,
+                  "startColumn": 13,
+                  "endColumn": 54,
+                  "sourceFile": "UPDACC.cpy"
+                }
+              }
+            ],
+            "location": {
+              "startLine": 20,
+              "endLine": 20,
+              "startColumn": 10,
+              "endColumn": 62,
+              "sourceFile": "UPDACC.cpy"
+            }
+          },
+          {
+            "id": "LK_L24_COMM-NEXT-STMT-DT",
+            "qualifiedName": "DFHCOMMAREA.COMM-NEXT-STMT-DT",
+            "level": 3,
+            "name": "COMM-NEXT-STMT-DT",
+            "pic": "9(8)",
+            "usage": "DISPLAY",
+            "logicalType": "Numeric Display (8 digits)",
+            "byteOffset": 66,
+            "relativeOffset": 66,
+            "byteLength": 8,
+            "elementByteLength": 8,
+            "location": {
+              "startLine": 24,
+              "endLine": 24,
+              "startColumn": 10,
+              "endColumn": 47,
+              "sourceFile": "UPDACC.cpy"
+            }
+          },
+          {
+            "id": "LK_L25_COMM-NEXT-STMNT-GROUP",
+            "qualifiedName": "DFHCOMMAREA.COMM-NEXT-STMNT-GROUP",
+            "level": 3,
+            "name": "COMM-NEXT-STMNT-GROUP",
+            "usage": "DISPLAY",
+            "redefines": "COMM-NEXT-STMT-DT",
+            "logicalType": "Group",
+            "byteOffset": 66,
+            "relativeOffset": 66,
+            "byteLength": 8,
+            "elementByteLength": 8,
+            "children": [
+              {
+                "id": "LK_L26_COMM-NEXTST-DAY",
+                "qualifiedName": "DFHCOMMAREA.COMM-NEXT-STMNT-GROUP.COMM-NEXTST-DAY",
+                "level": 5,
+                "name": "COMM-NEXTST-DAY",
+                "pic": "99",
+                "usage": "DISPLAY",
+                "logicalType": "Numeric Display (2 digits)",
+                "byteOffset": 66,
+                "relativeOffset": 0,
+                "byteLength": 2,
+                "elementByteLength": 2,
+                "location": {
+                  "startLine": 26,
+                  "endLine": 26,
+                  "startColumn": 13,
+                  "endColumn": 52,
+                  "sourceFile": "UPDACC.cpy"
+                }
+              },
+              {
+                "id": "LK_L27_COMM-NEXTST-MONTH",
+                "qualifiedName": "DFHCOMMAREA.COMM-NEXT-STMNT-GROUP.COMM-NEXTST-MONTH",
+                "level": 5,
+                "name": "COMM-NEXTST-MONTH",
+                "pic": "99",
+                "usage": "DISPLAY",
+                "logicalType": "Numeric Display (2 digits)",
+                "byteOffset": 68,
+                "relativeOffset": 2,
+                "byteLength": 2,
+                "elementByteLength": 2,
+                "location": {
+                  "startLine": 27,
+                  "endLine": 27,
+                  "startColumn": 13,
+                  "endColumn": 52,
+                  "sourceFile": "UPDACC.cpy"
+                }
+              },
+              {
+                "id": "LK_L28_COMM-NEXTST-YEAR",
+                "qualifiedName": "DFHCOMMAREA.COMM-NEXT-STMNT-GROUP.COMM-NEXTST-YEAR",
+                "level": 5,
+                "name": "COMM-NEXTST-YEAR",
+                "pic": "9999",
+                "usage": "DISPLAY",
+                "logicalType": "Numeric Display (4 digits)",
+                "byteOffset": 70,
+                "relativeOffset": 4,
+                "byteLength": 4,
+                "elementByteLength": 4,
+                "location": {
+                  "startLine": 28,
+                  "endLine": 28,
+                  "startColumn": 13,
+                  "endColumn": 54,
+                  "sourceFile": "UPDACC.cpy"
+                }
+              }
+            ],
+            "location": {
+              "startLine": 25,
+              "endLine": 25,
+              "startColumn": 10,
+              "endColumn": 62,
+              "sourceFile": "UPDACC.cpy"
+            }
+          },
+          {
+            "id": "LK_L29_COMM-AVAIL-BAL",
+            "qualifiedName": "DFHCOMMAREA.COMM-AVAIL-BAL",
+            "level": 3,
+            "name": "COMM-AVAIL-BAL",
+            "pic": "S9(10)V99",
+            "usage": "DISPLAY",
+            "logicalType": "Signed Decimal Display (12, 2)",
+            "byteOffset": 74,
+            "relativeOffset": 74,
+            "byteLength": 12,
+            "elementByteLength": 12,
+            "location": {
+              "startLine": 29,
+              "endLine": 29,
+              "startColumn": 10,
+              "endColumn": 52,
+              "sourceFile": "UPDACC.cpy"
+            }
+          },
+          {
+            "id": "LK_L30_COMM-ACTUAL-BAL",
+            "qualifiedName": "DFHCOMMAREA.COMM-ACTUAL-BAL",
+            "level": 3,
+            "name": "COMM-ACTUAL-BAL",
+            "pic": "S9(10)V99",
+            "usage": "DISPLAY",
+            "logicalType": "Signed Decimal Display (12, 2)",
+            "byteOffset": 86,
+            "relativeOffset": 86,
+            "byteLength": 12,
+            "elementByteLength": 12,
+            "location": {
+              "startLine": 30,
+              "endLine": 30,
+              "startColumn": 10,
+              "endColumn": 52,
+              "sourceFile": "UPDACC.cpy"
+            }
+          },
+          {
+            "id": "LK_L31_COMM-SUCCESS",
+            "qualifiedName": "DFHCOMMAREA.COMM-SUCCESS",
+            "level": 3,
+            "name": "COMM-SUCCESS",
+            "pic": "X",
+            "usage": "DISPLAY",
+            "logicalType": "Alphanumeric (1 chars)",
+            "byteOffset": 98,
+            "relativeOffset": 98,
+            "byteLength": 1,
+            "elementByteLength": 1,
+            "location": {
+              "startLine": 31,
+              "endLine": 31,
+              "startColumn": 10,
+              "endColumn": 44,
+              "sourceFile": "UPDACC.cpy"
+            }
+          }
+        ],
+        "location": {
+          "startLine": 154,
+          "endLine": 154,
+          "startColumn": 7,
+          "endColumn": 21,
+          "sourceFile": "UPDACC.cbl"
+        }
+      }
+    ],
+    "localStorageSection": [
+      {
+        "id": "LS_L91_DB2-DATE-REFORMAT",
+        "qualifiedName": "DB2-DATE-REFORMAT",
+        "level": 1,
+        "name": "DB2-DATE-REFORMAT",
+        "usage": "DISPLAY",
+        "logicalType": "Group",
+        "byteOffset": 0,
+        "relativeOffset": 0,
+        "byteLength": 10,
+        "elementByteLength": 10,
+        "children": [
+          {
+            "id": "LS_L92_DB2-DATE-REF-YR",
+            "qualifiedName": "DB2-DATE-REFORMAT.DB2-DATE-REF-YR",
+            "level": 3,
+            "name": "DB2-DATE-REF-YR",
+            "pic": "9(4)",
+            "usage": "DISPLAY",
+            "logicalType": "Numeric Display (4 digits)",
+            "byteOffset": 0,
+            "relativeOffset": 0,
+            "byteLength": 4,
+            "elementByteLength": 4,
+            "location": {
+              "startLine": 92,
+              "endLine": 92,
+              "startColumn": 10,
+              "endColumn": 48,
+              "sourceFile": "UPDACC.cbl"
+            }
+          },
+          {
+            "id": "LS_L93_FILLER",
+            "qualifiedName": "DB2-DATE-REFORMAT.FILLER",
+            "level": 3,
+            "name": "FILLER",
+            "pic": "X",
+            "usage": "DISPLAY",
+            "logicalType": "Alphanumeric (1 chars)",
+            "byteOffset": 4,
+            "relativeOffset": 4,
+            "byteLength": 1,
+            "elementByteLength": 1,
+            "isFiller": true,
+            "location": {
+              "startLine": 93,
+              "endLine": 93,
+              "startColumn": 10,
+              "endColumn": 45,
+              "sourceFile": "UPDACC.cbl"
+            }
+          },
+          {
+            "id": "LS_L94_DB2-DATE-REF-MNTH",
+            "qualifiedName": "DB2-DATE-REFORMAT.DB2-DATE-REF-MNTH",
+            "level": 3,
+            "name": "DB2-DATE-REF-MNTH",
+            "pic": "99",
+            "usage": "DISPLAY",
+            "logicalType": "Numeric Display (2 digits)",
+            "byteOffset": 5,
+            "relativeOffset": 5,
+            "byteLength": 2,
+            "elementByteLength": 2,
+            "location": {
+              "startLine": 94,
+              "endLine": 94,
+              "startColumn": 10,
+              "endColumn": 46,
+              "sourceFile": "UPDACC.cbl"
+            }
+          },
+          {
+            "id": "LS_L95_FILLER",
+            "qualifiedName": "DB2-DATE-REFORMAT.FILLER",
+            "level": 3,
+            "name": "FILLER",
+            "pic": "X",
+            "usage": "DISPLAY",
+            "logicalType": "Alphanumeric (1 chars)",
+            "byteOffset": 7,
+            "relativeOffset": 7,
+            "byteLength": 1,
+            "elementByteLength": 1,
+            "isFiller": true,
+            "location": {
+              "startLine": 95,
+              "endLine": 95,
+              "startColumn": 10,
+              "endColumn": 45,
+              "sourceFile": "UPDACC.cbl"
+            }
+          },
+          {
+            "id": "LS_L96_DB2-DATE-REF-DAY",
+            "qualifiedName": "DB2-DATE-REFORMAT.DB2-DATE-REF-DAY",
+            "level": 3,
+            "name": "DB2-DATE-REF-DAY",
+            "pic": "99",
+            "usage": "DISPLAY",
+            "logicalType": "Numeric Display (2 digits)",
+            "byteOffset": 8,
+            "relativeOffset": 8,
+            "byteLength": 2,
+            "elementByteLength": 2,
+            "location": {
+              "startLine": 96,
+              "endLine": 96,
+              "startColumn": 10,
+              "endColumn": 46,
+              "sourceFile": "UPDACC.cbl"
+            }
+          }
+        ],
+        "location": {
+          "startLine": 91,
+          "endLine": 91,
+          "startColumn": 7,
+          "endColumn": 27,
+          "sourceFile": "UPDACC.cbl"
+        }
+      },
+      {
+        "id": "LS_L99_WS-ACC-DATA",
+        "qualifiedName": "WS-ACC-DATA",
+        "level": 1,
+        "name": "WS-ACC-DATA",
+        "usage": "DISPLAY",
+        "logicalType": "Group",
+        "byteOffset": 10,
+        "relativeOffset": 0,
+        "byteLength": 98,
+        "elementByteLength": 98,
+        "children": [
+          {
+            "id": "LS_L7_ACCOUNT-DATA",
+            "qualifiedName": "WS-ACC-DATA.ACCOUNT-DATA",
+            "level": 3,
+            "name": "ACCOUNT-DATA",
+            "usage": "DISPLAY",
+            "logicalType": "Group",
+            "byteOffset": 10,
+            "relativeOffset": 0,
+            "byteLength": 98,
+            "elementByteLength": 98,
+            "children": [
+              {
+                "id": "LS_L8_ACCOUNT-EYE-CATCHER",
+                "qualifiedName": "WS-ACC-DATA.ACCOUNT-DATA.ACCOUNT-EYE-CATCHER",
+                "level": 5,
+                "name": "ACCOUNT-EYE-CATCHER",
+                "pic": "X(4)",
+                "usage": "DISPLAY",
+                "logicalType": "Alphanumeric (4 chars)",
+                "byteOffset": 10,
+                "relativeOffset": 0,
+                "byteLength": 4,
+                "elementByteLength": 4,
+                "conditions88": [
+                  {
+                    "name": "ACCOUNT-EYECATCHER-VALUE",
+                    "values": [
+                      "ACCT"
+                    ],
+                    "location": {
+                      "startLine": 9,
+                      "endLine": 9,
+                      "startColumn": 17,
+                      "endColumn": 64,
+                      "sourceFile": "ACCOUNT.cpy"
+                    }
+                  }
+                ],
+                "location": {
+                  "startLine": 8,
+                  "endLine": 8,
+                  "startColumn": 17,
+                  "endColumn": 55,
+                  "sourceFile": "ACCOUNT.cpy"
+                }
+              },
+              {
+                "id": "LS_L10_ACCOUNT-CUST-NO",
+                "qualifiedName": "WS-ACC-DATA.ACCOUNT-DATA.ACCOUNT-CUST-NO",
+                "level": 5,
+                "name": "ACCOUNT-CUST-NO",
+                "pic": "9(10)",
+                "usage": "DISPLAY",
+                "logicalType": "Numeric Display (10 digits)",
+                "byteOffset": 14,
+                "relativeOffset": 4,
+                "byteLength": 10,
+                "elementByteLength": 10,
+                "location": {
+                  "startLine": 10,
+                  "endLine": 10,
+                  "startColumn": 17,
+                  "endColumn": 56,
+                  "sourceFile": "ACCOUNT.cpy"
+                }
+              },
+              {
+                "id": "LS_L11_ACCOUNT-KEY",
+                "qualifiedName": "WS-ACC-DATA.ACCOUNT-DATA.ACCOUNT-KEY",
+                "level": 5,
+                "name": "ACCOUNT-KEY",
+                "usage": "DISPLAY",
+                "logicalType": "Group",
+                "byteOffset": 24,
+                "relativeOffset": 14,
+                "byteLength": 14,
+                "elementByteLength": 14,
+                "children": [
+                  {
+                    "id": "LS_L12_ACCOUNT-SORT-CODE",
+                    "qualifiedName": "WS-ACC-DATA.ACCOUNT-DATA.ACCOUNT-KEY.ACCOUNT-SORT-CODE",
+                    "level": 7,
+                    "name": "ACCOUNT-SORT-CODE",
+                    "pic": "9(6)",
+                    "usage": "DISPLAY",
+                    "logicalType": "Numeric Display (6 digits)",
+                    "byteOffset": 24,
+                    "relativeOffset": 0,
+                    "byteLength": 6,
+                    "elementByteLength": 6,
+                    "location": {
+                      "startLine": 12,
+                      "endLine": 12,
+                      "startColumn": 20,
+                      "endColumn": 55,
+                      "sourceFile": "ACCOUNT.cpy"
+                    }
+                  },
+                  {
+                    "id": "LS_L13_ACCOUNT-NUMBER",
+                    "qualifiedName": "WS-ACC-DATA.ACCOUNT-DATA.ACCOUNT-KEY.ACCOUNT-NUMBER",
+                    "level": 7,
+                    "name": "ACCOUNT-NUMBER",
+                    "pic": "9(8)",
+                    "usage": "DISPLAY",
+                    "logicalType": "Numeric Display (8 digits)",
+                    "byteOffset": 30,
+                    "relativeOffset": 6,
+                    "byteLength": 8,
+                    "elementByteLength": 8,
+                    "location": {
+                      "startLine": 13,
+                      "endLine": 13,
+                      "startColumn": 20,
+                      "endColumn": 55,
+                      "sourceFile": "ACCOUNT.cpy"
+                    }
+                  }
+                ],
+                "location": {
+                  "startLine": 11,
+                  "endLine": 11,
+                  "startColumn": 17,
+                  "endColumn": 31,
+                  "sourceFile": "ACCOUNT.cpy"
+                }
+              },
+              {
+                "id": "LS_L14_ACCOUNT-TYPE",
+                "qualifiedName": "WS-ACC-DATA.ACCOUNT-DATA.ACCOUNT-TYPE",
+                "level": 5,
+                "name": "ACCOUNT-TYPE",
+                "pic": "X(8)",
+                "usage": "DISPLAY",
+                "logicalType": "Alphanumeric (8 chars)",
+                "byteOffset": 38,
+                "relativeOffset": 28,
+                "byteLength": 8,
+                "elementByteLength": 8,
+                "location": {
+                  "startLine": 14,
+                  "endLine": 14,
+                  "startColumn": 17,
+                  "endColumn": 55,
+                  "sourceFile": "ACCOUNT.cpy"
+                }
+              },
+              {
+                "id": "LS_L15_ACCOUNT-INTEREST-RATE",
+                "qualifiedName": "WS-ACC-DATA.ACCOUNT-DATA.ACCOUNT-INTEREST-RATE",
+                "level": 5,
+                "name": "ACCOUNT-INTEREST-RATE",
+                "pic": "9(4)V99",
+                "usage": "DISPLAY",
+                "logicalType": "Decimal Display (6, 2)",
+                "byteOffset": 46,
+                "relativeOffset": 36,
+                "byteLength": 6,
+                "elementByteLength": 6,
+                "location": {
+                  "startLine": 15,
+                  "endLine": 15,
+                  "startColumn": 17,
+                  "endColumn": 58,
+                  "sourceFile": "ACCOUNT.cpy"
+                }
+              },
+              {
+                "id": "LS_L16_ACCOUNT-OPENED",
+                "qualifiedName": "WS-ACC-DATA.ACCOUNT-DATA.ACCOUNT-OPENED",
+                "level": 5,
+                "name": "ACCOUNT-OPENED",
+                "pic": "9(8)",
+                "usage": "DISPLAY",
+                "logicalType": "Numeric Display (8 digits)",
+                "byteOffset": 52,
+                "relativeOffset": 42,
+                "byteLength": 8,
+                "elementByteLength": 8,
+                "location": {
+                  "startLine": 16,
+                  "endLine": 16,
+                  "startColumn": 17,
+                  "endColumn": 55,
+                  "sourceFile": "ACCOUNT.cpy"
+                }
+              },
+              {
+                "id": "LS_L17_ACCOUNT-OPENED-GROUP",
+                "qualifiedName": "WS-ACC-DATA.ACCOUNT-DATA.ACCOUNT-OPENED-GROUP",
+                "level": 5,
+                "name": "ACCOUNT-OPENED-GROUP",
+                "usage": "DISPLAY",
+                "redefines": "ACCOUNT-OPENED",
+                "logicalType": "Group",
+                "byteOffset": 52,
+                "relativeOffset": 42,
+                "byteLength": 8,
+                "elementByteLength": 8,
+                "children": [
+                  {
+                    "id": "LS_L18_ACCOUNT-OPENED-DAY",
+                    "qualifiedName": "WS-ACC-DATA.ACCOUNT-DATA.ACCOUNT-OPENED-GROUP.ACCOUNT-OPENED-DAY",
+                    "level": 7,
+                    "name": "ACCOUNT-OPENED-DAY",
+                    "pic": "99",
+                    "usage": "DISPLAY",
+                    "logicalType": "Numeric Display (2 digits)",
+                    "byteOffset": 52,
+                    "relativeOffset": 0,
+                    "byteLength": 2,
+                    "elementByteLength": 2,
+                    "location": {
+                      "startLine": 18,
+                      "endLine": 18,
+                      "startColumn": 20,
+                      "endColumn": 54,
+                      "sourceFile": "ACCOUNT.cpy"
+                    }
+                  },
+                  {
+                    "id": "LS_L19_ACCOUNT-OPENED-MONTH",
+                    "qualifiedName": "WS-ACC-DATA.ACCOUNT-DATA.ACCOUNT-OPENED-GROUP.ACCOUNT-OPENED-MONTH",
+                    "level": 7,
+                    "name": "ACCOUNT-OPENED-MONTH",
+                    "pic": "99",
+                    "usage": "DISPLAY",
+                    "logicalType": "Numeric Display (2 digits)",
+                    "byteOffset": 54,
+                    "relativeOffset": 2,
+                    "byteLength": 2,
+                    "elementByteLength": 2,
+                    "location": {
+                      "startLine": 19,
+                      "endLine": 19,
+                      "startColumn": 20,
+                      "endColumn": 54,
+                      "sourceFile": "ACCOUNT.cpy"
+                    }
+                  },
+                  {
+                    "id": "LS_L20_ACCOUNT-OPENED-YEAR",
+                    "qualifiedName": "WS-ACC-DATA.ACCOUNT-DATA.ACCOUNT-OPENED-GROUP.ACCOUNT-OPENED-YEAR",
+                    "level": 7,
+                    "name": "ACCOUNT-OPENED-YEAR",
+                    "pic": "9999",
+                    "usage": "DISPLAY",
+                    "logicalType": "Numeric Display (4 digits)",
+                    "byteOffset": 56,
+                    "relativeOffset": 4,
+                    "byteLength": 4,
+                    "elementByteLength": 4,
+                    "location": {
+                      "startLine": 20,
+                      "endLine": 20,
+                      "startColumn": 20,
+                      "endColumn": 56,
+                      "sourceFile": "ACCOUNT.cpy"
+                    }
+                  }
+                ],
+                "location": {
+                  "startLine": 17,
+                  "endLine": 17,
+                  "startColumn": 17,
+                  "endColumn": 65,
+                  "sourceFile": "ACCOUNT.cpy"
+                }
+              },
+              {
+                "id": "LS_L21_ACCOUNT-OVERDRAFT-LIMIT",
+                "qualifiedName": "WS-ACC-DATA.ACCOUNT-DATA.ACCOUNT-OVERDRAFT-LIMIT",
+                "level": 5,
+                "name": "ACCOUNT-OVERDRAFT-LIMIT",
+                "pic": "9(8)",
+                "usage": "DISPLAY",
+                "logicalType": "Numeric Display (8 digits)",
+                "byteOffset": 60,
+                "relativeOffset": 50,
+                "byteLength": 8,
+                "elementByteLength": 8,
+                "location": {
+                  "startLine": 21,
+                  "endLine": 21,
+                  "startColumn": 17,
+                  "endColumn": 55,
+                  "sourceFile": "ACCOUNT.cpy"
+                }
+              },
+              {
+                "id": "LS_L22_ACCOUNT-LAST-STMT-DATE",
+                "qualifiedName": "WS-ACC-DATA.ACCOUNT-DATA.ACCOUNT-LAST-STMT-DATE",
+                "level": 5,
+                "name": "ACCOUNT-LAST-STMT-DATE",
+                "pic": "9(8)",
+                "usage": "DISPLAY",
+                "logicalType": "Numeric Display (8 digits)",
+                "byteOffset": 68,
+                "relativeOffset": 58,
+                "byteLength": 8,
+                "elementByteLength": 8,
+                "location": {
+                  "startLine": 22,
+                  "endLine": 22,
+                  "startColumn": 17,
+                  "endColumn": 55,
+                  "sourceFile": "ACCOUNT.cpy"
+                }
+              },
+              {
+                "id": "LS_L23_ACCOUNT-LAST-STMT-GROUP",
+                "qualifiedName": "WS-ACC-DATA.ACCOUNT-DATA.ACCOUNT-LAST-STMT-GROUP",
+                "level": 5,
+                "name": "ACCOUNT-LAST-STMT-GROUP",
+                "usage": "DISPLAY",
+                "redefines": "ACCOUNT-LAST-STMT-DATE",
+                "logicalType": "Group",
+                "byteOffset": 68,
+                "relativeOffset": 58,
+                "byteLength": 8,
+                "elementByteLength": 8,
+                "children": [
+                  {
+                    "id": "LS_L25_ACCOUNT-LAST-STMT-DAY",
+                    "qualifiedName": "WS-ACC-DATA.ACCOUNT-DATA.ACCOUNT-LAST-STMT-GROUP.ACCOUNT-LAST-STMT-DAY",
+                    "level": 7,
+                    "name": "ACCOUNT-LAST-STMT-DAY",
+                    "pic": "99",
+                    "usage": "DISPLAY",
+                    "logicalType": "Numeric Display (2 digits)",
+                    "byteOffset": 68,
+                    "relativeOffset": 0,
+                    "byteLength": 2,
+                    "elementByteLength": 2,
+                    "location": {
+                      "startLine": 25,
+                      "endLine": 25,
+                      "startColumn": 20,
+                      "endColumn": 53,
+                      "sourceFile": "ACCOUNT.cpy"
+                    }
+                  },
+                  {
+                    "id": "LS_L26_ACCOUNT-LAST-STMT-MONTH",
+                    "qualifiedName": "WS-ACC-DATA.ACCOUNT-DATA.ACCOUNT-LAST-STMT-GROUP.ACCOUNT-LAST-STMT-MONTH",
+                    "level": 7,
+                    "name": "ACCOUNT-LAST-STMT-MONTH",
+                    "pic": "99",
+                    "usage": "DISPLAY",
+                    "logicalType": "Numeric Display (2 digits)",
+                    "byteOffset": 70,
+                    "relativeOffset": 2,
+                    "byteLength": 2,
+                    "elementByteLength": 2,
+                    "location": {
+                      "startLine": 26,
+                      "endLine": 26,
+                      "startColumn": 20,
+                      "endColumn": 53,
+                      "sourceFile": "ACCOUNT.cpy"
+                    }
+                  },
+                  {
+                    "id": "LS_L27_ACCOUNT-LAST-STMT-YEAR",
+                    "qualifiedName": "WS-ACC-DATA.ACCOUNT-DATA.ACCOUNT-LAST-STMT-GROUP.ACCOUNT-LAST-STMT-YEAR",
+                    "level": 7,
+                    "name": "ACCOUNT-LAST-STMT-YEAR",
+                    "pic": "9999",
+                    "usage": "DISPLAY",
+                    "logicalType": "Numeric Display (4 digits)",
+                    "byteOffset": 72,
+                    "relativeOffset": 4,
+                    "byteLength": 4,
+                    "elementByteLength": 4,
+                    "location": {
+                      "startLine": 27,
+                      "endLine": 27,
+                      "startColumn": 20,
+                      "endColumn": 55,
+                      "sourceFile": "ACCOUNT.cpy"
+                    }
+                  }
+                ],
+                "location": {
+                  "startLine": 23,
+                  "endLine": 24,
+                  "startColumn": 17,
+                  "endColumn": 52,
+                  "sourceFile": "ACCOUNT.cpy"
+                }
+              },
+              {
+                "id": "LS_L28_ACCOUNT-NEXT-STMT-DATE",
+                "qualifiedName": "WS-ACC-DATA.ACCOUNT-DATA.ACCOUNT-NEXT-STMT-DATE",
+                "level": 5,
+                "name": "ACCOUNT-NEXT-STMT-DATE",
+                "pic": "9(8)",
+                "usage": "DISPLAY",
+                "logicalType": "Numeric Display (8 digits)",
+                "byteOffset": 76,
+                "relativeOffset": 66,
+                "byteLength": 8,
+                "elementByteLength": 8,
+                "location": {
+                  "startLine": 28,
+                  "endLine": 28,
+                  "startColumn": 17,
+                  "endColumn": 55,
+                  "sourceFile": "ACCOUNT.cpy"
+                }
+              },
+              {
+                "id": "LS_L29_ACCOUNT-NEXT-STMT-GROUP",
+                "qualifiedName": "WS-ACC-DATA.ACCOUNT-DATA.ACCOUNT-NEXT-STMT-GROUP",
+                "level": 5,
+                "name": "ACCOUNT-NEXT-STMT-GROUP",
+                "usage": "DISPLAY",
+                "redefines": "ACCOUNT-NEXT-STMT-DATE",
+                "logicalType": "Group",
+                "byteOffset": 76,
+                "relativeOffset": 66,
+                "byteLength": 8,
+                "elementByteLength": 8,
+                "children": [
+                  {
+                    "id": "LS_L31_ACCOUNT-NEXT-STMT-DAY",
+                    "qualifiedName": "WS-ACC-DATA.ACCOUNT-DATA.ACCOUNT-NEXT-STMT-GROUP.ACCOUNT-NEXT-STMT-DAY",
+                    "level": 7,
+                    "name": "ACCOUNT-NEXT-STMT-DAY",
+                    "pic": "99",
+                    "usage": "DISPLAY",
+                    "logicalType": "Numeric Display (2 digits)",
+                    "byteOffset": 76,
+                    "relativeOffset": 0,
+                    "byteLength": 2,
+                    "elementByteLength": 2,
+                    "location": {
+                      "startLine": 31,
+                      "endLine": 31,
+                      "startColumn": 20,
+                      "endColumn": 53,
+                      "sourceFile": "ACCOUNT.cpy"
+                    }
+                  },
+                  {
+                    "id": "LS_L32_ACCOUNT-NEXT-STMT-MONTH",
+                    "qualifiedName": "WS-ACC-DATA.ACCOUNT-DATA.ACCOUNT-NEXT-STMT-GROUP.ACCOUNT-NEXT-STMT-MONTH",
+                    "level": 7,
+                    "name": "ACCOUNT-NEXT-STMT-MONTH",
+                    "pic": "99",
+                    "usage": "DISPLAY",
+                    "logicalType": "Numeric Display (2 digits)",
+                    "byteOffset": 78,
+                    "relativeOffset": 2,
+                    "byteLength": 2,
+                    "elementByteLength": 2,
+                    "location": {
+                      "startLine": 32,
+                      "endLine": 32,
+                      "startColumn": 20,
+                      "endColumn": 53,
+                      "sourceFile": "ACCOUNT.cpy"
+                    }
+                  },
+                  {
+                    "id": "LS_L33_ACCOUNT-NEXT-STMT-YEAR",
+                    "qualifiedName": "WS-ACC-DATA.ACCOUNT-DATA.ACCOUNT-NEXT-STMT-GROUP.ACCOUNT-NEXT-STMT-YEAR",
+                    "level": 7,
+                    "name": "ACCOUNT-NEXT-STMT-YEAR",
+                    "pic": "9999",
+                    "usage": "DISPLAY",
+                    "logicalType": "Numeric Display (4 digits)",
+                    "byteOffset": 80,
+                    "relativeOffset": 4,
+                    "byteLength": 4,
+                    "elementByteLength": 4,
+                    "location": {
+                      "startLine": 33,
+                      "endLine": 33,
+                      "startColumn": 20,
+                      "endColumn": 55,
+                      "sourceFile": "ACCOUNT.cpy"
+                    }
+                  }
+                ],
+                "location": {
+                  "startLine": 29,
+                  "endLine": 30,
+                  "startColumn": 17,
+                  "endColumn": 51,
+                  "sourceFile": "ACCOUNT.cpy"
+                }
+              },
+              {
+                "id": "LS_L34_ACCOUNT-AVAILABLE-BALANCE",
+                "qualifiedName": "WS-ACC-DATA.ACCOUNT-DATA.ACCOUNT-AVAILABLE-BALANCE",
+                "level": 5,
+                "name": "ACCOUNT-AVAILABLE-BALANCE",
+                "pic": "S9(10)V99",
+                "usage": "DISPLAY",
+                "logicalType": "Signed Decimal Display (12, 2)",
+                "byteOffset": 84,
+                "relativeOffset": 74,
+                "byteLength": 12,
+                "elementByteLength": 12,
+                "location": {
+                  "startLine": 34,
+                  "endLine": 34,
+                  "startColumn": 17,
+                  "endColumn": 60,
+                  "sourceFile": "ACCOUNT.cpy"
+                }
+              },
+              {
+                "id": "LS_L35_ACCOUNT-ACTUAL-BALANCE",
+                "qualifiedName": "WS-ACC-DATA.ACCOUNT-DATA.ACCOUNT-ACTUAL-BALANCE",
+                "level": 5,
+                "name": "ACCOUNT-ACTUAL-BALANCE",
+                "pic": "S9(10)V99",
+                "usage": "DISPLAY",
+                "logicalType": "Signed Decimal Display (12, 2)",
+                "byteOffset": 96,
+                "relativeOffset": 86,
+                "byteLength": 12,
+                "elementByteLength": 12,
+                "location": {
+                  "startLine": 35,
+                  "endLine": 35,
+                  "startColumn": 17,
+                  "endColumn": 60,
+                  "sourceFile": "ACCOUNT.cpy"
+                }
+              }
+            ],
+            "location": {
+              "startLine": 7,
+              "endLine": 7,
+              "startColumn": 14,
+              "endColumn": 29,
+              "sourceFile": "ACCOUNT.cpy"
+            }
+          }
+        ],
+        "location": {
+          "startLine": 99,
+          "endLine": 99,
+          "startColumn": 7,
+          "endColumn": 21,
+          "sourceFile": "UPDACC.cbl"
+        }
+      },
+      {
+        "id": "LS_L102_WS-EIBTASKN12",
+        "qualifiedName": "WS-EIBTASKN12",
+        "level": 1,
+        "name": "WS-EIBTASKN12",
+        "pic": "9(12)",
+        "usage": "DISPLAY",
+        "value": "0",
+        "logicalType": "Numeric Display (12 digits)",
+        "byteOffset": 108,
+        "relativeOffset": 0,
+        "byteLength": 12,
+        "elementByteLength": 12,
+        "location": {
+          "startLine": 102,
+          "endLine": 102,
+          "startColumn": 7,
+          "endColumn": 61,
+          "sourceFile": "UPDACC.cbl"
+        }
+      },
+      {
+        "id": "LS_L103_WS-SQLCODE-DISP",
+        "qualifiedName": "WS-SQLCODE-DISP",
+        "level": 1,
+        "name": "WS-SQLCODE-DISP",
+        "pic": "9(9)",
+        "usage": "DISPLAY",
+        "value": "0",
+        "logicalType": "Numeric Display (9 digits)",
+        "byteOffset": 120,
+        "relativeOffset": 0,
+        "byteLength": 9,
+        "elementByteLength": 9,
+        "location": {
+          "startLine": 103,
+          "endLine": 103,
+          "startColumn": 7,
+          "endColumn": 61,
+          "sourceFile": "UPDACC.cbl"
+        }
+      },
+      {
+        "id": "LS_L108_DESIRED-ACC-KEY",
+        "qualifiedName": "DESIRED-ACC-KEY",
+        "level": 1,
+        "name": "DESIRED-ACC-KEY",
+        "usage": "DISPLAY",
+        "logicalType": "Group",
+        "byteOffset": 129,
+        "relativeOffset": 0,
+        "byteLength": 14,
+        "elementByteLength": 14,
+        "children": [
+          {
+            "id": "LS_L109_DESIRED-SORT-CODE",
+            "qualifiedName": "DESIRED-ACC-KEY.DESIRED-SORT-CODE",
+            "level": 3,
+            "name": "DESIRED-SORT-CODE",
+            "pic": "9(6)",
+            "usage": "DISPLAY",
+            "logicalType": "Numeric Display (6 digits)",
+            "byteOffset": 129,
+            "relativeOffset": 0,
+            "byteLength": 6,
+            "elementByteLength": 6,
+            "location": {
+              "startLine": 109,
+              "endLine": 109,
+              "startColumn": 10,
+              "endColumn": 48,
+              "sourceFile": "UPDACC.cbl"
+            }
+          },
+          {
+            "id": "LS_L110_DESIRED-ACC-NO",
+            "qualifiedName": "DESIRED-ACC-KEY.DESIRED-ACC-NO",
+            "level": 3,
+            "name": "DESIRED-ACC-NO",
+            "pic": "9(8)",
+            "usage": "DISPLAY",
+            "logicalType": "Numeric Display (8 digits)",
+            "byteOffset": 135,
+            "relativeOffset": 6,
+            "byteLength": 8,
+            "elementByteLength": 8,
+            "location": {
+              "startLine": 110,
+              "endLine": 110,
+              "startColumn": 10,
+              "endColumn": 48,
+              "sourceFile": "UPDACC.cbl"
+            }
+          }
+        ],
+        "location": {
+          "startLine": 108,
+          "endLine": 108,
+          "startColumn": 7,
+          "endColumn": 25,
+          "sourceFile": "UPDACC.cbl"
+        }
+      },
+      {
+        "id": "LS_L112_NEW-ACCOUNT-AVAILABLE-BALANCE",
+        "qualifiedName": "NEW-ACCOUNT-AVAILABLE-BALANCE",
+        "level": 1,
+        "name": "NEW-ACCOUNT-AVAILABLE-BALANCE",
+        "pic": "S9(10)V99",
+        "usage": "DISPLAY",
+        "value": "0",
+        "logicalType": "Signed Decimal Display (12, 2)",
+        "byteOffset": 143,
+        "relativeOffset": 0,
+        "byteLength": 12,
+        "elementByteLength": 12,
+        "location": {
+          "startLine": 112,
+          "endLine": 112,
+          "startColumn": 7,
+          "endColumn": 61,
+          "sourceFile": "UPDACC.cbl"
+        }
+      },
+      {
+        "id": "LS_L113_NEW-ACCOUNT-ACTUAL-BALANCE",
+        "qualifiedName": "NEW-ACCOUNT-ACTUAL-BALANCE",
+        "level": 1,
+        "name": "NEW-ACCOUNT-ACTUAL-BALANCE",
+        "pic": "S9(10)V99",
+        "usage": "DISPLAY",
+        "value": "0",
+        "logicalType": "Signed Decimal Display (12, 2)",
+        "byteOffset": 155,
+        "relativeOffset": 0,
+        "byteLength": 12,
+        "elementByteLength": 12,
+        "location": {
+          "startLine": 113,
+          "endLine": 113,
+          "startColumn": 7,
+          "endColumn": 61,
+          "sourceFile": "UPDACC.cbl"
+        }
+      },
+      {
+        "id": "LS_L114_WS-ACC-REC-LEN",
+        "qualifiedName": "WS-ACC-REC-LEN",
+        "level": 1,
+        "name": "WS-ACC-REC-LEN",
+        "pic": "S9(4)",
+        "usage": "COMP",
+        "value": "0",
+        "logicalType": "Signed SmallInt (16-bit Binary)",
+        "byteOffset": 167,
+        "relativeOffset": 0,
+        "byteLength": 2,
+        "elementByteLength": 2,
+        "location": {
+          "startLine": 114,
+          "endLine": 115,
+          "startColumn": 7,
+          "endColumn": 61,
+          "sourceFile": "UPDACC.cbl"
+        }
+      },
+      {
+        "id": "LS_L117_WS-U-TIME",
+        "qualifiedName": "WS-U-TIME",
+        "level": 1,
+        "name": "WS-U-TIME",
+        "pic": "S9(15)",
+        "usage": "COMP_3",
+        "logicalType": "Signed Integer(15) Packed",
+        "byteOffset": 169,
+        "relativeOffset": 0,
+        "byteLength": 8,
+        "elementByteLength": 8,
+        "location": {
+          "startLine": 117,
+          "endLine": 117,
+          "startColumn": 7,
+          "endColumn": 57,
+          "sourceFile": "UPDACC.cbl"
+        }
+      },
+      {
+        "id": "LS_L118_WS-ORIG-DATE",
+        "qualifiedName": "WS-ORIG-DATE",
+        "level": 1,
+        "name": "WS-ORIG-DATE",
+        "pic": "X(10)",
+        "usage": "DISPLAY",
+        "logicalType": "Alphanumeric (10 chars)",
+        "byteOffset": 177,
+        "relativeOffset": 0,
+        "byteLength": 10,
+        "elementByteLength": 10,
+        "location": {
+          "startLine": 118,
+          "endLine": 118,
+          "startColumn": 7,
+          "endColumn": 49,
+          "sourceFile": "UPDACC.cbl"
+        }
+      },
+      {
+        "id": "LS_L119_WS-ORIG-DATE-GRP",
+        "qualifiedName": "WS-ORIG-DATE-GRP",
+        "level": 1,
+        "name": "WS-ORIG-DATE-GRP",
+        "usage": "DISPLAY",
+        "redefines": "WS-ORIG-DATE",
+        "logicalType": "Group",
+        "byteOffset": 177,
+        "relativeOffset": 0,
+        "byteLength": 10,
+        "elementByteLength": 10,
+        "children": [
+          {
+            "id": "LS_L120_WS-ORIG-DATE-DD",
+            "qualifiedName": "WS-ORIG-DATE-GRP.WS-ORIG-DATE-DD",
+            "level": 3,
+            "name": "WS-ORIG-DATE-DD",
+            "pic": "99",
+            "usage": "DISPLAY",
+            "logicalType": "Numeric Display (2 digits)",
+            "byteOffset": 177,
+            "relativeOffset": 0,
+            "byteLength": 2,
+            "elementByteLength": 2,
+            "location": {
+              "startLine": 120,
+              "endLine": 120,
+              "startColumn": 10,
+              "endColumn": 46,
+              "sourceFile": "UPDACC.cbl"
+            }
+          },
+          {
+            "id": "LS_L121_FILLER",
+            "qualifiedName": "WS-ORIG-DATE-GRP.FILLER",
+            "level": 3,
+            "name": "FILLER",
+            "pic": "X",
+            "usage": "DISPLAY",
+            "logicalType": "Alphanumeric (1 chars)",
+            "byteOffset": 179,
+            "relativeOffset": 2,
+            "byteLength": 1,
+            "elementByteLength": 1,
+            "isFiller": true,
+            "location": {
+              "startLine": 121,
+              "endLine": 121,
+              "startColumn": 10,
+              "endColumn": 45,
+              "sourceFile": "UPDACC.cbl"
+            }
+          },
+          {
+            "id": "LS_L122_WS-ORIG-DATE-MM",
+            "qualifiedName": "WS-ORIG-DATE-GRP.WS-ORIG-DATE-MM",
+            "level": 3,
+            "name": "WS-ORIG-DATE-MM",
+            "pic": "99",
+            "usage": "DISPLAY",
+            "logicalType": "Numeric Display (2 digits)",
+            "byteOffset": 180,
+            "relativeOffset": 3,
+            "byteLength": 2,
+            "elementByteLength": 2,
+            "location": {
+              "startLine": 122,
+              "endLine": 122,
+              "startColumn": 10,
+              "endColumn": 46,
+              "sourceFile": "UPDACC.cbl"
+            }
+          },
+          {
+            "id": "LS_L123_FILLER",
+            "qualifiedName": "WS-ORIG-DATE-GRP.FILLER",
+            "level": 3,
+            "name": "FILLER",
+            "pic": "X",
+            "usage": "DISPLAY",
+            "logicalType": "Alphanumeric (1 chars)",
+            "byteOffset": 182,
+            "relativeOffset": 5,
+            "byteLength": 1,
+            "elementByteLength": 1,
+            "isFiller": true,
+            "location": {
+              "startLine": 123,
+              "endLine": 123,
+              "startColumn": 10,
+              "endColumn": 45,
+              "sourceFile": "UPDACC.cbl"
+            }
+          },
+          {
+            "id": "LS_L124_WS-ORIG-DATE-YYYY",
+            "qualifiedName": "WS-ORIG-DATE-GRP.WS-ORIG-DATE-YYYY",
+            "level": 3,
+            "name": "WS-ORIG-DATE-YYYY",
+            "pic": "9999",
+            "usage": "DISPLAY",
+            "logicalType": "Numeric Display (4 digits)",
+            "byteOffset": 183,
+            "relativeOffset": 6,
+            "byteLength": 4,
+            "elementByteLength": 4,
+            "location": {
+              "startLine": 124,
+              "endLine": 124,
+              "startColumn": 10,
+              "endColumn": 48,
+              "sourceFile": "UPDACC.cbl"
+            }
+          }
+        ],
+        "location": {
+          "startLine": 119,
+          "endLine": 119,
+          "startColumn": 7,
+          "endColumn": 49,
+          "sourceFile": "UPDACC.cbl"
+        }
+      },
+      {
+        "id": "LS_L126_WS-ORIG-DATE-GRP-X",
+        "qualifiedName": "WS-ORIG-DATE-GRP-X",
+        "level": 1,
+        "name": "WS-ORIG-DATE-GRP-X",
+        "usage": "DISPLAY",
+        "logicalType": "Group",
+        "byteOffset": 187,
+        "relativeOffset": 0,
+        "byteLength": 10,
+        "elementByteLength": 10,
+        "children": [
+          {
+            "id": "LS_L127_WS-ORIG-DATE-DD-X",
+            "qualifiedName": "WS-ORIG-DATE-GRP-X.WS-ORIG-DATE-DD-X",
+            "level": 3,
+            "name": "WS-ORIG-DATE-DD-X",
+            "pic": "XX",
+            "usage": "DISPLAY",
+            "logicalType": "Alphanumeric (2 chars)",
+            "byteOffset": 187,
+            "relativeOffset": 0,
+            "byteLength": 2,
+            "elementByteLength": 2,
+            "location": {
+              "startLine": 127,
+              "endLine": 127,
+              "startColumn": 10,
+              "endColumn": 46,
+              "sourceFile": "UPDACC.cbl"
+            }
+          },
+          {
+            "id": "LS_L128_FILLER",
+            "qualifiedName": "WS-ORIG-DATE-GRP-X.FILLER",
+            "level": 3,
+            "name": "FILLER",
+            "pic": "X",
+            "usage": "DISPLAY",
+            "value": ".",
+            "logicalType": "Alphanumeric (1 chars)",
+            "byteOffset": 189,
+            "relativeOffset": 2,
+            "byteLength": 1,
+            "elementByteLength": 1,
+            "isFiller": true,
+            "location": {
+              "startLine": 128,
+              "endLine": 128,
+              "startColumn": 10,
+              "endColumn": 63,
+              "sourceFile": "UPDACC.cbl"
+            }
+          },
+          {
+            "id": "LS_L129_WS-ORIG-DATE-MM-X",
+            "qualifiedName": "WS-ORIG-DATE-GRP-X.WS-ORIG-DATE-MM-X",
+            "level": 3,
+            "name": "WS-ORIG-DATE-MM-X",
+            "pic": "XX",
+            "usage": "DISPLAY",
+            "logicalType": "Alphanumeric (2 chars)",
+            "byteOffset": 190,
+            "relativeOffset": 3,
+            "byteLength": 2,
+            "elementByteLength": 2,
+            "location": {
+              "startLine": 129,
+              "endLine": 129,
+              "startColumn": 10,
+              "endColumn": 46,
+              "sourceFile": "UPDACC.cbl"
+            }
+          },
+          {
+            "id": "LS_L130_FILLER",
+            "qualifiedName": "WS-ORIG-DATE-GRP-X.FILLER",
+            "level": 3,
+            "name": "FILLER",
+            "pic": "X",
+            "usage": "DISPLAY",
+            "value": ".",
+            "logicalType": "Alphanumeric (1 chars)",
+            "byteOffset": 192,
+            "relativeOffset": 5,
+            "byteLength": 1,
+            "elementByteLength": 1,
+            "isFiller": true,
+            "location": {
+              "startLine": 130,
+              "endLine": 130,
+              "startColumn": 10,
+              "endColumn": 63,
+              "sourceFile": "UPDACC.cbl"
+            }
+          },
+          {
+            "id": "LS_L131_WS-ORIG-DATE-YYYY-X",
+            "qualifiedName": "WS-ORIG-DATE-GRP-X.WS-ORIG-DATE-YYYY-X",
+            "level": 3,
+            "name": "WS-ORIG-DATE-YYYY-X",
+            "pic": "X(4)",
+            "usage": "DISPLAY",
+            "logicalType": "Alphanumeric (4 chars)",
+            "byteOffset": 193,
+            "relativeOffset": 6,
+            "byteLength": 4,
+            "elementByteLength": 4,
+            "location": {
+              "startLine": 131,
+              "endLine": 131,
+              "startColumn": 10,
+              "endColumn": 48,
+              "sourceFile": "UPDACC.cbl"
+            }
+          }
+        ],
+        "location": {
+          "startLine": 126,
+          "endLine": 126,
+          "startColumn": 7,
+          "endColumn": 28,
+          "sourceFile": "UPDACC.cbl"
+        }
+      },
+      {
+        "id": "LS_L133_REJ-REASON",
+        "qualifiedName": "REJ-REASON",
+        "level": 1,
+        "name": "REJ-REASON",
+        "pic": "XX",
+        "usage": "DISPLAY",
+        "value": "SPACES",
+        "logicalType": "Alphanumeric (2 chars)",
+        "byteOffset": 197,
+        "relativeOffset": 0,
+        "byteLength": 2,
+        "elementByteLength": 2,
+        "location": {
+          "startLine": 133,
+          "endLine": 133,
+          "startColumn": 7,
+          "endColumn": 66,
+          "sourceFile": "UPDACC.cbl"
+        }
+      },
+      {
+        "id": "LS_L135_CUSTOMER-KY",
+        "qualifiedName": "CUSTOMER-KY",
+        "level": 1,
+        "name": "CUSTOMER-KY",
+        "usage": "DISPLAY",
+        "logicalType": "Group",
+        "byteOffset": 199,
+        "relativeOffset": 0,
+        "byteLength": 14,
+        "elementByteLength": 14,
+        "children": [
+          {
+            "id": "LS_L136_REQUIRED-SORT-CODE",
+            "qualifiedName": "CUSTOMER-KY.REQUIRED-SORT-CODE",
+            "level": 3,
+            "name": "REQUIRED-SORT-CODE",
+            "pic": "9(6)",
+            "usage": "DISPLAY",
+            "value": "0",
+            "logicalType": "Numeric Display (6 digits)",
+            "byteOffset": 199,
+            "relativeOffset": 0,
+            "byteLength": 6,
+            "elementByteLength": 6,
+            "location": {
+              "startLine": 136,
+              "endLine": 136,
+              "startColumn": 10,
+              "endColumn": 61,
+              "sourceFile": "UPDACC.cbl"
+            }
+          },
+          {
+            "id": "LS_L137_REQUIRED-ACC-NUM",
+            "qualifiedName": "CUSTOMER-KY.REQUIRED-ACC-NUM",
+            "level": 3,
+            "name": "REQUIRED-ACC-NUM",
+            "pic": "9(8)",
+            "usage": "DISPLAY",
+            "value": "0",
+            "logicalType": "Numeric Display (8 digits)",
+            "byteOffset": 205,
+            "relativeOffset": 6,
+            "byteLength": 8,
+            "elementByteLength": 8,
+            "location": {
+              "startLine": 137,
+              "endLine": 137,
+              "startColumn": 10,
+              "endColumn": 61,
+              "sourceFile": "UPDACC.cbl"
+            }
+          }
+        ],
+        "location": {
+          "startLine": 135,
+          "endLine": 135,
+          "startColumn": 7,
+          "endColumn": 21,
+          "sourceFile": "UPDACC.cbl"
+        }
+      },
+      {
+        "id": "LS_L139_STORM-DRAIN-CONDITION",
+        "qualifiedName": "STORM-DRAIN-CONDITION",
+        "level": 1,
+        "name": "STORM-DRAIN-CONDITION",
+        "pic": "X(20)",
+        "usage": "DISPLAY",
+        "logicalType": "Alphanumeric (20 chars)",
+        "byteOffset": 213,
+        "relativeOffset": 0,
+        "byteLength": 20,
+        "elementByteLength": 20,
+        "location": {
+          "startLine": 139,
+          "endLine": 139,
+          "startColumn": 7,
+          "endColumn": 49,
+          "sourceFile": "UPDACC.cbl"
+        }
+      },
+      {
+        "id": "LS_L141_WS-TIME-DATA",
+        "qualifiedName": "WS-TIME-DATA",
+        "level": 1,
+        "name": "WS-TIME-DATA",
+        "usage": "DISPLAY",
+        "logicalType": "Group",
+        "byteOffset": 233,
+        "relativeOffset": 0,
+        "byteLength": 6,
+        "elementByteLength": 6,
+        "children": [
+          {
+            "id": "LS_L142_WS-TIME-NOW",
+            "qualifiedName": "WS-TIME-DATA.WS-TIME-NOW",
+            "level": 3,
+            "name": "WS-TIME-NOW",
+            "pic": "9(6)",
+            "usage": "DISPLAY",
+            "logicalType": "Numeric Display (6 digits)",
+            "byteOffset": 233,
+            "relativeOffset": 0,
+            "byteLength": 6,
+            "elementByteLength": 6,
+            "location": {
+              "startLine": 142,
+              "endLine": 142,
+              "startColumn": 10,
+              "endColumn": 48,
+              "sourceFile": "UPDACC.cbl"
+            }
+          },
+          {
+            "id": "LS_L143_WS-TIME-NOW-GRP",
+            "qualifiedName": "WS-TIME-DATA.WS-TIME-NOW-GRP",
+            "level": 3,
+            "name": "WS-TIME-NOW-GRP",
+            "usage": "DISPLAY",
+            "redefines": "WS-TIME-NOW",
+            "logicalType": "Group",
+            "byteOffset": 233,
+            "relativeOffset": 0,
+            "byteLength": 6,
+            "elementByteLength": 6,
+            "children": [
+              {
+                "id": "LS_L144_WS-TIME-NOW-GRP-HH",
+                "qualifiedName": "WS-TIME-DATA.WS-TIME-NOW-GRP.WS-TIME-NOW-GRP-HH",
+                "level": 5,
+                "name": "WS-TIME-NOW-GRP-HH",
+                "pic": "99",
+                "usage": "DISPLAY",
+                "logicalType": "Numeric Display (2 digits)",
+                "byteOffset": 233,
+                "relativeOffset": 0,
+                "byteLength": 2,
+                "elementByteLength": 2,
+                "location": {
+                  "startLine": 144,
+                  "endLine": 144,
+                  "startColumn": 13,
+                  "endColumn": 46,
+                  "sourceFile": "UPDACC.cbl"
+                }
+              },
+              {
+                "id": "LS_L145_WS-TIME-NOW-GRP-MM",
+                "qualifiedName": "WS-TIME-DATA.WS-TIME-NOW-GRP.WS-TIME-NOW-GRP-MM",
+                "level": 5,
+                "name": "WS-TIME-NOW-GRP-MM",
+                "pic": "99",
+                "usage": "DISPLAY",
+                "logicalType": "Numeric Display (2 digits)",
+                "byteOffset": 235,
+                "relativeOffset": 2,
+                "byteLength": 2,
+                "elementByteLength": 2,
+                "location": {
+                  "startLine": 145,
+                  "endLine": 145,
+                  "startColumn": 13,
+                  "endColumn": 46,
+                  "sourceFile": "UPDACC.cbl"
+                }
+              },
+              {
+                "id": "LS_L146_WS-TIME-NOW-GRP-SS",
+                "qualifiedName": "WS-TIME-DATA.WS-TIME-NOW-GRP.WS-TIME-NOW-GRP-SS",
+                "level": 5,
+                "name": "WS-TIME-NOW-GRP-SS",
+                "pic": "99",
+                "usage": "DISPLAY",
+                "logicalType": "Numeric Display (2 digits)",
+                "byteOffset": 237,
+                "relativeOffset": 4,
+                "byteLength": 2,
+                "elementByteLength": 2,
+                "location": {
+                  "startLine": 146,
+                  "endLine": 146,
+                  "startColumn": 13,
+                  "endColumn": 46,
+                  "sourceFile": "UPDACC.cbl"
+                }
+              }
+            ],
+            "location": {
+              "startLine": 143,
+              "endLine": 143,
+              "startColumn": 10,
+              "endColumn": 50,
+              "sourceFile": "UPDACC.cbl"
+            }
+          }
+        ],
+        "location": {
+          "startLine": 141,
+          "endLine": 141,
+          "startColumn": 7,
+          "endColumn": 22,
+          "sourceFile": "UPDACC.cbl"
+        }
+      },
+      {
+        "id": "LS_L148_WS-ABEND-PGM",
+        "qualifiedName": "WS-ABEND-PGM",
+        "level": 1,
+        "name": "WS-ABEND-PGM",
+        "pic": "X(8)",
+        "usage": "DISPLAY",
+        "value": "ABNDPROC",
+        "logicalType": "Alphanumeric (8 chars)",
+        "byteOffset": 239,
+        "relativeOffset": 0,
+        "byteLength": 8,
+        "elementByteLength": 8,
+        "location": {
+          "startLine": 148,
+          "endLine": 148,
+          "startColumn": 7,
+          "endColumn": 70,
+          "sourceFile": "UPDACC.cbl"
+        }
+      },
+      {
+        "id": "LS_L150_ABNDINFO-REC",
+        "qualifiedName": "ABNDINFO-REC",
+        "level": 1,
+        "name": "ABNDINFO-REC",
+        "usage": "DISPLAY",
+        "logicalType": "Group",
+        "byteOffset": 247,
+        "relativeOffset": 0,
+        "byteLength": 678,
+        "elementByteLength": 678,
+        "children": [
+          {
+            "id": "LS_L7_ABND-VSAM-KEY",
+            "qualifiedName": "ABNDINFO-REC.ABND-VSAM-KEY",
+            "level": 3,
+            "name": "ABND-VSAM-KEY",
+            "usage": "DISPLAY",
+            "logicalType": "Group",
+            "byteOffset": 247,
+            "relativeOffset": 0,
+            "byteLength": 12,
+            "elementByteLength": 12,
+            "children": [
+              {
+                "id": "LS_L8_ABND-UTIME-KEY",
+                "qualifiedName": "ABNDINFO-REC.ABND-VSAM-KEY.ABND-UTIME-KEY",
+                "level": 5,
+                "name": "ABND-UTIME-KEY",
+                "pic": "S9(15)",
+                "usage": "COMP_3",
+                "logicalType": "Signed Integer(15) Packed",
+                "byteOffset": 247,
+                "relativeOffset": 0,
+                "byteLength": 8,
+                "elementByteLength": 8,
+                "location": {
+                  "startLine": 8,
+                  "endLine": 8,
+                  "startColumn": 14,
+                  "endColumn": 66,
+                  "sourceFile": "ABNDINFO.cpy"
+                }
+              },
+              {
+                "id": "LS_L9_ABND-TASKNO-KEY",
+                "qualifiedName": "ABNDINFO-REC.ABND-VSAM-KEY.ABND-TASKNO-KEY",
+                "level": 5,
+                "name": "ABND-TASKNO-KEY",
+                "pic": "9(4)",
+                "usage": "DISPLAY",
+                "logicalType": "Numeric Display (4 digits)",
+                "byteOffset": 255,
+                "relativeOffset": 8,
+                "byteLength": 4,
+                "elementByteLength": 4,
+                "location": {
+                  "startLine": 9,
+                  "endLine": 9,
+                  "startColumn": 14,
+                  "endColumn": 57,
+                  "sourceFile": "ABNDINFO.cpy"
+                }
+              }
+            ],
+            "location": {
+              "startLine": 7,
+              "endLine": 7,
+              "startColumn": 11,
+              "endColumn": 27,
+              "sourceFile": "ABNDINFO.cpy"
+            }
+          },
+          {
+            "id": "LS_L10_ABND-APPLID",
+            "qualifiedName": "ABNDINFO-REC.ABND-APPLID",
+            "level": 3,
+            "name": "ABND-APPLID",
+            "pic": "X(8)",
+            "usage": "DISPLAY",
+            "logicalType": "Alphanumeric (8 chars)",
+            "byteOffset": 259,
+            "relativeOffset": 12,
+            "byteLength": 8,
+            "elementByteLength": 8,
+            "location": {
+              "startLine": 10,
+              "endLine": 10,
+              "startColumn": 11,
+              "endColumn": 57,
+              "sourceFile": "ABNDINFO.cpy"
+            }
+          },
+          {
+            "id": "LS_L11_ABND-TRANID",
+            "qualifiedName": "ABNDINFO-REC.ABND-TRANID",
+            "level": 3,
+            "name": "ABND-TRANID",
+            "pic": "X(4)",
+            "usage": "DISPLAY",
+            "logicalType": "Alphanumeric (4 chars)",
+            "byteOffset": 267,
+            "relativeOffset": 20,
+            "byteLength": 4,
+            "elementByteLength": 4,
+            "location": {
+              "startLine": 11,
+              "endLine": 11,
+              "startColumn": 11,
+              "endColumn": 57,
+              "sourceFile": "ABNDINFO.cpy"
+            }
+          },
+          {
+            "id": "LS_L12_ABND-DATE",
+            "qualifiedName": "ABNDINFO-REC.ABND-DATE",
+            "level": 3,
+            "name": "ABND-DATE",
+            "pic": "X(10)",
+            "usage": "DISPLAY",
+            "logicalType": "Alphanumeric (10 chars)",
+            "byteOffset": 271,
+            "relativeOffset": 24,
+            "byteLength": 10,
+            "elementByteLength": 10,
+            "location": {
+              "startLine": 12,
+              "endLine": 12,
+              "startColumn": 11,
+              "endColumn": 58,
+              "sourceFile": "ABNDINFO.cpy"
+            }
+          },
+          {
+            "id": "LS_L13_ABND-TIME",
+            "qualifiedName": "ABNDINFO-REC.ABND-TIME",
+            "level": 3,
+            "name": "ABND-TIME",
+            "pic": "X(8)",
+            "usage": "DISPLAY",
+            "logicalType": "Alphanumeric (8 chars)",
+            "byteOffset": 281,
+            "relativeOffset": 34,
+            "byteLength": 8,
+            "elementByteLength": 8,
+            "location": {
+              "startLine": 13,
+              "endLine": 13,
+              "startColumn": 11,
+              "endColumn": 57,
+              "sourceFile": "ABNDINFO.cpy"
+            }
+          },
+          {
+            "id": "LS_L14_ABND-CODE",
+            "qualifiedName": "ABNDINFO-REC.ABND-CODE",
+            "level": 3,
+            "name": "ABND-CODE",
+            "pic": "X(4)",
+            "usage": "DISPLAY",
+            "logicalType": "Alphanumeric (4 chars)",
+            "byteOffset": 289,
+            "relativeOffset": 42,
+            "byteLength": 4,
+            "elementByteLength": 4,
+            "location": {
+              "startLine": 14,
+              "endLine": 14,
+              "startColumn": 11,
+              "endColumn": 57,
+              "sourceFile": "ABNDINFO.cpy"
+            }
+          },
+          {
+            "id": "LS_L15_ABND-PROGRAM",
+            "qualifiedName": "ABNDINFO-REC.ABND-PROGRAM",
+            "level": 3,
+            "name": "ABND-PROGRAM",
+            "pic": "X(8)",
+            "usage": "DISPLAY",
+            "logicalType": "Alphanumeric (8 chars)",
+            "byteOffset": 293,
+            "relativeOffset": 46,
+            "byteLength": 8,
+            "elementByteLength": 8,
+            "location": {
+              "startLine": 15,
+              "endLine": 15,
+              "startColumn": 11,
+              "endColumn": 57,
+              "sourceFile": "ABNDINFO.cpy"
+            }
+          },
+          {
+            "id": "LS_L16_ABND-RESPCODE",
+            "qualifiedName": "ABNDINFO-REC.ABND-RESPCODE",
+            "level": 3,
+            "name": "ABND-RESPCODE",
+            "pic": "S9(8)",
+            "usage": "DISPLAY",
+            "logicalType": "Signed Numeric Display (8 digits)",
+            "byteOffset": 301,
+            "relativeOffset": 54,
+            "byteLength": 8,
+            "elementByteLength": 8,
+            "isSignSeparate": true,
+            "location": {
+              "startLine": 16,
+              "endLine": 17,
+              "startColumn": 11,
+              "endColumn": 39,
+              "sourceFile": "ABNDINFO.cpy"
+            }
+          },
+          {
+            "id": "LS_L18_ABND-RESP2CODE",
+            "qualifiedName": "ABNDINFO-REC.ABND-RESP2CODE",
+            "level": 3,
+            "name": "ABND-RESP2CODE",
+            "pic": "S9(8)",
+            "usage": "DISPLAY",
+            "logicalType": "Signed Numeric Display (8 digits)",
+            "byteOffset": 309,
+            "relativeOffset": 62,
+            "byteLength": 8,
+            "elementByteLength": 8,
+            "isSignSeparate": true,
+            "location": {
+              "startLine": 18,
+              "endLine": 19,
+              "startColumn": 11,
+              "endColumn": 39,
+              "sourceFile": "ABNDINFO.cpy"
+            }
+          },
+          {
+            "id": "LS_L20_ABND-SQLCODE",
+            "qualifiedName": "ABNDINFO-REC.ABND-SQLCODE",
+            "level": 3,
+            "name": "ABND-SQLCODE",
+            "pic": "S9(8)",
+            "usage": "DISPLAY",
+            "logicalType": "Signed Numeric Display (8 digits)",
+            "byteOffset": 317,
+            "relativeOffset": 70,
+            "byteLength": 8,
+            "elementByteLength": 8,
+            "isSignSeparate": true,
+            "location": {
+              "startLine": 20,
+              "endLine": 21,
+              "startColumn": 11,
+              "endColumn": 39,
+              "sourceFile": "ABNDINFO.cpy"
+            }
+          },
+          {
+            "id": "LS_L22_ABND-FREEFORM",
+            "qualifiedName": "ABNDINFO-REC.ABND-FREEFORM",
+            "level": 3,
+            "name": "ABND-FREEFORM",
+            "pic": "X(600)",
+            "usage": "DISPLAY",
+            "logicalType": "Alphanumeric (600 chars)",
+            "byteOffset": 325,
+            "relativeOffset": 78,
+            "byteLength": 600,
+            "elementByteLength": 600,
+            "location": {
+              "startLine": 22,
+              "endLine": 22,
+              "startColumn": 11,
+              "endColumn": 59,
+              "sourceFile": "ABNDINFO.cpy"
+            }
+          }
+        ],
+        "location": {
+          "startLine": 150,
+          "endLine": 150,
+          "startColumn": 7,
+          "endColumn": 22,
+          "sourceFile": "UPDACC.cbl"
+        }
+      }
+    ],
+    "workingStorageBytes": 113
+  },
+  "sections": [
+    {
+      "name": "PREMIERE",
+      "location": {
+        "startLine": 158,
+        "endLine": 177,
+        "startColumn": 7,
+        "endColumn": 15,
+        "sourceFile": "UPDACC.cbl"
+      },
+      "paragraphNames": [
+        "A010",
+        "A999"
+      ]
+    },
+    {
+      "name": "UPDATE-ACCOUNT-DB2",
+      "location": {
+        "startLine": 180,
+        "endLine": 330,
+        "startColumn": 7,
+        "endColumn": 15,
+        "sourceFile": "UPDACC.cbl"
+      },
+      "paragraphNames": [
+        "UAD010",
+        "UAD999"
+      ]
+    },
+    {
+      "name": "GET-ME-OUT-OF-HERE",
+      "location": {
+        "startLine": 381,
+        "endLine": 388,
+        "startColumn": 7,
+        "endColumn": 15,
+        "sourceFile": "UPDACC.cbl"
+      },
+      "paragraphNames": [
+        "GMOOH010",
+        "GMOOH999"
+      ]
+    },
+    {
+      "name": "POPULATE-TIME-DATE",
+      "location": {
+        "startLine": 391,
+        "endLine": 406,
+        "startColumn": 7,
+        "endColumn": 15,
+        "sourceFile": "UPDACC.cbl"
+      },
+      "paragraphNames": [
+        "PTD010",
+        "PTD999"
+      ]
+    }
+  ],
+  "paragraphs": [
+    {
+      "name": "A010",
+      "sectionParent": "PREMIERE",
+      "location": {
+        "startLine": 159,
+        "endLine": 174,
+        "startColumn": 7,
+        "endColumn": 37,
+        "sourceFile": "UPDACC.cbl"
+      },
+      "successors": [
+        "UPDATE-ACCOUNT-DB2",
+        "GET-ME-OUT-OF-HERE"
+      ],
+      "fallthroughSuccessor": "A999",
+      "statements": [
+        {
+          "type": "MOVE",
+          "location": {
+            "startLine": 161,
+            "endLine": 161,
+            "startColumn": 11,
+            "endColumn": 28,
+            "sourceFile": "UPDACC.cbl"
+          },
+          "rawText": "MOVE SORTCODE TO COMM-SCODE",
+          "sourceFieldIds": [
+            "WS_L7_SORTCODE"
+          ],
+          "targetFieldIds": [
+            "LK_L9_COMM-SCODE"
+          ],
+          "fromExpr": "SORTCODE",
+          "toTargets": [
+            "COMM-SCODE"
+          ]
+        },
+        {
+          "type": "MOVE",
+          "location": {
+            "startLine": 162,
+            "endLine": 162,
+            "startColumn": 11,
+            "endColumn": 28,
+            "sourceFile": "UPDACC.cbl"
+          },
+          "rawText": "MOVE SORTCODE TO DESIRED-SORT-CODE",
+          "sourceFieldIds": [
+            "WS_L7_SORTCODE"
+          ],
+          "targetFieldIds": [
+            "LS_L109_DESIRED-SORT-CODE"
+          ],
+          "fromExpr": "SORTCODE",
+          "toTargets": [
+            "DESIRED-SORT-CODE"
+          ]
+        },
+        {
+          "type": "PERFORM",
+          "location": {
+            "startLine": 167,
+            "endLine": 167,
+            "startColumn": 11,
+            "endColumn": 19,
+            "sourceFile": "UPDACC.cbl"
+          },
+          "rawText": "PERFORM UPDATE-ACCOUNT-DB2",
+          "target": "UPDATE-ACCOUNT-DB2"
+        },
+        {
+          "type": "PERFORM",
+          "location": {
+            "startLine": 174,
+            "endLine": 174,
+            "startColumn": 11,
+            "endColumn": 19,
+            "sourceFile": "UPDACC.cbl"
+          },
+          "rawText": "PERFORM GET-ME-OUT-OF-HERE",
+          "target": "GET-ME-OUT-OF-HERE"
+        }
+      ]
+    },
+    {
+      "name": "A999",
+      "sectionParent": "PREMIERE",
+      "location": {
+        "startLine": 176,
+        "endLine": 177,
+        "startColumn": 7,
+        "endColumn": 15,
+        "sourceFile": "UPDACC.cbl"
+      },
+      "fallthroughSuccessor": "UAD010",
+      "statements": [
+        {
+          "type": "EXIT",
+          "location": {
+            "startLine": 177,
+            "endLine": 177,
+            "startColumn": 11,
+            "endColumn": 11,
+            "sourceFile": "UPDACC.cbl"
+          },
+          "rawText": "EXIT",
+          "operation": "EXIT"
+        }
+      ]
+    },
+    {
+      "name": "UAD010",
+      "sectionParent": "UPDATE-ACCOUNT-DB2",
+      "location": {
+        "startLine": 181,
+        "endLine": 327,
+        "startColumn": 7,
+        "endColumn": 35,
+        "sourceFile": "UPDACC.cbl"
+      },
+      "successors": [
+        "UAD999"
+      ],
+      "fallthroughSuccessor": "UAD999",
+      "statements": [
+        {
+          "type": "MOVE",
+          "location": {
+            "startLine": 187,
+            "endLine": 187,
+            "startColumn": 11,
+            "endColumn": 30,
+            "sourceFile": "UPDACC.cbl"
+          },
+          "rawText": "MOVE COMM-ACCNO TO DESIRED-ACC-NO",
+          "sourceFieldIds": [
+            "LK_L10_COMM-ACCNO"
+          ],
+          "targetFieldIds": [
+            "LS_L110_DESIRED-ACC-NO"
+          ],
+          "fromExpr": "COMM-ACCNO",
+          "toTargets": [
+            "DESIRED-ACC-NO"
+          ]
+        },
+        {
+          "type": "MOVE",
+          "location": {
+            "startLine": 188,
+            "endLine": 188,
+            "startColumn": 11,
+            "endColumn": 37,
+            "sourceFile": "UPDACC.cbl"
+          },
+          "rawText": "MOVE DESIRED-SORT-CODE TO HV-ACCOUNT-SORTCODE",
+          "sourceFieldIds": [
+            "LS_L109_DESIRED-SORT-CODE"
+          ],
+          "targetFieldIds": [
+            "WS_L65_HV-ACCOUNT-SORTCODE"
+          ],
+          "fromExpr": "DESIRED-SORT-CODE",
+          "toTargets": [
+            "HV-ACCOUNT-SORTCODE"
+          ]
+        },
+        {
+          "type": "MOVE",
+          "location": {
+            "startLine": 189,
+            "endLine": 189,
+            "startColumn": 11,
+            "endColumn": 34,
+            "sourceFile": "UPDACC.cbl"
+          },
+          "rawText": "MOVE DESIRED-ACC-NO TO HV-ACCOUNT-ACC-NO",
+          "sourceFieldIds": [
+            "LS_L110_DESIRED-ACC-NO"
+          ],
+          "targetFieldIds": [
+            "WS_L66_HV-ACCOUNT-ACC-NO"
+          ],
+          "fromExpr": "DESIRED-ACC-NO",
+          "toTargets": [
+            "HV-ACCOUNT-ACC-NO"
+          ]
+        },
+        {
+          "type": "EXEC_SQL",
+          "location": {
+            "startLine": 191,
+            "endLine": 219,
+            "startColumn": 6,
+            "endColumn": 6,
+            "sourceFile": "UPDACC.cbl"
+          },
+          "rawText": "*>EXECSQL EXEC SQL *>EXECSQL SELECT ACCOUNT_EYECATCHER, *>EXECSQL ACCOUNT_CUSTOMER_NUMBER, *>EXECSQL ACCOUNT_SORTCODE, *>EXECSQL ACCOUNT_NUMBER, *>EXECSQL ACCOUNT_TYPE, *>EXECSQL ACCOUNT_INTEREST_RATE, *>EXECSQL ACCOUNT_OPENED, *>EXECSQL ACCOUNT_OVERDRAFT_LIMIT, *>EXECSQL ACCOUNT_LAST_STATEMENT, *>EXECSQL ACCOUNT_NEXT_STATEMENT, *>EXECSQL ACCOUNT_AVAILABLE_BALANCE, *>EXECSQL ACCOUNT_ACTUAL_BALANCE *>EXECSQL INTO :HV-ACCOUNT-EYECATCHER, *>EXECSQL :HV-ACCOUNT-CUST-NO, *>EXECSQL :HV-ACCOUNT-SORTCODE, *>EXECSQL :HV-ACCOUNT-ACC-NO, *>EXECSQL :HV-ACCOUNT-ACC-TYPE, *>EXECSQL :HV-ACCOUNT-INT-RATE, *>EXECSQL :HV-ACCOUNT-OPENED, *>EXECSQL :HV-ACCOUNT-OVERDRAFT-LIM, *>EXECSQL :HV-ACCOUNT-LAST-STMT, *>EXECSQL :HV-ACCOUNT-NEXT-STMT, *>EXECSQL :HV-ACCOUNT-AVAIL-BAL, *>EXECSQL :HV-ACCOUNT-ACTUAL-BAL *>EXECSQL FROM ACCOUNT *>EXECSQL WHERE (ACCOUNT_SORTCODE = :HV-ACCOUNT-SORTCODE AND *>EXECSQL ACCOUNT_NUMBER = :HV-ACCOUNT-ACC-NO) *>EXECSQL END-EXEC }",
+          "subsystem": "SQL",
+          "rawPayload": "EXEC SQL SELECT ACCOUNT_EYECATCHER, ACCOUNT_CUSTOMER_NUMBER, ACCOUNT_SORTCODE, ACCOUNT_NUMBER, ACCOUNT_TYPE, ACCOUNT_INTEREST_RATE, ACCOUNT_OPENED, ACCOUNT_OVERDRAFT_LIMIT, ACCOUNT_LAST_STATEMENT, ACCOUNT_NEXT_STATEMENT, ACCOUNT_AVAILABLE_BALANCE, ACCOUNT_ACTUAL_BALANCE INTO  :HV-ACCOUNT-EYECATCHER, :HV-ACCOUNT-CUST-NO, :HV-ACCOUNT-SORTCODE, :HV-ACCOUNT-ACC-NO, :HV-ACCOUNT-ACC-TYPE, :HV-ACCOUNT-INT-RATE, :HV-ACCOUNT-OPENED, :HV-ACCOUNT-OVERDRAFT-LIM, :HV-ACCOUNT-LAST-STMT, :HV-ACCOUNT-NEXT-STMT, :HV-ACCOUNT-AVAIL-BAL, :HV-ACCOUNT-ACTUAL-BAL FROM ACCOUNT WHERE  (ACCOUNT_SORTCODE = :HV-ACCOUNT-SORTCODE AND ACCOUNT_NUMBER = :HV-ACCOUNT-ACC-NO) END-EXEC"
+        },
+        {
+          "type": "IF",
+          "location": {
+            "startLine": 225,
+            "endLine": 233,
+            "startColumn": 11,
+            "endColumn": 11,
+            "sourceFile": "UPDACC.cbl"
+          },
+          "rawText": "IF SQLCODE NOT = 0 MOVE 'N' TO COMM-SUCCESS MOVE SQLCODE TO SQLCODE-DISPLAY DISPLAY 'ERROR: UPDACC returned ' SQLCODE-DISPLAY ' on SELECT' GO TO UAD999 END-IF",
+          "condition": "SQLCODE NOT = 0",
+          "thenStatements": [
+            {
+              "type": "MOVE",
+              "location": {
+                "startLine": 227,
+                "endLine": 227,
+                "startColumn": 14,
+                "endColumn": 26,
+                "sourceFile": "UPDACC.cbl"
+              },
+              "rawText": "MOVE 'N' TO COMM-SUCCESS",
+              "targetFieldIds": [
+                "LK_L31_COMM-SUCCESS"
+              ],
+              "fromExpr": "'N'",
+              "toTargets": [
+                "COMM-SUCCESS"
+              ]
+            },
+            {
+              "type": "MOVE",
+              "location": {
+                "startLine": 228,
+                "endLine": 228,
+                "startColumn": 14,
+                "endColumn": 30,
+                "sourceFile": "UPDACC.cbl"
+              },
+              "rawText": "MOVE SQLCODE TO SQLCODE-DISPLAY",
+              "targetFieldIds": [
+                "WS_L82_SQLCODE-DISPLAY"
+              ],
+              "fromExpr": "SQLCODE",
+              "toTargets": [
+                "SQLCODE-DISPLAY"
+              ]
+            },
+            {
+              "type": "DISPLAY",
+              "location": {
+                "startLine": 229,
+                "endLine": 230,
+                "startColumn": 14,
+                "endColumn": 14,
+                "sourceFile": "UPDACC.cbl"
+              },
+              "rawText": "DISPLAY 'ERROR: UPDACC returned ' SQLCODE-DISPLAY ' on SELECT'",
+              "sourceFieldIds": [
+                "WS_L82_SQLCODE-DISPLAY"
+              ],
+              "operands": [
+                "'ERROR: UPDACC returned '",
+                "SQLCODE-DISPLAY",
+                "' on SELECT'"
+              ]
+            },
+            {
+              "type": "GO_TO",
+              "location": {
+                "startLine": 231,
+                "endLine": 231,
+                "startColumn": 14,
+                "endColumn": 20,
+                "sourceFile": "UPDACC.cbl"
+              },
+              "rawText": "GO TO UAD999",
+              "target": "UAD999",
+              "operation": "GO_TO"
+            }
+          ]
+        },
+        {
+          "type": "IF",
+          "location": {
+            "startLine": 267,
+            "endLine": 272,
+            "startColumn": 11,
+            "endColumn": 11,
+            "sourceFile": "UPDACC.cbl"
+          },
+          "rawText": "IF (COMM-ACC-TYPE = SPACES OR COMM-ACC-TYPE(1:1) = ' ') MOVE 'N' TO COMM-SUCCESS DISPLAY 'ERROR: UPDACC has invalid account-type' GO TO UAD999 END-IF",
+          "sourceFieldIds": [
+            "LK_L11_COMM-ACC-TYPE"
+          ],
+          "condition": "(COMM-ACC-TYPE = SPACES OR COMM-ACC-TYPE(1:1) = ' ')",
+          "thenStatements": [
+            {
+              "type": "MOVE",
+              "location": {
+                "startLine": 268,
+                "endLine": 268,
+                "startColumn": 14,
+                "endColumn": 26,
+                "sourceFile": "UPDACC.cbl"
+              },
+              "rawText": "MOVE 'N' TO COMM-SUCCESS",
+              "targetFieldIds": [
+                "LK_L31_COMM-SUCCESS"
+              ],
+              "fromExpr": "'N'",
+              "toTargets": [
+                "COMM-SUCCESS"
+              ]
+            },
+            {
+              "type": "DISPLAY",
+              "location": {
+                "startLine": 269,
+                "endLine": 269,
+                "startColumn": 14,
+                "endColumn": 22,
+                "sourceFile": "UPDACC.cbl"
+              },
+              "rawText": "DISPLAY 'ERROR: UPDACC has invalid account-type'",
+              "operands": [
+                "'ERROR: UPDACC has invalid account-type'"
+              ]
+            },
+            {
+              "type": "GO_TO",
+              "location": {
+                "startLine": 270,
+                "endLine": 270,
+                "startColumn": 14,
+                "endColumn": 20,
+                "sourceFile": "UPDACC.cbl"
+              },
+              "rawText": "GO TO UAD999",
+              "target": "UAD999",
+              "operation": "GO_TO"
+            }
+          ]
+        },
+        {
+          "type": "MOVE",
+          "location": {
+            "startLine": 274,
+            "endLine": 274,
+            "startColumn": 11,
+            "endColumn": 34,
+            "sourceFile": "UPDACC.cbl"
+          },
+          "rawText": "MOVE COMM-ACC-TYPE TO HV-ACCOUNT-ACC-TYPE",
+          "sourceFieldIds": [
+            "LK_L11_COMM-ACC-TYPE"
+          ],
+          "targetFieldIds": [
+            "WS_L67_HV-ACCOUNT-ACC-TYPE"
+          ],
+          "fromExpr": "COMM-ACC-TYPE",
+          "toTargets": [
+            "HV-ACCOUNT-ACC-TYPE"
+          ]
+        },
+        {
+          "type": "MOVE",
+          "location": {
+            "startLine": 275,
+            "endLine": 275,
+            "startColumn": 11,
+            "endColumn": 34,
+            "sourceFile": "UPDACC.cbl"
+          },
+          "rawText": "MOVE COMM-OVERDRAFT TO HV-ACCOUNT-OVERDRAFT-LIM",
+          "sourceFieldIds": [
+            "LK_L18_COMM-OVERDRAFT"
+          ],
+          "targetFieldIds": [
+            "WS_L70_HV-ACCOUNT-OVERDRAFT-LIM"
+          ],
+          "fromExpr": "COMM-OVERDRAFT",
+          "toTargets": [
+            "HV-ACCOUNT-OVERDRAFT-LIM"
+          ]
+        },
+        {
+          "type": "MOVE",
+          "location": {
+            "startLine": 276,
+            "endLine": 276,
+            "startColumn": 11,
+            "endColumn": 34,
+            "sourceFile": "UPDACC.cbl"
+          },
+          "rawText": "MOVE COMM-INT-RATE TO HV-ACCOUNT-INT-RATE",
+          "sourceFieldIds": [
+            "LK_L12_COMM-INT-RATE"
+          ],
+          "targetFieldIds": [
+            "WS_L68_HV-ACCOUNT-INT-RATE"
+          ],
+          "fromExpr": "COMM-INT-RATE",
+          "toTargets": [
+            "HV-ACCOUNT-INT-RATE"
+          ]
+        },
+        {
+          "type": "EXEC_SQL",
+          "location": {
+            "startLine": 278,
+            "endLine": 285,
+            "startColumn": 6,
+            "endColumn": 6,
+            "sourceFile": "UPDACC.cbl"
+          },
+          "rawText": "*>EXECSQL EXEC SQL *>EXECSQL UPDATE ACCOUNT *>EXECSQL SET ACCOUNT_TYPE = :HV-ACCOUNT-ACC-TYPE, *>EXECSQL ACCOUNT_INTEREST_RATE = :HV-ACCOUNT-INT-RATE, *>EXECSQL ACCOUNT_OVERDRAFT_LIMIT = :HV-ACCOUNT-OVERDRAFT-LIM *>EXECSQL WHERE (ACCOUNT_SORTCODE = :HV-ACCOUNT-SORTCODE AND *>EXECSQL ACCOUNT_NUMBER = :HV-ACCOUNT-ACC-NO) *>EXECSQL END-EXEC }",
+          "subsystem": "SQL",
+          "rawPayload": "EXEC SQL UPDATE ACCOUNT SET ACCOUNT_TYPE = :HV-ACCOUNT-ACC-TYPE, ACCOUNT_INTEREST_RATE = :HV-ACCOUNT-INT-RATE, ACCOUNT_OVERDRAFT_LIMIT = :HV-ACCOUNT-OVERDRAFT-LIM WHERE (ACCOUNT_SORTCODE = :HV-ACCOUNT-SORTCODE AND ACCOUNT_NUMBER = :HV-ACCOUNT-ACC-NO) END-EXEC"
+        },
+        {
+          "type": "IF",
+          "location": {
+            "startLine": 290,
+            "endLine": 296,
+            "startColumn": 11,
+            "endColumn": 11,
+            "sourceFile": "UPDACC.cbl"
+          },
+          "rawText": "IF SQLCODE NOT = 0 MOVE 'N' TO COMM-SUCCESS MOVE SQLCODE TO SQLCODE-DISPLAY DISPLAY 'ERROR: UPDACC returned ' SQLCODE-DISPLAY ' on UPDATE' GO TO UAD999 END-IF",
+          "condition": "SQLCODE NOT = 0",
+          "thenStatements": [
+            {
+              "type": "MOVE",
+              "location": {
+                "startLine": 291,
+                "endLine": 291,
+                "startColumn": 14,
+                "endColumn": 26,
+                "sourceFile": "UPDACC.cbl"
+              },
+              "rawText": "MOVE 'N' TO COMM-SUCCESS",
+              "targetFieldIds": [
+                "LK_L31_COMM-SUCCESS"
+              ],
+              "fromExpr": "'N'",
+              "toTargets": [
+                "COMM-SUCCESS"
+              ]
+            },
+            {
+              "type": "MOVE",
+              "location": {
+                "startLine": 292,
+                "endLine": 292,
+                "startColumn": 14,
+                "endColumn": 30,
+                "sourceFile": "UPDACC.cbl"
+              },
+              "rawText": "MOVE SQLCODE TO SQLCODE-DISPLAY",
+              "targetFieldIds": [
+                "WS_L82_SQLCODE-DISPLAY"
+              ],
+              "fromExpr": "SQLCODE",
+              "toTargets": [
+                "SQLCODE-DISPLAY"
+              ]
+            },
+            {
+              "type": "DISPLAY",
+              "location": {
+                "startLine": 293,
+                "endLine": 294,
+                "startColumn": 14,
+                "endColumn": 14,
+                "sourceFile": "UPDACC.cbl"
+              },
+              "rawText": "DISPLAY 'ERROR: UPDACC returned ' SQLCODE-DISPLAY ' on UPDATE'",
+              "sourceFieldIds": [
+                "WS_L82_SQLCODE-DISPLAY"
+              ],
+              "operands": [
+                "'ERROR: UPDACC returned '",
+                "SQLCODE-DISPLAY",
+                "' on UPDATE'"
+              ]
+            },
+            {
+              "type": "GO_TO",
+              "location": {
+                "startLine": 295,
+                "endLine": 295,
+                "startColumn": 14,
+                "endColumn": 20,
+                "sourceFile": "UPDACC.cbl"
+              },
+              "rawText": "GO TO UAD999",
+              "target": "UAD999",
+              "operation": "GO_TO"
+            }
+          ]
+        },
+        {
+          "type": "MOVE",
+          "location": {
+            "startLine": 302,
+            "endLine": 302,
+            "startColumn": 11,
+            "endColumn": 41,
+            "sourceFile": "UPDACC.cbl"
+          },
+          "rawText": "MOVE HV-ACCOUNT-EYECATCHER TO COMM-EYE",
+          "sourceFieldIds": [
+            "WS_L62_HV-ACCOUNT-EYECATCHER"
+          ],
+          "targetFieldIds": [
+            "LK_L7_COMM-EYE"
+          ],
+          "fromExpr": "HV-ACCOUNT-EYECATCHER",
+          "toTargets": [
+            "COMM-EYE"
+          ]
+        },
+        {
+          "type": "MOVE",
+          "location": {
+            "startLine": 303,
+            "endLine": 303,
+            "startColumn": 11,
+            "endColumn": 41,
+            "sourceFile": "UPDACC.cbl"
+          },
+          "rawText": "MOVE HV-ACCOUNT-CUST-NO TO COMM-CUSTNO",
+          "sourceFieldIds": [
+            "WS_L63_HV-ACCOUNT-CUST-NO"
+          ],
+          "targetFieldIds": [
+            "LK_L8_COMM-CUSTNO"
+          ],
+          "fromExpr": "HV-ACCOUNT-CUST-NO",
+          "toTargets": [
+            "COMM-CUSTNO"
+          ]
+        },
+        {
+          "type": "MOVE",
+          "location": {
+            "startLine": 304,
+            "endLine": 304,
+            "startColumn": 11,
+            "endColumn": 41,
+            "sourceFile": "UPDACC.cbl"
+          },
+          "rawText": "MOVE HV-ACCOUNT-SORTCODE TO COMM-SCODE",
+          "sourceFieldIds": [
+            "WS_L65_HV-ACCOUNT-SORTCODE"
+          ],
+          "targetFieldIds": [
+            "LK_L9_COMM-SCODE"
+          ],
+          "fromExpr": "HV-ACCOUNT-SORTCODE",
+          "toTargets": [
+            "COMM-SCODE"
+          ]
+        },
+        {
+          "type": "MOVE",
+          "location": {
+            "startLine": 305,
+            "endLine": 305,
+            "startColumn": 11,
+            "endColumn": 41,
+            "sourceFile": "UPDACC.cbl"
+          },
+          "rawText": "MOVE HV-ACCOUNT-ACC-NO TO COMM-ACCNO",
+          "sourceFieldIds": [
+            "WS_L66_HV-ACCOUNT-ACC-NO"
+          ],
+          "targetFieldIds": [
+            "LK_L10_COMM-ACCNO"
+          ],
+          "fromExpr": "HV-ACCOUNT-ACC-NO",
+          "toTargets": [
+            "COMM-ACCNO"
+          ]
+        },
+        {
+          "type": "MOVE",
+          "location": {
+            "startLine": 306,
+            "endLine": 306,
+            "startColumn": 11,
+            "endColumn": 41,
+            "sourceFile": "UPDACC.cbl"
+          },
+          "rawText": "MOVE HV-ACCOUNT-ACC-TYPE TO COMM-ACC-TYPE",
+          "sourceFieldIds": [
+            "WS_L67_HV-ACCOUNT-ACC-TYPE"
+          ],
+          "targetFieldIds": [
+            "LK_L11_COMM-ACC-TYPE"
+          ],
+          "fromExpr": "HV-ACCOUNT-ACC-TYPE",
+          "toTargets": [
+            "COMM-ACC-TYPE"
+          ]
+        },
+        {
+          "type": "MOVE",
+          "location": {
+            "startLine": 307,
+            "endLine": 307,
+            "startColumn": 11,
+            "endColumn": 41,
+            "sourceFile": "UPDACC.cbl"
+          },
+          "rawText": "MOVE HV-ACCOUNT-INT-RATE TO COMM-INT-RATE",
+          "sourceFieldIds": [
+            "WS_L68_HV-ACCOUNT-INT-RATE"
+          ],
+          "targetFieldIds": [
+            "LK_L12_COMM-INT-RATE"
+          ],
+          "fromExpr": "HV-ACCOUNT-INT-RATE",
+          "toTargets": [
+            "COMM-INT-RATE"
+          ]
+        },
+        {
+          "type": "INITIALIZE",
+          "location": {
+            "startLine": 308,
+            "endLine": 308,
+            "startColumn": 11,
+            "endColumn": 22,
+            "sourceFile": "UPDACC.cbl"
+          },
+          "rawText": "INITIALIZE DB2-DATE-REFORMAT",
+          "targetFieldIds": [
+            "LS_L91_DB2-DATE-REFORMAT"
+          ],
+          "targets": [
+            "DB2-DATE-REFORMAT"
+          ]
+        },
+        {
+          "type": "MOVE",
+          "location": {
+            "startLine": 309,
+            "endLine": 309,
+            "startColumn": 11,
+            "endColumn": 41,
+            "sourceFile": "UPDACC.cbl"
+          },
+          "rawText": "MOVE HV-ACCOUNT-OPENED TO DB2-DATE-REFORMAT",
+          "sourceFieldIds": [
+            "WS_L69_HV-ACCOUNT-OPENED"
+          ],
+          "targetFieldIds": [
+            "LS_L91_DB2-DATE-REFORMAT"
+          ],
+          "fromExpr": "HV-ACCOUNT-OPENED",
+          "toTargets": [
+            "DB2-DATE-REFORMAT"
+          ]
+        },
+        {
+          "type": "MOVE",
+          "location": {
+            "startLine": 310,
+            "endLine": 310,
+            "startColumn": 11,
+            "endColumn": 41,
+            "sourceFile": "UPDACC.cbl"
+          },
+          "rawText": "MOVE DB2-DATE-REF-YR TO COMM-OPENED-YEAR",
+          "sourceFieldIds": [
+            "LS_L92_DB2-DATE-REF-YR"
+          ],
+          "targetFieldIds": [
+            "LK_L17_COMM-OPENED-YEAR"
+          ],
+          "fromExpr": "DB2-DATE-REF-YR",
+          "toTargets": [
+            "COMM-OPENED-YEAR"
+          ]
+        },
+        {
+          "type": "MOVE",
+          "location": {
+            "startLine": 311,
+            "endLine": 311,
+            "startColumn": 11,
+            "endColumn": 41,
+            "sourceFile": "UPDACC.cbl"
+          },
+          "rawText": "MOVE DB2-DATE-REF-MNTH TO COMM-OPENED-MONTH",
+          "sourceFieldIds": [
+            "LS_L94_DB2-DATE-REF-MNTH"
+          ],
+          "targetFieldIds": [
+            "LK_L16_COMM-OPENED-MONTH"
+          ],
+          "fromExpr": "DB2-DATE-REF-MNTH",
+          "toTargets": [
+            "COMM-OPENED-MONTH"
+          ]
+        },
+        {
+          "type": "MOVE",
+          "location": {
+            "startLine": 312,
+            "endLine": 312,
+            "startColumn": 11,
+            "endColumn": 41,
+            "sourceFile": "UPDACC.cbl"
+          },
+          "rawText": "MOVE DB2-DATE-REF-DAY TO COMM-OPENED-DAY",
+          "sourceFieldIds": [
+            "LS_L96_DB2-DATE-REF-DAY"
+          ],
+          "targetFieldIds": [
+            "LK_L15_COMM-OPENED-DAY"
+          ],
+          "fromExpr": "DB2-DATE-REF-DAY",
+          "toTargets": [
+            "COMM-OPENED-DAY"
+          ]
+        },
+        {
+          "type": "MOVE",
+          "location": {
+            "startLine": 313,
+            "endLine": 313,
+            "startColumn": 11,
+            "endColumn": 44,
+            "sourceFile": "UPDACC.cbl"
+          },
+          "rawText": "MOVE HV-ACCOUNT-OVERDRAFT-LIM TO COMM-OVERDRAFT",
+          "sourceFieldIds": [
+            "WS_L70_HV-ACCOUNT-OVERDRAFT-LIM"
+          ],
+          "targetFieldIds": [
+            "LK_L18_COMM-OVERDRAFT"
+          ],
+          "fromExpr": "HV-ACCOUNT-OVERDRAFT-LIM",
+          "toTargets": [
+            "COMM-OVERDRAFT"
+          ]
+        },
+        {
+          "type": "INITIALIZE",
+          "location": {
+            "startLine": 314,
+            "endLine": 314,
+            "startColumn": 11,
+            "endColumn": 22,
+            "sourceFile": "UPDACC.cbl"
+          },
+          "rawText": "INITIALIZE DB2-DATE-REFORMAT",
+          "targetFieldIds": [
+            "LS_L91_DB2-DATE-REFORMAT"
+          ],
+          "targets": [
+            "DB2-DATE-REFORMAT"
+          ]
+        },
+        {
+          "type": "MOVE",
+          "location": {
+            "startLine": 315,
+            "endLine": 315,
+            "startColumn": 11,
+            "endColumn": 41,
+            "sourceFile": "UPDACC.cbl"
+          },
+          "rawText": "MOVE HV-ACCOUNT-LAST-STMT TO DB2-DATE-REFORMAT",
+          "sourceFieldIds": [
+            "WS_L71_HV-ACCOUNT-LAST-STMT"
+          ],
+          "targetFieldIds": [
+            "LS_L91_DB2-DATE-REFORMAT"
+          ],
+          "fromExpr": "HV-ACCOUNT-LAST-STMT",
+          "toTargets": [
+            "DB2-DATE-REFORMAT"
+          ]
+        },
+        {
+          "type": "MOVE",
+          "location": {
+            "startLine": 316,
+            "endLine": 316,
+            "startColumn": 11,
+            "endColumn": 41,
+            "sourceFile": "UPDACC.cbl"
+          },
+          "rawText": "MOVE DB2-DATE-REF-YR TO COMM-LASTST-YEAR",
+          "sourceFieldIds": [
+            "LS_L92_DB2-DATE-REF-YR"
+          ],
+          "targetFieldIds": [
+            "LK_L23_COMM-LASTST-YEAR"
+          ],
+          "fromExpr": "DB2-DATE-REF-YR",
+          "toTargets": [
+            "COMM-LASTST-YEAR"
+          ]
+        },
+        {
+          "type": "MOVE",
+          "location": {
+            "startLine": 317,
+            "endLine": 317,
+            "startColumn": 11,
+            "endColumn": 41,
+            "sourceFile": "UPDACC.cbl"
+          },
+          "rawText": "MOVE DB2-DATE-REF-MNTH TO COMM-LASTST-MONTH",
+          "sourceFieldIds": [
+            "LS_L94_DB2-DATE-REF-MNTH"
+          ],
+          "targetFieldIds": [
+            "LK_L22_COMM-LASTST-MONTH"
+          ],
+          "fromExpr": "DB2-DATE-REF-MNTH",
+          "toTargets": [
+            "COMM-LASTST-MONTH"
+          ]
+        },
+        {
+          "type": "MOVE",
+          "location": {
+            "startLine": 318,
+            "endLine": 318,
+            "startColumn": 11,
+            "endColumn": 41,
+            "sourceFile": "UPDACC.cbl"
+          },
+          "rawText": "MOVE DB2-DATE-REF-DAY TO COMM-LASTST-DAY",
+          "sourceFieldIds": [
+            "LS_L96_DB2-DATE-REF-DAY"
+          ],
+          "targetFieldIds": [
+            "LK_L21_COMM-LASTST-DAY"
+          ],
+          "fromExpr": "DB2-DATE-REF-DAY",
+          "toTargets": [
+            "COMM-LASTST-DAY"
+          ]
+        },
+        {
+          "type": "INITIALIZE",
+          "location": {
+            "startLine": 319,
+            "endLine": 319,
+            "startColumn": 11,
+            "endColumn": 22,
+            "sourceFile": "UPDACC.cbl"
+          },
+          "rawText": "INITIALIZE DB2-DATE-REFORMAT",
+          "targetFieldIds": [
+            "LS_L91_DB2-DATE-REFORMAT"
+          ],
+          "targets": [
+            "DB2-DATE-REFORMAT"
+          ]
+        },
+        {
+          "type": "MOVE",
+          "location": {
+            "startLine": 320,
+            "endLine": 320,
+            "startColumn": 11,
+            "endColumn": 41,
+            "sourceFile": "UPDACC.cbl"
+          },
+          "rawText": "MOVE HV-ACCOUNT-NEXT-STMT TO DB2-DATE-REFORMAT",
+          "sourceFieldIds": [
+            "WS_L72_HV-ACCOUNT-NEXT-STMT"
+          ],
+          "targetFieldIds": [
+            "LS_L91_DB2-DATE-REFORMAT"
+          ],
+          "fromExpr": "HV-ACCOUNT-NEXT-STMT",
+          "toTargets": [
+            "DB2-DATE-REFORMAT"
+          ]
+        },
+        {
+          "type": "MOVE",
+          "location": {
+            "startLine": 321,
+            "endLine": 321,
+            "startColumn": 11,
+            "endColumn": 41,
+            "sourceFile": "UPDACC.cbl"
+          },
+          "rawText": "MOVE DB2-DATE-REF-YR TO COMM-NEXTST-YEAR",
+          "sourceFieldIds": [
+            "LS_L92_DB2-DATE-REF-YR"
+          ],
+          "targetFieldIds": [
+            "LK_L28_COMM-NEXTST-YEAR"
+          ],
+          "fromExpr": "DB2-DATE-REF-YR",
+          "toTargets": [
+            "COMM-NEXTST-YEAR"
+          ]
+        },
+        {
+          "type": "MOVE",
+          "location": {
+            "startLine": 322,
+            "endLine": 322,
+            "startColumn": 11,
+            "endColumn": 41,
+            "sourceFile": "UPDACC.cbl"
+          },
+          "rawText": "MOVE DB2-DATE-REF-MNTH TO COMM-NEXTST-MONTH",
+          "sourceFieldIds": [
+            "LS_L94_DB2-DATE-REF-MNTH"
+          ],
+          "targetFieldIds": [
+            "LK_L27_COMM-NEXTST-MONTH"
+          ],
+          "fromExpr": "DB2-DATE-REF-MNTH",
+          "toTargets": [
+            "COMM-NEXTST-MONTH"
+          ]
+        },
+        {
+          "type": "MOVE",
+          "location": {
+            "startLine": 323,
+            "endLine": 323,
+            "startColumn": 11,
+            "endColumn": 41,
+            "sourceFile": "UPDACC.cbl"
+          },
+          "rawText": "MOVE DB2-DATE-REF-DAY TO COMM-NEXTST-DAY",
+          "sourceFieldIds": [
+            "LS_L96_DB2-DATE-REF-DAY"
+          ],
+          "targetFieldIds": [
+            "LK_L26_COMM-NEXTST-DAY"
+          ],
+          "fromExpr": "DB2-DATE-REF-DAY",
+          "toTargets": [
+            "COMM-NEXTST-DAY"
+          ]
+        },
+        {
+          "type": "MOVE",
+          "location": {
+            "startLine": 324,
+            "endLine": 324,
+            "startColumn": 11,
+            "endColumn": 41,
+            "sourceFile": "UPDACC.cbl"
+          },
+          "rawText": "MOVE HV-ACCOUNT-AVAIL-BAL TO COMM-AVAIL-BAL",
+          "sourceFieldIds": [
+            "WS_L73_HV-ACCOUNT-AVAIL-BAL"
+          ],
+          "targetFieldIds": [
+            "LK_L29_COMM-AVAIL-BAL"
+          ],
+          "fromExpr": "HV-ACCOUNT-AVAIL-BAL",
+          "toTargets": [
+            "COMM-AVAIL-BAL"
+          ]
+        },
+        {
+          "type": "MOVE",
+          "location": {
+            "startLine": 325,
+            "endLine": 325,
+            "startColumn": 11,
+            "endColumn": 41,
+            "sourceFile": "UPDACC.cbl"
+          },
+          "rawText": "MOVE HV-ACCOUNT-ACTUAL-BAL TO COMM-ACTUAL-BAL",
+          "sourceFieldIds": [
+            "WS_L74_HV-ACCOUNT-ACTUAL-BAL"
+          ],
+          "targetFieldIds": [
+            "LK_L30_COMM-ACTUAL-BAL"
+          ],
+          "fromExpr": "HV-ACCOUNT-ACTUAL-BAL",
+          "toTargets": [
+            "COMM-ACTUAL-BAL"
+          ]
+        },
+        {
+          "type": "MOVE",
+          "location": {
+            "startLine": 327,
+            "endLine": 327,
+            "startColumn": 11,
+            "endColumn": 23,
+            "sourceFile": "UPDACC.cbl"
+          },
+          "rawText": "MOVE 'Y' TO COMM-SUCCESS",
+          "targetFieldIds": [
+            "LK_L31_COMM-SUCCESS"
+          ],
+          "fromExpr": "'Y'",
+          "toTargets": [
+            "COMM-SUCCESS"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "UAD999",
+      "sectionParent": "UPDATE-ACCOUNT-DB2",
+      "location": {
+        "startLine": 329,
+        "endLine": 330,
+        "startColumn": 7,
+        "endColumn": 15,
+        "sourceFile": "UPDACC.cbl"
+      },
+      "calledBy": [
+        "UAD010"
+      ],
+      "fallthroughSuccessor": "GMOOH010",
+      "statements": [
+        {
+          "type": "EXIT",
+          "location": {
+            "startLine": 330,
+            "endLine": 330,
+            "startColumn": 11,
+            "endColumn": 11,
+            "sourceFile": "UPDACC.cbl"
+          },
+          "rawText": "EXIT",
+          "operation": "EXIT"
+        }
+      ]
+    },
+    {
+      "name": "GMOOH010",
+      "sectionParent": "GET-ME-OUT-OF-HERE",
+      "location": {
+        "startLine": 382,
+        "endLine": 385,
+        "startColumn": 7,
+        "endColumn": 27,
+        "sourceFile": "UPDACC.cbl"
+      },
+      "fallthroughSuccessor": "GMOOH999",
+      "statements": [
+        {
+          "type": "EXEC_CICS",
+          "location": {
+            "startLine": 384,
+            "endLine": 385,
+            "startColumn": 6,
+            "endColumn": 6,
+            "sourceFile": "UPDACC.cbl"
+          },
+          "rawText": "*>EXECCICS EXEC CICS RETURN *>EXECCICS END-EXEC }",
+          "subsystem": "CICS",
+          "rawPayload": "EXEC CICS RETURN END-EXEC"
+        }
+      ]
+    },
+    {
+      "name": "GMOOH999",
+      "sectionParent": "GET-ME-OUT-OF-HERE",
+      "location": {
+        "startLine": 387,
+        "endLine": 388,
+        "startColumn": 7,
+        "endColumn": 15,
+        "sourceFile": "UPDACC.cbl"
+      },
+      "fallthroughSuccessor": "PTD010",
+      "statements": [
+        {
+          "type": "EXIT",
+          "location": {
+            "startLine": 388,
+            "endLine": 388,
+            "startColumn": 11,
+            "endColumn": 11,
+            "sourceFile": "UPDACC.cbl"
+          },
+          "rawText": "EXIT",
+          "operation": "EXIT"
+        }
+      ]
+    },
+    {
+      "name": "PTD010",
+      "sectionParent": "POPULATE-TIME-DATE",
+      "location": {
+        "startLine": 392,
+        "endLine": 403,
+        "startColumn": 7,
+        "endColumn": 27,
+        "sourceFile": "UPDACC.cbl"
+      },
+      "fallthroughSuccessor": "PTD999",
+      "statements": [
+        {
+          "type": "EXEC_CICS",
+          "location": {
+            "startLine": 394,
+            "endLine": 396,
+            "startColumn": 6,
+            "endColumn": 6,
+            "sourceFile": "UPDACC.cbl"
+          },
+          "rawText": "*>EXECCICS EXEC CICS ASKTIME *>EXECCICS ABSTIME(WS-U-TIME) *>EXECCICS END-EXEC }",
+          "subsystem": "CICS",
+          "rawPayload": "EXEC CICS ASKTIME ABSTIME(WS-U-TIME) END-EXEC"
+        },
+        {
+          "type": "EXEC_CICS",
+          "location": {
+            "startLine": 398,
+            "endLine": 403,
+            "startColumn": 6,
+            "endColumn": 6,
+            "sourceFile": "UPDACC.cbl"
+          },
+          "rawText": "*>EXECCICS EXEC CICS FORMATTIME *>EXECCICS ABSTIME(WS-U-TIME) *>EXECCICS DDMMYYYY(WS-ORIG-DATE) *>EXECCICS TIME(WS-TIME-NOW) *>EXECCICS DATESEP *>EXECCICS END-EXEC }",
+          "subsystem": "CICS",
+          "rawPayload": "EXEC CICS FORMATTIME ABSTIME(WS-U-TIME) DDMMYYYY(WS-ORIG-DATE) TIME(WS-TIME-NOW) DATESEP END-EXEC"
+        }
+      ]
+    },
+    {
+      "name": "PTD999",
+      "sectionParent": "POPULATE-TIME-DATE",
+      "location": {
+        "startLine": 405,
+        "endLine": 406,
+        "startColumn": 7,
+        "endColumn": 15,
+        "sourceFile": "UPDACC.cbl"
+      },
+      "statements": [
+        {
+          "type": "EXIT",
+          "location": {
+            "startLine": 406,
+            "endLine": 406,
+            "startColumn": 11,
+            "endColumn": 11,
+            "sourceFile": "UPDACC.cbl"
+          },
+          "rawText": "EXIT",
+          "operation": "EXIT"
+        }
+      ]
+    }
+  ],
+  "asgAuditSummary": {
+    "totalAsgDataEntries": 129,
+    "totalAsgLevel88Entries": 1,
+    "totalAsgParagraphs": 8,
+    "totalAsgStatements": 47,
+    "totalAsgCalls": 79,
+    "asgVariableNames": [
+      "SORTCODE",
+      "SYSIDERR-RETRY",
+      "HOST-ACCOUNT-ROW",
+      "HV-ACCOUNT-EYECATCHER",
+      "HV-ACCOUNT-CUST-NO",
+      "HV-ACCOUNT-KEY",
+      "HV-ACCOUNT-SORTCODE",
+      "HV-ACCOUNT-ACC-NO",
+      "HV-ACCOUNT-ACC-TYPE",
+      "HV-ACCOUNT-INT-RATE",
+      "HV-ACCOUNT-OPENED",
+      "HV-ACCOUNT-OVERDRAFT-LIM",
+      "HV-ACCOUNT-LAST-STMT",
+      "HV-ACCOUNT-NEXT-STMT",
+      "HV-ACCOUNT-AVAIL-BAL",
+      "HV-ACCOUNT-ACTUAL-BAL",
+      "SQLCODE-DISPLAY",
+      "WS-CICS-WORK-AREA",
+      "WS-CICS-RESP",
+      "WS-CICS-RESP2",
+      "DFHCOMMAREA",
+      "COMM-EYE",
+      "COMM-CUSTNO",
+      "COMM-SCODE",
+      "COMM-ACCNO",
+      "COMM-ACC-TYPE",
+      "COMM-INT-RATE",
+      "COMM-OPENED",
+      "COMM-OPENED-GROUP",
+      "COMM-OPENED-DAY",
+      "COMM-OPENED-MONTH",
+      "COMM-OPENED-YEAR",
+      "COMM-OVERDRAFT",
+      "COMM-LAST-STMT-DT",
+      "COMM-LAST-STMNT-GROUP",
+      "COMM-LASTST-DAY",
+      "COMM-LASTST-MONTH",
+      "COMM-LASTST-YEAR",
+      "COMM-NEXT-STMT-DT",
+      "COMM-NEXT-STMNT-GROUP",
+      "COMM-NEXTST-DAY",
+      "COMM-NEXTST-MONTH",
+      "COMM-NEXTST-YEAR",
+      "COMM-AVAIL-BAL",
+      "COMM-ACTUAL-BAL",
+      "COMM-SUCCESS",
+      "DB2-DATE-REFORMAT",
+      "DB2-DATE-REF-YR",
+      "DB2-DATE-REF-MNTH",
+      "DB2-DATE-REF-DAY",
+      "WS-ACC-DATA",
+      "ACCOUNT-DATA",
+      "ACCOUNT-EYE-CATCHER",
+      "ACCOUNT-CUST-NO",
+      "ACCOUNT-KEY",
+      "ACCOUNT-SORT-CODE",
+      "ACCOUNT-NUMBER",
+      "ACCOUNT-TYPE",
+      "ACCOUNT-INTEREST-RATE",
+      "ACCOUNT-OPENED",
+      "ACCOUNT-OPENED-GROUP",
+      "ACCOUNT-OPENED-DAY",
+      "ACCOUNT-OPENED-MONTH",
+      "ACCOUNT-OPENED-YEAR",
+      "ACCOUNT-OVERDRAFT-LIMIT",
+      "ACCOUNT-LAST-STMT-DATE",
+      "ACCOUNT-LAST-STMT-GROUP",
+      "ACCOUNT-LAST-STMT-DAY",
+      "ACCOUNT-LAST-STMT-MONTH",
+      "ACCOUNT-LAST-STMT-YEAR",
+      "ACCOUNT-NEXT-STMT-DATE",
+      "ACCOUNT-NEXT-STMT-GROUP",
+      "ACCOUNT-NEXT-STMT-DAY",
+      "ACCOUNT-NEXT-STMT-MONTH",
+      "ACCOUNT-NEXT-STMT-YEAR",
+      "ACCOUNT-AVAILABLE-BALANCE",
+      "ACCOUNT-ACTUAL-BALANCE",
+      "WS-EIBTASKN12",
+      "WS-SQLCODE-DISP",
+      "DESIRED-ACC-KEY",
+      "DESIRED-SORT-CODE",
+      "DESIRED-ACC-NO",
+      "NEW-ACCOUNT-AVAILABLE-BALANCE",
+      "NEW-ACCOUNT-ACTUAL-BALANCE",
+      "WS-ACC-REC-LEN",
+      "WS-U-TIME",
+      "WS-ORIG-DATE",
+      "WS-ORIG-DATE-GRP",
+      "WS-ORIG-DATE-DD",
+      "WS-ORIG-DATE-MM",
+      "WS-ORIG-DATE-YYYY",
+      "WS-ORIG-DATE-GRP-X",
+      "WS-ORIG-DATE-DD-X",
+      "WS-ORIG-DATE-MM-X",
+      "WS-ORIG-DATE-YYYY-X",
+      "REJ-REASON",
+      "CUSTOMER-KY",
+      "REQUIRED-SORT-CODE",
+      "REQUIRED-ACC-NUM",
+      "STORM-DRAIN-CONDITION",
+      "WS-TIME-DATA",
+      "WS-TIME-NOW",
+      "WS-TIME-NOW-GRP",
+      "WS-TIME-NOW-GRP-HH",
+      "WS-TIME-NOW-GRP-MM",
+      "WS-TIME-NOW-GRP-SS",
+      "WS-ABEND-PGM",
+      "ABNDINFO-REC",
+      "ABND-VSAM-KEY",
+      "ABND-UTIME-KEY",
+      "ABND-TASKNO-KEY",
+      "ABND-APPLID",
+      "ABND-TRANID",
+      "ABND-DATE",
+      "ABND-TIME",
+      "ABND-CODE",
+      "ABND-PROGRAM",
+      "ABND-RESPCODE",
+      "ABND-RESP2CODE",
+      "ABND-SQLCODE",
+      "ABND-FREEFORM"
+    ],
+    "asgLevel88Names": [
+      "ACCOUNT-EYECATCHER-VALUE"
+    ],
+    "asgParagraphCalls": {
+      "UAD999": [
+        "UAD999",
+        "UAD999",
+        "UAD999"
+      ]
+    }
+  }
+}

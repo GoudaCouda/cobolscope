@@ -1,0 +1,1949 @@
+{
+  "programId": "ABNDPROC",
+  "author": "*>CE JONCOLLETT. *>CE",
+  "format": "FIXED",
+  "dataDictionary": {
+    "workingStorageSection": [
+      {
+        "id": "WS_L32_WS-CICS-WORK-AREA",
+        "qualifiedName": "WS-CICS-WORK-AREA",
+        "level": 1,
+        "name": "WS-CICS-WORK-AREA",
+        "usage": "DISPLAY",
+        "logicalType": "Group",
+        "byteOffset": 0,
+        "relativeOffset": 0,
+        "byteLength": 8,
+        "elementByteLength": 8,
+        "children": [
+          {
+            "id": "WS_L33_WS-CICS-RESP",
+            "qualifiedName": "WS-CICS-WORK-AREA.WS-CICS-RESP",
+            "level": 5,
+            "name": "WS-CICS-RESP",
+            "pic": "S9(8)",
+            "usage": "COMP",
+            "logicalType": "Signed Integer (32-bit Binary)",
+            "byteOffset": 0,
+            "relativeOffset": 0,
+            "byteLength": 4,
+            "elementByteLength": 4,
+            "location": {
+              "startLine": 33,
+              "endLine": 33,
+              "startColumn": 10,
+              "endColumn": 45,
+              "sourceFile": "ABNDPROC.cbl"
+            }
+          },
+          {
+            "id": "WS_L34_WS-CICS-RESP2",
+            "qualifiedName": "WS-CICS-WORK-AREA.WS-CICS-RESP2",
+            "level": 5,
+            "name": "WS-CICS-RESP2",
+            "pic": "S9(8)",
+            "usage": "COMP",
+            "logicalType": "Signed Integer (32-bit Binary)",
+            "byteOffset": 4,
+            "relativeOffset": 4,
+            "byteLength": 4,
+            "elementByteLength": 4,
+            "location": {
+              "startLine": 34,
+              "endLine": 34,
+              "startColumn": 10,
+              "endColumn": 45,
+              "sourceFile": "ABNDPROC.cbl"
+            }
+          }
+        ],
+        "location": {
+          "startLine": 32,
+          "endLine": 32,
+          "startColumn": 7,
+          "endColumn": 27,
+          "sourceFile": "ABNDPROC.cbl"
+        }
+      },
+      {
+        "id": "WS_L37_WS-ABND-AREA",
+        "qualifiedName": "WS-ABND-AREA",
+        "level": 1,
+        "name": "WS-ABND-AREA",
+        "usage": "DISPLAY",
+        "logicalType": "Group",
+        "byteOffset": 8,
+        "relativeOffset": 0,
+        "byteLength": 678,
+        "elementByteLength": 678,
+        "children": [
+          {
+            "id": "WS_L7_ABND-VSAM-KEY",
+            "qualifiedName": "WS-ABND-AREA.ABND-VSAM-KEY",
+            "level": 3,
+            "name": "ABND-VSAM-KEY",
+            "usage": "DISPLAY",
+            "logicalType": "Group",
+            "byteOffset": 8,
+            "relativeOffset": 0,
+            "byteLength": 12,
+            "elementByteLength": 12,
+            "children": [
+              {
+                "id": "WS_L8_ABND-UTIME-KEY",
+                "qualifiedName": "WS-ABND-AREA.ABND-VSAM-KEY.ABND-UTIME-KEY",
+                "level": 5,
+                "name": "ABND-UTIME-KEY",
+                "pic": "S9(15)",
+                "usage": "COMP_3",
+                "logicalType": "Signed Integer(15) Packed",
+                "byteOffset": 8,
+                "relativeOffset": 0,
+                "byteLength": 8,
+                "elementByteLength": 8,
+                "location": {
+                  "startLine": 8,
+                  "endLine": 8,
+                  "startColumn": 14,
+                  "endColumn": 66,
+                  "sourceFile": "ABNDINFO.cpy"
+                }
+              },
+              {
+                "id": "WS_L9_ABND-TASKNO-KEY",
+                "qualifiedName": "WS-ABND-AREA.ABND-VSAM-KEY.ABND-TASKNO-KEY",
+                "level": 5,
+                "name": "ABND-TASKNO-KEY",
+                "pic": "9(4)",
+                "usage": "DISPLAY",
+                "logicalType": "Numeric Display (4 digits)",
+                "byteOffset": 16,
+                "relativeOffset": 8,
+                "byteLength": 4,
+                "elementByteLength": 4,
+                "location": {
+                  "startLine": 9,
+                  "endLine": 9,
+                  "startColumn": 14,
+                  "endColumn": 57,
+                  "sourceFile": "ABNDINFO.cpy"
+                }
+              }
+            ],
+            "location": {
+              "startLine": 7,
+              "endLine": 7,
+              "startColumn": 11,
+              "endColumn": 27,
+              "sourceFile": "ABNDINFO.cpy"
+            }
+          },
+          {
+            "id": "WS_L10_ABND-APPLID",
+            "qualifiedName": "WS-ABND-AREA.ABND-APPLID",
+            "level": 3,
+            "name": "ABND-APPLID",
+            "pic": "X(8)",
+            "usage": "DISPLAY",
+            "logicalType": "Alphanumeric (8 chars)",
+            "byteOffset": 20,
+            "relativeOffset": 12,
+            "byteLength": 8,
+            "elementByteLength": 8,
+            "location": {
+              "startLine": 10,
+              "endLine": 10,
+              "startColumn": 11,
+              "endColumn": 57,
+              "sourceFile": "ABNDINFO.cpy"
+            }
+          },
+          {
+            "id": "WS_L11_ABND-TRANID",
+            "qualifiedName": "WS-ABND-AREA.ABND-TRANID",
+            "level": 3,
+            "name": "ABND-TRANID",
+            "pic": "X(4)",
+            "usage": "DISPLAY",
+            "logicalType": "Alphanumeric (4 chars)",
+            "byteOffset": 28,
+            "relativeOffset": 20,
+            "byteLength": 4,
+            "elementByteLength": 4,
+            "location": {
+              "startLine": 11,
+              "endLine": 11,
+              "startColumn": 11,
+              "endColumn": 57,
+              "sourceFile": "ABNDINFO.cpy"
+            }
+          },
+          {
+            "id": "WS_L12_ABND-DATE",
+            "qualifiedName": "WS-ABND-AREA.ABND-DATE",
+            "level": 3,
+            "name": "ABND-DATE",
+            "pic": "X(10)",
+            "usage": "DISPLAY",
+            "logicalType": "Alphanumeric (10 chars)",
+            "byteOffset": 32,
+            "relativeOffset": 24,
+            "byteLength": 10,
+            "elementByteLength": 10,
+            "location": {
+              "startLine": 12,
+              "endLine": 12,
+              "startColumn": 11,
+              "endColumn": 58,
+              "sourceFile": "ABNDINFO.cpy"
+            }
+          },
+          {
+            "id": "WS_L13_ABND-TIME",
+            "qualifiedName": "WS-ABND-AREA.ABND-TIME",
+            "level": 3,
+            "name": "ABND-TIME",
+            "pic": "X(8)",
+            "usage": "DISPLAY",
+            "logicalType": "Alphanumeric (8 chars)",
+            "byteOffset": 42,
+            "relativeOffset": 34,
+            "byteLength": 8,
+            "elementByteLength": 8,
+            "location": {
+              "startLine": 13,
+              "endLine": 13,
+              "startColumn": 11,
+              "endColumn": 57,
+              "sourceFile": "ABNDINFO.cpy"
+            }
+          },
+          {
+            "id": "WS_L14_ABND-CODE",
+            "qualifiedName": "WS-ABND-AREA.ABND-CODE",
+            "level": 3,
+            "name": "ABND-CODE",
+            "pic": "X(4)",
+            "usage": "DISPLAY",
+            "logicalType": "Alphanumeric (4 chars)",
+            "byteOffset": 50,
+            "relativeOffset": 42,
+            "byteLength": 4,
+            "elementByteLength": 4,
+            "location": {
+              "startLine": 14,
+              "endLine": 14,
+              "startColumn": 11,
+              "endColumn": 57,
+              "sourceFile": "ABNDINFO.cpy"
+            }
+          },
+          {
+            "id": "WS_L15_ABND-PROGRAM",
+            "qualifiedName": "WS-ABND-AREA.ABND-PROGRAM",
+            "level": 3,
+            "name": "ABND-PROGRAM",
+            "pic": "X(8)",
+            "usage": "DISPLAY",
+            "logicalType": "Alphanumeric (8 chars)",
+            "byteOffset": 54,
+            "relativeOffset": 46,
+            "byteLength": 8,
+            "elementByteLength": 8,
+            "location": {
+              "startLine": 15,
+              "endLine": 15,
+              "startColumn": 11,
+              "endColumn": 57,
+              "sourceFile": "ABNDINFO.cpy"
+            }
+          },
+          {
+            "id": "WS_L16_ABND-RESPCODE",
+            "qualifiedName": "WS-ABND-AREA.ABND-RESPCODE",
+            "level": 3,
+            "name": "ABND-RESPCODE",
+            "pic": "S9(8)",
+            "usage": "DISPLAY",
+            "logicalType": "Signed Numeric Display (8 digits)",
+            "byteOffset": 62,
+            "relativeOffset": 54,
+            "byteLength": 8,
+            "elementByteLength": 8,
+            "isSignSeparate": true,
+            "location": {
+              "startLine": 16,
+              "endLine": 17,
+              "startColumn": 11,
+              "endColumn": 39,
+              "sourceFile": "ABNDINFO.cpy"
+            }
+          },
+          {
+            "id": "WS_L18_ABND-RESP2CODE",
+            "qualifiedName": "WS-ABND-AREA.ABND-RESP2CODE",
+            "level": 3,
+            "name": "ABND-RESP2CODE",
+            "pic": "S9(8)",
+            "usage": "DISPLAY",
+            "logicalType": "Signed Numeric Display (8 digits)",
+            "byteOffset": 70,
+            "relativeOffset": 62,
+            "byteLength": 8,
+            "elementByteLength": 8,
+            "isSignSeparate": true,
+            "location": {
+              "startLine": 18,
+              "endLine": 19,
+              "startColumn": 11,
+              "endColumn": 39,
+              "sourceFile": "ABNDINFO.cpy"
+            }
+          },
+          {
+            "id": "WS_L20_ABND-SQLCODE",
+            "qualifiedName": "WS-ABND-AREA.ABND-SQLCODE",
+            "level": 3,
+            "name": "ABND-SQLCODE",
+            "pic": "S9(8)",
+            "usage": "DISPLAY",
+            "logicalType": "Signed Numeric Display (8 digits)",
+            "byteOffset": 78,
+            "relativeOffset": 70,
+            "byteLength": 8,
+            "elementByteLength": 8,
+            "isSignSeparate": true,
+            "location": {
+              "startLine": 20,
+              "endLine": 21,
+              "startColumn": 11,
+              "endColumn": 39,
+              "sourceFile": "ABNDINFO.cpy"
+            }
+          },
+          {
+            "id": "WS_L22_ABND-FREEFORM",
+            "qualifiedName": "WS-ABND-AREA.ABND-FREEFORM",
+            "level": 3,
+            "name": "ABND-FREEFORM",
+            "pic": "X(600)",
+            "usage": "DISPLAY",
+            "logicalType": "Alphanumeric (600 chars)",
+            "byteOffset": 86,
+            "relativeOffset": 78,
+            "byteLength": 600,
+            "elementByteLength": 600,
+            "location": {
+              "startLine": 22,
+              "endLine": 22,
+              "startColumn": 11,
+              "endColumn": 59,
+              "sourceFile": "ABNDINFO.cpy"
+            }
+          }
+        ],
+        "location": {
+          "startLine": 37,
+          "endLine": 37,
+          "startColumn": 7,
+          "endColumn": 22,
+          "sourceFile": "ABNDPROC.cbl"
+        }
+      },
+      {
+        "id": "WS_L40_WS-ABND-KEY-LEN",
+        "qualifiedName": "WS-ABND-KEY-LEN",
+        "level": 1,
+        "name": "WS-ABND-KEY-LEN",
+        "pic": "S9(8)",
+        "usage": "COMP",
+        "value": "+12",
+        "logicalType": "Signed Integer (32-bit Binary)",
+        "byteOffset": 686,
+        "relativeOffset": 0,
+        "byteLength": 4,
+        "elementByteLength": 4,
+        "location": {
+          "startLine": 40,
+          "endLine": 40,
+          "startColumn": 7,
+          "endColumn": 55,
+          "sourceFile": "ABNDPROC.cbl"
+        }
+      }
+    ],
+    "linkageSection": [
+      {
+        "id": "LK_L110_DFHCOMMAREA",
+        "qualifiedName": "DFHCOMMAREA",
+        "level": 1,
+        "name": "DFHCOMMAREA",
+        "usage": "DISPLAY",
+        "logicalType": "Group",
+        "byteOffset": 0,
+        "relativeOffset": 0,
+        "byteLength": 678,
+        "elementByteLength": 678,
+        "children": [
+          {
+            "id": "LK_L111_COMM-VSAM-KEY",
+            "qualifiedName": "DFHCOMMAREA.COMM-VSAM-KEY",
+            "level": 3,
+            "name": "COMM-VSAM-KEY",
+            "usage": "DISPLAY",
+            "logicalType": "Group",
+            "byteOffset": 0,
+            "relativeOffset": 0,
+            "byteLength": 12,
+            "elementByteLength": 12,
+            "children": [
+              {
+                "id": "LK_L112_COMM-UTIME-KEY",
+                "qualifiedName": "DFHCOMMAREA.COMM-VSAM-KEY.COMM-UTIME-KEY",
+                "level": 5,
+                "name": "COMM-UTIME-KEY",
+                "pic": "S9(15)",
+                "usage": "COMP_3",
+                "logicalType": "Signed Integer(15) Packed",
+                "byteOffset": 0,
+                "relativeOffset": 0,
+                "byteLength": 8,
+                "elementByteLength": 8,
+                "location": {
+                  "startLine": 112,
+                  "endLine": 112,
+                  "startColumn": 14,
+                  "endColumn": 66,
+                  "sourceFile": "ABNDPROC.cbl"
+                }
+              },
+              {
+                "id": "LK_L113_COMM-TASKNO-KEY",
+                "qualifiedName": "DFHCOMMAREA.COMM-VSAM-KEY.COMM-TASKNO-KEY",
+                "level": 5,
+                "name": "COMM-TASKNO-KEY",
+                "pic": "9(4)",
+                "usage": "DISPLAY",
+                "logicalType": "Numeric Display (4 digits)",
+                "byteOffset": 8,
+                "relativeOffset": 8,
+                "byteLength": 4,
+                "elementByteLength": 4,
+                "location": {
+                  "startLine": 113,
+                  "endLine": 113,
+                  "startColumn": 14,
+                  "endColumn": 57,
+                  "sourceFile": "ABNDPROC.cbl"
+                }
+              }
+            ],
+            "location": {
+              "startLine": 111,
+              "endLine": 111,
+              "startColumn": 11,
+              "endColumn": 27,
+              "sourceFile": "ABNDPROC.cbl"
+            }
+          },
+          {
+            "id": "LK_L114_COMM-APPLID",
+            "qualifiedName": "DFHCOMMAREA.COMM-APPLID",
+            "level": 3,
+            "name": "COMM-APPLID",
+            "pic": "X(8)",
+            "usage": "DISPLAY",
+            "logicalType": "Alphanumeric (8 chars)",
+            "byteOffset": 12,
+            "relativeOffset": 12,
+            "byteLength": 8,
+            "elementByteLength": 8,
+            "location": {
+              "startLine": 114,
+              "endLine": 114,
+              "startColumn": 11,
+              "endColumn": 57,
+              "sourceFile": "ABNDPROC.cbl"
+            }
+          },
+          {
+            "id": "LK_L115_COMM-TRANID",
+            "qualifiedName": "DFHCOMMAREA.COMM-TRANID",
+            "level": 3,
+            "name": "COMM-TRANID",
+            "pic": "X(4)",
+            "usage": "DISPLAY",
+            "logicalType": "Alphanumeric (4 chars)",
+            "byteOffset": 20,
+            "relativeOffset": 20,
+            "byteLength": 4,
+            "elementByteLength": 4,
+            "location": {
+              "startLine": 115,
+              "endLine": 115,
+              "startColumn": 11,
+              "endColumn": 57,
+              "sourceFile": "ABNDPROC.cbl"
+            }
+          },
+          {
+            "id": "LK_L116_COMM-DATE",
+            "qualifiedName": "DFHCOMMAREA.COMM-DATE",
+            "level": 3,
+            "name": "COMM-DATE",
+            "pic": "X(10)",
+            "usage": "DISPLAY",
+            "logicalType": "Alphanumeric (10 chars)",
+            "byteOffset": 24,
+            "relativeOffset": 24,
+            "byteLength": 10,
+            "elementByteLength": 10,
+            "location": {
+              "startLine": 116,
+              "endLine": 116,
+              "startColumn": 11,
+              "endColumn": 58,
+              "sourceFile": "ABNDPROC.cbl"
+            }
+          },
+          {
+            "id": "LK_L117_COMM-TIME",
+            "qualifiedName": "DFHCOMMAREA.COMM-TIME",
+            "level": 3,
+            "name": "COMM-TIME",
+            "pic": "X(8)",
+            "usage": "DISPLAY",
+            "logicalType": "Alphanumeric (8 chars)",
+            "byteOffset": 34,
+            "relativeOffset": 34,
+            "byteLength": 8,
+            "elementByteLength": 8,
+            "location": {
+              "startLine": 117,
+              "endLine": 117,
+              "startColumn": 11,
+              "endColumn": 57,
+              "sourceFile": "ABNDPROC.cbl"
+            }
+          },
+          {
+            "id": "LK_L118_COMM-CODE",
+            "qualifiedName": "DFHCOMMAREA.COMM-CODE",
+            "level": 3,
+            "name": "COMM-CODE",
+            "pic": "X(4)",
+            "usage": "DISPLAY",
+            "logicalType": "Alphanumeric (4 chars)",
+            "byteOffset": 42,
+            "relativeOffset": 42,
+            "byteLength": 4,
+            "elementByteLength": 4,
+            "location": {
+              "startLine": 118,
+              "endLine": 118,
+              "startColumn": 11,
+              "endColumn": 57,
+              "sourceFile": "ABNDPROC.cbl"
+            }
+          },
+          {
+            "id": "LK_L119_COMM-PROGRAM",
+            "qualifiedName": "DFHCOMMAREA.COMM-PROGRAM",
+            "level": 3,
+            "name": "COMM-PROGRAM",
+            "pic": "X(8)",
+            "usage": "DISPLAY",
+            "logicalType": "Alphanumeric (8 chars)",
+            "byteOffset": 46,
+            "relativeOffset": 46,
+            "byteLength": 8,
+            "elementByteLength": 8,
+            "location": {
+              "startLine": 119,
+              "endLine": 119,
+              "startColumn": 11,
+              "endColumn": 57,
+              "sourceFile": "ABNDPROC.cbl"
+            }
+          },
+          {
+            "id": "LK_L120_COMM-RESPCODE",
+            "qualifiedName": "DFHCOMMAREA.COMM-RESPCODE",
+            "level": 3,
+            "name": "COMM-RESPCODE",
+            "pic": "S9(8)",
+            "usage": "DISPLAY",
+            "logicalType": "Signed Numeric Display (8 digits)",
+            "byteOffset": 54,
+            "relativeOffset": 54,
+            "byteLength": 8,
+            "elementByteLength": 8,
+            "isSignSeparate": true,
+            "location": {
+              "startLine": 120,
+              "endLine": 121,
+              "startColumn": 11,
+              "endColumn": 35,
+              "sourceFile": "ABNDPROC.cbl"
+            }
+          },
+          {
+            "id": "LK_L122_COMM-RESP2CODE",
+            "qualifiedName": "DFHCOMMAREA.COMM-RESP2CODE",
+            "level": 3,
+            "name": "COMM-RESP2CODE",
+            "pic": "S9(8)",
+            "usage": "DISPLAY",
+            "logicalType": "Signed Numeric Display (8 digits)",
+            "byteOffset": 62,
+            "relativeOffset": 62,
+            "byteLength": 8,
+            "elementByteLength": 8,
+            "isSignSeparate": true,
+            "location": {
+              "startLine": 122,
+              "endLine": 123,
+              "startColumn": 11,
+              "endColumn": 35,
+              "sourceFile": "ABNDPROC.cbl"
+            }
+          },
+          {
+            "id": "LK_L124_COMM-SQLCODE",
+            "qualifiedName": "DFHCOMMAREA.COMM-SQLCODE",
+            "level": 3,
+            "name": "COMM-SQLCODE",
+            "pic": "S9(8)",
+            "usage": "DISPLAY",
+            "logicalType": "Signed Numeric Display (8 digits)",
+            "byteOffset": 70,
+            "relativeOffset": 70,
+            "byteLength": 8,
+            "elementByteLength": 8,
+            "isSignSeparate": true,
+            "location": {
+              "startLine": 124,
+              "endLine": 125,
+              "startColumn": 11,
+              "endColumn": 35,
+              "sourceFile": "ABNDPROC.cbl"
+            }
+          },
+          {
+            "id": "LK_L126_COMM-FREEFORM",
+            "qualifiedName": "DFHCOMMAREA.COMM-FREEFORM",
+            "level": 3,
+            "name": "COMM-FREEFORM",
+            "pic": "X(600)",
+            "usage": "DISPLAY",
+            "logicalType": "Alphanumeric (600 chars)",
+            "byteOffset": 78,
+            "relativeOffset": 78,
+            "byteLength": 600,
+            "elementByteLength": 600,
+            "location": {
+              "startLine": 126,
+              "endLine": 126,
+              "startColumn": 11,
+              "endColumn": 59,
+              "sourceFile": "ABNDPROC.cbl"
+            }
+          }
+        ],
+        "location": {
+          "startLine": 110,
+          "endLine": 110,
+          "startColumn": 7,
+          "endColumn": 21,
+          "sourceFile": "ABNDPROC.cbl"
+        }
+      }
+    ],
+    "localStorageSection": [
+      {
+        "id": "LS_L45_DB2-DATE-REFORMAT",
+        "qualifiedName": "DB2-DATE-REFORMAT",
+        "level": 1,
+        "name": "DB2-DATE-REFORMAT",
+        "usage": "DISPLAY",
+        "logicalType": "Group",
+        "byteOffset": 0,
+        "relativeOffset": 0,
+        "byteLength": 10,
+        "elementByteLength": 10,
+        "children": [
+          {
+            "id": "LS_L46_DB2-DATE-REF-YR",
+            "qualifiedName": "DB2-DATE-REFORMAT.DB2-DATE-REF-YR",
+            "level": 3,
+            "name": "DB2-DATE-REF-YR",
+            "pic": "9(4)",
+            "usage": "DISPLAY",
+            "logicalType": "Numeric Display (4 digits)",
+            "byteOffset": 0,
+            "relativeOffset": 0,
+            "byteLength": 4,
+            "elementByteLength": 4,
+            "location": {
+              "startLine": 46,
+              "endLine": 46,
+              "startColumn": 10,
+              "endColumn": 47,
+              "sourceFile": "ABNDPROC.cbl"
+            }
+          },
+          {
+            "id": "LS_L47_FILLER",
+            "qualifiedName": "DB2-DATE-REFORMAT.FILLER",
+            "level": 3,
+            "name": "FILLER",
+            "pic": "X",
+            "usage": "DISPLAY",
+            "logicalType": "Alphanumeric (1 chars)",
+            "byteOffset": 4,
+            "relativeOffset": 4,
+            "byteLength": 1,
+            "elementByteLength": 1,
+            "isFiller": true,
+            "location": {
+              "startLine": 47,
+              "endLine": 47,
+              "startColumn": 10,
+              "endColumn": 44,
+              "sourceFile": "ABNDPROC.cbl"
+            }
+          },
+          {
+            "id": "LS_L48_DB2-DATE-REF-MNTH",
+            "qualifiedName": "DB2-DATE-REFORMAT.DB2-DATE-REF-MNTH",
+            "level": 3,
+            "name": "DB2-DATE-REF-MNTH",
+            "pic": "99",
+            "usage": "DISPLAY",
+            "logicalType": "Numeric Display (2 digits)",
+            "byteOffset": 5,
+            "relativeOffset": 5,
+            "byteLength": 2,
+            "elementByteLength": 2,
+            "location": {
+              "startLine": 48,
+              "endLine": 48,
+              "startColumn": 10,
+              "endColumn": 45,
+              "sourceFile": "ABNDPROC.cbl"
+            }
+          },
+          {
+            "id": "LS_L49_FILLER",
+            "qualifiedName": "DB2-DATE-REFORMAT.FILLER",
+            "level": 3,
+            "name": "FILLER",
+            "pic": "X",
+            "usage": "DISPLAY",
+            "logicalType": "Alphanumeric (1 chars)",
+            "byteOffset": 7,
+            "relativeOffset": 7,
+            "byteLength": 1,
+            "elementByteLength": 1,
+            "isFiller": true,
+            "location": {
+              "startLine": 49,
+              "endLine": 49,
+              "startColumn": 10,
+              "endColumn": 44,
+              "sourceFile": "ABNDPROC.cbl"
+            }
+          },
+          {
+            "id": "LS_L50_DB2-DATE-REF-DAY",
+            "qualifiedName": "DB2-DATE-REFORMAT.DB2-DATE-REF-DAY",
+            "level": 3,
+            "name": "DB2-DATE-REF-DAY",
+            "pic": "99",
+            "usage": "DISPLAY",
+            "logicalType": "Numeric Display (2 digits)",
+            "byteOffset": 8,
+            "relativeOffset": 8,
+            "byteLength": 2,
+            "elementByteLength": 2,
+            "location": {
+              "startLine": 50,
+              "endLine": 50,
+              "startColumn": 10,
+              "endColumn": 45,
+              "sourceFile": "ABNDPROC.cbl"
+            }
+          }
+        ],
+        "location": {
+          "startLine": 45,
+          "endLine": 45,
+          "startColumn": 7,
+          "endColumn": 27,
+          "sourceFile": "ABNDPROC.cbl"
+        }
+      },
+      {
+        "id": "LS_L52_DATA-STORE-TYPE",
+        "qualifiedName": "DATA-STORE-TYPE",
+        "level": 1,
+        "name": "DATA-STORE-TYPE",
+        "pic": "X",
+        "usage": "DISPLAY",
+        "logicalType": "Alphanumeric (1 chars)",
+        "byteOffset": 10,
+        "relativeOffset": 0,
+        "byteLength": 1,
+        "elementByteLength": 1,
+        "conditions88": [
+          {
+            "name": "DATASTORE-TYPE-DLI",
+            "values": [
+              "1"
+            ],
+            "location": {
+              "startLine": 53,
+              "endLine": 53,
+              "startColumn": 10,
+              "endColumn": 45,
+              "sourceFile": "ABNDPROC.cbl"
+            }
+          },
+          {
+            "name": "DATASTORE-TYPE-DB2",
+            "values": [
+              "2"
+            ],
+            "location": {
+              "startLine": 54,
+              "endLine": 54,
+              "startColumn": 10,
+              "endColumn": 45,
+              "sourceFile": "ABNDPROC.cbl"
+            }
+          },
+          {
+            "name": "DATASTORE-TYPE-VSAM",
+            "values": [
+              "V"
+            ],
+            "location": {
+              "startLine": 55,
+              "endLine": 55,
+              "startColumn": 10,
+              "endColumn": 45,
+              "sourceFile": "ABNDPROC.cbl"
+            }
+          }
+        ],
+        "location": {
+          "startLine": 52,
+          "endLine": 52,
+          "startColumn": 7,
+          "endColumn": 36,
+          "sourceFile": "ABNDPROC.cbl"
+        }
+      },
+      {
+        "id": "LS_L57_WS-EIBTASKN12",
+        "qualifiedName": "WS-EIBTASKN12",
+        "level": 1,
+        "name": "WS-EIBTASKN12",
+        "pic": "9(12)",
+        "usage": "DISPLAY",
+        "value": "0",
+        "logicalType": "Numeric Display (12 digits)",
+        "byteOffset": 11,
+        "relativeOffset": 0,
+        "byteLength": 12,
+        "elementByteLength": 12,
+        "location": {
+          "startLine": 57,
+          "endLine": 57,
+          "startColumn": 7,
+          "endColumn": 56,
+          "sourceFile": "ABNDPROC.cbl"
+        }
+      },
+      {
+        "id": "LS_L58_WS-SQLCODE-DISP",
+        "qualifiedName": "WS-SQLCODE-DISP",
+        "level": 1,
+        "name": "WS-SQLCODE-DISP",
+        "pic": "9(9)",
+        "usage": "DISPLAY",
+        "value": "0",
+        "logicalType": "Numeric Display (9 digits)",
+        "byteOffset": 23,
+        "relativeOffset": 0,
+        "byteLength": 9,
+        "elementByteLength": 9,
+        "location": {
+          "startLine": 58,
+          "endLine": 58,
+          "startColumn": 7,
+          "endColumn": 55,
+          "sourceFile": "ABNDPROC.cbl"
+        }
+      },
+      {
+        "id": "LS_L65_WS-U-TIME",
+        "qualifiedName": "WS-U-TIME",
+        "level": 1,
+        "name": "WS-U-TIME",
+        "pic": "S9(15)",
+        "usage": "COMP_3",
+        "logicalType": "Signed Integer(15) Packed",
+        "byteOffset": 32,
+        "relativeOffset": 0,
+        "byteLength": 8,
+        "elementByteLength": 8,
+        "location": {
+          "startLine": 65,
+          "endLine": 65,
+          "startColumn": 7,
+          "endColumn": 58,
+          "sourceFile": "ABNDPROC.cbl"
+        }
+      },
+      {
+        "id": "LS_L66_WS-ORIG-DATE",
+        "qualifiedName": "WS-ORIG-DATE",
+        "level": 1,
+        "name": "WS-ORIG-DATE",
+        "pic": "X(10)",
+        "usage": "DISPLAY",
+        "logicalType": "Alphanumeric (10 chars)",
+        "byteOffset": 40,
+        "relativeOffset": 0,
+        "byteLength": 10,
+        "elementByteLength": 10,
+        "location": {
+          "startLine": 66,
+          "endLine": 66,
+          "startColumn": 7,
+          "endColumn": 50,
+          "sourceFile": "ABNDPROC.cbl"
+        }
+      },
+      {
+        "id": "LS_L67_WS-ORIG-DATE-GRP",
+        "qualifiedName": "WS-ORIG-DATE-GRP",
+        "level": 1,
+        "name": "WS-ORIG-DATE-GRP",
+        "usage": "DISPLAY",
+        "redefines": "WS-ORIG-DATE",
+        "logicalType": "Group",
+        "byteOffset": 40,
+        "relativeOffset": 0,
+        "byteLength": 10,
+        "elementByteLength": 10,
+        "children": [
+          {
+            "id": "LS_L68_WS-ORIG-DATE-DD",
+            "qualifiedName": "WS-ORIG-DATE-GRP.WS-ORIG-DATE-DD",
+            "level": 3,
+            "name": "WS-ORIG-DATE-DD",
+            "pic": "99",
+            "usage": "DISPLAY",
+            "logicalType": "Numeric Display (2 digits)",
+            "byteOffset": 40,
+            "relativeOffset": 0,
+            "byteLength": 2,
+            "elementByteLength": 2,
+            "location": {
+              "startLine": 68,
+              "endLine": 68,
+              "startColumn": 10,
+              "endColumn": 47,
+              "sourceFile": "ABNDPROC.cbl"
+            }
+          },
+          {
+            "id": "LS_L69_FILLER",
+            "qualifiedName": "WS-ORIG-DATE-GRP.FILLER",
+            "level": 3,
+            "name": "FILLER",
+            "pic": "X",
+            "usage": "DISPLAY",
+            "logicalType": "Alphanumeric (1 chars)",
+            "byteOffset": 42,
+            "relativeOffset": 2,
+            "byteLength": 1,
+            "elementByteLength": 1,
+            "isFiller": true,
+            "location": {
+              "startLine": 69,
+              "endLine": 69,
+              "startColumn": 10,
+              "endColumn": 46,
+              "sourceFile": "ABNDPROC.cbl"
+            }
+          },
+          {
+            "id": "LS_L70_WS-ORIG-DATE-MM",
+            "qualifiedName": "WS-ORIG-DATE-GRP.WS-ORIG-DATE-MM",
+            "level": 3,
+            "name": "WS-ORIG-DATE-MM",
+            "pic": "99",
+            "usage": "DISPLAY",
+            "logicalType": "Numeric Display (2 digits)",
+            "byteOffset": 43,
+            "relativeOffset": 3,
+            "byteLength": 2,
+            "elementByteLength": 2,
+            "location": {
+              "startLine": 70,
+              "endLine": 70,
+              "startColumn": 10,
+              "endColumn": 47,
+              "sourceFile": "ABNDPROC.cbl"
+            }
+          },
+          {
+            "id": "LS_L71_FILLER",
+            "qualifiedName": "WS-ORIG-DATE-GRP.FILLER",
+            "level": 3,
+            "name": "FILLER",
+            "pic": "X",
+            "usage": "DISPLAY",
+            "logicalType": "Alphanumeric (1 chars)",
+            "byteOffset": 45,
+            "relativeOffset": 5,
+            "byteLength": 1,
+            "elementByteLength": 1,
+            "isFiller": true,
+            "location": {
+              "startLine": 71,
+              "endLine": 71,
+              "startColumn": 10,
+              "endColumn": 46,
+              "sourceFile": "ABNDPROC.cbl"
+            }
+          },
+          {
+            "id": "LS_L72_WS-ORIG-DATE-YYYY",
+            "qualifiedName": "WS-ORIG-DATE-GRP.WS-ORIG-DATE-YYYY",
+            "level": 3,
+            "name": "WS-ORIG-DATE-YYYY",
+            "pic": "9999",
+            "usage": "DISPLAY",
+            "logicalType": "Numeric Display (4 digits)",
+            "byteOffset": 46,
+            "relativeOffset": 6,
+            "byteLength": 4,
+            "elementByteLength": 4,
+            "location": {
+              "startLine": 72,
+              "endLine": 72,
+              "startColumn": 10,
+              "endColumn": 49,
+              "sourceFile": "ABNDPROC.cbl"
+            }
+          }
+        ],
+        "location": {
+          "startLine": 67,
+          "endLine": 67,
+          "startColumn": 7,
+          "endColumn": 49,
+          "sourceFile": "ABNDPROC.cbl"
+        }
+      },
+      {
+        "id": "LS_L74_WS-ORIG-DATE-GRP-X",
+        "qualifiedName": "WS-ORIG-DATE-GRP-X",
+        "level": 1,
+        "name": "WS-ORIG-DATE-GRP-X",
+        "usage": "DISPLAY",
+        "logicalType": "Group",
+        "byteOffset": 50,
+        "relativeOffset": 0,
+        "byteLength": 10,
+        "elementByteLength": 10,
+        "children": [
+          {
+            "id": "LS_L75_WS-ORIG-DATE-DD-X",
+            "qualifiedName": "WS-ORIG-DATE-GRP-X.WS-ORIG-DATE-DD-X",
+            "level": 3,
+            "name": "WS-ORIG-DATE-DD-X",
+            "pic": "XX",
+            "usage": "DISPLAY",
+            "logicalType": "Alphanumeric (2 chars)",
+            "byteOffset": 50,
+            "relativeOffset": 0,
+            "byteLength": 2,
+            "elementByteLength": 2,
+            "location": {
+              "startLine": 75,
+              "endLine": 75,
+              "startColumn": 10,
+              "endColumn": 47,
+              "sourceFile": "ABNDPROC.cbl"
+            }
+          },
+          {
+            "id": "LS_L76_FILLER",
+            "qualifiedName": "WS-ORIG-DATE-GRP-X.FILLER",
+            "level": 3,
+            "name": "FILLER",
+            "pic": "X",
+            "usage": "DISPLAY",
+            "value": ".",
+            "logicalType": "Alphanumeric (1 chars)",
+            "byteOffset": 52,
+            "relativeOffset": 2,
+            "byteLength": 1,
+            "elementByteLength": 1,
+            "isFiller": true,
+            "location": {
+              "startLine": 76,
+              "endLine": 76,
+              "startColumn": 10,
+              "endColumn": 56,
+              "sourceFile": "ABNDPROC.cbl"
+            }
+          },
+          {
+            "id": "LS_L77_WS-ORIG-DATE-MM-X",
+            "qualifiedName": "WS-ORIG-DATE-GRP-X.WS-ORIG-DATE-MM-X",
+            "level": 3,
+            "name": "WS-ORIG-DATE-MM-X",
+            "pic": "XX",
+            "usage": "DISPLAY",
+            "logicalType": "Alphanumeric (2 chars)",
+            "byteOffset": 53,
+            "relativeOffset": 3,
+            "byteLength": 2,
+            "elementByteLength": 2,
+            "location": {
+              "startLine": 77,
+              "endLine": 77,
+              "startColumn": 10,
+              "endColumn": 47,
+              "sourceFile": "ABNDPROC.cbl"
+            }
+          },
+          {
+            "id": "LS_L78_FILLER",
+            "qualifiedName": "WS-ORIG-DATE-GRP-X.FILLER",
+            "level": 3,
+            "name": "FILLER",
+            "pic": "X",
+            "usage": "DISPLAY",
+            "value": ".",
+            "logicalType": "Alphanumeric (1 chars)",
+            "byteOffset": 55,
+            "relativeOffset": 5,
+            "byteLength": 1,
+            "elementByteLength": 1,
+            "isFiller": true,
+            "location": {
+              "startLine": 78,
+              "endLine": 78,
+              "startColumn": 10,
+              "endColumn": 56,
+              "sourceFile": "ABNDPROC.cbl"
+            }
+          },
+          {
+            "id": "LS_L79_WS-ORIG-DATE-YYYY-X",
+            "qualifiedName": "WS-ORIG-DATE-GRP-X.WS-ORIG-DATE-YYYY-X",
+            "level": 3,
+            "name": "WS-ORIG-DATE-YYYY-X",
+            "pic": "X(4)",
+            "usage": "DISPLAY",
+            "logicalType": "Alphanumeric (4 chars)",
+            "byteOffset": 56,
+            "relativeOffset": 6,
+            "byteLength": 4,
+            "elementByteLength": 4,
+            "location": {
+              "startLine": 79,
+              "endLine": 79,
+              "startColumn": 10,
+              "endColumn": 49,
+              "sourceFile": "ABNDPROC.cbl"
+            }
+          }
+        ],
+        "location": {
+          "startLine": 74,
+          "endLine": 74,
+          "startColumn": 7,
+          "endColumn": 28,
+          "sourceFile": "ABNDPROC.cbl"
+        }
+      },
+      {
+        "id": "LS_L82_WS-PASSED-DATA",
+        "qualifiedName": "WS-PASSED-DATA",
+        "level": 1,
+        "name": "WS-PASSED-DATA",
+        "usage": "DISPLAY",
+        "logicalType": "Group",
+        "byteOffset": 60,
+        "relativeOffset": 0,
+        "byteLength": 13,
+        "elementByteLength": 13,
+        "children": [
+          {
+            "id": "LS_L83_WS-TEST-KEY",
+            "qualifiedName": "WS-PASSED-DATA.WS-TEST-KEY",
+            "level": 2,
+            "name": "WS-TEST-KEY",
+            "pic": "X(4)",
+            "usage": "DISPLAY",
+            "logicalType": "Alphanumeric (4 chars)",
+            "byteOffset": 60,
+            "relativeOffset": 0,
+            "byteLength": 4,
+            "elementByteLength": 4,
+            "location": {
+              "startLine": 83,
+              "endLine": 83,
+              "startColumn": 10,
+              "endColumn": 61,
+              "sourceFile": "ABNDPROC.cbl"
+            }
+          },
+          {
+            "id": "LS_L84_WS-SORT-CODE",
+            "qualifiedName": "WS-PASSED-DATA.WS-SORT-CODE",
+            "level": 2,
+            "name": "WS-SORT-CODE",
+            "pic": "9(6)",
+            "usage": "DISPLAY",
+            "logicalType": "Numeric Display (6 digits)",
+            "byteOffset": 64,
+            "relativeOffset": 4,
+            "byteLength": 6,
+            "elementByteLength": 6,
+            "location": {
+              "startLine": 84,
+              "endLine": 84,
+              "startColumn": 10,
+              "endColumn": 61,
+              "sourceFile": "ABNDPROC.cbl"
+            }
+          },
+          {
+            "id": "LS_L85_WS-CUSTOMER-RANGE",
+            "qualifiedName": "WS-PASSED-DATA.WS-CUSTOMER-RANGE",
+            "level": 2,
+            "name": "WS-CUSTOMER-RANGE",
+            "usage": "DISPLAY",
+            "logicalType": "Group",
+            "byteOffset": 70,
+            "relativeOffset": 10,
+            "byteLength": 3,
+            "elementByteLength": 3,
+            "children": [
+              {
+                "id": "LS_L86_WS-CUSTOMER-RANGE-TOP",
+                "qualifiedName": "WS-PASSED-DATA.WS-CUSTOMER-RANGE.WS-CUSTOMER-RANGE-TOP",
+                "level": 7,
+                "name": "WS-CUSTOMER-RANGE-TOP",
+                "pic": "X",
+                "usage": "DISPLAY",
+                "logicalType": "Alphanumeric (1 chars)",
+                "byteOffset": 70,
+                "relativeOffset": 0,
+                "byteLength": 1,
+                "elementByteLength": 1,
+                "location": {
+                  "startLine": 86,
+                  "endLine": 86,
+                  "startColumn": 13,
+                  "endColumn": 58,
+                  "sourceFile": "ABNDPROC.cbl"
+                }
+              },
+              {
+                "id": "LS_L87_WS-CUSTOMER-RANGE-MIDDLE",
+                "qualifiedName": "WS-PASSED-DATA.WS-CUSTOMER-RANGE.WS-CUSTOMER-RANGE-MIDDLE",
+                "level": 7,
+                "name": "WS-CUSTOMER-RANGE-MIDDLE",
+                "pic": "X",
+                "usage": "DISPLAY",
+                "logicalType": "Alphanumeric (1 chars)",
+                "byteOffset": 71,
+                "relativeOffset": 1,
+                "byteLength": 1,
+                "elementByteLength": 1,
+                "location": {
+                  "startLine": 87,
+                  "endLine": 87,
+                  "startColumn": 13,
+                  "endColumn": 58,
+                  "sourceFile": "ABNDPROC.cbl"
+                }
+              },
+              {
+                "id": "LS_L88_WS-CUSTOMER-RANGE-BOTTOM",
+                "qualifiedName": "WS-PASSED-DATA.WS-CUSTOMER-RANGE.WS-CUSTOMER-RANGE-BOTTOM",
+                "level": 7,
+                "name": "WS-CUSTOMER-RANGE-BOTTOM",
+                "pic": "X",
+                "usage": "DISPLAY",
+                "logicalType": "Alphanumeric (1 chars)",
+                "byteOffset": 72,
+                "relativeOffset": 2,
+                "byteLength": 1,
+                "elementByteLength": 1,
+                "location": {
+                  "startLine": 88,
+                  "endLine": 88,
+                  "startColumn": 13,
+                  "endColumn": 58,
+                  "sourceFile": "ABNDPROC.cbl"
+                }
+              }
+            ],
+            "location": {
+              "startLine": 85,
+              "endLine": 85,
+              "startColumn": 10,
+              "endColumn": 30,
+              "sourceFile": "ABNDPROC.cbl"
+            }
+          }
+        ],
+        "location": {
+          "startLine": 82,
+          "endLine": 82,
+          "startColumn": 7,
+          "endColumn": 24,
+          "sourceFile": "ABNDPROC.cbl"
+        }
+      },
+      {
+        "id": "LS_L90_WS-SORT-DIV",
+        "qualifiedName": "WS-SORT-DIV",
+        "level": 1,
+        "name": "WS-SORT-DIV",
+        "usage": "DISPLAY",
+        "logicalType": "Group",
+        "byteOffset": 73,
+        "relativeOffset": 0,
+        "byteLength": 6,
+        "elementByteLength": 6,
+        "children": [
+          {
+            "id": "LS_L91_WS-SORT-DIV1",
+            "qualifiedName": "WS-SORT-DIV.WS-SORT-DIV1",
+            "level": 3,
+            "name": "WS-SORT-DIV1",
+            "pic": "XX",
+            "usage": "DISPLAY",
+            "logicalType": "Alphanumeric (2 chars)",
+            "byteOffset": 73,
+            "relativeOffset": 0,
+            "byteLength": 2,
+            "elementByteLength": 2,
+            "location": {
+              "startLine": 91,
+              "endLine": 91,
+              "startColumn": 10,
+              "endColumn": 56,
+              "sourceFile": "ABNDPROC.cbl"
+            }
+          },
+          {
+            "id": "LS_L92_WS-SORT-DIV2",
+            "qualifiedName": "WS-SORT-DIV.WS-SORT-DIV2",
+            "level": 3,
+            "name": "WS-SORT-DIV2",
+            "pic": "XX",
+            "usage": "DISPLAY",
+            "logicalType": "Alphanumeric (2 chars)",
+            "byteOffset": 75,
+            "relativeOffset": 2,
+            "byteLength": 2,
+            "elementByteLength": 2,
+            "location": {
+              "startLine": 92,
+              "endLine": 92,
+              "startColumn": 10,
+              "endColumn": 56,
+              "sourceFile": "ABNDPROC.cbl"
+            }
+          },
+          {
+            "id": "LS_L93_WS-SORT-DIV3",
+            "qualifiedName": "WS-SORT-DIV.WS-SORT-DIV3",
+            "level": 3,
+            "name": "WS-SORT-DIV3",
+            "pic": "XX",
+            "usage": "DISPLAY",
+            "logicalType": "Alphanumeric (2 chars)",
+            "byteOffset": 77,
+            "relativeOffset": 4,
+            "byteLength": 2,
+            "elementByteLength": 2,
+            "location": {
+              "startLine": 93,
+              "endLine": 93,
+              "startColumn": 10,
+              "endColumn": 56,
+              "sourceFile": "ABNDPROC.cbl"
+            }
+          }
+        ],
+        "location": {
+          "startLine": 90,
+          "endLine": 90,
+          "startColumn": 7,
+          "endColumn": 21,
+          "sourceFile": "ABNDPROC.cbl"
+        }
+      },
+      {
+        "id": "LS_L95_CUSTOMER-KY",
+        "qualifiedName": "CUSTOMER-KY",
+        "level": 1,
+        "name": "CUSTOMER-KY",
+        "usage": "DISPLAY",
+        "logicalType": "Group",
+        "byteOffset": 79,
+        "relativeOffset": 0,
+        "byteLength": 14,
+        "elementByteLength": 14,
+        "children": [
+          {
+            "id": "LS_L96_REQUIRED-SORT-CODE",
+            "qualifiedName": "CUSTOMER-KY.REQUIRED-SORT-CODE",
+            "level": 3,
+            "name": "REQUIRED-SORT-CODE",
+            "pic": "9(6)",
+            "usage": "DISPLAY",
+            "value": "0",
+            "logicalType": "Numeric Display (6 digits)",
+            "byteOffset": 79,
+            "relativeOffset": 0,
+            "byteLength": 6,
+            "elementByteLength": 6,
+            "location": {
+              "startLine": 96,
+              "endLine": 96,
+              "startColumn": 10,
+              "endColumn": 55,
+              "sourceFile": "ABNDPROC.cbl"
+            }
+          },
+          {
+            "id": "LS_L97_REQUIRED-ACC-NUM",
+            "qualifiedName": "CUSTOMER-KY.REQUIRED-ACC-NUM",
+            "level": 3,
+            "name": "REQUIRED-ACC-NUM",
+            "pic": "9(8)",
+            "usage": "DISPLAY",
+            "value": "0",
+            "logicalType": "Numeric Display (8 digits)",
+            "byteOffset": 85,
+            "relativeOffset": 6,
+            "byteLength": 8,
+            "elementByteLength": 8,
+            "location": {
+              "startLine": 97,
+              "endLine": 97,
+              "startColumn": 10,
+              "endColumn": 55,
+              "sourceFile": "ABNDPROC.cbl"
+            }
+          }
+        ],
+        "location": {
+          "startLine": 95,
+          "endLine": 95,
+          "startColumn": 7,
+          "endColumn": 21,
+          "sourceFile": "ABNDPROC.cbl"
+        }
+      },
+      {
+        "id": "LS_L99_PROCTRAN-RIDFLD",
+        "qualifiedName": "PROCTRAN-RIDFLD",
+        "level": 1,
+        "name": "PROCTRAN-RIDFLD",
+        "pic": "S9(8)",
+        "usage": "COMP",
+        "logicalType": "Signed Integer (32-bit Binary)",
+        "byteOffset": 93,
+        "relativeOffset": 0,
+        "byteLength": 4,
+        "elementByteLength": 4,
+        "location": {
+          "startLine": 99,
+          "endLine": 99,
+          "startColumn": 7,
+          "endColumn": 52,
+          "sourceFile": "ABNDPROC.cbl"
+        }
+      },
+      {
+        "id": "LS_L101_SQLCODE-DISPLAY",
+        "qualifiedName": "SQLCODE-DISPLAY",
+        "level": 1,
+        "name": "SQLCODE-DISPLAY",
+        "pic": "S9(8)",
+        "usage": "DISPLAY",
+        "logicalType": "Signed Numeric Display (8 digits)",
+        "byteOffset": 97,
+        "relativeOffset": 0,
+        "byteLength": 8,
+        "elementByteLength": 8,
+        "isSignSeparate": true,
+        "location": {
+          "startLine": 101,
+          "endLine": 102,
+          "startColumn": 7,
+          "endColumn": 32,
+          "sourceFile": "ABNDPROC.cbl"
+        }
+      },
+      {
+        "id": "LS_L104_MY-ABEND-CODE",
+        "qualifiedName": "MY-ABEND-CODE",
+        "level": 1,
+        "name": "MY-ABEND-CODE",
+        "pic": "XXXX",
+        "usage": "DISPLAY",
+        "logicalType": "Alphanumeric (4 chars)",
+        "byteOffset": 105,
+        "relativeOffset": 0,
+        "byteLength": 4,
+        "elementByteLength": 4,
+        "location": {
+          "startLine": 104,
+          "endLine": 104,
+          "startColumn": 7,
+          "endColumn": 46,
+          "sourceFile": "ABNDPROC.cbl"
+        }
+      }
+    ],
+    "workingStorageBytes": 690
+  },
+  "sections": [
+    {
+      "name": "PREMIERE",
+      "location": {
+        "startLine": 131,
+        "endLine": 166,
+        "startColumn": 7,
+        "endColumn": 15,
+        "sourceFile": "ABNDPROC.cbl"
+      },
+      "paragraphNames": [
+        "A010",
+        "A999"
+      ]
+    },
+    {
+      "name": "GET-ME-OUT-OF-HERE",
+      "location": {
+        "startLine": 169,
+        "endLine": 176,
+        "startColumn": 7,
+        "endColumn": 15,
+        "sourceFile": "ABNDPROC.cbl"
+      },
+      "paragraphNames": [
+        "GMOOH010",
+        "GMOOH999"
+      ]
+    }
+  ],
+  "paragraphs": [
+    {
+      "name": "A010",
+      "sectionParent": "PREMIERE",
+      "location": {
+        "startLine": 132,
+        "endLine": 163,
+        "startColumn": 7,
+        "endColumn": 37,
+        "sourceFile": "ABNDPROC.cbl"
+      },
+      "successors": [
+        "GET-ME-OUT-OF-HERE"
+      ],
+      "fallthroughSuccessor": "A999",
+      "statements": [
+        {
+          "type": "DISPLAY",
+          "location": {
+            "startLine": 135,
+            "endLine": 135,
+            "startColumn": 11,
+            "endColumn": 19,
+            "sourceFile": "ABNDPROC.cbl"
+          },
+          "rawText": "DISPLAY 'Started ABNDPROC:'",
+          "operands": [
+            "'Started ABNDPROC:'"
+          ]
+        },
+        {
+          "type": "DISPLAY",
+          "location": {
+            "startLine": 136,
+            "endLine": 136,
+            "startColumn": 11,
+            "endColumn": 38,
+            "sourceFile": "ABNDPROC.cbl"
+          },
+          "rawText": "DISPLAY 'COMMAREA passed=' DFHCOMMAREA",
+          "sourceFieldIds": [
+            "LK_L110_DFHCOMMAREA"
+          ],
+          "operands": [
+            "'COMMAREA passed='",
+            "DFHCOMMAREA"
+          ]
+        },
+        {
+          "type": "MOVE",
+          "location": {
+            "startLine": 139,
+            "endLine": 139,
+            "startColumn": 11,
+            "endColumn": 31,
+            "sourceFile": "ABNDPROC.cbl"
+          },
+          "rawText": "MOVE DFHCOMMAREA TO WS-ABND-AREA",
+          "sourceFieldIds": [
+            "LK_L110_DFHCOMMAREA"
+          ],
+          "targetFieldIds": [
+            "WS_L37_WS-ABND-AREA"
+          ],
+          "fromExpr": "DFHCOMMAREA",
+          "toTargets": [
+            "WS-ABND-AREA"
+          ]
+        },
+        {
+          "type": "EXEC_CICS",
+          "location": {
+            "startLine": 141,
+            "endLine": 147,
+            "startColumn": 6,
+            "endColumn": 6,
+            "sourceFile": "ABNDPROC.cbl"
+          },
+          "rawText": "*>EXECCICS EXEC CICS WRITE *>EXECCICS FILE('ABNDFILE') *>EXECCICS FROM(WS-ABND-AREA) *>EXECCICS RIDFLD(ABND-VSAM-KEY) *>EXECCICS RESP(WS-CICS-RESP) *>EXECCICS RESP2(WS-CICS-RESP2) *>EXECCICS END-EXEC }",
+          "subsystem": "CICS",
+          "rawPayload": "EXEC CICS WRITE FILE('ABNDFILE') FROM(WS-ABND-AREA) RIDFLD(ABND-VSAM-KEY) RESP(WS-CICS-RESP) RESP2(WS-CICS-RESP2) END-EXEC"
+        },
+        {
+          "type": "IF",
+          "location": {
+            "startLine": 149,
+            "endLine": 158,
+            "startColumn": 11,
+            "endColumn": 11,
+            "sourceFile": "ABNDPROC.cbl"
+          },
+          "rawText": "IF WS-CICS-RESP NOT= DFHRESP(NORMAL) DISPLAY '*********************************************' DISPLAY '**** Unable to write to the file ABNDFILE !!!' DISPLAY 'RESP=' WS-CICS-RESP ' RESP2=' WS-CICS-RESP2 DISPLAY '*********************************************' *>EXECCICS EXEC CICS RETURN *>EXECCICS END-EXEC } END-IF",
+          "sourceFieldIds": [
+            "WS_L33_WS-CICS-RESP"
+          ],
+          "condition": "WS-CICS-RESP NOT= DFHRESP(NORMAL)",
+          "thenStatements": [
+            {
+              "type": "DISPLAY",
+              "location": {
+                "startLine": 150,
+                "endLine": 150,
+                "startColumn": 14,
+                "endColumn": 22,
+                "sourceFile": "ABNDPROC.cbl"
+              },
+              "rawText": "DISPLAY '*********************************************'",
+              "operands": [
+                "'*********************************************'"
+              ]
+            },
+            {
+              "type": "DISPLAY",
+              "location": {
+                "startLine": 151,
+                "endLine": 151,
+                "startColumn": 14,
+                "endColumn": 22,
+                "sourceFile": "ABNDPROC.cbl"
+              },
+              "rawText": "DISPLAY '**** Unable to write to the file ABNDFILE !!!'",
+              "operands": [
+                "'**** Unable to write to the file ABNDFILE !!!'"
+              ]
+            },
+            {
+              "type": "DISPLAY",
+              "location": {
+                "startLine": 152,
+                "endLine": 152,
+                "startColumn": 14,
+                "endColumn": 53,
+                "sourceFile": "ABNDPROC.cbl"
+              },
+              "rawText": "DISPLAY 'RESP=' WS-CICS-RESP ' RESP2=' WS-CICS-RESP2",
+              "sourceFieldIds": [
+                "WS_L33_WS-CICS-RESP",
+                "WS_L34_WS-CICS-RESP2"
+              ],
+              "operands": [
+                "'RESP='",
+                "WS-CICS-RESP",
+                "' RESP2='",
+                "WS-CICS-RESP2"
+              ]
+            },
+            {
+              "type": "DISPLAY",
+              "location": {
+                "startLine": 153,
+                "endLine": 153,
+                "startColumn": 14,
+                "endColumn": 22,
+                "sourceFile": "ABNDPROC.cbl"
+              },
+              "rawText": "DISPLAY '*********************************************'",
+              "operands": [
+                "'*********************************************'"
+              ]
+            },
+            {
+              "type": "EXEC_CICS",
+              "location": {
+                "startLine": 155,
+                "endLine": 156,
+                "startColumn": 6,
+                "endColumn": 6,
+                "sourceFile": "ABNDPROC.cbl"
+              },
+              "rawText": "*>EXECCICS EXEC CICS RETURN *>EXECCICS END-EXEC }",
+              "subsystem": "CICS",
+              "rawPayload": "EXEC CICS RETURN END-EXEC"
+            }
+          ]
+        },
+        {
+          "type": "DISPLAY",
+          "location": {
+            "startLine": 160,
+            "endLine": 160,
+            "startColumn": 11,
+            "endColumn": 19,
+            "sourceFile": "ABNDPROC.cbl"
+          },
+          "rawText": "DISPLAY 'ABEND record successfully written to ABNDFILE'",
+          "operands": [
+            "'ABEND record successfully written to ABNDFILE'"
+          ]
+        },
+        {
+          "type": "DISPLAY",
+          "location": {
+            "startLine": 161,
+            "endLine": 161,
+            "startColumn": 11,
+            "endColumn": 19,
+            "sourceFile": "ABNDPROC.cbl"
+          },
+          "rawText": "DISPLAY WS-ABND-AREA",
+          "sourceFieldIds": [
+            "WS_L37_WS-ABND-AREA"
+          ],
+          "operands": [
+            "WS-ABND-AREA"
+          ]
+        },
+        {
+          "type": "PERFORM",
+          "location": {
+            "startLine": 163,
+            "endLine": 163,
+            "startColumn": 11,
+            "endColumn": 19,
+            "sourceFile": "ABNDPROC.cbl"
+          },
+          "rawText": "PERFORM GET-ME-OUT-OF-HERE",
+          "target": "GET-ME-OUT-OF-HERE"
+        }
+      ]
+    },
+    {
+      "name": "A999",
+      "sectionParent": "PREMIERE",
+      "location": {
+        "startLine": 165,
+        "endLine": 166,
+        "startColumn": 7,
+        "endColumn": 15,
+        "sourceFile": "ABNDPROC.cbl"
+      },
+      "fallthroughSuccessor": "GMOOH010",
+      "statements": [
+        {
+          "type": "EXIT",
+          "location": {
+            "startLine": 166,
+            "endLine": 166,
+            "startColumn": 11,
+            "endColumn": 11,
+            "sourceFile": "ABNDPROC.cbl"
+          },
+          "rawText": "EXIT",
+          "operation": "EXIT"
+        }
+      ]
+    },
+    {
+      "name": "GMOOH010",
+      "sectionParent": "GET-ME-OUT-OF-HERE",
+      "location": {
+        "startLine": 170,
+        "endLine": 173,
+        "startColumn": 7,
+        "endColumn": 17,
+        "sourceFile": "ABNDPROC.cbl"
+      },
+      "isTerminal": true,
+      "statements": [
+        {
+          "type": "EXEC_CICS",
+          "location": {
+            "startLine": 171,
+            "endLine": 172,
+            "startColumn": 6,
+            "endColumn": 6,
+            "sourceFile": "ABNDPROC.cbl"
+          },
+          "rawText": "*>EXECCICS EXEC CICS RETURN *>EXECCICS END-EXEC }",
+          "subsystem": "CICS",
+          "rawPayload": "EXEC CICS RETURN END-EXEC"
+        },
+        {
+          "type": "GOBACK",
+          "location": {
+            "startLine": 173,
+            "endLine": 173,
+            "startColumn": 11,
+            "endColumn": 11,
+            "sourceFile": "ABNDPROC.cbl"
+          },
+          "rawText": "GOBACK",
+          "operation": "GOBACK"
+        }
+      ]
+    },
+    {
+      "name": "GMOOH999",
+      "sectionParent": "GET-ME-OUT-OF-HERE",
+      "location": {
+        "startLine": 175,
+        "endLine": 176,
+        "startColumn": 7,
+        "endColumn": 15,
+        "sourceFile": "ABNDPROC.cbl"
+      },
+      "statements": [
+        {
+          "type": "EXIT",
+          "location": {
+            "startLine": 176,
+            "endLine": 176,
+            "startColumn": 11,
+            "endColumn": 11,
+            "sourceFile": "ABNDPROC.cbl"
+          },
+          "rawText": "EXIT",
+          "operation": "EXIT"
+        }
+      ]
+    }
+  ],
+  "asgAuditSummary": {
+    "totalAsgDataEntries": 72,
+    "totalAsgLevel88Entries": 3,
+    "totalAsgParagraphs": 4,
+    "totalAsgStatements": 12,
+    "totalAsgCalls": 9,
+    "asgVariableNames": [
+      "WS-CICS-WORK-AREA",
+      "WS-CICS-RESP",
+      "WS-CICS-RESP2",
+      "WS-ABND-AREA",
+      "ABND-VSAM-KEY",
+      "ABND-UTIME-KEY",
+      "ABND-TASKNO-KEY",
+      "ABND-APPLID",
+      "ABND-TRANID",
+      "ABND-DATE",
+      "ABND-TIME",
+      "ABND-CODE",
+      "ABND-PROGRAM",
+      "ABND-RESPCODE",
+      "ABND-RESP2CODE",
+      "ABND-SQLCODE",
+      "ABND-FREEFORM",
+      "WS-ABND-KEY-LEN",
+      "DFHCOMMAREA",
+      "COMM-VSAM-KEY",
+      "COMM-UTIME-KEY",
+      "COMM-TASKNO-KEY",
+      "COMM-APPLID",
+      "COMM-TRANID",
+      "COMM-DATE",
+      "COMM-TIME",
+      "COMM-CODE",
+      "COMM-PROGRAM",
+      "COMM-RESPCODE",
+      "COMM-RESP2CODE",
+      "COMM-SQLCODE",
+      "COMM-FREEFORM",
+      "DB2-DATE-REFORMAT",
+      "DB2-DATE-REF-YR",
+      "DB2-DATE-REF-MNTH",
+      "DB2-DATE-REF-DAY",
+      "DATA-STORE-TYPE",
+      "WS-EIBTASKN12",
+      "WS-SQLCODE-DISP",
+      "WS-U-TIME",
+      "WS-ORIG-DATE",
+      "WS-ORIG-DATE-GRP",
+      "WS-ORIG-DATE-DD",
+      "WS-ORIG-DATE-MM",
+      "WS-ORIG-DATE-YYYY",
+      "WS-ORIG-DATE-GRP-X",
+      "WS-ORIG-DATE-DD-X",
+      "WS-ORIG-DATE-MM-X",
+      "WS-ORIG-DATE-YYYY-X",
+      "WS-PASSED-DATA",
+      "WS-TEST-KEY",
+      "WS-SORT-CODE",
+      "WS-CUSTOMER-RANGE",
+      "WS-CUSTOMER-RANGE-TOP",
+      "WS-CUSTOMER-RANGE-MIDDLE",
+      "WS-CUSTOMER-RANGE-BOTTOM",
+      "WS-SORT-DIV",
+      "WS-SORT-DIV1",
+      "WS-SORT-DIV2",
+      "WS-SORT-DIV3",
+      "CUSTOMER-KY",
+      "REQUIRED-SORT-CODE",
+      "REQUIRED-ACC-NUM",
+      "PROCTRAN-RIDFLD",
+      "SQLCODE-DISPLAY",
+      "MY-ABEND-CODE"
+    ],
+    "asgLevel88Names": [
+      "DATASTORE-TYPE-DLI",
+      "DATASTORE-TYPE-DB2",
+      "DATASTORE-TYPE-VSAM"
+    ]
+  }
+}

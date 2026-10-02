@@ -1,0 +1,2567 @@
+{
+  "programId": "CRDTAGY2",
+  "author": "*>CE Jon Collett. *>CE",
+  "format": "FIXED",
+  "dataDictionary": {
+    "workingStorageSection": [
+      {
+        "id": "WS_L7_SORTCODE",
+        "qualifiedName": "SORTCODE",
+        "level": 77,
+        "name": "SORTCODE",
+        "pic": "9(6)",
+        "usage": "DISPLAY",
+        "value": "987654",
+        "logicalType": "Numeric Display (6 digits)",
+        "byteOffset": 0,
+        "relativeOffset": 0,
+        "byteLength": 6,
+        "elementByteLength": 6,
+        "location": {
+          "startLine": 7,
+          "endLine": 7,
+          "startColumn": 7,
+          "endColumn": 50,
+          "sourceFile": "SORTCODE.cpy"
+        }
+      },
+      {
+        "id": "WS_L44_WS-CONT-IN",
+        "qualifiedName": "WS-CONT-IN",
+        "level": 1,
+        "name": "WS-CONT-IN",
+        "usage": "DISPLAY",
+        "logicalType": "Group",
+        "byteOffset": 6,
+        "relativeOffset": 0,
+        "byteLength": 397,
+        "elementByteLength": 397,
+        "children": [
+          {
+            "id": "WS_L7_CUSTOMER-RECORD",
+            "qualifiedName": "WS-CONT-IN.CUSTOMER-RECORD",
+            "level": 3,
+            "name": "CUSTOMER-RECORD",
+            "usage": "DISPLAY",
+            "logicalType": "Group",
+            "byteOffset": 6,
+            "relativeOffset": 0,
+            "byteLength": 397,
+            "elementByteLength": 397,
+            "children": [
+              {
+                "id": "WS_L8_CUSTOMER-EYECATCHER",
+                "qualifiedName": "WS-CONT-IN.CUSTOMER-RECORD.CUSTOMER-EYECATCHER",
+                "level": 5,
+                "name": "CUSTOMER-EYECATCHER",
+                "pic": "X(4)",
+                "usage": "DISPLAY",
+                "logicalType": "Alphanumeric (4 chars)",
+                "byteOffset": 6,
+                "relativeOffset": 0,
+                "byteLength": 4,
+                "elementByteLength": 4,
+                "conditions88": [
+                  {
+                    "name": "CUSTOMER-EYECATCHER-VALUE",
+                    "values": [
+                      "CUST"
+                    ],
+                    "location": {
+                      "startLine": 9,
+                      "endLine": 9,
+                      "startColumn": 17,
+                      "endColumn": 65,
+                      "sourceFile": "CUSTOMER.cpy"
+                    }
+                  }
+                ],
+                "location": {
+                  "startLine": 8,
+                  "endLine": 8,
+                  "startColumn": 14,
+                  "endColumn": 61,
+                  "sourceFile": "CUSTOMER.cpy"
+                }
+              },
+              {
+                "id": "WS_L10_CUSTOMER-KEY",
+                "qualifiedName": "WS-CONT-IN.CUSTOMER-RECORD.CUSTOMER-KEY",
+                "level": 5,
+                "name": "CUSTOMER-KEY",
+                "usage": "DISPLAY",
+                "logicalType": "Group",
+                "byteOffset": 10,
+                "relativeOffset": 4,
+                "byteLength": 16,
+                "elementByteLength": 16,
+                "children": [
+                  {
+                    "id": "WS_L11_CUSTOMER-SORTCODE",
+                    "qualifiedName": "WS-CONT-IN.CUSTOMER-RECORD.CUSTOMER-KEY.CUSTOMER-SORTCODE",
+                    "level": 7,
+                    "name": "CUSTOMER-SORTCODE",
+                    "pic": "9(6)",
+                    "usage": "DISPLAY",
+                    "logicalType": "Numeric Display (6 digits)",
+                    "byteOffset": 10,
+                    "relativeOffset": 0,
+                    "byteLength": 6,
+                    "elementByteLength": 6,
+                    "location": {
+                      "startLine": 11,
+                      "endLine": 11,
+                      "startColumn": 17,
+                      "endColumn": 69,
+                      "sourceFile": "CUSTOMER.cpy"
+                    }
+                  },
+                  {
+                    "id": "WS_L12_CUSTOMER-NUMBER",
+                    "qualifiedName": "WS-CONT-IN.CUSTOMER-RECORD.CUSTOMER-KEY.CUSTOMER-NUMBER",
+                    "level": 7,
+                    "name": "CUSTOMER-NUMBER",
+                    "pic": "9(10)",
+                    "usage": "DISPLAY",
+                    "logicalType": "Numeric Display (10 digits)",
+                    "byteOffset": 16,
+                    "relativeOffset": 6,
+                    "byteLength": 10,
+                    "elementByteLength": 10,
+                    "location": {
+                      "startLine": 12,
+                      "endLine": 12,
+                      "startColumn": 17,
+                      "endColumn": 70,
+                      "sourceFile": "CUSTOMER.cpy"
+                    }
+                  }
+                ],
+                "location": {
+                  "startLine": 10,
+                  "endLine": 10,
+                  "startColumn": 14,
+                  "endColumn": 29,
+                  "sourceFile": "CUSTOMER.cpy"
+                }
+              },
+              {
+                "id": "WS_L13_CUSTOMER-NAME",
+                "qualifiedName": "WS-CONT-IN.CUSTOMER-RECORD.CUSTOMER-NAME",
+                "level": 5,
+                "name": "CUSTOMER-NAME",
+                "usage": "DISPLAY",
+                "logicalType": "Group",
+                "byteOffset": 26,
+                "relativeOffset": 20,
+                "byteLength": 110,
+                "elementByteLength": 110,
+                "children": [
+                  {
+                    "id": "WS_L14_CUSTOMER-TITLE",
+                    "qualifiedName": "WS-CONT-IN.CUSTOMER-RECORD.CUSTOMER-NAME.CUSTOMER-TITLE",
+                    "level": 7,
+                    "name": "CUSTOMER-TITLE",
+                    "pic": "X(10)",
+                    "usage": "DISPLAY",
+                    "logicalType": "Alphanumeric (10 chars)",
+                    "byteOffset": 26,
+                    "relativeOffset": 0,
+                    "byteLength": 10,
+                    "elementByteLength": 10,
+                    "location": {
+                      "startLine": 14,
+                      "endLine": 14,
+                      "startColumn": 17,
+                      "endColumn": 62,
+                      "sourceFile": "CUSTOMER.cpy"
+                    }
+                  },
+                  {
+                    "id": "WS_L15_CUSTOMER-FIRST-NAME",
+                    "qualifiedName": "WS-CONT-IN.CUSTOMER-RECORD.CUSTOMER-NAME.CUSTOMER-FIRST-NAME",
+                    "level": 7,
+                    "name": "CUSTOMER-FIRST-NAME",
+                    "pic": "X(50)",
+                    "usage": "DISPLAY",
+                    "logicalType": "Alphanumeric (50 chars)",
+                    "byteOffset": 36,
+                    "relativeOffset": 10,
+                    "byteLength": 50,
+                    "elementByteLength": 50,
+                    "location": {
+                      "startLine": 15,
+                      "endLine": 15,
+                      "startColumn": 17,
+                      "endColumn": 62,
+                      "sourceFile": "CUSTOMER.cpy"
+                    }
+                  },
+                  {
+                    "id": "WS_L16_CUSTOMER-LAST-NAME",
+                    "qualifiedName": "WS-CONT-IN.CUSTOMER-RECORD.CUSTOMER-NAME.CUSTOMER-LAST-NAME",
+                    "level": 7,
+                    "name": "CUSTOMER-LAST-NAME",
+                    "pic": "X(50)",
+                    "usage": "DISPLAY",
+                    "logicalType": "Alphanumeric (50 chars)",
+                    "byteOffset": 86,
+                    "relativeOffset": 60,
+                    "byteLength": 50,
+                    "elementByteLength": 50,
+                    "location": {
+                      "startLine": 16,
+                      "endLine": 16,
+                      "startColumn": 17,
+                      "endColumn": 62,
+                      "sourceFile": "CUSTOMER.cpy"
+                    }
+                  }
+                ],
+                "location": {
+                  "startLine": 13,
+                  "endLine": 13,
+                  "startColumn": 14,
+                  "endColumn": 30,
+                  "sourceFile": "CUSTOMER.cpy"
+                }
+              },
+              {
+                "id": "WS_L17_CUSTOMER-DOB",
+                "qualifiedName": "WS-CONT-IN.CUSTOMER-RECORD.CUSTOMER-DOB",
+                "level": 5,
+                "name": "CUSTOMER-DOB",
+                "usage": "DISPLAY",
+                "logicalType": "Group",
+                "byteOffset": 136,
+                "relativeOffset": 130,
+                "byteLength": 8,
+                "elementByteLength": 8,
+                "children": [
+                  {
+                    "id": "WS_L18_CUSTOMER-DOB-DAY",
+                    "qualifiedName": "WS-CONT-IN.CUSTOMER-RECORD.CUSTOMER-DOB.CUSTOMER-DOB-DAY",
+                    "level": 7,
+                    "name": "CUSTOMER-DOB-DAY",
+                    "pic": "99",
+                    "usage": "DISPLAY",
+                    "logicalType": "Numeric Display (2 digits)",
+                    "byteOffset": 136,
+                    "relativeOffset": 0,
+                    "byteLength": 2,
+                    "elementByteLength": 2,
+                    "location": {
+                      "startLine": 18,
+                      "endLine": 18,
+                      "startColumn": 17,
+                      "endColumn": 67,
+                      "sourceFile": "CUSTOMER.cpy"
+                    }
+                  },
+                  {
+                    "id": "WS_L19_CUSTOMER-DOB-MONTH",
+                    "qualifiedName": "WS-CONT-IN.CUSTOMER-RECORD.CUSTOMER-DOB.CUSTOMER-DOB-MONTH",
+                    "level": 7,
+                    "name": "CUSTOMER-DOB-MONTH",
+                    "pic": "99",
+                    "usage": "DISPLAY",
+                    "logicalType": "Numeric Display (2 digits)",
+                    "byteOffset": 138,
+                    "relativeOffset": 2,
+                    "byteLength": 2,
+                    "elementByteLength": 2,
+                    "location": {
+                      "startLine": 19,
+                      "endLine": 19,
+                      "startColumn": 17,
+                      "endColumn": 67,
+                      "sourceFile": "CUSTOMER.cpy"
+                    }
+                  },
+                  {
+                    "id": "WS_L20_CUSTOMER-DOB-YEAR",
+                    "qualifiedName": "WS-CONT-IN.CUSTOMER-RECORD.CUSTOMER-DOB.CUSTOMER-DOB-YEAR",
+                    "level": 7,
+                    "name": "CUSTOMER-DOB-YEAR",
+                    "pic": "9999",
+                    "usage": "DISPLAY",
+                    "logicalType": "Numeric Display (4 digits)",
+                    "byteOffset": 140,
+                    "relativeOffset": 4,
+                    "byteLength": 4,
+                    "elementByteLength": 4,
+                    "location": {
+                      "startLine": 20,
+                      "endLine": 20,
+                      "startColumn": 17,
+                      "endColumn": 69,
+                      "sourceFile": "CUSTOMER.cpy"
+                    }
+                  }
+                ],
+                "location": {
+                  "startLine": 17,
+                  "endLine": 17,
+                  "startColumn": 14,
+                  "endColumn": 29,
+                  "sourceFile": "CUSTOMER.cpy"
+                }
+              },
+              {
+                "id": "WS_L21_CUSTOMER-PHONE",
+                "qualifiedName": "WS-CONT-IN.CUSTOMER-RECORD.CUSTOMER-PHONE",
+                "level": 5,
+                "name": "CUSTOMER-PHONE",
+                "pic": "X(20)",
+                "usage": "DISPLAY",
+                "logicalType": "Alphanumeric (20 chars)",
+                "byteOffset": 144,
+                "relativeOffset": 138,
+                "byteLength": 20,
+                "elementByteLength": 20,
+                "location": {
+                  "startLine": 21,
+                  "endLine": 21,
+                  "startColumn": 14,
+                  "endColumn": 62,
+                  "sourceFile": "CUSTOMER.cpy"
+                }
+              },
+              {
+                "id": "WS_L22_CUSTOMER-ADDRESS",
+                "qualifiedName": "WS-CONT-IN.CUSTOMER-RECORD.CUSTOMER-ADDRESS",
+                "level": 5,
+                "name": "CUSTOMER-ADDRESS",
+                "usage": "DISPLAY",
+                "logicalType": "Group",
+                "byteOffset": 164,
+                "relativeOffset": 158,
+                "byteLength": 210,
+                "elementByteLength": 210,
+                "children": [
+                  {
+                    "id": "WS_L23_CUSTOMER-ADDR-LINE1",
+                    "qualifiedName": "WS-CONT-IN.CUSTOMER-RECORD.CUSTOMER-ADDRESS.CUSTOMER-ADDR-LINE1",
+                    "level": 7,
+                    "name": "CUSTOMER-ADDR-LINE1",
+                    "pic": "X(50)",
+                    "usage": "DISPLAY",
+                    "logicalType": "Alphanumeric (50 chars)",
+                    "byteOffset": 164,
+                    "relativeOffset": 0,
+                    "byteLength": 50,
+                    "elementByteLength": 50,
+                    "location": {
+                      "startLine": 23,
+                      "endLine": 23,
+                      "startColumn": 17,
+                      "endColumn": 62,
+                      "sourceFile": "CUSTOMER.cpy"
+                    }
+                  },
+                  {
+                    "id": "WS_L24_CUSTOMER-ADDR-LINE2",
+                    "qualifiedName": "WS-CONT-IN.CUSTOMER-RECORD.CUSTOMER-ADDRESS.CUSTOMER-ADDR-LINE2",
+                    "level": 7,
+                    "name": "CUSTOMER-ADDR-LINE2",
+                    "pic": "X(50)",
+                    "usage": "DISPLAY",
+                    "logicalType": "Alphanumeric (50 chars)",
+                    "byteOffset": 214,
+                    "relativeOffset": 50,
+                    "byteLength": 50,
+                    "elementByteLength": 50,
+                    "location": {
+                      "startLine": 24,
+                      "endLine": 24,
+                      "startColumn": 17,
+                      "endColumn": 62,
+                      "sourceFile": "CUSTOMER.cpy"
+                    }
+                  },
+                  {
+                    "id": "WS_L25_CUSTOMER-CITY",
+                    "qualifiedName": "WS-CONT-IN.CUSTOMER-RECORD.CUSTOMER-ADDRESS.CUSTOMER-CITY",
+                    "level": 7,
+                    "name": "CUSTOMER-CITY",
+                    "pic": "X(50)",
+                    "usage": "DISPLAY",
+                    "logicalType": "Alphanumeric (50 chars)",
+                    "byteOffset": 264,
+                    "relativeOffset": 100,
+                    "byteLength": 50,
+                    "elementByteLength": 50,
+                    "location": {
+                      "startLine": 25,
+                      "endLine": 25,
+                      "startColumn": 17,
+                      "endColumn": 62,
+                      "sourceFile": "CUSTOMER.cpy"
+                    }
+                  },
+                  {
+                    "id": "WS_L26_CUSTOMER-POSTCODE",
+                    "qualifiedName": "WS-CONT-IN.CUSTOMER-RECORD.CUSTOMER-ADDRESS.CUSTOMER-POSTCODE",
+                    "level": 7,
+                    "name": "CUSTOMER-POSTCODE",
+                    "pic": "X(10)",
+                    "usage": "DISPLAY",
+                    "logicalType": "Alphanumeric (10 chars)",
+                    "byteOffset": 314,
+                    "relativeOffset": 150,
+                    "byteLength": 10,
+                    "elementByteLength": 10,
+                    "location": {
+                      "startLine": 26,
+                      "endLine": 26,
+                      "startColumn": 17,
+                      "endColumn": 62,
+                      "sourceFile": "CUSTOMER.cpy"
+                    }
+                  },
+                  {
+                    "id": "WS_L27_CUSTOMER-COUNTRY",
+                    "qualifiedName": "WS-CONT-IN.CUSTOMER-RECORD.CUSTOMER-ADDRESS.CUSTOMER-COUNTRY",
+                    "level": 7,
+                    "name": "CUSTOMER-COUNTRY",
+                    "pic": "X(50)",
+                    "usage": "DISPLAY",
+                    "logicalType": "Alphanumeric (50 chars)",
+                    "byteOffset": 324,
+                    "relativeOffset": 160,
+                    "byteLength": 50,
+                    "elementByteLength": 50,
+                    "location": {
+                      "startLine": 27,
+                      "endLine": 27,
+                      "startColumn": 17,
+                      "endColumn": 62,
+                      "sourceFile": "CUSTOMER.cpy"
+                    }
+                  }
+                ],
+                "location": {
+                  "startLine": 22,
+                  "endLine": 22,
+                  "startColumn": 14,
+                  "endColumn": 33,
+                  "sourceFile": "CUSTOMER.cpy"
+                }
+              },
+              {
+                "id": "WS_L28_CUSTOMER-STATUS",
+                "qualifiedName": "WS-CONT-IN.CUSTOMER-RECORD.CUSTOMER-STATUS",
+                "level": 5,
+                "name": "CUSTOMER-STATUS",
+                "pic": "X(10)",
+                "usage": "DISPLAY",
+                "logicalType": "Alphanumeric (10 chars)",
+                "byteOffset": 374,
+                "relativeOffset": 368,
+                "byteLength": 10,
+                "elementByteLength": 10,
+                "conditions88": [
+                  {
+                    "name": "CUSTOMER-STATUS-ACTIVE",
+                    "values": [
+                      "ACTIVE"
+                    ],
+                    "location": {
+                      "startLine": 29,
+                      "endLine": 29,
+                      "startColumn": 17,
+                      "endColumn": 67,
+                      "sourceFile": "CUSTOMER.cpy"
+                    }
+                  },
+                  {
+                    "name": "CUSTOMER-STATUS-INACTIVE",
+                    "values": [
+                      "INACTIVE"
+                    ],
+                    "location": {
+                      "startLine": 30,
+                      "endLine": 30,
+                      "startColumn": 17,
+                      "endColumn": 69,
+                      "sourceFile": "CUSTOMER.cpy"
+                    }
+                  },
+                  {
+                    "name": "CUSTOMER-STATUS-SUSPENDED",
+                    "values": [
+                      "SUSPENDED"
+                    ],
+                    "location": {
+                      "startLine": 31,
+                      "endLine": 31,
+                      "startColumn": 17,
+                      "endColumn": 70,
+                      "sourceFile": "CUSTOMER.cpy"
+                    }
+                  }
+                ],
+                "location": {
+                  "startLine": 28,
+                  "endLine": 28,
+                  "startColumn": 14,
+                  "endColumn": 62,
+                  "sourceFile": "CUSTOMER.cpy"
+                }
+              },
+              {
+                "id": "WS_L32_CUSTOMER-CREATED-DATE",
+                "qualifiedName": "WS-CONT-IN.CUSTOMER-RECORD.CUSTOMER-CREATED-DATE",
+                "level": 5,
+                "name": "CUSTOMER-CREATED-DATE",
+                "usage": "DISPLAY",
+                "logicalType": "Group",
+                "byteOffset": 384,
+                "relativeOffset": 378,
+                "byteLength": 8,
+                "elementByteLength": 8,
+                "children": [
+                  {
+                    "id": "WS_L33_CUSTOMER-CREATED-DAY",
+                    "qualifiedName": "WS-CONT-IN.CUSTOMER-RECORD.CUSTOMER-CREATED-DATE.CUSTOMER-CREATED-DAY",
+                    "level": 7,
+                    "name": "CUSTOMER-CREATED-DAY",
+                    "pic": "99",
+                    "usage": "DISPLAY",
+                    "logicalType": "Numeric Display (2 digits)",
+                    "byteOffset": 384,
+                    "relativeOffset": 0,
+                    "byteLength": 2,
+                    "elementByteLength": 2,
+                    "location": {
+                      "startLine": 33,
+                      "endLine": 33,
+                      "startColumn": 17,
+                      "endColumn": 67,
+                      "sourceFile": "CUSTOMER.cpy"
+                    }
+                  },
+                  {
+                    "id": "WS_L34_CUSTOMER-CREATED-MONTH",
+                    "qualifiedName": "WS-CONT-IN.CUSTOMER-RECORD.CUSTOMER-CREATED-DATE.CUSTOMER-CREATED-MONTH",
+                    "level": 7,
+                    "name": "CUSTOMER-CREATED-MONTH",
+                    "pic": "99",
+                    "usage": "DISPLAY",
+                    "logicalType": "Numeric Display (2 digits)",
+                    "byteOffset": 386,
+                    "relativeOffset": 2,
+                    "byteLength": 2,
+                    "elementByteLength": 2,
+                    "location": {
+                      "startLine": 34,
+                      "endLine": 34,
+                      "startColumn": 17,
+                      "endColumn": 67,
+                      "sourceFile": "CUSTOMER.cpy"
+                    }
+                  },
+                  {
+                    "id": "WS_L35_CUSTOMER-CREATED-YEAR",
+                    "qualifiedName": "WS-CONT-IN.CUSTOMER-RECORD.CUSTOMER-CREATED-DATE.CUSTOMER-CREATED-YEAR",
+                    "level": 7,
+                    "name": "CUSTOMER-CREATED-YEAR",
+                    "pic": "9999",
+                    "usage": "DISPLAY",
+                    "logicalType": "Numeric Display (4 digits)",
+                    "byteOffset": 388,
+                    "relativeOffset": 4,
+                    "byteLength": 4,
+                    "elementByteLength": 4,
+                    "location": {
+                      "startLine": 35,
+                      "endLine": 35,
+                      "startColumn": 17,
+                      "endColumn": 69,
+                      "sourceFile": "CUSTOMER.cpy"
+                    }
+                  }
+                ],
+                "location": {
+                  "startLine": 32,
+                  "endLine": 32,
+                  "startColumn": 14,
+                  "endColumn": 38,
+                  "sourceFile": "CUSTOMER.cpy"
+                }
+              },
+              {
+                "id": "WS_L36_CUSTOMER-CREDIT-SCORE",
+                "qualifiedName": "WS-CONT-IN.CUSTOMER-RECORD.CUSTOMER-CREDIT-SCORE",
+                "level": 5,
+                "name": "CUSTOMER-CREDIT-SCORE",
+                "pic": "999",
+                "usage": "DISPLAY",
+                "logicalType": "Numeric Display (3 digits)",
+                "byteOffset": 392,
+                "relativeOffset": 386,
+                "byteLength": 3,
+                "elementByteLength": 3,
+                "location": {
+                  "startLine": 36,
+                  "endLine": 36,
+                  "startColumn": 14,
+                  "endColumn": 60,
+                  "sourceFile": "CUSTOMER.cpy"
+                }
+              },
+              {
+                "id": "WS_L37_CUSTOMER-CS-REVIEW-DATE",
+                "qualifiedName": "WS-CONT-IN.CUSTOMER-RECORD.CUSTOMER-CS-REVIEW-DATE",
+                "level": 5,
+                "name": "CUSTOMER-CS-REVIEW-DATE",
+                "usage": "DISPLAY",
+                "logicalType": "Group",
+                "byteOffset": 395,
+                "relativeOffset": 389,
+                "byteLength": 8,
+                "elementByteLength": 8,
+                "children": [
+                  {
+                    "id": "WS_L38_CUSTOMER-CS-REVIEW-DAY",
+                    "qualifiedName": "WS-CONT-IN.CUSTOMER-RECORD.CUSTOMER-CS-REVIEW-DATE.CUSTOMER-CS-REVIEW-DAY",
+                    "level": 7,
+                    "name": "CUSTOMER-CS-REVIEW-DAY",
+                    "pic": "99",
+                    "usage": "DISPLAY",
+                    "logicalType": "Numeric Display (2 digits)",
+                    "byteOffset": 395,
+                    "relativeOffset": 0,
+                    "byteLength": 2,
+                    "elementByteLength": 2,
+                    "location": {
+                      "startLine": 38,
+                      "endLine": 38,
+                      "startColumn": 17,
+                      "endColumn": 67,
+                      "sourceFile": "CUSTOMER.cpy"
+                    }
+                  },
+                  {
+                    "id": "WS_L39_CUSTOMER-CS-REVIEW-MONTH",
+                    "qualifiedName": "WS-CONT-IN.CUSTOMER-RECORD.CUSTOMER-CS-REVIEW-DATE.CUSTOMER-CS-REVIEW-MONTH",
+                    "level": 7,
+                    "name": "CUSTOMER-CS-REVIEW-MONTH",
+                    "pic": "99",
+                    "usage": "DISPLAY",
+                    "logicalType": "Numeric Display (2 digits)",
+                    "byteOffset": 397,
+                    "relativeOffset": 2,
+                    "byteLength": 2,
+                    "elementByteLength": 2,
+                    "location": {
+                      "startLine": 39,
+                      "endLine": 39,
+                      "startColumn": 17,
+                      "endColumn": 67,
+                      "sourceFile": "CUSTOMER.cpy"
+                    }
+                  },
+                  {
+                    "id": "WS_L40_CUSTOMER-CS-REVIEW-YEAR",
+                    "qualifiedName": "WS-CONT-IN.CUSTOMER-RECORD.CUSTOMER-CS-REVIEW-DATE.CUSTOMER-CS-REVIEW-YEAR",
+                    "level": 7,
+                    "name": "CUSTOMER-CS-REVIEW-YEAR",
+                    "pic": "9999",
+                    "usage": "DISPLAY",
+                    "logicalType": "Numeric Display (4 digits)",
+                    "byteOffset": 399,
+                    "relativeOffset": 4,
+                    "byteLength": 4,
+                    "elementByteLength": 4,
+                    "location": {
+                      "startLine": 40,
+                      "endLine": 40,
+                      "startColumn": 17,
+                      "endColumn": 69,
+                      "sourceFile": "CUSTOMER.cpy"
+                    }
+                  }
+                ],
+                "location": {
+                  "startLine": 37,
+                  "endLine": 37,
+                  "startColumn": 14,
+                  "endColumn": 40,
+                  "sourceFile": "CUSTOMER.cpy"
+                }
+              }
+            ],
+            "location": {
+              "startLine": 7,
+              "endLine": 7,
+              "startColumn": 11,
+              "endColumn": 29,
+              "sourceFile": "CUSTOMER.cpy"
+            }
+          }
+        ],
+        "location": {
+          "startLine": 44,
+          "endLine": 44,
+          "startColumn": 7,
+          "endColumn": 20,
+          "sourceFile": "CRDTAGY2.cbl"
+        }
+      },
+      {
+        "id": "WS_L47_WS-CICS-WORK-AREA",
+        "qualifiedName": "WS-CICS-WORK-AREA",
+        "level": 1,
+        "name": "WS-CICS-WORK-AREA",
+        "usage": "DISPLAY",
+        "logicalType": "Group",
+        "byteOffset": 403,
+        "relativeOffset": 0,
+        "byteLength": 8,
+        "elementByteLength": 8,
+        "children": [
+          {
+            "id": "WS_L48_WS-CICS-RESP",
+            "qualifiedName": "WS-CICS-WORK-AREA.WS-CICS-RESP",
+            "level": 5,
+            "name": "WS-CICS-RESP",
+            "pic": "S9(8)",
+            "usage": "COMP",
+            "logicalType": "Signed Integer (32-bit Binary)",
+            "byteOffset": 403,
+            "relativeOffset": 0,
+            "byteLength": 4,
+            "elementByteLength": 4,
+            "location": {
+              "startLine": 48,
+              "endLine": 48,
+              "startColumn": 10,
+              "endColumn": 54,
+              "sourceFile": "CRDTAGY2.cbl"
+            }
+          },
+          {
+            "id": "WS_L49_WS-CICS-RESP2",
+            "qualifiedName": "WS-CICS-WORK-AREA.WS-CICS-RESP2",
+            "level": 5,
+            "name": "WS-CICS-RESP2",
+            "pic": "S9(8)",
+            "usage": "COMP",
+            "logicalType": "Signed Integer (32-bit Binary)",
+            "byteOffset": 407,
+            "relativeOffset": 4,
+            "byteLength": 4,
+            "elementByteLength": 4,
+            "location": {
+              "startLine": 49,
+              "endLine": 49,
+              "startColumn": 10,
+              "endColumn": 54,
+              "sourceFile": "CRDTAGY2.cbl"
+            }
+          }
+        ],
+        "location": {
+          "startLine": 47,
+          "endLine": 47,
+          "startColumn": 7,
+          "endColumn": 27,
+          "sourceFile": "CRDTAGY2.cbl"
+        }
+      },
+      {
+        "id": "WS_L52_WS-DELAY-AMT",
+        "qualifiedName": "WS-DELAY-AMT",
+        "level": 1,
+        "name": "WS-DELAY-AMT",
+        "pic": "S9(8)",
+        "usage": "COMP",
+        "value": "0",
+        "logicalType": "Signed Integer (32-bit Binary)",
+        "byteOffset": 411,
+        "relativeOffset": 0,
+        "byteLength": 4,
+        "elementByteLength": 4,
+        "location": {
+          "startLine": 52,
+          "endLine": 53,
+          "startColumn": 7,
+          "endColumn": 58,
+          "sourceFile": "CRDTAGY2.cbl"
+        }
+      },
+      {
+        "id": "WS_L55_WS-CONTAINER-NAME",
+        "qualifiedName": "WS-CONTAINER-NAME",
+        "level": 1,
+        "name": "WS-CONTAINER-NAME",
+        "pic": "X(16)",
+        "usage": "DISPLAY",
+        "value": "SPACES",
+        "logicalType": "Alphanumeric (16 chars)",
+        "byteOffset": 415,
+        "relativeOffset": 0,
+        "byteLength": 16,
+        "elementByteLength": 16,
+        "location": {
+          "startLine": 55,
+          "endLine": 55,
+          "startColumn": 7,
+          "endColumn": 63,
+          "sourceFile": "CRDTAGY2.cbl"
+        }
+      },
+      {
+        "id": "WS_L56_WS-CHANNEL-NAME",
+        "qualifiedName": "WS-CHANNEL-NAME",
+        "level": 1,
+        "name": "WS-CHANNEL-NAME",
+        "pic": "X(16)",
+        "usage": "DISPLAY",
+        "value": "SPACES",
+        "logicalType": "Alphanumeric (16 chars)",
+        "byteOffset": 431,
+        "relativeOffset": 0,
+        "byteLength": 16,
+        "elementByteLength": 16,
+        "location": {
+          "startLine": 56,
+          "endLine": 56,
+          "startColumn": 7,
+          "endColumn": 63,
+          "sourceFile": "CRDTAGY2.cbl"
+        }
+      },
+      {
+        "id": "WS_L58_WS-CONTAINER-LEN",
+        "qualifiedName": "WS-CONTAINER-LEN",
+        "level": 1,
+        "name": "WS-CONTAINER-LEN",
+        "pic": "S9(8)",
+        "usage": "COMP",
+        "value": "0",
+        "logicalType": "Signed Integer (32-bit Binary)",
+        "byteOffset": 447,
+        "relativeOffset": 0,
+        "byteLength": 4,
+        "elementByteLength": 4,
+        "location": {
+          "startLine": 58,
+          "endLine": 59,
+          "startColumn": 7,
+          "endColumn": 58,
+          "sourceFile": "CRDTAGY2.cbl"
+        }
+      },
+      {
+        "id": "WS_L60_WS-NEW-CREDSCORE",
+        "qualifiedName": "WS-NEW-CREDSCORE",
+        "level": 1,
+        "name": "WS-NEW-CREDSCORE",
+        "pic": "999",
+        "usage": "DISPLAY",
+        "value": "0",
+        "logicalType": "Numeric Display (3 digits)",
+        "byteOffset": 451,
+        "relativeOffset": 0,
+        "byteLength": 3,
+        "elementByteLength": 3,
+        "location": {
+          "startLine": 60,
+          "endLine": 60,
+          "startColumn": 7,
+          "endColumn": 58,
+          "sourceFile": "CRDTAGY2.cbl"
+        }
+      },
+      {
+        "id": "WS_L61_WS-SEED",
+        "qualifiedName": "WS-SEED",
+        "level": 1,
+        "name": "WS-SEED",
+        "pic": "S9(15)",
+        "usage": "COMP",
+        "logicalType": "Signed BigInt (64-bit Binary)",
+        "byteOffset": 454,
+        "relativeOffset": 0,
+        "byteLength": 8,
+        "elementByteLength": 8,
+        "location": {
+          "startLine": 61,
+          "endLine": 61,
+          "startColumn": 7,
+          "endColumn": 55,
+          "sourceFile": "CRDTAGY2.cbl"
+        }
+      },
+      {
+        "id": "WS_L65_WS-U-TIME",
+        "qualifiedName": "WS-U-TIME",
+        "level": 1,
+        "name": "WS-U-TIME",
+        "pic": "S9(15)",
+        "usage": "COMP_3",
+        "logicalType": "Signed Integer(15) Packed",
+        "byteOffset": 462,
+        "relativeOffset": 0,
+        "byteLength": 8,
+        "elementByteLength": 8,
+        "location": {
+          "startLine": 65,
+          "endLine": 65,
+          "startColumn": 7,
+          "endColumn": 57,
+          "sourceFile": "CRDTAGY2.cbl"
+        }
+      },
+      {
+        "id": "WS_L66_WS-ORIG-DATE",
+        "qualifiedName": "WS-ORIG-DATE",
+        "level": 1,
+        "name": "WS-ORIG-DATE",
+        "pic": "X(10)",
+        "usage": "DISPLAY",
+        "logicalType": "Alphanumeric (10 chars)",
+        "byteOffset": 470,
+        "relativeOffset": 0,
+        "byteLength": 10,
+        "elementByteLength": 10,
+        "location": {
+          "startLine": 66,
+          "endLine": 66,
+          "startColumn": 7,
+          "endColumn": 49,
+          "sourceFile": "CRDTAGY2.cbl"
+        }
+      },
+      {
+        "id": "WS_L67_WS-ORIG-DATE-GRP",
+        "qualifiedName": "WS-ORIG-DATE-GRP",
+        "level": 1,
+        "name": "WS-ORIG-DATE-GRP",
+        "usage": "DISPLAY",
+        "redefines": "WS-ORIG-DATE",
+        "logicalType": "Group",
+        "byteOffset": 470,
+        "relativeOffset": 0,
+        "byteLength": 10,
+        "elementByteLength": 10,
+        "children": [
+          {
+            "id": "WS_L68_WS-ORIG-DATE-DD",
+            "qualifiedName": "WS-ORIG-DATE-GRP.WS-ORIG-DATE-DD",
+            "level": 3,
+            "name": "WS-ORIG-DATE-DD",
+            "pic": "99",
+            "usage": "DISPLAY",
+            "logicalType": "Numeric Display (2 digits)",
+            "byteOffset": 470,
+            "relativeOffset": 0,
+            "byteLength": 2,
+            "elementByteLength": 2,
+            "location": {
+              "startLine": 68,
+              "endLine": 68,
+              "startColumn": 10,
+              "endColumn": 46,
+              "sourceFile": "CRDTAGY2.cbl"
+            }
+          },
+          {
+            "id": "WS_L69_FILLER",
+            "qualifiedName": "WS-ORIG-DATE-GRP.FILLER",
+            "level": 3,
+            "name": "FILLER",
+            "pic": "X",
+            "usage": "DISPLAY",
+            "logicalType": "Alphanumeric (1 chars)",
+            "byteOffset": 472,
+            "relativeOffset": 2,
+            "byteLength": 1,
+            "elementByteLength": 1,
+            "isFiller": true,
+            "location": {
+              "startLine": 69,
+              "endLine": 69,
+              "startColumn": 10,
+              "endColumn": 45,
+              "sourceFile": "CRDTAGY2.cbl"
+            }
+          },
+          {
+            "id": "WS_L70_WS-ORIG-DATE-MM",
+            "qualifiedName": "WS-ORIG-DATE-GRP.WS-ORIG-DATE-MM",
+            "level": 3,
+            "name": "WS-ORIG-DATE-MM",
+            "pic": "99",
+            "usage": "DISPLAY",
+            "logicalType": "Numeric Display (2 digits)",
+            "byteOffset": 473,
+            "relativeOffset": 3,
+            "byteLength": 2,
+            "elementByteLength": 2,
+            "location": {
+              "startLine": 70,
+              "endLine": 70,
+              "startColumn": 10,
+              "endColumn": 46,
+              "sourceFile": "CRDTAGY2.cbl"
+            }
+          },
+          {
+            "id": "WS_L71_FILLER",
+            "qualifiedName": "WS-ORIG-DATE-GRP.FILLER",
+            "level": 3,
+            "name": "FILLER",
+            "pic": "X",
+            "usage": "DISPLAY",
+            "logicalType": "Alphanumeric (1 chars)",
+            "byteOffset": 475,
+            "relativeOffset": 5,
+            "byteLength": 1,
+            "elementByteLength": 1,
+            "isFiller": true,
+            "location": {
+              "startLine": 71,
+              "endLine": 71,
+              "startColumn": 10,
+              "endColumn": 45,
+              "sourceFile": "CRDTAGY2.cbl"
+            }
+          },
+          {
+            "id": "WS_L72_WS-ORIG-DATE-YYYY",
+            "qualifiedName": "WS-ORIG-DATE-GRP.WS-ORIG-DATE-YYYY",
+            "level": 3,
+            "name": "WS-ORIG-DATE-YYYY",
+            "pic": "9999",
+            "usage": "DISPLAY",
+            "logicalType": "Numeric Display (4 digits)",
+            "byteOffset": 476,
+            "relativeOffset": 6,
+            "byteLength": 4,
+            "elementByteLength": 4,
+            "location": {
+              "startLine": 72,
+              "endLine": 72,
+              "startColumn": 10,
+              "endColumn": 48,
+              "sourceFile": "CRDTAGY2.cbl"
+            }
+          }
+        ],
+        "location": {
+          "startLine": 67,
+          "endLine": 67,
+          "startColumn": 7,
+          "endColumn": 49,
+          "sourceFile": "CRDTAGY2.cbl"
+        }
+      },
+      {
+        "id": "WS_L74_WS-ORIG-DATE-GRP-X",
+        "qualifiedName": "WS-ORIG-DATE-GRP-X",
+        "level": 1,
+        "name": "WS-ORIG-DATE-GRP-X",
+        "usage": "DISPLAY",
+        "logicalType": "Group",
+        "byteOffset": 480,
+        "relativeOffset": 0,
+        "byteLength": 10,
+        "elementByteLength": 10,
+        "children": [
+          {
+            "id": "WS_L75_WS-ORIG-DATE-DD-X",
+            "qualifiedName": "WS-ORIG-DATE-GRP-X.WS-ORIG-DATE-DD-X",
+            "level": 3,
+            "name": "WS-ORIG-DATE-DD-X",
+            "pic": "XX",
+            "usage": "DISPLAY",
+            "logicalType": "Alphanumeric (2 chars)",
+            "byteOffset": 480,
+            "relativeOffset": 0,
+            "byteLength": 2,
+            "elementByteLength": 2,
+            "location": {
+              "startLine": 75,
+              "endLine": 75,
+              "startColumn": 10,
+              "endColumn": 46,
+              "sourceFile": "CRDTAGY2.cbl"
+            }
+          },
+          {
+            "id": "WS_L76_FILLER",
+            "qualifiedName": "WS-ORIG-DATE-GRP-X.FILLER",
+            "level": 3,
+            "name": "FILLER",
+            "pic": "X",
+            "usage": "DISPLAY",
+            "value": ".",
+            "logicalType": "Alphanumeric (1 chars)",
+            "byteOffset": 482,
+            "relativeOffset": 2,
+            "byteLength": 1,
+            "elementByteLength": 1,
+            "isFiller": true,
+            "location": {
+              "startLine": 76,
+              "endLine": 76,
+              "startColumn": 10,
+              "endColumn": 60,
+              "sourceFile": "CRDTAGY2.cbl"
+            }
+          },
+          {
+            "id": "WS_L77_WS-ORIG-DATE-MM-X",
+            "qualifiedName": "WS-ORIG-DATE-GRP-X.WS-ORIG-DATE-MM-X",
+            "level": 3,
+            "name": "WS-ORIG-DATE-MM-X",
+            "pic": "XX",
+            "usage": "DISPLAY",
+            "logicalType": "Alphanumeric (2 chars)",
+            "byteOffset": 483,
+            "relativeOffset": 3,
+            "byteLength": 2,
+            "elementByteLength": 2,
+            "location": {
+              "startLine": 77,
+              "endLine": 77,
+              "startColumn": 10,
+              "endColumn": 46,
+              "sourceFile": "CRDTAGY2.cbl"
+            }
+          },
+          {
+            "id": "WS_L78_FILLER",
+            "qualifiedName": "WS-ORIG-DATE-GRP-X.FILLER",
+            "level": 3,
+            "name": "FILLER",
+            "pic": "X",
+            "usage": "DISPLAY",
+            "value": ".",
+            "logicalType": "Alphanumeric (1 chars)",
+            "byteOffset": 485,
+            "relativeOffset": 5,
+            "byteLength": 1,
+            "elementByteLength": 1,
+            "isFiller": true,
+            "location": {
+              "startLine": 78,
+              "endLine": 78,
+              "startColumn": 10,
+              "endColumn": 60,
+              "sourceFile": "CRDTAGY2.cbl"
+            }
+          },
+          {
+            "id": "WS_L79_WS-ORIG-DATE-YYYY-X",
+            "qualifiedName": "WS-ORIG-DATE-GRP-X.WS-ORIG-DATE-YYYY-X",
+            "level": 3,
+            "name": "WS-ORIG-DATE-YYYY-X",
+            "pic": "X(4)",
+            "usage": "DISPLAY",
+            "logicalType": "Alphanumeric (4 chars)",
+            "byteOffset": 486,
+            "relativeOffset": 6,
+            "byteLength": 4,
+            "elementByteLength": 4,
+            "location": {
+              "startLine": 79,
+              "endLine": 79,
+              "startColumn": 10,
+              "endColumn": 48,
+              "sourceFile": "CRDTAGY2.cbl"
+            }
+          }
+        ],
+        "location": {
+          "startLine": 74,
+          "endLine": 74,
+          "startColumn": 7,
+          "endColumn": 28,
+          "sourceFile": "CRDTAGY2.cbl"
+        }
+      },
+      {
+        "id": "WS_L82_WS-TIME-DATA",
+        "qualifiedName": "WS-TIME-DATA",
+        "level": 1,
+        "name": "WS-TIME-DATA",
+        "usage": "DISPLAY",
+        "logicalType": "Group",
+        "byteOffset": 490,
+        "relativeOffset": 0,
+        "byteLength": 6,
+        "elementByteLength": 6,
+        "children": [
+          {
+            "id": "WS_L83_WS-TIME-NOW",
+            "qualifiedName": "WS-TIME-DATA.WS-TIME-NOW",
+            "level": 3,
+            "name": "WS-TIME-NOW",
+            "pic": "9(6)",
+            "usage": "DISPLAY",
+            "logicalType": "Numeric Display (6 digits)",
+            "byteOffset": 490,
+            "relativeOffset": 0,
+            "byteLength": 6,
+            "elementByteLength": 6,
+            "location": {
+              "startLine": 83,
+              "endLine": 83,
+              "startColumn": 10,
+              "endColumn": 48,
+              "sourceFile": "CRDTAGY2.cbl"
+            }
+          },
+          {
+            "id": "WS_L84_WS-TIME-NOW-GRP",
+            "qualifiedName": "WS-TIME-DATA.WS-TIME-NOW-GRP",
+            "level": 3,
+            "name": "WS-TIME-NOW-GRP",
+            "usage": "DISPLAY",
+            "redefines": "WS-TIME-NOW",
+            "logicalType": "Group",
+            "byteOffset": 490,
+            "relativeOffset": 0,
+            "byteLength": 6,
+            "elementByteLength": 6,
+            "children": [
+              {
+                "id": "WS_L85_WS-TIME-NOW-GRP-HH",
+                "qualifiedName": "WS-TIME-DATA.WS-TIME-NOW-GRP.WS-TIME-NOW-GRP-HH",
+                "level": 5,
+                "name": "WS-TIME-NOW-GRP-HH",
+                "pic": "99",
+                "usage": "DISPLAY",
+                "logicalType": "Numeric Display (2 digits)",
+                "byteOffset": 490,
+                "relativeOffset": 0,
+                "byteLength": 2,
+                "elementByteLength": 2,
+                "location": {
+                  "startLine": 85,
+                  "endLine": 85,
+                  "startColumn": 13,
+                  "endColumn": 46,
+                  "sourceFile": "CRDTAGY2.cbl"
+                }
+              },
+              {
+                "id": "WS_L86_WS-TIME-NOW-GRP-MM",
+                "qualifiedName": "WS-TIME-DATA.WS-TIME-NOW-GRP.WS-TIME-NOW-GRP-MM",
+                "level": 5,
+                "name": "WS-TIME-NOW-GRP-MM",
+                "pic": "99",
+                "usage": "DISPLAY",
+                "logicalType": "Numeric Display (2 digits)",
+                "byteOffset": 492,
+                "relativeOffset": 2,
+                "byteLength": 2,
+                "elementByteLength": 2,
+                "location": {
+                  "startLine": 86,
+                  "endLine": 86,
+                  "startColumn": 13,
+                  "endColumn": 46,
+                  "sourceFile": "CRDTAGY2.cbl"
+                }
+              },
+              {
+                "id": "WS_L87_WS-TIME-NOW-GRP-SS",
+                "qualifiedName": "WS-TIME-DATA.WS-TIME-NOW-GRP.WS-TIME-NOW-GRP-SS",
+                "level": 5,
+                "name": "WS-TIME-NOW-GRP-SS",
+                "pic": "99",
+                "usage": "DISPLAY",
+                "logicalType": "Numeric Display (2 digits)",
+                "byteOffset": 494,
+                "relativeOffset": 4,
+                "byteLength": 2,
+                "elementByteLength": 2,
+                "location": {
+                  "startLine": 87,
+                  "endLine": 87,
+                  "startColumn": 13,
+                  "endColumn": 46,
+                  "sourceFile": "CRDTAGY2.cbl"
+                }
+              }
+            ],
+            "location": {
+              "startLine": 84,
+              "endLine": 84,
+              "startColumn": 10,
+              "endColumn": 50,
+              "sourceFile": "CRDTAGY2.cbl"
+            }
+          }
+        ],
+        "location": {
+          "startLine": 82,
+          "endLine": 82,
+          "startColumn": 7,
+          "endColumn": 22,
+          "sourceFile": "CRDTAGY2.cbl"
+        }
+      },
+      {
+        "id": "WS_L89_WS-ABEND-PGM",
+        "qualifiedName": "WS-ABEND-PGM",
+        "level": 1,
+        "name": "WS-ABEND-PGM",
+        "pic": "X(8)",
+        "usage": "DISPLAY",
+        "value": "ABNDPROC",
+        "logicalType": "Alphanumeric (8 chars)",
+        "byteOffset": 496,
+        "relativeOffset": 0,
+        "byteLength": 8,
+        "elementByteLength": 8,
+        "location": {
+          "startLine": 89,
+          "endLine": 89,
+          "startColumn": 7,
+          "endColumn": 67,
+          "sourceFile": "CRDTAGY2.cbl"
+        }
+      },
+      {
+        "id": "WS_L91_ABNDINFO-REC",
+        "qualifiedName": "ABNDINFO-REC",
+        "level": 1,
+        "name": "ABNDINFO-REC",
+        "usage": "DISPLAY",
+        "logicalType": "Group",
+        "byteOffset": 504,
+        "relativeOffset": 0,
+        "byteLength": 678,
+        "elementByteLength": 678,
+        "children": [
+          {
+            "id": "WS_L7_ABND-VSAM-KEY",
+            "qualifiedName": "ABNDINFO-REC.ABND-VSAM-KEY",
+            "level": 3,
+            "name": "ABND-VSAM-KEY",
+            "usage": "DISPLAY",
+            "logicalType": "Group",
+            "byteOffset": 504,
+            "relativeOffset": 0,
+            "byteLength": 12,
+            "elementByteLength": 12,
+            "children": [
+              {
+                "id": "WS_L8_ABND-UTIME-KEY",
+                "qualifiedName": "ABNDINFO-REC.ABND-VSAM-KEY.ABND-UTIME-KEY",
+                "level": 5,
+                "name": "ABND-UTIME-KEY",
+                "pic": "S9(15)",
+                "usage": "COMP_3",
+                "logicalType": "Signed Integer(15) Packed",
+                "byteOffset": 504,
+                "relativeOffset": 0,
+                "byteLength": 8,
+                "elementByteLength": 8,
+                "location": {
+                  "startLine": 8,
+                  "endLine": 8,
+                  "startColumn": 14,
+                  "endColumn": 66,
+                  "sourceFile": "ABNDINFO.cpy"
+                }
+              },
+              {
+                "id": "WS_L9_ABND-TASKNO-KEY",
+                "qualifiedName": "ABNDINFO-REC.ABND-VSAM-KEY.ABND-TASKNO-KEY",
+                "level": 5,
+                "name": "ABND-TASKNO-KEY",
+                "pic": "9(4)",
+                "usage": "DISPLAY",
+                "logicalType": "Numeric Display (4 digits)",
+                "byteOffset": 512,
+                "relativeOffset": 8,
+                "byteLength": 4,
+                "elementByteLength": 4,
+                "location": {
+                  "startLine": 9,
+                  "endLine": 9,
+                  "startColumn": 14,
+                  "endColumn": 57,
+                  "sourceFile": "ABNDINFO.cpy"
+                }
+              }
+            ],
+            "location": {
+              "startLine": 7,
+              "endLine": 7,
+              "startColumn": 11,
+              "endColumn": 27,
+              "sourceFile": "ABNDINFO.cpy"
+            }
+          },
+          {
+            "id": "WS_L10_ABND-APPLID",
+            "qualifiedName": "ABNDINFO-REC.ABND-APPLID",
+            "level": 3,
+            "name": "ABND-APPLID",
+            "pic": "X(8)",
+            "usage": "DISPLAY",
+            "logicalType": "Alphanumeric (8 chars)",
+            "byteOffset": 516,
+            "relativeOffset": 12,
+            "byteLength": 8,
+            "elementByteLength": 8,
+            "location": {
+              "startLine": 10,
+              "endLine": 10,
+              "startColumn": 11,
+              "endColumn": 57,
+              "sourceFile": "ABNDINFO.cpy"
+            }
+          },
+          {
+            "id": "WS_L11_ABND-TRANID",
+            "qualifiedName": "ABNDINFO-REC.ABND-TRANID",
+            "level": 3,
+            "name": "ABND-TRANID",
+            "pic": "X(4)",
+            "usage": "DISPLAY",
+            "logicalType": "Alphanumeric (4 chars)",
+            "byteOffset": 524,
+            "relativeOffset": 20,
+            "byteLength": 4,
+            "elementByteLength": 4,
+            "location": {
+              "startLine": 11,
+              "endLine": 11,
+              "startColumn": 11,
+              "endColumn": 57,
+              "sourceFile": "ABNDINFO.cpy"
+            }
+          },
+          {
+            "id": "WS_L12_ABND-DATE",
+            "qualifiedName": "ABNDINFO-REC.ABND-DATE",
+            "level": 3,
+            "name": "ABND-DATE",
+            "pic": "X(10)",
+            "usage": "DISPLAY",
+            "logicalType": "Alphanumeric (10 chars)",
+            "byteOffset": 528,
+            "relativeOffset": 24,
+            "byteLength": 10,
+            "elementByteLength": 10,
+            "location": {
+              "startLine": 12,
+              "endLine": 12,
+              "startColumn": 11,
+              "endColumn": 58,
+              "sourceFile": "ABNDINFO.cpy"
+            }
+          },
+          {
+            "id": "WS_L13_ABND-TIME",
+            "qualifiedName": "ABNDINFO-REC.ABND-TIME",
+            "level": 3,
+            "name": "ABND-TIME",
+            "pic": "X(8)",
+            "usage": "DISPLAY",
+            "logicalType": "Alphanumeric (8 chars)",
+            "byteOffset": 538,
+            "relativeOffset": 34,
+            "byteLength": 8,
+            "elementByteLength": 8,
+            "location": {
+              "startLine": 13,
+              "endLine": 13,
+              "startColumn": 11,
+              "endColumn": 57,
+              "sourceFile": "ABNDINFO.cpy"
+            }
+          },
+          {
+            "id": "WS_L14_ABND-CODE",
+            "qualifiedName": "ABNDINFO-REC.ABND-CODE",
+            "level": 3,
+            "name": "ABND-CODE",
+            "pic": "X(4)",
+            "usage": "DISPLAY",
+            "logicalType": "Alphanumeric (4 chars)",
+            "byteOffset": 546,
+            "relativeOffset": 42,
+            "byteLength": 4,
+            "elementByteLength": 4,
+            "location": {
+              "startLine": 14,
+              "endLine": 14,
+              "startColumn": 11,
+              "endColumn": 57,
+              "sourceFile": "ABNDINFO.cpy"
+            }
+          },
+          {
+            "id": "WS_L15_ABND-PROGRAM",
+            "qualifiedName": "ABNDINFO-REC.ABND-PROGRAM",
+            "level": 3,
+            "name": "ABND-PROGRAM",
+            "pic": "X(8)",
+            "usage": "DISPLAY",
+            "logicalType": "Alphanumeric (8 chars)",
+            "byteOffset": 550,
+            "relativeOffset": 46,
+            "byteLength": 8,
+            "elementByteLength": 8,
+            "location": {
+              "startLine": 15,
+              "endLine": 15,
+              "startColumn": 11,
+              "endColumn": 57,
+              "sourceFile": "ABNDINFO.cpy"
+            }
+          },
+          {
+            "id": "WS_L16_ABND-RESPCODE",
+            "qualifiedName": "ABNDINFO-REC.ABND-RESPCODE",
+            "level": 3,
+            "name": "ABND-RESPCODE",
+            "pic": "S9(8)",
+            "usage": "DISPLAY",
+            "logicalType": "Signed Numeric Display (8 digits)",
+            "byteOffset": 558,
+            "relativeOffset": 54,
+            "byteLength": 8,
+            "elementByteLength": 8,
+            "isSignSeparate": true,
+            "location": {
+              "startLine": 16,
+              "endLine": 17,
+              "startColumn": 11,
+              "endColumn": 39,
+              "sourceFile": "ABNDINFO.cpy"
+            }
+          },
+          {
+            "id": "WS_L18_ABND-RESP2CODE",
+            "qualifiedName": "ABNDINFO-REC.ABND-RESP2CODE",
+            "level": 3,
+            "name": "ABND-RESP2CODE",
+            "pic": "S9(8)",
+            "usage": "DISPLAY",
+            "logicalType": "Signed Numeric Display (8 digits)",
+            "byteOffset": 566,
+            "relativeOffset": 62,
+            "byteLength": 8,
+            "elementByteLength": 8,
+            "isSignSeparate": true,
+            "location": {
+              "startLine": 18,
+              "endLine": 19,
+              "startColumn": 11,
+              "endColumn": 39,
+              "sourceFile": "ABNDINFO.cpy"
+            }
+          },
+          {
+            "id": "WS_L20_ABND-SQLCODE",
+            "qualifiedName": "ABNDINFO-REC.ABND-SQLCODE",
+            "level": 3,
+            "name": "ABND-SQLCODE",
+            "pic": "S9(8)",
+            "usage": "DISPLAY",
+            "logicalType": "Signed Numeric Display (8 digits)",
+            "byteOffset": 574,
+            "relativeOffset": 70,
+            "byteLength": 8,
+            "elementByteLength": 8,
+            "isSignSeparate": true,
+            "location": {
+              "startLine": 20,
+              "endLine": 21,
+              "startColumn": 11,
+              "endColumn": 39,
+              "sourceFile": "ABNDINFO.cpy"
+            }
+          },
+          {
+            "id": "WS_L22_ABND-FREEFORM",
+            "qualifiedName": "ABNDINFO-REC.ABND-FREEFORM",
+            "level": 3,
+            "name": "ABND-FREEFORM",
+            "pic": "X(600)",
+            "usage": "DISPLAY",
+            "logicalType": "Alphanumeric (600 chars)",
+            "byteOffset": 582,
+            "relativeOffset": 78,
+            "byteLength": 600,
+            "elementByteLength": 600,
+            "location": {
+              "startLine": 22,
+              "endLine": 22,
+              "startColumn": 11,
+              "endColumn": 59,
+              "sourceFile": "ABNDINFO.cpy"
+            }
+          }
+        ],
+        "location": {
+          "startLine": 91,
+          "endLine": 91,
+          "startColumn": 7,
+          "endColumn": 22,
+          "sourceFile": "CRDTAGY2.cbl"
+        }
+      }
+    ],
+    "workingStorageBytes": 1182
+  },
+  "sections": [
+    {
+      "name": "PREMIERE",
+      "location": {
+        "startLine": 98,
+        "endLine": 232,
+        "startColumn": 7,
+        "endColumn": 15,
+        "sourceFile": "CRDTAGY2.cbl"
+      },
+      "paragraphNames": [
+        "A010",
+        "A999"
+      ]
+    },
+    {
+      "name": "GET-ME-OUT-OF-HERE",
+      "location": {
+        "startLine": 235,
+        "endLine": 242,
+        "startColumn": 7,
+        "endColumn": 15,
+        "sourceFile": "CRDTAGY2.cbl"
+      },
+      "paragraphNames": [
+        "GMOFH010",
+        "GMOFH999"
+      ]
+    },
+    {
+      "name": "POPULATE-TIME-DATE",
+      "location": {
+        "startLine": 245,
+        "endLine": 260,
+        "startColumn": 7,
+        "endColumn": 15,
+        "sourceFile": "CRDTAGY2.cbl"
+      },
+      "paragraphNames": [
+        "PTD010",
+        "PTD999"
+      ]
+    }
+  ],
+  "paragraphs": [
+    {
+      "name": "A010",
+      "sectionParent": "PREMIERE",
+      "location": {
+        "startLine": 99,
+        "endLine": 229,
+        "startColumn": 7,
+        "endColumn": 37,
+        "sourceFile": "CRDTAGY2.cbl"
+      },
+      "successors": [
+        "POPULATE-TIME-DATE",
+        "GET-ME-OUT-OF-HERE"
+      ],
+      "fallthroughSuccessor": "A999",
+      "statements": [
+        {
+          "type": "MOVE",
+          "location": {
+            "startLine": 105,
+            "endLine": 105,
+            "startColumn": 11,
+            "endColumn": 38,
+            "sourceFile": "CRDTAGY2.cbl"
+          },
+          "rawText": "MOVE 'CIPB ' TO WS-CONTAINER-NAME",
+          "targetFieldIds": [
+            "WS_L55_WS-CONTAINER-NAME"
+          ],
+          "fromExpr": "'CIPB '",
+          "toTargets": [
+            "WS-CONTAINER-NAME"
+          ]
+        },
+        {
+          "type": "MOVE",
+          "location": {
+            "startLine": 106,
+            "endLine": 106,
+            "startColumn": 11,
+            "endColumn": 38,
+            "sourceFile": "CRDTAGY2.cbl"
+          },
+          "rawText": "MOVE 'CIPCREDCHANN ' TO WS-CHANNEL-NAME",
+          "targetFieldIds": [
+            "WS_L56_WS-CHANNEL-NAME"
+          ],
+          "fromExpr": "'CIPCREDCHANN '",
+          "toTargets": [
+            "WS-CHANNEL-NAME"
+          ]
+        },
+        {
+          "type": "MOVE",
+          "location": {
+            "startLine": 107,
+            "endLine": 107,
+            "startColumn": 11,
+            "endColumn": 38,
+            "sourceFile": "CRDTAGY2.cbl"
+          },
+          "rawText": "MOVE EIBTASKN TO WS-SEED",
+          "targetFieldIds": [
+            "WS_L61_WS-SEED"
+          ],
+          "fromExpr": "EIBTASKN",
+          "toTargets": [
+            "WS-SEED"
+          ]
+        },
+        {
+          "type": "COMPUTE",
+          "location": {
+            "startLine": 109,
+            "endLine": 110,
+            "startColumn": 11,
+            "endColumn": 58,
+            "sourceFile": "CRDTAGY2.cbl"
+          },
+          "rawText": "COMPUTE WS-DELAY-AMT = ((3 - 1) * FUNCTION RANDOM(WS-SEED)) + 1",
+          "sourceFieldIds": [
+            "WS_L61_WS-SEED"
+          ],
+          "targetFieldIds": [
+            "WS_L52_WS-DELAY-AMT"
+          ],
+          "expression": "((3 - 1) * FUNCTION RANDOM(WS-SEED)) + 1",
+          "targets": [
+            "WS-DELAY-AMT"
+          ]
+        },
+        {
+          "type": "EXEC_CICS",
+          "location": {
+            "startLine": 112,
+            "endLine": 116,
+            "startColumn": 6,
+            "endColumn": 6,
+            "sourceFile": "CRDTAGY2.cbl"
+          },
+          "rawText": "*>EXECCICS EXEC CICS DELAY *>EXECCICS FOR SECONDS(WS-DELAY-AMT) *>EXECCICS RESP(WS-CICS-RESP) *>EXECCICS RESP2(WS-CICS-RESP2) *>EXECCICS END-EXEC }",
+          "subsystem": "CICS",
+          "rawPayload": "EXEC CICS DELAY FOR SECONDS(WS-DELAY-AMT) RESP(WS-CICS-RESP) RESP2(WS-CICS-RESP2) END-EXEC"
+        },
+        {
+          "type": "IF",
+          "location": {
+            "startLine": 118,
+            "endLine": 174,
+            "startColumn": 11,
+            "endColumn": 11,
+            "sourceFile": "CRDTAGY2.cbl"
+          },
+          "rawText": "IF WS-CICS-RESP NOT = DFHRESP(NORMAL) *> *> Preserve the RESP and RESP2, then set up the *> standard ABEND info before getting the applid, *> date/time etc. and linking to the Abend Handler *> program. *> INITIALIZE ABNDINFO-REC MOVE EIBRESP TO ABND-RESPCODE MOVE EIBRESP2 TO ABND-RESP2CODE *> *> Get supplemental information *> *>EXECCICS EXEC CICS ASSIGN APPLID(ABND-APPLID) *>EXECCICS END-EXEC } MOVE EIBTASKN TO ABND-TASKNO-KEY MOVE EIBTRNID TO ABND-TRANID PERFORM POPULATE-TIME-DATE MOVE WS-ORIG-DATE TO ABND-DATE STRING WS-TIME-NOW-GRP-HH DELIMITED BY SIZE, ':' DELIMITED BY SIZE, WS-TIME-NOW-GRP-MM DELIMITED BY SIZE, ':' DELIMITED BY SIZE, WS-TIME-NOW-GRP-MM DELIMITED BY SIZE INTO ABND-TIME END-STRING MOVE WS-U-TIME TO ABND-UTIME-KEY MOVE 'PLOP' TO ABND-CODE *>EXECCICS EXEC CICS ASSIGN PROGRAM(ABND-PROGRAM) *>EXECCICS END-EXEC } MOVE ZEROS TO ABND-SQLCODE STRING 'A010 - *** The delay messed up! ***' DELIMITED BY SIZE, ' EIBRESP=' DELIMITED BY SIZE, ABND-RESPCODE DELIMITED BY SIZE, ' RESP2=' DELIMITED BY SIZE, ABND-RESP2CODE DELIMITED BY SIZE INTO ABND-FREEFORM END-STRING *>EXECCICS EXEC CICS LINK PROGRAM(WS-ABEND-PGM) *>EXECCICS COMMAREA(ABNDINFO-REC) *>EXECCICS END-EXEC } DISPLAY '*** The delay messed up ! ***' *>EXECCICS EXEC CICS ABEND *>EXECCICS ABCODE('PLOP') *>EXECCICS END-EXEC } END-IF",
+          "sourceFieldIds": [
+            "WS_L48_WS-CICS-RESP"
+          ],
+          "condition": "WS-CICS-RESP NOT = DFHRESP(NORMAL)",
+          "thenStatements": [
+            {
+              "type": "INITIALIZE",
+              "location": {
+                "startLine": 125,
+                "endLine": 125,
+                "startColumn": 14,
+                "endColumn": 25,
+                "sourceFile": "CRDTAGY2.cbl"
+              },
+              "rawText": "INITIALIZE ABNDINFO-REC",
+              "targetFieldIds": [
+                "WS_L91_ABNDINFO-REC"
+              ],
+              "targets": [
+                "ABNDINFO-REC"
+              ]
+            },
+            {
+              "type": "MOVE",
+              "location": {
+                "startLine": 126,
+                "endLine": 126,
+                "startColumn": 14,
+                "endColumn": 33,
+                "sourceFile": "CRDTAGY2.cbl"
+              },
+              "rawText": "MOVE EIBRESP TO ABND-RESPCODE",
+              "targetFieldIds": [
+                "WS_L16_ABND-RESPCODE"
+              ],
+              "fromExpr": "EIBRESP",
+              "toTargets": [
+                "ABND-RESPCODE"
+              ]
+            },
+            {
+              "type": "MOVE",
+              "location": {
+                "startLine": 127,
+                "endLine": 127,
+                "startColumn": 14,
+                "endColumn": 33,
+                "sourceFile": "CRDTAGY2.cbl"
+              },
+              "rawText": "MOVE EIBRESP2 TO ABND-RESP2CODE",
+              "targetFieldIds": [
+                "WS_L18_ABND-RESP2CODE"
+              ],
+              "fromExpr": "EIBRESP2",
+              "toTargets": [
+                "ABND-RESP2CODE"
+              ]
+            },
+            {
+              "type": "EXEC_CICS",
+              "location": {
+                "startLine": 131,
+                "endLine": 132,
+                "startColumn": 6,
+                "endColumn": 6,
+                "sourceFile": "CRDTAGY2.cbl"
+              },
+              "rawText": "*>EXECCICS EXEC CICS ASSIGN APPLID(ABND-APPLID) *>EXECCICS END-EXEC }",
+              "subsystem": "CICS",
+              "rawPayload": "EXEC CICS ASSIGN APPLID(ABND-APPLID) END-EXEC"
+            },
+            {
+              "type": "MOVE",
+              "location": {
+                "startLine": 134,
+                "endLine": 134,
+                "startColumn": 14,
+                "endColumn": 33,
+                "sourceFile": "CRDTAGY2.cbl"
+              },
+              "rawText": "MOVE EIBTASKN TO ABND-TASKNO-KEY",
+              "targetFieldIds": [
+                "WS_L9_ABND-TASKNO-KEY"
+              ],
+              "fromExpr": "EIBTASKN",
+              "toTargets": [
+                "ABND-TASKNO-KEY"
+              ]
+            },
+            {
+              "type": "MOVE",
+              "location": {
+                "startLine": 135,
+                "endLine": 135,
+                "startColumn": 14,
+                "endColumn": 33,
+                "sourceFile": "CRDTAGY2.cbl"
+              },
+              "rawText": "MOVE EIBTRNID TO ABND-TRANID",
+              "targetFieldIds": [
+                "WS_L11_ABND-TRANID"
+              ],
+              "fromExpr": "EIBTRNID",
+              "toTargets": [
+                "ABND-TRANID"
+              ]
+            },
+            {
+              "type": "PERFORM",
+              "location": {
+                "startLine": 137,
+                "endLine": 137,
+                "startColumn": 14,
+                "endColumn": 22,
+                "sourceFile": "CRDTAGY2.cbl"
+              },
+              "rawText": "PERFORM POPULATE-TIME-DATE",
+              "target": "POPULATE-TIME-DATE"
+            },
+            {
+              "type": "MOVE",
+              "location": {
+                "startLine": 139,
+                "endLine": 139,
+                "startColumn": 14,
+                "endColumn": 35,
+                "sourceFile": "CRDTAGY2.cbl"
+              },
+              "rawText": "MOVE WS-ORIG-DATE TO ABND-DATE",
+              "sourceFieldIds": [
+                "WS_L66_WS-ORIG-DATE"
+              ],
+              "targetFieldIds": [
+                "WS_L12_ABND-DATE"
+              ],
+              "fromExpr": "WS-ORIG-DATE",
+              "toTargets": [
+                "ABND-DATE"
+              ]
+            },
+            {
+              "type": "STRING",
+              "location": {
+                "startLine": 140,
+                "endLine": 146,
+                "startColumn": 14,
+                "endColumn": 14,
+                "sourceFile": "CRDTAGY2.cbl"
+              },
+              "rawText": "STRING WS-TIME-NOW-GRP-HH DELIMITED BY SIZE, ':' DELIMITED BY SIZE, WS-TIME-NOW-GRP-MM DELIMITED BY SIZE, ':' DELIMITED BY SIZE, WS-TIME-NOW-GRP-MM DELIMITED BY SIZE INTO ABND-TIME END-STRING",
+              "sourceFieldIds": [
+                "WS_L85_WS-TIME-NOW-GRP-HH",
+                "WS_L86_WS-TIME-NOW-GRP-MM",
+                "WS_L13_ABND-TIME"
+              ],
+              "operation": "STRING",
+              "expression": "STRING WS-TIME-NOW-GRP-HH DELIMITED BY SIZE, ':' DELIMITED BY SIZE, WS-TIME-NOW-GRP-MM DELIMITED BY SIZE, ':' DELIMITED BY SIZE, WS-TIME-NOW-GRP-MM DELIMITED BY SIZE INTO ABND-TIME END-STRING"
+            },
+            {
+              "type": "MOVE",
+              "location": {
+                "startLine": 148,
+                "endLine": 148,
+                "startColumn": 14,
+                "endColumn": 34,
+                "sourceFile": "CRDTAGY2.cbl"
+              },
+              "rawText": "MOVE WS-U-TIME TO ABND-UTIME-KEY",
+              "sourceFieldIds": [
+                "WS_L65_WS-U-TIME"
+              ],
+              "targetFieldIds": [
+                "WS_L8_ABND-UTIME-KEY"
+              ],
+              "fromExpr": "WS-U-TIME",
+              "toTargets": [
+                "ABND-UTIME-KEY"
+              ]
+            },
+            {
+              "type": "MOVE",
+              "location": {
+                "startLine": 149,
+                "endLine": 149,
+                "startColumn": 14,
+                "endColumn": 34,
+                "sourceFile": "CRDTAGY2.cbl"
+              },
+              "rawText": "MOVE 'PLOP' TO ABND-CODE",
+              "targetFieldIds": [
+                "WS_L14_ABND-CODE"
+              ],
+              "fromExpr": "'PLOP'",
+              "toTargets": [
+                "ABND-CODE"
+              ]
+            },
+            {
+              "type": "EXEC_CICS",
+              "location": {
+                "startLine": 151,
+                "endLine": 152,
+                "startColumn": 6,
+                "endColumn": 6,
+                "sourceFile": "CRDTAGY2.cbl"
+              },
+              "rawText": "*>EXECCICS EXEC CICS ASSIGN PROGRAM(ABND-PROGRAM) *>EXECCICS END-EXEC }",
+              "subsystem": "CICS",
+              "rawPayload": "EXEC CICS ASSIGN PROGRAM(ABND-PROGRAM) END-EXEC"
+            },
+            {
+              "type": "MOVE",
+              "location": {
+                "startLine": 154,
+                "endLine": 154,
+                "startColumn": 14,
+                "endColumn": 33,
+                "sourceFile": "CRDTAGY2.cbl"
+              },
+              "rawText": "MOVE ZEROS TO ABND-SQLCODE",
+              "targetFieldIds": [
+                "WS_L20_ABND-SQLCODE"
+              ],
+              "fromExpr": "ZEROS",
+              "toTargets": [
+                "ABND-SQLCODE"
+              ]
+            },
+            {
+              "type": "STRING",
+              "location": {
+                "startLine": 156,
+                "endLine": 163,
+                "startColumn": 14,
+                "endColumn": 14,
+                "sourceFile": "CRDTAGY2.cbl"
+              },
+              "rawText": "STRING 'A010 - *** The delay messed up! ***' DELIMITED BY SIZE, ' EIBRESP=' DELIMITED BY SIZE, ABND-RESPCODE DELIMITED BY SIZE, ' RESP2=' DELIMITED BY SIZE, ABND-RESP2CODE DELIMITED BY SIZE INTO ABND-FREEFORM END-STRING",
+              "sourceFieldIds": [
+                "WS_L16_ABND-RESPCODE",
+                "WS_L18_ABND-RESP2CODE",
+                "WS_L22_ABND-FREEFORM"
+              ],
+              "operation": "STRING",
+              "expression": "STRING 'A010 - *** The delay messed up! ***' DELIMITED BY SIZE, ' EIBRESP=' DELIMITED BY SIZE, ABND-RESPCODE DELIMITED BY SIZE, ' RESP2=' DELIMITED BY SIZE, ABND-RESP2CODE DELIMITED BY SIZE INTO ABND-FREEFORM END-STRING"
+            },
+            {
+              "type": "EXEC_CICS",
+              "location": {
+                "startLine": 165,
+                "endLine": 167,
+                "startColumn": 6,
+                "endColumn": 6,
+                "sourceFile": "CRDTAGY2.cbl"
+              },
+              "rawText": "*>EXECCICS EXEC CICS LINK PROGRAM(WS-ABEND-PGM) *>EXECCICS COMMAREA(ABNDINFO-REC) *>EXECCICS END-EXEC }",
+              "subsystem": "CICS",
+              "rawPayload": "EXEC CICS LINK PROGRAM(WS-ABEND-PGM) COMMAREA(ABNDINFO-REC) END-EXEC"
+            },
+            {
+              "type": "DISPLAY",
+              "location": {
+                "startLine": 170,
+                "endLine": 170,
+                "startColumn": 14,
+                "endColumn": 22,
+                "sourceFile": "CRDTAGY2.cbl"
+              },
+              "rawText": "DISPLAY '*** The delay messed up ! ***'",
+              "operands": [
+                "'*** The delay messed up ! ***'"
+              ]
+            },
+            {
+              "type": "EXEC_CICS",
+              "location": {
+                "startLine": 171,
+                "endLine": 173,
+                "startColumn": 6,
+                "endColumn": 6,
+                "sourceFile": "CRDTAGY2.cbl"
+              },
+              "rawText": "*>EXECCICS EXEC CICS ABEND *>EXECCICS ABCODE('PLOP') *>EXECCICS END-EXEC }",
+              "subsystem": "CICS",
+              "rawPayload": "EXEC CICS ABEND ABCODE('PLOP') END-EXEC"
+            }
+          ]
+        },
+        {
+          "type": "COMPUTE",
+          "location": {
+            "startLine": 177,
+            "endLine": 177,
+            "startColumn": 11,
+            "endColumn": 48,
+            "sourceFile": "CRDTAGY2.cbl"
+          },
+          "rawText": "COMPUTE WS-CONTAINER-LEN = LENGTH OF WS-CONT-IN",
+          "sourceFieldIds": [
+            "WS_L44_WS-CONT-IN"
+          ],
+          "targetFieldIds": [
+            "WS_L58_WS-CONTAINER-LEN"
+          ],
+          "expression": "LENGTH OF WS-CONT-IN",
+          "targets": [
+            "WS-CONTAINER-LEN"
+          ]
+        },
+        {
+          "type": "EXEC_CICS",
+          "location": {
+            "startLine": 179,
+            "endLine": 185,
+            "startColumn": 6,
+            "endColumn": 6,
+            "sourceFile": "CRDTAGY2.cbl"
+          },
+          "rawText": "*>EXECCICS EXEC CICS GET CONTAINER(WS-CONTAINER-NAME) *>EXECCICS CHANNEL(WS-CHANNEL-NAME) *>EXECCICS INTO(WS-CONT-IN) *>EXECCICS FLENGTH(WS-CONTAINER-LEN) *>EXECCICS RESP(WS-CICS-RESP) *>EXECCICS RESP2(WS-CICS-RESP2) *>EXECCICS END-EXEC }",
+          "subsystem": "CICS",
+          "rawPayload": "EXEC CICS GET CONTAINER(WS-CONTAINER-NAME) CHANNEL(WS-CHANNEL-NAME) INTO(WS-CONT-IN) FLENGTH(WS-CONTAINER-LEN) RESP(WS-CICS-RESP) RESP2(WS-CICS-RESP2) END-EXEC"
+        },
+        {
+          "type": "IF",
+          "location": {
+            "startLine": 187,
+            "endLine": 194,
+            "startColumn": 11,
+            "endColumn": 11,
+            "sourceFile": "CRDTAGY2.cbl"
+          },
+          "rawText": "IF WS-CICS-RESP NOT = DFHRESP(NORMAL) DISPLAY 'CRDTAGY2 - UNABLE TO GET CONTAINER. RESP=' WS-CICS-RESP ', RESP2=' WS-CICS-RESP2 DISPLAY 'CONTAINER=' WS-CONTAINER-NAME ' CHANNEL=' WS-CHANNEL-NAME ' FLENGTH=' WS-CONTAINER-LEN PERFORM GET-ME-OUT-OF-HERE END-IF",
+          "sourceFieldIds": [
+            "WS_L48_WS-CICS-RESP"
+          ],
+          "condition": "WS-CICS-RESP NOT = DFHRESP(NORMAL)",
+          "thenStatements": [
+            {
+              "type": "DISPLAY",
+              "location": {
+                "startLine": 188,
+                "endLine": 189,
+                "startColumn": 14,
+                "endColumn": 41,
+                "sourceFile": "CRDTAGY2.cbl"
+              },
+              "rawText": "DISPLAY 'CRDTAGY2 - UNABLE TO GET CONTAINER. RESP=' WS-CICS-RESP ', RESP2=' WS-CICS-RESP2",
+              "sourceFieldIds": [
+                "WS_L48_WS-CICS-RESP",
+                "WS_L49_WS-CICS-RESP2"
+              ],
+              "operands": [
+                "'CRDTAGY2 - UNABLE TO GET CONTAINER. RESP='",
+                "WS-CICS-RESP",
+                "', RESP2='",
+                "WS-CICS-RESP2"
+              ]
+            },
+            {
+              "type": "DISPLAY",
+              "location": {
+                "startLine": 190,
+                "endLine": 192,
+                "startColumn": 14,
+                "endColumn": 23,
+                "sourceFile": "CRDTAGY2.cbl"
+              },
+              "rawText": "DISPLAY 'CONTAINER=' WS-CONTAINER-NAME ' CHANNEL=' WS-CHANNEL-NAME ' FLENGTH=' WS-CONTAINER-LEN",
+              "sourceFieldIds": [
+                "WS_L55_WS-CONTAINER-NAME",
+                "WS_L56_WS-CHANNEL-NAME",
+                "WS_L58_WS-CONTAINER-LEN"
+              ],
+              "operands": [
+                "'CONTAINER='",
+                "WS-CONTAINER-NAME",
+                "' CHANNEL='",
+                "WS-CHANNEL-NAME",
+                "' FLENGTH='",
+                "WS-CONTAINER-LEN"
+              ]
+            },
+            {
+              "type": "PERFORM",
+              "location": {
+                "startLine": 193,
+                "endLine": 193,
+                "startColumn": 14,
+                "endColumn": 22,
+                "sourceFile": "CRDTAGY2.cbl"
+              },
+              "rawText": "PERFORM GET-ME-OUT-OF-HERE",
+              "target": "GET-ME-OUT-OF-HERE"
+            }
+          ]
+        },
+        {
+          "type": "COMPUTE",
+          "location": {
+            "startLine": 201,
+            "endLine": 202,
+            "startColumn": 11,
+            "endColumn": 49,
+            "sourceFile": "CRDTAGY2.cbl"
+          },
+          "rawText": "COMPUTE WS-NEW-CREDSCORE = ((999 - 1) * FUNCTION RANDOM) + 1",
+          "targetFieldIds": [
+            "WS_L60_WS-NEW-CREDSCORE"
+          ],
+          "expression": "((999 - 1) * FUNCTION RANDOM) + 1",
+          "targets": [
+            "WS-NEW-CREDSCORE"
+          ]
+        },
+        {
+          "type": "MOVE",
+          "location": {
+            "startLine": 204,
+            "endLine": 205,
+            "startColumn": 11,
+            "endColumn": 17,
+            "sourceFile": "CRDTAGY2.cbl"
+          },
+          "rawText": "MOVE WS-NEW-CREDSCORE TO CUSTOMER-CREDIT-SCORE OF WS-CONT-IN",
+          "sourceFieldIds": [
+            "WS_L60_WS-NEW-CREDSCORE"
+          ],
+          "targetFieldIds": [
+            "WS_L36_CUSTOMER-CREDIT-SCORE"
+          ],
+          "fromExpr": "WS-NEW-CREDSCORE",
+          "toTargets": [
+            "CUSTOMER-CREDIT-SCORE"
+          ]
+        },
+        {
+          "type": "COMPUTE",
+          "location": {
+            "startLine": 210,
+            "endLine": 210,
+            "startColumn": 11,
+            "endColumn": 48,
+            "sourceFile": "CRDTAGY2.cbl"
+          },
+          "rawText": "COMPUTE WS-CONTAINER-LEN = LENGTH OF WS-CONT-IN",
+          "sourceFieldIds": [
+            "WS_L44_WS-CONT-IN"
+          ],
+          "targetFieldIds": [
+            "WS_L58_WS-CONTAINER-LEN"
+          ],
+          "expression": "LENGTH OF WS-CONT-IN",
+          "targets": [
+            "WS-CONTAINER-LEN"
+          ]
+        },
+        {
+          "type": "EXEC_CICS",
+          "location": {
+            "startLine": 212,
+            "endLine": 218,
+            "startColumn": 6,
+            "endColumn": 6,
+            "sourceFile": "CRDTAGY2.cbl"
+          },
+          "rawText": "*>EXECCICS EXEC CICS PUT CONTAINER(WS-CONTAINER-NAME) *>EXECCICS FROM(WS-CONT-IN) *>EXECCICS FLENGTH(WS-CONTAINER-LEN) *>EXECCICS CHANNEL(WS-CHANNEL-NAME) *>EXECCICS RESP(WS-CICS-RESP) *>EXECCICS RESP2(WS-CICS-RESP2) *>EXECCICS END-EXEC }",
+          "subsystem": "CICS",
+          "rawPayload": "EXEC CICS PUT CONTAINER(WS-CONTAINER-NAME) FROM(WS-CONT-IN) FLENGTH(WS-CONTAINER-LEN) CHANNEL(WS-CHANNEL-NAME) RESP(WS-CICS-RESP) RESP2(WS-CICS-RESP2) END-EXEC"
+        },
+        {
+          "type": "IF",
+          "location": {
+            "startLine": 220,
+            "endLine": 227,
+            "startColumn": 11,
+            "endColumn": 11,
+            "sourceFile": "CRDTAGY2.cbl"
+          },
+          "rawText": "IF WS-CICS-RESP NOT = DFHRESP(NORMAL) DISPLAY 'CRDTAGY2 - UNABLE TO PUT CONTAINER. RESP=' WS-CICS-RESP ', RESP2=' WS-CICS-RESP2 DISPLAY 'CONTAINER=' WS-CONTAINER-NAME ' CHANNEL=' WS-CHANNEL-NAME ' FLENGTH=' WS-CONTAINER-LEN PERFORM GET-ME-OUT-OF-HERE END-IF",
+          "sourceFieldIds": [
+            "WS_L48_WS-CICS-RESP"
+          ],
+          "condition": "WS-CICS-RESP NOT = DFHRESP(NORMAL)",
+          "thenStatements": [
+            {
+              "type": "DISPLAY",
+              "location": {
+                "startLine": 221,
+                "endLine": 222,
+                "startColumn": 14,
+                "endColumn": 41,
+                "sourceFile": "CRDTAGY2.cbl"
+              },
+              "rawText": "DISPLAY 'CRDTAGY2 - UNABLE TO PUT CONTAINER. RESP=' WS-CICS-RESP ', RESP2=' WS-CICS-RESP2",
+              "sourceFieldIds": [
+                "WS_L48_WS-CICS-RESP",
+                "WS_L49_WS-CICS-RESP2"
+              ],
+              "operands": [
+                "'CRDTAGY2 - UNABLE TO PUT CONTAINER. RESP='",
+                "WS-CICS-RESP",
+                "', RESP2='",
+                "WS-CICS-RESP2"
+              ]
+            },
+            {
+              "type": "DISPLAY",
+              "location": {
+                "startLine": 223,
+                "endLine": 225,
+                "startColumn": 14,
+                "endColumn": 20,
+                "sourceFile": "CRDTAGY2.cbl"
+              },
+              "rawText": "DISPLAY 'CONTAINER=' WS-CONTAINER-NAME ' CHANNEL=' WS-CHANNEL-NAME ' FLENGTH=' WS-CONTAINER-LEN",
+              "sourceFieldIds": [
+                "WS_L55_WS-CONTAINER-NAME",
+                "WS_L56_WS-CHANNEL-NAME",
+                "WS_L58_WS-CONTAINER-LEN"
+              ],
+              "operands": [
+                "'CONTAINER='",
+                "WS-CONTAINER-NAME",
+                "' CHANNEL='",
+                "WS-CHANNEL-NAME",
+                "' FLENGTH='",
+                "WS-CONTAINER-LEN"
+              ]
+            },
+            {
+              "type": "PERFORM",
+              "location": {
+                "startLine": 226,
+                "endLine": 226,
+                "startColumn": 14,
+                "endColumn": 22,
+                "sourceFile": "CRDTAGY2.cbl"
+              },
+              "rawText": "PERFORM GET-ME-OUT-OF-HERE",
+              "target": "GET-ME-OUT-OF-HERE"
+            }
+          ]
+        },
+        {
+          "type": "PERFORM",
+          "location": {
+            "startLine": 229,
+            "endLine": 229,
+            "startColumn": 11,
+            "endColumn": 19,
+            "sourceFile": "CRDTAGY2.cbl"
+          },
+          "rawText": "PERFORM GET-ME-OUT-OF-HERE",
+          "target": "GET-ME-OUT-OF-HERE"
+        }
+      ]
+    },
+    {
+      "name": "A999",
+      "sectionParent": "PREMIERE",
+      "location": {
+        "startLine": 231,
+        "endLine": 232,
+        "startColumn": 7,
+        "endColumn": 15,
+        "sourceFile": "CRDTAGY2.cbl"
+      },
+      "fallthroughSuccessor": "GMOFH010",
+      "statements": [
+        {
+          "type": "EXIT",
+          "location": {
+            "startLine": 232,
+            "endLine": 232,
+            "startColumn": 11,
+            "endColumn": 11,
+            "sourceFile": "CRDTAGY2.cbl"
+          },
+          "rawText": "EXIT",
+          "operation": "EXIT"
+        }
+      ]
+    },
+    {
+      "name": "GMOFH010",
+      "sectionParent": "GET-ME-OUT-OF-HERE",
+      "location": {
+        "startLine": 236,
+        "endLine": 239,
+        "startColumn": 7,
+        "endColumn": 27,
+        "sourceFile": "CRDTAGY2.cbl"
+      },
+      "fallthroughSuccessor": "GMOFH999",
+      "statements": [
+        {
+          "type": "EXEC_CICS",
+          "location": {
+            "startLine": 238,
+            "endLine": 239,
+            "startColumn": 6,
+            "endColumn": 6,
+            "sourceFile": "CRDTAGY2.cbl"
+          },
+          "rawText": "*>EXECCICS EXEC CICS RETURN *>EXECCICS END-EXEC }",
+          "subsystem": "CICS",
+          "rawPayload": "EXEC CICS RETURN END-EXEC"
+        }
+      ]
+    },
+    {
+      "name": "GMOFH999",
+      "sectionParent": "GET-ME-OUT-OF-HERE",
+      "location": {
+        "startLine": 241,
+        "endLine": 242,
+        "startColumn": 7,
+        "endColumn": 15,
+        "sourceFile": "CRDTAGY2.cbl"
+      },
+      "fallthroughSuccessor": "PTD010",
+      "statements": [
+        {
+          "type": "EXIT",
+          "location": {
+            "startLine": 242,
+            "endLine": 242,
+            "startColumn": 11,
+            "endColumn": 11,
+            "sourceFile": "CRDTAGY2.cbl"
+          },
+          "rawText": "EXIT",
+          "operation": "EXIT"
+        }
+      ]
+    },
+    {
+      "name": "PTD010",
+      "sectionParent": "POPULATE-TIME-DATE",
+      "location": {
+        "startLine": 246,
+        "endLine": 257,
+        "startColumn": 7,
+        "endColumn": 27,
+        "sourceFile": "CRDTAGY2.cbl"
+      },
+      "fallthroughSuccessor": "PTD999",
+      "statements": [
+        {
+          "type": "EXEC_CICS",
+          "location": {
+            "startLine": 248,
+            "endLine": 250,
+            "startColumn": 6,
+            "endColumn": 6,
+            "sourceFile": "CRDTAGY2.cbl"
+          },
+          "rawText": "*>EXECCICS EXEC CICS ASKTIME *>EXECCICS ABSTIME(WS-U-TIME) *>EXECCICS END-EXEC }",
+          "subsystem": "CICS",
+          "rawPayload": "EXEC CICS ASKTIME ABSTIME(WS-U-TIME) END-EXEC"
+        },
+        {
+          "type": "EXEC_CICS",
+          "location": {
+            "startLine": 252,
+            "endLine": 257,
+            "startColumn": 6,
+            "endColumn": 6,
+            "sourceFile": "CRDTAGY2.cbl"
+          },
+          "rawText": "*>EXECCICS EXEC CICS FORMATTIME *>EXECCICS ABSTIME(WS-U-TIME) *>EXECCICS DDMMYYYY(WS-ORIG-DATE) *>EXECCICS TIME(WS-TIME-NOW) *>EXECCICS DATESEP *>EXECCICS END-EXEC }",
+          "subsystem": "CICS",
+          "rawPayload": "EXEC CICS FORMATTIME ABSTIME(WS-U-TIME) DDMMYYYY(WS-ORIG-DATE) TIME(WS-TIME-NOW) DATESEP END-EXEC"
+        }
+      ]
+    },
+    {
+      "name": "PTD999",
+      "sectionParent": "POPULATE-TIME-DATE",
+      "location": {
+        "startLine": 259,
+        "endLine": 260,
+        "startColumn": 7,
+        "endColumn": 15,
+        "sourceFile": "CRDTAGY2.cbl"
+      },
+      "statements": [
+        {
+          "type": "EXIT",
+          "location": {
+            "startLine": 260,
+            "endLine": 260,
+            "startColumn": 11,
+            "endColumn": 11,
+            "sourceFile": "CRDTAGY2.cbl"
+          },
+          "rawText": "EXIT",
+          "operation": "EXIT"
+        }
+      ]
+    }
+  ],
+  "asgAuditSummary": {
+    "totalAsgDataEntries": 76,
+    "totalAsgLevel88Entries": 4,
+    "totalAsgParagraphs": 6,
+    "totalAsgStatements": 21,
+    "totalAsgCalls": 43,
+    "asgVariableNames": [
+      "SORTCODE",
+      "WS-CONT-IN",
+      "CUSTOMER-RECORD",
+      "CUSTOMER-EYECATCHER",
+      "CUSTOMER-KEY",
+      "CUSTOMER-SORTCODE",
+      "CUSTOMER-NUMBER",
+      "CUSTOMER-NAME",
+      "CUSTOMER-TITLE",
+      "CUSTOMER-FIRST-NAME",
+      "CUSTOMER-LAST-NAME",
+      "CUSTOMER-DOB",
+      "CUSTOMER-DOB-DAY",
+      "CUSTOMER-DOB-MONTH",
+      "CUSTOMER-DOB-YEAR",
+      "CUSTOMER-PHONE",
+      "CUSTOMER-ADDRESS",
+      "CUSTOMER-ADDR-LINE1",
+      "CUSTOMER-ADDR-LINE2",
+      "CUSTOMER-CITY",
+      "CUSTOMER-POSTCODE",
+      "CUSTOMER-COUNTRY",
+      "CUSTOMER-STATUS",
+      "CUSTOMER-CREATED-DATE",
+      "CUSTOMER-CREATED-DAY",
+      "CUSTOMER-CREATED-MONTH",
+      "CUSTOMER-CREATED-YEAR",
+      "CUSTOMER-CREDIT-SCORE",
+      "CUSTOMER-CS-REVIEW-DATE",
+      "CUSTOMER-CS-REVIEW-DAY",
+      "CUSTOMER-CS-REVIEW-MONTH",
+      "CUSTOMER-CS-REVIEW-YEAR",
+      "WS-CICS-WORK-AREA",
+      "WS-CICS-RESP",
+      "WS-CICS-RESP2",
+      "WS-DELAY-AMT",
+      "WS-CONTAINER-NAME",
+      "WS-CHANNEL-NAME",
+      "WS-CONTAINER-LEN",
+      "WS-NEW-CREDSCORE",
+      "WS-SEED",
+      "WS-U-TIME",
+      "WS-ORIG-DATE",
+      "WS-ORIG-DATE-GRP",
+      "WS-ORIG-DATE-DD",
+      "WS-ORIG-DATE-MM",
+      "WS-ORIG-DATE-YYYY",
+      "WS-ORIG-DATE-GRP-X",
+      "WS-ORIG-DATE-DD-X",
+      "WS-ORIG-DATE-MM-X",
+      "WS-ORIG-DATE-YYYY-X",
+      "WS-TIME-DATA",
+      "WS-TIME-NOW",
+      "WS-TIME-NOW-GRP",
+      "WS-TIME-NOW-GRP-HH",
+      "WS-TIME-NOW-GRP-MM",
+      "WS-TIME-NOW-GRP-SS",
+      "WS-ABEND-PGM",
+      "ABNDINFO-REC",
+      "ABND-VSAM-KEY",
+      "ABND-UTIME-KEY",
+      "ABND-TASKNO-KEY",
+      "ABND-APPLID",
+      "ABND-TRANID",
+      "ABND-DATE",
+      "ABND-TIME",
+      "ABND-CODE",
+      "ABND-PROGRAM",
+      "ABND-RESPCODE",
+      "ABND-RESP2CODE",
+      "ABND-SQLCODE",
+      "ABND-FREEFORM"
+    ],
+    "asgLevel88Names": [
+      "CUSTOMER-EYECATCHER-VALUE",
+      "CUSTOMER-STATUS-ACTIVE",
+      "CUSTOMER-STATUS-INACTIVE",
+      "CUSTOMER-STATUS-SUSPENDED"
+    ]
+  }
+}

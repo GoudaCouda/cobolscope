@@ -1,0 +1,5127 @@
+{
+  "programId": "UPDCUST",
+  "author": "*>CE Jon Collett. *>CE",
+  "format": "FIXED",
+  "dataDictionary": {
+    "workingStorageSection": [
+      {
+        "id": "WS_L7_SORTCODE",
+        "qualifiedName": "SORTCODE",
+        "level": 77,
+        "name": "SORTCODE",
+        "pic": "9(6)",
+        "usage": "DISPLAY",
+        "value": "987654",
+        "logicalType": "Numeric Display (6 digits)",
+        "byteOffset": 0,
+        "relativeOffset": 0,
+        "byteLength": 6,
+        "elementByteLength": 6,
+        "location": {
+          "startLine": 7,
+          "endLine": 7,
+          "startColumn": 7,
+          "endColumn": 50,
+          "sourceFile": "SORTCODE.cpy"
+        }
+      },
+      {
+        "id": "WS_L48_SYSIDERR-RETRY",
+        "qualifiedName": "SYSIDERR-RETRY",
+        "level": 77,
+        "name": "SYSIDERR-RETRY",
+        "pic": "999",
+        "usage": "DISPLAY",
+        "logicalType": "Numeric Display (3 digits)",
+        "byteOffset": 6,
+        "relativeOffset": 0,
+        "byteLength": 3,
+        "elementByteLength": 3,
+        "location": {
+          "startLine": 48,
+          "endLine": 48,
+          "startColumn": 7,
+          "endColumn": 46,
+          "sourceFile": "UPDCUST.cbl"
+        }
+      },
+      {
+        "id": "WS_L51_FILLER",
+        "qualifiedName": "FILLER",
+        "level": 1,
+        "name": "FILLER",
+        "logicalType": "Elementary",
+        "byteOffset": 9,
+        "relativeOffset": 0,
+        "byteLength": 0,
+        "elementByteLength": 0,
+        "location": {
+          "startLine": 51,
+          "endLine": 53,
+          "startColumn": 6,
+          "endColumn": 26,
+          "sourceFile": "UPDCUST.cbl"
+        }
+      },
+      {
+        "id": "WS_L56_HOST-CUSTOMER-ROW",
+        "qualifiedName": "HOST-CUSTOMER-ROW",
+        "level": 1,
+        "name": "HOST-CUSTOMER-ROW",
+        "usage": "DISPLAY",
+        "logicalType": "Group",
+        "byteOffset": 9,
+        "relativeOffset": 0,
+        "byteLength": 384,
+        "elementByteLength": 384,
+        "children": [
+          {
+            "id": "WS_L57_HV-CUSTOMER-EYECATCHER",
+            "qualifiedName": "HOST-CUSTOMER-ROW.HV-CUSTOMER-EYECATCHER",
+            "level": 3,
+            "name": "HV-CUSTOMER-EYECATCHER",
+            "pic": "X(4)",
+            "usage": "DISPLAY",
+            "logicalType": "Alphanumeric (4 chars)",
+            "byteOffset": 9,
+            "relativeOffset": 0,
+            "byteLength": 4,
+            "elementByteLength": 4,
+            "location": {
+              "startLine": 57,
+              "endLine": 57,
+              "startColumn": 10,
+              "endColumn": 48,
+              "sourceFile": "UPDCUST.cbl"
+            }
+          },
+          {
+            "id": "WS_L58_HV-CUSTOMER-SORTCODE",
+            "qualifiedName": "HOST-CUSTOMER-ROW.HV-CUSTOMER-SORTCODE",
+            "level": 3,
+            "name": "HV-CUSTOMER-SORTCODE",
+            "pic": "X(6)",
+            "usage": "DISPLAY",
+            "logicalType": "Alphanumeric (6 chars)",
+            "byteOffset": 13,
+            "relativeOffset": 4,
+            "byteLength": 6,
+            "elementByteLength": 6,
+            "location": {
+              "startLine": 58,
+              "endLine": 58,
+              "startColumn": 10,
+              "endColumn": 48,
+              "sourceFile": "UPDCUST.cbl"
+            }
+          },
+          {
+            "id": "WS_L59_HV-CUSTOMER-NUMBER",
+            "qualifiedName": "HOST-CUSTOMER-ROW.HV-CUSTOMER-NUMBER",
+            "level": 3,
+            "name": "HV-CUSTOMER-NUMBER",
+            "pic": "X(10)",
+            "usage": "DISPLAY",
+            "logicalType": "Alphanumeric (10 chars)",
+            "byteOffset": 19,
+            "relativeOffset": 10,
+            "byteLength": 10,
+            "elementByteLength": 10,
+            "location": {
+              "startLine": 59,
+              "endLine": 59,
+              "startColumn": 10,
+              "endColumn": 49,
+              "sourceFile": "UPDCUST.cbl"
+            }
+          },
+          {
+            "id": "WS_L60_HV-CUSTOMER-TITLE",
+            "qualifiedName": "HOST-CUSTOMER-ROW.HV-CUSTOMER-TITLE",
+            "level": 3,
+            "name": "HV-CUSTOMER-TITLE",
+            "pic": "X(10)",
+            "usage": "DISPLAY",
+            "logicalType": "Alphanumeric (10 chars)",
+            "byteOffset": 29,
+            "relativeOffset": 20,
+            "byteLength": 10,
+            "elementByteLength": 10,
+            "location": {
+              "startLine": 60,
+              "endLine": 60,
+              "startColumn": 10,
+              "endColumn": 49,
+              "sourceFile": "UPDCUST.cbl"
+            }
+          },
+          {
+            "id": "WS_L61_HV-CUSTOMER-FIRST-NAME",
+            "qualifiedName": "HOST-CUSTOMER-ROW.HV-CUSTOMER-FIRST-NAME",
+            "level": 3,
+            "name": "HV-CUSTOMER-FIRST-NAME",
+            "pic": "X(50)",
+            "usage": "DISPLAY",
+            "logicalType": "Alphanumeric (50 chars)",
+            "byteOffset": 39,
+            "relativeOffset": 30,
+            "byteLength": 50,
+            "elementByteLength": 50,
+            "location": {
+              "startLine": 61,
+              "endLine": 61,
+              "startColumn": 10,
+              "endColumn": 49,
+              "sourceFile": "UPDCUST.cbl"
+            }
+          },
+          {
+            "id": "WS_L62_HV-CUSTOMER-LAST-NAME",
+            "qualifiedName": "HOST-CUSTOMER-ROW.HV-CUSTOMER-LAST-NAME",
+            "level": 3,
+            "name": "HV-CUSTOMER-LAST-NAME",
+            "pic": "X(50)",
+            "usage": "DISPLAY",
+            "logicalType": "Alphanumeric (50 chars)",
+            "byteOffset": 89,
+            "relativeOffset": 80,
+            "byteLength": 50,
+            "elementByteLength": 50,
+            "location": {
+              "startLine": 62,
+              "endLine": 62,
+              "startColumn": 10,
+              "endColumn": 49,
+              "sourceFile": "UPDCUST.cbl"
+            }
+          },
+          {
+            "id": "WS_L63_HV-CUSTOMER-DOB",
+            "qualifiedName": "HOST-CUSTOMER-ROW.HV-CUSTOMER-DOB",
+            "level": 3,
+            "name": "HV-CUSTOMER-DOB",
+            "pic": "S9(9)",
+            "usage": "COMP",
+            "logicalType": "Signed Integer (32-bit Binary)",
+            "byteOffset": 139,
+            "relativeOffset": 130,
+            "byteLength": 4,
+            "elementByteLength": 4,
+            "location": {
+              "startLine": 63,
+              "endLine": 63,
+              "startColumn": 10,
+              "endColumn": 54,
+              "sourceFile": "UPDCUST.cbl"
+            }
+          },
+          {
+            "id": "WS_L64_HV-CUSTOMER-PHONE",
+            "qualifiedName": "HOST-CUSTOMER-ROW.HV-CUSTOMER-PHONE",
+            "level": 3,
+            "name": "HV-CUSTOMER-PHONE",
+            "pic": "X(20)",
+            "usage": "DISPLAY",
+            "logicalType": "Alphanumeric (20 chars)",
+            "byteOffset": 143,
+            "relativeOffset": 134,
+            "byteLength": 20,
+            "elementByteLength": 20,
+            "location": {
+              "startLine": 64,
+              "endLine": 64,
+              "startColumn": 10,
+              "endColumn": 49,
+              "sourceFile": "UPDCUST.cbl"
+            }
+          },
+          {
+            "id": "WS_L65_HV-CUSTOMER-ADDR-LINE1",
+            "qualifiedName": "HOST-CUSTOMER-ROW.HV-CUSTOMER-ADDR-LINE1",
+            "level": 3,
+            "name": "HV-CUSTOMER-ADDR-LINE1",
+            "pic": "X(50)",
+            "usage": "DISPLAY",
+            "logicalType": "Alphanumeric (50 chars)",
+            "byteOffset": 163,
+            "relativeOffset": 154,
+            "byteLength": 50,
+            "elementByteLength": 50,
+            "location": {
+              "startLine": 65,
+              "endLine": 65,
+              "startColumn": 10,
+              "endColumn": 49,
+              "sourceFile": "UPDCUST.cbl"
+            }
+          },
+          {
+            "id": "WS_L66_HV-CUSTOMER-ADDR-LINE2",
+            "qualifiedName": "HOST-CUSTOMER-ROW.HV-CUSTOMER-ADDR-LINE2",
+            "level": 3,
+            "name": "HV-CUSTOMER-ADDR-LINE2",
+            "pic": "X(50)",
+            "usage": "DISPLAY",
+            "logicalType": "Alphanumeric (50 chars)",
+            "byteOffset": 213,
+            "relativeOffset": 204,
+            "byteLength": 50,
+            "elementByteLength": 50,
+            "location": {
+              "startLine": 66,
+              "endLine": 66,
+              "startColumn": 10,
+              "endColumn": 49,
+              "sourceFile": "UPDCUST.cbl"
+            }
+          },
+          {
+            "id": "WS_L67_HV-CUSTOMER-CITY",
+            "qualifiedName": "HOST-CUSTOMER-ROW.HV-CUSTOMER-CITY",
+            "level": 3,
+            "name": "HV-CUSTOMER-CITY",
+            "pic": "X(50)",
+            "usage": "DISPLAY",
+            "logicalType": "Alphanumeric (50 chars)",
+            "byteOffset": 263,
+            "relativeOffset": 254,
+            "byteLength": 50,
+            "elementByteLength": 50,
+            "location": {
+              "startLine": 67,
+              "endLine": 67,
+              "startColumn": 10,
+              "endColumn": 49,
+              "sourceFile": "UPDCUST.cbl"
+            }
+          },
+          {
+            "id": "WS_L68_HV-CUSTOMER-POSTCODE",
+            "qualifiedName": "HOST-CUSTOMER-ROW.HV-CUSTOMER-POSTCODE",
+            "level": 3,
+            "name": "HV-CUSTOMER-POSTCODE",
+            "pic": "X(10)",
+            "usage": "DISPLAY",
+            "logicalType": "Alphanumeric (10 chars)",
+            "byteOffset": 313,
+            "relativeOffset": 304,
+            "byteLength": 10,
+            "elementByteLength": 10,
+            "location": {
+              "startLine": 68,
+              "endLine": 68,
+              "startColumn": 10,
+              "endColumn": 49,
+              "sourceFile": "UPDCUST.cbl"
+            }
+          },
+          {
+            "id": "WS_L69_HV-CUSTOMER-COUNTRY",
+            "qualifiedName": "HOST-CUSTOMER-ROW.HV-CUSTOMER-COUNTRY",
+            "level": 3,
+            "name": "HV-CUSTOMER-COUNTRY",
+            "pic": "X(50)",
+            "usage": "DISPLAY",
+            "logicalType": "Alphanumeric (50 chars)",
+            "byteOffset": 323,
+            "relativeOffset": 314,
+            "byteLength": 50,
+            "elementByteLength": 50,
+            "location": {
+              "startLine": 69,
+              "endLine": 69,
+              "startColumn": 10,
+              "endColumn": 49,
+              "sourceFile": "UPDCUST.cbl"
+            }
+          },
+          {
+            "id": "WS_L70_HV-CUSTOMER-STATUS",
+            "qualifiedName": "HOST-CUSTOMER-ROW.HV-CUSTOMER-STATUS",
+            "level": 3,
+            "name": "HV-CUSTOMER-STATUS",
+            "pic": "X(10)",
+            "usage": "DISPLAY",
+            "logicalType": "Alphanumeric (10 chars)",
+            "byteOffset": 373,
+            "relativeOffset": 364,
+            "byteLength": 10,
+            "elementByteLength": 10,
+            "location": {
+              "startLine": 70,
+              "endLine": 70,
+              "startColumn": 10,
+              "endColumn": 49,
+              "sourceFile": "UPDCUST.cbl"
+            }
+          },
+          {
+            "id": "WS_L71_HV-CUSTOMER-CREATE-DATE",
+            "qualifiedName": "HOST-CUSTOMER-ROW.HV-CUSTOMER-CREATE-DATE",
+            "level": 3,
+            "name": "HV-CUSTOMER-CREATE-DATE",
+            "pic": "S9(9)",
+            "usage": "COMP",
+            "logicalType": "Signed Integer (32-bit Binary)",
+            "byteOffset": 383,
+            "relativeOffset": 374,
+            "byteLength": 4,
+            "elementByteLength": 4,
+            "location": {
+              "startLine": 71,
+              "endLine": 71,
+              "startColumn": 10,
+              "endColumn": 54,
+              "sourceFile": "UPDCUST.cbl"
+            }
+          },
+          {
+            "id": "WS_L72_HV-CUSTOMER-CREDIT-SCORE",
+            "qualifiedName": "HOST-CUSTOMER-ROW.HV-CUSTOMER-CREDIT-SCORE",
+            "level": 3,
+            "name": "HV-CUSTOMER-CREDIT-SCORE",
+            "pic": "S9(4)",
+            "usage": "COMP",
+            "logicalType": "Signed SmallInt (16-bit Binary)",
+            "byteOffset": 387,
+            "relativeOffset": 378,
+            "byteLength": 2,
+            "elementByteLength": 2,
+            "location": {
+              "startLine": 72,
+              "endLine": 72,
+              "startColumn": 10,
+              "endColumn": 54,
+              "sourceFile": "UPDCUST.cbl"
+            }
+          },
+          {
+            "id": "WS_L73_HV-CUSTOMER-CS-REVIEW-DATE",
+            "qualifiedName": "HOST-CUSTOMER-ROW.HV-CUSTOMER-CS-REVIEW-DATE",
+            "level": 3,
+            "name": "HV-CUSTOMER-CS-REVIEW-DATE",
+            "pic": "S9(9)",
+            "usage": "COMP",
+            "logicalType": "Signed Integer (32-bit Binary)",
+            "byteOffset": 389,
+            "relativeOffset": 380,
+            "byteLength": 4,
+            "elementByteLength": 4,
+            "location": {
+              "startLine": 73,
+              "endLine": 73,
+              "startColumn": 10,
+              "endColumn": 54,
+              "sourceFile": "UPDCUST.cbl"
+            }
+          }
+        ],
+        "location": {
+          "startLine": 56,
+          "endLine": 56,
+          "startColumn": 7,
+          "endColumn": 27,
+          "sourceFile": "UPDCUST.cbl"
+        }
+      },
+      {
+        "id": "WS_L76_FILLER",
+        "qualifiedName": "FILLER",
+        "level": 1,
+        "name": "FILLER",
+        "logicalType": "Elementary",
+        "byteOffset": 393,
+        "relativeOffset": 0,
+        "byteLength": 0,
+        "elementByteLength": 0,
+        "location": {
+          "startLine": 76,
+          "endLine": 78,
+          "startColumn": 6,
+          "endColumn": 26,
+          "sourceFile": "UPDCUST.cbl"
+        }
+      },
+      {
+        "id": "WS_L80_SQLCODE-DISPLAY",
+        "qualifiedName": "SQLCODE-DISPLAY",
+        "level": 1,
+        "name": "SQLCODE-DISPLAY",
+        "pic": "S9(8)",
+        "usage": "DISPLAY",
+        "logicalType": "Signed Numeric Display (8 digits)",
+        "byteOffset": 393,
+        "relativeOffset": 0,
+        "byteLength": 8,
+        "elementByteLength": 8,
+        "isSignSeparate": true,
+        "location": {
+          "startLine": 80,
+          "endLine": 81,
+          "startColumn": 7,
+          "endColumn": 34,
+          "sourceFile": "UPDCUST.cbl"
+        }
+      },
+      {
+        "id": "WS_L83_WS-CICS-WORK-AREA",
+        "qualifiedName": "WS-CICS-WORK-AREA",
+        "level": 1,
+        "name": "WS-CICS-WORK-AREA",
+        "usage": "DISPLAY",
+        "logicalType": "Group",
+        "byteOffset": 401,
+        "relativeOffset": 0,
+        "byteLength": 8,
+        "elementByteLength": 8,
+        "children": [
+          {
+            "id": "WS_L84_WS-CICS-RESP",
+            "qualifiedName": "WS-CICS-WORK-AREA.WS-CICS-RESP",
+            "level": 3,
+            "name": "WS-CICS-RESP",
+            "pic": "S9(8)",
+            "usage": "COMP",
+            "logicalType": "Signed Integer (32-bit Binary)",
+            "byteOffset": 401,
+            "relativeOffset": 0,
+            "byteLength": 4,
+            "elementByteLength": 4,
+            "location": {
+              "startLine": 84,
+              "endLine": 84,
+              "startColumn": 10,
+              "endColumn": 53,
+              "sourceFile": "UPDCUST.cbl"
+            }
+          },
+          {
+            "id": "WS_L85_WS-CICS-RESP2",
+            "qualifiedName": "WS-CICS-WORK-AREA.WS-CICS-RESP2",
+            "level": 3,
+            "name": "WS-CICS-RESP2",
+            "pic": "S9(8)",
+            "usage": "COMP",
+            "logicalType": "Signed Integer (32-bit Binary)",
+            "byteOffset": 405,
+            "relativeOffset": 4,
+            "byteLength": 4,
+            "elementByteLength": 4,
+            "location": {
+              "startLine": 85,
+              "endLine": 85,
+              "startColumn": 10,
+              "endColumn": 53,
+              "sourceFile": "UPDCUST.cbl"
+            }
+          }
+        ],
+        "location": {
+          "startLine": 83,
+          "endLine": 83,
+          "startColumn": 7,
+          "endColumn": 27,
+          "sourceFile": "UPDCUST.cbl"
+        }
+      }
+    ],
+    "linkageSection": [
+      {
+        "id": "LK_L166_DFHCOMMAREA",
+        "qualifiedName": "DFHCOMMAREA",
+        "level": 1,
+        "name": "DFHCOMMAREA",
+        "usage": "DISPLAY",
+        "logicalType": "Group",
+        "byteOffset": 0,
+        "relativeOffset": 0,
+        "byteLength": 399,
+        "elementByteLength": 399,
+        "children": [
+          {
+            "id": "LK_L7_COMM-EYE",
+            "qualifiedName": "DFHCOMMAREA.COMM-EYE",
+            "level": 3,
+            "name": "COMM-EYE",
+            "pic": "X(4)",
+            "usage": "DISPLAY",
+            "logicalType": "Alphanumeric (4 chars)",
+            "byteOffset": 0,
+            "relativeOffset": 0,
+            "byteLength": 4,
+            "elementByteLength": 4,
+            "location": {
+              "startLine": 7,
+              "endLine": 7,
+              "startColumn": 10,
+              "endColumn": 47,
+              "sourceFile": "UPDCUST.cpy"
+            }
+          },
+          {
+            "id": "LK_L8_COMM-SCODE",
+            "qualifiedName": "DFHCOMMAREA.COMM-SCODE",
+            "level": 3,
+            "name": "COMM-SCODE",
+            "pic": "X(6)",
+            "usage": "DISPLAY",
+            "logicalType": "Alphanumeric (6 chars)",
+            "byteOffset": 4,
+            "relativeOffset": 4,
+            "byteLength": 6,
+            "elementByteLength": 6,
+            "location": {
+              "startLine": 8,
+              "endLine": 8,
+              "startColumn": 10,
+              "endColumn": 47,
+              "sourceFile": "UPDCUST.cpy"
+            }
+          },
+          {
+            "id": "LK_L9_COMM-CUSTNO",
+            "qualifiedName": "DFHCOMMAREA.COMM-CUSTNO",
+            "level": 3,
+            "name": "COMM-CUSTNO",
+            "pic": "X(10)",
+            "usage": "DISPLAY",
+            "logicalType": "Alphanumeric (10 chars)",
+            "byteOffset": 10,
+            "relativeOffset": 10,
+            "byteLength": 10,
+            "elementByteLength": 10,
+            "location": {
+              "startLine": 9,
+              "endLine": 9,
+              "startColumn": 10,
+              "endColumn": 48,
+              "sourceFile": "UPDCUST.cpy"
+            }
+          },
+          {
+            "id": "LK_L10_COMM-NAME",
+            "qualifiedName": "DFHCOMMAREA.COMM-NAME",
+            "level": 3,
+            "name": "COMM-NAME",
+            "usage": "DISPLAY",
+            "logicalType": "Group",
+            "byteOffset": 20,
+            "relativeOffset": 20,
+            "byteLength": 110,
+            "elementByteLength": 110,
+            "children": [
+              {
+                "id": "LK_L11_COMM-TITLE",
+                "qualifiedName": "DFHCOMMAREA.COMM-NAME.COMM-TITLE",
+                "level": 5,
+                "name": "COMM-TITLE",
+                "pic": "X(10)",
+                "usage": "DISPLAY",
+                "logicalType": "Alphanumeric (10 chars)",
+                "byteOffset": 20,
+                "relativeOffset": 0,
+                "byteLength": 10,
+                "elementByteLength": 10,
+                "location": {
+                  "startLine": 11,
+                  "endLine": 11,
+                  "startColumn": 13,
+                  "endColumn": 48,
+                  "sourceFile": "UPDCUST.cpy"
+                }
+              },
+              {
+                "id": "LK_L12_COMM-FIRST-NAME",
+                "qualifiedName": "DFHCOMMAREA.COMM-NAME.COMM-FIRST-NAME",
+                "level": 5,
+                "name": "COMM-FIRST-NAME",
+                "pic": "X(50)",
+                "usage": "DISPLAY",
+                "logicalType": "Alphanumeric (50 chars)",
+                "byteOffset": 30,
+                "relativeOffset": 10,
+                "byteLength": 50,
+                "elementByteLength": 50,
+                "location": {
+                  "startLine": 12,
+                  "endLine": 12,
+                  "startColumn": 13,
+                  "endColumn": 48,
+                  "sourceFile": "UPDCUST.cpy"
+                }
+              },
+              {
+                "id": "LK_L13_COMM-LAST-NAME",
+                "qualifiedName": "DFHCOMMAREA.COMM-NAME.COMM-LAST-NAME",
+                "level": 5,
+                "name": "COMM-LAST-NAME",
+                "pic": "X(50)",
+                "usage": "DISPLAY",
+                "logicalType": "Alphanumeric (50 chars)",
+                "byteOffset": 80,
+                "relativeOffset": 60,
+                "byteLength": 50,
+                "elementByteLength": 50,
+                "location": {
+                  "startLine": 13,
+                  "endLine": 13,
+                  "startColumn": 13,
+                  "endColumn": 48,
+                  "sourceFile": "UPDCUST.cpy"
+                }
+              }
+            ],
+            "location": {
+              "startLine": 10,
+              "endLine": 10,
+              "startColumn": 10,
+              "endColumn": 22,
+              "sourceFile": "UPDCUST.cpy"
+            }
+          },
+          {
+            "id": "LK_L14_COMM-DOB",
+            "qualifiedName": "DFHCOMMAREA.COMM-DOB",
+            "level": 3,
+            "name": "COMM-DOB",
+            "usage": "DISPLAY",
+            "logicalType": "Group",
+            "byteOffset": 130,
+            "relativeOffset": 130,
+            "byteLength": 8,
+            "elementByteLength": 8,
+            "children": [
+              {
+                "id": "LK_L15_COMM-DOB-DAY",
+                "qualifiedName": "DFHCOMMAREA.COMM-DOB.COMM-DOB-DAY",
+                "level": 5,
+                "name": "COMM-DOB-DAY",
+                "pic": "99",
+                "usage": "DISPLAY",
+                "logicalType": "Numeric Display (2 digits)",
+                "byteOffset": 130,
+                "relativeOffset": 0,
+                "byteLength": 2,
+                "elementByteLength": 2,
+                "location": {
+                  "startLine": 15,
+                  "endLine": 15,
+                  "startColumn": 13,
+                  "endColumn": 53,
+                  "sourceFile": "UPDCUST.cpy"
+                }
+              },
+              {
+                "id": "LK_L16_COMM-DOB-MONTH",
+                "qualifiedName": "DFHCOMMAREA.COMM-DOB.COMM-DOB-MONTH",
+                "level": 5,
+                "name": "COMM-DOB-MONTH",
+                "pic": "99",
+                "usage": "DISPLAY",
+                "logicalType": "Numeric Display (2 digits)",
+                "byteOffset": 132,
+                "relativeOffset": 2,
+                "byteLength": 2,
+                "elementByteLength": 2,
+                "location": {
+                  "startLine": 16,
+                  "endLine": 16,
+                  "startColumn": 13,
+                  "endColumn": 53,
+                  "sourceFile": "UPDCUST.cpy"
+                }
+              },
+              {
+                "id": "LK_L17_COMM-DOB-YEAR",
+                "qualifiedName": "DFHCOMMAREA.COMM-DOB.COMM-DOB-YEAR",
+                "level": 5,
+                "name": "COMM-DOB-YEAR",
+                "pic": "9999",
+                "usage": "DISPLAY",
+                "logicalType": "Numeric Display (4 digits)",
+                "byteOffset": 134,
+                "relativeOffset": 4,
+                "byteLength": 4,
+                "elementByteLength": 4,
+                "location": {
+                  "startLine": 17,
+                  "endLine": 17,
+                  "startColumn": 13,
+                  "endColumn": 55,
+                  "sourceFile": "UPDCUST.cpy"
+                }
+              }
+            ],
+            "location": {
+              "startLine": 14,
+              "endLine": 14,
+              "startColumn": 10,
+              "endColumn": 21,
+              "sourceFile": "UPDCUST.cpy"
+            }
+          },
+          {
+            "id": "LK_L18_COMM-PHONE",
+            "qualifiedName": "DFHCOMMAREA.COMM-PHONE",
+            "level": 3,
+            "name": "COMM-PHONE",
+            "pic": "X(20)",
+            "usage": "DISPLAY",
+            "logicalType": "Alphanumeric (20 chars)",
+            "byteOffset": 138,
+            "relativeOffset": 138,
+            "byteLength": 20,
+            "elementByteLength": 20,
+            "location": {
+              "startLine": 18,
+              "endLine": 18,
+              "startColumn": 10,
+              "endColumn": 48,
+              "sourceFile": "UPDCUST.cpy"
+            }
+          },
+          {
+            "id": "LK_L19_COMM-ADDR",
+            "qualifiedName": "DFHCOMMAREA.COMM-ADDR",
+            "level": 3,
+            "name": "COMM-ADDR",
+            "usage": "DISPLAY",
+            "logicalType": "Group",
+            "byteOffset": 158,
+            "relativeOffset": 158,
+            "byteLength": 210,
+            "elementByteLength": 210,
+            "children": [
+              {
+                "id": "LK_L20_COMM-ADDR-LINE1",
+                "qualifiedName": "DFHCOMMAREA.COMM-ADDR.COMM-ADDR-LINE1",
+                "level": 5,
+                "name": "COMM-ADDR-LINE1",
+                "pic": "X(50)",
+                "usage": "DISPLAY",
+                "logicalType": "Alphanumeric (50 chars)",
+                "byteOffset": 158,
+                "relativeOffset": 0,
+                "byteLength": 50,
+                "elementByteLength": 50,
+                "location": {
+                  "startLine": 20,
+                  "endLine": 20,
+                  "startColumn": 13,
+                  "endColumn": 48,
+                  "sourceFile": "UPDCUST.cpy"
+                }
+              },
+              {
+                "id": "LK_L21_COMM-ADDR-LINE2",
+                "qualifiedName": "DFHCOMMAREA.COMM-ADDR.COMM-ADDR-LINE2",
+                "level": 5,
+                "name": "COMM-ADDR-LINE2",
+                "pic": "X(50)",
+                "usage": "DISPLAY",
+                "logicalType": "Alphanumeric (50 chars)",
+                "byteOffset": 208,
+                "relativeOffset": 50,
+                "byteLength": 50,
+                "elementByteLength": 50,
+                "location": {
+                  "startLine": 21,
+                  "endLine": 21,
+                  "startColumn": 13,
+                  "endColumn": 48,
+                  "sourceFile": "UPDCUST.cpy"
+                }
+              },
+              {
+                "id": "LK_L22_COMM-CITY",
+                "qualifiedName": "DFHCOMMAREA.COMM-ADDR.COMM-CITY",
+                "level": 5,
+                "name": "COMM-CITY",
+                "pic": "X(50)",
+                "usage": "DISPLAY",
+                "logicalType": "Alphanumeric (50 chars)",
+                "byteOffset": 258,
+                "relativeOffset": 100,
+                "byteLength": 50,
+                "elementByteLength": 50,
+                "location": {
+                  "startLine": 22,
+                  "endLine": 22,
+                  "startColumn": 13,
+                  "endColumn": 48,
+                  "sourceFile": "UPDCUST.cpy"
+                }
+              },
+              {
+                "id": "LK_L23_COMM-POSTCODE",
+                "qualifiedName": "DFHCOMMAREA.COMM-ADDR.COMM-POSTCODE",
+                "level": 5,
+                "name": "COMM-POSTCODE",
+                "pic": "X(10)",
+                "usage": "DISPLAY",
+                "logicalType": "Alphanumeric (10 chars)",
+                "byteOffset": 308,
+                "relativeOffset": 150,
+                "byteLength": 10,
+                "elementByteLength": 10,
+                "location": {
+                  "startLine": 23,
+                  "endLine": 23,
+                  "startColumn": 13,
+                  "endColumn": 48,
+                  "sourceFile": "UPDCUST.cpy"
+                }
+              },
+              {
+                "id": "LK_L24_COMM-COUNTRY",
+                "qualifiedName": "DFHCOMMAREA.COMM-ADDR.COMM-COUNTRY",
+                "level": 5,
+                "name": "COMM-COUNTRY",
+                "pic": "X(50)",
+                "usage": "DISPLAY",
+                "logicalType": "Alphanumeric (50 chars)",
+                "byteOffset": 318,
+                "relativeOffset": 160,
+                "byteLength": 50,
+                "elementByteLength": 50,
+                "location": {
+                  "startLine": 24,
+                  "endLine": 24,
+                  "startColumn": 13,
+                  "endColumn": 48,
+                  "sourceFile": "UPDCUST.cpy"
+                }
+              }
+            ],
+            "location": {
+              "startLine": 19,
+              "endLine": 19,
+              "startColumn": 10,
+              "endColumn": 22,
+              "sourceFile": "UPDCUST.cpy"
+            }
+          },
+          {
+            "id": "LK_L25_COMM-STATUS",
+            "qualifiedName": "DFHCOMMAREA.COMM-STATUS",
+            "level": 3,
+            "name": "COMM-STATUS",
+            "pic": "X(10)",
+            "usage": "DISPLAY",
+            "logicalType": "Alphanumeric (10 chars)",
+            "byteOffset": 368,
+            "relativeOffset": 368,
+            "byteLength": 10,
+            "elementByteLength": 10,
+            "location": {
+              "startLine": 25,
+              "endLine": 25,
+              "startColumn": 10,
+              "endColumn": 48,
+              "sourceFile": "UPDCUST.cpy"
+            }
+          },
+          {
+            "id": "LK_L26_COMM-CREATED-DATE",
+            "qualifiedName": "DFHCOMMAREA.COMM-CREATED-DATE",
+            "level": 3,
+            "name": "COMM-CREATED-DATE",
+            "usage": "DISPLAY",
+            "logicalType": "Group",
+            "byteOffset": 378,
+            "relativeOffset": 378,
+            "byteLength": 8,
+            "elementByteLength": 8,
+            "children": [
+              {
+                "id": "LK_L27_COMM-CREATED-DAY",
+                "qualifiedName": "DFHCOMMAREA.COMM-CREATED-DATE.COMM-CREATED-DAY",
+                "level": 5,
+                "name": "COMM-CREATED-DAY",
+                "pic": "99",
+                "usage": "DISPLAY",
+                "logicalType": "Numeric Display (2 digits)",
+                "byteOffset": 378,
+                "relativeOffset": 0,
+                "byteLength": 2,
+                "elementByteLength": 2,
+                "location": {
+                  "startLine": 27,
+                  "endLine": 27,
+                  "startColumn": 13,
+                  "endColumn": 53,
+                  "sourceFile": "UPDCUST.cpy"
+                }
+              },
+              {
+                "id": "LK_L28_COMM-CREATED-MONTH",
+                "qualifiedName": "DFHCOMMAREA.COMM-CREATED-DATE.COMM-CREATED-MONTH",
+                "level": 5,
+                "name": "COMM-CREATED-MONTH",
+                "pic": "99",
+                "usage": "DISPLAY",
+                "logicalType": "Numeric Display (2 digits)",
+                "byteOffset": 380,
+                "relativeOffset": 2,
+                "byteLength": 2,
+                "elementByteLength": 2,
+                "location": {
+                  "startLine": 28,
+                  "endLine": 28,
+                  "startColumn": 13,
+                  "endColumn": 53,
+                  "sourceFile": "UPDCUST.cpy"
+                }
+              },
+              {
+                "id": "LK_L29_COMM-CREATED-YEAR",
+                "qualifiedName": "DFHCOMMAREA.COMM-CREATED-DATE.COMM-CREATED-YEAR",
+                "level": 5,
+                "name": "COMM-CREATED-YEAR",
+                "pic": "9999",
+                "usage": "DISPLAY",
+                "logicalType": "Numeric Display (4 digits)",
+                "byteOffset": 382,
+                "relativeOffset": 4,
+                "byteLength": 4,
+                "elementByteLength": 4,
+                "location": {
+                  "startLine": 29,
+                  "endLine": 29,
+                  "startColumn": 13,
+                  "endColumn": 55,
+                  "sourceFile": "UPDCUST.cpy"
+                }
+              }
+            ],
+            "location": {
+              "startLine": 26,
+              "endLine": 26,
+              "startColumn": 10,
+              "endColumn": 30,
+              "sourceFile": "UPDCUST.cpy"
+            }
+          },
+          {
+            "id": "LK_L30_COMM-CREDIT-SCORE",
+            "qualifiedName": "DFHCOMMAREA.COMM-CREDIT-SCORE",
+            "level": 3,
+            "name": "COMM-CREDIT-SCORE",
+            "pic": "9(3)",
+            "usage": "DISPLAY",
+            "logicalType": "Numeric Display (3 digits)",
+            "byteOffset": 386,
+            "relativeOffset": 386,
+            "byteLength": 3,
+            "elementByteLength": 3,
+            "location": {
+              "startLine": 30,
+              "endLine": 30,
+              "startColumn": 10,
+              "endColumn": 47,
+              "sourceFile": "UPDCUST.cpy"
+            }
+          },
+          {
+            "id": "LK_L31_COMM-CS-REVIEW-DATE",
+            "qualifiedName": "DFHCOMMAREA.COMM-CS-REVIEW-DATE",
+            "level": 3,
+            "name": "COMM-CS-REVIEW-DATE",
+            "usage": "DISPLAY",
+            "logicalType": "Group",
+            "byteOffset": 389,
+            "relativeOffset": 389,
+            "byteLength": 8,
+            "elementByteLength": 8,
+            "children": [
+              {
+                "id": "LK_L32_COMM-CS-REVIEW-DAY",
+                "qualifiedName": "DFHCOMMAREA.COMM-CS-REVIEW-DATE.COMM-CS-REVIEW-DAY",
+                "level": 5,
+                "name": "COMM-CS-REVIEW-DAY",
+                "pic": "99",
+                "usage": "DISPLAY",
+                "logicalType": "Numeric Display (2 digits)",
+                "byteOffset": 389,
+                "relativeOffset": 0,
+                "byteLength": 2,
+                "elementByteLength": 2,
+                "location": {
+                  "startLine": 32,
+                  "endLine": 32,
+                  "startColumn": 13,
+                  "endColumn": 53,
+                  "sourceFile": "UPDCUST.cpy"
+                }
+              },
+              {
+                "id": "LK_L33_COMM-CS-REVIEW-MONTH",
+                "qualifiedName": "DFHCOMMAREA.COMM-CS-REVIEW-DATE.COMM-CS-REVIEW-MONTH",
+                "level": 5,
+                "name": "COMM-CS-REVIEW-MONTH",
+                "pic": "99",
+                "usage": "DISPLAY",
+                "logicalType": "Numeric Display (2 digits)",
+                "byteOffset": 391,
+                "relativeOffset": 2,
+                "byteLength": 2,
+                "elementByteLength": 2,
+                "location": {
+                  "startLine": 33,
+                  "endLine": 33,
+                  "startColumn": 13,
+                  "endColumn": 53,
+                  "sourceFile": "UPDCUST.cpy"
+                }
+              },
+              {
+                "id": "LK_L34_COMM-CS-REVIEW-YEAR",
+                "qualifiedName": "DFHCOMMAREA.COMM-CS-REVIEW-DATE.COMM-CS-REVIEW-YEAR",
+                "level": 5,
+                "name": "COMM-CS-REVIEW-YEAR",
+                "pic": "9999",
+                "usage": "DISPLAY",
+                "logicalType": "Numeric Display (4 digits)",
+                "byteOffset": 393,
+                "relativeOffset": 4,
+                "byteLength": 4,
+                "elementByteLength": 4,
+                "location": {
+                  "startLine": 34,
+                  "endLine": 34,
+                  "startColumn": 13,
+                  "endColumn": 55,
+                  "sourceFile": "UPDCUST.cpy"
+                }
+              }
+            ],
+            "location": {
+              "startLine": 31,
+              "endLine": 31,
+              "startColumn": 10,
+              "endColumn": 32,
+              "sourceFile": "UPDCUST.cpy"
+            }
+          },
+          {
+            "id": "LK_L35_COMM-UPD-SUCCESS",
+            "qualifiedName": "DFHCOMMAREA.COMM-UPD-SUCCESS",
+            "level": 3,
+            "name": "COMM-UPD-SUCCESS",
+            "pic": "X",
+            "usage": "DISPLAY",
+            "logicalType": "Alphanumeric (1 chars)",
+            "byteOffset": 397,
+            "relativeOffset": 397,
+            "byteLength": 1,
+            "elementByteLength": 1,
+            "location": {
+              "startLine": 35,
+              "endLine": 35,
+              "startColumn": 10,
+              "endColumn": 44,
+              "sourceFile": "UPDCUST.cpy"
+            }
+          },
+          {
+            "id": "LK_L36_COMM-UPD-FAIL-CD",
+            "qualifiedName": "DFHCOMMAREA.COMM-UPD-FAIL-CD",
+            "level": 3,
+            "name": "COMM-UPD-FAIL-CD",
+            "pic": "X",
+            "usage": "DISPLAY",
+            "logicalType": "Alphanumeric (1 chars)",
+            "byteOffset": 398,
+            "relativeOffset": 398,
+            "byteLength": 1,
+            "elementByteLength": 1,
+            "location": {
+              "startLine": 36,
+              "endLine": 36,
+              "startColumn": 10,
+              "endColumn": 44,
+              "sourceFile": "UPDCUST.cpy"
+            }
+          }
+        ],
+        "location": {
+          "startLine": 166,
+          "endLine": 166,
+          "startColumn": 7,
+          "endColumn": 21,
+          "sourceFile": "UPDCUST.cbl"
+        }
+      }
+    ],
+    "localStorageSection": [
+      {
+        "id": "LS_L89_DB2-DATE-REFORMAT",
+        "qualifiedName": "DB2-DATE-REFORMAT",
+        "level": 1,
+        "name": "DB2-DATE-REFORMAT",
+        "usage": "DISPLAY",
+        "logicalType": "Group",
+        "byteOffset": 0,
+        "relativeOffset": 0,
+        "byteLength": 10,
+        "elementByteLength": 10,
+        "children": [
+          {
+            "id": "LS_L90_DB2-DATE-REF-YR",
+            "qualifiedName": "DB2-DATE-REFORMAT.DB2-DATE-REF-YR",
+            "level": 3,
+            "name": "DB2-DATE-REF-YR",
+            "pic": "9(4)",
+            "usage": "DISPLAY",
+            "logicalType": "Numeric Display (4 digits)",
+            "byteOffset": 0,
+            "relativeOffset": 0,
+            "byteLength": 4,
+            "elementByteLength": 4,
+            "location": {
+              "startLine": 90,
+              "endLine": 90,
+              "startColumn": 10,
+              "endColumn": 47,
+              "sourceFile": "UPDCUST.cbl"
+            }
+          },
+          {
+            "id": "LS_L91_FILLER",
+            "qualifiedName": "DB2-DATE-REFORMAT.FILLER",
+            "level": 3,
+            "name": "FILLER",
+            "pic": "X",
+            "usage": "DISPLAY",
+            "logicalType": "Alphanumeric (1 chars)",
+            "byteOffset": 4,
+            "relativeOffset": 4,
+            "byteLength": 1,
+            "elementByteLength": 1,
+            "isFiller": true,
+            "location": {
+              "startLine": 91,
+              "endLine": 91,
+              "startColumn": 10,
+              "endColumn": 44,
+              "sourceFile": "UPDCUST.cbl"
+            }
+          },
+          {
+            "id": "LS_L92_DB2-DATE-REF-MNTH",
+            "qualifiedName": "DB2-DATE-REFORMAT.DB2-DATE-REF-MNTH",
+            "level": 3,
+            "name": "DB2-DATE-REF-MNTH",
+            "pic": "99",
+            "usage": "DISPLAY",
+            "logicalType": "Numeric Display (2 digits)",
+            "byteOffset": 5,
+            "relativeOffset": 5,
+            "byteLength": 2,
+            "elementByteLength": 2,
+            "location": {
+              "startLine": 92,
+              "endLine": 92,
+              "startColumn": 10,
+              "endColumn": 45,
+              "sourceFile": "UPDCUST.cbl"
+            }
+          },
+          {
+            "id": "LS_L93_FILLER",
+            "qualifiedName": "DB2-DATE-REFORMAT.FILLER",
+            "level": 3,
+            "name": "FILLER",
+            "pic": "X",
+            "usage": "DISPLAY",
+            "logicalType": "Alphanumeric (1 chars)",
+            "byteOffset": 7,
+            "relativeOffset": 7,
+            "byteLength": 1,
+            "elementByteLength": 1,
+            "isFiller": true,
+            "location": {
+              "startLine": 93,
+              "endLine": 93,
+              "startColumn": 10,
+              "endColumn": 44,
+              "sourceFile": "UPDCUST.cbl"
+            }
+          },
+          {
+            "id": "LS_L94_DB2-DATE-REF-DAY",
+            "qualifiedName": "DB2-DATE-REFORMAT.DB2-DATE-REF-DAY",
+            "level": 3,
+            "name": "DB2-DATE-REF-DAY",
+            "pic": "99",
+            "usage": "DISPLAY",
+            "logicalType": "Numeric Display (2 digits)",
+            "byteOffset": 8,
+            "relativeOffset": 8,
+            "byteLength": 2,
+            "elementByteLength": 2,
+            "location": {
+              "startLine": 94,
+              "endLine": 94,
+              "startColumn": 10,
+              "endColumn": 45,
+              "sourceFile": "UPDCUST.cbl"
+            }
+          }
+        ],
+        "location": {
+          "startLine": 89,
+          "endLine": 89,
+          "startColumn": 7,
+          "endColumn": 27,
+          "sourceFile": "UPDCUST.cbl"
+        }
+      },
+      {
+        "id": "LS_L97_WS-CUST-DATA",
+        "qualifiedName": "WS-CUST-DATA",
+        "level": 1,
+        "name": "WS-CUST-DATA",
+        "usage": "DISPLAY",
+        "logicalType": "Group",
+        "byteOffset": 10,
+        "relativeOffset": 0,
+        "byteLength": 397,
+        "elementByteLength": 397,
+        "children": [
+          {
+            "id": "LS_L7_CUSTOMER-RECORD",
+            "qualifiedName": "WS-CUST-DATA.CUSTOMER-RECORD",
+            "level": 3,
+            "name": "CUSTOMER-RECORD",
+            "usage": "DISPLAY",
+            "logicalType": "Group",
+            "byteOffset": 10,
+            "relativeOffset": 0,
+            "byteLength": 397,
+            "elementByteLength": 397,
+            "children": [
+              {
+                "id": "LS_L8_CUSTOMER-EYECATCHER",
+                "qualifiedName": "WS-CUST-DATA.CUSTOMER-RECORD.CUSTOMER-EYECATCHER",
+                "level": 5,
+                "name": "CUSTOMER-EYECATCHER",
+                "pic": "X(4)",
+                "usage": "DISPLAY",
+                "logicalType": "Alphanumeric (4 chars)",
+                "byteOffset": 10,
+                "relativeOffset": 0,
+                "byteLength": 4,
+                "elementByteLength": 4,
+                "conditions88": [
+                  {
+                    "name": "CUSTOMER-EYECATCHER-VALUE",
+                    "values": [
+                      "CUST"
+                    ],
+                    "location": {
+                      "startLine": 9,
+                      "endLine": 9,
+                      "startColumn": 17,
+                      "endColumn": 65,
+                      "sourceFile": "CUSTOMER.cpy"
+                    }
+                  }
+                ],
+                "location": {
+                  "startLine": 8,
+                  "endLine": 8,
+                  "startColumn": 14,
+                  "endColumn": 61,
+                  "sourceFile": "CUSTOMER.cpy"
+                }
+              },
+              {
+                "id": "LS_L10_CUSTOMER-KEY",
+                "qualifiedName": "WS-CUST-DATA.CUSTOMER-RECORD.CUSTOMER-KEY",
+                "level": 5,
+                "name": "CUSTOMER-KEY",
+                "usage": "DISPLAY",
+                "logicalType": "Group",
+                "byteOffset": 14,
+                "relativeOffset": 4,
+                "byteLength": 16,
+                "elementByteLength": 16,
+                "children": [
+                  {
+                    "id": "LS_L11_CUSTOMER-SORTCODE",
+                    "qualifiedName": "WS-CUST-DATA.CUSTOMER-RECORD.CUSTOMER-KEY.CUSTOMER-SORTCODE",
+                    "level": 7,
+                    "name": "CUSTOMER-SORTCODE",
+                    "pic": "9(6)",
+                    "usage": "DISPLAY",
+                    "logicalType": "Numeric Display (6 digits)",
+                    "byteOffset": 14,
+                    "relativeOffset": 0,
+                    "byteLength": 6,
+                    "elementByteLength": 6,
+                    "location": {
+                      "startLine": 11,
+                      "endLine": 11,
+                      "startColumn": 17,
+                      "endColumn": 69,
+                      "sourceFile": "CUSTOMER.cpy"
+                    }
+                  },
+                  {
+                    "id": "LS_L12_CUSTOMER-NUMBER",
+                    "qualifiedName": "WS-CUST-DATA.CUSTOMER-RECORD.CUSTOMER-KEY.CUSTOMER-NUMBER",
+                    "level": 7,
+                    "name": "CUSTOMER-NUMBER",
+                    "pic": "9(10)",
+                    "usage": "DISPLAY",
+                    "logicalType": "Numeric Display (10 digits)",
+                    "byteOffset": 20,
+                    "relativeOffset": 6,
+                    "byteLength": 10,
+                    "elementByteLength": 10,
+                    "location": {
+                      "startLine": 12,
+                      "endLine": 12,
+                      "startColumn": 17,
+                      "endColumn": 70,
+                      "sourceFile": "CUSTOMER.cpy"
+                    }
+                  }
+                ],
+                "location": {
+                  "startLine": 10,
+                  "endLine": 10,
+                  "startColumn": 14,
+                  "endColumn": 29,
+                  "sourceFile": "CUSTOMER.cpy"
+                }
+              },
+              {
+                "id": "LS_L13_CUSTOMER-NAME",
+                "qualifiedName": "WS-CUST-DATA.CUSTOMER-RECORD.CUSTOMER-NAME",
+                "level": 5,
+                "name": "CUSTOMER-NAME",
+                "usage": "DISPLAY",
+                "logicalType": "Group",
+                "byteOffset": 30,
+                "relativeOffset": 20,
+                "byteLength": 110,
+                "elementByteLength": 110,
+                "children": [
+                  {
+                    "id": "LS_L14_CUSTOMER-TITLE",
+                    "qualifiedName": "WS-CUST-DATA.CUSTOMER-RECORD.CUSTOMER-NAME.CUSTOMER-TITLE",
+                    "level": 7,
+                    "name": "CUSTOMER-TITLE",
+                    "pic": "X(10)",
+                    "usage": "DISPLAY",
+                    "logicalType": "Alphanumeric (10 chars)",
+                    "byteOffset": 30,
+                    "relativeOffset": 0,
+                    "byteLength": 10,
+                    "elementByteLength": 10,
+                    "location": {
+                      "startLine": 14,
+                      "endLine": 14,
+                      "startColumn": 17,
+                      "endColumn": 62,
+                      "sourceFile": "CUSTOMER.cpy"
+                    }
+                  },
+                  {
+                    "id": "LS_L15_CUSTOMER-FIRST-NAME",
+                    "qualifiedName": "WS-CUST-DATA.CUSTOMER-RECORD.CUSTOMER-NAME.CUSTOMER-FIRST-NAME",
+                    "level": 7,
+                    "name": "CUSTOMER-FIRST-NAME",
+                    "pic": "X(50)",
+                    "usage": "DISPLAY",
+                    "logicalType": "Alphanumeric (50 chars)",
+                    "byteOffset": 40,
+                    "relativeOffset": 10,
+                    "byteLength": 50,
+                    "elementByteLength": 50,
+                    "location": {
+                      "startLine": 15,
+                      "endLine": 15,
+                      "startColumn": 17,
+                      "endColumn": 62,
+                      "sourceFile": "CUSTOMER.cpy"
+                    }
+                  },
+                  {
+                    "id": "LS_L16_CUSTOMER-LAST-NAME",
+                    "qualifiedName": "WS-CUST-DATA.CUSTOMER-RECORD.CUSTOMER-NAME.CUSTOMER-LAST-NAME",
+                    "level": 7,
+                    "name": "CUSTOMER-LAST-NAME",
+                    "pic": "X(50)",
+                    "usage": "DISPLAY",
+                    "logicalType": "Alphanumeric (50 chars)",
+                    "byteOffset": 90,
+                    "relativeOffset": 60,
+                    "byteLength": 50,
+                    "elementByteLength": 50,
+                    "location": {
+                      "startLine": 16,
+                      "endLine": 16,
+                      "startColumn": 17,
+                      "endColumn": 62,
+                      "sourceFile": "CUSTOMER.cpy"
+                    }
+                  }
+                ],
+                "location": {
+                  "startLine": 13,
+                  "endLine": 13,
+                  "startColumn": 14,
+                  "endColumn": 30,
+                  "sourceFile": "CUSTOMER.cpy"
+                }
+              },
+              {
+                "id": "LS_L17_CUSTOMER-DOB",
+                "qualifiedName": "WS-CUST-DATA.CUSTOMER-RECORD.CUSTOMER-DOB",
+                "level": 5,
+                "name": "CUSTOMER-DOB",
+                "usage": "DISPLAY",
+                "logicalType": "Group",
+                "byteOffset": 140,
+                "relativeOffset": 130,
+                "byteLength": 8,
+                "elementByteLength": 8,
+                "children": [
+                  {
+                    "id": "LS_L18_CUSTOMER-DOB-DAY",
+                    "qualifiedName": "WS-CUST-DATA.CUSTOMER-RECORD.CUSTOMER-DOB.CUSTOMER-DOB-DAY",
+                    "level": 7,
+                    "name": "CUSTOMER-DOB-DAY",
+                    "pic": "99",
+                    "usage": "DISPLAY",
+                    "logicalType": "Numeric Display (2 digits)",
+                    "byteOffset": 140,
+                    "relativeOffset": 0,
+                    "byteLength": 2,
+                    "elementByteLength": 2,
+                    "location": {
+                      "startLine": 18,
+                      "endLine": 18,
+                      "startColumn": 17,
+                      "endColumn": 67,
+                      "sourceFile": "CUSTOMER.cpy"
+                    }
+                  },
+                  {
+                    "id": "LS_L19_CUSTOMER-DOB-MONTH",
+                    "qualifiedName": "WS-CUST-DATA.CUSTOMER-RECORD.CUSTOMER-DOB.CUSTOMER-DOB-MONTH",
+                    "level": 7,
+                    "name": "CUSTOMER-DOB-MONTH",
+                    "pic": "99",
+                    "usage": "DISPLAY",
+                    "logicalType": "Numeric Display (2 digits)",
+                    "byteOffset": 142,
+                    "relativeOffset": 2,
+                    "byteLength": 2,
+                    "elementByteLength": 2,
+                    "location": {
+                      "startLine": 19,
+                      "endLine": 19,
+                      "startColumn": 17,
+                      "endColumn": 67,
+                      "sourceFile": "CUSTOMER.cpy"
+                    }
+                  },
+                  {
+                    "id": "LS_L20_CUSTOMER-DOB-YEAR",
+                    "qualifiedName": "WS-CUST-DATA.CUSTOMER-RECORD.CUSTOMER-DOB.CUSTOMER-DOB-YEAR",
+                    "level": 7,
+                    "name": "CUSTOMER-DOB-YEAR",
+                    "pic": "9999",
+                    "usage": "DISPLAY",
+                    "logicalType": "Numeric Display (4 digits)",
+                    "byteOffset": 144,
+                    "relativeOffset": 4,
+                    "byteLength": 4,
+                    "elementByteLength": 4,
+                    "location": {
+                      "startLine": 20,
+                      "endLine": 20,
+                      "startColumn": 17,
+                      "endColumn": 69,
+                      "sourceFile": "CUSTOMER.cpy"
+                    }
+                  }
+                ],
+                "location": {
+                  "startLine": 17,
+                  "endLine": 17,
+                  "startColumn": 14,
+                  "endColumn": 29,
+                  "sourceFile": "CUSTOMER.cpy"
+                }
+              },
+              {
+                "id": "LS_L21_CUSTOMER-PHONE",
+                "qualifiedName": "WS-CUST-DATA.CUSTOMER-RECORD.CUSTOMER-PHONE",
+                "level": 5,
+                "name": "CUSTOMER-PHONE",
+                "pic": "X(20)",
+                "usage": "DISPLAY",
+                "logicalType": "Alphanumeric (20 chars)",
+                "byteOffset": 148,
+                "relativeOffset": 138,
+                "byteLength": 20,
+                "elementByteLength": 20,
+                "location": {
+                  "startLine": 21,
+                  "endLine": 21,
+                  "startColumn": 14,
+                  "endColumn": 62,
+                  "sourceFile": "CUSTOMER.cpy"
+                }
+              },
+              {
+                "id": "LS_L22_CUSTOMER-ADDRESS",
+                "qualifiedName": "WS-CUST-DATA.CUSTOMER-RECORD.CUSTOMER-ADDRESS",
+                "level": 5,
+                "name": "CUSTOMER-ADDRESS",
+                "usage": "DISPLAY",
+                "logicalType": "Group",
+                "byteOffset": 168,
+                "relativeOffset": 158,
+                "byteLength": 210,
+                "elementByteLength": 210,
+                "children": [
+                  {
+                    "id": "LS_L23_CUSTOMER-ADDR-LINE1",
+                    "qualifiedName": "WS-CUST-DATA.CUSTOMER-RECORD.CUSTOMER-ADDRESS.CUSTOMER-ADDR-LINE1",
+                    "level": 7,
+                    "name": "CUSTOMER-ADDR-LINE1",
+                    "pic": "X(50)",
+                    "usage": "DISPLAY",
+                    "logicalType": "Alphanumeric (50 chars)",
+                    "byteOffset": 168,
+                    "relativeOffset": 0,
+                    "byteLength": 50,
+                    "elementByteLength": 50,
+                    "location": {
+                      "startLine": 23,
+                      "endLine": 23,
+                      "startColumn": 17,
+                      "endColumn": 62,
+                      "sourceFile": "CUSTOMER.cpy"
+                    }
+                  },
+                  {
+                    "id": "LS_L24_CUSTOMER-ADDR-LINE2",
+                    "qualifiedName": "WS-CUST-DATA.CUSTOMER-RECORD.CUSTOMER-ADDRESS.CUSTOMER-ADDR-LINE2",
+                    "level": 7,
+                    "name": "CUSTOMER-ADDR-LINE2",
+                    "pic": "X(50)",
+                    "usage": "DISPLAY",
+                    "logicalType": "Alphanumeric (50 chars)",
+                    "byteOffset": 218,
+                    "relativeOffset": 50,
+                    "byteLength": 50,
+                    "elementByteLength": 50,
+                    "location": {
+                      "startLine": 24,
+                      "endLine": 24,
+                      "startColumn": 17,
+                      "endColumn": 62,
+                      "sourceFile": "CUSTOMER.cpy"
+                    }
+                  },
+                  {
+                    "id": "LS_L25_CUSTOMER-CITY",
+                    "qualifiedName": "WS-CUST-DATA.CUSTOMER-RECORD.CUSTOMER-ADDRESS.CUSTOMER-CITY",
+                    "level": 7,
+                    "name": "CUSTOMER-CITY",
+                    "pic": "X(50)",
+                    "usage": "DISPLAY",
+                    "logicalType": "Alphanumeric (50 chars)",
+                    "byteOffset": 268,
+                    "relativeOffset": 100,
+                    "byteLength": 50,
+                    "elementByteLength": 50,
+                    "location": {
+                      "startLine": 25,
+                      "endLine": 25,
+                      "startColumn": 17,
+                      "endColumn": 62,
+                      "sourceFile": "CUSTOMER.cpy"
+                    }
+                  },
+                  {
+                    "id": "LS_L26_CUSTOMER-POSTCODE",
+                    "qualifiedName": "WS-CUST-DATA.CUSTOMER-RECORD.CUSTOMER-ADDRESS.CUSTOMER-POSTCODE",
+                    "level": 7,
+                    "name": "CUSTOMER-POSTCODE",
+                    "pic": "X(10)",
+                    "usage": "DISPLAY",
+                    "logicalType": "Alphanumeric (10 chars)",
+                    "byteOffset": 318,
+                    "relativeOffset": 150,
+                    "byteLength": 10,
+                    "elementByteLength": 10,
+                    "location": {
+                      "startLine": 26,
+                      "endLine": 26,
+                      "startColumn": 17,
+                      "endColumn": 62,
+                      "sourceFile": "CUSTOMER.cpy"
+                    }
+                  },
+                  {
+                    "id": "LS_L27_CUSTOMER-COUNTRY",
+                    "qualifiedName": "WS-CUST-DATA.CUSTOMER-RECORD.CUSTOMER-ADDRESS.CUSTOMER-COUNTRY",
+                    "level": 7,
+                    "name": "CUSTOMER-COUNTRY",
+                    "pic": "X(50)",
+                    "usage": "DISPLAY",
+                    "logicalType": "Alphanumeric (50 chars)",
+                    "byteOffset": 328,
+                    "relativeOffset": 160,
+                    "byteLength": 50,
+                    "elementByteLength": 50,
+                    "location": {
+                      "startLine": 27,
+                      "endLine": 27,
+                      "startColumn": 17,
+                      "endColumn": 62,
+                      "sourceFile": "CUSTOMER.cpy"
+                    }
+                  }
+                ],
+                "location": {
+                  "startLine": 22,
+                  "endLine": 22,
+                  "startColumn": 14,
+                  "endColumn": 33,
+                  "sourceFile": "CUSTOMER.cpy"
+                }
+              },
+              {
+                "id": "LS_L28_CUSTOMER-STATUS",
+                "qualifiedName": "WS-CUST-DATA.CUSTOMER-RECORD.CUSTOMER-STATUS",
+                "level": 5,
+                "name": "CUSTOMER-STATUS",
+                "pic": "X(10)",
+                "usage": "DISPLAY",
+                "logicalType": "Alphanumeric (10 chars)",
+                "byteOffset": 378,
+                "relativeOffset": 368,
+                "byteLength": 10,
+                "elementByteLength": 10,
+                "conditions88": [
+                  {
+                    "name": "CUSTOMER-STATUS-ACTIVE",
+                    "values": [
+                      "ACTIVE"
+                    ],
+                    "location": {
+                      "startLine": 29,
+                      "endLine": 29,
+                      "startColumn": 17,
+                      "endColumn": 67,
+                      "sourceFile": "CUSTOMER.cpy"
+                    }
+                  },
+                  {
+                    "name": "CUSTOMER-STATUS-INACTIVE",
+                    "values": [
+                      "INACTIVE"
+                    ],
+                    "location": {
+                      "startLine": 30,
+                      "endLine": 30,
+                      "startColumn": 17,
+                      "endColumn": 69,
+                      "sourceFile": "CUSTOMER.cpy"
+                    }
+                  },
+                  {
+                    "name": "CUSTOMER-STATUS-SUSPENDED",
+                    "values": [
+                      "SUSPENDED"
+                    ],
+                    "location": {
+                      "startLine": 31,
+                      "endLine": 31,
+                      "startColumn": 17,
+                      "endColumn": 70,
+                      "sourceFile": "CUSTOMER.cpy"
+                    }
+                  }
+                ],
+                "location": {
+                  "startLine": 28,
+                  "endLine": 28,
+                  "startColumn": 14,
+                  "endColumn": 62,
+                  "sourceFile": "CUSTOMER.cpy"
+                }
+              },
+              {
+                "id": "LS_L32_CUSTOMER-CREATED-DATE",
+                "qualifiedName": "WS-CUST-DATA.CUSTOMER-RECORD.CUSTOMER-CREATED-DATE",
+                "level": 5,
+                "name": "CUSTOMER-CREATED-DATE",
+                "usage": "DISPLAY",
+                "logicalType": "Group",
+                "byteOffset": 388,
+                "relativeOffset": 378,
+                "byteLength": 8,
+                "elementByteLength": 8,
+                "children": [
+                  {
+                    "id": "LS_L33_CUSTOMER-CREATED-DAY",
+                    "qualifiedName": "WS-CUST-DATA.CUSTOMER-RECORD.CUSTOMER-CREATED-DATE.CUSTOMER-CREATED-DAY",
+                    "level": 7,
+                    "name": "CUSTOMER-CREATED-DAY",
+                    "pic": "99",
+                    "usage": "DISPLAY",
+                    "logicalType": "Numeric Display (2 digits)",
+                    "byteOffset": 388,
+                    "relativeOffset": 0,
+                    "byteLength": 2,
+                    "elementByteLength": 2,
+                    "location": {
+                      "startLine": 33,
+                      "endLine": 33,
+                      "startColumn": 17,
+                      "endColumn": 67,
+                      "sourceFile": "CUSTOMER.cpy"
+                    }
+                  },
+                  {
+                    "id": "LS_L34_CUSTOMER-CREATED-MONTH",
+                    "qualifiedName": "WS-CUST-DATA.CUSTOMER-RECORD.CUSTOMER-CREATED-DATE.CUSTOMER-CREATED-MONTH",
+                    "level": 7,
+                    "name": "CUSTOMER-CREATED-MONTH",
+                    "pic": "99",
+                    "usage": "DISPLAY",
+                    "logicalType": "Numeric Display (2 digits)",
+                    "byteOffset": 390,
+                    "relativeOffset": 2,
+                    "byteLength": 2,
+                    "elementByteLength": 2,
+                    "location": {
+                      "startLine": 34,
+                      "endLine": 34,
+                      "startColumn": 17,
+                      "endColumn": 67,
+                      "sourceFile": "CUSTOMER.cpy"
+                    }
+                  },
+                  {
+                    "id": "LS_L35_CUSTOMER-CREATED-YEAR",
+                    "qualifiedName": "WS-CUST-DATA.CUSTOMER-RECORD.CUSTOMER-CREATED-DATE.CUSTOMER-CREATED-YEAR",
+                    "level": 7,
+                    "name": "CUSTOMER-CREATED-YEAR",
+                    "pic": "9999",
+                    "usage": "DISPLAY",
+                    "logicalType": "Numeric Display (4 digits)",
+                    "byteOffset": 392,
+                    "relativeOffset": 4,
+                    "byteLength": 4,
+                    "elementByteLength": 4,
+                    "location": {
+                      "startLine": 35,
+                      "endLine": 35,
+                      "startColumn": 17,
+                      "endColumn": 69,
+                      "sourceFile": "CUSTOMER.cpy"
+                    }
+                  }
+                ],
+                "location": {
+                  "startLine": 32,
+                  "endLine": 32,
+                  "startColumn": 14,
+                  "endColumn": 38,
+                  "sourceFile": "CUSTOMER.cpy"
+                }
+              },
+              {
+                "id": "LS_L36_CUSTOMER-CREDIT-SCORE",
+                "qualifiedName": "WS-CUST-DATA.CUSTOMER-RECORD.CUSTOMER-CREDIT-SCORE",
+                "level": 5,
+                "name": "CUSTOMER-CREDIT-SCORE",
+                "pic": "999",
+                "usage": "DISPLAY",
+                "logicalType": "Numeric Display (3 digits)",
+                "byteOffset": 396,
+                "relativeOffset": 386,
+                "byteLength": 3,
+                "elementByteLength": 3,
+                "location": {
+                  "startLine": 36,
+                  "endLine": 36,
+                  "startColumn": 14,
+                  "endColumn": 60,
+                  "sourceFile": "CUSTOMER.cpy"
+                }
+              },
+              {
+                "id": "LS_L37_CUSTOMER-CS-REVIEW-DATE",
+                "qualifiedName": "WS-CUST-DATA.CUSTOMER-RECORD.CUSTOMER-CS-REVIEW-DATE",
+                "level": 5,
+                "name": "CUSTOMER-CS-REVIEW-DATE",
+                "usage": "DISPLAY",
+                "logicalType": "Group",
+                "byteOffset": 399,
+                "relativeOffset": 389,
+                "byteLength": 8,
+                "elementByteLength": 8,
+                "children": [
+                  {
+                    "id": "LS_L38_CUSTOMER-CS-REVIEW-DAY",
+                    "qualifiedName": "WS-CUST-DATA.CUSTOMER-RECORD.CUSTOMER-CS-REVIEW-DATE.CUSTOMER-CS-REVIEW-DAY",
+                    "level": 7,
+                    "name": "CUSTOMER-CS-REVIEW-DAY",
+                    "pic": "99",
+                    "usage": "DISPLAY",
+                    "logicalType": "Numeric Display (2 digits)",
+                    "byteOffset": 399,
+                    "relativeOffset": 0,
+                    "byteLength": 2,
+                    "elementByteLength": 2,
+                    "location": {
+                      "startLine": 38,
+                      "endLine": 38,
+                      "startColumn": 17,
+                      "endColumn": 67,
+                      "sourceFile": "CUSTOMER.cpy"
+                    }
+                  },
+                  {
+                    "id": "LS_L39_CUSTOMER-CS-REVIEW-MONTH",
+                    "qualifiedName": "WS-CUST-DATA.CUSTOMER-RECORD.CUSTOMER-CS-REVIEW-DATE.CUSTOMER-CS-REVIEW-MONTH",
+                    "level": 7,
+                    "name": "CUSTOMER-CS-REVIEW-MONTH",
+                    "pic": "99",
+                    "usage": "DISPLAY",
+                    "logicalType": "Numeric Display (2 digits)",
+                    "byteOffset": 401,
+                    "relativeOffset": 2,
+                    "byteLength": 2,
+                    "elementByteLength": 2,
+                    "location": {
+                      "startLine": 39,
+                      "endLine": 39,
+                      "startColumn": 17,
+                      "endColumn": 67,
+                      "sourceFile": "CUSTOMER.cpy"
+                    }
+                  },
+                  {
+                    "id": "LS_L40_CUSTOMER-CS-REVIEW-YEAR",
+                    "qualifiedName": "WS-CUST-DATA.CUSTOMER-RECORD.CUSTOMER-CS-REVIEW-DATE.CUSTOMER-CS-REVIEW-YEAR",
+                    "level": 7,
+                    "name": "CUSTOMER-CS-REVIEW-YEAR",
+                    "pic": "9999",
+                    "usage": "DISPLAY",
+                    "logicalType": "Numeric Display (4 digits)",
+                    "byteOffset": 403,
+                    "relativeOffset": 4,
+                    "byteLength": 4,
+                    "elementByteLength": 4,
+                    "location": {
+                      "startLine": 40,
+                      "endLine": 40,
+                      "startColumn": 17,
+                      "endColumn": 69,
+                      "sourceFile": "CUSTOMER.cpy"
+                    }
+                  }
+                ],
+                "location": {
+                  "startLine": 37,
+                  "endLine": 37,
+                  "startColumn": 14,
+                  "endColumn": 40,
+                  "sourceFile": "CUSTOMER.cpy"
+                }
+              }
+            ],
+            "location": {
+              "startLine": 7,
+              "endLine": 7,
+              "startColumn": 11,
+              "endColumn": 29,
+              "sourceFile": "CUSTOMER.cpy"
+            }
+          }
+        ],
+        "location": {
+          "startLine": 97,
+          "endLine": 97,
+          "startColumn": 7,
+          "endColumn": 22,
+          "sourceFile": "UPDCUST.cbl"
+        }
+      },
+      {
+        "id": "LS_L100_WS-EIBTASKN12",
+        "qualifiedName": "WS-EIBTASKN12",
+        "level": 1,
+        "name": "WS-EIBTASKN12",
+        "pic": "9(12)",
+        "usage": "DISPLAY",
+        "value": "0",
+        "logicalType": "Numeric Display (12 digits)",
+        "byteOffset": 407,
+        "relativeOffset": 0,
+        "byteLength": 12,
+        "elementByteLength": 12,
+        "location": {
+          "startLine": 100,
+          "endLine": 100,
+          "startColumn": 7,
+          "endColumn": 56,
+          "sourceFile": "UPDCUST.cbl"
+        }
+      },
+      {
+        "id": "LS_L101_WS-SQLCODE-DISP",
+        "qualifiedName": "WS-SQLCODE-DISP",
+        "level": 1,
+        "name": "WS-SQLCODE-DISP",
+        "pic": "9(9)",
+        "usage": "DISPLAY",
+        "value": "0",
+        "logicalType": "Numeric Display (9 digits)",
+        "byteOffset": 419,
+        "relativeOffset": 0,
+        "byteLength": 9,
+        "elementByteLength": 9,
+        "location": {
+          "startLine": 101,
+          "endLine": 101,
+          "startColumn": 7,
+          "endColumn": 56,
+          "sourceFile": "UPDCUST.cbl"
+        }
+      },
+      {
+        "id": "LS_L106_DESIRED-CUST-KEY",
+        "qualifiedName": "DESIRED-CUST-KEY",
+        "level": 1,
+        "name": "DESIRED-CUST-KEY",
+        "usage": "DISPLAY",
+        "logicalType": "Group",
+        "byteOffset": 428,
+        "relativeOffset": 0,
+        "byteLength": 16,
+        "elementByteLength": 16,
+        "children": [
+          {
+            "id": "LS_L107_DESIRED-SORT-CODE",
+            "qualifiedName": "DESIRED-CUST-KEY.DESIRED-SORT-CODE",
+            "level": 3,
+            "name": "DESIRED-SORT-CODE",
+            "pic": "9(6)",
+            "usage": "DISPLAY",
+            "logicalType": "Numeric Display (6 digits)",
+            "byteOffset": 428,
+            "relativeOffset": 0,
+            "byteLength": 6,
+            "elementByteLength": 6,
+            "location": {
+              "startLine": 107,
+              "endLine": 107,
+              "startColumn": 10,
+              "endColumn": 47,
+              "sourceFile": "UPDCUST.cbl"
+            }
+          },
+          {
+            "id": "LS_L108_DESIRED-CUSTNO",
+            "qualifiedName": "DESIRED-CUST-KEY.DESIRED-CUSTNO",
+            "level": 3,
+            "name": "DESIRED-CUSTNO",
+            "pic": "9(10)",
+            "usage": "DISPLAY",
+            "logicalType": "Numeric Display (10 digits)",
+            "byteOffset": 434,
+            "relativeOffset": 6,
+            "byteLength": 10,
+            "elementByteLength": 10,
+            "location": {
+              "startLine": 108,
+              "endLine": 108,
+              "startColumn": 10,
+              "endColumn": 48,
+              "sourceFile": "UPDCUST.cbl"
+            }
+          }
+        ],
+        "location": {
+          "startLine": 106,
+          "endLine": 106,
+          "startColumn": 7,
+          "endColumn": 26,
+          "sourceFile": "UPDCUST.cbl"
+        }
+      },
+      {
+        "id": "LS_L110_WS-CUST-REC-LEN",
+        "qualifiedName": "WS-CUST-REC-LEN",
+        "level": 1,
+        "name": "WS-CUST-REC-LEN",
+        "pic": "S9(4)",
+        "usage": "COMP",
+        "value": "0",
+        "logicalType": "Signed SmallInt (16-bit Binary)",
+        "byteOffset": 444,
+        "relativeOffset": 0,
+        "byteLength": 2,
+        "elementByteLength": 2,
+        "location": {
+          "startLine": 110,
+          "endLine": 110,
+          "startColumn": 7,
+          "endColumn": 61,
+          "sourceFile": "UPDCUST.cbl"
+        }
+      },
+      {
+        "id": "LS_L112_WS-U-TIME",
+        "qualifiedName": "WS-U-TIME",
+        "level": 1,
+        "name": "WS-U-TIME",
+        "pic": "S9(15)",
+        "usage": "COMP_3",
+        "logicalType": "Signed Integer(15) Packed",
+        "byteOffset": 446,
+        "relativeOffset": 0,
+        "byteLength": 8,
+        "elementByteLength": 8,
+        "location": {
+          "startLine": 112,
+          "endLine": 112,
+          "startColumn": 7,
+          "endColumn": 56,
+          "sourceFile": "UPDCUST.cbl"
+        }
+      },
+      {
+        "id": "LS_L113_WS-ORIG-DATE",
+        "qualifiedName": "WS-ORIG-DATE",
+        "level": 1,
+        "name": "WS-ORIG-DATE",
+        "pic": "X(10)",
+        "usage": "DISPLAY",
+        "logicalType": "Alphanumeric (10 chars)",
+        "byteOffset": 454,
+        "relativeOffset": 0,
+        "byteLength": 10,
+        "elementByteLength": 10,
+        "location": {
+          "startLine": 113,
+          "endLine": 113,
+          "startColumn": 7,
+          "endColumn": 48,
+          "sourceFile": "UPDCUST.cbl"
+        }
+      },
+      {
+        "id": "LS_L115_WS-ORIG-DATE-GRP",
+        "qualifiedName": "WS-ORIG-DATE-GRP",
+        "level": 1,
+        "name": "WS-ORIG-DATE-GRP",
+        "usage": "DISPLAY",
+        "redefines": "WS-ORIG-DATE",
+        "logicalType": "Group",
+        "byteOffset": 454,
+        "relativeOffset": 0,
+        "byteLength": 10,
+        "elementByteLength": 10,
+        "children": [
+          {
+            "id": "LS_L116_WS-ORIG-DATE-DD",
+            "qualifiedName": "WS-ORIG-DATE-GRP.WS-ORIG-DATE-DD",
+            "level": 3,
+            "name": "WS-ORIG-DATE-DD",
+            "pic": "99",
+            "usage": "DISPLAY",
+            "logicalType": "Numeric Display (2 digits)",
+            "byteOffset": 454,
+            "relativeOffset": 0,
+            "byteLength": 2,
+            "elementByteLength": 2,
+            "location": {
+              "startLine": 116,
+              "endLine": 116,
+              "startColumn": 10,
+              "endColumn": 45,
+              "sourceFile": "UPDCUST.cbl"
+            }
+          },
+          {
+            "id": "LS_L117_FILLER",
+            "qualifiedName": "WS-ORIG-DATE-GRP.FILLER",
+            "level": 3,
+            "name": "FILLER",
+            "pic": "X",
+            "usage": "DISPLAY",
+            "logicalType": "Alphanumeric (1 chars)",
+            "byteOffset": 456,
+            "relativeOffset": 2,
+            "byteLength": 1,
+            "elementByteLength": 1,
+            "isFiller": true,
+            "location": {
+              "startLine": 117,
+              "endLine": 117,
+              "startColumn": 10,
+              "endColumn": 44,
+              "sourceFile": "UPDCUST.cbl"
+            }
+          },
+          {
+            "id": "LS_L118_WS-ORIG-DATE-MM",
+            "qualifiedName": "WS-ORIG-DATE-GRP.WS-ORIG-DATE-MM",
+            "level": 3,
+            "name": "WS-ORIG-DATE-MM",
+            "pic": "99",
+            "usage": "DISPLAY",
+            "logicalType": "Numeric Display (2 digits)",
+            "byteOffset": 457,
+            "relativeOffset": 3,
+            "byteLength": 2,
+            "elementByteLength": 2,
+            "location": {
+              "startLine": 118,
+              "endLine": 118,
+              "startColumn": 10,
+              "endColumn": 45,
+              "sourceFile": "UPDCUST.cbl"
+            }
+          },
+          {
+            "id": "LS_L119_FILLER",
+            "qualifiedName": "WS-ORIG-DATE-GRP.FILLER",
+            "level": 3,
+            "name": "FILLER",
+            "pic": "X",
+            "usage": "DISPLAY",
+            "logicalType": "Alphanumeric (1 chars)",
+            "byteOffset": 459,
+            "relativeOffset": 5,
+            "byteLength": 1,
+            "elementByteLength": 1,
+            "isFiller": true,
+            "location": {
+              "startLine": 119,
+              "endLine": 119,
+              "startColumn": 10,
+              "endColumn": 44,
+              "sourceFile": "UPDCUST.cbl"
+            }
+          },
+          {
+            "id": "LS_L120_WS-ORIG-DATE-YYYY",
+            "qualifiedName": "WS-ORIG-DATE-GRP.WS-ORIG-DATE-YYYY",
+            "level": 3,
+            "name": "WS-ORIG-DATE-YYYY",
+            "pic": "9999",
+            "usage": "DISPLAY",
+            "logicalType": "Numeric Display (4 digits)",
+            "byteOffset": 460,
+            "relativeOffset": 6,
+            "byteLength": 4,
+            "elementByteLength": 4,
+            "location": {
+              "startLine": 120,
+              "endLine": 120,
+              "startColumn": 10,
+              "endColumn": 47,
+              "sourceFile": "UPDCUST.cbl"
+            }
+          }
+        ],
+        "location": {
+          "startLine": 115,
+          "endLine": 115,
+          "startColumn": 7,
+          "endColumn": 49,
+          "sourceFile": "UPDCUST.cbl"
+        }
+      },
+      {
+        "id": "LS_L122_WS-ORIG-DATE-GRP-X",
+        "qualifiedName": "WS-ORIG-DATE-GRP-X",
+        "level": 1,
+        "name": "WS-ORIG-DATE-GRP-X",
+        "usage": "DISPLAY",
+        "logicalType": "Group",
+        "byteOffset": 464,
+        "relativeOffset": 0,
+        "byteLength": 10,
+        "elementByteLength": 10,
+        "children": [
+          {
+            "id": "LS_L123_WS-ORIG-DATE-DD-X",
+            "qualifiedName": "WS-ORIG-DATE-GRP-X.WS-ORIG-DATE-DD-X",
+            "level": 3,
+            "name": "WS-ORIG-DATE-DD-X",
+            "pic": "XX",
+            "usage": "DISPLAY",
+            "logicalType": "Alphanumeric (2 chars)",
+            "byteOffset": 464,
+            "relativeOffset": 0,
+            "byteLength": 2,
+            "elementByteLength": 2,
+            "location": {
+              "startLine": 123,
+              "endLine": 123,
+              "startColumn": 10,
+              "endColumn": 45,
+              "sourceFile": "UPDCUST.cbl"
+            }
+          },
+          {
+            "id": "LS_L124_FILLER",
+            "qualifiedName": "WS-ORIG-DATE-GRP-X.FILLER",
+            "level": 3,
+            "name": "FILLER",
+            "pic": "X",
+            "usage": "DISPLAY",
+            "value": ".",
+            "logicalType": "Alphanumeric (1 chars)",
+            "byteOffset": 466,
+            "relativeOffset": 2,
+            "byteLength": 1,
+            "elementByteLength": 1,
+            "isFiller": true,
+            "location": {
+              "startLine": 124,
+              "endLine": 124,
+              "startColumn": 10,
+              "endColumn": 54,
+              "sourceFile": "UPDCUST.cbl"
+            }
+          },
+          {
+            "id": "LS_L125_WS-ORIG-DATE-MM-X",
+            "qualifiedName": "WS-ORIG-DATE-GRP-X.WS-ORIG-DATE-MM-X",
+            "level": 3,
+            "name": "WS-ORIG-DATE-MM-X",
+            "pic": "XX",
+            "usage": "DISPLAY",
+            "logicalType": "Alphanumeric (2 chars)",
+            "byteOffset": 467,
+            "relativeOffset": 3,
+            "byteLength": 2,
+            "elementByteLength": 2,
+            "location": {
+              "startLine": 125,
+              "endLine": 125,
+              "startColumn": 10,
+              "endColumn": 45,
+              "sourceFile": "UPDCUST.cbl"
+            }
+          },
+          {
+            "id": "LS_L126_FILLER",
+            "qualifiedName": "WS-ORIG-DATE-GRP-X.FILLER",
+            "level": 3,
+            "name": "FILLER",
+            "pic": "X",
+            "usage": "DISPLAY",
+            "value": ".",
+            "logicalType": "Alphanumeric (1 chars)",
+            "byteOffset": 469,
+            "relativeOffset": 5,
+            "byteLength": 1,
+            "elementByteLength": 1,
+            "isFiller": true,
+            "location": {
+              "startLine": 126,
+              "endLine": 126,
+              "startColumn": 10,
+              "endColumn": 54,
+              "sourceFile": "UPDCUST.cbl"
+            }
+          },
+          {
+            "id": "LS_L127_WS-ORIG-DATE-YYYY-X",
+            "qualifiedName": "WS-ORIG-DATE-GRP-X.WS-ORIG-DATE-YYYY-X",
+            "level": 3,
+            "name": "WS-ORIG-DATE-YYYY-X",
+            "pic": "X(4)",
+            "usage": "DISPLAY",
+            "logicalType": "Alphanumeric (4 chars)",
+            "byteOffset": 470,
+            "relativeOffset": 6,
+            "byteLength": 4,
+            "elementByteLength": 4,
+            "location": {
+              "startLine": 127,
+              "endLine": 127,
+              "startColumn": 10,
+              "endColumn": 47,
+              "sourceFile": "UPDCUST.cbl"
+            }
+          }
+        ],
+        "location": {
+          "startLine": 122,
+          "endLine": 122,
+          "startColumn": 7,
+          "endColumn": 28,
+          "sourceFile": "UPDCUST.cbl"
+        }
+      },
+      {
+        "id": "LS_L129_REJ-REASON",
+        "qualifiedName": "REJ-REASON",
+        "level": 1,
+        "name": "REJ-REASON",
+        "pic": "XX",
+        "usage": "DISPLAY",
+        "value": "SPACES",
+        "logicalType": "Alphanumeric (2 chars)",
+        "byteOffset": 474,
+        "relativeOffset": 0,
+        "byteLength": 2,
+        "elementByteLength": 2,
+        "location": {
+          "startLine": 129,
+          "endLine": 129,
+          "startColumn": 7,
+          "endColumn": 58,
+          "sourceFile": "UPDCUST.cbl"
+        }
+      },
+      {
+        "id": "LS_L131_WS-PASSED-DATA",
+        "qualifiedName": "WS-PASSED-DATA",
+        "level": 1,
+        "name": "WS-PASSED-DATA",
+        "usage": "DISPLAY",
+        "logicalType": "Group",
+        "byteOffset": 476,
+        "relativeOffset": 0,
+        "byteLength": 13,
+        "elementByteLength": 13,
+        "children": [
+          {
+            "id": "LS_L132_WS-TEST-KEY",
+            "qualifiedName": "WS-PASSED-DATA.WS-TEST-KEY",
+            "level": 2,
+            "name": "WS-TEST-KEY",
+            "pic": "X(4)",
+            "usage": "DISPLAY",
+            "logicalType": "Alphanumeric (4 chars)",
+            "byteOffset": 476,
+            "relativeOffset": 0,
+            "byteLength": 4,
+            "elementByteLength": 4,
+            "location": {
+              "startLine": 132,
+              "endLine": 132,
+              "startColumn": 10,
+              "endColumn": 47,
+              "sourceFile": "UPDCUST.cbl"
+            }
+          },
+          {
+            "id": "LS_L133_WS-SORT-CODE",
+            "qualifiedName": "WS-PASSED-DATA.WS-SORT-CODE",
+            "level": 2,
+            "name": "WS-SORT-CODE",
+            "pic": "9(6)",
+            "usage": "DISPLAY",
+            "logicalType": "Numeric Display (6 digits)",
+            "byteOffset": 480,
+            "relativeOffset": 4,
+            "byteLength": 6,
+            "elementByteLength": 6,
+            "location": {
+              "startLine": 133,
+              "endLine": 133,
+              "startColumn": 10,
+              "endColumn": 47,
+              "sourceFile": "UPDCUST.cbl"
+            }
+          },
+          {
+            "id": "LS_L134_WS-CUSTOMER-RANGE",
+            "qualifiedName": "WS-PASSED-DATA.WS-CUSTOMER-RANGE",
+            "level": 2,
+            "name": "WS-CUSTOMER-RANGE",
+            "usage": "DISPLAY",
+            "logicalType": "Group",
+            "byteOffset": 486,
+            "relativeOffset": 10,
+            "byteLength": 3,
+            "elementByteLength": 3,
+            "children": [
+              {
+                "id": "LS_L135_WS-CUSTOMER-RANGE-TOP",
+                "qualifiedName": "WS-PASSED-DATA.WS-CUSTOMER-RANGE.WS-CUSTOMER-RANGE-TOP",
+                "level": 7,
+                "name": "WS-CUSTOMER-RANGE-TOP",
+                "pic": "X",
+                "usage": "DISPLAY",
+                "logicalType": "Alphanumeric (1 chars)",
+                "byteOffset": 486,
+                "relativeOffset": 0,
+                "byteLength": 1,
+                "elementByteLength": 1,
+                "location": {
+                  "startLine": 135,
+                  "endLine": 135,
+                  "startColumn": 13,
+                  "endColumn": 47,
+                  "sourceFile": "UPDCUST.cbl"
+                }
+              },
+              {
+                "id": "LS_L136_WS-CUSTOMER-RANGE-MIDDLE",
+                "qualifiedName": "WS-PASSED-DATA.WS-CUSTOMER-RANGE.WS-CUSTOMER-RANGE-MIDDLE",
+                "level": 7,
+                "name": "WS-CUSTOMER-RANGE-MIDDLE",
+                "pic": "X",
+                "usage": "DISPLAY",
+                "logicalType": "Alphanumeric (1 chars)",
+                "byteOffset": 487,
+                "relativeOffset": 1,
+                "byteLength": 1,
+                "elementByteLength": 1,
+                "location": {
+                  "startLine": 136,
+                  "endLine": 136,
+                  "startColumn": 13,
+                  "endColumn": 47,
+                  "sourceFile": "UPDCUST.cbl"
+                }
+              },
+              {
+                "id": "LS_L137_WS-CUSTOMER-RANGE-BOTTOM",
+                "qualifiedName": "WS-PASSED-DATA.WS-CUSTOMER-RANGE.WS-CUSTOMER-RANGE-BOTTOM",
+                "level": 7,
+                "name": "WS-CUSTOMER-RANGE-BOTTOM",
+                "pic": "X",
+                "usage": "DISPLAY",
+                "logicalType": "Alphanumeric (1 chars)",
+                "byteOffset": 488,
+                "relativeOffset": 2,
+                "byteLength": 1,
+                "elementByteLength": 1,
+                "location": {
+                  "startLine": 137,
+                  "endLine": 137,
+                  "startColumn": 13,
+                  "endColumn": 47,
+                  "sourceFile": "UPDCUST.cbl"
+                }
+              }
+            ],
+            "location": {
+              "startLine": 134,
+              "endLine": 134,
+              "startColumn": 10,
+              "endColumn": 30,
+              "sourceFile": "UPDCUST.cbl"
+            }
+          }
+        ],
+        "location": {
+          "startLine": 131,
+          "endLine": 131,
+          "startColumn": 7,
+          "endColumn": 24,
+          "sourceFile": "UPDCUST.cbl"
+        }
+      },
+      {
+        "id": "LS_L139_WS-SORT-DIV",
+        "qualifiedName": "WS-SORT-DIV",
+        "level": 1,
+        "name": "WS-SORT-DIV",
+        "usage": "DISPLAY",
+        "logicalType": "Group",
+        "byteOffset": 489,
+        "relativeOffset": 0,
+        "byteLength": 6,
+        "elementByteLength": 6,
+        "children": [
+          {
+            "id": "LS_L140_WS-SORT-DIV1",
+            "qualifiedName": "WS-SORT-DIV.WS-SORT-DIV1",
+            "level": 3,
+            "name": "WS-SORT-DIV1",
+            "pic": "XX",
+            "usage": "DISPLAY",
+            "logicalType": "Alphanumeric (2 chars)",
+            "byteOffset": 489,
+            "relativeOffset": 0,
+            "byteLength": 2,
+            "elementByteLength": 2,
+            "location": {
+              "startLine": 140,
+              "endLine": 140,
+              "startColumn": 10,
+              "endColumn": 45,
+              "sourceFile": "UPDCUST.cbl"
+            }
+          },
+          {
+            "id": "LS_L141_WS-SORT-DIV2",
+            "qualifiedName": "WS-SORT-DIV.WS-SORT-DIV2",
+            "level": 3,
+            "name": "WS-SORT-DIV2",
+            "pic": "XX",
+            "usage": "DISPLAY",
+            "logicalType": "Alphanumeric (2 chars)",
+            "byteOffset": 491,
+            "relativeOffset": 2,
+            "byteLength": 2,
+            "elementByteLength": 2,
+            "location": {
+              "startLine": 141,
+              "endLine": 141,
+              "startColumn": 10,
+              "endColumn": 45,
+              "sourceFile": "UPDCUST.cbl"
+            }
+          },
+          {
+            "id": "LS_L142_WS-SORT-DIV3",
+            "qualifiedName": "WS-SORT-DIV.WS-SORT-DIV3",
+            "level": 3,
+            "name": "WS-SORT-DIV3",
+            "pic": "XX",
+            "usage": "DISPLAY",
+            "logicalType": "Alphanumeric (2 chars)",
+            "byteOffset": 493,
+            "relativeOffset": 4,
+            "byteLength": 2,
+            "elementByteLength": 2,
+            "location": {
+              "startLine": 142,
+              "endLine": 142,
+              "startColumn": 10,
+              "endColumn": 45,
+              "sourceFile": "UPDCUST.cbl"
+            }
+          }
+        ],
+        "location": {
+          "startLine": 139,
+          "endLine": 139,
+          "startColumn": 7,
+          "endColumn": 21,
+          "sourceFile": "UPDCUST.cbl"
+        }
+      },
+      {
+        "id": "LS_L144_CUSTOMER-KY",
+        "qualifiedName": "CUSTOMER-KY",
+        "level": 1,
+        "name": "CUSTOMER-KY",
+        "usage": "DISPLAY",
+        "logicalType": "Group",
+        "byteOffset": 495,
+        "relativeOffset": 0,
+        "byteLength": 14,
+        "elementByteLength": 14,
+        "children": [
+          {
+            "id": "LS_L145_REQUIRED-SORT-CODE",
+            "qualifiedName": "CUSTOMER-KY.REQUIRED-SORT-CODE",
+            "level": 3,
+            "name": "REQUIRED-SORT-CODE",
+            "pic": "9(6)",
+            "usage": "DISPLAY",
+            "value": "0",
+            "logicalType": "Numeric Display (6 digits)",
+            "byteOffset": 495,
+            "relativeOffset": 0,
+            "byteLength": 6,
+            "elementByteLength": 6,
+            "location": {
+              "startLine": 145,
+              "endLine": 145,
+              "startColumn": 10,
+              "endColumn": 56,
+              "sourceFile": "UPDCUST.cbl"
+            }
+          },
+          {
+            "id": "LS_L146_REQUIRED-ACC-NUM",
+            "qualifiedName": "CUSTOMER-KY.REQUIRED-ACC-NUM",
+            "level": 3,
+            "name": "REQUIRED-ACC-NUM",
+            "pic": "9(8)",
+            "usage": "DISPLAY",
+            "value": "0",
+            "logicalType": "Numeric Display (8 digits)",
+            "byteOffset": 501,
+            "relativeOffset": 6,
+            "byteLength": 8,
+            "elementByteLength": 8,
+            "location": {
+              "startLine": 146,
+              "endLine": 146,
+              "startColumn": 10,
+              "endColumn": 56,
+              "sourceFile": "UPDCUST.cbl"
+            }
+          }
+        ],
+        "location": {
+          "startLine": 144,
+          "endLine": 144,
+          "startColumn": 7,
+          "endColumn": 21,
+          "sourceFile": "UPDCUST.cbl"
+        }
+      },
+      {
+        "id": "LS_L148_STORM-DRAIN-CONDITION",
+        "qualifiedName": "STORM-DRAIN-CONDITION",
+        "level": 1,
+        "name": "STORM-DRAIN-CONDITION",
+        "pic": "X(20)",
+        "usage": "DISPLAY",
+        "logicalType": "Alphanumeric (20 chars)",
+        "byteOffset": 509,
+        "relativeOffset": 0,
+        "byteLength": 20,
+        "elementByteLength": 20,
+        "location": {
+          "startLine": 148,
+          "endLine": 148,
+          "startColumn": 7,
+          "endColumn": 48,
+          "sourceFile": "UPDCUST.cbl"
+        }
+      },
+      {
+        "id": "LS_L150_WS-UNSTR-TITLE",
+        "qualifiedName": "WS-UNSTR-TITLE",
+        "level": 1,
+        "name": "WS-UNSTR-TITLE",
+        "pic": "X(9)",
+        "usage": "DISPLAY",
+        "value": "",
+        "logicalType": "Alphanumeric (9 chars)",
+        "byteOffset": 529,
+        "relativeOffset": 0,
+        "byteLength": 9,
+        "elementByteLength": 9,
+        "location": {
+          "startLine": 150,
+          "endLine": 150,
+          "startColumn": 7,
+          "endColumn": 58,
+          "sourceFile": "UPDCUST.cbl"
+        }
+      },
+      {
+        "id": "LS_L151_WS-TITLE-VALID",
+        "qualifiedName": "WS-TITLE-VALID",
+        "level": 1,
+        "name": "WS-TITLE-VALID",
+        "pic": "X",
+        "usage": "DISPLAY",
+        "logicalType": "Alphanumeric (1 chars)",
+        "byteOffset": 538,
+        "relativeOffset": 0,
+        "byteLength": 1,
+        "elementByteLength": 1,
+        "location": {
+          "startLine": 151,
+          "endLine": 151,
+          "startColumn": 7,
+          "endColumn": 44,
+          "sourceFile": "UPDCUST.cbl"
+        }
+      },
+      {
+        "id": "LS_L153_WS-TIME-DATA",
+        "qualifiedName": "WS-TIME-DATA",
+        "level": 1,
+        "name": "WS-TIME-DATA",
+        "usage": "DISPLAY",
+        "logicalType": "Group",
+        "byteOffset": 539,
+        "relativeOffset": 0,
+        "byteLength": 6,
+        "elementByteLength": 6,
+        "children": [
+          {
+            "id": "LS_L154_WS-TIME-NOW",
+            "qualifiedName": "WS-TIME-DATA.WS-TIME-NOW",
+            "level": 3,
+            "name": "WS-TIME-NOW",
+            "pic": "9(6)",
+            "usage": "DISPLAY",
+            "logicalType": "Numeric Display (6 digits)",
+            "byteOffset": 539,
+            "relativeOffset": 0,
+            "byteLength": 6,
+            "elementByteLength": 6,
+            "location": {
+              "startLine": 154,
+              "endLine": 154,
+              "startColumn": 11,
+              "endColumn": 47,
+              "sourceFile": "UPDCUST.cbl"
+            }
+          },
+          {
+            "id": "LS_L155_WS-TIME-NOW-GRP",
+            "qualifiedName": "WS-TIME-DATA.WS-TIME-NOW-GRP",
+            "level": 3,
+            "name": "WS-TIME-NOW-GRP",
+            "usage": "DISPLAY",
+            "redefines": "WS-TIME-NOW",
+            "logicalType": "Group",
+            "byteOffset": 539,
+            "relativeOffset": 0,
+            "byteLength": 6,
+            "elementByteLength": 6,
+            "children": [
+              {
+                "id": "LS_L156_WS-TIME-NOW-GRP-HH",
+                "qualifiedName": "WS-TIME-DATA.WS-TIME-NOW-GRP.WS-TIME-NOW-GRP-HH",
+                "level": 5,
+                "name": "WS-TIME-NOW-GRP-HH",
+                "pic": "99",
+                "usage": "DISPLAY",
+                "logicalType": "Numeric Display (2 digits)",
+                "byteOffset": 539,
+                "relativeOffset": 0,
+                "byteLength": 2,
+                "elementByteLength": 2,
+                "location": {
+                  "startLine": 156,
+                  "endLine": 156,
+                  "startColumn": 14,
+                  "endColumn": 45,
+                  "sourceFile": "UPDCUST.cbl"
+                }
+              },
+              {
+                "id": "LS_L157_WS-TIME-NOW-GRP-MM",
+                "qualifiedName": "WS-TIME-DATA.WS-TIME-NOW-GRP.WS-TIME-NOW-GRP-MM",
+                "level": 5,
+                "name": "WS-TIME-NOW-GRP-MM",
+                "pic": "99",
+                "usage": "DISPLAY",
+                "logicalType": "Numeric Display (2 digits)",
+                "byteOffset": 541,
+                "relativeOffset": 2,
+                "byteLength": 2,
+                "elementByteLength": 2,
+                "location": {
+                  "startLine": 157,
+                  "endLine": 157,
+                  "startColumn": 14,
+                  "endColumn": 45,
+                  "sourceFile": "UPDCUST.cbl"
+                }
+              },
+              {
+                "id": "LS_L158_WS-TIME-NOW-GRP-SS",
+                "qualifiedName": "WS-TIME-DATA.WS-TIME-NOW-GRP.WS-TIME-NOW-GRP-SS",
+                "level": 5,
+                "name": "WS-TIME-NOW-GRP-SS",
+                "pic": "99",
+                "usage": "DISPLAY",
+                "logicalType": "Numeric Display (2 digits)",
+                "byteOffset": 543,
+                "relativeOffset": 4,
+                "byteLength": 2,
+                "elementByteLength": 2,
+                "location": {
+                  "startLine": 158,
+                  "endLine": 158,
+                  "startColumn": 14,
+                  "endColumn": 45,
+                  "sourceFile": "UPDCUST.cbl"
+                }
+              }
+            ],
+            "location": {
+              "startLine": 155,
+              "endLine": 155,
+              "startColumn": 11,
+              "endColumn": 51,
+              "sourceFile": "UPDCUST.cbl"
+            }
+          }
+        ],
+        "location": {
+          "startLine": 153,
+          "endLine": 153,
+          "startColumn": 7,
+          "endColumn": 22,
+          "sourceFile": "UPDCUST.cbl"
+        }
+      },
+      {
+        "id": "LS_L160_WS-ABEND-PGM",
+        "qualifiedName": "WS-ABEND-PGM",
+        "level": 1,
+        "name": "WS-ABEND-PGM",
+        "pic": "X(8)",
+        "usage": "DISPLAY",
+        "value": "ABNDPROC",
+        "logicalType": "Alphanumeric (8 chars)",
+        "byteOffset": 545,
+        "relativeOffset": 0,
+        "byteLength": 8,
+        "elementByteLength": 8,
+        "location": {
+          "startLine": 160,
+          "endLine": 160,
+          "startColumn": 7,
+          "endColumn": 64,
+          "sourceFile": "UPDCUST.cbl"
+        }
+      },
+      {
+        "id": "LS_L162_ABNDINFO-REC",
+        "qualifiedName": "ABNDINFO-REC",
+        "level": 1,
+        "name": "ABNDINFO-REC",
+        "usage": "DISPLAY",
+        "logicalType": "Group",
+        "byteOffset": 553,
+        "relativeOffset": 0,
+        "byteLength": 678,
+        "elementByteLength": 678,
+        "children": [
+          {
+            "id": "LS_L7_ABND-VSAM-KEY",
+            "qualifiedName": "ABNDINFO-REC.ABND-VSAM-KEY",
+            "level": 3,
+            "name": "ABND-VSAM-KEY",
+            "usage": "DISPLAY",
+            "logicalType": "Group",
+            "byteOffset": 553,
+            "relativeOffset": 0,
+            "byteLength": 12,
+            "elementByteLength": 12,
+            "children": [
+              {
+                "id": "LS_L8_ABND-UTIME-KEY",
+                "qualifiedName": "ABNDINFO-REC.ABND-VSAM-KEY.ABND-UTIME-KEY",
+                "level": 5,
+                "name": "ABND-UTIME-KEY",
+                "pic": "S9(15)",
+                "usage": "COMP_3",
+                "logicalType": "Signed Integer(15) Packed",
+                "byteOffset": 553,
+                "relativeOffset": 0,
+                "byteLength": 8,
+                "elementByteLength": 8,
+                "location": {
+                  "startLine": 8,
+                  "endLine": 8,
+                  "startColumn": 14,
+                  "endColumn": 66,
+                  "sourceFile": "ABNDINFO.cpy"
+                }
+              },
+              {
+                "id": "LS_L9_ABND-TASKNO-KEY",
+                "qualifiedName": "ABNDINFO-REC.ABND-VSAM-KEY.ABND-TASKNO-KEY",
+                "level": 5,
+                "name": "ABND-TASKNO-KEY",
+                "pic": "9(4)",
+                "usage": "DISPLAY",
+                "logicalType": "Numeric Display (4 digits)",
+                "byteOffset": 561,
+                "relativeOffset": 8,
+                "byteLength": 4,
+                "elementByteLength": 4,
+                "location": {
+                  "startLine": 9,
+                  "endLine": 9,
+                  "startColumn": 14,
+                  "endColumn": 57,
+                  "sourceFile": "ABNDINFO.cpy"
+                }
+              }
+            ],
+            "location": {
+              "startLine": 7,
+              "endLine": 7,
+              "startColumn": 11,
+              "endColumn": 27,
+              "sourceFile": "ABNDINFO.cpy"
+            }
+          },
+          {
+            "id": "LS_L10_ABND-APPLID",
+            "qualifiedName": "ABNDINFO-REC.ABND-APPLID",
+            "level": 3,
+            "name": "ABND-APPLID",
+            "pic": "X(8)",
+            "usage": "DISPLAY",
+            "logicalType": "Alphanumeric (8 chars)",
+            "byteOffset": 565,
+            "relativeOffset": 12,
+            "byteLength": 8,
+            "elementByteLength": 8,
+            "location": {
+              "startLine": 10,
+              "endLine": 10,
+              "startColumn": 11,
+              "endColumn": 57,
+              "sourceFile": "ABNDINFO.cpy"
+            }
+          },
+          {
+            "id": "LS_L11_ABND-TRANID",
+            "qualifiedName": "ABNDINFO-REC.ABND-TRANID",
+            "level": 3,
+            "name": "ABND-TRANID",
+            "pic": "X(4)",
+            "usage": "DISPLAY",
+            "logicalType": "Alphanumeric (4 chars)",
+            "byteOffset": 573,
+            "relativeOffset": 20,
+            "byteLength": 4,
+            "elementByteLength": 4,
+            "location": {
+              "startLine": 11,
+              "endLine": 11,
+              "startColumn": 11,
+              "endColumn": 57,
+              "sourceFile": "ABNDINFO.cpy"
+            }
+          },
+          {
+            "id": "LS_L12_ABND-DATE",
+            "qualifiedName": "ABNDINFO-REC.ABND-DATE",
+            "level": 3,
+            "name": "ABND-DATE",
+            "pic": "X(10)",
+            "usage": "DISPLAY",
+            "logicalType": "Alphanumeric (10 chars)",
+            "byteOffset": 577,
+            "relativeOffset": 24,
+            "byteLength": 10,
+            "elementByteLength": 10,
+            "location": {
+              "startLine": 12,
+              "endLine": 12,
+              "startColumn": 11,
+              "endColumn": 58,
+              "sourceFile": "ABNDINFO.cpy"
+            }
+          },
+          {
+            "id": "LS_L13_ABND-TIME",
+            "qualifiedName": "ABNDINFO-REC.ABND-TIME",
+            "level": 3,
+            "name": "ABND-TIME",
+            "pic": "X(8)",
+            "usage": "DISPLAY",
+            "logicalType": "Alphanumeric (8 chars)",
+            "byteOffset": 587,
+            "relativeOffset": 34,
+            "byteLength": 8,
+            "elementByteLength": 8,
+            "location": {
+              "startLine": 13,
+              "endLine": 13,
+              "startColumn": 11,
+              "endColumn": 57,
+              "sourceFile": "ABNDINFO.cpy"
+            }
+          },
+          {
+            "id": "LS_L14_ABND-CODE",
+            "qualifiedName": "ABNDINFO-REC.ABND-CODE",
+            "level": 3,
+            "name": "ABND-CODE",
+            "pic": "X(4)",
+            "usage": "DISPLAY",
+            "logicalType": "Alphanumeric (4 chars)",
+            "byteOffset": 595,
+            "relativeOffset": 42,
+            "byteLength": 4,
+            "elementByteLength": 4,
+            "location": {
+              "startLine": 14,
+              "endLine": 14,
+              "startColumn": 11,
+              "endColumn": 57,
+              "sourceFile": "ABNDINFO.cpy"
+            }
+          },
+          {
+            "id": "LS_L15_ABND-PROGRAM",
+            "qualifiedName": "ABNDINFO-REC.ABND-PROGRAM",
+            "level": 3,
+            "name": "ABND-PROGRAM",
+            "pic": "X(8)",
+            "usage": "DISPLAY",
+            "logicalType": "Alphanumeric (8 chars)",
+            "byteOffset": 599,
+            "relativeOffset": 46,
+            "byteLength": 8,
+            "elementByteLength": 8,
+            "location": {
+              "startLine": 15,
+              "endLine": 15,
+              "startColumn": 11,
+              "endColumn": 57,
+              "sourceFile": "ABNDINFO.cpy"
+            }
+          },
+          {
+            "id": "LS_L16_ABND-RESPCODE",
+            "qualifiedName": "ABNDINFO-REC.ABND-RESPCODE",
+            "level": 3,
+            "name": "ABND-RESPCODE",
+            "pic": "S9(8)",
+            "usage": "DISPLAY",
+            "logicalType": "Signed Numeric Display (8 digits)",
+            "byteOffset": 607,
+            "relativeOffset": 54,
+            "byteLength": 8,
+            "elementByteLength": 8,
+            "isSignSeparate": true,
+            "location": {
+              "startLine": 16,
+              "endLine": 17,
+              "startColumn": 11,
+              "endColumn": 39,
+              "sourceFile": "ABNDINFO.cpy"
+            }
+          },
+          {
+            "id": "LS_L18_ABND-RESP2CODE",
+            "qualifiedName": "ABNDINFO-REC.ABND-RESP2CODE",
+            "level": 3,
+            "name": "ABND-RESP2CODE",
+            "pic": "S9(8)",
+            "usage": "DISPLAY",
+            "logicalType": "Signed Numeric Display (8 digits)",
+            "byteOffset": 615,
+            "relativeOffset": 62,
+            "byteLength": 8,
+            "elementByteLength": 8,
+            "isSignSeparate": true,
+            "location": {
+              "startLine": 18,
+              "endLine": 19,
+              "startColumn": 11,
+              "endColumn": 39,
+              "sourceFile": "ABNDINFO.cpy"
+            }
+          },
+          {
+            "id": "LS_L20_ABND-SQLCODE",
+            "qualifiedName": "ABNDINFO-REC.ABND-SQLCODE",
+            "level": 3,
+            "name": "ABND-SQLCODE",
+            "pic": "S9(8)",
+            "usage": "DISPLAY",
+            "logicalType": "Signed Numeric Display (8 digits)",
+            "byteOffset": 623,
+            "relativeOffset": 70,
+            "byteLength": 8,
+            "elementByteLength": 8,
+            "isSignSeparate": true,
+            "location": {
+              "startLine": 20,
+              "endLine": 21,
+              "startColumn": 11,
+              "endColumn": 39,
+              "sourceFile": "ABNDINFO.cpy"
+            }
+          },
+          {
+            "id": "LS_L22_ABND-FREEFORM",
+            "qualifiedName": "ABNDINFO-REC.ABND-FREEFORM",
+            "level": 3,
+            "name": "ABND-FREEFORM",
+            "pic": "X(600)",
+            "usage": "DISPLAY",
+            "logicalType": "Alphanumeric (600 chars)",
+            "byteOffset": 631,
+            "relativeOffset": 78,
+            "byteLength": 600,
+            "elementByteLength": 600,
+            "location": {
+              "startLine": 22,
+              "endLine": 22,
+              "startColumn": 11,
+              "endColumn": 59,
+              "sourceFile": "ABNDINFO.cpy"
+            }
+          }
+        ],
+        "location": {
+          "startLine": 162,
+          "endLine": 162,
+          "startColumn": 7,
+          "endColumn": 22,
+          "sourceFile": "UPDCUST.cbl"
+        }
+      }
+    ],
+    "workingStorageBytes": 409
+  },
+  "sections": [
+    {
+      "name": "PREMIERE",
+      "location": {
+        "startLine": 170,
+        "endLine": 218,
+        "startColumn": 7,
+        "endColumn": 15,
+        "sourceFile": "UPDCUST.cbl"
+      },
+      "paragraphNames": [
+        "A010",
+        "A999"
+      ]
+    },
+    {
+      "name": "UPDATE-CUSTOMER-DB2",
+      "location": {
+        "startLine": 221,
+        "endLine": 429,
+        "startColumn": 7,
+        "endColumn": 15,
+        "sourceFile": "UPDCUST.cbl"
+      },
+      "paragraphNames": [
+        "UCD010",
+        "UCD999"
+      ]
+    },
+    {
+      "name": "GET-ME-OUT-OF-HERE",
+      "location": {
+        "startLine": 432,
+        "endLine": 439,
+        "startColumn": 7,
+        "endColumn": 15,
+        "sourceFile": "UPDCUST.cbl"
+      },
+      "paragraphNames": [
+        "GMOOH010",
+        "GMOOH999"
+      ]
+    },
+    {
+      "name": "POPULATE-TIME-DATE",
+      "location": {
+        "startLine": 442,
+        "endLine": 457,
+        "startColumn": 7,
+        "endColumn": 15,
+        "sourceFile": "UPDCUST.cbl"
+      },
+      "paragraphNames": [
+        "PTD010",
+        "PTD999"
+      ]
+    }
+  ],
+  "paragraphs": [
+    {
+      "name": "A010",
+      "sectionParent": "PREMIERE",
+      "location": {
+        "startLine": 171,
+        "endLine": 215,
+        "startColumn": 7,
+        "endColumn": 37,
+        "sourceFile": "UPDCUST.cbl"
+      },
+      "successors": [
+        "UPDATE-CUSTOMER-DB2",
+        "GET-ME-OUT-OF-HERE"
+      ],
+      "fallthroughSuccessor": "A999",
+      "statements": [
+        {
+          "type": "MOVE",
+          "location": {
+            "startLine": 173,
+            "endLine": 173,
+            "startColumn": 11,
+            "endColumn": 30,
+            "sourceFile": "UPDCUST.cbl"
+          },
+          "rawText": "MOVE COMM-SCODE TO DESIRED-SORT-CODE",
+          "sourceFieldIds": [
+            "LK_L8_COMM-SCODE"
+          ],
+          "targetFieldIds": [
+            "LS_L107_DESIRED-SORT-CODE"
+          ],
+          "fromExpr": "COMM-SCODE",
+          "toTargets": [
+            "DESIRED-SORT-CODE"
+          ]
+        },
+        {
+          "type": "MOVE",
+          "location": {
+            "startLine": 179,
+            "endLine": 179,
+            "startColumn": 11,
+            "endColumn": 30,
+            "sourceFile": "UPDCUST.cbl"
+          },
+          "rawText": "MOVE COMM-TITLE TO WS-UNSTR-TITLE",
+          "sourceFieldIds": [
+            "LK_L11_COMM-TITLE"
+          ],
+          "targetFieldIds": [
+            "LS_L150_WS-UNSTR-TITLE"
+          ],
+          "fromExpr": "COMM-TITLE",
+          "toTargets": [
+            "WS-UNSTR-TITLE"
+          ]
+        },
+        {
+          "type": "MOVE",
+          "location": {
+            "startLine": 181,
+            "endLine": 181,
+            "startColumn": 11,
+            "endColumn": 23,
+            "sourceFile": "UPDCUST.cbl"
+          },
+          "rawText": "MOVE ' ' TO WS-TITLE-VALID",
+          "targetFieldIds": [
+            "LS_L151_WS-TITLE-VALID"
+          ],
+          "fromExpr": "' '",
+          "toTargets": [
+            "WS-TITLE-VALID"
+          ]
+        },
+        {
+          "type": "EVALUATE",
+          "location": {
+            "startLine": 183,
+            "endLine": 199,
+            "startColumn": 11,
+            "endColumn": 11,
+            "sourceFile": "UPDCUST.cbl"
+          },
+          "rawText": "EVALUATE TRUE WHEN WS-UNSTR-TITLE = 'Professor' OR WS-UNSTR-TITLE = 'Mr' OR WS-UNSTR-TITLE = 'Mrs' OR WS-UNSTR-TITLE = 'Miss' OR WS-UNSTR-TITLE = 'Ms' OR WS-UNSTR-TITLE = 'Dr' OR WS-UNSTR-TITLE = 'Drs' OR WS-UNSTR-TITLE = 'Lord' OR WS-UNSTR-TITLE = 'Sir' OR WS-UNSTR-TITLE = 'Lady' OR WS-UNSTR-TITLE = SPACES MOVE 'Y' TO WS-TITLE-VALID WHEN OTHER MOVE 'N' TO WS-TITLE-VALID END-EVALUATE",
+          "sourceFieldIds": [
+            "LS_L150_WS-UNSTR-TITLE"
+          ],
+          "subjects": [
+            "TRUE"
+          ],
+          "whenBranches": [
+            {
+              "conditions": [
+                "WHEN WS-UNSTR-TITLE = 'Professor' OR WS-UNSTR-TITLE = 'Mr' OR WS-UNSTR-TITLE = 'Mrs' OR WS-UNSTR-TITLE = 'Miss' OR WS-UNSTR-TITLE = 'Ms' OR WS-UNSTR-TITLE = 'Dr' OR WS-UNSTR-TITLE = 'Drs' OR WS-UNSTR-TITLE = 'Lord' OR WS-UNSTR-TITLE = 'Sir' OR WS-UNSTR-TITLE = 'Lady' OR WS-UNSTR-TITLE = SPACES"
+              ],
+              "statements": [
+                {
+                  "type": "MOVE",
+                  "location": {
+                    "startLine": 195,
+                    "endLine": 195,
+                    "startColumn": 16,
+                    "endColumn": 28,
+                    "sourceFile": "UPDCUST.cbl"
+                  },
+                  "rawText": "MOVE 'Y' TO WS-TITLE-VALID",
+                  "targetFieldIds": [
+                    "LS_L151_WS-TITLE-VALID"
+                  ],
+                  "fromExpr": "'Y'",
+                  "toTargets": [
+                    "WS-TITLE-VALID"
+                  ]
+                }
+              ]
+            }
+          ],
+          "whenOtherStatements": [
+            {
+              "type": "MOVE",
+              "location": {
+                "startLine": 198,
+                "endLine": 198,
+                "startColumn": 17,
+                "endColumn": 29,
+                "sourceFile": "UPDCUST.cbl"
+              },
+              "rawText": "MOVE 'N' TO WS-TITLE-VALID",
+              "targetFieldIds": [
+                "LS_L151_WS-TITLE-VALID"
+              ],
+              "fromExpr": "'N'",
+              "toTargets": [
+                "WS-TITLE-VALID"
+              ]
+            }
+          ]
+        },
+        {
+          "type": "IF",
+          "location": {
+            "startLine": 201,
+            "endLine": 205,
+            "startColumn": 11,
+            "endColumn": 11,
+            "sourceFile": "UPDCUST.cbl"
+          },
+          "rawText": "IF WS-TITLE-VALID = 'N' MOVE 'N' TO COMM-UPD-SUCCESS MOVE 'T' TO COMM-UPD-FAIL-CD GOBACK END-IF",
+          "sourceFieldIds": [
+            "LS_L151_WS-TITLE-VALID"
+          ],
+          "condition": "WS-TITLE-VALID = 'N'",
+          "thenStatements": [
+            {
+              "type": "MOVE",
+              "location": {
+                "startLine": 202,
+                "endLine": 202,
+                "startColumn": 13,
+                "endColumn": 25,
+                "sourceFile": "UPDCUST.cbl"
+              },
+              "rawText": "MOVE 'N' TO COMM-UPD-SUCCESS",
+              "targetFieldIds": [
+                "LK_L35_COMM-UPD-SUCCESS"
+              ],
+              "fromExpr": "'N'",
+              "toTargets": [
+                "COMM-UPD-SUCCESS"
+              ]
+            },
+            {
+              "type": "MOVE",
+              "location": {
+                "startLine": 203,
+                "endLine": 203,
+                "startColumn": 13,
+                "endColumn": 25,
+                "sourceFile": "UPDCUST.cbl"
+              },
+              "rawText": "MOVE 'T' TO COMM-UPD-FAIL-CD",
+              "targetFieldIds": [
+                "LK_L36_COMM-UPD-FAIL-CD"
+              ],
+              "fromExpr": "'T'",
+              "toTargets": [
+                "COMM-UPD-FAIL-CD"
+              ]
+            },
+            {
+              "type": "GOBACK",
+              "location": {
+                "startLine": 204,
+                "endLine": 204,
+                "startColumn": 13,
+                "endColumn": 13,
+                "sourceFile": "UPDCUST.cbl"
+              },
+              "rawText": "GOBACK",
+              "operation": "GOBACK"
+            }
+          ]
+        },
+        {
+          "type": "PERFORM",
+          "location": {
+            "startLine": 210,
+            "endLine": 210,
+            "startColumn": 11,
+            "endColumn": 19,
+            "sourceFile": "UPDCUST.cbl"
+          },
+          "rawText": "PERFORM UPDATE-CUSTOMER-DB2",
+          "target": "UPDATE-CUSTOMER-DB2"
+        },
+        {
+          "type": "PERFORM",
+          "location": {
+            "startLine": 215,
+            "endLine": 215,
+            "startColumn": 11,
+            "endColumn": 19,
+            "sourceFile": "UPDCUST.cbl"
+          },
+          "rawText": "PERFORM GET-ME-OUT-OF-HERE",
+          "target": "GET-ME-OUT-OF-HERE"
+        }
+      ]
+    },
+    {
+      "name": "A999",
+      "sectionParent": "PREMIERE",
+      "location": {
+        "startLine": 217,
+        "endLine": 218,
+        "startColumn": 7,
+        "endColumn": 15,
+        "sourceFile": "UPDCUST.cbl"
+      },
+      "fallthroughSuccessor": "UCD010",
+      "statements": [
+        {
+          "type": "EXIT",
+          "location": {
+            "startLine": 218,
+            "endLine": 218,
+            "startColumn": 11,
+            "endColumn": 11,
+            "sourceFile": "UPDCUST.cbl"
+          },
+          "rawText": "EXIT",
+          "operation": "EXIT"
+        }
+      ]
+    },
+    {
+      "name": "UCD010",
+      "sectionParent": "UPDATE-CUSTOMER-DB2",
+      "location": {
+        "startLine": 222,
+        "endLine": 426,
+        "startColumn": 7,
+        "endColumn": 39,
+        "sourceFile": "UPDCUST.cbl"
+      },
+      "successors": [
+        "UCD999"
+      ],
+      "fallthroughSuccessor": "UCD999",
+      "statements": [
+        {
+          "type": "MOVE",
+          "location": {
+            "startLine": 227,
+            "endLine": 227,
+            "startColumn": 11,
+            "endColumn": 30,
+            "sourceFile": "UPDCUST.cbl"
+          },
+          "rawText": "MOVE COMM-SCODE TO DESIRED-SORT-CODE",
+          "sourceFieldIds": [
+            "LK_L8_COMM-SCODE"
+          ],
+          "targetFieldIds": [
+            "LS_L107_DESIRED-SORT-CODE"
+          ],
+          "fromExpr": "COMM-SCODE",
+          "toTargets": [
+            "DESIRED-SORT-CODE"
+          ]
+        },
+        {
+          "type": "MOVE",
+          "location": {
+            "startLine": 228,
+            "endLine": 228,
+            "startColumn": 11,
+            "endColumn": 31,
+            "sourceFile": "UPDCUST.cbl"
+          },
+          "rawText": "MOVE COMM-CUSTNO TO DESIRED-CUSTNO",
+          "sourceFieldIds": [
+            "LK_L9_COMM-CUSTNO"
+          ],
+          "targetFieldIds": [
+            "LS_L108_DESIRED-CUSTNO"
+          ],
+          "fromExpr": "COMM-CUSTNO",
+          "toTargets": [
+            "DESIRED-CUSTNO"
+          ]
+        },
+        {
+          "type": "IF",
+          "location": {
+            "startLine": 234,
+            "endLine": 241,
+            "startColumn": 11,
+            "endColumn": 11,
+            "sourceFile": "UPDCUST.cbl"
+          },
+          "rawText": "IF (COMM-FIRST-NAME = SPACES OR COMM-FIRST-NAME(1:1) = ' ') AND (COMM-LAST-NAME = SPACES OR COMM-LAST-NAME(1:1) = ' ') AND (COMM-ADDR-LINE1 = SPACES OR COMM-ADDR-LINE1(1:1) = ' ') MOVE 'N' TO COMM-UPD-SUCCESS MOVE '4' TO COMM-UPD-FAIL-CD GO TO UCD999 END-IF",
+          "sourceFieldIds": [
+            "LK_L12_COMM-FIRST-NAME",
+            "LK_L13_COMM-LAST-NAME",
+            "LK_L20_COMM-ADDR-LINE1"
+          ],
+          "condition": "(COMM-FIRST-NAME = SPACES OR COMM-FIRST-NAME(1:1) = ' ') AND (COMM-LAST-NAME = SPACES OR COMM-LAST-NAME(1:1) = ' ') AND (COMM-ADDR-LINE1 = SPACES OR COMM-ADDR-LINE1(1:1) = ' ')",
+          "thenStatements": [
+            {
+              "type": "MOVE",
+              "location": {
+                "startLine": 238,
+                "endLine": 238,
+                "startColumn": 14,
+                "endColumn": 26,
+                "sourceFile": "UPDCUST.cbl"
+              },
+              "rawText": "MOVE 'N' TO COMM-UPD-SUCCESS",
+              "targetFieldIds": [
+                "LK_L35_COMM-UPD-SUCCESS"
+              ],
+              "fromExpr": "'N'",
+              "toTargets": [
+                "COMM-UPD-SUCCESS"
+              ]
+            },
+            {
+              "type": "MOVE",
+              "location": {
+                "startLine": 239,
+                "endLine": 239,
+                "startColumn": 14,
+                "endColumn": 26,
+                "sourceFile": "UPDCUST.cbl"
+              },
+              "rawText": "MOVE '4' TO COMM-UPD-FAIL-CD",
+              "targetFieldIds": [
+                "LK_L36_COMM-UPD-FAIL-CD"
+              ],
+              "fromExpr": "'4'",
+              "toTargets": [
+                "COMM-UPD-FAIL-CD"
+              ]
+            },
+            {
+              "type": "GO_TO",
+              "location": {
+                "startLine": 240,
+                "endLine": 240,
+                "startColumn": 14,
+                "endColumn": 20,
+                "sourceFile": "UPDCUST.cbl"
+              },
+              "rawText": "GO TO UCD999",
+              "target": "UCD999",
+              "operation": "GO_TO"
+            }
+          ]
+        },
+        {
+          "type": "IF",
+          "location": {
+            "startLine": 249,
+            "endLine": 253,
+            "startColumn": 12,
+            "endColumn": 12,
+            "sourceFile": "UPDCUST.cbl"
+          },
+          "rawText": "IF COMM-SCODE = SPACES OR COMM-SCODE = LOW-VALUES MOVE SORTCODE TO HV-CUSTOMER-SORTCODE ELSE MOVE COMM-SCODE TO HV-CUSTOMER-SORTCODE END-IF",
+          "sourceFieldIds": [
+            "LK_L8_COMM-SCODE"
+          ],
+          "condition": "COMM-SCODE = SPACES OR COMM-SCODE = LOW-VALUES",
+          "thenStatements": [
+            {
+              "type": "MOVE",
+              "location": {
+                "startLine": 250,
+                "endLine": 250,
+                "startColumn": 15,
+                "endColumn": 32,
+                "sourceFile": "UPDCUST.cbl"
+              },
+              "rawText": "MOVE SORTCODE TO HV-CUSTOMER-SORTCODE",
+              "sourceFieldIds": [
+                "WS_L7_SORTCODE"
+              ],
+              "targetFieldIds": [
+                "WS_L58_HV-CUSTOMER-SORTCODE"
+              ],
+              "fromExpr": "SORTCODE",
+              "toTargets": [
+                "HV-CUSTOMER-SORTCODE"
+              ]
+            }
+          ],
+          "elseStatements": [
+            {
+              "type": "MOVE",
+              "location": {
+                "startLine": 252,
+                "endLine": 252,
+                "startColumn": 15,
+                "endColumn": 34,
+                "sourceFile": "UPDCUST.cbl"
+              },
+              "rawText": "MOVE COMM-SCODE TO HV-CUSTOMER-SORTCODE",
+              "sourceFieldIds": [
+                "LK_L8_COMM-SCODE"
+              ],
+              "targetFieldIds": [
+                "WS_L58_HV-CUSTOMER-SORTCODE"
+              ],
+              "fromExpr": "COMM-SCODE",
+              "toTargets": [
+                "HV-CUSTOMER-SORTCODE"
+              ]
+            }
+          ]
+        },
+        {
+          "type": "MOVE",
+          "location": {
+            "startLine": 259,
+            "endLine": 259,
+            "startColumn": 12,
+            "endColumn": 25,
+            "sourceFile": "UPDCUST.cbl"
+          },
+          "rawText": "MOVE ZERO TO DESIRED-CUSTNO",
+          "targetFieldIds": [
+            "LS_L108_DESIRED-CUSTNO"
+          ],
+          "fromExpr": "ZERO",
+          "toTargets": [
+            "DESIRED-CUSTNO"
+          ]
+        },
+        {
+          "type": "UNSTRING",
+          "location": {
+            "startLine": 260,
+            "endLine": 262,
+            "startColumn": 12,
+            "endColumn": 12,
+            "sourceFile": "UPDCUST.cbl"
+          },
+          "rawText": "UNSTRING COMM-CUSTNO DELIMITED BY ' ' INTO DESIRED-CUSTNO END-UNSTRING",
+          "sourceFieldIds": [
+            "LK_L9_COMM-CUSTNO",
+            "LS_L108_DESIRED-CUSTNO"
+          ],
+          "operation": "UNSTRING",
+          "expression": "UNSTRING COMM-CUSTNO DELIMITED BY ' ' INTO DESIRED-CUSTNO END-UNSTRING"
+        },
+        {
+          "type": "MOVE",
+          "location": {
+            "startLine": 263,
+            "endLine": 263,
+            "startColumn": 12,
+            "endColumn": 35,
+            "sourceFile": "UPDCUST.cbl"
+          },
+          "rawText": "MOVE DESIRED-CUSTNO TO HV-CUSTOMER-NUMBER",
+          "sourceFieldIds": [
+            "LS_L108_DESIRED-CUSTNO"
+          ],
+          "targetFieldIds": [
+            "WS_L59_HV-CUSTOMER-NUMBER"
+          ],
+          "fromExpr": "DESIRED-CUSTNO",
+          "toTargets": [
+            "HV-CUSTOMER-NUMBER"
+          ]
+        },
+        {
+          "type": "EXEC_SQL",
+          "location": {
+            "startLine": 265,
+            "endLine": 303,
+            "startColumn": 6,
+            "endColumn": 6,
+            "sourceFile": "UPDCUST.cbl"
+          },
+          "rawText": "*>EXECSQL EXEC SQL *>EXECSQL SELECT CUSTOMER_EYECATCHER, *>EXECSQL CUSTOMER_SORTCODE, *>EXECSQL CUSTOMER_NUMBER, *>EXECSQL CUSTOMER_TITLE, *>EXECSQL CUSTOMER_FIRST_NAME, *>EXECSQL CUSTOMER_LAST_NAME, *>EXECSQL CUSTOMER_DATE_OF_BIRTH, *>EXECSQL CUSTOMER_PHONE, *>EXECSQL CUSTOMER_ADDR_LINE1, *>EXECSQL CUSTOMER_ADDR_LINE2, *>EXECSQL CUSTOMER_CITY, *>EXECSQL CUSTOMER_POSTCODE, *>EXECSQL CUSTOMER_COUNTRY, *>EXECSQL CUSTOMER_STATUS, *>EXECSQL CUSTOMER_CREATED_DATE, *>EXECSQL CUSTOMER_CREDIT_SCORE, *>EXECSQL CUSTOMER_CS_REVIEW_DATE *>EXECSQL INTO :HV-CUSTOMER-EYECATCHER, *>EXECSQL :HV-CUSTOMER-SORTCODE, *>EXECSQL :HV-CUSTOMER-NUMBER, *>EXECSQL :HV-CUSTOMER-TITLE, *>EXECSQL :HV-CUSTOMER-FIRST-NAME, *>EXECSQL :HV-CUSTOMER-LAST-NAME, *>EXECSQL :HV-CUSTOMER-DOB, *>EXECSQL :HV-CUSTOMER-PHONE, *>EXECSQL :HV-CUSTOMER-ADDR-LINE1, *>EXECSQL :HV-CUSTOMER-ADDR-LINE2, *>EXECSQL :HV-CUSTOMER-CITY, *>EXECSQL :HV-CUSTOMER-POSTCODE, *>EXECSQL :HV-CUSTOMER-COUNTRY, *>EXECSQL :HV-CUSTOMER-STATUS, *>EXECSQL :HV-CUSTOMER-CREATE-DATE, *>EXECSQL :HV-CUSTOMER-CREDIT-SCORE, *>EXECSQL :HV-CUSTOMER-CS-REVIEW-DATE *>EXECSQL FROM CUSTOMER *>EXECSQL WHERE CUSTOMER_SORTCODE = :HV-CUSTOMER-SORTCODE *>EXECSQL AND CUSTOMER_NUMBER = :HV-CUSTOMER-NUMBER *>EXECSQL END-EXEC }",
+          "subsystem": "SQL",
+          "rawPayload": "EXEC SQL SELECT CUSTOMER_EYECATCHER, CUSTOMER_SORTCODE, CUSTOMER_NUMBER, CUSTOMER_TITLE, CUSTOMER_FIRST_NAME, CUSTOMER_LAST_NAME, CUSTOMER_DATE_OF_BIRTH, CUSTOMER_PHONE, CUSTOMER_ADDR_LINE1, CUSTOMER_ADDR_LINE2, CUSTOMER_CITY, CUSTOMER_POSTCODE, CUSTOMER_COUNTRY, CUSTOMER_STATUS, CUSTOMER_CREATED_DATE, CUSTOMER_CREDIT_SCORE, CUSTOMER_CS_REVIEW_DATE INTO :HV-CUSTOMER-EYECATCHER, :HV-CUSTOMER-SORTCODE, :HV-CUSTOMER-NUMBER, :HV-CUSTOMER-TITLE, :HV-CUSTOMER-FIRST-NAME, :HV-CUSTOMER-LAST-NAME, :HV-CUSTOMER-DOB, :HV-CUSTOMER-PHONE, :HV-CUSTOMER-ADDR-LINE1, :HV-CUSTOMER-ADDR-LINE2, :HV-CUSTOMER-CITY, :HV-CUSTOMER-POSTCODE, :HV-CUSTOMER-COUNTRY, :HV-CUSTOMER-STATUS, :HV-CUSTOMER-CREATE-DATE, :HV-CUSTOMER-CREDIT-SCORE, :HV-CUSTOMER-CS-REVIEW-DATE FROM CUSTOMER WHERE CUSTOMER_SORTCODE = :HV-CUSTOMER-SORTCODE AND CUSTOMER_NUMBER = :HV-CUSTOMER-NUMBER END-EXEC"
+        },
+        {
+          "type": "IF",
+          "location": {
+            "startLine": 308,
+            "endLine": 312,
+            "startColumn": 11,
+            "endColumn": 11,
+            "sourceFile": "UPDCUST.cbl"
+          },
+          "rawText": "IF SQLCODE = 100 MOVE 'N' TO COMM-UPD-SUCCESS MOVE '1' TO COMM-UPD-FAIL-CD GO TO UCD999 END-IF",
+          "condition": "SQLCODE = 100",
+          "thenStatements": [
+            {
+              "type": "MOVE",
+              "location": {
+                "startLine": 309,
+                "endLine": 309,
+                "startColumn": 14,
+                "endColumn": 26,
+                "sourceFile": "UPDCUST.cbl"
+              },
+              "rawText": "MOVE 'N' TO COMM-UPD-SUCCESS",
+              "targetFieldIds": [
+                "LK_L35_COMM-UPD-SUCCESS"
+              ],
+              "fromExpr": "'N'",
+              "toTargets": [
+                "COMM-UPD-SUCCESS"
+              ]
+            },
+            {
+              "type": "MOVE",
+              "location": {
+                "startLine": 310,
+                "endLine": 310,
+                "startColumn": 14,
+                "endColumn": 26,
+                "sourceFile": "UPDCUST.cbl"
+              },
+              "rawText": "MOVE '1' TO COMM-UPD-FAIL-CD",
+              "targetFieldIds": [
+                "LK_L36_COMM-UPD-FAIL-CD"
+              ],
+              "fromExpr": "'1'",
+              "toTargets": [
+                "COMM-UPD-FAIL-CD"
+              ]
+            },
+            {
+              "type": "GO_TO",
+              "location": {
+                "startLine": 311,
+                "endLine": 311,
+                "startColumn": 14,
+                "endColumn": 20,
+                "sourceFile": "UPDCUST.cbl"
+              },
+              "rawText": "GO TO UCD999",
+              "target": "UCD999",
+              "operation": "GO_TO"
+            }
+          ]
+        },
+        {
+          "type": "IF",
+          "location": {
+            "startLine": 314,
+            "endLine": 321,
+            "startColumn": 11,
+            "endColumn": 11,
+            "sourceFile": "UPDCUST.cbl"
+          },
+          "rawText": "IF SQLCODE NOT = 0 MOVE SQLCODE TO SQLCODE-DISPLAY DISPLAY 'UPDCUST - SELECT CUSTOMER failed. SQLCODE=' SQLCODE-DISPLAY MOVE 'N' TO COMM-UPD-SUCCESS MOVE '2' TO COMM-UPD-FAIL-CD GO TO UCD999 END-IF",
+          "condition": "SQLCODE NOT = 0",
+          "thenStatements": [
+            {
+              "type": "MOVE",
+              "location": {
+                "startLine": 315,
+                "endLine": 315,
+                "startColumn": 14,
+                "endColumn": 30,
+                "sourceFile": "UPDCUST.cbl"
+              },
+              "rawText": "MOVE SQLCODE TO SQLCODE-DISPLAY",
+              "targetFieldIds": [
+                "WS_L80_SQLCODE-DISPLAY"
+              ],
+              "fromExpr": "SQLCODE",
+              "toTargets": [
+                "SQLCODE-DISPLAY"
+              ]
+            },
+            {
+              "type": "DISPLAY",
+              "location": {
+                "startLine": 316,
+                "endLine": 317,
+                "startColumn": 14,
+                "endColumn": 17,
+                "sourceFile": "UPDCUST.cbl"
+              },
+              "rawText": "DISPLAY 'UPDCUST - SELECT CUSTOMER failed. SQLCODE=' SQLCODE-DISPLAY",
+              "sourceFieldIds": [
+                "WS_L80_SQLCODE-DISPLAY"
+              ],
+              "operands": [
+                "'UPDCUST - SELECT CUSTOMER failed. SQLCODE='",
+                "SQLCODE-DISPLAY"
+              ]
+            },
+            {
+              "type": "MOVE",
+              "location": {
+                "startLine": 318,
+                "endLine": 318,
+                "startColumn": 14,
+                "endColumn": 26,
+                "sourceFile": "UPDCUST.cbl"
+              },
+              "rawText": "MOVE 'N' TO COMM-UPD-SUCCESS",
+              "targetFieldIds": [
+                "LK_L35_COMM-UPD-SUCCESS"
+              ],
+              "fromExpr": "'N'",
+              "toTargets": [
+                "COMM-UPD-SUCCESS"
+              ]
+            },
+            {
+              "type": "MOVE",
+              "location": {
+                "startLine": 319,
+                "endLine": 319,
+                "startColumn": 14,
+                "endColumn": 26,
+                "sourceFile": "UPDCUST.cbl"
+              },
+              "rawText": "MOVE '2' TO COMM-UPD-FAIL-CD",
+              "targetFieldIds": [
+                "LK_L36_COMM-UPD-FAIL-CD"
+              ],
+              "fromExpr": "'2'",
+              "toTargets": [
+                "COMM-UPD-FAIL-CD"
+              ]
+            },
+            {
+              "type": "GO_TO",
+              "location": {
+                "startLine": 320,
+                "endLine": 320,
+                "startColumn": 14,
+                "endColumn": 20,
+                "sourceFile": "UPDCUST.cbl"
+              },
+              "rawText": "GO TO UCD999",
+              "target": "UCD999",
+              "operation": "GO_TO"
+            }
+          ]
+        },
+        {
+          "type": "IF",
+          "location": {
+            "startLine": 327,
+            "endLine": 333,
+            "startColumn": 11,
+            "endColumn": 11,
+            "sourceFile": "UPDCUST.cbl"
+          },
+          "rawText": "IF COMM-FIRST-NAME OF COMM-NAME (1:1) NOT = ' ' MOVE COMM-TITLE OF COMM-NAME TO HV-CUSTOMER-TITLE MOVE COMM-FIRST-NAME OF COMM-NAME TO HV-CUSTOMER-FIRST-NAME MOVE COMM-LAST-NAME OF COMM-NAME TO HV-CUSTOMER-LAST-NAME END-IF",
+          "sourceFieldIds": [
+            "LK_L12_COMM-FIRST-NAME",
+            "LK_L10_COMM-NAME"
+          ],
+          "condition": "COMM-FIRST-NAME OF COMM-NAME (1:1) NOT = ' '",
+          "thenStatements": [
+            {
+              "type": "MOVE",
+              "location": {
+                "startLine": 328,
+                "endLine": 328,
+                "startColumn": 14,
+                "endColumn": 46,
+                "sourceFile": "UPDCUST.cbl"
+              },
+              "rawText": "MOVE COMM-TITLE OF COMM-NAME TO HV-CUSTOMER-TITLE",
+              "sourceFieldIds": [
+                "LK_L11_COMM-TITLE",
+                "LK_L10_COMM-NAME"
+              ],
+              "targetFieldIds": [
+                "WS_L60_HV-CUSTOMER-TITLE"
+              ],
+              "fromExpr": "COMM-TITLE OF COMM-NAME",
+              "toTargets": [
+                "HV-CUSTOMER-TITLE"
+              ]
+            },
+            {
+              "type": "MOVE",
+              "location": {
+                "startLine": 329,
+                "endLine": 330,
+                "startColumn": 14,
+                "endColumn": 20,
+                "sourceFile": "UPDCUST.cbl"
+              },
+              "rawText": "MOVE COMM-FIRST-NAME OF COMM-NAME TO HV-CUSTOMER-FIRST-NAME",
+              "sourceFieldIds": [
+                "LK_L12_COMM-FIRST-NAME",
+                "LK_L10_COMM-NAME"
+              ],
+              "targetFieldIds": [
+                "WS_L61_HV-CUSTOMER-FIRST-NAME"
+              ],
+              "fromExpr": "COMM-FIRST-NAME OF COMM-NAME",
+              "toTargets": [
+                "HV-CUSTOMER-FIRST-NAME"
+              ]
+            },
+            {
+              "type": "MOVE",
+              "location": {
+                "startLine": 331,
+                "endLine": 332,
+                "startColumn": 14,
+                "endColumn": 20,
+                "sourceFile": "UPDCUST.cbl"
+              },
+              "rawText": "MOVE COMM-LAST-NAME OF COMM-NAME TO HV-CUSTOMER-LAST-NAME",
+              "sourceFieldIds": [
+                "LK_L13_COMM-LAST-NAME",
+                "LK_L10_COMM-NAME"
+              ],
+              "targetFieldIds": [
+                "WS_L62_HV-CUSTOMER-LAST-NAME"
+              ],
+              "fromExpr": "COMM-LAST-NAME OF COMM-NAME",
+              "toTargets": [
+                "HV-CUSTOMER-LAST-NAME"
+              ]
+            }
+          ]
+        },
+        {
+          "type": "IF",
+          "location": {
+            "startLine": 335,
+            "endLine": 337,
+            "startColumn": 11,
+            "endColumn": 11,
+            "sourceFile": "UPDCUST.cbl"
+          },
+          "rawText": "IF COMM-PHONE(1:1) NOT = ' ' MOVE COMM-PHONE TO HV-CUSTOMER-PHONE END-IF",
+          "sourceFieldIds": [
+            "LK_L18_COMM-PHONE"
+          ],
+          "condition": "COMM-PHONE(1:1) NOT = ' '",
+          "thenStatements": [
+            {
+              "type": "MOVE",
+              "location": {
+                "startLine": 336,
+                "endLine": 336,
+                "startColumn": 14,
+                "endColumn": 33,
+                "sourceFile": "UPDCUST.cbl"
+              },
+              "rawText": "MOVE COMM-PHONE TO HV-CUSTOMER-PHONE",
+              "sourceFieldIds": [
+                "LK_L18_COMM-PHONE"
+              ],
+              "targetFieldIds": [
+                "WS_L64_HV-CUSTOMER-PHONE"
+              ],
+              "fromExpr": "COMM-PHONE",
+              "toTargets": [
+                "HV-CUSTOMER-PHONE"
+              ]
+            }
+          ]
+        },
+        {
+          "type": "IF",
+          "location": {
+            "startLine": 339,
+            "endLine": 347,
+            "startColumn": 11,
+            "endColumn": 11,
+            "sourceFile": "UPDCUST.cbl"
+          },
+          "rawText": "IF COMM-ADDR-LINE1 OF COMM-ADDR (1:1) NOT = ' ' MOVE COMM-ADDR-LINE1 OF COMM-ADDR TO HV-CUSTOMER-ADDR-LINE1 MOVE COMM-ADDR-LINE2 OF COMM-ADDR TO HV-CUSTOMER-ADDR-LINE2 MOVE COMM-CITY OF COMM-ADDR TO HV-CUSTOMER-CITY MOVE COMM-POSTCODE OF COMM-ADDR TO HV-CUSTOMER-POSTCODE MOVE COMM-COUNTRY OF COMM-ADDR TO HV-CUSTOMER-COUNTRY END-IF",
+          "sourceFieldIds": [
+            "LK_L20_COMM-ADDR-LINE1",
+            "LK_L19_COMM-ADDR"
+          ],
+          "condition": "COMM-ADDR-LINE1 OF COMM-ADDR (1:1) NOT = ' '",
+          "thenStatements": [
+            {
+              "type": "MOVE",
+              "location": {
+                "startLine": 340,
+                "endLine": 341,
+                "startColumn": 14,
+                "endColumn": 20,
+                "sourceFile": "UPDCUST.cbl"
+              },
+              "rawText": "MOVE COMM-ADDR-LINE1 OF COMM-ADDR TO HV-CUSTOMER-ADDR-LINE1",
+              "sourceFieldIds": [
+                "LK_L20_COMM-ADDR-LINE1",
+                "LK_L19_COMM-ADDR"
+              ],
+              "targetFieldIds": [
+                "WS_L65_HV-CUSTOMER-ADDR-LINE1"
+              ],
+              "fromExpr": "COMM-ADDR-LINE1 OF COMM-ADDR",
+              "toTargets": [
+                "HV-CUSTOMER-ADDR-LINE1"
+              ]
+            },
+            {
+              "type": "MOVE",
+              "location": {
+                "startLine": 342,
+                "endLine": 343,
+                "startColumn": 14,
+                "endColumn": 20,
+                "sourceFile": "UPDCUST.cbl"
+              },
+              "rawText": "MOVE COMM-ADDR-LINE2 OF COMM-ADDR TO HV-CUSTOMER-ADDR-LINE2",
+              "sourceFieldIds": [
+                "LK_L21_COMM-ADDR-LINE2",
+                "LK_L19_COMM-ADDR"
+              ],
+              "targetFieldIds": [
+                "WS_L66_HV-CUSTOMER-ADDR-LINE2"
+              ],
+              "fromExpr": "COMM-ADDR-LINE2 OF COMM-ADDR",
+              "toTargets": [
+                "HV-CUSTOMER-ADDR-LINE2"
+              ]
+            },
+            {
+              "type": "MOVE",
+              "location": {
+                "startLine": 344,
+                "endLine": 344,
+                "startColumn": 14,
+                "endColumn": 45,
+                "sourceFile": "UPDCUST.cbl"
+              },
+              "rawText": "MOVE COMM-CITY OF COMM-ADDR TO HV-CUSTOMER-CITY",
+              "sourceFieldIds": [
+                "LK_L22_COMM-CITY",
+                "LK_L19_COMM-ADDR"
+              ],
+              "targetFieldIds": [
+                "WS_L67_HV-CUSTOMER-CITY"
+              ],
+              "fromExpr": "COMM-CITY OF COMM-ADDR",
+              "toTargets": [
+                "HV-CUSTOMER-CITY"
+              ]
+            },
+            {
+              "type": "MOVE",
+              "location": {
+                "startLine": 345,
+                "endLine": 345,
+                "startColumn": 14,
+                "endColumn": 49,
+                "sourceFile": "UPDCUST.cbl"
+              },
+              "rawText": "MOVE COMM-POSTCODE OF COMM-ADDR TO HV-CUSTOMER-POSTCODE",
+              "sourceFieldIds": [
+                "LK_L23_COMM-POSTCODE",
+                "LK_L19_COMM-ADDR"
+              ],
+              "targetFieldIds": [
+                "WS_L68_HV-CUSTOMER-POSTCODE"
+              ],
+              "fromExpr": "COMM-POSTCODE OF COMM-ADDR",
+              "toTargets": [
+                "HV-CUSTOMER-POSTCODE"
+              ]
+            },
+            {
+              "type": "MOVE",
+              "location": {
+                "startLine": 346,
+                "endLine": 346,
+                "startColumn": 14,
+                "endColumn": 48,
+                "sourceFile": "UPDCUST.cbl"
+              },
+              "rawText": "MOVE COMM-COUNTRY OF COMM-ADDR TO HV-CUSTOMER-COUNTRY",
+              "sourceFieldIds": [
+                "LK_L24_COMM-COUNTRY",
+                "LK_L19_COMM-ADDR"
+              ],
+              "targetFieldIds": [
+                "WS_L69_HV-CUSTOMER-COUNTRY"
+              ],
+              "fromExpr": "COMM-COUNTRY OF COMM-ADDR",
+              "toTargets": [
+                "HV-CUSTOMER-COUNTRY"
+              ]
+            }
+          ]
+        },
+        {
+          "type": "IF",
+          "location": {
+            "startLine": 349,
+            "endLine": 351,
+            "startColumn": 11,
+            "endColumn": 11,
+            "sourceFile": "UPDCUST.cbl"
+          },
+          "rawText": "IF COMM-STATUS(1:1) NOT = ' ' MOVE COMM-STATUS TO HV-CUSTOMER-STATUS END-IF",
+          "sourceFieldIds": [
+            "LK_L25_COMM-STATUS"
+          ],
+          "condition": "COMM-STATUS(1:1) NOT = ' '",
+          "thenStatements": [
+            {
+              "type": "MOVE",
+              "location": {
+                "startLine": 350,
+                "endLine": 350,
+                "startColumn": 14,
+                "endColumn": 34,
+                "sourceFile": "UPDCUST.cbl"
+              },
+              "rawText": "MOVE COMM-STATUS TO HV-CUSTOMER-STATUS",
+              "sourceFieldIds": [
+                "LK_L25_COMM-STATUS"
+              ],
+              "targetFieldIds": [
+                "WS_L70_HV-CUSTOMER-STATUS"
+              ],
+              "fromExpr": "COMM-STATUS",
+              "toTargets": [
+                "HV-CUSTOMER-STATUS"
+              ]
+            }
+          ]
+        },
+        {
+          "type": "IF",
+          "location": {
+            "startLine": 353,
+            "endLine": 358,
+            "startColumn": 11,
+            "endColumn": 11,
+            "sourceFile": "UPDCUST.cbl"
+          },
+          "rawText": "IF COMM-DOB-YEAR NOT = 0 COMPUTE HV-CUSTOMER-DOB = (COMM-DOB-YEAR * 10000) + (COMM-DOB-MONTH * 100) + COMM-DOB-DAY END-IF",
+          "sourceFieldIds": [
+            "LK_L17_COMM-DOB-YEAR"
+          ],
+          "condition": "COMM-DOB-YEAR NOT = 0",
+          "thenStatements": [
+            {
+              "type": "COMPUTE",
+              "location": {
+                "startLine": 354,
+                "endLine": 357,
+                "startColumn": 14,
+                "endColumn": 17,
+                "sourceFile": "UPDCUST.cbl"
+              },
+              "rawText": "COMPUTE HV-CUSTOMER-DOB = (COMM-DOB-YEAR * 10000) + (COMM-DOB-MONTH * 100) + COMM-DOB-DAY",
+              "sourceFieldIds": [
+                "LK_L17_COMM-DOB-YEAR",
+                "LK_L16_COMM-DOB-MONTH",
+                "LK_L15_COMM-DOB-DAY"
+              ],
+              "targetFieldIds": [
+                "WS_L63_HV-CUSTOMER-DOB"
+              ],
+              "expression": "(COMM-DOB-YEAR * 10000) + (COMM-DOB-MONTH * 100) + COMM-DOB-DAY",
+              "targets": [
+                "HV-CUSTOMER-DOB"
+              ]
+            }
+          ]
+        },
+        {
+          "type": "EXEC_SQL",
+          "location": {
+            "startLine": 363,
+            "endLine": 378,
+            "startColumn": 6,
+            "endColumn": 6,
+            "sourceFile": "UPDCUST.cbl"
+          },
+          "rawText": "*>EXECSQL EXEC SQL *>EXECSQL UPDATE CUSTOMER *>EXECSQL SET CUSTOMER_TITLE = :HV-CUSTOMER-TITLE, *>EXECSQL CUSTOMER_FIRST_NAME = :HV-CUSTOMER-FIRST-NAME, *>EXECSQL CUSTOMER_LAST_NAME = :HV-CUSTOMER-LAST-NAME, *>EXECSQL CUSTOMER_DATE_OF_BIRTH = :HV-CUSTOMER-DOB, *>EXECSQL CUSTOMER_PHONE = :HV-CUSTOMER-PHONE, *>EXECSQL CUSTOMER_ADDR_LINE1 = :HV-CUSTOMER-ADDR-LINE1, *>EXECSQL CUSTOMER_ADDR_LINE2 = :HV-CUSTOMER-ADDR-LINE2, *>EXECSQL CUSTOMER_CITY = :HV-CUSTOMER-CITY, *>EXECSQL CUSTOMER_POSTCODE = :HV-CUSTOMER-POSTCODE, *>EXECSQL CUSTOMER_COUNTRY = :HV-CUSTOMER-COUNTRY, *>EXECSQL CUSTOMER_STATUS = :HV-CUSTOMER-STATUS *>EXECSQL WHERE CUSTOMER_SORTCODE = :HV-CUSTOMER-SORTCODE *>EXECSQL AND CUSTOMER_NUMBER = :HV-CUSTOMER-NUMBER *>EXECSQL END-EXEC }",
+          "subsystem": "SQL",
+          "rawPayload": "EXEC SQL UPDATE CUSTOMER SET CUSTOMER_TITLE = :HV-CUSTOMER-TITLE, CUSTOMER_FIRST_NAME = :HV-CUSTOMER-FIRST-NAME, CUSTOMER_LAST_NAME = :HV-CUSTOMER-LAST-NAME, CUSTOMER_DATE_OF_BIRTH = :HV-CUSTOMER-DOB, CUSTOMER_PHONE = :HV-CUSTOMER-PHONE, CUSTOMER_ADDR_LINE1 = :HV-CUSTOMER-ADDR-LINE1, CUSTOMER_ADDR_LINE2 = :HV-CUSTOMER-ADDR-LINE2, CUSTOMER_CITY = :HV-CUSTOMER-CITY, CUSTOMER_POSTCODE = :HV-CUSTOMER-POSTCODE, CUSTOMER_COUNTRY = :HV-CUSTOMER-COUNTRY, CUSTOMER_STATUS = :HV-CUSTOMER-STATUS WHERE CUSTOMER_SORTCODE = :HV-CUSTOMER-SORTCODE AND CUSTOMER_NUMBER = :HV-CUSTOMER-NUMBER END-EXEC"
+        },
+        {
+          "type": "IF",
+          "location": {
+            "startLine": 383,
+            "endLine": 390,
+            "startColumn": 11,
+            "endColumn": 11,
+            "sourceFile": "UPDCUST.cbl"
+          },
+          "rawText": "IF SQLCODE NOT = 0 MOVE SQLCODE TO SQLCODE-DISPLAY DISPLAY 'UPDCUST - UPDATE CUSTOMER failed. SQLCODE=' SQLCODE-DISPLAY MOVE 'N' TO COMM-UPD-SUCCESS MOVE '3' TO COMM-UPD-FAIL-CD GO TO UCD999 END-IF",
+          "condition": "SQLCODE NOT = 0",
+          "thenStatements": [
+            {
+              "type": "MOVE",
+              "location": {
+                "startLine": 384,
+                "endLine": 384,
+                "startColumn": 14,
+                "endColumn": 30,
+                "sourceFile": "UPDCUST.cbl"
+              },
+              "rawText": "MOVE SQLCODE TO SQLCODE-DISPLAY",
+              "targetFieldIds": [
+                "WS_L80_SQLCODE-DISPLAY"
+              ],
+              "fromExpr": "SQLCODE",
+              "toTargets": [
+                "SQLCODE-DISPLAY"
+              ]
+            },
+            {
+              "type": "DISPLAY",
+              "location": {
+                "startLine": 385,
+                "endLine": 386,
+                "startColumn": 14,
+                "endColumn": 17,
+                "sourceFile": "UPDCUST.cbl"
+              },
+              "rawText": "DISPLAY 'UPDCUST - UPDATE CUSTOMER failed. SQLCODE=' SQLCODE-DISPLAY",
+              "sourceFieldIds": [
+                "WS_L80_SQLCODE-DISPLAY"
+              ],
+              "operands": [
+                "'UPDCUST - UPDATE CUSTOMER failed. SQLCODE='",
+                "SQLCODE-DISPLAY"
+              ]
+            },
+            {
+              "type": "MOVE",
+              "location": {
+                "startLine": 387,
+                "endLine": 387,
+                "startColumn": 14,
+                "endColumn": 26,
+                "sourceFile": "UPDCUST.cbl"
+              },
+              "rawText": "MOVE 'N' TO COMM-UPD-SUCCESS",
+              "targetFieldIds": [
+                "LK_L35_COMM-UPD-SUCCESS"
+              ],
+              "fromExpr": "'N'",
+              "toTargets": [
+                "COMM-UPD-SUCCESS"
+              ]
+            },
+            {
+              "type": "MOVE",
+              "location": {
+                "startLine": 388,
+                "endLine": 388,
+                "startColumn": 14,
+                "endColumn": 26,
+                "sourceFile": "UPDCUST.cbl"
+              },
+              "rawText": "MOVE '3' TO COMM-UPD-FAIL-CD",
+              "targetFieldIds": [
+                "LK_L36_COMM-UPD-FAIL-CD"
+              ],
+              "fromExpr": "'3'",
+              "toTargets": [
+                "COMM-UPD-FAIL-CD"
+              ]
+            },
+            {
+              "type": "GO_TO",
+              "location": {
+                "startLine": 389,
+                "endLine": 389,
+                "startColumn": 14,
+                "endColumn": 20,
+                "sourceFile": "UPDCUST.cbl"
+              },
+              "rawText": "GO TO UCD999",
+              "target": "UCD999",
+              "operation": "GO_TO"
+            }
+          ]
+        },
+        {
+          "type": "MOVE",
+          "location": {
+            "startLine": 395,
+            "endLine": 395,
+            "startColumn": 11,
+            "endColumn": 42,
+            "sourceFile": "UPDCUST.cbl"
+          },
+          "rawText": "MOVE HV-CUSTOMER-EYECATCHER TO COMM-EYE",
+          "sourceFieldIds": [
+            "WS_L57_HV-CUSTOMER-EYECATCHER"
+          ],
+          "targetFieldIds": [
+            "LK_L7_COMM-EYE"
+          ],
+          "fromExpr": "HV-CUSTOMER-EYECATCHER",
+          "toTargets": [
+            "COMM-EYE"
+          ]
+        },
+        {
+          "type": "MOVE",
+          "location": {
+            "startLine": 396,
+            "endLine": 396,
+            "startColumn": 11,
+            "endColumn": 40,
+            "sourceFile": "UPDCUST.cbl"
+          },
+          "rawText": "MOVE HV-CUSTOMER-SORTCODE TO COMM-SCODE",
+          "sourceFieldIds": [
+            "WS_L58_HV-CUSTOMER-SORTCODE"
+          ],
+          "targetFieldIds": [
+            "LK_L8_COMM-SCODE"
+          ],
+          "fromExpr": "HV-CUSTOMER-SORTCODE",
+          "toTargets": [
+            "COMM-SCODE"
+          ]
+        },
+        {
+          "type": "MOVE",
+          "location": {
+            "startLine": 397,
+            "endLine": 397,
+            "startColumn": 11,
+            "endColumn": 38,
+            "sourceFile": "UPDCUST.cbl"
+          },
+          "rawText": "MOVE HV-CUSTOMER-NUMBER TO COMM-CUSTNO",
+          "sourceFieldIds": [
+            "WS_L59_HV-CUSTOMER-NUMBER"
+          ],
+          "targetFieldIds": [
+            "LK_L9_COMM-CUSTNO"
+          ],
+          "fromExpr": "HV-CUSTOMER-NUMBER",
+          "toTargets": [
+            "COMM-CUSTNO"
+          ]
+        },
+        {
+          "type": "MOVE",
+          "location": {
+            "startLine": 398,
+            "endLine": 398,
+            "startColumn": 11,
+            "endColumn": 51,
+            "sourceFile": "UPDCUST.cbl"
+          },
+          "rawText": "MOVE HV-CUSTOMER-TITLE TO COMM-TITLE OF COMM-NAME",
+          "sourceFieldIds": [
+            "WS_L60_HV-CUSTOMER-TITLE"
+          ],
+          "targetFieldIds": [
+            "LK_L11_COMM-TITLE"
+          ],
+          "fromExpr": "HV-CUSTOMER-TITLE",
+          "toTargets": [
+            "COMM-TITLE"
+          ]
+        },
+        {
+          "type": "MOVE",
+          "location": {
+            "startLine": 399,
+            "endLine": 400,
+            "startColumn": 11,
+            "endColumn": 17,
+            "sourceFile": "UPDCUST.cbl"
+          },
+          "rawText": "MOVE HV-CUSTOMER-FIRST-NAME TO COMM-FIRST-NAME OF COMM-NAME",
+          "sourceFieldIds": [
+            "WS_L61_HV-CUSTOMER-FIRST-NAME"
+          ],
+          "targetFieldIds": [
+            "LK_L12_COMM-FIRST-NAME"
+          ],
+          "fromExpr": "HV-CUSTOMER-FIRST-NAME",
+          "toTargets": [
+            "COMM-FIRST-NAME"
+          ]
+        },
+        {
+          "type": "MOVE",
+          "location": {
+            "startLine": 401,
+            "endLine": 402,
+            "startColumn": 11,
+            "endColumn": 17,
+            "sourceFile": "UPDCUST.cbl"
+          },
+          "rawText": "MOVE HV-CUSTOMER-LAST-NAME TO COMM-LAST-NAME OF COMM-NAME",
+          "sourceFieldIds": [
+            "WS_L62_HV-CUSTOMER-LAST-NAME"
+          ],
+          "targetFieldIds": [
+            "LK_L13_COMM-LAST-NAME"
+          ],
+          "fromExpr": "HV-CUSTOMER-LAST-NAME",
+          "toTargets": [
+            "COMM-LAST-NAME"
+          ]
+        },
+        {
+          "type": "MOVE",
+          "location": {
+            "startLine": 403,
+            "endLine": 403,
+            "startColumn": 11,
+            "endColumn": 37,
+            "sourceFile": "UPDCUST.cbl"
+          },
+          "rawText": "MOVE HV-CUSTOMER-PHONE TO COMM-PHONE",
+          "sourceFieldIds": [
+            "WS_L64_HV-CUSTOMER-PHONE"
+          ],
+          "targetFieldIds": [
+            "LK_L18_COMM-PHONE"
+          ],
+          "fromExpr": "HV-CUSTOMER-PHONE",
+          "toTargets": [
+            "COMM-PHONE"
+          ]
+        },
+        {
+          "type": "MOVE",
+          "location": {
+            "startLine": 404,
+            "endLine": 405,
+            "startColumn": 11,
+            "endColumn": 17,
+            "sourceFile": "UPDCUST.cbl"
+          },
+          "rawText": "MOVE HV-CUSTOMER-ADDR-LINE1 TO COMM-ADDR-LINE1 OF COMM-ADDR",
+          "sourceFieldIds": [
+            "WS_L65_HV-CUSTOMER-ADDR-LINE1"
+          ],
+          "targetFieldIds": [
+            "LK_L20_COMM-ADDR-LINE1"
+          ],
+          "fromExpr": "HV-CUSTOMER-ADDR-LINE1",
+          "toTargets": [
+            "COMM-ADDR-LINE1"
+          ]
+        },
+        {
+          "type": "MOVE",
+          "location": {
+            "startLine": 406,
+            "endLine": 407,
+            "startColumn": 11,
+            "endColumn": 17,
+            "sourceFile": "UPDCUST.cbl"
+          },
+          "rawText": "MOVE HV-CUSTOMER-ADDR-LINE2 TO COMM-ADDR-LINE2 OF COMM-ADDR",
+          "sourceFieldIds": [
+            "WS_L66_HV-CUSTOMER-ADDR-LINE2"
+          ],
+          "targetFieldIds": [
+            "LK_L21_COMM-ADDR-LINE2"
+          ],
+          "fromExpr": "HV-CUSTOMER-ADDR-LINE2",
+          "toTargets": [
+            "COMM-ADDR-LINE2"
+          ]
+        },
+        {
+          "type": "MOVE",
+          "location": {
+            "startLine": 408,
+            "endLine": 408,
+            "startColumn": 11,
+            "endColumn": 49,
+            "sourceFile": "UPDCUST.cbl"
+          },
+          "rawText": "MOVE HV-CUSTOMER-CITY TO COMM-CITY OF COMM-ADDR",
+          "sourceFieldIds": [
+            "WS_L67_HV-CUSTOMER-CITY"
+          ],
+          "targetFieldIds": [
+            "LK_L22_COMM-CITY"
+          ],
+          "fromExpr": "HV-CUSTOMER-CITY",
+          "toTargets": [
+            "COMM-CITY"
+          ]
+        },
+        {
+          "type": "MOVE",
+          "location": {
+            "startLine": 409,
+            "endLine": 409,
+            "startColumn": 11,
+            "endColumn": 57,
+            "sourceFile": "UPDCUST.cbl"
+          },
+          "rawText": "MOVE HV-CUSTOMER-POSTCODE TO COMM-POSTCODE OF COMM-ADDR",
+          "sourceFieldIds": [
+            "WS_L68_HV-CUSTOMER-POSTCODE"
+          ],
+          "targetFieldIds": [
+            "LK_L23_COMM-POSTCODE"
+          ],
+          "fromExpr": "HV-CUSTOMER-POSTCODE",
+          "toTargets": [
+            "COMM-POSTCODE"
+          ]
+        },
+        {
+          "type": "MOVE",
+          "location": {
+            "startLine": 410,
+            "endLine": 410,
+            "startColumn": 11,
+            "endColumn": 55,
+            "sourceFile": "UPDCUST.cbl"
+          },
+          "rawText": "MOVE HV-CUSTOMER-COUNTRY TO COMM-COUNTRY OF COMM-ADDR",
+          "sourceFieldIds": [
+            "WS_L69_HV-CUSTOMER-COUNTRY"
+          ],
+          "targetFieldIds": [
+            "LK_L24_COMM-COUNTRY"
+          ],
+          "fromExpr": "HV-CUSTOMER-COUNTRY",
+          "toTargets": [
+            "COMM-COUNTRY"
+          ]
+        },
+        {
+          "type": "MOVE",
+          "location": {
+            "startLine": 411,
+            "endLine": 411,
+            "startColumn": 11,
+            "endColumn": 38,
+            "sourceFile": "UPDCUST.cbl"
+          },
+          "rawText": "MOVE HV-CUSTOMER-STATUS TO COMM-STATUS",
+          "sourceFieldIds": [
+            "WS_L70_HV-CUSTOMER-STATUS"
+          ],
+          "targetFieldIds": [
+            "LK_L25_COMM-STATUS"
+          ],
+          "fromExpr": "HV-CUSTOMER-STATUS",
+          "toTargets": [
+            "COMM-STATUS"
+          ]
+        },
+        {
+          "type": "COMPUTE",
+          "location": {
+            "startLine": 412,
+            "endLine": 413,
+            "startColumn": 11,
+            "endColumn": 40,
+            "sourceFile": "UPDCUST.cbl"
+          },
+          "rawText": "COMPUTE COMM-CREATED-YEAR = HV-CUSTOMER-CREATE-DATE / 10000",
+          "sourceFieldIds": [
+            "WS_L71_HV-CUSTOMER-CREATE-DATE"
+          ],
+          "targetFieldIds": [
+            "LK_L29_COMM-CREATED-YEAR"
+          ],
+          "expression": "HV-CUSTOMER-CREATE-DATE / 10000",
+          "targets": [
+            "COMM-CREATED-YEAR"
+          ]
+        },
+        {
+          "type": "COMPUTE",
+          "location": {
+            "startLine": 414,
+            "endLine": 415,
+            "startColumn": 11,
+            "endColumn": 61,
+            "sourceFile": "UPDCUST.cbl"
+          },
+          "rawText": "COMPUTE COMM-CREATED-MONTH = FUNCTION MOD(HV-CUSTOMER-CREATE-DATE / 100, 100)",
+          "sourceFieldIds": [
+            "WS_L71_HV-CUSTOMER-CREATE-DATE"
+          ],
+          "targetFieldIds": [
+            "LK_L28_COMM-CREATED-MONTH"
+          ],
+          "expression": "FUNCTION MOD(HV-CUSTOMER-CREATE-DATE / 100, 100)",
+          "targets": [
+            "COMM-CREATED-MONTH"
+          ]
+        },
+        {
+          "type": "COMPUTE",
+          "location": {
+            "startLine": 416,
+            "endLine": 417,
+            "startColumn": 11,
+            "endColumn": 55,
+            "sourceFile": "UPDCUST.cbl"
+          },
+          "rawText": "COMPUTE COMM-CREATED-DAY = FUNCTION MOD(HV-CUSTOMER-CREATE-DATE, 100)",
+          "sourceFieldIds": [
+            "WS_L71_HV-CUSTOMER-CREATE-DATE"
+          ],
+          "targetFieldIds": [
+            "LK_L27_COMM-CREATED-DAY"
+          ],
+          "expression": "FUNCTION MOD(HV-CUSTOMER-CREATE-DATE, 100)",
+          "targets": [
+            "COMM-CREATED-DAY"
+          ]
+        },
+        {
+          "type": "COMPUTE",
+          "location": {
+            "startLine": 418,
+            "endLine": 418,
+            "startColumn": 11,
+            "endColumn": 53,
+            "sourceFile": "UPDCUST.cbl"
+          },
+          "rawText": "COMPUTE COMM-DOB-YEAR = HV-CUSTOMER-DOB / 10000",
+          "sourceFieldIds": [
+            "WS_L63_HV-CUSTOMER-DOB"
+          ],
+          "targetFieldIds": [
+            "LK_L17_COMM-DOB-YEAR"
+          ],
+          "expression": "HV-CUSTOMER-DOB / 10000",
+          "targets": [
+            "COMM-DOB-YEAR"
+          ]
+        },
+        {
+          "type": "COMPUTE",
+          "location": {
+            "startLine": 419,
+            "endLine": 420,
+            "startColumn": 11,
+            "endColumn": 53,
+            "sourceFile": "UPDCUST.cbl"
+          },
+          "rawText": "COMPUTE COMM-DOB-MONTH = FUNCTION MOD(HV-CUSTOMER-DOB / 100, 100)",
+          "sourceFieldIds": [
+            "WS_L63_HV-CUSTOMER-DOB"
+          ],
+          "targetFieldIds": [
+            "LK_L16_COMM-DOB-MONTH"
+          ],
+          "expression": "FUNCTION MOD(HV-CUSTOMER-DOB / 100, 100)",
+          "targets": [
+            "COMM-DOB-MONTH"
+          ]
+        },
+        {
+          "type": "COMPUTE",
+          "location": {
+            "startLine": 421,
+            "endLine": 422,
+            "startColumn": 11,
+            "endColumn": 47,
+            "sourceFile": "UPDCUST.cbl"
+          },
+          "rawText": "COMPUTE COMM-DOB-DAY = FUNCTION MOD(HV-CUSTOMER-DOB, 100)",
+          "sourceFieldIds": [
+            "WS_L63_HV-CUSTOMER-DOB"
+          ],
+          "targetFieldIds": [
+            "LK_L15_COMM-DOB-DAY"
+          ],
+          "expression": "FUNCTION MOD(HV-CUSTOMER-DOB, 100)",
+          "targets": [
+            "COMM-DOB-DAY"
+          ]
+        },
+        {
+          "type": "MOVE",
+          "location": {
+            "startLine": 423,
+            "endLine": 423,
+            "startColumn": 11,
+            "endColumn": 44,
+            "sourceFile": "UPDCUST.cbl"
+          },
+          "rawText": "MOVE HV-CUSTOMER-CREDIT-SCORE TO COMM-CREDIT-SCORE",
+          "sourceFieldIds": [
+            "WS_L72_HV-CUSTOMER-CREDIT-SCORE"
+          ],
+          "targetFieldIds": [
+            "LK_L30_COMM-CREDIT-SCORE"
+          ],
+          "fromExpr": "HV-CUSTOMER-CREDIT-SCORE",
+          "toTargets": [
+            "COMM-CREDIT-SCORE"
+          ]
+        },
+        {
+          "type": "MOVE",
+          "location": {
+            "startLine": 424,
+            "endLine": 424,
+            "startColumn": 11,
+            "endColumn": 46,
+            "sourceFile": "UPDCUST.cbl"
+          },
+          "rawText": "MOVE HV-CUSTOMER-CS-REVIEW-DATE TO COMM-CS-REVIEW-DATE",
+          "sourceFieldIds": [
+            "WS_L73_HV-CUSTOMER-CS-REVIEW-DATE"
+          ],
+          "targetFieldIds": [
+            "LK_L31_COMM-CS-REVIEW-DATE"
+          ],
+          "fromExpr": "HV-CUSTOMER-CS-REVIEW-DATE",
+          "toTargets": [
+            "COMM-CS-REVIEW-DATE"
+          ]
+        },
+        {
+          "type": "MOVE",
+          "location": {
+            "startLine": 426,
+            "endLine": 426,
+            "startColumn": 11,
+            "endColumn": 23,
+            "sourceFile": "UPDCUST.cbl"
+          },
+          "rawText": "MOVE 'Y' TO COMM-UPD-SUCCESS",
+          "targetFieldIds": [
+            "LK_L35_COMM-UPD-SUCCESS"
+          ],
+          "fromExpr": "'Y'",
+          "toTargets": [
+            "COMM-UPD-SUCCESS"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "UCD999",
+      "sectionParent": "UPDATE-CUSTOMER-DB2",
+      "location": {
+        "startLine": 428,
+        "endLine": 429,
+        "startColumn": 7,
+        "endColumn": 15,
+        "sourceFile": "UPDCUST.cbl"
+      },
+      "calledBy": [
+        "UCD010"
+      ],
+      "fallthroughSuccessor": "GMOOH010",
+      "statements": [
+        {
+          "type": "EXIT",
+          "location": {
+            "startLine": 429,
+            "endLine": 429,
+            "startColumn": 11,
+            "endColumn": 11,
+            "sourceFile": "UPDCUST.cbl"
+          },
+          "rawText": "EXIT",
+          "operation": "EXIT"
+        }
+      ]
+    },
+    {
+      "name": "GMOOH010",
+      "sectionParent": "GET-ME-OUT-OF-HERE",
+      "location": {
+        "startLine": 433,
+        "endLine": 436,
+        "startColumn": 7,
+        "endColumn": 27,
+        "sourceFile": "UPDCUST.cbl"
+      },
+      "fallthroughSuccessor": "GMOOH999",
+      "statements": [
+        {
+          "type": "EXEC_CICS",
+          "location": {
+            "startLine": 435,
+            "endLine": 436,
+            "startColumn": 6,
+            "endColumn": 6,
+            "sourceFile": "UPDCUST.cbl"
+          },
+          "rawText": "*>EXECCICS EXEC CICS RETURN *>EXECCICS END-EXEC }",
+          "subsystem": "CICS",
+          "rawPayload": "EXEC CICS RETURN END-EXEC"
+        }
+      ]
+    },
+    {
+      "name": "GMOOH999",
+      "sectionParent": "GET-ME-OUT-OF-HERE",
+      "location": {
+        "startLine": 438,
+        "endLine": 439,
+        "startColumn": 7,
+        "endColumn": 15,
+        "sourceFile": "UPDCUST.cbl"
+      },
+      "fallthroughSuccessor": "PTD010",
+      "statements": [
+        {
+          "type": "EXIT",
+          "location": {
+            "startLine": 439,
+            "endLine": 439,
+            "startColumn": 11,
+            "endColumn": 11,
+            "sourceFile": "UPDCUST.cbl"
+          },
+          "rawText": "EXIT",
+          "operation": "EXIT"
+        }
+      ]
+    },
+    {
+      "name": "PTD010",
+      "sectionParent": "POPULATE-TIME-DATE",
+      "location": {
+        "startLine": 443,
+        "endLine": 454,
+        "startColumn": 7,
+        "endColumn": 27,
+        "sourceFile": "UPDCUST.cbl"
+      },
+      "fallthroughSuccessor": "PTD999",
+      "statements": [
+        {
+          "type": "EXEC_CICS",
+          "location": {
+            "startLine": 445,
+            "endLine": 447,
+            "startColumn": 6,
+            "endColumn": 6,
+            "sourceFile": "UPDCUST.cbl"
+          },
+          "rawText": "*>EXECCICS EXEC CICS ASKTIME *>EXECCICS ABSTIME(WS-U-TIME) *>EXECCICS END-EXEC }",
+          "subsystem": "CICS",
+          "rawPayload": "EXEC CICS ASKTIME ABSTIME(WS-U-TIME) END-EXEC"
+        },
+        {
+          "type": "EXEC_CICS",
+          "location": {
+            "startLine": 449,
+            "endLine": 454,
+            "startColumn": 6,
+            "endColumn": 6,
+            "sourceFile": "UPDCUST.cbl"
+          },
+          "rawText": "*>EXECCICS EXEC CICS FORMATTIME *>EXECCICS ABSTIME(WS-U-TIME) *>EXECCICS DDMMYYYY(WS-ORIG-DATE) *>EXECCICS TIME(WS-TIME-NOW) *>EXECCICS DATESEP *>EXECCICS END-EXEC }",
+          "subsystem": "CICS",
+          "rawPayload": "EXEC CICS FORMATTIME ABSTIME(WS-U-TIME) DDMMYYYY(WS-ORIG-DATE) TIME(WS-TIME-NOW) DATESEP END-EXEC"
+        }
+      ]
+    },
+    {
+      "name": "PTD999",
+      "sectionParent": "POPULATE-TIME-DATE",
+      "location": {
+        "startLine": 456,
+        "endLine": 457,
+        "startColumn": 7,
+        "endColumn": 15,
+        "sourceFile": "UPDCUST.cbl"
+      },
+      "statements": [
+        {
+          "type": "EXIT",
+          "location": {
+            "startLine": 457,
+            "endLine": 457,
+            "startColumn": 11,
+            "endColumn": 11,
+            "sourceFile": "UPDCUST.cbl"
+          },
+          "rawText": "EXIT",
+          "operation": "EXIT"
+        }
+      ]
+    }
+  ],
+  "asgAuditSummary": {
+    "totalAsgDataEntries": 153,
+    "totalAsgLevel88Entries": 4,
+    "totalAsgParagraphs": 8,
+    "totalAsgStatements": 53,
+    "totalAsgCalls": 124,
+    "asgVariableNames": [
+      "SORTCODE",
+      "SYSIDERR-RETRY",
+      "HOST-CUSTOMER-ROW",
+      "HV-CUSTOMER-EYECATCHER",
+      "HV-CUSTOMER-SORTCODE",
+      "HV-CUSTOMER-NUMBER",
+      "HV-CUSTOMER-TITLE",
+      "HV-CUSTOMER-FIRST-NAME",
+      "HV-CUSTOMER-LAST-NAME",
+      "HV-CUSTOMER-DOB",
+      "HV-CUSTOMER-PHONE",
+      "HV-CUSTOMER-ADDR-LINE1",
+      "HV-CUSTOMER-ADDR-LINE2",
+      "HV-CUSTOMER-CITY",
+      "HV-CUSTOMER-POSTCODE",
+      "HV-CUSTOMER-COUNTRY",
+      "HV-CUSTOMER-STATUS",
+      "HV-CUSTOMER-CREATE-DATE",
+      "HV-CUSTOMER-CREDIT-SCORE",
+      "HV-CUSTOMER-CS-REVIEW-DATE",
+      "SQLCODE-DISPLAY",
+      "WS-CICS-WORK-AREA",
+      "WS-CICS-RESP",
+      "WS-CICS-RESP2",
+      "DFHCOMMAREA",
+      "COMM-EYE",
+      "COMM-SCODE",
+      "COMM-CUSTNO",
+      "COMM-NAME",
+      "COMM-TITLE",
+      "COMM-FIRST-NAME",
+      "COMM-LAST-NAME",
+      "COMM-DOB",
+      "COMM-DOB-DAY",
+      "COMM-DOB-MONTH",
+      "COMM-DOB-YEAR",
+      "COMM-PHONE",
+      "COMM-ADDR",
+      "COMM-ADDR-LINE1",
+      "COMM-ADDR-LINE2",
+      "COMM-CITY",
+      "COMM-POSTCODE",
+      "COMM-COUNTRY",
+      "COMM-STATUS",
+      "COMM-CREATED-DATE",
+      "COMM-CREATED-DAY",
+      "COMM-CREATED-MONTH",
+      "COMM-CREATED-YEAR",
+      "COMM-CREDIT-SCORE",
+      "COMM-CS-REVIEW-DATE",
+      "COMM-CS-REVIEW-DAY",
+      "COMM-CS-REVIEW-MONTH",
+      "COMM-CS-REVIEW-YEAR",
+      "COMM-UPD-SUCCESS",
+      "COMM-UPD-FAIL-CD",
+      "DB2-DATE-REFORMAT",
+      "DB2-DATE-REF-YR",
+      "DB2-DATE-REF-MNTH",
+      "DB2-DATE-REF-DAY",
+      "WS-CUST-DATA",
+      "CUSTOMER-RECORD",
+      "CUSTOMER-EYECATCHER",
+      "CUSTOMER-KEY",
+      "CUSTOMER-SORTCODE",
+      "CUSTOMER-NUMBER",
+      "CUSTOMER-NAME",
+      "CUSTOMER-TITLE",
+      "CUSTOMER-FIRST-NAME",
+      "CUSTOMER-LAST-NAME",
+      "CUSTOMER-DOB",
+      "CUSTOMER-DOB-DAY",
+      "CUSTOMER-DOB-MONTH",
+      "CUSTOMER-DOB-YEAR",
+      "CUSTOMER-PHONE",
+      "CUSTOMER-ADDRESS",
+      "CUSTOMER-ADDR-LINE1",
+      "CUSTOMER-ADDR-LINE2",
+      "CUSTOMER-CITY",
+      "CUSTOMER-POSTCODE",
+      "CUSTOMER-COUNTRY",
+      "CUSTOMER-STATUS",
+      "CUSTOMER-CREATED-DATE",
+      "CUSTOMER-CREATED-DAY",
+      "CUSTOMER-CREATED-MONTH",
+      "CUSTOMER-CREATED-YEAR",
+      "CUSTOMER-CREDIT-SCORE",
+      "CUSTOMER-CS-REVIEW-DATE",
+      "CUSTOMER-CS-REVIEW-DAY",
+      "CUSTOMER-CS-REVIEW-MONTH",
+      "CUSTOMER-CS-REVIEW-YEAR",
+      "WS-EIBTASKN12",
+      "WS-SQLCODE-DISP",
+      "DESIRED-CUST-KEY",
+      "DESIRED-SORT-CODE",
+      "DESIRED-CUSTNO",
+      "WS-CUST-REC-LEN",
+      "WS-U-TIME",
+      "WS-ORIG-DATE",
+      "WS-ORIG-DATE-GRP",
+      "WS-ORIG-DATE-DD",
+      "WS-ORIG-DATE-MM",
+      "WS-ORIG-DATE-YYYY",
+      "WS-ORIG-DATE-GRP-X",
+      "WS-ORIG-DATE-DD-X",
+      "WS-ORIG-DATE-MM-X",
+      "WS-ORIG-DATE-YYYY-X",
+      "REJ-REASON",
+      "WS-PASSED-DATA",
+      "WS-TEST-KEY",
+      "WS-SORT-CODE",
+      "WS-CUSTOMER-RANGE",
+      "WS-CUSTOMER-RANGE-TOP",
+      "WS-CUSTOMER-RANGE-MIDDLE",
+      "WS-CUSTOMER-RANGE-BOTTOM",
+      "WS-SORT-DIV",
+      "WS-SORT-DIV1",
+      "WS-SORT-DIV2",
+      "WS-SORT-DIV3",
+      "CUSTOMER-KY",
+      "REQUIRED-SORT-CODE",
+      "REQUIRED-ACC-NUM",
+      "STORM-DRAIN-CONDITION",
+      "WS-UNSTR-TITLE",
+      "WS-TITLE-VALID",
+      "WS-TIME-DATA",
+      "WS-TIME-NOW",
+      "WS-TIME-NOW-GRP",
+      "WS-TIME-NOW-GRP-HH",
+      "WS-TIME-NOW-GRP-MM",
+      "WS-TIME-NOW-GRP-SS",
+      "WS-ABEND-PGM",
+      "ABNDINFO-REC",
+      "ABND-VSAM-KEY",
+      "ABND-UTIME-KEY",
+      "ABND-TASKNO-KEY",
+      "ABND-APPLID",
+      "ABND-TRANID",
+      "ABND-DATE",
+      "ABND-TIME",
+      "ABND-CODE",
+      "ABND-PROGRAM",
+      "ABND-RESPCODE",
+      "ABND-RESP2CODE",
+      "ABND-SQLCODE",
+      "ABND-FREEFORM"
+    ],
+    "asgLevel88Names": [
+      "CUSTOMER-EYECATCHER-VALUE",
+      "CUSTOMER-STATUS-ACTIVE",
+      "CUSTOMER-STATUS-INACTIVE",
+      "CUSTOMER-STATUS-SUSPENDED"
+    ],
+    "asgParagraphCalls": {
+      "UCD999": [
+        "UCD999",
+        "UCD999",
+        "UCD999",
+        "UCD999"
+      ]
+    }
+  }
+}

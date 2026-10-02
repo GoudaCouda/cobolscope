@@ -128,6 +128,13 @@
         return;
       }
 
+      const prog = currentProgramId && manifest.programs ? manifest.programs.find(p => p.program_id === currentProgramId) : null;
+      if (prog && prog.source_code) {
+        cachedSources[url] = prog.source_code;
+        populatePortalSourceTable(prog.source_code);
+        return;
+      }
+
       portalSourceTbody.innerHTML = `<tr><td colspan="2" style="padding:24px; text-align:center; color:var(--text-muted);">Loading source file...</td></tr>`;
 
       fetch(url)

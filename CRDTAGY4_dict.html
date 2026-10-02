@@ -1,0 +1,2653 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Data Dictionary - CRDTAGY4</title>
+    <style>
+:root {
+    --bg-primary: #F8FAFC;
+    --bg-surface: #FFFFFF;
+    --surface-hover: #F1F5F9;
+    --border-color: #E2E8F0;
+    --border-subtle: #F1F5F9;
+    --text-primary: #0F172A;
+    --text-secondary: #475569;
+    --text-muted: #64748B;
+    --primary: #0078D4;
+    --primary-hover: #106EBE;
+    --primary-light: #EFF6FC;
+    --primary-border: #C7E0F4;
+
+    /* Semantic badges matching Call Graph & Portal */
+    --badge-redef: #B45309;
+    --badge-redef-bg: #FEF3C7;
+    --badge-redef-border: #FDE68A;
+
+    --badge-occurs: #6D28D9;
+    --badge-occurs-bg: #EDE9FE;
+    --badge-occurs-border: #DDD6FE;
+
+    --badge-val: #15803D;
+    --badge-val-bg: #DCFCE7;
+    --badge-val-border: #BBF7D0;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
+    line-height: 1.5;
+    padding: 24px;
+}
+
+.container {
+    max-width: 1440px;
+    margin: 0 auto;
+}
+
+/* Header matching Call Graph Enterprise Theme */
+.header {
+    background: var(--bg-surface);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    padding: 16px 20px;
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.03);
+}
+
+html.in-portal-iframe body {
+    padding: 16px;
+}
+
+html.in-portal-iframe .header .brand-tag,
+html.in-portal-iframe .header .brand-divider {
+    display: none !important;
+}
+
+html.in-portal-iframe .header {
+    padding: 10px 16px;
+    margin-bottom: 16px;
+}
+
+.header-left {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.brand-tag {
+    font-size: 0.72rem;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+    color: var(--text-secondary);
+    text-transform: uppercase;
+}
+
+.brand-divider {
+    color: #CBD5E1;
+    font-weight: 300;
+}
+
+.program-title {
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+}
+
+.badge-tag {
+    font-size: 0.7rem;
+    font-weight: 700;
+    background: var(--primary-light);
+    color: var(--primary);
+    border: 1px solid var(--primary-border);
+    padding: 2px 7px;
+    border-radius: 4px;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+}
+
+.meta-text {
+    color: var(--text-muted);
+    font-size: 0.8rem;
+}
+
+/* Summary Metrics Grid */
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 14px;
+    margin-bottom: 20px;
+}
+
+.stat-card {
+    background-color: var(--bg-surface);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    padding: 16px 18px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.03);
+    transition: box-shadow 0.15s ease;
+}
+
+.stat-card:hover {
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.06);
+}
+
+.stat-title {
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    font-weight: 700;
+    color: var(--text-muted);
+}
+
+.stat-value {
+    font-size: 1.6rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-top: 4px;
+}
+
+/* Search & Filter Toolbar */
+.toolbar {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 16px;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+.search-box {
+    flex: 1;
+    min-width: 280px;
+    background: var(--bg-surface);
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    padding: 8px 14px;
+    color: var(--text-primary);
+    font-size: 0.88rem;
+    transition: border-color 0.15s, box-shadow 0.15s;
+}
+
+.search-box:focus {
+    outline: none;
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px rgba(0, 120, 212, 0.15);
+}
+
+.search-box::placeholder {
+    color: var(--text-muted);
+}
+
+.filter-select {
+    background: var(--bg-surface);
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    padding: 8px 12px;
+    color: var(--text-primary);
+    font-size: 0.88rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: border-color 0.15s, box-shadow 0.15s;
+}
+
+.filter-select:focus {
+    outline: none;
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px rgba(0, 120, 212, 0.15);
+}
+
+/* Split-Screen Data Dictionary & Code Workspace */
+.dict-workspace {
+    display: flex;
+    flex-direction: row;
+    align-items: stretch;
+    width: 100%;
+    height: calc(100vh - 280px);
+    min-height: 520px;
+    gap: 0;
+    position: relative;
+}
+
+html.in-portal-iframe .dict-workspace {
+    height: calc(100vh - 230px);
+}
+
+.table-container {
+    flex: 1 1 0px;
+    background-color: var(--bg-surface);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    overflow: auto;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.03);
+    min-width: 320px;
+    height: 100%;
+}
+
+.table-container thead th {
+    position: sticky;
+    top: 0;
+    z-index: 2;
+    background-color: #F8FAFC;
+    box-shadow: 0 1px 0 var(--border-color);
+}
+
+/* Splitter Divider */
+.dict-splitter {
+    width: 8px;
+    min-width: 8px;
+    cursor: col-resize;
+    background: transparent;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    user-select: none;
+    touch-action: none;
+    z-index: 10;
+    flex-shrink: 0;
+    margin: 0 2px;
+}
+
+.dict-splitter::after {
+    content: "";
+    width: 2px;
+    height: 36px;
+    background: var(--border-color);
+    border-radius: 2px;
+    transition: background-color 0.15s ease, height 0.15s ease, width 0.15s ease;
+}
+
+.dict-splitter:hover::after,
+.dict-splitter.active::after {
+    background: var(--primary);
+    width: 4px;
+    height: 100%;
+}
+
+/* Code Split Pane in Data Dictionary */
+.dict-code-pane {
+    flex: 1 1 0px;
+    background: var(--bg-surface);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+    min-width: 300px;
+    height: 100%;
+}
+
+.dict-code-header {
+    height: 38px;
+    min-height: 38px;
+    background: #F8FAFC;
+    border-bottom: 1px solid var(--border-color);
+    padding: 0 12px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+}
+
+.dict-code-title-area {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    overflow: hidden;
+    min-width: 0;
+}
+
+.dict-code-label {
+    font-size: 0.72rem;
+    font-weight: 800;
+    letter-spacing: 0.06em;
+    color: var(--text-secondary);
+    flex-shrink: 0;
+}
+
+.dict-var-badge {
+    font-size: 0.72rem;
+    font-weight: 600;
+    color: var(--primary);
+    background: var(--primary-light);
+    border: 1px solid rgba(0, 120, 212, 0.25);
+    padding: 1px 6px;
+    border-radius: 4px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 260px;
+}
+
+.dict-code-actions {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    flex-shrink: 0;
+}
+
+.code-btn-close {
+    height: 24px;
+    width: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.85rem;
+    background: transparent;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    color: var(--text-muted);
+}
+
+.code-btn-close:hover {
+    background: #F1F5F9;
+    color: var(--text-primary);
+}
+
+.code-pane-subbar {
+    height: 24px;
+    background: #F1F5F9;
+    border-bottom: 1px solid var(--border-color);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 12px;
+    font-size: 0.68rem;
+    color: var(--text-muted);
+}
+
+.cobol-columns-indicator {
+    display: flex;
+    gap: 8px;
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    font-size: 0.65rem;
+}
+
+.col-guide {
+    color: #94A3B8;
+}
+
+.col-guide:hover {
+    color: var(--text-secondary);
+}
+
+.code-line-info {
+    font-size: 0.68rem;
+    font-weight: 500;
+    color: var(--text-secondary);
+}
+
+.code-pane-content {
+    flex: 1;
+    overflow: auto;
+    background: #FFFFFF;
+    position: relative;
+}
+
+.code-empty-state {
+    padding: 40px 20px;
+    text-align: center;
+    color: var(--text-muted);
+    font-size: 0.8rem;
+}
+
+table.cobol-code-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    font-size: 0.78rem;
+    line-height: 1.5;
+}
+
+table.cobol-code-table tr {
+    transition: background-color 0.1s ease;
+}
+
+table.cobol-code-table tr td {
+    border-bottom: none !important;
+    padding: 0;
+}
+
+table.cobol-code-table tr:hover td {
+    background-color: #F8FAFC;
+}
+
+td.code-line-num {
+    width: 50px;
+    min-width: 50px;
+    text-align: right;
+    padding: 0 8px !important;
+    color: #94A3B8;
+    background: #F8FAFC;
+    border-right: 1px solid var(--border-color);
+    border-bottom: none !important;
+    user-select: none;
+    cursor: pointer;
+    font-size: 0.72rem;
+    line-height: 1.5;
+    vertical-align: middle;
+}
+
+td.code-line-num:hover {
+    color: var(--primary);
+}
+
+td.code-line-text {
+    padding: 0 10px !important;
+    white-space: pre;
+    color: #1E293B;
+    border-bottom: none !important;
+    line-height: 1.5;
+    vertical-align: middle;
+}
+
+tr.line-highlighted td.code-line-text {
+    background: #EFF6FC !important;
+    color: #0F172A;
+}
+
+tr.line-highlighted td.code-line-num {
+    background: #E0F2FE !important;
+    color: var(--primary);
+    font-weight: 700;
+}
+
+tr.line-highlight-start td.code-line-text {
+    border-left: 3px solid var(--primary);
+    font-weight: 600;
+}
+
+/* Subtle word/variable occurrence highlighting */
+.code-word {
+    cursor: pointer;
+    border-radius: 2px;
+    transition: background-color 0.12s ease, box-shadow 0.12s ease;
+}
+
+.code-word:hover {
+    background-color: rgba(0, 120, 212, 0.12);
+}
+
+.code-word.var-highlight {
+    background-color: #FEF08A !important;
+    color: #854D0E !important;
+    font-weight: 700;
+    border-radius: 3px;
+    box-shadow: 0 0 0 1.5px #FDE047;
+}
+
+.code-comment {
+    color: #64748B;
+    font-style: italic;
+}
+
+/* Clickable Table Rows and Selected State */
+tr.dict-row-clickable {
+    cursor: pointer;
+}
+
+tr.selected-var-row {
+    background-color: #EFF6FC !important;
+}
+
+tr.selected-var-row td:first-child {
+    border-left: 3px solid var(--primary);
+}
+
+#dictTable {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: left;
+    font-size: 0.85rem;
+}
+
+#dictTable th {
+    background-color: #F8FAFC;
+    color: var(--text-secondary);
+    font-size: 0.74rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    padding: 11px 14px;
+    border-bottom: 1px solid var(--border-color);
+    cursor: pointer;
+    user-select: none;
+    transition: color 0.1s, background-color 0.1s;
+}
+
+#dictTable th:hover {
+    color: var(--primary);
+    background-color: #F1F5F9;
+}
+
+#dictTable td {
+    padding: 10px 14px;
+    border-bottom: 1px solid var(--border-color);
+    vertical-align: middle;
+    color: var(--text-primary);
+}
+
+#dictTable tr:last-child td {
+    border-bottom: none;
+}
+
+#dictTable tr:hover {
+    background-color: var(--surface-hover);
+}
+
+.filler-row {
+    opacity: 0.6;
+    background-color: #FAFAFA;
+}
+
+.font-mono {
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+}
+
+.text-center { text-align: center; }
+.text-sm { font-size: 0.78rem; }
+.text-muted { color: var(--text-muted); }
+
+.field-name {
+    font-weight: 700;
+    color: var(--text-primary);
+    font-size: 0.88rem;
+}
+
+.field-path {
+    font-size: 0.72rem;
+    color: var(--text-muted);
+    margin-top: 2px;
+}
+
+/* Field Badges */
+.badge {
+    display: inline-block;
+    font-size: 0.68rem;
+    font-weight: 700;
+    padding: 1px 6px;
+    border-radius: 3px;
+    margin-left: 6px;
+    vertical-align: middle;
+    letter-spacing: 0.02em;
+}
+
+.badge-redefines {
+    background: var(--badge-redef-bg);
+    color: var(--badge-redef);
+    border: 1px solid var(--badge-redef-border);
+}
+
+.badge-occurs {
+    background: var(--badge-occurs-bg);
+    color: var(--badge-occurs);
+    border: 1px solid var(--badge-occurs-border);
+}
+
+.badge-value {
+    background: var(--badge-val-bg);
+    color: var(--badge-val);
+    border: 1px solid var(--badge-val-border);
+}
+
+.type-pill {
+    background-color: var(--primary-light);
+    color: var(--primary);
+    border: 1px solid var(--primary-border);
+    padding: 2px 7px;
+    border-radius: 4px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    display: inline-block;
+    white-space: nowrap;
+}
+
+.cond88-block {
+    margin-top: 6px;
+    padding: 4px 8px;
+    background: #F8FAFC;
+    border-left: 2px solid var(--primary);
+    border-radius: 0 4px 4px 0;
+    font-size: 0.76rem;
+    color: var(--text-secondary);
+}
+
+.cond88-item {
+    margin-top: 2px;
+}
+
+.cond88-item b {
+    color: var(--text-primary);
+}
+
+/* Reference Breadcrumbs */
+.refs-list {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    align-items: flex-start;
+}
+
+.ref-breadcrumb {
+    display: inline-flex;
+    flex-direction: row;
+    align-items: center;
+    background: #F1F5F9;
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    padding: 2px 7px;
+    gap: 5px;
+    cursor: pointer;
+    transition: all 0.15s ease;
+}
+
+.ref-breadcrumb:hover {
+    background: #EFF6FC;
+    border-color: #0078D4;
+}
+
+.ref-breadcrumb:hover .ref-para {
+    color: #0078D4;
+    text-decoration: underline;
+}
+
+.ref-sec {
+    font-size: 0.65rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--text-muted);
+}
+
+.ref-sep {
+    color: #CBD5E1;
+    font-size: 0.68rem;
+}
+
+.ref-para {
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    font-size: 0.76rem;
+    font-weight: 600;
+    color: var(--text-primary);
+}    </style>
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <div>
+                <div class="header-left">
+                    <span class="brand-tag">COBOLSCOPE</span>
+                    <span class="brand-divider">/</span>
+                    <code class="program-title">CRDTAGY4</code>
+                    <span class="badge-tag">Data Dictionary</span>
+                </div>
+            </div>
+            <div class="meta-text" style="text-align: right;">
+<div>Author: <b>Jon Collett</b></div>            </div>
+        </header>
+
+        <section class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-title">Total Data Items</div>
+                <div class="stat-value font-mono">76</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-title">Level-88 Rules</div>
+                <div class="stat-value font-mono">4</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-title">Memory Overlays</div>
+                <div class="stat-value font-mono">2</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-title">Working-Storage Span</div>
+                <div class="stat-value font-mono">1,182 bytes</div>
+            </div>
+        </section>
+
+        <div class="toolbar">
+            <input type="text" id="searchInput" class="search-box" placeholder="Search fields, qualified paths, or referencing paragraphs...">
+            <select id="sectionFilter" class="filter-select">
+                <option value="ALL">All Sections</option>
+                <option value="WORKING-STORAGE">WORKING-STORAGE</option>
+            </select>
+            <select id="typeFilter" class="filter-select">
+                <option value="ALL">All Types</option>
+                <option value="Alphanumeric (1 chars)">Alphanumeric (1 chars)</option>
+                <option value="Alphanumeric (10 chars)">Alphanumeric (10 chars)</option>
+                <option value="Alphanumeric (16 chars)">Alphanumeric (16 chars)</option>
+                <option value="Alphanumeric (2 chars)">Alphanumeric (2 chars)</option>
+                <option value="Alphanumeric (20 chars)">Alphanumeric (20 chars)</option>
+                <option value="Alphanumeric (4 chars)">Alphanumeric (4 chars)</option>
+                <option value="Alphanumeric (50 chars)">Alphanumeric (50 chars)</option>
+                <option value="Alphanumeric (600 chars)">Alphanumeric (600 chars)</option>
+                <option value="Alphanumeric (8 chars)">Alphanumeric (8 chars)</option>
+                <option value="Group">Group</option>
+                <option value="Numeric Display (10 digits)">Numeric Display (10 digits)</option>
+                <option value="Numeric Display (2 digits)">Numeric Display (2 digits)</option>
+                <option value="Numeric Display (3 digits)">Numeric Display (3 digits)</option>
+                <option value="Numeric Display (4 digits)">Numeric Display (4 digits)</option>
+                <option value="Numeric Display (6 digits)">Numeric Display (6 digits)</option>
+                <option value="Signed BigInt (64-bit Binary)">Signed BigInt (64-bit Binary)</option>
+                <option value="Signed Integer (32-bit Binary)">Signed Integer (32-bit Binary)</option>
+                <option value="Signed Integer(15) Packed">Signed Integer(15) Packed</option>
+                <option value="Signed Numeric Display (8 digits)">Signed Numeric Display (8 digits)</option>
+            </select>
+        </div>
+
+        <div class="dict-workspace" id="dictWorkspace">
+            <div class="table-container" id="dictTableContainer">
+                <table id="dictTable">
+                    <thead>
+                        <tr>
+                            <th onclick="sortTable(0)" class="text-center" style="width: 70px;">Lvl</th>
+                            <th onclick="sortTable(1)">Field Name / Structure</th>
+                            <th onclick="sortTable(2)">Business Type</th>
+                            <th onclick="sortTable(3)">PIC / Usage</th>
+                            <th onclick="sortTable(4)" class="text-center">Offset</th>
+                            <th onclick="sortTable(5)" class="text-center">Length</th>
+                            <th>Where-Used (Paragraphs)</th>
+                        </tr>
+                    </thead>
+                    <tbody id="dictTableBody">
+                        <tr class=" dict-row-clickable" data-section="WORKING-STORAGE" data-name="SORTCODE" data-var-name="SORTCODE" data-path="SORTCODE" data-type="Numeric Display (6 digits)" data-start-line="7" data-end-line="7">
+                            <td class="text-center font-mono"><b>77</b></td>
+                            <td>
+                                <div style="padding-left: 0px;">
+                                    <span class="field-name font-mono">SORTCODE</span>
+<span class="badge badge-value">VALUE 987654</span>                                    <div class="field-path font-mono text-muted">SORTCODE</div>
+                                </div>
+                            </td>
+                            <td><span class="type-pill">Numeric Display (6 digits)</span></td>
+                            <td class="font-mono text-sm">9(6)<br/><span class="text-muted">DISPLAY</span></td>
+                            <td class="text-center font-mono">0</td>
+                            <td class="text-center font-mono"><b>6</b></td>
+                            <td>
+                                <span class="text-muted">—</span>
+                            </td>
+                        </tr>
+                        <tr class=" dict-row-clickable" data-section="WORKING-STORAGE" data-name="WS-CONT-IN" data-var-name="WS-CONT-IN" data-path="WS-CONT-IN" data-type="Group" data-start-line="45" data-end-line="45">
+                            <td class="text-center font-mono"><b>01</b></td>
+                            <td>
+                                <div style="padding-left: 0px;">
+                                    <span class="field-name font-mono">WS-CONT-IN</span>
+                                    <div class="field-path font-mono text-muted">WS-CONT-IN</div>
+                                </div>
+                            </td>
+                            <td><span class="type-pill">Group</span></td>
+                            <td class="font-mono text-sm">—<br/><span class="text-muted">DISPLAY</span></td>
+                            <td class="text-center font-mono">6</td>
+                            <td class="text-center font-mono"><b>397</b></td>
+                            <td>
+                                <div class="refs-list">
+                                    <div class="ref-breadcrumb" title="Click to view routine in Code (Ctrl+Click to open Call Graph)" onclick="handleBreadcrumbClick(event, 'A010', 'PREMIERE', 'WS-CONT-IN')">
+                                        <span class="ref-sec">PREMIERE</span>
+                                        <span class="ref-sep">&rsaquo;</span>
+                                        <span class="ref-para">A010</span>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr class=" dict-row-clickable" data-section="WORKING-STORAGE" data-name="CUSTOMER-RECORD" data-var-name="CUSTOMER-RECORD" data-path="WS-CONT-IN.CUSTOMER-RECORD" data-type="Group" data-start-line="7" data-end-line="7">
+                            <td class="text-center font-mono"><b>03</b></td>
+                            <td>
+                                <div style="padding-left: 18px;">
+                                    <span class="field-name font-mono">CUSTOMER-RECORD</span>
+                                    <div class="field-path font-mono text-muted">WS-CONT-IN.CUSTOMER-RECORD</div>
+                                </div>
+                            </td>
+                            <td><span class="type-pill">Group</span></td>
+                            <td class="font-mono text-sm">—<br/><span class="text-muted">DISPLAY</span></td>
+                            <td class="text-center font-mono">6</td>
+                            <td class="text-center font-mono"><b>397</b></td>
+                            <td>
+                                <span class="text-muted">—</span>
+                            </td>
+                        </tr>
+                        <tr class=" dict-row-clickable" data-section="WORKING-STORAGE" data-name="CUSTOMER-EYECATCHER" data-var-name="CUSTOMER-EYECATCHER" data-path="WS-CONT-IN.CUSTOMER-RECORD.CUSTOMER-EYECATCHER" data-type="Alphanumeric (4 chars)" data-start-line="8" data-end-line="8">
+                            <td class="text-center font-mono"><b>05</b></td>
+                            <td>
+                                <div style="padding-left: 36px;">
+                                    <span class="field-name font-mono">CUSTOMER-EYECATCHER</span>
+                                    <div class="field-path font-mono text-muted">WS-CONT-IN.CUSTOMER-RECORD.CUSTOMER-EYECATCHER</div>
+                                    <div class="cond88-block">
+                                        <div class="cond88-item"><b>88 CUSTOMER-EYECATCHER-VALUE:</b> CUST</div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td><span class="type-pill">Alphanumeric (4 chars)</span></td>
+                            <td class="font-mono text-sm">X(4)<br/><span class="text-muted">DISPLAY</span></td>
+                            <td class="text-center font-mono">6</td>
+                            <td class="text-center font-mono"><b>4</b></td>
+                            <td>
+                                <span class="text-muted">—</span>
+                            </td>
+                        </tr>
+                        <tr class=" dict-row-clickable" data-section="WORKING-STORAGE" data-name="CUSTOMER-KEY" data-var-name="CUSTOMER-KEY" data-path="WS-CONT-IN.CUSTOMER-RECORD.CUSTOMER-KEY" data-type="Group" data-start-line="10" data-end-line="10">
+                            <td class="text-center font-mono"><b>05</b></td>
+                            <td>
+                                <div style="padding-left: 36px;">
+                                    <span class="field-name font-mono">CUSTOMER-KEY</span>
+                                    <div class="field-path font-mono text-muted">WS-CONT-IN.CUSTOMER-RECORD.CUSTOMER-KEY</div>
+                                </div>
+                            </td>
+                            <td><span class="type-pill">Group</span></td>
+                            <td class="font-mono text-sm">—<br/><span class="text-muted">DISPLAY</span></td>
+                            <td class="text-center font-mono">10</td>
+                            <td class="text-center font-mono"><b>16</b></td>
+                            <td>
+                                <span class="text-muted">—</span>
+                            </td>
+                        </tr>
+                        <tr class=" dict-row-clickable" data-section="WORKING-STORAGE" data-name="CUSTOMER-SORTCODE" data-var-name="CUSTOMER-SORTCODE" data-path="WS-CONT-IN.CUSTOMER-RECORD.CUSTOMER-KEY.CUSTOMER-SORTCODE" data-type="Numeric Display (6 digits)" data-start-line="11" data-end-line="11">
+                            <td class="text-center font-mono"><b>07</b></td>
+                            <td>
+                                <div style="padding-left: 54px;">
+                                    <span class="field-name font-mono">CUSTOMER-SORTCODE</span>
+                                    <div class="field-path font-mono text-muted">WS-CONT-IN.CUSTOMER-RECORD.CUSTOMER-KEY.CUSTOMER-SORTCODE</div>
+                                </div>
+                            </td>
+                            <td><span class="type-pill">Numeric Display (6 digits)</span></td>
+                            <td class="font-mono text-sm">9(6)<br/><span class="text-muted">DISPLAY</span></td>
+                            <td class="text-center font-mono">10</td>
+                            <td class="text-center font-mono"><b>6</b></td>
+                            <td>
+                                <span class="text-muted">—</span>
+                            </td>
+                        </tr>
+                        <tr class=" dict-row-clickable" data-section="WORKING-STORAGE" data-name="CUSTOMER-NUMBER" data-var-name="CUSTOMER-NUMBER" data-path="WS-CONT-IN.CUSTOMER-RECORD.CUSTOMER-KEY.CUSTOMER-NUMBER" data-type="Numeric Display (10 digits)" data-start-line="12" data-end-line="12">
+                            <td class="text-center font-mono"><b>07</b></td>
+                            <td>
+                                <div style="padding-left: 54px;">
+                                    <span class="field-name font-mono">CUSTOMER-NUMBER</span>
+                                    <div class="field-path font-mono text-muted">WS-CONT-IN.CUSTOMER-RECORD.CUSTOMER-KEY.CUSTOMER-NUMBER</div>
+                                </div>
+                            </td>
+                            <td><span class="type-pill">Numeric Display (10 digits)</span></td>
+                            <td class="font-mono text-sm">9(10)<br/><span class="text-muted">DISPLAY</span></td>
+                            <td class="text-center font-mono">16</td>
+                            <td class="text-center font-mono"><b>10</b></td>
+                            <td>
+                                <span class="text-muted">—</span>
+                            </td>
+                        </tr>
+                        <tr class=" dict-row-clickable" data-section="WORKING-STORAGE" data-name="CUSTOMER-NAME" data-var-name="CUSTOMER-NAME" data-path="WS-CONT-IN.CUSTOMER-RECORD.CUSTOMER-NAME" data-type="Group" data-start-line="13" data-end-line="13">
+                            <td class="text-center font-mono"><b>05</b></td>
+                            <td>
+                                <div style="padding-left: 36px;">
+                                    <span class="field-name font-mono">CUSTOMER-NAME</span>
+                                    <div class="field-path font-mono text-muted">WS-CONT-IN.CUSTOMER-RECORD.CUSTOMER-NAME</div>
+                                </div>
+                            </td>
+                            <td><span class="type-pill">Group</span></td>
+                            <td class="font-mono text-sm">—<br/><span class="text-muted">DISPLAY</span></td>
+                            <td class="text-center font-mono">26</td>
+                            <td class="text-center font-mono"><b>110</b></td>
+                            <td>
+                                <span class="text-muted">—</span>
+                            </td>
+                        </tr>
+                        <tr class=" dict-row-clickable" data-section="WORKING-STORAGE" data-name="CUSTOMER-TITLE" data-var-name="CUSTOMER-TITLE" data-path="WS-CONT-IN.CUSTOMER-RECORD.CUSTOMER-NAME.CUSTOMER-TITLE" data-type="Alphanumeric (10 chars)" data-start-line="14" data-end-line="14">
+                            <td class="text-center font-mono"><b>07</b></td>
+                            <td>
+                                <div style="padding-left: 54px;">
+                                    <span class="field-name font-mono">CUSTOMER-TITLE</span>
+                                    <div class="field-path font-mono text-muted">WS-CONT-IN.CUSTOMER-RECORD.CUSTOMER-NAME.CUSTOMER-TITLE</div>
+                                </div>
+                            </td>
+                            <td><span class="type-pill">Alphanumeric (10 chars)</span></td>
+                            <td class="font-mono text-sm">X(10)<br/><span class="text-muted">DISPLAY</span></td>
+                            <td class="text-center font-mono">26</td>
+                            <td class="text-center font-mono"><b>10</b></td>
+                            <td>
+                                <span class="text-muted">—</span>
+                            </td>
+                        </tr>
+                        <tr class=" dict-row-clickable" data-section="WORKING-STORAGE" data-name="CUSTOMER-FIRST-NAME" data-var-name="CUSTOMER-FIRST-NAME" data-path="WS-CONT-IN.CUSTOMER-RECORD.CUSTOMER-NAME.CUSTOMER-FIRST-NAME" data-type="Alphanumeric (50 chars)" data-start-line="15" data-end-line="15">
+                            <td class="text-center font-mono"><b>07</b></td>
+                            <td>
+                                <div style="padding-left: 54px;">
+                                    <span class="field-name font-mono">CUSTOMER-FIRST-NAME</span>
+                                    <div class="field-path font-mono text-muted">WS-CONT-IN.CUSTOMER-RECORD.CUSTOMER-NAME.CUSTOMER-FIRST-NAME</div>
+                                </div>
+                            </td>
+                            <td><span class="type-pill">Alphanumeric (50 chars)</span></td>
+                            <td class="font-mono text-sm">X(50)<br/><span class="text-muted">DISPLAY</span></td>
+                            <td class="text-center font-mono">36</td>
+                            <td class="text-center font-mono"><b>50</b></td>
+                            <td>
+                                <span class="text-muted">—</span>
+                            </td>
+                        </tr>
+                        <tr class=" dict-row-clickable" data-section="WORKING-STORAGE" data-name="CUSTOMER-LAST-NAME" data-var-name="CUSTOMER-LAST-NAME" data-path="WS-CONT-IN.CUSTOMER-RECORD.CUSTOMER-NAME.CUSTOMER-LAST-NAME" data-type="Alphanumeric (50 chars)" data-start-line="16" data-end-line="16">
+                            <td class="text-center font-mono"><b>07</b></td>
+                            <td>
+                                <div style="padding-left: 54px;">
+                                    <span class="field-name font-mono">CUSTOMER-LAST-NAME</span>
+                                    <div class="field-path font-mono text-muted">WS-CONT-IN.CUSTOMER-RECORD.CUSTOMER-NAME.CUSTOMER-LAST-NAME</div>
+                                </div>
+                            </td>
+                            <td><span class="type-pill">Alphanumeric (50 chars)</span></td>
+                            <td class="font-mono text-sm">X(50)<br/><span class="text-muted">DISPLAY</span></td>
+                            <td class="text-center font-mono">86</td>
+                            <td class="text-center font-mono"><b>50</b></td>
+                            <td>
+                                <span class="text-muted">—</span>
+                            </td>
+                        </tr>
+                        <tr class=" dict-row-clickable" data-section="WORKING-STORAGE" data-name="CUSTOMER-DOB" data-var-name="CUSTOMER-DOB" data-path="WS-CONT-IN.CUSTOMER-RECORD.CUSTOMER-DOB" data-type="Group" data-start-line="17" data-end-line="17">
+                            <td class="text-center font-mono"><b>05</b></td>
+                            <td>
+                                <div style="padding-left: 36px;">
+                                    <span class="field-name font-mono">CUSTOMER-DOB</span>
+                                    <div class="field-path font-mono text-muted">WS-CONT-IN.CUSTOMER-RECORD.CUSTOMER-DOB</div>
+                                </div>
+                            </td>
+                            <td><span class="type-pill">Group</span></td>
+                            <td class="font-mono text-sm">—<br/><span class="text-muted">DISPLAY</span></td>
+                            <td class="text-center font-mono">136</td>
+                            <td class="text-center font-mono"><b>8</b></td>
+                            <td>
+                                <span class="text-muted">—</span>
+                            </td>
+                        </tr>
+                        <tr class=" dict-row-clickable" data-section="WORKING-STORAGE" data-name="CUSTOMER-DOB-DAY" data-var-name="CUSTOMER-DOB-DAY" data-path="WS-CONT-IN.CUSTOMER-RECORD.CUSTOMER-DOB.CUSTOMER-DOB-DAY" data-type="Numeric Display (2 digits)" data-start-line="18" data-end-line="18">
+                            <td class="text-center font-mono"><b>07</b></td>
+                            <td>
+                                <div style="padding-left: 54px;">
+                                    <span class="field-name font-mono">CUSTOMER-DOB-DAY</span>
+                                    <div class="field-path font-mono text-muted">WS-CONT-IN.CUSTOMER-RECORD.CUSTOMER-DOB.CUSTOMER-DOB-DAY</div>
+                                </div>
+                            </td>
+                            <td><span class="type-pill">Numeric Display (2 digits)</span></td>
+                            <td class="font-mono text-sm">99<br/><span class="text-muted">DISPLAY</span></td>
+                            <td class="text-center font-mono">136</td>
+                            <td class="text-center font-mono"><b>2</b></td>
+                            <td>
+                                <span class="text-muted">—</span>
+                            </td>
+                        </tr>
+                        <tr class=" dict-row-clickable" data-section="WORKING-STORAGE" data-name="CUSTOMER-DOB-MONTH" data-var-name="CUSTOMER-DOB-MONTH" data-path="WS-CONT-IN.CUSTOMER-RECORD.CUSTOMER-DOB.CUSTOMER-DOB-MONTH" data-type="Numeric Display (2 digits)" data-start-line="19" data-end-line="19">
+                            <td class="text-center font-mono"><b>07</b></td>
+                            <td>
+                                <div style="padding-left: 54px;">
+                                    <span class="field-name font-mono">CUSTOMER-DOB-MONTH</span>
+                                    <div class="field-path font-mono text-muted">WS-CONT-IN.CUSTOMER-RECORD.CUSTOMER-DOB.CUSTOMER-DOB-MONTH</div>
+                                </div>
+                            </td>
+                            <td><span class="type-pill">Numeric Display (2 digits)</span></td>
+                            <td class="font-mono text-sm">99<br/><span class="text-muted">DISPLAY</span></td>
+                            <td class="text-center font-mono">138</td>
+                            <td class="text-center font-mono"><b>2</b></td>
+                            <td>
+                                <span class="text-muted">—</span>
+                            </td>
+                        </tr>
+                        <tr class=" dict-row-clickable" data-section="WORKING-STORAGE" data-name="CUSTOMER-DOB-YEAR" data-var-name="CUSTOMER-DOB-YEAR" data-path="WS-CONT-IN.CUSTOMER-RECORD.CUSTOMER-DOB.CUSTOMER-DOB-YEAR" data-type="Numeric Display (4 digits)" data-start-line="20" data-end-line="20">
+                            <td class="text-center font-mono"><b>07</b></td>
+                            <td>
+                                <div style="padding-left: 54px;">
+                                    <span class="field-name font-mono">CUSTOMER-DOB-YEAR</span>
+                                    <div class="field-path font-mono text-muted">WS-CONT-IN.CUSTOMER-RECORD.CUSTOMER-DOB.CUSTOMER-DOB-YEAR</div>
+                                </div>
+                            </td>
+                            <td><span class="type-pill">Numeric Display (4 digits)</span></td>
+                            <td class="font-mono text-sm">9999<br/><span class="text-muted">DISPLAY</span></td>
+                            <td class="text-center font-mono">140</td>
+                            <td class="text-center font-mono"><b>4</b></td>
+                            <td>
+                                <span class="text-muted">—</span>
+                            </td>
+                        </tr>
+                        <tr class=" dict-row-clickable" data-section="WORKING-STORAGE" data-name="CUSTOMER-PHONE" data-var-name="CUSTOMER-PHONE" data-path="WS-CONT-IN.CUSTOMER-RECORD.CUSTOMER-PHONE" data-type="Alphanumeric (20 chars)" data-start-line="21" data-end-line="21">
+                            <td class="text-center font-mono"><b>05</b></td>
+                            <td>
+                                <div style="padding-left: 36px;">
+                                    <span class="field-name font-mono">CUSTOMER-PHONE</span>
+                                    <div class="field-path font-mono text-muted">WS-CONT-IN.CUSTOMER-RECORD.CUSTOMER-PHONE</div>
+                                </div>
+                            </td>
+                            <td><span class="type-pill">Alphanumeric (20 chars)</span></td>
+                            <td class="font-mono text-sm">X(20)<br/><span class="text-muted">DISPLAY</span></td>
+                            <td class="text-center font-mono">144</td>
+                            <td class="text-center font-mono"><b>20</b></td>
+                            <td>
+                                <span class="text-muted">—</span>
+                            </td>
+                        </tr>
+                        <tr class=" dict-row-clickable" data-section="WORKING-STORAGE" data-name="CUSTOMER-ADDRESS" data-var-name="CUSTOMER-ADDRESS" data-path="WS-CONT-IN.CUSTOMER-RECORD.CUSTOMER-ADDRESS" data-type="Group" data-start-line="22" data-end-line="22">
+                            <td class="text-center font-mono"><b>05</b></td>
+                            <td>
+                                <div style="padding-left: 36px;">
+                                    <span class="field-name font-mono">CUSTOMER-ADDRESS</span>
+                                    <div class="field-path font-mono text-muted">WS-CONT-IN.CUSTOMER-RECORD.CUSTOMER-ADDRESS</div>
+                                </div>
+                            </td>
+                            <td><span class="type-pill">Group</span></td>
+                            <td class="font-mono text-sm">—<br/><span class="text-muted">DISPLAY</span></td>
+                            <td class="text-center font-mono">164</td>
+                            <td class="text-center font-mono"><b>210</b></td>
+                            <td>
+                                <span class="text-muted">—</span>
+                            </td>
+                        </tr>
+                        <tr class=" dict-row-clickable" data-section="WORKING-STORAGE" data-name="CUSTOMER-ADDR-LINE1" data-var-name="CUSTOMER-ADDR-LINE1" data-path="WS-CONT-IN.CUSTOMER-RECORD.CUSTOMER-ADDRESS.CUSTOMER-ADDR-LINE1" data-type="Alphanumeric (50 chars)" data-start-line="23" data-end-line="23">
+                            <td class="text-center font-mono"><b>07</b></td>
+                            <td>
+                                <div style="padding-left: 54px;">
+                                    <span class="field-name font-mono">CUSTOMER-ADDR-LINE1</span>
+                                    <div class="field-path font-mono text-muted">WS-CONT-IN.CUSTOMER-RECORD.CUSTOMER-ADDRESS.CUSTOMER-ADDR-LINE1</div>
+                                </div>
+                            </td>
+                            <td><span class="type-pill">Alphanumeric (50 chars)</span></td>
+                            <td class="font-mono text-sm">X(50)<br/><span class="text-muted">DISPLAY</span></td>
+                            <td class="text-center font-mono">164</td>
+                            <td class="text-center font-mono"><b>50</b></td>
+                            <td>
+                                <span class="text-muted">—</span>
+                            </td>
+                        </tr>
+                        <tr class=" dict-row-clickable" data-section="WORKING-STORAGE" data-name="CUSTOMER-ADDR-LINE2" data-var-name="CUSTOMER-ADDR-LINE2" data-path="WS-CONT-IN.CUSTOMER-RECORD.CUSTOMER-ADDRESS.CUSTOMER-ADDR-LINE2" data-type="Alphanumeric (50 chars)" data-start-line="24" data-end-line="24">
+                            <td class="text-center font-mono"><b>07</b></td>
+                            <td>
+                                <div style="padding-left: 54px;">
+                                    <span class="field-name font-mono">CUSTOMER-ADDR-LINE2</span>
+                                    <div class="field-path font-mono text-muted">WS-CONT-IN.CUSTOMER-RECORD.CUSTOMER-ADDRESS.CUSTOMER-ADDR-LINE2</div>
+                                </div>
+                            </td>
+                            <td><span class="type-pill">Alphanumeric (50 chars)</span></td>
+                            <td class="font-mono text-sm">X(50)<br/><span class="text-muted">DISPLAY</span></td>
+                            <td class="text-center font-mono">214</td>
+                            <td class="text-center font-mono"><b>50</b></td>
+                            <td>
+                                <span class="text-muted">—</span>
+                            </td>
+                        </tr>
+                        <tr class=" dict-row-clickable" data-section="WORKING-STORAGE" data-name="CUSTOMER-CITY" data-var-name="CUSTOMER-CITY" data-path="WS-CONT-IN.CUSTOMER-RECORD.CUSTOMER-ADDRESS.CUSTOMER-CITY" data-type="Alphanumeric (50 chars)" data-start-line="25" data-end-line="25">
+                            <td class="text-center font-mono"><b>07</b></td>
+                            <td>
+                                <div style="padding-left: 54px;">
+                                    <span class="field-name font-mono">CUSTOMER-CITY</span>
+                                    <div class="field-path font-mono text-muted">WS-CONT-IN.CUSTOMER-RECORD.CUSTOMER-ADDRESS.CUSTOMER-CITY</div>
+                                </div>
+                            </td>
+                            <td><span class="type-pill">Alphanumeric (50 chars)</span></td>
+                            <td class="font-mono text-sm">X(50)<br/><span class="text-muted">DISPLAY</span></td>
+                            <td class="text-center font-mono">264</td>
+                            <td class="text-center font-mono"><b>50</b></td>
+                            <td>
+                                <span class="text-muted">—</span>
+                            </td>
+                        </tr>
+                        <tr class=" dict-row-clickable" data-section="WORKING-STORAGE" data-name="CUSTOMER-POSTCODE" data-var-name="CUSTOMER-POSTCODE" data-path="WS-CONT-IN.CUSTOMER-RECORD.CUSTOMER-ADDRESS.CUSTOMER-POSTCODE" data-type="Alphanumeric (10 chars)" data-start-line="26" data-end-line="26">
+                            <td class="text-center font-mono"><b>07</b></td>
+                            <td>
+                                <div style="padding-left: 54px;">
+                                    <span class="field-name font-mono">CUSTOMER-POSTCODE</span>
+                                    <div class="field-path font-mono text-muted">WS-CONT-IN.CUSTOMER-RECORD.CUSTOMER-ADDRESS.CUSTOMER-POSTCODE</div>
+                                </div>
+                            </td>
+                            <td><span class="type-pill">Alphanumeric (10 chars)</span></td>
+                            <td class="font-mono text-sm">X(10)<br/><span class="text-muted">DISPLAY</span></td>
+                            <td class="text-center font-mono">314</td>
+                            <td class="text-center font-mono"><b>10</b></td>
+                            <td>
+                                <span class="text-muted">—</span>
+                            </td>
+                        </tr>
+                        <tr class=" dict-row-clickable" data-section="WORKING-STORAGE" data-name="CUSTOMER-COUNTRY" data-var-name="CUSTOMER-COUNTRY" data-path="WS-CONT-IN.CUSTOMER-RECORD.CUSTOMER-ADDRESS.CUSTOMER-COUNTRY" data-type="Alphanumeric (50 chars)" data-start-line="27" data-end-line="27">
+                            <td class="text-center font-mono"><b>07</b></td>
+                            <td>
+                                <div style="padding-left: 54px;">
+                                    <span class="field-name font-mono">CUSTOMER-COUNTRY</span>
+                                    <div class="field-path font-mono text-muted">WS-CONT-IN.CUSTOMER-RECORD.CUSTOMER-ADDRESS.CUSTOMER-COUNTRY</div>
+                                </div>
+                            </td>
+                            <td><span class="type-pill">Alphanumeric (50 chars)</span></td>
+                            <td class="font-mono text-sm">X(50)<br/><span class="text-muted">DISPLAY</span></td>
+                            <td class="text-center font-mono">324</td>
+                            <td class="text-center font-mono"><b>50</b></td>
+                            <td>
+                                <span class="text-muted">—</span>
+                            </td>
+                        </tr>
+                        <tr class=" dict-row-clickable" data-section="WORKING-STORAGE" data-name="CUSTOMER-STATUS" data-var-name="CUSTOMER-STATUS" data-path="WS-CONT-IN.CUSTOMER-RECORD.CUSTOMER-STATUS" data-type="Alphanumeric (10 chars)" data-start-line="28" data-end-line="28">
+                            <td class="text-center font-mono"><b>05</b></td>
+                            <td>
+                                <div style="padding-left: 36px;">
+                                    <span class="field-name font-mono">CUSTOMER-STATUS</span>
+                                    <div class="field-path font-mono text-muted">WS-CONT-IN.CUSTOMER-RECORD.CUSTOMER-STATUS</div>
+                                    <div class="cond88-block">
+                                        <div class="cond88-item"><b>88 CUSTOMER-STATUS-ACTIVE:</b> ACTIVE</div>
+                                        <div class="cond88-item"><b>88 CUSTOMER-STATUS-INACTIVE:</b> INACTIVE</div>
+                                        <div class="cond88-item"><b>88 CUSTOMER-STATUS-SUSPENDED:</b> SUSPENDED</div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td><span class="type-pill">Alphanumeric (10 chars)</span></td>
+                            <td class="font-mono text-sm">X(10)<br/><span class="text-muted">DISPLAY</span></td>
+                            <td class="text-center font-mono">374</td>
+                            <td class="text-center font-mono"><b>10</b></td>
+                            <td>
+                                <span class="text-muted">—</span>
+                            </td>
+                        </tr>
+                        <tr class=" dict-row-clickable" data-section="WORKING-STORAGE" data-name="CUSTOMER-CREATED-DATE" data-var-name="CUSTOMER-CREATED-DATE" data-path="WS-CONT-IN.CUSTOMER-RECORD.CUSTOMER-CREATED-DATE" data-type="Group" data-start-line="32" data-end-line="32">
+                            <td class="text-center font-mono"><b>05</b></td>
+                            <td>
+                                <div style="padding-left: 36px;">
+                                    <span class="field-name font-mono">CUSTOMER-CREATED-DATE</span>
+                                    <div class="field-path font-mono text-muted">WS-CONT-IN.CUSTOMER-RECORD.CUSTOMER-CREATED-DATE</div>
+                                </div>
+                            </td>
+                            <td><span class="type-pill">Group</span></td>
+                            <td class="font-mono text-sm">—<br/><span class="text-muted">DISPLAY</span></td>
+                            <td class="text-center font-mono">384</td>
+                            <td class="text-center font-mono"><b>8</b></td>
+                            <td>
+                                <span class="text-muted">—</span>
+                            </td>
+                        </tr>
+                        <tr class=" dict-row-clickable" data-section="WORKING-STORAGE" data-name="CUSTOMER-CREATED-DAY" data-var-name="CUSTOMER-CREATED-DAY" data-path="WS-CONT-IN.CUSTOMER-RECORD.CUSTOMER-CREATED-DATE.CUSTOMER-CREATED-DAY" data-type="Numeric Display (2 digits)" data-start-line="33" data-end-line="33">
+                            <td class="text-center font-mono"><b>07</b></td>
+                            <td>
+                                <div style="padding-left: 54px;">
+                                    <span class="field-name font-mono">CUSTOMER-CREATED-DAY</span>
+                                    <div class="field-path font-mono text-muted">WS-CONT-IN.CUSTOMER-RECORD.CUSTOMER-CREATED-DATE.CUSTOMER-CREATED-DAY</div>
+                                </div>
+                            </td>
+                            <td><span class="type-pill">Numeric Display (2 digits)</span></td>
+                            <td class="font-mono text-sm">99<br/><span class="text-muted">DISPLAY</span></td>
+                            <td class="text-center font-mono">384</td>
+                            <td class="text-center font-mono"><b>2</b></td>
+                            <td>
+                                <span class="text-muted">—</span>
+                            </td>
+                        </tr>
+                        <tr class=" dict-row-clickable" data-section="WORKING-STORAGE" data-name="CUSTOMER-CREATED-MONTH" data-var-name="CUSTOMER-CREATED-MONTH" data-path="WS-CONT-IN.CUSTOMER-RECORD.CUSTOMER-CREATED-DATE.CUSTOMER-CREATED-MONTH" data-type="Numeric Display (2 digits)" data-start-line="34" data-end-line="34">
+                            <td class="text-center font-mono"><b>07</b></td>
+                            <td>
+                                <div style="padding-left: 54px;">
+                                    <span class="field-name font-mono">CUSTOMER-CREATED-MONTH</span>
+                                    <div class="field-path font-mono text-muted">WS-CONT-IN.CUSTOMER-RECORD.CUSTOMER-CREATED-DATE.CUSTOMER-CREATED-MONTH</div>
+                                </div>
+                            </td>
+                            <td><span class="type-pill">Numeric Display (2 digits)</span></td>
+                            <td class="font-mono text-sm">99<br/><span class="text-muted">DISPLAY</span></td>
+                            <td class="text-center font-mono">386</td>
+                            <td class="text-center font-mono"><b>2</b></td>
+                            <td>
+                                <span class="text-muted">—</span>
+                            </td>
+                        </tr>
+                        <tr class=" dict-row-clickable" data-section="WORKING-STORAGE" data-name="CUSTOMER-CREATED-YEAR" data-var-name="CUSTOMER-CREATED-YEAR" data-path="WS-CONT-IN.CUSTOMER-RECORD.CUSTOMER-CREATED-DATE.CUSTOMER-CREATED-YEAR" data-type="Numeric Display (4 digits)" data-start-line="35" data-end-line="35">
+                            <td class="text-center font-mono"><b>07</b></td>
+                            <td>
+                                <div style="padding-left: 54px;">
+                                    <span class="field-name font-mono">CUSTOMER-CREATED-YEAR</span>
+                                    <div class="field-path font-mono text-muted">WS-CONT-IN.CUSTOMER-RECORD.CUSTOMER-CREATED-DATE.CUSTOMER-CREATED-YEAR</div>
+                                </div>
+                            </td>
+                            <td><span class="type-pill">Numeric Display (4 digits)</span></td>
+                            <td class="font-mono text-sm">9999<br/><span class="text-muted">DISPLAY</span></td>
+                            <td class="text-center font-mono">388</td>
+                            <td class="text-center font-mono"><b>4</b></td>
+                            <td>
+                                <span class="text-muted">—</span>
+                            </td>
+                        </tr>
+                        <tr class=" dict-row-clickable" data-section="WORKING-STORAGE" data-name="CUSTOMER-CREDIT-SCORE" data-var-name="CUSTOMER-CREDIT-SCORE" data-path="WS-CONT-IN.CUSTOMER-RECORD.CUSTOMER-CREDIT-SCORE" data-type="Numeric Display (3 digits)" data-start-line="36" data-end-line="36">
+                            <td class="text-center font-mono"><b>05</b></td>
+                            <td>
+                                <div style="padding-left: 36px;">
+                                    <span class="field-name font-mono">CUSTOMER-CREDIT-SCORE</span>
+                                    <div class="field-path font-mono text-muted">WS-CONT-IN.CUSTOMER-RECORD.CUSTOMER-CREDIT-SCORE</div>
+                                </div>
+                            </td>
+                            <td><span class="type-pill">Numeric Display (3 digits)</span></td>
+                            <td class="font-mono text-sm">999<br/><span class="text-muted">DISPLAY</span></td>
+                            <td class="text-center font-mono">392</td>
+                            <td class="text-center font-mono"><b>3</b></td>
+                            <td>
+                                <div class="refs-list">
+                                    <div class="ref-breadcrumb" title="Click to view routine in Code (Ctrl+Click to open Call Graph)" onclick="handleBreadcrumbClick(event, 'A010', 'PREMIERE', 'CUSTOMER-CREDIT-SCORE')">
+                                        <span class="ref-sec">PREMIERE</span>
+                                        <span class="ref-sep">&rsaquo;</span>
+                                        <span class="ref-para">A010</span>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr class=" dict-row-clickable" data-section="WORKING-STORAGE" data-name="CUSTOMER-CS-REVIEW-DATE" data-var-name="CUSTOMER-CS-REVIEW-DATE" data-path="WS-CONT-IN.CUSTOMER-RECORD.CUSTOMER-CS-REVIEW-DATE" data-type="Group" data-start-line="37" data-end-line="37">
+                            <td class="text-center font-mono"><b>05</b></td>
+                            <td>
+                                <div style="padding-left: 36px;">
+                                    <span class="field-name font-mono">CUSTOMER-CS-REVIEW-DATE</span>
+                                    <div class="field-path font-mono text-muted">WS-CONT-IN.CUSTOMER-RECORD.CUSTOMER-CS-REVIEW-DATE</div>
+                                </div>
+                            </td>
+                            <td><span class="type-pill">Group</span></td>
+                            <td class="font-mono text-sm">—<br/><span class="text-muted">DISPLAY</span></td>
+                            <td class="text-center font-mono">395</td>
+                            <td class="text-center font-mono"><b>8</b></td>
+                            <td>
+                                <span class="text-muted">—</span>
+                            </td>
+                        </tr>
+                        <tr class=" dict-row-clickable" data-section="WORKING-STORAGE" data-name="CUSTOMER-CS-REVIEW-DAY" data-var-name="CUSTOMER-CS-REVIEW-DAY" data-path="WS-CONT-IN.CUSTOMER-RECORD.CUSTOMER-CS-REVIEW-DATE.CUSTOMER-CS-REVIEW-DAY" data-type="Numeric Display (2 digits)" data-start-line="38" data-end-line="38">
+                            <td class="text-center font-mono"><b>07</b></td>
+                            <td>
+                                <div style="padding-left: 54px;">
+                                    <span class="field-name font-mono">CUSTOMER-CS-REVIEW-DAY</span>
+                                    <div class="field-path font-mono text-muted">WS-CONT-IN.CUSTOMER-RECORD.CUSTOMER-CS-REVIEW-DATE.CUSTOMER-CS-REVIEW-DAY</div>
+                                </div>
+                            </td>
+                            <td><span class="type-pill">Numeric Display (2 digits)</span></td>
+                            <td class="font-mono text-sm">99<br/><span class="text-muted">DISPLAY</span></td>
+                            <td class="text-center font-mono">395</td>
+                            <td class="text-center font-mono"><b>2</b></td>
+                            <td>
+                                <span class="text-muted">—</span>
+                            </td>
+                        </tr>
+                        <tr class=" dict-row-clickable" data-section="WORKING-STORAGE" data-name="CUSTOMER-CS-REVIEW-MONTH" data-var-name="CUSTOMER-CS-REVIEW-MONTH" data-path="WS-CONT-IN.CUSTOMER-RECORD.CUSTOMER-CS-REVIEW-DATE.CUSTOMER-CS-REVIEW-MONTH" data-type="Numeric Display (2 digits)" data-start-line="39" data-end-line="39">
+                            <td class="text-center font-mono"><b>07</b></td>
+                            <td>
+                                <div style="padding-left: 54px;">
+                                    <span class="field-name font-mono">CUSTOMER-CS-REVIEW-MONTH</span>
+                                    <div class="field-path font-mono text-muted">WS-CONT-IN.CUSTOMER-RECORD.CUSTOMER-CS-REVIEW-DATE.CUSTOMER-CS-REVIEW-MONTH</div>
+                                </div>
+                            </td>
+                            <td><span class="type-pill">Numeric Display (2 digits)</span></td>
+                            <td class="font-mono text-sm">99<br/><span class="text-muted">DISPLAY</span></td>
+                            <td class="text-center font-mono">397</td>
+                            <td class="text-center font-mono"><b>2</b></td>
+                            <td>
+                                <span class="text-muted">—</span>
+                            </td>
+                        </tr>
+                        <tr class=" dict-row-clickable" data-section="WORKING-STORAGE" data-name="CUSTOMER-CS-REVIEW-YEAR" data-var-name="CUSTOMER-CS-REVIEW-YEAR" data-path="WS-CONT-IN.CUSTOMER-RECORD.CUSTOMER-CS-REVIEW-DATE.CUSTOMER-CS-REVIEW-YEAR" data-type="Numeric Display (4 digits)" data-start-line="40" data-end-line="40">
+                            <td class="text-center font-mono"><b>07</b></td>
+                            <td>
+                                <div style="padding-left: 54px;">
+                                    <span class="field-name font-mono">CUSTOMER-CS-REVIEW-YEAR</span>
+                                    <div class="field-path font-mono text-muted">WS-CONT-IN.CUSTOMER-RECORD.CUSTOMER-CS-REVIEW-DATE.CUSTOMER-CS-REVIEW-YEAR</div>
+                                </div>
+                            </td>
+                            <td><span class="type-pill">Numeric Display (4 digits)</span></td>
+                            <td class="font-mono text-sm">9999<br/><span class="text-muted">DISPLAY</span></td>
+                            <td class="text-center font-mono">399</td>
+                            <td class="text-center font-mono"><b>4</b></td>
+                            <td>
+                                <span class="text-muted">—</span>
+                            </td>
+                        </tr>
+                        <tr class=" dict-row-clickable" data-section="WORKING-STORAGE" data-name="WS-CICS-WORK-AREA" data-var-name="WS-CICS-WORK-AREA" data-path="WS-CICS-WORK-AREA" data-type="Group" data-start-line="48" data-end-line="48">
+                            <td class="text-center font-mono"><b>01</b></td>
+                            <td>
+                                <div style="padding-left: 0px;">
+                                    <span class="field-name font-mono">WS-CICS-WORK-AREA</span>
+                                    <div class="field-path font-mono text-muted">WS-CICS-WORK-AREA</div>
+                                </div>
+                            </td>
+                            <td><span class="type-pill">Group</span></td>
+                            <td class="font-mono text-sm">—<br/><span class="text-muted">DISPLAY</span></td>
+                            <td class="text-center font-mono">403</td>
+                            <td class="text-center font-mono"><b>8</b></td>
+                            <td>
+                                <span class="text-muted">—</span>
+                            </td>
+                        </tr>
+                        <tr class=" dict-row-clickable" data-section="WORKING-STORAGE" data-name="WS-CICS-RESP" data-var-name="WS-CICS-RESP" data-path="WS-CICS-WORK-AREA.WS-CICS-RESP" data-type="Signed Integer (32-bit Binary)" data-start-line="49" data-end-line="49">
+                            <td class="text-center font-mono"><b>05</b></td>
+                            <td>
+                                <div style="padding-left: 18px;">
+                                    <span class="field-name font-mono">WS-CICS-RESP</span>
+                                    <div class="field-path font-mono text-muted">WS-CICS-WORK-AREA.WS-CICS-RESP</div>
+                                </div>
+                            </td>
+                            <td><span class="type-pill">Signed Integer (32-bit Binary)</span></td>
+                            <td class="font-mono text-sm">S9(8)<br/><span class="text-muted">COMP</span></td>
+                            <td class="text-center font-mono">403</td>
+                            <td class="text-center font-mono"><b>4</b></td>
+                            <td>
+                                <div class="refs-list">
+                                    <div class="ref-breadcrumb" title="Click to view routine in Code (Ctrl+Click to open Call Graph)" onclick="handleBreadcrumbClick(event, 'A010', 'PREMIERE', 'WS-CICS-RESP')">
+                                        <span class="ref-sec">PREMIERE</span>
+                                        <span class="ref-sep">&rsaquo;</span>
+                                        <span class="ref-para">A010</span>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr class=" dict-row-clickable" data-section="WORKING-STORAGE" data-name="WS-CICS-RESP2" data-var-name="WS-CICS-RESP2" data-path="WS-CICS-WORK-AREA.WS-CICS-RESP2" data-type="Signed Integer (32-bit Binary)" data-start-line="50" data-end-line="50">
+                            <td class="text-center font-mono"><b>05</b></td>
+                            <td>
+                                <div style="padding-left: 18px;">
+                                    <span class="field-name font-mono">WS-CICS-RESP2</span>
+                                    <div class="field-path font-mono text-muted">WS-CICS-WORK-AREA.WS-CICS-RESP2</div>
+                                </div>
+                            </td>
+                            <td><span class="type-pill">Signed Integer (32-bit Binary)</span></td>
+                            <td class="font-mono text-sm">S9(8)<br/><span class="text-muted">COMP</span></td>
+                            <td class="text-center font-mono">407</td>
+                            <td class="text-center font-mono"><b>4</b></td>
+                            <td>
+                                <div class="refs-list">
+                                    <div class="ref-breadcrumb" title="Click to view routine in Code (Ctrl+Click to open Call Graph)" onclick="handleBreadcrumbClick(event, 'A010', 'PREMIERE', 'WS-CICS-RESP2')">
+                                        <span class="ref-sec">PREMIERE</span>
+                                        <span class="ref-sep">&rsaquo;</span>
+                                        <span class="ref-para">A010</span>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr class=" dict-row-clickable" data-section="WORKING-STORAGE" data-name="WS-DELAY-AMT" data-var-name="WS-DELAY-AMT" data-path="WS-DELAY-AMT" data-type="Signed Integer (32-bit Binary)" data-start-line="53" data-end-line="54">
+                            <td class="text-center font-mono"><b>01</b></td>
+                            <td>
+                                <div style="padding-left: 0px;">
+                                    <span class="field-name font-mono">WS-DELAY-AMT</span>
+<span class="badge badge-value">VALUE 0</span>                                    <div class="field-path font-mono text-muted">WS-DELAY-AMT</div>
+                                </div>
+                            </td>
+                            <td><span class="type-pill">Signed Integer (32-bit Binary)</span></td>
+                            <td class="font-mono text-sm">S9(8)<br/><span class="text-muted">COMP</span></td>
+                            <td class="text-center font-mono">411</td>
+                            <td class="text-center font-mono"><b>4</b></td>
+                            <td>
+                                <div class="refs-list">
+                                    <div class="ref-breadcrumb" title="Click to view routine in Code (Ctrl+Click to open Call Graph)" onclick="handleBreadcrumbClick(event, 'A010', 'PREMIERE', 'WS-DELAY-AMT')">
+                                        <span class="ref-sec">PREMIERE</span>
+                                        <span class="ref-sep">&rsaquo;</span>
+                                        <span class="ref-para">A010</span>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr class=" dict-row-clickable" data-section="WORKING-STORAGE" data-name="WS-CONTAINER-NAME" data-var-name="WS-CONTAINER-NAME" data-path="WS-CONTAINER-NAME" data-type="Alphanumeric (16 chars)" data-start-line="56" data-end-line="56">
+                            <td class="text-center font-mono"><b>01</b></td>
+                            <td>
+                                <div style="padding-left: 0px;">
+                                    <span class="field-name font-mono">WS-CONTAINER-NAME</span>
+<span class="badge badge-value">VALUE SPACES</span>                                    <div class="field-path font-mono text-muted">WS-CONTAINER-NAME</div>
+                                </div>
+                            </td>
+                            <td><span class="type-pill">Alphanumeric (16 chars)</span></td>
+                            <td class="font-mono text-sm">X(16)<br/><span class="text-muted">DISPLAY</span></td>
+                            <td class="text-center font-mono">415</td>
+                            <td class="text-center font-mono"><b>16</b></td>
+                            <td>
+                                <div class="refs-list">
+                                    <div class="ref-breadcrumb" title="Click to view routine in Code (Ctrl+Click to open Call Graph)" onclick="handleBreadcrumbClick(event, 'A010', 'PREMIERE', 'WS-CONTAINER-NAME')">
+                                        <span class="ref-sec">PREMIERE</span>
+                                        <span class="ref-sep">&rsaquo;</span>
+                                        <span class="ref-para">A010</span>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr class=" dict-row-clickable" data-section="WORKING-STORAGE" data-name="WS-CHANNEL-NAME" data-var-name="WS-CHANNEL-NAME" data-path="WS-CHANNEL-NAME" data-type="Alphanumeric (16 chars)" data-start-line="57" data-end-line="57">
+                            <td class="text-center font-mono"><b>01</b></td>
+                            <td>
+                                <div style="padding-left: 0px;">
+                                    <span class="field-name font-mono">WS-CHANNEL-NAME</span>
+<span class="badge badge-value">VALUE SPACES</span>                                    <div class="field-path font-mono text-muted">WS-CHANNEL-NAME</div>
+                                </div>
+                            </td>
+                            <td><span class="type-pill">Alphanumeric (16 chars)</span></td>
+                            <td class="font-mono text-sm">X(16)<br/><span class="text-muted">DISPLAY</span></td>
+                            <td class="text-center font-mono">431</td>
+                            <td class="text-center font-mono"><b>16</b></td>
+                            <td>
+                                <div class="refs-list">
+                                    <div class="ref-breadcrumb" title="Click to view routine in Code (Ctrl+Click to open Call Graph)" onclick="handleBreadcrumbClick(event, 'A010', 'PREMIERE', 'WS-CHANNEL-NAME')">
+                                        <span class="ref-sec">PREMIERE</span>
+                                        <span class="ref-sep">&rsaquo;</span>
+                                        <span class="ref-para">A010</span>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr class=" dict-row-clickable" data-section="WORKING-STORAGE" data-name="WS-CONTAINER-LEN" data-var-name="WS-CONTAINER-LEN" data-path="WS-CONTAINER-LEN" data-type="Signed Integer (32-bit Binary)" data-start-line="59" data-end-line="60">
+                            <td class="text-center font-mono"><b>01</b></td>
+                            <td>
+                                <div style="padding-left: 0px;">
+                                    <span class="field-name font-mono">WS-CONTAINER-LEN</span>
+<span class="badge badge-value">VALUE 0</span>                                    <div class="field-path font-mono text-muted">WS-CONTAINER-LEN</div>
+                                </div>
+                            </td>
+                            <td><span class="type-pill">Signed Integer (32-bit Binary)</span></td>
+                            <td class="font-mono text-sm">S9(8)<br/><span class="text-muted">COMP</span></td>
+                            <td class="text-center font-mono">447</td>
+                            <td class="text-center font-mono"><b>4</b></td>
+                            <td>
+                                <div class="refs-list">
+                                    <div class="ref-breadcrumb" title="Click to view routine in Code (Ctrl+Click to open Call Graph)" onclick="handleBreadcrumbClick(event, 'A010', 'PREMIERE', 'WS-CONTAINER-LEN')">
+                                        <span class="ref-sec">PREMIERE</span>
+                                        <span class="ref-sep">&rsaquo;</span>
+                                        <span class="ref-para">A010</span>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr class=" dict-row-clickable" data-section="WORKING-STORAGE" data-name="WS-NEW-CREDSCORE" data-var-name="WS-NEW-CREDSCORE" data-path="WS-NEW-CREDSCORE" data-type="Numeric Display (3 digits)" data-start-line="61" data-end-line="61">
+                            <td class="text-center font-mono"><b>01</b></td>
+                            <td>
+                                <div style="padding-left: 0px;">
+                                    <span class="field-name font-mono">WS-NEW-CREDSCORE</span>
+<span class="badge badge-value">VALUE 0</span>                                    <div class="field-path font-mono text-muted">WS-NEW-CREDSCORE</div>
+                                </div>
+                            </td>
+                            <td><span class="type-pill">Numeric Display (3 digits)</span></td>
+                            <td class="font-mono text-sm">999<br/><span class="text-muted">DISPLAY</span></td>
+                            <td class="text-center font-mono">451</td>
+                            <td class="text-center font-mono"><b>3</b></td>
+                            <td>
+                                <div class="refs-list">
+                                    <div class="ref-breadcrumb" title="Click to view routine in Code (Ctrl+Click to open Call Graph)" onclick="handleBreadcrumbClick(event, 'A010', 'PREMIERE', 'WS-NEW-CREDSCORE')">
+                                        <span class="ref-sec">PREMIERE</span>
+                                        <span class="ref-sep">&rsaquo;</span>
+                                        <span class="ref-para">A010</span>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr class=" dict-row-clickable" data-section="WORKING-STORAGE" data-name="WS-SEED" data-var-name="WS-SEED" data-path="WS-SEED" data-type="Signed BigInt (64-bit Binary)" data-start-line="62" data-end-line="62">
+                            <td class="text-center font-mono"><b>01</b></td>
+                            <td>
+                                <div style="padding-left: 0px;">
+                                    <span class="field-name font-mono">WS-SEED</span>
+                                    <div class="field-path font-mono text-muted">WS-SEED</div>
+                                </div>
+                            </td>
+                            <td><span class="type-pill">Signed BigInt (64-bit Binary)</span></td>
+                            <td class="font-mono text-sm">S9(15)<br/><span class="text-muted">COMP</span></td>
+                            <td class="text-center font-mono">454</td>
+                            <td class="text-center font-mono"><b>8</b></td>
+                            <td>
+                                <div class="refs-list">
+                                    <div class="ref-breadcrumb" title="Click to view routine in Code (Ctrl+Click to open Call Graph)" onclick="handleBreadcrumbClick(event, 'A010', 'PREMIERE', 'WS-SEED')">
+                                        <span class="ref-sec">PREMIERE</span>
+                                        <span class="ref-sep">&rsaquo;</span>
+                                        <span class="ref-para">A010</span>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr class=" dict-row-clickable" data-section="WORKING-STORAGE" data-name="WS-U-TIME" data-var-name="WS-U-TIME" data-path="WS-U-TIME" data-type="Signed Integer(15) Packed" data-start-line="65" data-end-line="65">
+                            <td class="text-center font-mono"><b>01</b></td>
+                            <td>
+                                <div style="padding-left: 0px;">
+                                    <span class="field-name font-mono">WS-U-TIME</span>
+                                    <div class="field-path font-mono text-muted">WS-U-TIME</div>
+                                </div>
+                            </td>
+                            <td><span class="type-pill">Signed Integer(15) Packed</span></td>
+                            <td class="font-mono text-sm">S9(15)<br/><span class="text-muted">COMP_3</span></td>
+                            <td class="text-center font-mono">462</td>
+                            <td class="text-center font-mono"><b>8</b></td>
+                            <td>
+                                <div class="refs-list">
+                                    <div class="ref-breadcrumb" title="Click to view routine in Code (Ctrl+Click to open Call Graph)" onclick="handleBreadcrumbClick(event, 'A010', 'PREMIERE', 'WS-U-TIME')">
+                                        <span class="ref-sec">PREMIERE</span>
+                                        <span class="ref-sep">&rsaquo;</span>
+                                        <span class="ref-para">A010</span>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr class=" dict-row-clickable" data-section="WORKING-STORAGE" data-name="WS-ORIG-DATE" data-var-name="WS-ORIG-DATE" data-path="WS-ORIG-DATE" data-type="Alphanumeric (10 chars)" data-start-line="66" data-end-line="66">
+                            <td class="text-center font-mono"><b>01</b></td>
+                            <td>
+                                <div style="padding-left: 0px;">
+                                    <span class="field-name font-mono">WS-ORIG-DATE</span>
+                                    <div class="field-path font-mono text-muted">WS-ORIG-DATE</div>
+                                </div>
+                            </td>
+                            <td><span class="type-pill">Alphanumeric (10 chars)</span></td>
+                            <td class="font-mono text-sm">X(10)<br/><span class="text-muted">DISPLAY</span></td>
+                            <td class="text-center font-mono">470</td>
+                            <td class="text-center font-mono"><b>10</b></td>
+                            <td>
+                                <div class="refs-list">
+                                    <div class="ref-breadcrumb" title="Click to view routine in Code (Ctrl+Click to open Call Graph)" onclick="handleBreadcrumbClick(event, 'A010', 'PREMIERE', 'WS-ORIG-DATE')">
+                                        <span class="ref-sec">PREMIERE</span>
+                                        <span class="ref-sep">&rsaquo;</span>
+                                        <span class="ref-para">A010</span>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr class=" dict-row-clickable" data-section="WORKING-STORAGE" data-name="WS-ORIG-DATE-GRP" data-var-name="WS-ORIG-DATE-GRP" data-path="WS-ORIG-DATE-GRP" data-type="Group" data-start-line="67" data-end-line="67">
+                            <td class="text-center font-mono"><b>01</b></td>
+                            <td>
+                                <div style="padding-left: 0px;">
+                                    <span class="field-name font-mono">WS-ORIG-DATE-GRP</span>
+<span class="badge badge-redefines">REDEFINES WS-ORIG-DATE</span>                                    <div class="field-path font-mono text-muted">WS-ORIG-DATE-GRP</div>
+                                </div>
+                            </td>
+                            <td><span class="type-pill">Group</span></td>
+                            <td class="font-mono text-sm">—<br/><span class="text-muted">DISPLAY</span></td>
+                            <td class="text-center font-mono">470</td>
+                            <td class="text-center font-mono"><b>10</b></td>
+                            <td>
+                                <span class="text-muted">—</span>
+                            </td>
+                        </tr>
+                        <tr class=" dict-row-clickable" data-section="WORKING-STORAGE" data-name="WS-ORIG-DATE-DD" data-var-name="WS-ORIG-DATE-DD" data-path="WS-ORIG-DATE-GRP.WS-ORIG-DATE-DD" data-type="Numeric Display (2 digits)" data-start-line="68" data-end-line="68">
+                            <td class="text-center font-mono"><b>03</b></td>
+                            <td>
+                                <div style="padding-left: 18px;">
+                                    <span class="field-name font-mono">WS-ORIG-DATE-DD</span>
+                                    <div class="field-path font-mono text-muted">WS-ORIG-DATE-GRP.WS-ORIG-DATE-DD</div>
+                                </div>
+                            </td>
+                            <td><span class="type-pill">Numeric Display (2 digits)</span></td>
+                            <td class="font-mono text-sm">99<br/><span class="text-muted">DISPLAY</span></td>
+                            <td class="text-center font-mono">470</td>
+                            <td class="text-center font-mono"><b>2</b></td>
+                            <td>
+                                <span class="text-muted">—</span>
+                            </td>
+                        </tr>
+                        <tr class="filler-row dict-row-clickable" data-section="WORKING-STORAGE" data-name="FILLER" data-var-name="FILLER" data-path="WS-ORIG-DATE-GRP.FILLER" data-type="Alphanumeric (1 chars)" data-start-line="69" data-end-line="69">
+                            <td class="text-center font-mono"><b>03</b></td>
+                            <td>
+                                <div style="padding-left: 18px;">
+                                    <span class="field-name font-mono">FILLER</span>
+                                    <div class="field-path font-mono text-muted">WS-ORIG-DATE-GRP.FILLER</div>
+                                </div>
+                            </td>
+                            <td><span class="type-pill">Alphanumeric (1 chars)</span></td>
+                            <td class="font-mono text-sm">X<br/><span class="text-muted">DISPLAY</span></td>
+                            <td class="text-center font-mono">472</td>
+                            <td class="text-center font-mono"><b>1</b></td>
+                            <td>
+                                <span class="text-muted">—</span>
+                            </td>
+                        </tr>
+                        <tr class=" dict-row-clickable" data-section="WORKING-STORAGE" data-name="WS-ORIG-DATE-MM" data-var-name="WS-ORIG-DATE-MM" data-path="WS-ORIG-DATE-GRP.WS-ORIG-DATE-MM" data-type="Numeric Display (2 digits)" data-start-line="70" data-end-line="70">
+                            <td class="text-center font-mono"><b>03</b></td>
+                            <td>
+                                <div style="padding-left: 18px;">
+                                    <span class="field-name font-mono">WS-ORIG-DATE-MM</span>
+                                    <div class="field-path font-mono text-muted">WS-ORIG-DATE-GRP.WS-ORIG-DATE-MM</div>
+                                </div>
+                            </td>
+                            <td><span class="type-pill">Numeric Display (2 digits)</span></td>
+                            <td class="font-mono text-sm">99<br/><span class="text-muted">DISPLAY</span></td>
+                            <td class="text-center font-mono">473</td>
+                            <td class="text-center font-mono"><b>2</b></td>
+                            <td>
+                                <span class="text-muted">—</span>
+                            </td>
+                        </tr>
+                        <tr class="filler-row dict-row-clickable" data-section="WORKING-STORAGE" data-name="FILLER" data-var-name="FILLER" data-path="WS-ORIG-DATE-GRP.FILLER" data-type="Alphanumeric (1 chars)" data-start-line="71" data-end-line="71">
+                            <td class="text-center font-mono"><b>03</b></td>
+                            <td>
+                                <div style="padding-left: 18px;">
+                                    <span class="field-name font-mono">FILLER</span>
+                                    <div class="field-path font-mono text-muted">WS-ORIG-DATE-GRP.FILLER</div>
+                                </div>
+                            </td>
+                            <td><span class="type-pill">Alphanumeric (1 chars)</span></td>
+                            <td class="font-mono text-sm">X<br/><span class="text-muted">DISPLAY</span></td>
+                            <td class="text-center font-mono">475</td>
+                            <td class="text-center font-mono"><b>1</b></td>
+                            <td>
+                                <span class="text-muted">—</span>
+                            </td>
+                        </tr>
+                        <tr class=" dict-row-clickable" data-section="WORKING-STORAGE" data-name="WS-ORIG-DATE-YYYY" data-var-name="WS-ORIG-DATE-YYYY" data-path="WS-ORIG-DATE-GRP.WS-ORIG-DATE-YYYY" data-type="Numeric Display (4 digits)" data-start-line="72" data-end-line="72">
+                            <td class="text-center font-mono"><b>03</b></td>
+                            <td>
+                                <div style="padding-left: 18px;">
+                                    <span class="field-name font-mono">WS-ORIG-DATE-YYYY</span>
+                                    <div class="field-path font-mono text-muted">WS-ORIG-DATE-GRP.WS-ORIG-DATE-YYYY</div>
+                                </div>
+                            </td>
+                            <td><span class="type-pill">Numeric Display (4 digits)</span></td>
+                            <td class="font-mono text-sm">9999<br/><span class="text-muted">DISPLAY</span></td>
+                            <td class="text-center font-mono">476</td>
+                            <td class="text-center font-mono"><b>4</b></td>
+                            <td>
+                                <span class="text-muted">—</span>
+                            </td>
+                        </tr>
+                        <tr class=" dict-row-clickable" data-section="WORKING-STORAGE" data-name="WS-ORIG-DATE-GRP-X" data-var-name="WS-ORIG-DATE-GRP-X" data-path="WS-ORIG-DATE-GRP-X" data-type="Group" data-start-line="74" data-end-line="74">
+                            <td class="text-center font-mono"><b>01</b></td>
+                            <td>
+                                <div style="padding-left: 0px;">
+                                    <span class="field-name font-mono">WS-ORIG-DATE-GRP-X</span>
+                                    <div class="field-path font-mono text-muted">WS-ORIG-DATE-GRP-X</div>
+                                </div>
+                            </td>
+                            <td><span class="type-pill">Group</span></td>
+                            <td class="font-mono text-sm">—<br/><span class="text-muted">DISPLAY</span></td>
+                            <td class="text-center font-mono">480</td>
+                            <td class="text-center font-mono"><b>10</b></td>
+                            <td>
+                                <span class="text-muted">—</span>
+                            </td>
+                        </tr>
+                        <tr class=" dict-row-clickable" data-section="WORKING-STORAGE" data-name="WS-ORIG-DATE-DD-X" data-var-name="WS-ORIG-DATE-DD-X" data-path="WS-ORIG-DATE-GRP-X.WS-ORIG-DATE-DD-X" data-type="Alphanumeric (2 chars)" data-start-line="75" data-end-line="75">
+                            <td class="text-center font-mono"><b>03</b></td>
+                            <td>
+                                <div style="padding-left: 18px;">
+                                    <span class="field-name font-mono">WS-ORIG-DATE-DD-X</span>
+                                    <div class="field-path font-mono text-muted">WS-ORIG-DATE-GRP-X.WS-ORIG-DATE-DD-X</div>
+                                </div>
+                            </td>
+                            <td><span class="type-pill">Alphanumeric (2 chars)</span></td>
+                            <td class="font-mono text-sm">XX<br/><span class="text-muted">DISPLAY</span></td>
+                            <td class="text-center font-mono">480</td>
+                            <td class="text-center font-mono"><b>2</b></td>
+                            <td>
+                                <span class="text-muted">—</span>
+                            </td>
+                        </tr>
+                        <tr class="filler-row dict-row-clickable" data-section="WORKING-STORAGE" data-name="FILLER" data-var-name="FILLER" data-path="WS-ORIG-DATE-GRP-X.FILLER" data-type="Alphanumeric (1 chars)" data-start-line="76" data-end-line="76">
+                            <td class="text-center font-mono"><b>03</b></td>
+                            <td>
+                                <div style="padding-left: 18px;">
+                                    <span class="field-name font-mono">FILLER</span>
+<span class="badge badge-value">VALUE .</span>                                    <div class="field-path font-mono text-muted">WS-ORIG-DATE-GRP-X.FILLER</div>
+                                </div>
+                            </td>
+                            <td><span class="type-pill">Alphanumeric (1 chars)</span></td>
+                            <td class="font-mono text-sm">X<br/><span class="text-muted">DISPLAY</span></td>
+                            <td class="text-center font-mono">482</td>
+                            <td class="text-center font-mono"><b>1</b></td>
+                            <td>
+                                <span class="text-muted">—</span>
+                            </td>
+                        </tr>
+                        <tr class=" dict-row-clickable" data-section="WORKING-STORAGE" data-name="WS-ORIG-DATE-MM-X" data-var-name="WS-ORIG-DATE-MM-X" data-path="WS-ORIG-DATE-GRP-X.WS-ORIG-DATE-MM-X" data-type="Alphanumeric (2 chars)" data-start-line="77" data-end-line="77">
+                            <td class="text-center font-mono"><b>03</b></td>
+                            <td>
+                                <div style="padding-left: 18px;">
+                                    <span class="field-name font-mono">WS-ORIG-DATE-MM-X</span>
+                                    <div class="field-path font-mono text-muted">WS-ORIG-DATE-GRP-X.WS-ORIG-DATE-MM-X</div>
+                                </div>
+                            </td>
+                            <td><span class="type-pill">Alphanumeric (2 chars)</span></td>
+                            <td class="font-mono text-sm">XX<br/><span class="text-muted">DISPLAY</span></td>
+                            <td class="text-center font-mono">483</td>
+                            <td class="text-center font-mono"><b>2</b></td>
+                            <td>
+                                <span class="text-muted">—</span>
+                            </td>
+                        </tr>
+                        <tr class="filler-row dict-row-clickable" data-section="WORKING-STORAGE" data-name="FILLER" data-var-name="FILLER" data-path="WS-ORIG-DATE-GRP-X.FILLER" data-type="Alphanumeric (1 chars)" data-start-line="78" data-end-line="78">
+                            <td class="text-center font-mono"><b>03</b></td>
+                            <td>
+                                <div style="padding-left: 18px;">
+                                    <span class="field-name font-mono">FILLER</span>
+<span class="badge badge-value">VALUE .</span>                                    <div class="field-path font-mono text-muted">WS-ORIG-DATE-GRP-X.FILLER</div>
+                                </div>
+                            </td>
+                            <td><span class="type-pill">Alphanumeric (1 chars)</span></td>
+                            <td class="font-mono text-sm">X<br/><span class="text-muted">DISPLAY</span></td>
+                            <td class="text-center font-mono">485</td>
+                            <td class="text-center font-mono"><b>1</b></td>
+                            <td>
+                                <span class="text-muted">—</span>
+                            </td>
+                        </tr>
+                        <tr class=" dict-row-clickable" data-section="WORKING-STORAGE" data-name="WS-ORIG-DATE-YYYY-X" data-var-name="WS-ORIG-DATE-YYYY-X" data-path="WS-ORIG-DATE-GRP-X.WS-ORIG-DATE-YYYY-X" data-type="Alphanumeric (4 chars)" data-start-line="79" data-end-line="79">
+                            <td class="text-center font-mono"><b>03</b></td>
+                            <td>
+                                <div style="padding-left: 18px;">
+                                    <span class="field-name font-mono">WS-ORIG-DATE-YYYY-X</span>
+                                    <div class="field-path font-mono text-muted">WS-ORIG-DATE-GRP-X.WS-ORIG-DATE-YYYY-X</div>
+                                </div>
+                            </td>
+                            <td><span class="type-pill">Alphanumeric (4 chars)</span></td>
+                            <td class="font-mono text-sm">X(4)<br/><span class="text-muted">DISPLAY</span></td>
+                            <td class="text-center font-mono">486</td>
+                            <td class="text-center font-mono"><b>4</b></td>
+                            <td>
+                                <span class="text-muted">—</span>
+                            </td>
+                        </tr>
+                        <tr class=" dict-row-clickable" data-section="WORKING-STORAGE" data-name="WS-TIME-DATA" data-var-name="WS-TIME-DATA" data-path="WS-TIME-DATA" data-type="Group" data-start-line="82" data-end-line="82">
+                            <td class="text-center font-mono"><b>01</b></td>
+                            <td>
+                                <div style="padding-left: 0px;">
+                                    <span class="field-name font-mono">WS-TIME-DATA</span>
+                                    <div class="field-path font-mono text-muted">WS-TIME-DATA</div>
+                                </div>
+                            </td>
+                            <td><span class="type-pill">Group</span></td>
+                            <td class="font-mono text-sm">—<br/><span class="text-muted">DISPLAY</span></td>
+                            <td class="text-center font-mono">490</td>
+                            <td class="text-center font-mono"><b>6</b></td>
+                            <td>
+                                <span class="text-muted">—</span>
+                            </td>
+                        </tr>
+                        <tr class=" dict-row-clickable" data-section="WORKING-STORAGE" data-name="WS-TIME-NOW" data-var-name="WS-TIME-NOW" data-path="WS-TIME-DATA.WS-TIME-NOW" data-type="Numeric Display (6 digits)" data-start-line="83" data-end-line="83">
+                            <td class="text-center font-mono"><b>03</b></td>
+                            <td>
+                                <div style="padding-left: 18px;">
+                                    <span class="field-name font-mono">WS-TIME-NOW</span>
+                                    <div class="field-path font-mono text-muted">WS-TIME-DATA.WS-TIME-NOW</div>
+                                </div>
+                            </td>
+                            <td><span class="type-pill">Numeric Display (6 digits)</span></td>
+                            <td class="font-mono text-sm">9(6)<br/><span class="text-muted">DISPLAY</span></td>
+                            <td class="text-center font-mono">490</td>
+                            <td class="text-center font-mono"><b>6</b></td>
+                            <td>
+                                <span class="text-muted">—</span>
+                            </td>
+                        </tr>
+                        <tr class=" dict-row-clickable" data-section="WORKING-STORAGE" data-name="WS-TIME-NOW-GRP" data-var-name="WS-TIME-NOW-GRP" data-path="WS-TIME-DATA.WS-TIME-NOW-GRP" data-type="Group" data-start-line="84" data-end-line="84">
+                            <td class="text-center font-mono"><b>03</b></td>
+                            <td>
+                                <div style="padding-left: 18px;">
+                                    <span class="field-name font-mono">WS-TIME-NOW-GRP</span>
+<span class="badge badge-redefines">REDEFINES WS-TIME-NOW</span>                                    <div class="field-path font-mono text-muted">WS-TIME-DATA.WS-TIME-NOW-GRP</div>
+                                </div>
+                            </td>
+                            <td><span class="type-pill">Group</span></td>
+                            <td class="font-mono text-sm">—<br/><span class="text-muted">DISPLAY</span></td>
+                            <td class="text-center font-mono">490</td>
+                            <td class="text-center font-mono"><b>6</b></td>
+                            <td>
+                                <span class="text-muted">—</span>
+                            </td>
+                        </tr>
+                        <tr class=" dict-row-clickable" data-section="WORKING-STORAGE" data-name="WS-TIME-NOW-GRP-HH" data-var-name="WS-TIME-NOW-GRP-HH" data-path="WS-TIME-DATA.WS-TIME-NOW-GRP.WS-TIME-NOW-GRP-HH" data-type="Numeric Display (2 digits)" data-start-line="85" data-end-line="85">
+                            <td class="text-center font-mono"><b>05</b></td>
+                            <td>
+                                <div style="padding-left: 36px;">
+                                    <span class="field-name font-mono">WS-TIME-NOW-GRP-HH</span>
+                                    <div class="field-path font-mono text-muted">WS-TIME-DATA.WS-TIME-NOW-GRP.WS-TIME-NOW-GRP-HH</div>
+                                </div>
+                            </td>
+                            <td><span class="type-pill">Numeric Display (2 digits)</span></td>
+                            <td class="font-mono text-sm">99<br/><span class="text-muted">DISPLAY</span></td>
+                            <td class="text-center font-mono">490</td>
+                            <td class="text-center font-mono"><b>2</b></td>
+                            <td>
+                                <div class="refs-list">
+                                    <div class="ref-breadcrumb" title="Click to view routine in Code (Ctrl+Click to open Call Graph)" onclick="handleBreadcrumbClick(event, 'A010', 'PREMIERE', 'WS-TIME-NOW-GRP-HH')">
+                                        <span class="ref-sec">PREMIERE</span>
+                                        <span class="ref-sep">&rsaquo;</span>
+                                        <span class="ref-para">A010</span>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr class=" dict-row-clickable" data-section="WORKING-STORAGE" data-name="WS-TIME-NOW-GRP-MM" data-var-name="WS-TIME-NOW-GRP-MM" data-path="WS-TIME-DATA.WS-TIME-NOW-GRP.WS-TIME-NOW-GRP-MM" data-type="Numeric Display (2 digits)" data-start-line="86" data-end-line="86">
+                            <td class="text-center font-mono"><b>05</b></td>
+                            <td>
+                                <div style="padding-left: 36px;">
+                                    <span class="field-name font-mono">WS-TIME-NOW-GRP-MM</span>
+                                    <div class="field-path font-mono text-muted">WS-TIME-DATA.WS-TIME-NOW-GRP.WS-TIME-NOW-GRP-MM</div>
+                                </div>
+                            </td>
+                            <td><span class="type-pill">Numeric Display (2 digits)</span></td>
+                            <td class="font-mono text-sm">99<br/><span class="text-muted">DISPLAY</span></td>
+                            <td class="text-center font-mono">492</td>
+                            <td class="text-center font-mono"><b>2</b></td>
+                            <td>
+                                <div class="refs-list">
+                                    <div class="ref-breadcrumb" title="Click to view routine in Code (Ctrl+Click to open Call Graph)" onclick="handleBreadcrumbClick(event, 'A010', 'PREMIERE', 'WS-TIME-NOW-GRP-MM')">
+                                        <span class="ref-sec">PREMIERE</span>
+                                        <span class="ref-sep">&rsaquo;</span>
+                                        <span class="ref-para">A010</span>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr class=" dict-row-clickable" data-section="WORKING-STORAGE" data-name="WS-TIME-NOW-GRP-SS" data-var-name="WS-TIME-NOW-GRP-SS" data-path="WS-TIME-DATA.WS-TIME-NOW-GRP.WS-TIME-NOW-GRP-SS" data-type="Numeric Display (2 digits)" data-start-line="87" data-end-line="87">
+                            <td class="text-center font-mono"><b>05</b></td>
+                            <td>
+                                <div style="padding-left: 36px;">
+                                    <span class="field-name font-mono">WS-TIME-NOW-GRP-SS</span>
+                                    <div class="field-path font-mono text-muted">WS-TIME-DATA.WS-TIME-NOW-GRP.WS-TIME-NOW-GRP-SS</div>
+                                </div>
+                            </td>
+                            <td><span class="type-pill">Numeric Display (2 digits)</span></td>
+                            <td class="font-mono text-sm">99<br/><span class="text-muted">DISPLAY</span></td>
+                            <td class="text-center font-mono">494</td>
+                            <td class="text-center font-mono"><b>2</b></td>
+                            <td>
+                                <span class="text-muted">—</span>
+                            </td>
+                        </tr>
+                        <tr class=" dict-row-clickable" data-section="WORKING-STORAGE" data-name="WS-ABEND-PGM" data-var-name="WS-ABEND-PGM" data-path="WS-ABEND-PGM" data-type="Alphanumeric (8 chars)" data-start-line="89" data-end-line="89">
+                            <td class="text-center font-mono"><b>01</b></td>
+                            <td>
+                                <div style="padding-left: 0px;">
+                                    <span class="field-name font-mono">WS-ABEND-PGM</span>
+<span class="badge badge-value">VALUE ABNDPROC</span>                                    <div class="field-path font-mono text-muted">WS-ABEND-PGM</div>
+                                </div>
+                            </td>
+                            <td><span class="type-pill">Alphanumeric (8 chars)</span></td>
+                            <td class="font-mono text-sm">X(8)<br/><span class="text-muted">DISPLAY</span></td>
+                            <td class="text-center font-mono">496</td>
+                            <td class="text-center font-mono"><b>8</b></td>
+                            <td>
+                                <span class="text-muted">—</span>
+                            </td>
+                        </tr>
+                        <tr class=" dict-row-clickable" data-section="WORKING-STORAGE" data-name="ABNDINFO-REC" data-var-name="ABNDINFO-REC" data-path="ABNDINFO-REC" data-type="Group" data-start-line="91" data-end-line="91">
+                            <td class="text-center font-mono"><b>01</b></td>
+                            <td>
+                                <div style="padding-left: 0px;">
+                                    <span class="field-name font-mono">ABNDINFO-REC</span>
+                                    <div class="field-path font-mono text-muted">ABNDINFO-REC</div>
+                                </div>
+                            </td>
+                            <td><span class="type-pill">Group</span></td>
+                            <td class="font-mono text-sm">—<br/><span class="text-muted">DISPLAY</span></td>
+                            <td class="text-center font-mono">504</td>
+                            <td class="text-center font-mono"><b>678</b></td>
+                            <td>
+                                <div class="refs-list">
+                                    <div class="ref-breadcrumb" title="Click to view routine in Code (Ctrl+Click to open Call Graph)" onclick="handleBreadcrumbClick(event, 'A010', 'PREMIERE', 'ABNDINFO-REC')">
+                                        <span class="ref-sec">PREMIERE</span>
+                                        <span class="ref-sep">&rsaquo;</span>
+                                        <span class="ref-para">A010</span>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr class=" dict-row-clickable" data-section="WORKING-STORAGE" data-name="ABND-VSAM-KEY" data-var-name="ABND-VSAM-KEY" data-path="ABNDINFO-REC.ABND-VSAM-KEY" data-type="Group" data-start-line="7" data-end-line="7">
+                            <td class="text-center font-mono"><b>03</b></td>
+                            <td>
+                                <div style="padding-left: 18px;">
+                                    <span class="field-name font-mono">ABND-VSAM-KEY</span>
+                                    <div class="field-path font-mono text-muted">ABNDINFO-REC.ABND-VSAM-KEY</div>
+                                </div>
+                            </td>
+                            <td><span class="type-pill">Group</span></td>
+                            <td class="font-mono text-sm">—<br/><span class="text-muted">DISPLAY</span></td>
+                            <td class="text-center font-mono">504</td>
+                            <td class="text-center font-mono"><b>12</b></td>
+                            <td>
+                                <span class="text-muted">—</span>
+                            </td>
+                        </tr>
+                        <tr class=" dict-row-clickable" data-section="WORKING-STORAGE" data-name="ABND-UTIME-KEY" data-var-name="ABND-UTIME-KEY" data-path="ABNDINFO-REC.ABND-VSAM-KEY.ABND-UTIME-KEY" data-type="Signed Integer(15) Packed" data-start-line="8" data-end-line="8">
+                            <td class="text-center font-mono"><b>05</b></td>
+                            <td>
+                                <div style="padding-left: 36px;">
+                                    <span class="field-name font-mono">ABND-UTIME-KEY</span>
+                                    <div class="field-path font-mono text-muted">ABNDINFO-REC.ABND-VSAM-KEY.ABND-UTIME-KEY</div>
+                                </div>
+                            </td>
+                            <td><span class="type-pill">Signed Integer(15) Packed</span></td>
+                            <td class="font-mono text-sm">S9(15)<br/><span class="text-muted">COMP_3</span></td>
+                            <td class="text-center font-mono">504</td>
+                            <td class="text-center font-mono"><b>8</b></td>
+                            <td>
+                                <div class="refs-list">
+                                    <div class="ref-breadcrumb" title="Click to view routine in Code (Ctrl+Click to open Call Graph)" onclick="handleBreadcrumbClick(event, 'A010', 'PREMIERE', 'ABND-UTIME-KEY')">
+                                        <span class="ref-sec">PREMIERE</span>
+                                        <span class="ref-sep">&rsaquo;</span>
+                                        <span class="ref-para">A010</span>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr class=" dict-row-clickable" data-section="WORKING-STORAGE" data-name="ABND-TASKNO-KEY" data-var-name="ABND-TASKNO-KEY" data-path="ABNDINFO-REC.ABND-VSAM-KEY.ABND-TASKNO-KEY" data-type="Numeric Display (4 digits)" data-start-line="9" data-end-line="9">
+                            <td class="text-center font-mono"><b>05</b></td>
+                            <td>
+                                <div style="padding-left: 36px;">
+                                    <span class="field-name font-mono">ABND-TASKNO-KEY</span>
+                                    <div class="field-path font-mono text-muted">ABNDINFO-REC.ABND-VSAM-KEY.ABND-TASKNO-KEY</div>
+                                </div>
+                            </td>
+                            <td><span class="type-pill">Numeric Display (4 digits)</span></td>
+                            <td class="font-mono text-sm">9(4)<br/><span class="text-muted">DISPLAY</span></td>
+                            <td class="text-center font-mono">512</td>
+                            <td class="text-center font-mono"><b>4</b></td>
+                            <td>
+                                <div class="refs-list">
+                                    <div class="ref-breadcrumb" title="Click to view routine in Code (Ctrl+Click to open Call Graph)" onclick="handleBreadcrumbClick(event, 'A010', 'PREMIERE', 'ABND-TASKNO-KEY')">
+                                        <span class="ref-sec">PREMIERE</span>
+                                        <span class="ref-sep">&rsaquo;</span>
+                                        <span class="ref-para">A010</span>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr class=" dict-row-clickable" data-section="WORKING-STORAGE" data-name="ABND-APPLID" data-var-name="ABND-APPLID" data-path="ABNDINFO-REC.ABND-APPLID" data-type="Alphanumeric (8 chars)" data-start-line="10" data-end-line="10">
+                            <td class="text-center font-mono"><b>03</b></td>
+                            <td>
+                                <div style="padding-left: 18px;">
+                                    <span class="field-name font-mono">ABND-APPLID</span>
+                                    <div class="field-path font-mono text-muted">ABNDINFO-REC.ABND-APPLID</div>
+                                </div>
+                            </td>
+                            <td><span class="type-pill">Alphanumeric (8 chars)</span></td>
+                            <td class="font-mono text-sm">X(8)<br/><span class="text-muted">DISPLAY</span></td>
+                            <td class="text-center font-mono">516</td>
+                            <td class="text-center font-mono"><b>8</b></td>
+                            <td>
+                                <span class="text-muted">—</span>
+                            </td>
+                        </tr>
+                        <tr class=" dict-row-clickable" data-section="WORKING-STORAGE" data-name="ABND-TRANID" data-var-name="ABND-TRANID" data-path="ABNDINFO-REC.ABND-TRANID" data-type="Alphanumeric (4 chars)" data-start-line="11" data-end-line="11">
+                            <td class="text-center font-mono"><b>03</b></td>
+                            <td>
+                                <div style="padding-left: 18px;">
+                                    <span class="field-name font-mono">ABND-TRANID</span>
+                                    <div class="field-path font-mono text-muted">ABNDINFO-REC.ABND-TRANID</div>
+                                </div>
+                            </td>
+                            <td><span class="type-pill">Alphanumeric (4 chars)</span></td>
+                            <td class="font-mono text-sm">X(4)<br/><span class="text-muted">DISPLAY</span></td>
+                            <td class="text-center font-mono">524</td>
+                            <td class="text-center font-mono"><b>4</b></td>
+                            <td>
+                                <div class="refs-list">
+                                    <div class="ref-breadcrumb" title="Click to view routine in Code (Ctrl+Click to open Call Graph)" onclick="handleBreadcrumbClick(event, 'A010', 'PREMIERE', 'ABND-TRANID')">
+                                        <span class="ref-sec">PREMIERE</span>
+                                        <span class="ref-sep">&rsaquo;</span>
+                                        <span class="ref-para">A010</span>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr class=" dict-row-clickable" data-section="WORKING-STORAGE" data-name="ABND-DATE" data-var-name="ABND-DATE" data-path="ABNDINFO-REC.ABND-DATE" data-type="Alphanumeric (10 chars)" data-start-line="12" data-end-line="12">
+                            <td class="text-center font-mono"><b>03</b></td>
+                            <td>
+                                <div style="padding-left: 18px;">
+                                    <span class="field-name font-mono">ABND-DATE</span>
+                                    <div class="field-path font-mono text-muted">ABNDINFO-REC.ABND-DATE</div>
+                                </div>
+                            </td>
+                            <td><span class="type-pill">Alphanumeric (10 chars)</span></td>
+                            <td class="font-mono text-sm">X(10)<br/><span class="text-muted">DISPLAY</span></td>
+                            <td class="text-center font-mono">528</td>
+                            <td class="text-center font-mono"><b>10</b></td>
+                            <td>
+                                <div class="refs-list">
+                                    <div class="ref-breadcrumb" title="Click to view routine in Code (Ctrl+Click to open Call Graph)" onclick="handleBreadcrumbClick(event, 'A010', 'PREMIERE', 'ABND-DATE')">
+                                        <span class="ref-sec">PREMIERE</span>
+                                        <span class="ref-sep">&rsaquo;</span>
+                                        <span class="ref-para">A010</span>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr class=" dict-row-clickable" data-section="WORKING-STORAGE" data-name="ABND-TIME" data-var-name="ABND-TIME" data-path="ABNDINFO-REC.ABND-TIME" data-type="Alphanumeric (8 chars)" data-start-line="13" data-end-line="13">
+                            <td class="text-center font-mono"><b>03</b></td>
+                            <td>
+                                <div style="padding-left: 18px;">
+                                    <span class="field-name font-mono">ABND-TIME</span>
+                                    <div class="field-path font-mono text-muted">ABNDINFO-REC.ABND-TIME</div>
+                                </div>
+                            </td>
+                            <td><span class="type-pill">Alphanumeric (8 chars)</span></td>
+                            <td class="font-mono text-sm">X(8)<br/><span class="text-muted">DISPLAY</span></td>
+                            <td class="text-center font-mono">538</td>
+                            <td class="text-center font-mono"><b>8</b></td>
+                            <td>
+                                <div class="refs-list">
+                                    <div class="ref-breadcrumb" title="Click to view routine in Code (Ctrl+Click to open Call Graph)" onclick="handleBreadcrumbClick(event, 'A010', 'PREMIERE', 'ABND-TIME')">
+                                        <span class="ref-sec">PREMIERE</span>
+                                        <span class="ref-sep">&rsaquo;</span>
+                                        <span class="ref-para">A010</span>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr class=" dict-row-clickable" data-section="WORKING-STORAGE" data-name="ABND-CODE" data-var-name="ABND-CODE" data-path="ABNDINFO-REC.ABND-CODE" data-type="Alphanumeric (4 chars)" data-start-line="14" data-end-line="14">
+                            <td class="text-center font-mono"><b>03</b></td>
+                            <td>
+                                <div style="padding-left: 18px;">
+                                    <span class="field-name font-mono">ABND-CODE</span>
+                                    <div class="field-path font-mono text-muted">ABNDINFO-REC.ABND-CODE</div>
+                                </div>
+                            </td>
+                            <td><span class="type-pill">Alphanumeric (4 chars)</span></td>
+                            <td class="font-mono text-sm">X(4)<br/><span class="text-muted">DISPLAY</span></td>
+                            <td class="text-center font-mono">546</td>
+                            <td class="text-center font-mono"><b>4</b></td>
+                            <td>
+                                <div class="refs-list">
+                                    <div class="ref-breadcrumb" title="Click to view routine in Code (Ctrl+Click to open Call Graph)" onclick="handleBreadcrumbClick(event, 'A010', 'PREMIERE', 'ABND-CODE')">
+                                        <span class="ref-sec">PREMIERE</span>
+                                        <span class="ref-sep">&rsaquo;</span>
+                                        <span class="ref-para">A010</span>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr class=" dict-row-clickable" data-section="WORKING-STORAGE" data-name="ABND-PROGRAM" data-var-name="ABND-PROGRAM" data-path="ABNDINFO-REC.ABND-PROGRAM" data-type="Alphanumeric (8 chars)" data-start-line="15" data-end-line="15">
+                            <td class="text-center font-mono"><b>03</b></td>
+                            <td>
+                                <div style="padding-left: 18px;">
+                                    <span class="field-name font-mono">ABND-PROGRAM</span>
+                                    <div class="field-path font-mono text-muted">ABNDINFO-REC.ABND-PROGRAM</div>
+                                </div>
+                            </td>
+                            <td><span class="type-pill">Alphanumeric (8 chars)</span></td>
+                            <td class="font-mono text-sm">X(8)<br/><span class="text-muted">DISPLAY</span></td>
+                            <td class="text-center font-mono">550</td>
+                            <td class="text-center font-mono"><b>8</b></td>
+                            <td>
+                                <span class="text-muted">—</span>
+                            </td>
+                        </tr>
+                        <tr class=" dict-row-clickable" data-section="WORKING-STORAGE" data-name="ABND-RESPCODE" data-var-name="ABND-RESPCODE" data-path="ABNDINFO-REC.ABND-RESPCODE" data-type="Signed Numeric Display (8 digits)" data-start-line="16" data-end-line="17">
+                            <td class="text-center font-mono"><b>03</b></td>
+                            <td>
+                                <div style="padding-left: 18px;">
+                                    <span class="field-name font-mono">ABND-RESPCODE</span>
+                                    <div class="field-path font-mono text-muted">ABNDINFO-REC.ABND-RESPCODE</div>
+                                </div>
+                            </td>
+                            <td><span class="type-pill">Signed Numeric Display (8 digits)</span></td>
+                            <td class="font-mono text-sm">S9(8)<br/><span class="text-muted">DISPLAY</span></td>
+                            <td class="text-center font-mono">558</td>
+                            <td class="text-center font-mono"><b>8</b></td>
+                            <td>
+                                <div class="refs-list">
+                                    <div class="ref-breadcrumb" title="Click to view routine in Code (Ctrl+Click to open Call Graph)" onclick="handleBreadcrumbClick(event, 'A010', 'PREMIERE', 'ABND-RESPCODE')">
+                                        <span class="ref-sec">PREMIERE</span>
+                                        <span class="ref-sep">&rsaquo;</span>
+                                        <span class="ref-para">A010</span>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr class=" dict-row-clickable" data-section="WORKING-STORAGE" data-name="ABND-RESP2CODE" data-var-name="ABND-RESP2CODE" data-path="ABNDINFO-REC.ABND-RESP2CODE" data-type="Signed Numeric Display (8 digits)" data-start-line="18" data-end-line="19">
+                            <td class="text-center font-mono"><b>03</b></td>
+                            <td>
+                                <div style="padding-left: 18px;">
+                                    <span class="field-name font-mono">ABND-RESP2CODE</span>
+                                    <div class="field-path font-mono text-muted">ABNDINFO-REC.ABND-RESP2CODE</div>
+                                </div>
+                            </td>
+                            <td><span class="type-pill">Signed Numeric Display (8 digits)</span></td>
+                            <td class="font-mono text-sm">S9(8)<br/><span class="text-muted">DISPLAY</span></td>
+                            <td class="text-center font-mono">566</td>
+                            <td class="text-center font-mono"><b>8</b></td>
+                            <td>
+                                <div class="refs-list">
+                                    <div class="ref-breadcrumb" title="Click to view routine in Code (Ctrl+Click to open Call Graph)" onclick="handleBreadcrumbClick(event, 'A010', 'PREMIERE', 'ABND-RESP2CODE')">
+                                        <span class="ref-sec">PREMIERE</span>
+                                        <span class="ref-sep">&rsaquo;</span>
+                                        <span class="ref-para">A010</span>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr class=" dict-row-clickable" data-section="WORKING-STORAGE" data-name="ABND-SQLCODE" data-var-name="ABND-SQLCODE" data-path="ABNDINFO-REC.ABND-SQLCODE" data-type="Signed Numeric Display (8 digits)" data-start-line="20" data-end-line="21">
+                            <td class="text-center font-mono"><b>03</b></td>
+                            <td>
+                                <div style="padding-left: 18px;">
+                                    <span class="field-name font-mono">ABND-SQLCODE</span>
+                                    <div class="field-path font-mono text-muted">ABNDINFO-REC.ABND-SQLCODE</div>
+                                </div>
+                            </td>
+                            <td><span class="type-pill">Signed Numeric Display (8 digits)</span></td>
+                            <td class="font-mono text-sm">S9(8)<br/><span class="text-muted">DISPLAY</span></td>
+                            <td class="text-center font-mono">574</td>
+                            <td class="text-center font-mono"><b>8</b></td>
+                            <td>
+                                <div class="refs-list">
+                                    <div class="ref-breadcrumb" title="Click to view routine in Code (Ctrl+Click to open Call Graph)" onclick="handleBreadcrumbClick(event, 'A010', 'PREMIERE', 'ABND-SQLCODE')">
+                                        <span class="ref-sec">PREMIERE</span>
+                                        <span class="ref-sep">&rsaquo;</span>
+                                        <span class="ref-para">A010</span>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr class=" dict-row-clickable" data-section="WORKING-STORAGE" data-name="ABND-FREEFORM" data-var-name="ABND-FREEFORM" data-path="ABNDINFO-REC.ABND-FREEFORM" data-type="Alphanumeric (600 chars)" data-start-line="22" data-end-line="22">
+                            <td class="text-center font-mono"><b>03</b></td>
+                            <td>
+                                <div style="padding-left: 18px;">
+                                    <span class="field-name font-mono">ABND-FREEFORM</span>
+                                    <div class="field-path font-mono text-muted">ABNDINFO-REC.ABND-FREEFORM</div>
+                                </div>
+                            </td>
+                            <td><span class="type-pill">Alphanumeric (600 chars)</span></td>
+                            <td class="font-mono text-sm">X(600)<br/><span class="text-muted">DISPLAY</span></td>
+                            <td class="text-center font-mono">582</td>
+                            <td class="text-center font-mono"><b>600</b></td>
+                            <td>
+                                <div class="refs-list">
+                                    <div class="ref-breadcrumb" title="Click to view routine in Code (Ctrl+Click to open Call Graph)" onclick="handleBreadcrumbClick(event, 'A010', 'PREMIERE', 'ABND-FREEFORM')">
+                                        <span class="ref-sec">PREMIERE</span>
+                                        <span class="ref-sep">&rsaquo;</span>
+                                        <span class="ref-para">A010</span>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="dict-splitter" id="dictSplitter" style="display:none;"></div>
+
+            <div class="dict-code-pane" id="dictCodePane" style="display:none;">
+                <div class="dict-code-header">
+                    <div class="dict-code-title-area">
+                        <span class="dict-code-label">SOURCE CODE</span>
+                        <span class="dict-var-badge" id="dictCurrentBadge">No item selected</span>
+                    </div>
+                    <div class="dict-code-actions">
+                        <div class="code-search-box">
+                            <input type="text" id="dictCodeJumpLineInput" placeholder="Jump line / search..." title="Type a line number or word and press Enter" />
+                        </div>
+                        <button class="code-btn-close" id="btnCloseDictCode" title="Close Code Split View (Esc)">✕</button>
+                    </div>
+                </div>
+
+                <div class="code-pane-subbar">
+                    <div class="cobol-columns-indicator">
+                        <span class="col-guide col-seq" title="Columns 1-6: Sequence Number">1-6</span>
+                        <span class="col-guide col-ind" title="Column 7: Indicator Area (*, -, D)">7</span>
+                        <span class="col-guide col-area-a" title="Columns 8-11: Area A (Divisions, Sections, Paragraphs, 01/77 levels)">8-11 Area A</span>
+                        <span class="col-guide col-area-b" title="Columns 12-72: Area B (Statements, clauses)">12-72 Area B</span>
+                        <span class="col-guide col-ident" title="Columns 73-80: Identification Area">73-80</span>
+                    </div>
+                    <div class="code-line-info" id="dictCodeLineCountInfo">0 lines</div>
+                </div>
+
+                <div class="code-pane-content" id="dictCodePaneContent">
+                    <div class="code-empty-state" id="dictCodeEmptyState" style="display:none;">
+                        COBOL source code was not embedded or not available for this program.
+                    </div>
+                    <table class="cobol-code-table" id="dictCobolCodeTable">
+                        <tbody id="dictCobolCodeTbody">
+                            <!-- Rendered dynamically -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script id="embeddedSourceCode" type="application/json">"       CBL CICS(\u0027SP,EDF\u0027)\n      ******************************************************************\n      *                                                                *\n      *  Copyright IBM Corp. 2023                                      *\n      *                                                                *\n      ******************************************************************\n      ******************************************************************\n      * This program is the dummy credit agency, used for credit\n      * scoring. Data is passed to the program via a channel and\n      * container and the role of this program is to delay for a\n      * random amount of time (between 0 and 3 seconds) and to\n      * create a random credit score (between 1 and 999), then finish.\n      *\n      * The purpose of the initial delay is to emulate data being\n      * returned to the parent program (this program is driven using\n      * the Async API). There is a delay of 3 seconds in the parent\n      * so what this means is there a 1 in 4 chance that data will be\n      * returned withing the overall 3 second delay - this emulates\n      * not always being able to get a timely reply back to the parent.\n      *\n      *\n      ******************************************************************\n\n       IDENTIFICATION DIVISION.\n       PROGRAM-ID. CRDTAGY4.\n       AUTHOR. Jon Collett.\n\n       ENVIRONMENT DIVISION.\n       CONFIGURATION SECTION.\n      * SOURCE-COMPUTER.  IBM-370 WITH DEBUGGING MODE.\n       SOURCE-COMPUTER.  IBM-370.\n       OBJECT-COMPUTER.  IBM-370.\n\n       INPUT-OUTPUT SECTION.\n\n       DATA DIVISION.\n       FILE SECTION.\n\n       WORKING-STORAGE SECTION.\n\n\n       COPY SORTCODE.\n\n\n       01 WS-CONT-IN.\n          COPY CUSTOMER.\n\n       01 WS-CICS-WORK-AREA.\n          05 WS-CICS-RESP               PIC S9(8) COMP.\n          05 WS-CICS-RESP2              PIC S9(8) COMP.\n\n\n       01 WS-DELAY-AMT                  PIC S9(8) COMP\n                                                   VALUE 0.\n\n       01 WS-CONTAINER-NAME             PIC X(16)  VALUE SPACES.\n       01 WS-CHANNEL-NAME               PIC X(16)  VALUE SPACES.\n\n       01 WS-CONTAINER-LEN              PIC S9(8) COMP\n                                                   VALUE 0.\n       01 WS-NEW-CREDSCORE              PIC 999    VALUE 0.\n       01 WS-SEED                       PIC S9(15) COMP.\n\n\n       01 WS-U-TIME                     PIC S9(15) COMP-3.\n       01 WS-ORIG-DATE                  PIC X(10).\n       01 WS-ORIG-DATE-GRP REDEFINES WS-ORIG-DATE.\n          03 WS-ORIG-DATE-DD            PIC 99.\n          03 FILLER                     PIC X.\n          03 WS-ORIG-DATE-MM            PIC 99.\n          03 FILLER                     PIC X.\n          03 WS-ORIG-DATE-YYYY          PIC 9999.\n\n       01 WS-ORIG-DATE-GRP-X.\n          03 WS-ORIG-DATE-DD-X          PIC XX.\n          03 FILLER                     PIC X      VALUE \u0027.\u0027.\n          03 WS-ORIG-DATE-MM-X          PIC XX.\n          03 FILLER                     PIC X      VALUE \u0027.\u0027.\n          03 WS-ORIG-DATE-YYYY-X        PIC X(4).\n\n\n       01 WS-TIME-DATA.\n          03 WS-TIME-NOW                PIC 9(6).\n          03 WS-TIME-NOW-GRP REDEFINES WS-TIME-NOW.\n             05 WS-TIME-NOW-GRP-HH      PIC 99.\n             05 WS-TIME-NOW-GRP-MM      PIC 99.\n             05 WS-TIME-NOW-GRP-SS      PIC 99.\n\n       01 WS-ABEND-PGM                  PIC X(8)   VALUE \u0027ABNDPROC\u0027.\n\n       01 ABNDINFO-REC.\n           COPY ABNDINFO.\n\n\n       LINKAGE SECTION.\n\n\n       PROCEDURE DIVISION.\n       PREMIERE SECTION.\n       A010.\n      *\n      *    Generate a random  number of seconds between 0 \u0026 3.\n      *    This is the delay amount in seconds.\n      *\n\n           MOVE \u0027CIPD            \u0027 TO WS-CONTAINER-NAME.\n           MOVE \u0027CIPCREDCHANN    \u0027 TO WS-CHANNEL-NAME.\n           MOVE EIBTASKN           TO WS-SEED.\n\n           COMPUTE WS-DELAY-AMT = ((3 - 1)\n                            * FUNCTION RANDOM(WS-SEED)) + 1.\n\n           EXEC CICS DELAY\n                FOR SECONDS(WS-DELAY-AMT)\n                RESP(WS-CICS-RESP)\n                RESP2(WS-CICS-RESP2)\n           END-EXEC.\n\n           IF WS-CICS-RESP NOT = DFHRESP(NORMAL)\n      *\n      *       Preserve the RESP and RESP2, then set up the\n      *       standard ABEND info before getting the applid,\n      *       date/time etc. and linking to the Abend Handler\n      *       program.\n      *\n              INITIALIZE ABNDINFO-REC\n              MOVE EIBRESP    TO ABND-RESPCODE\n              MOVE EIBRESP2   TO ABND-RESP2CODE\n      *\n      *       Get supplemental information\n      *\n              EXEC CICS ASSIGN APPLID(ABND-APPLID)\n              END-EXEC\n\n              MOVE EIBTASKN   TO ABND-TASKNO-KEY\n              MOVE EIBTRNID   TO ABND-TRANID\n\n              PERFORM POPULATE-TIME-DATE\n\n              MOVE WS-ORIG-DATE TO ABND-DATE\n              STRING WS-TIME-NOW-GRP-HH DELIMITED BY SIZE,\n                      \u0027:\u0027 DELIMITED BY SIZE,\n                       WS-TIME-NOW-GRP-MM DELIMITED BY SIZE,\n                       \u0027:\u0027 DELIMITED BY SIZE,\n                       WS-TIME-NOW-GRP-MM DELIMITED BY SIZE\n                       INTO ABND-TIME\n              END-STRING\n\n              MOVE WS-U-TIME   TO ABND-UTIME-KEY\n              MOVE \u0027PLOP\u0027      TO ABND-CODE\n\n              EXEC CICS ASSIGN PROGRAM(ABND-PROGRAM)\n              END-EXEC\n\n              MOVE ZEROS      TO ABND-SQLCODE\n\n              STRING \u0027A010  - *** The delay messed up! ***\u0027\n                      DELIMITED BY SIZE,\n                      \u0027 EIBRESP=\u0027 DELIMITED BY SIZE,\n                      ABND-RESPCODE DELIMITED BY SIZE,\n                      \u0027 RESP2=\u0027 DELIMITED BY SIZE,\n                      ABND-RESP2CODE DELIMITED BY SIZE\n                      INTO ABND-FREEFORM\n              END-STRING\n\n              EXEC CICS LINK PROGRAM(WS-ABEND-PGM)\n                          COMMAREA(ABNDINFO-REC)\n              END-EXEC\n\n\n              DISPLAY \u0027*** The delay messed up ! ***\u0027\n              EXEC CICS ABEND\n                 ABCODE(\u0027PLOP\u0027)\n              END-EXEC\n           END-IF.\n\n\n           COMPUTE WS-CONTAINER-LEN = LENGTH OF WS-CONT-IN.\n\n           EXEC CICS GET CONTAINER(WS-CONTAINER-NAME)\n                     CHANNEL(WS-CHANNEL-NAME)\n                     INTO(WS-CONT-IN)\n                     FLENGTH(WS-CONTAINER-LEN)\n                     RESP(WS-CICS-RESP)\n                     RESP2(WS-CICS-RESP2)\n           END-EXEC.\n\n           IF WS-CICS-RESP NOT = DFHRESP(NORMAL)\n              DISPLAY \u0027CRDTAGY4 - UNABLE TO GET CONTAINER. RESP=\u0027\n                 WS-CICS-RESP \u0027, RESP2=\u0027 WS-CICS-RESP2\n              DISPLAY \u0027CONTAINER=\u0027 WS-CONTAINER-NAME \u0027 CHANNEL=\u0027\n                       WS-CHANNEL-NAME \u0027 FLENGTH=\u0027\n                       WS-CONTAINER-LEN\n              PERFORM GET-ME-OUT-OF-HERE\n           END-IF.\n\n      *\n      *    Now generate a credit score between 1 and 999. Because we\n      *    used a SEED on the first RANDOM (above) we don\u0027t need to\n      *    use a SEED again when using RANDOM for a subsequent time\n      *\n\n           COMPUTE WS-NEW-CREDSCORE = ((999 - 1)\n                            * FUNCTION RANDOM) + 1.\n\n           MOVE WS-NEW-CREDSCORE TO CUSTOMER-CREDIT-SCORE\n              OF WS-CONT-IN.\n\n      *\n      *    Now PUT the data back into a container\n      *\n           COMPUTE WS-CONTAINER-LEN = LENGTH OF WS-CONT-IN.\n\n           EXEC CICS PUT CONTAINER(WS-CONTAINER-NAME)\n                         FROM(WS-CONT-IN)\n                         FLENGTH(WS-CONTAINER-LEN)\n                         CHANNEL(WS-CHANNEL-NAME)\n                         RESP(WS-CICS-RESP)\n                         RESP2(WS-CICS-RESP2)\n           END-EXEC.\n\n           IF WS-CICS-RESP NOT = DFHRESP(NORMAL)\n              DISPLAY \u0027CRDTAGY4- UNABLE TO PUT CONTAINER. RESP=\u0027\n                 WS-CICS-RESP \u0027, RESP2=\u0027 WS-CICS-RESP2\n              DISPLAY  \u0027CONTAINER=\u0027  WS-CONTAINER-NAME\n              \u0027 CHANNEL=\u0027 WS-CHANNEL-NAME \u0027 FLENGTH=\u0027\n                    WS-CONTAINER-LEN\n              PERFORM GET-ME-OUT-OF-HERE\n           END-IF.\n\n           PERFORM GET-ME-OUT-OF-HERE.\n\n       A999.\n           EXIT.\n\n\n       GET-ME-OUT-OF-HERE SECTION.\n       GMOFH010.\n\n           EXEC CICS RETURN\n           END-EXEC.\n\n       GMOFH999.\n           EXIT.\n\n\n       POPULATE-TIME-DATE SECTION.\n       PTD010.\n\n           EXEC CICS ASKTIME\n              ABSTIME(WS-U-TIME)\n           END-EXEC.\n\n           EXEC CICS FORMATTIME\n                     ABSTIME(WS-U-TIME)\n                     DDMMYYYY(WS-ORIG-DATE)\n                     TIME(WS-TIME-NOW)\n                     DATESEP\n           END-EXEC.\n\n       PTD999.\n           EXIT.\n"</script>
+    <script id="embeddedParagraphLocations" type="application/json">{"A010": {"end_line": 231, "start_line": 100}, "A999": {"end_line": 234, "start_line": 233}, "GMOFH010": {"end_line": 241, "start_line": 238}, "GMOFH999": {"end_line": 244, "start_line": 243}, "PTD010": {"end_line": 259, "start_line": 248}, "PTD999": {"end_line": 262, "start_line": 261}}</script>
+
+    <script>
+        if (window.self !== window.top) {
+            document.documentElement.classList.add("in-portal-iframe");
+        }
+        const searchInput = document.getElementById('searchInput');
+        const sectionFilter = document.getElementById('sectionFilter');
+        const typeFilter = document.getElementById('typeFilter');
+        const rows = document.querySelectorAll('#dictTable tbody tr');
+
+        // Split Code Pane Elements
+        const dictWorkspace = document.getElementById('dictWorkspace');
+        const dictTableContainer = document.getElementById('dictTableContainer');
+        const dictSplitter = document.getElementById('dictSplitter');
+        const dictCodePane = document.getElementById('dictCodePane');
+        const dictCurrentBadge = document.getElementById('dictCurrentBadge');
+        const dictCodeJumpLineInput = document.getElementById('dictCodeJumpLineInput');
+        const btnCloseDictCode = document.getElementById('btnCloseDictCode');
+        const dictCodeLineCountInfo = document.getElementById('dictCodeLineCountInfo');
+        const dictCodeEmptyState = document.getElementById('dictCodeEmptyState');
+        const dictCobolCodeTable = document.getElementById('dictCobolCodeTable');
+        const dictCobolCodeTbody = document.getElementById('dictCobolCodeTbody');
+
+        // Embedded source code & routine locations
+        const embeddedSourceEl = document.getElementById('embeddedSourceCode');
+        const rawSource = embeddedSourceEl ? JSON.parse(embeddedSourceEl.textContent || '""') : '';
+        const codeLines = rawSource ? rawSource.split(/\r?\n/) : [];
+
+        const embeddedLocsEl = document.getElementById('embeddedParagraphLocations');
+        const paragraphLocations = embeddedLocsEl ? JSON.parse(embeddedLocsEl.textContent || '{}') : {};
+
+        let isCodeSplitOpen = false;
+        let activeHighlightedWord = null;
+
+        function filterRows() {
+            const query = searchInput.value.toLowerCase().trim();
+            const sec = sectionFilter.value;
+            const typ = typeFilter.value;
+
+            rows.forEach(r => {
+                const text = r.textContent.toLowerCase();
+                const rSec = r.getAttribute('data-section');
+                const rTyp = r.getAttribute('data-type');
+
+                const matchQuery = !query || text.includes(query);
+                const matchSec = sec === 'ALL' || rSec === sec;
+                const matchTyp = typ === 'ALL' || rTyp === typ;
+
+                r.style.display = (matchQuery && matchSec && matchTyp) ? '' : 'none';
+            });
+        }
+
+        searchInput.addEventListener('input', filterRows);
+        sectionFilter.addEventListener('change', filterRows);
+        typeFilter.addEventListener('change', filterRows);
+
+        function sortTable(n) {
+            const table = document.getElementById("dictTable");
+            let rows, switching = true, i, x, y, shouldSwitch, dir = "asc", switchcount = 0;
+            
+            while (switching) {
+                switching = false;
+                rows = table.rows;
+                for (i = 1; i < (rows.length - 1); i++) {
+                    shouldSwitch = false;
+                    x = rows[i].getElementsByTagName("TD")[n];
+                    y = rows[i + 1].getElementsByTagName("TD")[n];
+                    
+                    let xVal = x.textContent.trim();
+                    let yVal = y.textContent.trim();
+
+                    // Check if numeric
+                    let xNum = parseFloat(xVal.replace(/[^0-9.-]+/g,""));
+                    let yNum = parseFloat(yVal.replace(/[^0-9.-]+/g,""));
+
+                    let cmpX = isNaN(xNum) ? xVal.toLowerCase() : xNum;
+                    let cmpY = isNaN(yNum) ? yVal.toLowerCase() : yNum;
+
+                    if (dir == "asc") {
+                        if (cmpX > cmpY) { shouldSwitch = true; break; }
+                    } else if (dir == "desc") {
+                        if (cmpX < cmpY) { shouldSwitch = true; break; }
+                    }
+                }
+                if (shouldSwitch) {
+                    rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+                    switching = true;
+                    switchcount++;
+                } else {
+                    if (switchcount == 0 && dir == "asc") {
+                        dir = "desc";
+                        switching = true;
+                    }
+                }
+            }
+        }
+
+        function escapeHtml(text) {
+            if (!text) return "";
+            return String(text)
+                .replace(/&/g, "&amp;")
+                .replace(/</g, "&lt;")
+                .replace(/>/g, "&gt;");
+        }
+
+        function formatCodeLineHtml(lineText) {
+            if (!lineText) return "";
+            if (lineText.length >= 7 && (lineText[6] === "*" || lineText[6] === "/")) {
+                return `<span class="code-comment">${escapeHtml(lineText)}</span>`;
+            }
+            const escaped = escapeHtml(lineText);
+            return escaped.replace(/&(?:amp|lt|gt);|\b([A-Za-z0-9]+(?:-[A-Za-z0-9]+)*)\b/g, (match, word) => {
+                if (word) {
+                    return `<span class="code-word" data-word="${word.toUpperCase()}">${word}</span>`;
+                }
+                return match;
+            });
+        }
+
+        // Render source lines
+        function renderSourceLines() {
+            if (!dictCobolCodeTbody) return;
+
+            if (!codeLines || codeLines.length === 0) {
+                if (dictCodeEmptyState) dictCodeEmptyState.style.display = "block";
+                if (dictCobolCodeTable) dictCobolCodeTable.style.display = "none";
+                if (dictCodeLineCountInfo) dictCodeLineCountInfo.textContent = "0 lines";
+                return;
+            }
+
+            if (dictCodeEmptyState) dictCodeEmptyState.style.display = "none";
+            if (dictCobolCodeTable) dictCobolCodeTable.style.display = "table";
+            if (dictCodeLineCountInfo) dictCodeLineCountInfo.textContent = `${codeLines.length} lines`;
+
+            const fragment = document.createDocumentFragment();
+            for (let i = 0; i < codeLines.length; i++) {
+                const lineNum = i + 1;
+                const rawText = codeLines[i];
+
+                const tr = document.createElement("tr");
+                tr.id = `dict-code-line-${lineNum}`;
+                tr.className = "code-line-row";
+
+                const tdNum = document.createElement("td");
+                tdNum.className = "code-line-num";
+                tdNum.textContent = lineNum;
+                tdNum.title = `Line ${lineNum}`;
+                tdNum.onclick = () => focusSingleLine(lineNum);
+
+                const tdText = document.createElement("td");
+                tdText.className = "code-line-text";
+
+                const codeEl = document.createElement("code");
+                codeEl.innerHTML = formatCodeLineHtml(rawText);
+                tdText.appendChild(codeEl);
+
+                tr.appendChild(tdNum);
+                tr.appendChild(tdText);
+                fragment.appendChild(tr);
+            }
+
+            dictCobolCodeTbody.innerHTML = "";
+            dictCobolCodeTbody.appendChild(fragment);
+
+            // Word occurrence click handler
+            dictCobolCodeTbody.onclick = (e) => {
+                const wordEl = e.target.closest(".code-word");
+                if (wordEl && wordEl.dataset.word) {
+                    const w = wordEl.dataset.word;
+                    if (w.length >= 2 || /^[A-Z0-9]/.test(w)) {
+                        if (w === activeHighlightedWord) {
+                            highlightWordInCode(null);
+                        } else {
+                            highlightWordInCode(w, true);
+                        }
+                    }
+                } else if (!e.target.closest(".code-line-num")) {
+                    highlightWordInCode(null);
+                }
+            };
+        }
+
+        function highlightWordInCode(wordToHighlight, forceState) {
+            const norm = (wordToHighlight || "").toUpperCase().trim();
+            if (!dictCobolCodeTbody) return;
+
+            dictCobolCodeTbody.querySelectorAll(".code-word.var-highlight").forEach(el => {
+                el.classList.remove("var-highlight");
+            });
+
+            if (!norm) {
+                activeHighlightedWord = null;
+                return;
+            }
+
+            if (forceState === undefined && norm === activeHighlightedWord) {
+                activeHighlightedWord = null;
+                return;
+            }
+
+            activeHighlightedWord = norm;
+            const matches = dictCobolCodeTbody.querySelectorAll(`.code-word[data-word="${norm}"]`);
+            matches.forEach(el => el.classList.add("var-highlight"));
+        }
+
+        function highlightCodeLines(startLine, endLine) {
+            if (!dictCobolCodeTbody) return;
+
+            const prev = dictCobolCodeTbody.querySelectorAll(".line-highlighted, .line-highlight-start");
+            prev.forEach(el => el.classList.remove("line-highlighted", "line-highlight-start"));
+
+            if (startLine > 0) {
+                const effectiveEnd = (endLine && endLine >= startLine) ? endLine : startLine;
+                for (let l = startLine; l <= effectiveEnd; l++) {
+                    const row = document.getElementById(`dict-code-line-${l}`);
+                    if (row) {
+                        row.classList.add("line-highlighted");
+                        if (l === startLine) {
+                            row.classList.add("line-highlight-start");
+                        }
+                    }
+                }
+
+                const firstRow = document.getElementById(`dict-code-line-${startLine}`);
+                if (firstRow) {
+                    firstRow.scrollIntoView({ behavior: "smooth", block: "center" });
+                }
+            }
+        }
+
+        function focusSingleLine(lineNum) {
+            highlightCodeLines(lineNum, lineNum);
+            if (dictCurrentBadge) {
+                dictCurrentBadge.textContent = `[LINE] ${lineNum}`;
+            }
+        }
+
+        function findAndFocusWord(word) {
+            if (!word || !codeLines || codeLines.length === 0) return;
+            const q = word.toUpperCase();
+            let foundLine = 0;
+            for (let i = 0; i < codeLines.length; i++) {
+                if (codeLines[i].toUpperCase().includes(q)) {
+                    foundLine = i + 1;
+                    break;
+                }
+            }
+            if (foundLine > 0) {
+                highlightCodeLines(foundLine, foundLine);
+            }
+        }
+
+        function openDictCodePane() {
+            if (!dictCodePane || !dictSplitter) return;
+            isCodeSplitOpen = true;
+            dictCodePane.style.display = "flex";
+            dictSplitter.style.display = "flex";
+
+            let ratio = 55;
+            const savedRatio = localStorage.getItem("cobolscope_dict_split_ratio");
+            if (savedRatio) {
+                const parsed = parseFloat(savedRatio);
+                if (!isNaN(parsed) && parsed >= 25 && parsed <= 75) {
+                    ratio = parsed;
+                }
+            }
+
+            if (dictTableContainer) dictTableContainer.style.flex = `${ratio} 1 0px`;
+            dictCodePane.style.flex = `${100 - ratio} 1 0px`;
+        }
+
+        function closeDictCodePane() {
+            if (!dictCodePane || !dictSplitter) return;
+            isCodeSplitOpen = false;
+            dictCodePane.style.display = "none";
+            dictSplitter.style.display = "none";
+            if (dictTableContainer) dictTableContainer.style.flex = "1 1 0px";
+
+            rows.forEach(r => r.classList.remove("selected-var-row"));
+            highlightWordInCode(null);
+            if (dictCobolCodeTbody) {
+                dictCobolCodeTbody.querySelectorAll(".line-highlighted, .line-highlight-start").forEach(el => {
+                    el.classList.remove("line-highlighted", "line-highlight-start");
+                });
+            }
+        }
+
+        function setupDictSplitter() {
+            if (!dictSplitter || !dictWorkspace || !dictTableContainer || !dictCodePane) return;
+            let isDragging = false;
+
+            dictSplitter.addEventListener("pointerdown", (e) => {
+                isDragging = true;
+                dictSplitter.setPointerCapture(e.pointerId);
+                document.body.classList.add("is-resizing");
+                dictSplitter.classList.add("active");
+                e.preventDefault();
+            });
+
+            dictSplitter.addEventListener("pointermove", (e) => {
+                if (!isDragging) return;
+                const rect = dictWorkspace.getBoundingClientRect();
+                const currentX = e.clientX - rect.left;
+                let ratio = (currentX / rect.width) * 100;
+                ratio = Math.max(25, Math.min(75, ratio));
+
+                dictTableContainer.style.flex = `${ratio} 1 0px`;
+                dictCodePane.style.flex = `${100 - ratio} 1 0px`;
+
+                localStorage.setItem("cobolscope_dict_split_ratio", ratio.toFixed(1));
+            });
+
+            const stopDrag = (e) => {
+                if (isDragging) {
+                    isDragging = false;
+                    document.body.classList.remove("is-resizing");
+                    dictSplitter.classList.remove("active");
+                    try { dictSplitter.releasePointerCapture(e.pointerId); } catch (_) {}
+                }
+            };
+
+            dictSplitter.addEventListener("pointerup", stopDrag);
+            dictSplitter.addEventListener("pointercancel", stopDrag);
+        }
+
+        // Open code for a variable row
+        function openCodeForVar(rowEl) {
+            if (!rowEl) return;
+            const varName = rowEl.getAttribute("data-var-name") || "";
+            const startLine = parseInt(rowEl.getAttribute("data-start-line"), 10) || 0;
+            const endLine = parseInt(rowEl.getAttribute("data-end-line"), 10) || 0;
+
+            rows.forEach(r => r.classList.remove("selected-var-row"));
+            rowEl.classList.add("selected-var-row");
+
+            openDictCodePane();
+
+            const lineSpanText = startLine > 0 ? ` (L${startLine}${endLine > startLine ? `-L${endLine}` : ""})` : "";
+            if (dictCurrentBadge) {
+                dictCurrentBadge.textContent = `[VARIABLE] ${varName}${lineSpanText}`;
+            }
+
+            if (startLine > 0) {
+                highlightCodeLines(startLine, endLine || startLine);
+            } else {
+                findAndFocusWord(varName);
+            }
+
+            if (varName) {
+                highlightWordInCode(varName, true);
+            }
+        }
+
+        // Handle Where-Used routine breadcrumb click
+        window.handleBreadcrumbClick = function(event, paraName, secName, varName) {
+            if (event) {
+                event.stopPropagation();
+            }
+
+            if (event && (event.ctrlKey || event.metaKey)) {
+                jumpToRoutine(paraName, secName);
+                return;
+            }
+
+            openDictCodePane();
+
+            const cleanPara = (paraName || "").toUpperCase().trim();
+            const loc = paragraphLocations[cleanPara];
+            const targetVar = varName || "";
+            const varSuffix = targetVar ? ` • ${targetVar}` : "";
+
+            if (loc && loc.start_line > 0) {
+                if (dictCurrentBadge) {
+                    dictCurrentBadge.textContent = `[ROUTINE] ${cleanPara} (L${loc.start_line}-L${loc.end_line})${varSuffix}`;
+                }
+                highlightCodeLines(loc.start_line, loc.end_line);
+            } else {
+                if (dictCurrentBadge) {
+                    dictCurrentBadge.textContent = `[ROUTINE] ${cleanPara}${varSuffix}`;
+                }
+                findAndFocusWord(cleanPara);
+            }
+
+            if (targetVar) {
+                highlightWordInCode(targetVar, true);
+            }
+        };
+
+        // Table row click delegation
+        const dictTableBody = document.getElementById("dictTableBody");
+        if (dictTableBody) {
+            dictTableBody.addEventListener("click", (e) => {
+                if (e.target.closest(".ref-breadcrumb")) {
+                    return; // Handled by handleBreadcrumbClick
+                }
+                const row = e.target.closest("tr.dict-row-clickable");
+                if (row) {
+                    openCodeForVar(row);
+                }
+            });
+        }
+
+        if (btnCloseDictCode) {
+            btnCloseDictCode.addEventListener("click", closeDictCodePane);
+        }
+
+        if (dictCodeJumpLineInput) {
+            dictCodeJumpLineInput.addEventListener("keydown", (e) => {
+                if (e.key === "Enter") {
+                    e.preventDefault();
+                    const val = (dictCodeJumpLineInput.value || "").trim();
+                    if (!val) return;
+                    if (/^\d+$/.test(val)) {
+                        const lineNum = parseInt(val, 10);
+                        if (lineNum >= 1 && lineNum <= codeLines.length) {
+                            focusSingleLine(lineNum);
+                        }
+                    } else {
+                        findAndFocusWord(val);
+                        highlightWordInCode(val, true);
+                    }
+                }
+            });
+        }
+
+        document.addEventListener("keydown", (e) => {
+            if (e.key === "Escape" && isCodeSplitOpen) {
+                closeDictCodePane();
+            }
+        });
+
+        function jumpToRoutine(paraName, secName) {
+            if (!paraName) return;
+            const targetPara = paraName.trim();
+            const targetSec = (secName || '').trim();
+
+            // 1. If running inside Portal iframe, notify parent portal
+            if (window.parent && window.parent !== window) {
+                window.parent.postMessage({
+                    type: 'COBOLSCOPE_JUMP_TO_ROUTINE',
+                    routine: targetPara,
+                    section: targetSec
+                }, '*');
+                try {
+                    if (typeof window.parent.handleJumpToRoutine === 'function') {
+                        window.parent.handleJumpToRoutine(targetPara, targetSec);
+                    }
+                } catch (e) {}
+                return;
+            }
+
+            // 2. If running standalone, navigate to companion Call Graph HTML
+            const curPath = window.location.pathname;
+            if (curPath.endsWith('_dict.html')) {
+                const graphPath = curPath.replace(/_dict\.html$/, '.html');
+                window.location.href = graphPath + '#routine=' + encodeURIComponent(targetPara);
+            } else {
+                window.location.hash = 'routine=' + encodeURIComponent(targetPara);
+            }
+        }
+
+        // Initialize code viewer and splitter
+        renderSourceLines();
+        setupDictSplitter();    </script>
+</body>
+</html>

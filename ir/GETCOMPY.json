@@ -1,0 +1,158 @@
+{
+  "programId": "GETCOMPY",
+  "author": "*>CE James O'Grady. *>CE *>CE",
+  "format": "FIXED",
+  "dataDictionary": {
+    "linkageSection": [
+      {
+        "id": "LK_L30_DFHCOMMAREA",
+        "qualifiedName": "DFHCOMMAREA",
+        "level": 1,
+        "name": "DFHCOMMAREA",
+        "usage": "DISPLAY",
+        "logicalType": "Group",
+        "byteOffset": 0,
+        "relativeOffset": 0,
+        "byteLength": 40,
+        "elementByteLength": 40,
+        "children": [
+          {
+            "id": "LK_L7_GETCompanyOperation",
+            "qualifiedName": "DFHCOMMAREA.GETCompanyOperation",
+            "level": 3,
+            "name": "GETCompanyOperation",
+            "usage": "DISPLAY",
+            "logicalType": "Group",
+            "byteOffset": 0,
+            "relativeOffset": 0,
+            "byteLength": 40,
+            "elementByteLength": 40,
+            "children": [
+              {
+                "id": "LK_L8_company-name",
+                "qualifiedName": "DFHCOMMAREA.GETCompanyOperation.company-name",
+                "level": 6,
+                "name": "company-name",
+                "pic": "x(40)",
+                "usage": "DISPLAY",
+                "logicalType": "Alphanumeric (40 chars)",
+                "byteOffset": 0,
+                "relativeOffset": 0,
+                "byteLength": 40,
+                "elementByteLength": 40,
+                "location": {
+                  "startLine": 8,
+                  "endLine": 8,
+                  "startColumn": 13,
+                  "endColumn": 38,
+                  "sourceFile": "GETCOMPY.cpy"
+                }
+              }
+            ],
+            "location": {
+              "startLine": 7,
+              "endLine": 7,
+              "startColumn": 11,
+              "endColumn": 33,
+              "sourceFile": "GETCOMPY.cpy"
+            }
+          }
+        ],
+        "location": {
+          "startLine": 30,
+          "endLine": 30,
+          "startColumn": 7,
+          "endColumn": 21,
+          "sourceFile": "GETCOMPY.cbl"
+        }
+      }
+    ],
+    "workingStorageBytes": 0
+  },
+  "sections": [
+    {
+      "name": "PREMIERE",
+      "location": {
+        "startLine": 36,
+        "endLine": 43,
+        "startColumn": 7,
+        "endColumn": 17,
+        "sourceFile": "GETCOMPY.cbl"
+      },
+      "paragraphNames": [
+        "A010"
+      ]
+    }
+  ],
+  "paragraphs": [
+    {
+      "name": "A010",
+      "sectionParent": "PREMIERE",
+      "location": {
+        "startLine": 37,
+        "endLine": 43,
+        "startColumn": 7,
+        "endColumn": 17,
+        "sourceFile": "GETCOMPY.cbl"
+      },
+      "isTerminal": true,
+      "statements": [
+        {
+          "type": "MOVE",
+          "location": {
+            "startLine": 38,
+            "endLine": 38,
+            "startColumn": 11,
+            "endColumn": 50,
+            "sourceFile": "GETCOMPY.cbl"
+          },
+          "rawText": "move 'CICS Bank Sample Application' to COMPANY-NAME",
+          "targetFieldIds": [
+            "LK_L8_company-name"
+          ],
+          "fromExpr": "'CICS Bank Sample Application'",
+          "toTargets": [
+            "COMPANY-NAME"
+          ]
+        },
+        {
+          "type": "EXEC_CICS",
+          "location": {
+            "startLine": 40,
+            "endLine": 41,
+            "startColumn": 6,
+            "endColumn": 6,
+            "sourceFile": "GETCOMPY.cbl"
+          },
+          "rawText": "*>EXECCICS EXEC CICS RETURN *>EXECCICS END-EXEC }",
+          "subsystem": "CICS",
+          "rawPayload": "EXEC CICS RETURN END-EXEC"
+        },
+        {
+          "type": "GOBACK",
+          "location": {
+            "startLine": 43,
+            "endLine": 43,
+            "startColumn": 11,
+            "endColumn": 11,
+            "sourceFile": "GETCOMPY.cbl"
+          },
+          "rawText": "GOBACK",
+          "operation": "GOBACK"
+        }
+      ]
+    }
+  ],
+  "asgAuditSummary": {
+    "totalAsgDataEntries": 3,
+    "totalAsgLevel88Entries": 0,
+    "totalAsgParagraphs": 1,
+    "totalAsgStatements": 3,
+    "totalAsgCalls": 2,
+    "asgVariableNames": [
+      "DFHCOMMAREA",
+      "GETCOMPANYOPERATION",
+      "COMPANY-NAME"
+    ]
+  }
+}

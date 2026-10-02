@@ -1,0 +1,4136 @@
+{
+  "programId": "INQTRAND",
+  "author": "*>CE IBM. *>CE",
+  "format": "FIXED",
+  "dataDictionary": {
+    "workingStorageSection": [
+      {
+        "id": "WS_L7_SORTCODE",
+        "qualifiedName": "SORTCODE",
+        "level": 77,
+        "name": "SORTCODE",
+        "pic": "9(6)",
+        "usage": "DISPLAY",
+        "value": "987654",
+        "logicalType": "Numeric Display (6 digits)",
+        "byteOffset": 0,
+        "relativeOffset": 0,
+        "byteLength": 6,
+        "elementByteLength": 6,
+        "location": {
+          "startLine": 7,
+          "endLine": 7,
+          "startColumn": 7,
+          "endColumn": 50,
+          "sourceFile": "SORTCODE.cpy"
+        }
+      },
+      {
+        "id": "WS_L42_FILLER",
+        "qualifiedName": "FILLER",
+        "level": 1,
+        "name": "FILLER",
+        "logicalType": "Elementary",
+        "byteOffset": 6,
+        "relativeOffset": 0,
+        "byteLength": 0,
+        "elementByteLength": 0,
+        "location": {
+          "startLine": 42,
+          "endLine": 44,
+          "startColumn": 6,
+          "endColumn": 26,
+          "sourceFile": "INQTRAND.cbl"
+        }
+      },
+      {
+        "id": "WS_L47_HOST-PROCTRAN-ROW",
+        "qualifiedName": "HOST-PROCTRAN-ROW",
+        "level": 1,
+        "name": "HOST-PROCTRAN-ROW",
+        "usage": "DISPLAY",
+        "logicalType": "Group",
+        "byteOffset": 6,
+        "relativeOffset": 0,
+        "byteLength": 96,
+        "elementByteLength": 96,
+        "children": [
+          {
+            "id": "WS_L48_HV-PROCTRAN-EYECATCHER",
+            "qualifiedName": "HOST-PROCTRAN-ROW.HV-PROCTRAN-EYECATCHER",
+            "level": 3,
+            "name": "HV-PROCTRAN-EYECATCHER",
+            "pic": "X(4)",
+            "usage": "DISPLAY",
+            "logicalType": "Alphanumeric (4 chars)",
+            "byteOffset": 6,
+            "relativeOffset": 0,
+            "byteLength": 4,
+            "elementByteLength": 4,
+            "location": {
+              "startLine": 48,
+              "endLine": 48,
+              "startColumn": 10,
+              "endColumn": 47,
+              "sourceFile": "INQTRAND.cbl"
+            }
+          },
+          {
+            "id": "WS_L49_HV-PROCTRAN-SORTCODE",
+            "qualifiedName": "HOST-PROCTRAN-ROW.HV-PROCTRAN-SORTCODE",
+            "level": 3,
+            "name": "HV-PROCTRAN-SORTCODE",
+            "pic": "X(6)",
+            "usage": "DISPLAY",
+            "logicalType": "Alphanumeric (6 chars)",
+            "byteOffset": 10,
+            "relativeOffset": 4,
+            "byteLength": 6,
+            "elementByteLength": 6,
+            "location": {
+              "startLine": 49,
+              "endLine": 49,
+              "startColumn": 10,
+              "endColumn": 47,
+              "sourceFile": "INQTRAND.cbl"
+            }
+          },
+          {
+            "id": "WS_L50_HV-PROCTRAN-NUMBER",
+            "qualifiedName": "HOST-PROCTRAN-ROW.HV-PROCTRAN-NUMBER",
+            "level": 3,
+            "name": "HV-PROCTRAN-NUMBER",
+            "pic": "X(8)",
+            "usage": "DISPLAY",
+            "logicalType": "Alphanumeric (8 chars)",
+            "byteOffset": 16,
+            "relativeOffset": 10,
+            "byteLength": 8,
+            "elementByteLength": 8,
+            "location": {
+              "startLine": 50,
+              "endLine": 50,
+              "startColumn": 10,
+              "endColumn": 47,
+              "sourceFile": "INQTRAND.cbl"
+            }
+          },
+          {
+            "id": "WS_L51_HV-PROCTRAN-DATE",
+            "qualifiedName": "HOST-PROCTRAN-ROW.HV-PROCTRAN-DATE",
+            "level": 3,
+            "name": "HV-PROCTRAN-DATE",
+            "pic": "X(10)",
+            "usage": "DISPLAY",
+            "logicalType": "Alphanumeric (10 chars)",
+            "byteOffset": 24,
+            "relativeOffset": 18,
+            "byteLength": 10,
+            "elementByteLength": 10,
+            "location": {
+              "startLine": 51,
+              "endLine": 51,
+              "startColumn": 10,
+              "endColumn": 48,
+              "sourceFile": "INQTRAND.cbl"
+            }
+          },
+          {
+            "id": "WS_L52_HV-PROCTRAN-TIME",
+            "qualifiedName": "HOST-PROCTRAN-ROW.HV-PROCTRAN-TIME",
+            "level": 3,
+            "name": "HV-PROCTRAN-TIME",
+            "pic": "X(6)",
+            "usage": "DISPLAY",
+            "logicalType": "Alphanumeric (6 chars)",
+            "byteOffset": 34,
+            "relativeOffset": 28,
+            "byteLength": 6,
+            "elementByteLength": 6,
+            "location": {
+              "startLine": 52,
+              "endLine": 52,
+              "startColumn": 10,
+              "endColumn": 47,
+              "sourceFile": "INQTRAND.cbl"
+            }
+          },
+          {
+            "id": "WS_L53_HV-PROCTRAN-REF",
+            "qualifiedName": "HOST-PROCTRAN-ROW.HV-PROCTRAN-REF",
+            "level": 3,
+            "name": "HV-PROCTRAN-REF",
+            "pic": "X(12)",
+            "usage": "DISPLAY",
+            "logicalType": "Alphanumeric (12 chars)",
+            "byteOffset": 40,
+            "relativeOffset": 34,
+            "byteLength": 12,
+            "elementByteLength": 12,
+            "location": {
+              "startLine": 53,
+              "endLine": 53,
+              "startColumn": 10,
+              "endColumn": 48,
+              "sourceFile": "INQTRAND.cbl"
+            }
+          },
+          {
+            "id": "WS_L54_HV-PROCTRAN-TYPE",
+            "qualifiedName": "HOST-PROCTRAN-ROW.HV-PROCTRAN-TYPE",
+            "level": 3,
+            "name": "HV-PROCTRAN-TYPE",
+            "pic": "X(3)",
+            "usage": "DISPLAY",
+            "logicalType": "Alphanumeric (3 chars)",
+            "byteOffset": 52,
+            "relativeOffset": 46,
+            "byteLength": 3,
+            "elementByteLength": 3,
+            "location": {
+              "startLine": 54,
+              "endLine": 54,
+              "startColumn": 10,
+              "endColumn": 47,
+              "sourceFile": "INQTRAND.cbl"
+            }
+          },
+          {
+            "id": "WS_L55_HV-PROCTRAN-DESC",
+            "qualifiedName": "HOST-PROCTRAN-ROW.HV-PROCTRAN-DESC",
+            "level": 3,
+            "name": "HV-PROCTRAN-DESC",
+            "pic": "X(40)",
+            "usage": "DISPLAY",
+            "logicalType": "Alphanumeric (40 chars)",
+            "byteOffset": 55,
+            "relativeOffset": 49,
+            "byteLength": 40,
+            "elementByteLength": 40,
+            "location": {
+              "startLine": 55,
+              "endLine": 55,
+              "startColumn": 10,
+              "endColumn": 48,
+              "sourceFile": "INQTRAND.cbl"
+            }
+          },
+          {
+            "id": "WS_L56_HV-PROCTRAN-AMOUNT",
+            "qualifiedName": "HOST-PROCTRAN-ROW.HV-PROCTRAN-AMOUNT",
+            "level": 3,
+            "name": "HV-PROCTRAN-AMOUNT",
+            "pic": "S9(10)V99",
+            "usage": "COMP_3",
+            "logicalType": "Signed Decimal(12, 2) Packed",
+            "byteOffset": 95,
+            "relativeOffset": 89,
+            "byteLength": 7,
+            "elementByteLength": 7,
+            "location": {
+              "startLine": 56,
+              "endLine": 56,
+              "startColumn": 10,
+              "endColumn": 59,
+              "sourceFile": "INQTRAND.cbl"
+            }
+          }
+        ],
+        "location": {
+          "startLine": 47,
+          "endLine": 47,
+          "startColumn": 7,
+          "endColumn": 27,
+          "sourceFile": "INQTRAND.cbl"
+        }
+      },
+      {
+        "id": "WS_L59_FILLER",
+        "qualifiedName": "FILLER",
+        "level": 1,
+        "name": "FILLER",
+        "logicalType": "Elementary",
+        "byteOffset": 102,
+        "relativeOffset": 0,
+        "byteLength": 0,
+        "elementByteLength": 0,
+        "location": {
+          "startLine": 59,
+          "endLine": 61,
+          "startColumn": 6,
+          "endColumn": 26,
+          "sourceFile": "INQTRAND.cbl"
+        }
+      },
+      {
+        "id": "WS_L64_FILLER",
+        "qualifiedName": "FILLER",
+        "level": 1,
+        "name": "FILLER",
+        "logicalType": "Elementary",
+        "byteOffset": 102,
+        "relativeOffset": 0,
+        "byteLength": 0,
+        "elementByteLength": 0,
+        "location": {
+          "startLine": 64,
+          "endLine": 81,
+          "startColumn": 6,
+          "endColumn": 26,
+          "sourceFile": "INQTRAND.cbl"
+        }
+      },
+      {
+        "id": "WS_L83_WS-CICS-WORK-AREA",
+        "qualifiedName": "WS-CICS-WORK-AREA",
+        "level": 1,
+        "name": "WS-CICS-WORK-AREA",
+        "usage": "DISPLAY",
+        "logicalType": "Group",
+        "byteOffset": 102,
+        "relativeOffset": 0,
+        "byteLength": 8,
+        "elementByteLength": 8,
+        "children": [
+          {
+            "id": "WS_L84_WS-CICS-RESP",
+            "qualifiedName": "WS-CICS-WORK-AREA.WS-CICS-RESP",
+            "level": 5,
+            "name": "WS-CICS-RESP",
+            "pic": "S9(8)",
+            "usage": "COMP",
+            "logicalType": "Signed Integer (32-bit Binary)",
+            "byteOffset": 102,
+            "relativeOffset": 0,
+            "byteLength": 4,
+            "elementByteLength": 4,
+            "location": {
+              "startLine": 84,
+              "endLine": 84,
+              "startColumn": 10,
+              "endColumn": 53,
+              "sourceFile": "INQTRAND.cbl"
+            }
+          },
+          {
+            "id": "WS_L85_WS-CICS-RESP2",
+            "qualifiedName": "WS-CICS-WORK-AREA.WS-CICS-RESP2",
+            "level": 5,
+            "name": "WS-CICS-RESP2",
+            "pic": "S9(8)",
+            "usage": "COMP",
+            "logicalType": "Signed Integer (32-bit Binary)",
+            "byteOffset": 106,
+            "relativeOffset": 4,
+            "byteLength": 4,
+            "elementByteLength": 4,
+            "location": {
+              "startLine": 85,
+              "endLine": 85,
+              "startColumn": 10,
+              "endColumn": 53,
+              "sourceFile": "INQTRAND.cbl"
+            }
+          }
+        ],
+        "location": {
+          "startLine": 83,
+          "endLine": 83,
+          "startColumn": 7,
+          "endColumn": 27,
+          "sourceFile": "INQTRAND.cbl"
+        }
+      },
+      {
+        "id": "WS_L87_SQLCODE-DISPLAY",
+        "qualifiedName": "SQLCODE-DISPLAY",
+        "level": 1,
+        "name": "SQLCODE-DISPLAY",
+        "pic": "S9(8)",
+        "usage": "DISPLAY",
+        "logicalType": "Signed Numeric Display (8 digits)",
+        "byteOffset": 110,
+        "relativeOffset": 0,
+        "byteLength": 8,
+        "elementByteLength": 8,
+        "isSignSeparate": true,
+        "location": {
+          "startLine": 87,
+          "endLine": 88,
+          "startColumn": 7,
+          "endColumn": 32,
+          "sourceFile": "INQTRAND.cbl"
+        }
+      },
+      {
+        "id": "WS_L90_WS-ABEND-PGM",
+        "qualifiedName": "WS-ABEND-PGM",
+        "level": 1,
+        "name": "WS-ABEND-PGM",
+        "pic": "X(8)",
+        "usage": "DISPLAY",
+        "value": "ABNDPROC",
+        "logicalType": "Alphanumeric (8 chars)",
+        "byteOffset": 118,
+        "relativeOffset": 0,
+        "byteLength": 8,
+        "elementByteLength": 8,
+        "location": {
+          "startLine": 90,
+          "endLine": 90,
+          "startColumn": 7,
+          "endColumn": 64,
+          "sourceFile": "INQTRAND.cbl"
+        }
+      },
+      {
+        "id": "WS_L92_ABNDINFO-REC",
+        "qualifiedName": "ABNDINFO-REC",
+        "level": 1,
+        "name": "ABNDINFO-REC",
+        "usage": "DISPLAY",
+        "logicalType": "Group",
+        "byteOffset": 126,
+        "relativeOffset": 0,
+        "byteLength": 678,
+        "elementByteLength": 678,
+        "children": [
+          {
+            "id": "WS_L7_ABND-VSAM-KEY",
+            "qualifiedName": "ABNDINFO-REC.ABND-VSAM-KEY",
+            "level": 3,
+            "name": "ABND-VSAM-KEY",
+            "usage": "DISPLAY",
+            "logicalType": "Group",
+            "byteOffset": 126,
+            "relativeOffset": 0,
+            "byteLength": 12,
+            "elementByteLength": 12,
+            "children": [
+              {
+                "id": "WS_L8_ABND-UTIME-KEY",
+                "qualifiedName": "ABNDINFO-REC.ABND-VSAM-KEY.ABND-UTIME-KEY",
+                "level": 5,
+                "name": "ABND-UTIME-KEY",
+                "pic": "S9(15)",
+                "usage": "COMP_3",
+                "logicalType": "Signed Integer(15) Packed",
+                "byteOffset": 126,
+                "relativeOffset": 0,
+                "byteLength": 8,
+                "elementByteLength": 8,
+                "location": {
+                  "startLine": 8,
+                  "endLine": 8,
+                  "startColumn": 14,
+                  "endColumn": 66,
+                  "sourceFile": "ABNDINFO.cpy"
+                }
+              },
+              {
+                "id": "WS_L9_ABND-TASKNO-KEY",
+                "qualifiedName": "ABNDINFO-REC.ABND-VSAM-KEY.ABND-TASKNO-KEY",
+                "level": 5,
+                "name": "ABND-TASKNO-KEY",
+                "pic": "9(4)",
+                "usage": "DISPLAY",
+                "logicalType": "Numeric Display (4 digits)",
+                "byteOffset": 134,
+                "relativeOffset": 8,
+                "byteLength": 4,
+                "elementByteLength": 4,
+                "location": {
+                  "startLine": 9,
+                  "endLine": 9,
+                  "startColumn": 14,
+                  "endColumn": 57,
+                  "sourceFile": "ABNDINFO.cpy"
+                }
+              }
+            ],
+            "location": {
+              "startLine": 7,
+              "endLine": 7,
+              "startColumn": 11,
+              "endColumn": 27,
+              "sourceFile": "ABNDINFO.cpy"
+            }
+          },
+          {
+            "id": "WS_L10_ABND-APPLID",
+            "qualifiedName": "ABNDINFO-REC.ABND-APPLID",
+            "level": 3,
+            "name": "ABND-APPLID",
+            "pic": "X(8)",
+            "usage": "DISPLAY",
+            "logicalType": "Alphanumeric (8 chars)",
+            "byteOffset": 138,
+            "relativeOffset": 12,
+            "byteLength": 8,
+            "elementByteLength": 8,
+            "location": {
+              "startLine": 10,
+              "endLine": 10,
+              "startColumn": 11,
+              "endColumn": 57,
+              "sourceFile": "ABNDINFO.cpy"
+            }
+          },
+          {
+            "id": "WS_L11_ABND-TRANID",
+            "qualifiedName": "ABNDINFO-REC.ABND-TRANID",
+            "level": 3,
+            "name": "ABND-TRANID",
+            "pic": "X(4)",
+            "usage": "DISPLAY",
+            "logicalType": "Alphanumeric (4 chars)",
+            "byteOffset": 146,
+            "relativeOffset": 20,
+            "byteLength": 4,
+            "elementByteLength": 4,
+            "location": {
+              "startLine": 11,
+              "endLine": 11,
+              "startColumn": 11,
+              "endColumn": 57,
+              "sourceFile": "ABNDINFO.cpy"
+            }
+          },
+          {
+            "id": "WS_L12_ABND-DATE",
+            "qualifiedName": "ABNDINFO-REC.ABND-DATE",
+            "level": 3,
+            "name": "ABND-DATE",
+            "pic": "X(10)",
+            "usage": "DISPLAY",
+            "logicalType": "Alphanumeric (10 chars)",
+            "byteOffset": 150,
+            "relativeOffset": 24,
+            "byteLength": 10,
+            "elementByteLength": 10,
+            "location": {
+              "startLine": 12,
+              "endLine": 12,
+              "startColumn": 11,
+              "endColumn": 58,
+              "sourceFile": "ABNDINFO.cpy"
+            }
+          },
+          {
+            "id": "WS_L13_ABND-TIME",
+            "qualifiedName": "ABNDINFO-REC.ABND-TIME",
+            "level": 3,
+            "name": "ABND-TIME",
+            "pic": "X(8)",
+            "usage": "DISPLAY",
+            "logicalType": "Alphanumeric (8 chars)",
+            "byteOffset": 160,
+            "relativeOffset": 34,
+            "byteLength": 8,
+            "elementByteLength": 8,
+            "location": {
+              "startLine": 13,
+              "endLine": 13,
+              "startColumn": 11,
+              "endColumn": 57,
+              "sourceFile": "ABNDINFO.cpy"
+            }
+          },
+          {
+            "id": "WS_L14_ABND-CODE",
+            "qualifiedName": "ABNDINFO-REC.ABND-CODE",
+            "level": 3,
+            "name": "ABND-CODE",
+            "pic": "X(4)",
+            "usage": "DISPLAY",
+            "logicalType": "Alphanumeric (4 chars)",
+            "byteOffset": 168,
+            "relativeOffset": 42,
+            "byteLength": 4,
+            "elementByteLength": 4,
+            "location": {
+              "startLine": 14,
+              "endLine": 14,
+              "startColumn": 11,
+              "endColumn": 57,
+              "sourceFile": "ABNDINFO.cpy"
+            }
+          },
+          {
+            "id": "WS_L15_ABND-PROGRAM",
+            "qualifiedName": "ABNDINFO-REC.ABND-PROGRAM",
+            "level": 3,
+            "name": "ABND-PROGRAM",
+            "pic": "X(8)",
+            "usage": "DISPLAY",
+            "logicalType": "Alphanumeric (8 chars)",
+            "byteOffset": 172,
+            "relativeOffset": 46,
+            "byteLength": 8,
+            "elementByteLength": 8,
+            "location": {
+              "startLine": 15,
+              "endLine": 15,
+              "startColumn": 11,
+              "endColumn": 57,
+              "sourceFile": "ABNDINFO.cpy"
+            }
+          },
+          {
+            "id": "WS_L16_ABND-RESPCODE",
+            "qualifiedName": "ABNDINFO-REC.ABND-RESPCODE",
+            "level": 3,
+            "name": "ABND-RESPCODE",
+            "pic": "S9(8)",
+            "usage": "DISPLAY",
+            "logicalType": "Signed Numeric Display (8 digits)",
+            "byteOffset": 180,
+            "relativeOffset": 54,
+            "byteLength": 8,
+            "elementByteLength": 8,
+            "isSignSeparate": true,
+            "location": {
+              "startLine": 16,
+              "endLine": 17,
+              "startColumn": 11,
+              "endColumn": 39,
+              "sourceFile": "ABNDINFO.cpy"
+            }
+          },
+          {
+            "id": "WS_L18_ABND-RESP2CODE",
+            "qualifiedName": "ABNDINFO-REC.ABND-RESP2CODE",
+            "level": 3,
+            "name": "ABND-RESP2CODE",
+            "pic": "S9(8)",
+            "usage": "DISPLAY",
+            "logicalType": "Signed Numeric Display (8 digits)",
+            "byteOffset": 188,
+            "relativeOffset": 62,
+            "byteLength": 8,
+            "elementByteLength": 8,
+            "isSignSeparate": true,
+            "location": {
+              "startLine": 18,
+              "endLine": 19,
+              "startColumn": 11,
+              "endColumn": 39,
+              "sourceFile": "ABNDINFO.cpy"
+            }
+          },
+          {
+            "id": "WS_L20_ABND-SQLCODE",
+            "qualifiedName": "ABNDINFO-REC.ABND-SQLCODE",
+            "level": 3,
+            "name": "ABND-SQLCODE",
+            "pic": "S9(8)",
+            "usage": "DISPLAY",
+            "logicalType": "Signed Numeric Display (8 digits)",
+            "byteOffset": 196,
+            "relativeOffset": 70,
+            "byteLength": 8,
+            "elementByteLength": 8,
+            "isSignSeparate": true,
+            "location": {
+              "startLine": 20,
+              "endLine": 21,
+              "startColumn": 11,
+              "endColumn": 39,
+              "sourceFile": "ABNDINFO.cpy"
+            }
+          },
+          {
+            "id": "WS_L22_ABND-FREEFORM",
+            "qualifiedName": "ABNDINFO-REC.ABND-FREEFORM",
+            "level": 3,
+            "name": "ABND-FREEFORM",
+            "pic": "X(600)",
+            "usage": "DISPLAY",
+            "logicalType": "Alphanumeric (600 chars)",
+            "byteOffset": 204,
+            "relativeOffset": 78,
+            "byteLength": 600,
+            "elementByteLength": 600,
+            "location": {
+              "startLine": 22,
+              "endLine": 22,
+              "startColumn": 11,
+              "endColumn": 59,
+              "sourceFile": "ABNDINFO.cpy"
+            }
+          }
+        ],
+        "location": {
+          "startLine": 92,
+          "endLine": 92,
+          "startColumn": 7,
+          "endColumn": 22,
+          "sourceFile": "INQTRAND.cbl"
+        }
+      },
+      {
+        "id": "WS_L95_WS-U-TIME",
+        "qualifiedName": "WS-U-TIME",
+        "level": 1,
+        "name": "WS-U-TIME",
+        "pic": "S9(15)",
+        "usage": "COMP_3",
+        "logicalType": "Signed Integer(15) Packed",
+        "byteOffset": 804,
+        "relativeOffset": 0,
+        "byteLength": 8,
+        "elementByteLength": 8,
+        "location": {
+          "startLine": 95,
+          "endLine": 95,
+          "startColumn": 7,
+          "endColumn": 56,
+          "sourceFile": "INQTRAND.cbl"
+        }
+      },
+      {
+        "id": "WS_L96_WS-ORIG-DATE",
+        "qualifiedName": "WS-ORIG-DATE",
+        "level": 1,
+        "name": "WS-ORIG-DATE",
+        "pic": "X(10)",
+        "usage": "DISPLAY",
+        "logicalType": "Alphanumeric (10 chars)",
+        "byteOffset": 812,
+        "relativeOffset": 0,
+        "byteLength": 10,
+        "elementByteLength": 10,
+        "location": {
+          "startLine": 96,
+          "endLine": 96,
+          "startColumn": 7,
+          "endColumn": 48,
+          "sourceFile": "INQTRAND.cbl"
+        }
+      },
+      {
+        "id": "WS_L97_WS-ORIG-DATE-GRP",
+        "qualifiedName": "WS-ORIG-DATE-GRP",
+        "level": 1,
+        "name": "WS-ORIG-DATE-GRP",
+        "usage": "DISPLAY",
+        "redefines": "WS-ORIG-DATE",
+        "logicalType": "Group",
+        "byteOffset": 812,
+        "relativeOffset": 0,
+        "byteLength": 10,
+        "elementByteLength": 10,
+        "children": [
+          {
+            "id": "WS_L98_WS-ORIG-DATE-DD",
+            "qualifiedName": "WS-ORIG-DATE-GRP.WS-ORIG-DATE-DD",
+            "level": 3,
+            "name": "WS-ORIG-DATE-DD",
+            "pic": "99",
+            "usage": "DISPLAY",
+            "logicalType": "Numeric Display (2 digits)",
+            "byteOffset": 812,
+            "relativeOffset": 0,
+            "byteLength": 2,
+            "elementByteLength": 2,
+            "location": {
+              "startLine": 98,
+              "endLine": 98,
+              "startColumn": 10,
+              "endColumn": 45,
+              "sourceFile": "INQTRAND.cbl"
+            }
+          },
+          {
+            "id": "WS_L99_FILLER",
+            "qualifiedName": "WS-ORIG-DATE-GRP.FILLER",
+            "level": 3,
+            "name": "FILLER",
+            "pic": "X",
+            "usage": "DISPLAY",
+            "logicalType": "Alphanumeric (1 chars)",
+            "byteOffset": 814,
+            "relativeOffset": 2,
+            "byteLength": 1,
+            "elementByteLength": 1,
+            "isFiller": true,
+            "location": {
+              "startLine": 99,
+              "endLine": 99,
+              "startColumn": 10,
+              "endColumn": 44,
+              "sourceFile": "INQTRAND.cbl"
+            }
+          },
+          {
+            "id": "WS_L100_WS-ORIG-DATE-MM",
+            "qualifiedName": "WS-ORIG-DATE-GRP.WS-ORIG-DATE-MM",
+            "level": 3,
+            "name": "WS-ORIG-DATE-MM",
+            "pic": "99",
+            "usage": "DISPLAY",
+            "logicalType": "Numeric Display (2 digits)",
+            "byteOffset": 815,
+            "relativeOffset": 3,
+            "byteLength": 2,
+            "elementByteLength": 2,
+            "location": {
+              "startLine": 100,
+              "endLine": 100,
+              "startColumn": 10,
+              "endColumn": 45,
+              "sourceFile": "INQTRAND.cbl"
+            }
+          },
+          {
+            "id": "WS_L101_FILLER",
+            "qualifiedName": "WS-ORIG-DATE-GRP.FILLER",
+            "level": 3,
+            "name": "FILLER",
+            "pic": "X",
+            "usage": "DISPLAY",
+            "logicalType": "Alphanumeric (1 chars)",
+            "byteOffset": 817,
+            "relativeOffset": 5,
+            "byteLength": 1,
+            "elementByteLength": 1,
+            "isFiller": true,
+            "location": {
+              "startLine": 101,
+              "endLine": 101,
+              "startColumn": 10,
+              "endColumn": 44,
+              "sourceFile": "INQTRAND.cbl"
+            }
+          },
+          {
+            "id": "WS_L102_WS-ORIG-DATE-YYYY",
+            "qualifiedName": "WS-ORIG-DATE-GRP.WS-ORIG-DATE-YYYY",
+            "level": 3,
+            "name": "WS-ORIG-DATE-YYYY",
+            "pic": "9999",
+            "usage": "DISPLAY",
+            "logicalType": "Numeric Display (4 digits)",
+            "byteOffset": 818,
+            "relativeOffset": 6,
+            "byteLength": 4,
+            "elementByteLength": 4,
+            "location": {
+              "startLine": 102,
+              "endLine": 102,
+              "startColumn": 10,
+              "endColumn": 47,
+              "sourceFile": "INQTRAND.cbl"
+            }
+          }
+        ],
+        "location": {
+          "startLine": 97,
+          "endLine": 97,
+          "startColumn": 7,
+          "endColumn": 49,
+          "sourceFile": "INQTRAND.cbl"
+        }
+      },
+      {
+        "id": "WS_L104_WS-TIME-DATA",
+        "qualifiedName": "WS-TIME-DATA",
+        "level": 1,
+        "name": "WS-TIME-DATA",
+        "usage": "DISPLAY",
+        "logicalType": "Group",
+        "byteOffset": 822,
+        "relativeOffset": 0,
+        "byteLength": 6,
+        "elementByteLength": 6,
+        "children": [
+          {
+            "id": "WS_L105_WS-TIME-NOW",
+            "qualifiedName": "WS-TIME-DATA.WS-TIME-NOW",
+            "level": 3,
+            "name": "WS-TIME-NOW",
+            "pic": "9(6)",
+            "usage": "DISPLAY",
+            "logicalType": "Numeric Display (6 digits)",
+            "byteOffset": 822,
+            "relativeOffset": 0,
+            "byteLength": 6,
+            "elementByteLength": 6,
+            "location": {
+              "startLine": 105,
+              "endLine": 105,
+              "startColumn": 11,
+              "endColumn": 47,
+              "sourceFile": "INQTRAND.cbl"
+            }
+          },
+          {
+            "id": "WS_L106_WS-TIME-NOW-GRP",
+            "qualifiedName": "WS-TIME-DATA.WS-TIME-NOW-GRP",
+            "level": 3,
+            "name": "WS-TIME-NOW-GRP",
+            "usage": "DISPLAY",
+            "redefines": "WS-TIME-NOW",
+            "logicalType": "Group",
+            "byteOffset": 822,
+            "relativeOffset": 0,
+            "byteLength": 6,
+            "elementByteLength": 6,
+            "children": [
+              {
+                "id": "WS_L107_WS-TIME-NOW-GRP-HH",
+                "qualifiedName": "WS-TIME-DATA.WS-TIME-NOW-GRP.WS-TIME-NOW-GRP-HH",
+                "level": 5,
+                "name": "WS-TIME-NOW-GRP-HH",
+                "pic": "99",
+                "usage": "DISPLAY",
+                "logicalType": "Numeric Display (2 digits)",
+                "byteOffset": 822,
+                "relativeOffset": 0,
+                "byteLength": 2,
+                "elementByteLength": 2,
+                "location": {
+                  "startLine": 107,
+                  "endLine": 107,
+                  "startColumn": 14,
+                  "endColumn": 48,
+                  "sourceFile": "INQTRAND.cbl"
+                }
+              },
+              {
+                "id": "WS_L108_WS-TIME-NOW-GRP-MM",
+                "qualifiedName": "WS-TIME-DATA.WS-TIME-NOW-GRP.WS-TIME-NOW-GRP-MM",
+                "level": 5,
+                "name": "WS-TIME-NOW-GRP-MM",
+                "pic": "99",
+                "usage": "DISPLAY",
+                "logicalType": "Numeric Display (2 digits)",
+                "byteOffset": 824,
+                "relativeOffset": 2,
+                "byteLength": 2,
+                "elementByteLength": 2,
+                "location": {
+                  "startLine": 108,
+                  "endLine": 108,
+                  "startColumn": 14,
+                  "endColumn": 48,
+                  "sourceFile": "INQTRAND.cbl"
+                }
+              },
+              {
+                "id": "WS_L109_WS-TIME-NOW-GRP-SS",
+                "qualifiedName": "WS-TIME-DATA.WS-TIME-NOW-GRP.WS-TIME-NOW-GRP-SS",
+                "level": 5,
+                "name": "WS-TIME-NOW-GRP-SS",
+                "pic": "99",
+                "usage": "DISPLAY",
+                "logicalType": "Numeric Display (2 digits)",
+                "byteOffset": 826,
+                "relativeOffset": 4,
+                "byteLength": 2,
+                "elementByteLength": 2,
+                "location": {
+                  "startLine": 109,
+                  "endLine": 109,
+                  "startColumn": 14,
+                  "endColumn": 48,
+                  "sourceFile": "INQTRAND.cbl"
+                }
+              }
+            ],
+            "location": {
+              "startLine": 106,
+              "endLine": 106,
+              "startColumn": 11,
+              "endColumn": 51,
+              "sourceFile": "INQTRAND.cbl"
+            }
+          }
+        ],
+        "location": {
+          "startLine": 104,
+          "endLine": 104,
+          "startColumn": 7,
+          "endColumn": 22,
+          "sourceFile": "INQTRAND.cbl"
+        }
+      },
+      {
+        "id": "WS_L112_WS-TRAN-ID-PARTS",
+        "qualifiedName": "WS-TRAN-ID-PARTS",
+        "level": 1,
+        "name": "WS-TRAN-ID-PARTS",
+        "usage": "DISPLAY",
+        "logicalType": "Group",
+        "byteOffset": 828,
+        "relativeOffset": 0,
+        "byteLength": 44,
+        "elementByteLength": 44,
+        "children": [
+          {
+            "id": "WS_L113_WS-TRAN-ID-SC",
+            "qualifiedName": "WS-TRAN-ID-PARTS.WS-TRAN-ID-SC",
+            "level": 3,
+            "name": "WS-TRAN-ID-SC",
+            "pic": "X(6)",
+            "usage": "DISPLAY",
+            "logicalType": "Alphanumeric (6 chars)",
+            "byteOffset": 828,
+            "relativeOffset": 0,
+            "byteLength": 6,
+            "elementByteLength": 6,
+            "location": {
+              "startLine": 113,
+              "endLine": 113,
+              "startColumn": 10,
+              "endColumn": 47,
+              "sourceFile": "INQTRAND.cbl"
+            }
+          },
+          {
+            "id": "WS_L114_FILLER",
+            "qualifiedName": "WS-TRAN-ID-PARTS.FILLER",
+            "level": 3,
+            "name": "FILLER",
+            "pic": "X",
+            "usage": "DISPLAY",
+            "value": "-",
+            "logicalType": "Alphanumeric (1 chars)",
+            "byteOffset": 834,
+            "relativeOffset": 6,
+            "byteLength": 1,
+            "elementByteLength": 1,
+            "isFiller": true,
+            "location": {
+              "startLine": 114,
+              "endLine": 114,
+              "startColumn": 10,
+              "endColumn": 54,
+              "sourceFile": "INQTRAND.cbl"
+            }
+          },
+          {
+            "id": "WS_L115_WS-TRAN-ID-NUM",
+            "qualifiedName": "WS-TRAN-ID-PARTS.WS-TRAN-ID-NUM",
+            "level": 3,
+            "name": "WS-TRAN-ID-NUM",
+            "pic": "X(8)",
+            "usage": "DISPLAY",
+            "logicalType": "Alphanumeric (8 chars)",
+            "byteOffset": 835,
+            "relativeOffset": 7,
+            "byteLength": 8,
+            "elementByteLength": 8,
+            "location": {
+              "startLine": 115,
+              "endLine": 115,
+              "startColumn": 10,
+              "endColumn": 47,
+              "sourceFile": "INQTRAND.cbl"
+            }
+          },
+          {
+            "id": "WS_L116_FILLER",
+            "qualifiedName": "WS-TRAN-ID-PARTS.FILLER",
+            "level": 3,
+            "name": "FILLER",
+            "pic": "X",
+            "usage": "DISPLAY",
+            "value": "-",
+            "logicalType": "Alphanumeric (1 chars)",
+            "byteOffset": 843,
+            "relativeOffset": 15,
+            "byteLength": 1,
+            "elementByteLength": 1,
+            "isFiller": true,
+            "location": {
+              "startLine": 116,
+              "endLine": 116,
+              "startColumn": 10,
+              "endColumn": 54,
+              "sourceFile": "INQTRAND.cbl"
+            }
+          },
+          {
+            "id": "WS_L117_WS-TRAN-ID-DATE",
+            "qualifiedName": "WS-TRAN-ID-PARTS.WS-TRAN-ID-DATE",
+            "level": 3,
+            "name": "WS-TRAN-ID-DATE",
+            "pic": "X(8)",
+            "usage": "DISPLAY",
+            "logicalType": "Alphanumeric (8 chars)",
+            "byteOffset": 844,
+            "relativeOffset": 16,
+            "byteLength": 8,
+            "elementByteLength": 8,
+            "location": {
+              "startLine": 117,
+              "endLine": 117,
+              "startColumn": 10,
+              "endColumn": 47,
+              "sourceFile": "INQTRAND.cbl"
+            }
+          },
+          {
+            "id": "WS_L118_FILLER",
+            "qualifiedName": "WS-TRAN-ID-PARTS.FILLER",
+            "level": 3,
+            "name": "FILLER",
+            "pic": "X",
+            "usage": "DISPLAY",
+            "value": "-",
+            "logicalType": "Alphanumeric (1 chars)",
+            "byteOffset": 852,
+            "relativeOffset": 24,
+            "byteLength": 1,
+            "elementByteLength": 1,
+            "isFiller": true,
+            "location": {
+              "startLine": 118,
+              "endLine": 118,
+              "startColumn": 10,
+              "endColumn": 54,
+              "sourceFile": "INQTRAND.cbl"
+            }
+          },
+          {
+            "id": "WS_L119_WS-TRAN-ID-TIME",
+            "qualifiedName": "WS-TRAN-ID-PARTS.WS-TRAN-ID-TIME",
+            "level": 3,
+            "name": "WS-TRAN-ID-TIME",
+            "pic": "X(6)",
+            "usage": "DISPLAY",
+            "logicalType": "Alphanumeric (6 chars)",
+            "byteOffset": 853,
+            "relativeOffset": 25,
+            "byteLength": 6,
+            "elementByteLength": 6,
+            "location": {
+              "startLine": 119,
+              "endLine": 119,
+              "startColumn": 10,
+              "endColumn": 47,
+              "sourceFile": "INQTRAND.cbl"
+            }
+          },
+          {
+            "id": "WS_L120_FILLER",
+            "qualifiedName": "WS-TRAN-ID-PARTS.FILLER",
+            "level": 3,
+            "name": "FILLER",
+            "pic": "X",
+            "usage": "DISPLAY",
+            "value": "-",
+            "logicalType": "Alphanumeric (1 chars)",
+            "byteOffset": 859,
+            "relativeOffset": 31,
+            "byteLength": 1,
+            "elementByteLength": 1,
+            "isFiller": true,
+            "location": {
+              "startLine": 120,
+              "endLine": 120,
+              "startColumn": 10,
+              "endColumn": 54,
+              "sourceFile": "INQTRAND.cbl"
+            }
+          },
+          {
+            "id": "WS_L121_WS-TRAN-ID-REF",
+            "qualifiedName": "WS-TRAN-ID-PARTS.WS-TRAN-ID-REF",
+            "level": 3,
+            "name": "WS-TRAN-ID-REF",
+            "pic": "X(12)",
+            "usage": "DISPLAY",
+            "logicalType": "Alphanumeric (12 chars)",
+            "byteOffset": 860,
+            "relativeOffset": 32,
+            "byteLength": 12,
+            "elementByteLength": 12,
+            "location": {
+              "startLine": 121,
+              "endLine": 121,
+              "startColumn": 10,
+              "endColumn": 48,
+              "sourceFile": "INQTRAND.cbl"
+            }
+          }
+        ],
+        "location": {
+          "startLine": 112,
+          "endLine": 112,
+          "startColumn": 7,
+          "endColumn": 26,
+          "sourceFile": "INQTRAND.cbl"
+        }
+      },
+      {
+        "id": "WS_L124_WS-DATE-WORK",
+        "qualifiedName": "WS-DATE-WORK",
+        "level": 1,
+        "name": "WS-DATE-WORK",
+        "usage": "DISPLAY",
+        "logicalType": "Group",
+        "byteOffset": 872,
+        "relativeOffset": 0,
+        "byteLength": 18,
+        "elementByteLength": 18,
+        "children": [
+          {
+            "id": "WS_L125_WS-DATE-YYYYMMDD",
+            "qualifiedName": "WS-DATE-WORK.WS-DATE-YYYYMMDD",
+            "level": 3,
+            "name": "WS-DATE-YYYYMMDD",
+            "pic": "9(8)",
+            "usage": "DISPLAY",
+            "logicalType": "Numeric Display (8 digits)",
+            "byteOffset": 872,
+            "relativeOffset": 0,
+            "byteLength": 8,
+            "elementByteLength": 8,
+            "location": {
+              "startLine": 125,
+              "endLine": 125,
+              "startColumn": 10,
+              "endColumn": 47,
+              "sourceFile": "INQTRAND.cbl"
+            }
+          },
+          {
+            "id": "WS_L126_WS-DATE-YYYYMMDD-GRP",
+            "qualifiedName": "WS-DATE-WORK.WS-DATE-YYYYMMDD-GRP",
+            "level": 3,
+            "name": "WS-DATE-YYYYMMDD-GRP",
+            "usage": "DISPLAY",
+            "redefines": "WS-DATE-YYYYMMDD",
+            "logicalType": "Group",
+            "byteOffset": 872,
+            "relativeOffset": 0,
+            "byteLength": 8,
+            "elementByteLength": 8,
+            "children": [
+              {
+                "id": "WS_L127_WS-DATE-YYYY",
+                "qualifiedName": "WS-DATE-WORK.WS-DATE-YYYYMMDD-GRP.WS-DATE-YYYY",
+                "level": 5,
+                "name": "WS-DATE-YYYY",
+                "pic": "9(4)",
+                "usage": "DISPLAY",
+                "logicalType": "Numeric Display (4 digits)",
+                "byteOffset": 872,
+                "relativeOffset": 0,
+                "byteLength": 4,
+                "elementByteLength": 4,
+                "location": {
+                  "startLine": 127,
+                  "endLine": 127,
+                  "startColumn": 13,
+                  "endColumn": 47,
+                  "sourceFile": "INQTRAND.cbl"
+                }
+              },
+              {
+                "id": "WS_L128_WS-DATE-MM",
+                "qualifiedName": "WS-DATE-WORK.WS-DATE-YYYYMMDD-GRP.WS-DATE-MM",
+                "level": 5,
+                "name": "WS-DATE-MM",
+                "pic": "9(2)",
+                "usage": "DISPLAY",
+                "logicalType": "Numeric Display (2 digits)",
+                "byteOffset": 876,
+                "relativeOffset": 4,
+                "byteLength": 2,
+                "elementByteLength": 2,
+                "location": {
+                  "startLine": 128,
+                  "endLine": 128,
+                  "startColumn": 13,
+                  "endColumn": 47,
+                  "sourceFile": "INQTRAND.cbl"
+                }
+              },
+              {
+                "id": "WS_L129_WS-DATE-DD",
+                "qualifiedName": "WS-DATE-WORK.WS-DATE-YYYYMMDD-GRP.WS-DATE-DD",
+                "level": 5,
+                "name": "WS-DATE-DD",
+                "pic": "9(2)",
+                "usage": "DISPLAY",
+                "logicalType": "Numeric Display (2 digits)",
+                "byteOffset": 878,
+                "relativeOffset": 6,
+                "byteLength": 2,
+                "elementByteLength": 2,
+                "location": {
+                  "startLine": 129,
+                  "endLine": 129,
+                  "startColumn": 13,
+                  "endColumn": 47,
+                  "sourceFile": "INQTRAND.cbl"
+                }
+              }
+            ],
+            "location": {
+              "startLine": 126,
+              "endLine": 126,
+              "startColumn": 10,
+              "endColumn": 60,
+              "sourceFile": "INQTRAND.cbl"
+            }
+          },
+          {
+            "id": "WS_L130_WS-DATE-ISO",
+            "qualifiedName": "WS-DATE-WORK.WS-DATE-ISO",
+            "level": 3,
+            "name": "WS-DATE-ISO",
+            "pic": "X(10)",
+            "usage": "DISPLAY",
+            "logicalType": "Alphanumeric (10 chars)",
+            "byteOffset": 880,
+            "relativeOffset": 8,
+            "byteLength": 10,
+            "elementByteLength": 10,
+            "location": {
+              "startLine": 130,
+              "endLine": 130,
+              "startColumn": 10,
+              "endColumn": 48,
+              "sourceFile": "INQTRAND.cbl"
+            }
+          },
+          {
+            "id": "WS_L131_WS-DATE-ISO-GRP",
+            "qualifiedName": "WS-DATE-WORK.WS-DATE-ISO-GRP",
+            "level": 3,
+            "name": "WS-DATE-ISO-GRP",
+            "usage": "DISPLAY",
+            "redefines": "WS-DATE-ISO",
+            "logicalType": "Group",
+            "byteOffset": 880,
+            "relativeOffset": 8,
+            "byteLength": 10,
+            "elementByteLength": 10,
+            "children": [
+              {
+                "id": "WS_L132_WS-DATE-ISO-YYYY",
+                "qualifiedName": "WS-DATE-WORK.WS-DATE-ISO-GRP.WS-DATE-ISO-YYYY",
+                "level": 5,
+                "name": "WS-DATE-ISO-YYYY",
+                "pic": "X(4)",
+                "usage": "DISPLAY",
+                "logicalType": "Alphanumeric (4 chars)",
+                "byteOffset": 880,
+                "relativeOffset": 0,
+                "byteLength": 4,
+                "elementByteLength": 4,
+                "location": {
+                  "startLine": 132,
+                  "endLine": 132,
+                  "startColumn": 13,
+                  "endColumn": 47,
+                  "sourceFile": "INQTRAND.cbl"
+                }
+              },
+              {
+                "id": "WS_L133_WS-DATE-ISO-SEP1",
+                "qualifiedName": "WS-DATE-WORK.WS-DATE-ISO-GRP.WS-DATE-ISO-SEP1",
+                "level": 5,
+                "name": "WS-DATE-ISO-SEP1",
+                "pic": "X",
+                "usage": "DISPLAY",
+                "logicalType": "Alphanumeric (1 chars)",
+                "byteOffset": 884,
+                "relativeOffset": 4,
+                "byteLength": 1,
+                "elementByteLength": 1,
+                "location": {
+                  "startLine": 133,
+                  "endLine": 133,
+                  "startColumn": 13,
+                  "endColumn": 44,
+                  "sourceFile": "INQTRAND.cbl"
+                }
+              },
+              {
+                "id": "WS_L134_WS-DATE-ISO-MM",
+                "qualifiedName": "WS-DATE-WORK.WS-DATE-ISO-GRP.WS-DATE-ISO-MM",
+                "level": 5,
+                "name": "WS-DATE-ISO-MM",
+                "pic": "X(2)",
+                "usage": "DISPLAY",
+                "logicalType": "Alphanumeric (2 chars)",
+                "byteOffset": 885,
+                "relativeOffset": 5,
+                "byteLength": 2,
+                "elementByteLength": 2,
+                "location": {
+                  "startLine": 134,
+                  "endLine": 134,
+                  "startColumn": 13,
+                  "endColumn": 47,
+                  "sourceFile": "INQTRAND.cbl"
+                }
+              },
+              {
+                "id": "WS_L135_WS-DATE-ISO-SEP2",
+                "qualifiedName": "WS-DATE-WORK.WS-DATE-ISO-GRP.WS-DATE-ISO-SEP2",
+                "level": 5,
+                "name": "WS-DATE-ISO-SEP2",
+                "pic": "X",
+                "usage": "DISPLAY",
+                "logicalType": "Alphanumeric (1 chars)",
+                "byteOffset": 887,
+                "relativeOffset": 7,
+                "byteLength": 1,
+                "elementByteLength": 1,
+                "location": {
+                  "startLine": 135,
+                  "endLine": 135,
+                  "startColumn": 13,
+                  "endColumn": 44,
+                  "sourceFile": "INQTRAND.cbl"
+                }
+              },
+              {
+                "id": "WS_L136_WS-DATE-ISO-DD",
+                "qualifiedName": "WS-DATE-WORK.WS-DATE-ISO-GRP.WS-DATE-ISO-DD",
+                "level": 5,
+                "name": "WS-DATE-ISO-DD",
+                "pic": "X(2)",
+                "usage": "DISPLAY",
+                "logicalType": "Alphanumeric (2 chars)",
+                "byteOffset": 888,
+                "relativeOffset": 8,
+                "byteLength": 2,
+                "elementByteLength": 2,
+                "location": {
+                  "startLine": 136,
+                  "endLine": 136,
+                  "startColumn": 13,
+                  "endColumn": 47,
+                  "sourceFile": "INQTRAND.cbl"
+                }
+              }
+            ],
+            "location": {
+              "startLine": 131,
+              "endLine": 131,
+              "startColumn": 10,
+              "endColumn": 50,
+              "sourceFile": "INQTRAND.cbl"
+            }
+          }
+        ],
+        "location": {
+          "startLine": 124,
+          "endLine": 124,
+          "startColumn": 7,
+          "endColumn": 22,
+          "sourceFile": "INQTRAND.cbl"
+        }
+      }
+    ],
+    "linkageSection": [
+      {
+        "id": "LK_L11_DFHCOMMAREA",
+        "qualifiedName": "DFHCOMMAREA",
+        "level": 1,
+        "name": "DFHCOMMAREA",
+        "usage": "DISPLAY",
+        "logicalType": "Group",
+        "byteOffset": 0,
+        "relativeOffset": 0,
+        "byteLength": 191,
+        "elementByteLength": 191,
+        "children": [
+          {
+            "id": "LK_L12_INQTRAND-EYE",
+            "qualifiedName": "DFHCOMMAREA.INQTRAND-EYE",
+            "level": 3,
+            "name": "INQTRAND-EYE",
+            "pic": "X(4)",
+            "usage": "DISPLAY",
+            "logicalType": "Alphanumeric (4 chars)",
+            "byteOffset": 0,
+            "relativeOffset": 0,
+            "byteLength": 4,
+            "elementByteLength": 4,
+            "conditions88": [
+              {
+                "name": "INQTRAND-EYE-VALID",
+                "values": [
+                  "ITRD"
+                ],
+                "location": {
+                  "startLine": 13,
+                  "endLine": 13,
+                  "startColumn": 13,
+                  "endColumn": 53,
+                  "sourceFile": "INQTRAND.cpy"
+                }
+              }
+            ],
+            "location": {
+              "startLine": 12,
+              "endLine": 12,
+              "startColumn": 10,
+              "endColumn": 49,
+              "sourceFile": "INQTRAND.cpy"
+            }
+          },
+          {
+            "id": "LK_L16_INQTRAND-SORTCODE",
+            "qualifiedName": "DFHCOMMAREA.INQTRAND-SORTCODE",
+            "level": 3,
+            "name": "INQTRAND-SORTCODE",
+            "pic": "9(6)",
+            "usage": "DISPLAY",
+            "logicalType": "Numeric Display (6 digits)",
+            "byteOffset": 4,
+            "relativeOffset": 4,
+            "byteLength": 6,
+            "elementByteLength": 6,
+            "location": {
+              "startLine": 16,
+              "endLine": 16,
+              "startColumn": 10,
+              "endColumn": 49,
+              "sourceFile": "INQTRAND.cpy"
+            }
+          },
+          {
+            "id": "LK_L17_INQTRAND-ACCNO",
+            "qualifiedName": "DFHCOMMAREA.INQTRAND-ACCNO",
+            "level": 3,
+            "name": "INQTRAND-ACCNO",
+            "pic": "9(8)",
+            "usage": "DISPLAY",
+            "logicalType": "Numeric Display (8 digits)",
+            "byteOffset": 10,
+            "relativeOffset": 10,
+            "byteLength": 8,
+            "elementByteLength": 8,
+            "location": {
+              "startLine": 17,
+              "endLine": 17,
+              "startColumn": 10,
+              "endColumn": 49,
+              "sourceFile": "INQTRAND.cpy"
+            }
+          },
+          {
+            "id": "LK_L18_INQTRAND-DATE",
+            "qualifiedName": "DFHCOMMAREA.INQTRAND-DATE",
+            "level": 3,
+            "name": "INQTRAND-DATE",
+            "pic": "9(8)",
+            "usage": "DISPLAY",
+            "logicalType": "Numeric Display (8 digits)",
+            "byteOffset": 18,
+            "relativeOffset": 18,
+            "byteLength": 8,
+            "elementByteLength": 8,
+            "location": {
+              "startLine": 18,
+              "endLine": 18,
+              "startColumn": 10,
+              "endColumn": 49,
+              "sourceFile": "INQTRAND.cpy"
+            }
+          },
+          {
+            "id": "LK_L19_INQTRAND-TIME",
+            "qualifiedName": "DFHCOMMAREA.INQTRAND-TIME",
+            "level": 3,
+            "name": "INQTRAND-TIME",
+            "pic": "9(6)",
+            "usage": "DISPLAY",
+            "logicalType": "Numeric Display (6 digits)",
+            "byteOffset": 26,
+            "relativeOffset": 26,
+            "byteLength": 6,
+            "elementByteLength": 6,
+            "location": {
+              "startLine": 19,
+              "endLine": 19,
+              "startColumn": 10,
+              "endColumn": 49,
+              "sourceFile": "INQTRAND.cpy"
+            }
+          },
+          {
+            "id": "LK_L20_INQTRAND-REF",
+            "qualifiedName": "DFHCOMMAREA.INQTRAND-REF",
+            "level": 3,
+            "name": "INQTRAND-REF",
+            "pic": "9(12)",
+            "usage": "DISPLAY",
+            "logicalType": "Numeric Display (12 digits)",
+            "byteOffset": 32,
+            "relativeOffset": 32,
+            "byteLength": 12,
+            "elementByteLength": 12,
+            "location": {
+              "startLine": 20,
+              "endLine": 20,
+              "startColumn": 10,
+              "endColumn": 50,
+              "sourceFile": "INQTRAND.cpy"
+            }
+          },
+          {
+            "id": "LK_L23_INQTRAND-SUCCESS",
+            "qualifiedName": "DFHCOMMAREA.INQTRAND-SUCCESS",
+            "level": 3,
+            "name": "INQTRAND-SUCCESS",
+            "pic": "X",
+            "usage": "DISPLAY",
+            "logicalType": "Alphanumeric (1 chars)",
+            "byteOffset": 44,
+            "relativeOffset": 44,
+            "byteLength": 1,
+            "elementByteLength": 1,
+            "conditions88": [
+              {
+                "name": "INQTRAND-SUCCESS-TRUE",
+                "values": [
+                  "Y"
+                ],
+                "location": {
+                  "startLine": 24,
+                  "endLine": 24,
+                  "startColumn": 13,
+                  "endColumn": 50,
+                  "sourceFile": "INQTRAND.cpy"
+                }
+              },
+              {
+                "name": "INQTRAND-SUCCESS-FALSE",
+                "values": [
+                  "N"
+                ],
+                "location": {
+                  "startLine": 25,
+                  "endLine": 25,
+                  "startColumn": 13,
+                  "endColumn": 50,
+                  "sourceFile": "INQTRAND.cpy"
+                }
+              }
+            ],
+            "location": {
+              "startLine": 23,
+              "endLine": 23,
+              "startColumn": 10,
+              "endColumn": 46,
+              "sourceFile": "INQTRAND.cpy"
+            }
+          },
+          {
+            "id": "LK_L26_INQTRAND-FOUND",
+            "qualifiedName": "DFHCOMMAREA.INQTRAND-FOUND",
+            "level": 3,
+            "name": "INQTRAND-FOUND",
+            "pic": "X",
+            "usage": "DISPLAY",
+            "logicalType": "Alphanumeric (1 chars)",
+            "byteOffset": 45,
+            "relativeOffset": 45,
+            "byteLength": 1,
+            "elementByteLength": 1,
+            "conditions88": [
+              {
+                "name": "INQTRAND-FOUND-TRUE",
+                "values": [
+                  "Y"
+                ],
+                "location": {
+                  "startLine": 27,
+                  "endLine": 27,
+                  "startColumn": 13,
+                  "endColumn": 50,
+                  "sourceFile": "INQTRAND.cpy"
+                }
+              },
+              {
+                "name": "INQTRAND-FOUND-FALSE",
+                "values": [
+                  "N"
+                ],
+                "location": {
+                  "startLine": 28,
+                  "endLine": 28,
+                  "startColumn": 13,
+                  "endColumn": 50,
+                  "sourceFile": "INQTRAND.cpy"
+                }
+              }
+            ],
+            "location": {
+              "startLine": 26,
+              "endLine": 26,
+              "startColumn": 10,
+              "endColumn": 46,
+              "sourceFile": "INQTRAND.cpy"
+            }
+          },
+          {
+            "id": "LK_L31_INQTRAND-TRAN-ID",
+            "qualifiedName": "DFHCOMMAREA.INQTRAND-TRAN-ID",
+            "level": 3,
+            "name": "INQTRAND-TRAN-ID",
+            "pic": "X(50)",
+            "usage": "DISPLAY",
+            "logicalType": "Alphanumeric (50 chars)",
+            "byteOffset": 46,
+            "relativeOffset": 46,
+            "byteLength": 50,
+            "elementByteLength": 50,
+            "location": {
+              "startLine": 31,
+              "endLine": 31,
+              "startColumn": 10,
+              "endColumn": 50,
+              "sourceFile": "INQTRAND.cpy"
+            }
+          },
+          {
+            "id": "LK_L32_INQTRAND-TRAN-SORTCODE",
+            "qualifiedName": "DFHCOMMAREA.INQTRAND-TRAN-SORTCODE",
+            "level": 3,
+            "name": "INQTRAND-TRAN-SORTCODE",
+            "pic": "9(6)",
+            "usage": "DISPLAY",
+            "logicalType": "Numeric Display (6 digits)",
+            "byteOffset": 96,
+            "relativeOffset": 96,
+            "byteLength": 6,
+            "elementByteLength": 6,
+            "location": {
+              "startLine": 32,
+              "endLine": 32,
+              "startColumn": 10,
+              "endColumn": 49,
+              "sourceFile": "INQTRAND.cpy"
+            }
+          },
+          {
+            "id": "LK_L33_INQTRAND-TRAN-ACCNO",
+            "qualifiedName": "DFHCOMMAREA.INQTRAND-TRAN-ACCNO",
+            "level": 3,
+            "name": "INQTRAND-TRAN-ACCNO",
+            "pic": "9(8)",
+            "usage": "DISPLAY",
+            "logicalType": "Numeric Display (8 digits)",
+            "byteOffset": 102,
+            "relativeOffset": 102,
+            "byteLength": 8,
+            "elementByteLength": 8,
+            "location": {
+              "startLine": 33,
+              "endLine": 33,
+              "startColumn": 10,
+              "endColumn": 49,
+              "sourceFile": "INQTRAND.cpy"
+            }
+          },
+          {
+            "id": "LK_L34_INQTRAND-TRAN-DATE",
+            "qualifiedName": "DFHCOMMAREA.INQTRAND-TRAN-DATE",
+            "level": 3,
+            "name": "INQTRAND-TRAN-DATE",
+            "pic": "9(8)",
+            "usage": "DISPLAY",
+            "logicalType": "Numeric Display (8 digits)",
+            "byteOffset": 110,
+            "relativeOffset": 110,
+            "byteLength": 8,
+            "elementByteLength": 8,
+            "location": {
+              "startLine": 34,
+              "endLine": 34,
+              "startColumn": 10,
+              "endColumn": 49,
+              "sourceFile": "INQTRAND.cpy"
+            }
+          },
+          {
+            "id": "LK_L35_INQTRAND-TRAN-DATE-GRP",
+            "qualifiedName": "DFHCOMMAREA.INQTRAND-TRAN-DATE-GRP",
+            "level": 3,
+            "name": "INQTRAND-TRAN-DATE-GRP",
+            "usage": "DISPLAY",
+            "redefines": "INQTRAND-TRAN-DATE",
+            "logicalType": "Group",
+            "byteOffset": 110,
+            "relativeOffset": 110,
+            "byteLength": 8,
+            "elementByteLength": 8,
+            "children": [
+              {
+                "id": "LK_L36_INQTRAND-TRAN-DATE-YYYY",
+                "qualifiedName": "DFHCOMMAREA.INQTRAND-TRAN-DATE-GRP.INQTRAND-TRAN-DATE-YYYY",
+                "level": 5,
+                "name": "INQTRAND-TRAN-DATE-YYYY",
+                "pic": "9999",
+                "usage": "DISPLAY",
+                "logicalType": "Numeric Display (4 digits)",
+                "byteOffset": 110,
+                "relativeOffset": 0,
+                "byteLength": 4,
+                "elementByteLength": 4,
+                "location": {
+                  "startLine": 36,
+                  "endLine": 36,
+                  "startColumn": 13,
+                  "endColumn": 49,
+                  "sourceFile": "INQTRAND.cpy"
+                }
+              },
+              {
+                "id": "LK_L37_INQTRAND-TRAN-DATE-MM",
+                "qualifiedName": "DFHCOMMAREA.INQTRAND-TRAN-DATE-GRP.INQTRAND-TRAN-DATE-MM",
+                "level": 5,
+                "name": "INQTRAND-TRAN-DATE-MM",
+                "pic": "99",
+                "usage": "DISPLAY",
+                "logicalType": "Numeric Display (2 digits)",
+                "byteOffset": 114,
+                "relativeOffset": 4,
+                "byteLength": 2,
+                "elementByteLength": 2,
+                "location": {
+                  "startLine": 37,
+                  "endLine": 37,
+                  "startColumn": 13,
+                  "endColumn": 47,
+                  "sourceFile": "INQTRAND.cpy"
+                }
+              },
+              {
+                "id": "LK_L38_INQTRAND-TRAN-DATE-DD",
+                "qualifiedName": "DFHCOMMAREA.INQTRAND-TRAN-DATE-GRP.INQTRAND-TRAN-DATE-DD",
+                "level": 5,
+                "name": "INQTRAND-TRAN-DATE-DD",
+                "pic": "99",
+                "usage": "DISPLAY",
+                "logicalType": "Numeric Display (2 digits)",
+                "byteOffset": 116,
+                "relativeOffset": 6,
+                "byteLength": 2,
+                "elementByteLength": 2,
+                "location": {
+                  "startLine": 38,
+                  "endLine": 38,
+                  "startColumn": 13,
+                  "endColumn": 47,
+                  "sourceFile": "INQTRAND.cpy"
+                }
+              }
+            ],
+            "location": {
+              "startLine": 35,
+              "endLine": 35,
+              "startColumn": 10,
+              "endColumn": 64,
+              "sourceFile": "INQTRAND.cpy"
+            }
+          },
+          {
+            "id": "LK_L39_INQTRAND-TRAN-TIME",
+            "qualifiedName": "DFHCOMMAREA.INQTRAND-TRAN-TIME",
+            "level": 3,
+            "name": "INQTRAND-TRAN-TIME",
+            "pic": "9(6)",
+            "usage": "DISPLAY",
+            "logicalType": "Numeric Display (6 digits)",
+            "byteOffset": 118,
+            "relativeOffset": 118,
+            "byteLength": 6,
+            "elementByteLength": 6,
+            "location": {
+              "startLine": 39,
+              "endLine": 39,
+              "startColumn": 10,
+              "endColumn": 49,
+              "sourceFile": "INQTRAND.cpy"
+            }
+          },
+          {
+            "id": "LK_L40_INQTRAND-TRAN-TIME-GRP",
+            "qualifiedName": "DFHCOMMAREA.INQTRAND-TRAN-TIME-GRP",
+            "level": 3,
+            "name": "INQTRAND-TRAN-TIME-GRP",
+            "usage": "DISPLAY",
+            "redefines": "INQTRAND-TRAN-TIME",
+            "logicalType": "Group",
+            "byteOffset": 118,
+            "relativeOffset": 118,
+            "byteLength": 6,
+            "elementByteLength": 6,
+            "children": [
+              {
+                "id": "LK_L41_INQTRAND-TRAN-TIME-HH",
+                "qualifiedName": "DFHCOMMAREA.INQTRAND-TRAN-TIME-GRP.INQTRAND-TRAN-TIME-HH",
+                "level": 5,
+                "name": "INQTRAND-TRAN-TIME-HH",
+                "pic": "99",
+                "usage": "DISPLAY",
+                "logicalType": "Numeric Display (2 digits)",
+                "byteOffset": 118,
+                "relativeOffset": 0,
+                "byteLength": 2,
+                "elementByteLength": 2,
+                "location": {
+                  "startLine": 41,
+                  "endLine": 41,
+                  "startColumn": 13,
+                  "endColumn": 47,
+                  "sourceFile": "INQTRAND.cpy"
+                }
+              },
+              {
+                "id": "LK_L42_INQTRAND-TRAN-TIME-MM",
+                "qualifiedName": "DFHCOMMAREA.INQTRAND-TRAN-TIME-GRP.INQTRAND-TRAN-TIME-MM",
+                "level": 5,
+                "name": "INQTRAND-TRAN-TIME-MM",
+                "pic": "99",
+                "usage": "DISPLAY",
+                "logicalType": "Numeric Display (2 digits)",
+                "byteOffset": 120,
+                "relativeOffset": 2,
+                "byteLength": 2,
+                "elementByteLength": 2,
+                "location": {
+                  "startLine": 42,
+                  "endLine": 42,
+                  "startColumn": 13,
+                  "endColumn": 47,
+                  "sourceFile": "INQTRAND.cpy"
+                }
+              },
+              {
+                "id": "LK_L43_INQTRAND-TRAN-TIME-SS",
+                "qualifiedName": "DFHCOMMAREA.INQTRAND-TRAN-TIME-GRP.INQTRAND-TRAN-TIME-SS",
+                "level": 5,
+                "name": "INQTRAND-TRAN-TIME-SS",
+                "pic": "99",
+                "usage": "DISPLAY",
+                "logicalType": "Numeric Display (2 digits)",
+                "byteOffset": 122,
+                "relativeOffset": 4,
+                "byteLength": 2,
+                "elementByteLength": 2,
+                "location": {
+                  "startLine": 43,
+                  "endLine": 43,
+                  "startColumn": 13,
+                  "endColumn": 47,
+                  "sourceFile": "INQTRAND.cpy"
+                }
+              }
+            ],
+            "location": {
+              "startLine": 40,
+              "endLine": 40,
+              "startColumn": 10,
+              "endColumn": 64,
+              "sourceFile": "INQTRAND.cpy"
+            }
+          },
+          {
+            "id": "LK_L44_INQTRAND-TRAN-REF",
+            "qualifiedName": "DFHCOMMAREA.INQTRAND-TRAN-REF",
+            "level": 3,
+            "name": "INQTRAND-TRAN-REF",
+            "pic": "9(12)",
+            "usage": "DISPLAY",
+            "logicalType": "Numeric Display (12 digits)",
+            "byteOffset": 124,
+            "relativeOffset": 124,
+            "byteLength": 12,
+            "elementByteLength": 12,
+            "location": {
+              "startLine": 44,
+              "endLine": 44,
+              "startColumn": 10,
+              "endColumn": 50,
+              "sourceFile": "INQTRAND.cpy"
+            }
+          },
+          {
+            "id": "LK_L45_INQTRAND-TRAN-TYPE",
+            "qualifiedName": "DFHCOMMAREA.INQTRAND-TRAN-TYPE",
+            "level": 3,
+            "name": "INQTRAND-TRAN-TYPE",
+            "pic": "X(3)",
+            "usage": "DISPLAY",
+            "logicalType": "Alphanumeric (3 chars)",
+            "byteOffset": 136,
+            "relativeOffset": 136,
+            "byteLength": 3,
+            "elementByteLength": 3,
+            "location": {
+              "startLine": 45,
+              "endLine": 45,
+              "startColumn": 10,
+              "endColumn": 49,
+              "sourceFile": "INQTRAND.cpy"
+            }
+          },
+          {
+            "id": "LK_L46_INQTRAND-TRAN-DESC",
+            "qualifiedName": "DFHCOMMAREA.INQTRAND-TRAN-DESC",
+            "level": 3,
+            "name": "INQTRAND-TRAN-DESC",
+            "pic": "X(40)",
+            "usage": "DISPLAY",
+            "logicalType": "Alphanumeric (40 chars)",
+            "byteOffset": 139,
+            "relativeOffset": 139,
+            "byteLength": 40,
+            "elementByteLength": 40,
+            "location": {
+              "startLine": 46,
+              "endLine": 46,
+              "startColumn": 10,
+              "endColumn": 50,
+              "sourceFile": "INQTRAND.cpy"
+            }
+          },
+          {
+            "id": "LK_L47_INQTRAND-TRAN-AMOUNT",
+            "qualifiedName": "DFHCOMMAREA.INQTRAND-TRAN-AMOUNT",
+            "level": 3,
+            "name": "INQTRAND-TRAN-AMOUNT",
+            "pic": "S9(10)V99",
+            "usage": "DISPLAY",
+            "logicalType": "Signed Decimal Display (12, 2)",
+            "byteOffset": 179,
+            "relativeOffset": 179,
+            "byteLength": 12,
+            "elementByteLength": 12,
+            "location": {
+              "startLine": 47,
+              "endLine": 47,
+              "startColumn": 10,
+              "endColumn": 54,
+              "sourceFile": "INQTRAND.cpy"
+            }
+          }
+        ],
+        "location": {
+          "startLine": 11,
+          "endLine": 11,
+          "startColumn": 7,
+          "endColumn": 21,
+          "sourceFile": "INQTRAND.cpy"
+        }
+      }
+    ],
+    "workingStorageBytes": 890
+  },
+  "sections": [
+    {
+      "name": "PREMIERE",
+      "location": {
+        "startLine": 143,
+        "endLine": 177,
+        "startColumn": 7,
+        "endColumn": 15,
+        "sourceFile": "INQTRAND.cbl"
+      },
+      "paragraphNames": [
+        "A010",
+        "A999"
+      ]
+    },
+    {
+      "name": "READ-TRANSACTION-DB2",
+      "location": {
+        "startLine": 180,
+        "endLine": 283,
+        "startColumn": 7,
+        "endColumn": 15,
+        "sourceFile": "INQTRAND.cbl"
+      },
+      "paragraphNames": [
+        "RTD010",
+        "RTD999"
+      ]
+    },
+    {
+      "name": "GET-ME-OUT-OF-HERE",
+      "location": {
+        "startLine": 286,
+        "endLine": 293,
+        "startColumn": 7,
+        "endColumn": 15,
+        "sourceFile": "INQTRAND.cbl"
+      },
+      "paragraphNames": [
+        "GMOFH010",
+        "GMOFH999"
+      ]
+    },
+    {
+      "name": "ABEND-ROUTINE",
+      "location": {
+        "startLine": 296,
+        "endLine": 344,
+        "startColumn": 7,
+        "endColumn": 15,
+        "sourceFile": "INQTRAND.cbl"
+      },
+      "paragraphNames": [
+        "AR010",
+        "AR999"
+      ]
+    },
+    {
+      "name": "ABEND-HANDLING",
+      "location": {
+        "startLine": 347,
+        "endLine": 390,
+        "startColumn": 7,
+        "endColumn": 15,
+        "sourceFile": "INQTRAND.cbl"
+      },
+      "paragraphNames": [
+        "AH010",
+        "AH999"
+      ]
+    },
+    {
+      "name": "POPULATE-TIME-DATE",
+      "location": {
+        "startLine": 393,
+        "endLine": 408,
+        "startColumn": 7,
+        "endColumn": 15,
+        "sourceFile": "INQTRAND.cbl"
+      },
+      "paragraphNames": [
+        "PTD010",
+        "PTD999"
+      ]
+    },
+    {
+      "name": "CONVERT-YYYYMMDD-TO-ISO",
+      "location": {
+        "startLine": 410,
+        "endLine": 422,
+        "startColumn": 7,
+        "endColumn": 15,
+        "sourceFile": "INQTRAND.cbl"
+      },
+      "paragraphNames": [
+        "CYI010",
+        "CYI999"
+      ]
+    },
+    {
+      "name": "CONVERT-ISO-TO-YYYYMMDD",
+      "location": {
+        "startLine": 425,
+        "endLine": 435,
+        "startColumn": 7,
+        "endColumn": 15,
+        "sourceFile": "INQTRAND.cbl"
+      },
+      "paragraphNames": [
+        "CIY010",
+        "CIY999"
+      ]
+    }
+  ],
+  "paragraphs": [
+    {
+      "name": "A010",
+      "sectionParent": "PREMIERE",
+      "location": {
+        "startLine": 144,
+        "endLine": 174,
+        "startColumn": 7,
+        "endColumn": 37,
+        "sourceFile": "INQTRAND.cbl"
+      },
+      "successors": [
+        "READ-TRANSACTION-DB2",
+        "GET-ME-OUT-OF-HERE"
+      ],
+      "fallthroughSuccessor": "A999",
+      "statements": [
+        {
+          "type": "EXEC_CICS",
+          "location": {
+            "startLine": 149,
+            "endLine": 151,
+            "startColumn": 6,
+            "endColumn": 6,
+            "sourceFile": "INQTRAND.cbl"
+          },
+          "rawText": "*>EXECCICS EXEC CICS HANDLE *>EXECCICS ABEND LABEL(ABEND-HANDLING) *>EXECCICS END-EXEC }",
+          "subsystem": "CICS",
+          "rawPayload": "EXEC CICS HANDLE ABEND LABEL(ABEND-HANDLING) END-EXEC"
+        },
+        {
+          "type": "IF",
+          "location": {
+            "startLine": 156,
+            "endLine": 158,
+            "startColumn": 11,
+            "endColumn": 11,
+            "sourceFile": "INQTRAND.cbl"
+          },
+          "rawText": "IF NOT INQTRAND-EYE-VALID MOVE 'ITRD' TO INQTRAND-EYE END-IF",
+          "condition": "NOT INQTRAND-EYE-VALID",
+          "thenStatements": [
+            {
+              "type": "MOVE",
+              "location": {
+                "startLine": 157,
+                "endLine": 157,
+                "startColumn": 14,
+                "endColumn": 29,
+                "sourceFile": "INQTRAND.cbl"
+              },
+              "rawText": "MOVE 'ITRD' TO INQTRAND-EYE",
+              "targetFieldIds": [
+                "LK_L12_INQTRAND-EYE"
+              ],
+              "fromExpr": "'ITRD'",
+              "toTargets": [
+                "INQTRAND-EYE"
+              ]
+            }
+          ]
+        },
+        {
+          "type": "MOVE",
+          "location": {
+            "startLine": 163,
+            "endLine": 163,
+            "startColumn": 11,
+            "endColumn": 23,
+            "sourceFile": "INQTRAND.cbl"
+          },
+          "rawText": "MOVE 'N' TO INQTRAND-SUCCESS",
+          "targetFieldIds": [
+            "LK_L23_INQTRAND-SUCCESS"
+          ],
+          "fromExpr": "'N'",
+          "toTargets": [
+            "INQTRAND-SUCCESS"
+          ]
+        },
+        {
+          "type": "MOVE",
+          "location": {
+            "startLine": 164,
+            "endLine": 164,
+            "startColumn": 11,
+            "endColumn": 23,
+            "sourceFile": "INQTRAND.cbl"
+          },
+          "rawText": "MOVE 'N' TO INQTRAND-FOUND",
+          "targetFieldIds": [
+            "LK_L26_INQTRAND-FOUND"
+          ],
+          "fromExpr": "'N'",
+          "toTargets": [
+            "INQTRAND-FOUND"
+          ]
+        },
+        {
+          "type": "PERFORM",
+          "location": {
+            "startLine": 169,
+            "endLine": 169,
+            "startColumn": 11,
+            "endColumn": 19,
+            "sourceFile": "INQTRAND.cbl"
+          },
+          "rawText": "PERFORM READ-TRANSACTION-DB2",
+          "target": "READ-TRANSACTION-DB2"
+        },
+        {
+          "type": "PERFORM",
+          "location": {
+            "startLine": 174,
+            "endLine": 174,
+            "startColumn": 11,
+            "endColumn": 19,
+            "sourceFile": "INQTRAND.cbl"
+          },
+          "rawText": "PERFORM GET-ME-OUT-OF-HERE",
+          "target": "GET-ME-OUT-OF-HERE"
+        }
+      ]
+    },
+    {
+      "name": "A999",
+      "sectionParent": "PREMIERE",
+      "location": {
+        "startLine": 176,
+        "endLine": 177,
+        "startColumn": 7,
+        "endColumn": 15,
+        "sourceFile": "INQTRAND.cbl"
+      },
+      "fallthroughSuccessor": "RTD010",
+      "statements": [
+        {
+          "type": "EXIT",
+          "location": {
+            "startLine": 177,
+            "endLine": 177,
+            "startColumn": 11,
+            "endColumn": 11,
+            "sourceFile": "INQTRAND.cbl"
+          },
+          "rawText": "EXIT",
+          "operation": "EXIT"
+        }
+      ]
+    },
+    {
+      "name": "RTD010",
+      "sectionParent": "READ-TRANSACTION-DB2",
+      "location": {
+        "startLine": 181,
+        "endLine": 280,
+        "startColumn": 7,
+        "endColumn": 17,
+        "sourceFile": "INQTRAND.cbl"
+      },
+      "successors": [
+        "CONVERT-YYYYMMDD-TO-ISO",
+        "ABEND-ROUTINE",
+        "CONVERT-ISO-TO-YYYYMMDD"
+      ],
+      "fallthroughSuccessor": "RTD999",
+      "statements": [
+        {
+          "type": "MOVE",
+          "location": {
+            "startLine": 186,
+            "endLine": 186,
+            "startColumn": 11,
+            "endColumn": 37,
+            "sourceFile": "INQTRAND.cbl"
+          },
+          "rawText": "MOVE INQTRAND-SORTCODE TO HV-PROCTRAN-SORTCODE",
+          "sourceFieldIds": [
+            "LK_L16_INQTRAND-SORTCODE"
+          ],
+          "targetFieldIds": [
+            "WS_L49_HV-PROCTRAN-SORTCODE"
+          ],
+          "fromExpr": "INQTRAND-SORTCODE",
+          "toTargets": [
+            "HV-PROCTRAN-SORTCODE"
+          ]
+        },
+        {
+          "type": "MOVE",
+          "location": {
+            "startLine": 187,
+            "endLine": 187,
+            "startColumn": 11,
+            "endColumn": 34,
+            "sourceFile": "INQTRAND.cbl"
+          },
+          "rawText": "MOVE INQTRAND-ACCNO TO HV-PROCTRAN-NUMBER",
+          "sourceFieldIds": [
+            "LK_L17_INQTRAND-ACCNO"
+          ],
+          "targetFieldIds": [
+            "WS_L50_HV-PROCTRAN-NUMBER"
+          ],
+          "fromExpr": "INQTRAND-ACCNO",
+          "toTargets": [
+            "HV-PROCTRAN-NUMBER"
+          ]
+        },
+        {
+          "type": "MOVE",
+          "location": {
+            "startLine": 190,
+            "endLine": 190,
+            "startColumn": 11,
+            "endColumn": 33,
+            "sourceFile": "INQTRAND.cbl"
+          },
+          "rawText": "MOVE INQTRAND-DATE TO WS-DATE-YYYYMMDD",
+          "sourceFieldIds": [
+            "LK_L18_INQTRAND-DATE"
+          ],
+          "targetFieldIds": [
+            "WS_L125_WS-DATE-YYYYMMDD"
+          ],
+          "fromExpr": "INQTRAND-DATE",
+          "toTargets": [
+            "WS-DATE-YYYYMMDD"
+          ]
+        },
+        {
+          "type": "PERFORM",
+          "location": {
+            "startLine": 191,
+            "endLine": 191,
+            "startColumn": 11,
+            "endColumn": 19,
+            "sourceFile": "INQTRAND.cbl"
+          },
+          "rawText": "PERFORM CONVERT-YYYYMMDD-TO-ISO",
+          "target": "CONVERT-YYYYMMDD-TO-ISO"
+        },
+        {
+          "type": "MOVE",
+          "location": {
+            "startLine": 192,
+            "endLine": 192,
+            "startColumn": 11,
+            "endColumn": 31,
+            "sourceFile": "INQTRAND.cbl"
+          },
+          "rawText": "MOVE WS-DATE-ISO TO HV-PROCTRAN-DATE",
+          "sourceFieldIds": [
+            "WS_L130_WS-DATE-ISO"
+          ],
+          "targetFieldIds": [
+            "WS_L51_HV-PROCTRAN-DATE"
+          ],
+          "fromExpr": "WS-DATE-ISO",
+          "toTargets": [
+            "HV-PROCTRAN-DATE"
+          ]
+        },
+        {
+          "type": "MOVE",
+          "location": {
+            "startLine": 194,
+            "endLine": 194,
+            "startColumn": 11,
+            "endColumn": 33,
+            "sourceFile": "INQTRAND.cbl"
+          },
+          "rawText": "MOVE INQTRAND-TIME TO HV-PROCTRAN-TIME",
+          "sourceFieldIds": [
+            "LK_L19_INQTRAND-TIME"
+          ],
+          "targetFieldIds": [
+            "WS_L52_HV-PROCTRAN-TIME"
+          ],
+          "fromExpr": "INQTRAND-TIME",
+          "toTargets": [
+            "HV-PROCTRAN-TIME"
+          ]
+        },
+        {
+          "type": "MOVE",
+          "location": {
+            "startLine": 195,
+            "endLine": 195,
+            "startColumn": 11,
+            "endColumn": 32,
+            "sourceFile": "INQTRAND.cbl"
+          },
+          "rawText": "MOVE INQTRAND-REF TO HV-PROCTRAN-REF",
+          "sourceFieldIds": [
+            "LK_L20_INQTRAND-REF"
+          ],
+          "targetFieldIds": [
+            "WS_L53_HV-PROCTRAN-REF"
+          ],
+          "fromExpr": "INQTRAND-REF",
+          "toTargets": [
+            "HV-PROCTRAN-REF"
+          ]
+        },
+        {
+          "type": "EXEC_SQL",
+          "location": {
+            "startLine": 200,
+            "endLine": 201,
+            "startColumn": 6,
+            "endColumn": 6,
+            "sourceFile": "INQTRAND.cbl"
+          },
+          "rawText": "*>EXECSQL EXEC SQL OPEN TRAND-CURSOR *>EXECSQL END-EXEC }",
+          "subsystem": "SQL",
+          "rawPayload": "EXEC SQL OPEN TRAND-CURSOR END-EXEC"
+        },
+        {
+          "type": "IF",
+          "location": {
+            "startLine": 203,
+            "endLine": 206,
+            "startColumn": 11,
+            "endColumn": 11,
+            "sourceFile": "INQTRAND.cbl"
+          },
+          "rawText": "IF SQLCODE NOT = 0 MOVE SQLCODE TO SQLCODE-DISPLAY PERFORM ABEND-ROUTINE END-IF",
+          "condition": "SQLCODE NOT = 0",
+          "thenStatements": [
+            {
+              "type": "MOVE",
+              "location": {
+                "startLine": 204,
+                "endLine": 204,
+                "startColumn": 14,
+                "endColumn": 30,
+                "sourceFile": "INQTRAND.cbl"
+              },
+              "rawText": "MOVE SQLCODE TO SQLCODE-DISPLAY",
+              "targetFieldIds": [
+                "WS_L87_SQLCODE-DISPLAY"
+              ],
+              "fromExpr": "SQLCODE",
+              "toTargets": [
+                "SQLCODE-DISPLAY"
+              ]
+            },
+            {
+              "type": "PERFORM",
+              "location": {
+                "startLine": 205,
+                "endLine": 205,
+                "startColumn": 14,
+                "endColumn": 22,
+                "sourceFile": "INQTRAND.cbl"
+              },
+              "rawText": "PERFORM ABEND-ROUTINE",
+              "target": "ABEND-ROUTINE"
+            }
+          ]
+        },
+        {
+          "type": "EXEC_SQL",
+          "location": {
+            "startLine": 211,
+            "endLine": 221,
+            "startColumn": 6,
+            "endColumn": 6,
+            "sourceFile": "INQTRAND.cbl"
+          },
+          "rawText": "*>EXECSQL EXEC SQL FETCH TRAND-CURSOR *>EXECSQL INTO :HV-PROCTRAN-EYECATCHER, *>EXECSQL :HV-PROCTRAN-SORTCODE, *>EXECSQL :HV-PROCTRAN-NUMBER, *>EXECSQL :HV-PROCTRAN-DATE, *>EXECSQL :HV-PROCTRAN-TIME, *>EXECSQL :HV-PROCTRAN-REF, *>EXECSQL :HV-PROCTRAN-TYPE, *>EXECSQL :HV-PROCTRAN-DESC, *>EXECSQL :HV-PROCTRAN-AMOUNT *>EXECSQL END-EXEC }",
+          "subsystem": "SQL",
+          "rawPayload": "EXEC SQL FETCH TRAND-CURSOR INTO :HV-PROCTRAN-EYECATCHER, :HV-PROCTRAN-SORTCODE, :HV-PROCTRAN-NUMBER, :HV-PROCTRAN-DATE, :HV-PROCTRAN-TIME, :HV-PROCTRAN-REF, :HV-PROCTRAN-TYPE, :HV-PROCTRAN-DESC, :HV-PROCTRAN-AMOUNT END-EXEC"
+        },
+        {
+          "type": "IF",
+          "location": {
+            "startLine": 223,
+            "endLine": 269,
+            "startColumn": 11,
+            "endColumn": 11,
+            "sourceFile": "INQTRAND.cbl"
+          },
+          "rawText": "IF SQLCODE = 0 *> *> Transaction found - populate output *> MOVE 'Y' TO INQTRAND-FOUND *> *> Convert DATE from YYYY-MM-DD to YYYYMMDD *> MOVE HV-PROCTRAN-DATE TO WS-DATE-ISO PERFORM CONVERT-ISO-TO-YYYYMMDD *> *> Build composite transaction ID *> MOVE HV-PROCTRAN-SORTCODE TO WS-TRAN-ID-SC MOVE HV-PROCTRAN-NUMBER TO WS-TRAN-ID-NUM MOVE WS-DATE-YYYYMMDD TO WS-TRAN-ID-DATE MOVE HV-PROCTRAN-TIME TO WS-TRAN-ID-TIME MOVE HV-PROCTRAN-REF TO WS-TRAN-ID-REF MOVE WS-TRAN-ID-PARTS TO INQTRAND-TRAN-ID MOVE HV-PROCTRAN-SORTCODE TO INQTRAND-TRAN-SORTCODE MOVE HV-PROCTRAN-NUMBER TO INQTRAND-TRAN-ACCNO MOVE WS-DATE-YYYYMMDD TO INQTRAND-TRAN-DATE MOVE HV-PROCTRAN-TIME TO INQTRAND-TRAN-TIME MOVE HV-PROCTRAN-REF TO INQTRAND-TRAN-REF MOVE HV-PROCTRAN-TYPE TO INQTRAND-TRAN-TYPE MOVE HV-PROCTRAN-DESC TO INQTRAND-TRAN-DESC MOVE HV-PROCTRAN-AMOUNT TO INQTRAND-TRAN-AMOUNT MOVE 'Y' TO INQTRAND-SUCCESS ELSE IF SQLCODE = 100 *> *> Transaction not found - this is not an error *> MOVE 'N' TO INQTRAND-FOUND MOVE 'Y' TO INQTRAND-SUCCESS ELSE *> *> SQL error occurred *> MOVE SQLCODE TO SQLCODE-DISPLAY PERFORM ABEND-ROUTINE END-IF END-IF",
+          "condition": "SQLCODE = 0",
+          "thenStatements": [
+            {
+              "type": "MOVE",
+              "location": {
+                "startLine": 227,
+                "endLine": 227,
+                "startColumn": 14,
+                "endColumn": 26,
+                "sourceFile": "INQTRAND.cbl"
+              },
+              "rawText": "MOVE 'Y' TO INQTRAND-FOUND",
+              "targetFieldIds": [
+                "LK_L26_INQTRAND-FOUND"
+              ],
+              "fromExpr": "'Y'",
+              "toTargets": [
+                "INQTRAND-FOUND"
+              ]
+            },
+            {
+              "type": "MOVE",
+              "location": {
+                "startLine": 232,
+                "endLine": 232,
+                "startColumn": 14,
+                "endColumn": 39,
+                "sourceFile": "INQTRAND.cbl"
+              },
+              "rawText": "MOVE HV-PROCTRAN-DATE TO WS-DATE-ISO",
+              "sourceFieldIds": [
+                "WS_L51_HV-PROCTRAN-DATE"
+              ],
+              "targetFieldIds": [
+                "WS_L130_WS-DATE-ISO"
+              ],
+              "fromExpr": "HV-PROCTRAN-DATE",
+              "toTargets": [
+                "WS-DATE-ISO"
+              ]
+            },
+            {
+              "type": "PERFORM",
+              "location": {
+                "startLine": 233,
+                "endLine": 233,
+                "startColumn": 14,
+                "endColumn": 22,
+                "sourceFile": "INQTRAND.cbl"
+              },
+              "rawText": "PERFORM CONVERT-ISO-TO-YYYYMMDD",
+              "target": "CONVERT-ISO-TO-YYYYMMDD"
+            },
+            {
+              "type": "MOVE",
+              "location": {
+                "startLine": 238,
+                "endLine": 238,
+                "startColumn": 14,
+                "endColumn": 43,
+                "sourceFile": "INQTRAND.cbl"
+              },
+              "rawText": "MOVE HV-PROCTRAN-SORTCODE TO WS-TRAN-ID-SC",
+              "sourceFieldIds": [
+                "WS_L49_HV-PROCTRAN-SORTCODE"
+              ],
+              "targetFieldIds": [
+                "WS_L113_WS-TRAN-ID-SC"
+              ],
+              "fromExpr": "HV-PROCTRAN-SORTCODE",
+              "toTargets": [
+                "WS-TRAN-ID-SC"
+              ]
+            },
+            {
+              "type": "MOVE",
+              "location": {
+                "startLine": 239,
+                "endLine": 239,
+                "startColumn": 14,
+                "endColumn": 41,
+                "sourceFile": "INQTRAND.cbl"
+              },
+              "rawText": "MOVE HV-PROCTRAN-NUMBER TO WS-TRAN-ID-NUM",
+              "sourceFieldIds": [
+                "WS_L50_HV-PROCTRAN-NUMBER"
+              ],
+              "targetFieldIds": [
+                "WS_L115_WS-TRAN-ID-NUM"
+              ],
+              "fromExpr": "HV-PROCTRAN-NUMBER",
+              "toTargets": [
+                "WS-TRAN-ID-NUM"
+              ]
+            },
+            {
+              "type": "MOVE",
+              "location": {
+                "startLine": 240,
+                "endLine": 240,
+                "startColumn": 14,
+                "endColumn": 39,
+                "sourceFile": "INQTRAND.cbl"
+              },
+              "rawText": "MOVE WS-DATE-YYYYMMDD TO WS-TRAN-ID-DATE",
+              "sourceFieldIds": [
+                "WS_L125_WS-DATE-YYYYMMDD"
+              ],
+              "targetFieldIds": [
+                "WS_L117_WS-TRAN-ID-DATE"
+              ],
+              "fromExpr": "WS-DATE-YYYYMMDD",
+              "toTargets": [
+                "WS-TRAN-ID-DATE"
+              ]
+            },
+            {
+              "type": "MOVE",
+              "location": {
+                "startLine": 241,
+                "endLine": 241,
+                "startColumn": 14,
+                "endColumn": 39,
+                "sourceFile": "INQTRAND.cbl"
+              },
+              "rawText": "MOVE HV-PROCTRAN-TIME TO WS-TRAN-ID-TIME",
+              "sourceFieldIds": [
+                "WS_L52_HV-PROCTRAN-TIME"
+              ],
+              "targetFieldIds": [
+                "WS_L119_WS-TRAN-ID-TIME"
+              ],
+              "fromExpr": "HV-PROCTRAN-TIME",
+              "toTargets": [
+                "WS-TRAN-ID-TIME"
+              ]
+            },
+            {
+              "type": "MOVE",
+              "location": {
+                "startLine": 242,
+                "endLine": 242,
+                "startColumn": 14,
+                "endColumn": 38,
+                "sourceFile": "INQTRAND.cbl"
+              },
+              "rawText": "MOVE HV-PROCTRAN-REF TO WS-TRAN-ID-REF",
+              "sourceFieldIds": [
+                "WS_L53_HV-PROCTRAN-REF"
+              ],
+              "targetFieldIds": [
+                "WS_L121_WS-TRAN-ID-REF"
+              ],
+              "fromExpr": "HV-PROCTRAN-REF",
+              "toTargets": [
+                "WS-TRAN-ID-REF"
+              ]
+            },
+            {
+              "type": "MOVE",
+              "location": {
+                "startLine": 244,
+                "endLine": 244,
+                "startColumn": 14,
+                "endColumn": 39,
+                "sourceFile": "INQTRAND.cbl"
+              },
+              "rawText": "MOVE WS-TRAN-ID-PARTS TO INQTRAND-TRAN-ID",
+              "sourceFieldIds": [
+                "WS_L112_WS-TRAN-ID-PARTS"
+              ],
+              "targetFieldIds": [
+                "LK_L31_INQTRAND-TRAN-ID"
+              ],
+              "fromExpr": "WS-TRAN-ID-PARTS",
+              "toTargets": [
+                "INQTRAND-TRAN-ID"
+              ]
+            },
+            {
+              "type": "MOVE",
+              "location": {
+                "startLine": 245,
+                "endLine": 245,
+                "startColumn": 14,
+                "endColumn": 43,
+                "sourceFile": "INQTRAND.cbl"
+              },
+              "rawText": "MOVE HV-PROCTRAN-SORTCODE TO INQTRAND-TRAN-SORTCODE",
+              "sourceFieldIds": [
+                "WS_L49_HV-PROCTRAN-SORTCODE"
+              ],
+              "targetFieldIds": [
+                "LK_L32_INQTRAND-TRAN-SORTCODE"
+              ],
+              "fromExpr": "HV-PROCTRAN-SORTCODE",
+              "toTargets": [
+                "INQTRAND-TRAN-SORTCODE"
+              ]
+            },
+            {
+              "type": "MOVE",
+              "location": {
+                "startLine": 246,
+                "endLine": 246,
+                "startColumn": 14,
+                "endColumn": 41,
+                "sourceFile": "INQTRAND.cbl"
+              },
+              "rawText": "MOVE HV-PROCTRAN-NUMBER TO INQTRAND-TRAN-ACCNO",
+              "sourceFieldIds": [
+                "WS_L50_HV-PROCTRAN-NUMBER"
+              ],
+              "targetFieldIds": [
+                "LK_L33_INQTRAND-TRAN-ACCNO"
+              ],
+              "fromExpr": "HV-PROCTRAN-NUMBER",
+              "toTargets": [
+                "INQTRAND-TRAN-ACCNO"
+              ]
+            },
+            {
+              "type": "MOVE",
+              "location": {
+                "startLine": 247,
+                "endLine": 247,
+                "startColumn": 14,
+                "endColumn": 39,
+                "sourceFile": "INQTRAND.cbl"
+              },
+              "rawText": "MOVE WS-DATE-YYYYMMDD TO INQTRAND-TRAN-DATE",
+              "sourceFieldIds": [
+                "WS_L125_WS-DATE-YYYYMMDD"
+              ],
+              "targetFieldIds": [
+                "LK_L34_INQTRAND-TRAN-DATE"
+              ],
+              "fromExpr": "WS-DATE-YYYYMMDD",
+              "toTargets": [
+                "INQTRAND-TRAN-DATE"
+              ]
+            },
+            {
+              "type": "MOVE",
+              "location": {
+                "startLine": 248,
+                "endLine": 248,
+                "startColumn": 14,
+                "endColumn": 39,
+                "sourceFile": "INQTRAND.cbl"
+              },
+              "rawText": "MOVE HV-PROCTRAN-TIME TO INQTRAND-TRAN-TIME",
+              "sourceFieldIds": [
+                "WS_L52_HV-PROCTRAN-TIME"
+              ],
+              "targetFieldIds": [
+                "LK_L39_INQTRAND-TRAN-TIME"
+              ],
+              "fromExpr": "HV-PROCTRAN-TIME",
+              "toTargets": [
+                "INQTRAND-TRAN-TIME"
+              ]
+            },
+            {
+              "type": "MOVE",
+              "location": {
+                "startLine": 249,
+                "endLine": 249,
+                "startColumn": 14,
+                "endColumn": 38,
+                "sourceFile": "INQTRAND.cbl"
+              },
+              "rawText": "MOVE HV-PROCTRAN-REF TO INQTRAND-TRAN-REF",
+              "sourceFieldIds": [
+                "WS_L53_HV-PROCTRAN-REF"
+              ],
+              "targetFieldIds": [
+                "LK_L44_INQTRAND-TRAN-REF"
+              ],
+              "fromExpr": "HV-PROCTRAN-REF",
+              "toTargets": [
+                "INQTRAND-TRAN-REF"
+              ]
+            },
+            {
+              "type": "MOVE",
+              "location": {
+                "startLine": 250,
+                "endLine": 250,
+                "startColumn": 14,
+                "endColumn": 39,
+                "sourceFile": "INQTRAND.cbl"
+              },
+              "rawText": "MOVE HV-PROCTRAN-TYPE TO INQTRAND-TRAN-TYPE",
+              "sourceFieldIds": [
+                "WS_L54_HV-PROCTRAN-TYPE"
+              ],
+              "targetFieldIds": [
+                "LK_L45_INQTRAND-TRAN-TYPE"
+              ],
+              "fromExpr": "HV-PROCTRAN-TYPE",
+              "toTargets": [
+                "INQTRAND-TRAN-TYPE"
+              ]
+            },
+            {
+              "type": "MOVE",
+              "location": {
+                "startLine": 251,
+                "endLine": 251,
+                "startColumn": 14,
+                "endColumn": 39,
+                "sourceFile": "INQTRAND.cbl"
+              },
+              "rawText": "MOVE HV-PROCTRAN-DESC TO INQTRAND-TRAN-DESC",
+              "sourceFieldIds": [
+                "WS_L55_HV-PROCTRAN-DESC"
+              ],
+              "targetFieldIds": [
+                "LK_L46_INQTRAND-TRAN-DESC"
+              ],
+              "fromExpr": "HV-PROCTRAN-DESC",
+              "toTargets": [
+                "INQTRAND-TRAN-DESC"
+              ]
+            },
+            {
+              "type": "MOVE",
+              "location": {
+                "startLine": 252,
+                "endLine": 252,
+                "startColumn": 14,
+                "endColumn": 41,
+                "sourceFile": "INQTRAND.cbl"
+              },
+              "rawText": "MOVE HV-PROCTRAN-AMOUNT TO INQTRAND-TRAN-AMOUNT",
+              "sourceFieldIds": [
+                "WS_L56_HV-PROCTRAN-AMOUNT"
+              ],
+              "targetFieldIds": [
+                "LK_L47_INQTRAND-TRAN-AMOUNT"
+              ],
+              "fromExpr": "HV-PROCTRAN-AMOUNT",
+              "toTargets": [
+                "INQTRAND-TRAN-AMOUNT"
+              ]
+            },
+            {
+              "type": "MOVE",
+              "location": {
+                "startLine": 254,
+                "endLine": 254,
+                "startColumn": 14,
+                "endColumn": 26,
+                "sourceFile": "INQTRAND.cbl"
+              },
+              "rawText": "MOVE 'Y' TO INQTRAND-SUCCESS",
+              "targetFieldIds": [
+                "LK_L23_INQTRAND-SUCCESS"
+              ],
+              "fromExpr": "'Y'",
+              "toTargets": [
+                "INQTRAND-SUCCESS"
+              ]
+            }
+          ],
+          "elseStatements": [
+            {
+              "type": "IF",
+              "location": {
+                "startLine": 256,
+                "endLine": 268,
+                "startColumn": 14,
+                "endColumn": 14,
+                "sourceFile": "INQTRAND.cbl"
+              },
+              "rawText": "IF SQLCODE = 100 *> *> Transaction not found - this is not an error *> MOVE 'N' TO INQTRAND-FOUND MOVE 'Y' TO INQTRAND-SUCCESS ELSE *> *> SQL error occurred *> MOVE SQLCODE TO SQLCODE-DISPLAY PERFORM ABEND-ROUTINE END-IF",
+              "condition": "SQLCODE = 100",
+              "thenStatements": [
+                {
+                  "type": "MOVE",
+                  "location": {
+                    "startLine": 260,
+                    "endLine": 260,
+                    "startColumn": 17,
+                    "endColumn": 29,
+                    "sourceFile": "INQTRAND.cbl"
+                  },
+                  "rawText": "MOVE 'N' TO INQTRAND-FOUND",
+                  "targetFieldIds": [
+                    "LK_L26_INQTRAND-FOUND"
+                  ],
+                  "fromExpr": "'N'",
+                  "toTargets": [
+                    "INQTRAND-FOUND"
+                  ]
+                },
+                {
+                  "type": "MOVE",
+                  "location": {
+                    "startLine": 261,
+                    "endLine": 261,
+                    "startColumn": 17,
+                    "endColumn": 29,
+                    "sourceFile": "INQTRAND.cbl"
+                  },
+                  "rawText": "MOVE 'Y' TO INQTRAND-SUCCESS",
+                  "targetFieldIds": [
+                    "LK_L23_INQTRAND-SUCCESS"
+                  ],
+                  "fromExpr": "'Y'",
+                  "toTargets": [
+                    "INQTRAND-SUCCESS"
+                  ]
+                }
+              ],
+              "elseStatements": [
+                {
+                  "type": "MOVE",
+                  "location": {
+                    "startLine": 266,
+                    "endLine": 266,
+                    "startColumn": 17,
+                    "endColumn": 33,
+                    "sourceFile": "INQTRAND.cbl"
+                  },
+                  "rawText": "MOVE SQLCODE TO SQLCODE-DISPLAY",
+                  "targetFieldIds": [
+                    "WS_L87_SQLCODE-DISPLAY"
+                  ],
+                  "fromExpr": "SQLCODE",
+                  "toTargets": [
+                    "SQLCODE-DISPLAY"
+                  ]
+                },
+                {
+                  "type": "PERFORM",
+                  "location": {
+                    "startLine": 267,
+                    "endLine": 267,
+                    "startColumn": 17,
+                    "endColumn": 25,
+                    "sourceFile": "INQTRAND.cbl"
+                  },
+                  "rawText": "PERFORM ABEND-ROUTINE",
+                  "target": "ABEND-ROUTINE"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "EXEC_SQL",
+          "location": {
+            "startLine": 274,
+            "endLine": 275,
+            "startColumn": 6,
+            "endColumn": 6,
+            "sourceFile": "INQTRAND.cbl"
+          },
+          "rawText": "*>EXECSQL EXEC SQL CLOSE TRAND-CURSOR *>EXECSQL END-EXEC }",
+          "subsystem": "SQL",
+          "rawPayload": "EXEC SQL CLOSE TRAND-CURSOR END-EXEC"
+        },
+        {
+          "type": "IF",
+          "location": {
+            "startLine": 277,
+            "endLine": 280,
+            "startColumn": 11,
+            "endColumn": 11,
+            "sourceFile": "INQTRAND.cbl"
+          },
+          "rawText": "IF SQLCODE NOT = 0 MOVE SQLCODE TO SQLCODE-DISPLAY PERFORM ABEND-ROUTINE END-IF",
+          "condition": "SQLCODE NOT = 0",
+          "thenStatements": [
+            {
+              "type": "MOVE",
+              "location": {
+                "startLine": 278,
+                "endLine": 278,
+                "startColumn": 14,
+                "endColumn": 30,
+                "sourceFile": "INQTRAND.cbl"
+              },
+              "rawText": "MOVE SQLCODE TO SQLCODE-DISPLAY",
+              "targetFieldIds": [
+                "WS_L87_SQLCODE-DISPLAY"
+              ],
+              "fromExpr": "SQLCODE",
+              "toTargets": [
+                "SQLCODE-DISPLAY"
+              ]
+            },
+            {
+              "type": "PERFORM",
+              "location": {
+                "startLine": 279,
+                "endLine": 279,
+                "startColumn": 14,
+                "endColumn": 22,
+                "sourceFile": "INQTRAND.cbl"
+              },
+              "rawText": "PERFORM ABEND-ROUTINE",
+              "target": "ABEND-ROUTINE"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "RTD999",
+      "sectionParent": "READ-TRANSACTION-DB2",
+      "location": {
+        "startLine": 282,
+        "endLine": 283,
+        "startColumn": 7,
+        "endColumn": 15,
+        "sourceFile": "INQTRAND.cbl"
+      },
+      "fallthroughSuccessor": "GMOFH010",
+      "statements": [
+        {
+          "type": "EXIT",
+          "location": {
+            "startLine": 283,
+            "endLine": 283,
+            "startColumn": 11,
+            "endColumn": 11,
+            "sourceFile": "INQTRAND.cbl"
+          },
+          "rawText": "EXIT",
+          "operation": "EXIT"
+        }
+      ]
+    },
+    {
+      "name": "GMOFH010",
+      "sectionParent": "GET-ME-OUT-OF-HERE",
+      "location": {
+        "startLine": 287,
+        "endLine": 290,
+        "startColumn": 7,
+        "endColumn": 27,
+        "sourceFile": "INQTRAND.cbl"
+      },
+      "fallthroughSuccessor": "GMOFH999",
+      "statements": [
+        {
+          "type": "EXEC_CICS",
+          "location": {
+            "startLine": 289,
+            "endLine": 290,
+            "startColumn": 6,
+            "endColumn": 6,
+            "sourceFile": "INQTRAND.cbl"
+          },
+          "rawText": "*>EXECCICS EXEC CICS RETURN *>EXECCICS END-EXEC }",
+          "subsystem": "CICS",
+          "rawPayload": "EXEC CICS RETURN END-EXEC"
+        }
+      ]
+    },
+    {
+      "name": "GMOFH999",
+      "sectionParent": "GET-ME-OUT-OF-HERE",
+      "location": {
+        "startLine": 292,
+        "endLine": 293,
+        "startColumn": 7,
+        "endColumn": 15,
+        "sourceFile": "INQTRAND.cbl"
+      },
+      "fallthroughSuccessor": "AR010",
+      "statements": [
+        {
+          "type": "EXIT",
+          "location": {
+            "startLine": 293,
+            "endLine": 293,
+            "startColumn": 11,
+            "endColumn": 11,
+            "sourceFile": "INQTRAND.cbl"
+          },
+          "rawText": "EXIT",
+          "operation": "EXIT"
+        }
+      ]
+    },
+    {
+      "name": "AR010",
+      "sectionParent": "ABEND-ROUTINE",
+      "location": {
+        "startLine": 297,
+        "endLine": 341,
+        "startColumn": 7,
+        "endColumn": 27,
+        "sourceFile": "INQTRAND.cbl"
+      },
+      "successors": [
+        "POPULATE-TIME-DATE"
+      ],
+      "fallthroughSuccessor": "AR999",
+      "statements": [
+        {
+          "type": "INITIALIZE",
+          "location": {
+            "startLine": 299,
+            "endLine": 299,
+            "startColumn": 11,
+            "endColumn": 22,
+            "sourceFile": "INQTRAND.cbl"
+          },
+          "rawText": "INITIALIZE ABNDINFO-REC",
+          "targetFieldIds": [
+            "WS_L92_ABNDINFO-REC"
+          ],
+          "targets": [
+            "ABNDINFO-REC"
+          ]
+        },
+        {
+          "type": "MOVE",
+          "location": {
+            "startLine": 300,
+            "endLine": 300,
+            "startColumn": 11,
+            "endColumn": 30,
+            "sourceFile": "INQTRAND.cbl"
+          },
+          "rawText": "MOVE EIBRESP TO ABND-RESPCODE",
+          "targetFieldIds": [
+            "WS_L16_ABND-RESPCODE"
+          ],
+          "fromExpr": "EIBRESP",
+          "toTargets": [
+            "ABND-RESPCODE"
+          ]
+        },
+        {
+          "type": "MOVE",
+          "location": {
+            "startLine": 301,
+            "endLine": 301,
+            "startColumn": 11,
+            "endColumn": 30,
+            "sourceFile": "INQTRAND.cbl"
+          },
+          "rawText": "MOVE EIBRESP2 TO ABND-RESP2CODE",
+          "targetFieldIds": [
+            "WS_L18_ABND-RESP2CODE"
+          ],
+          "fromExpr": "EIBRESP2",
+          "toTargets": [
+            "ABND-RESP2CODE"
+          ]
+        },
+        {
+          "type": "EXEC_CICS",
+          "location": {
+            "startLine": 303,
+            "endLine": 304,
+            "startColumn": 6,
+            "endColumn": 6,
+            "sourceFile": "INQTRAND.cbl"
+          },
+          "rawText": "*>EXECCICS EXEC CICS ASSIGN APPLID(ABND-APPLID) *>EXECCICS END-EXEC }",
+          "subsystem": "CICS",
+          "rawPayload": "EXEC CICS ASSIGN APPLID(ABND-APPLID) END-EXEC"
+        },
+        {
+          "type": "MOVE",
+          "location": {
+            "startLine": 306,
+            "endLine": 306,
+            "startColumn": 11,
+            "endColumn": 30,
+            "sourceFile": "INQTRAND.cbl"
+          },
+          "rawText": "MOVE EIBTASKN TO ABND-TASKNO-KEY",
+          "targetFieldIds": [
+            "WS_L9_ABND-TASKNO-KEY"
+          ],
+          "fromExpr": "EIBTASKN",
+          "toTargets": [
+            "ABND-TASKNO-KEY"
+          ]
+        },
+        {
+          "type": "MOVE",
+          "location": {
+            "startLine": 307,
+            "endLine": 307,
+            "startColumn": 11,
+            "endColumn": 30,
+            "sourceFile": "INQTRAND.cbl"
+          },
+          "rawText": "MOVE EIBTRNID TO ABND-TRANID",
+          "targetFieldIds": [
+            "WS_L11_ABND-TRANID"
+          ],
+          "fromExpr": "EIBTRNID",
+          "toTargets": [
+            "ABND-TRANID"
+          ]
+        },
+        {
+          "type": "PERFORM",
+          "location": {
+            "startLine": 309,
+            "endLine": 309,
+            "startColumn": 11,
+            "endColumn": 19,
+            "sourceFile": "INQTRAND.cbl"
+          },
+          "rawText": "PERFORM POPULATE-TIME-DATE",
+          "target": "POPULATE-TIME-DATE"
+        },
+        {
+          "type": "MOVE",
+          "location": {
+            "startLine": 311,
+            "endLine": 311,
+            "startColumn": 11,
+            "endColumn": 32,
+            "sourceFile": "INQTRAND.cbl"
+          },
+          "rawText": "MOVE WS-ORIG-DATE TO ABND-DATE",
+          "sourceFieldIds": [
+            "WS_L96_WS-ORIG-DATE"
+          ],
+          "targetFieldIds": [
+            "WS_L12_ABND-DATE"
+          ],
+          "fromExpr": "WS-ORIG-DATE",
+          "toTargets": [
+            "ABND-DATE"
+          ]
+        },
+        {
+          "type": "STRING",
+          "location": {
+            "startLine": 312,
+            "endLine": 318,
+            "startColumn": 11,
+            "endColumn": 11,
+            "sourceFile": "INQTRAND.cbl"
+          },
+          "rawText": "STRING WS-TIME-NOW-GRP-HH DELIMITED BY SIZE, ':' DELIMITED BY SIZE, WS-TIME-NOW-GRP-MM DELIMITED BY SIZE, ':' DELIMITED BY SIZE, WS-TIME-NOW-GRP-SS DELIMITED BY SIZE INTO ABND-TIME END-STRING",
+          "sourceFieldIds": [
+            "WS_L107_WS-TIME-NOW-GRP-HH",
+            "WS_L108_WS-TIME-NOW-GRP-MM",
+            "WS_L109_WS-TIME-NOW-GRP-SS",
+            "WS_L13_ABND-TIME"
+          ],
+          "operation": "STRING",
+          "expression": "STRING WS-TIME-NOW-GRP-HH DELIMITED BY SIZE, ':' DELIMITED BY SIZE, WS-TIME-NOW-GRP-MM DELIMITED BY SIZE, ':' DELIMITED BY SIZE, WS-TIME-NOW-GRP-SS DELIMITED BY SIZE INTO ABND-TIME END-STRING"
+        },
+        {
+          "type": "MOVE",
+          "location": {
+            "startLine": 320,
+            "endLine": 320,
+            "startColumn": 11,
+            "endColumn": 31,
+            "sourceFile": "INQTRAND.cbl"
+          },
+          "rawText": "MOVE WS-U-TIME TO ABND-UTIME-KEY",
+          "sourceFieldIds": [
+            "WS_L95_WS-U-TIME"
+          ],
+          "targetFieldIds": [
+            "WS_L8_ABND-UTIME-KEY"
+          ],
+          "fromExpr": "WS-U-TIME",
+          "toTargets": [
+            "ABND-UTIME-KEY"
+          ]
+        },
+        {
+          "type": "MOVE",
+          "location": {
+            "startLine": 321,
+            "endLine": 321,
+            "startColumn": 11,
+            "endColumn": 31,
+            "sourceFile": "INQTRAND.cbl"
+          },
+          "rawText": "MOVE 'ITRD' TO ABND-CODE",
+          "targetFieldIds": [
+            "WS_L14_ABND-CODE"
+          ],
+          "fromExpr": "'ITRD'",
+          "toTargets": [
+            "ABND-CODE"
+          ]
+        },
+        {
+          "type": "EXEC_CICS",
+          "location": {
+            "startLine": 323,
+            "endLine": 324,
+            "startColumn": 6,
+            "endColumn": 6,
+            "sourceFile": "INQTRAND.cbl"
+          },
+          "rawText": "*>EXECCICS EXEC CICS ASSIGN PROGRAM(ABND-PROGRAM) *>EXECCICS END-EXEC }",
+          "subsystem": "CICS",
+          "rawPayload": "EXEC CICS ASSIGN PROGRAM(ABND-PROGRAM) END-EXEC"
+        },
+        {
+          "type": "MOVE",
+          "location": {
+            "startLine": 326,
+            "endLine": 326,
+            "startColumn": 11,
+            "endColumn": 35,
+            "sourceFile": "INQTRAND.cbl"
+          },
+          "rawText": "MOVE SQLCODE-DISPLAY TO ABND-SQLCODE",
+          "sourceFieldIds": [
+            "WS_L87_SQLCODE-DISPLAY"
+          ],
+          "targetFieldIds": [
+            "WS_L20_ABND-SQLCODE"
+          ],
+          "fromExpr": "SQLCODE-DISPLAY",
+          "toTargets": [
+            "ABND-SQLCODE"
+          ]
+        },
+        {
+          "type": "STRING",
+          "location": {
+            "startLine": 328,
+            "endLine": 332,
+            "startColumn": 11,
+            "endColumn": 11,
+            "sourceFile": "INQTRAND.cbl"
+          },
+          "rawText": "STRING 'INQTRAND - DB2 Error. SQLCODE=' DELIMITED BY SIZE, SQLCODE-DISPLAY DELIMITED BY SIZE INTO ABND-FREEFORM END-STRING",
+          "sourceFieldIds": [
+            "WS_L87_SQLCODE-DISPLAY",
+            "WS_L22_ABND-FREEFORM"
+          ],
+          "operation": "STRING",
+          "expression": "STRING 'INQTRAND - DB2 Error. SQLCODE=' DELIMITED BY SIZE, SQLCODE-DISPLAY DELIMITED BY SIZE INTO ABND-FREEFORM END-STRING"
+        },
+        {
+          "type": "EXEC_CICS",
+          "location": {
+            "startLine": 334,
+            "endLine": 336,
+            "startColumn": 6,
+            "endColumn": 6,
+            "sourceFile": "INQTRAND.cbl"
+          },
+          "rawText": "*>EXECCICS EXEC CICS LINK PROGRAM(WS-ABEND-PGM) *>EXECCICS COMMAREA(ABNDINFO-REC) *>EXECCICS END-EXEC }",
+          "subsystem": "CICS",
+          "rawPayload": "EXEC CICS LINK PROGRAM(WS-ABEND-PGM) COMMAREA(ABNDINFO-REC) END-EXEC"
+        },
+        {
+          "type": "EXEC_CICS",
+          "location": {
+            "startLine": 338,
+            "endLine": 341,
+            "startColumn": 6,
+            "endColumn": 6,
+            "sourceFile": "INQTRAND.cbl"
+          },
+          "rawText": "*>EXECCICS EXEC CICS ABEND ABCODE('ITRD') *>EXECCICS CANCEL *>EXECCICS NODUMP *>EXECCICS END-EXEC }",
+          "subsystem": "CICS",
+          "rawPayload": "EXEC CICS ABEND ABCODE('ITRD') CANCEL NODUMP END-EXEC"
+        }
+      ]
+    },
+    {
+      "name": "AR999",
+      "sectionParent": "ABEND-ROUTINE",
+      "location": {
+        "startLine": 343,
+        "endLine": 344,
+        "startColumn": 7,
+        "endColumn": 15,
+        "sourceFile": "INQTRAND.cbl"
+      },
+      "fallthroughSuccessor": "AH010",
+      "statements": [
+        {
+          "type": "EXIT",
+          "location": {
+            "startLine": 344,
+            "endLine": 344,
+            "startColumn": 11,
+            "endColumn": 11,
+            "sourceFile": "INQTRAND.cbl"
+          },
+          "rawText": "EXIT",
+          "operation": "EXIT"
+        }
+      ]
+    },
+    {
+      "name": "AH010",
+      "sectionParent": "ABEND-HANDLING",
+      "location": {
+        "startLine": 348,
+        "endLine": 387,
+        "startColumn": 7,
+        "endColumn": 27,
+        "sourceFile": "INQTRAND.cbl"
+      },
+      "successors": [
+        "POPULATE-TIME-DATE"
+      ],
+      "fallthroughSuccessor": "AH999",
+      "statements": [
+        {
+          "type": "INITIALIZE",
+          "location": {
+            "startLine": 350,
+            "endLine": 350,
+            "startColumn": 11,
+            "endColumn": 22,
+            "sourceFile": "INQTRAND.cbl"
+          },
+          "rawText": "INITIALIZE ABNDINFO-REC",
+          "targetFieldIds": [
+            "WS_L92_ABNDINFO-REC"
+          ],
+          "targets": [
+            "ABNDINFO-REC"
+          ]
+        },
+        {
+          "type": "MOVE",
+          "location": {
+            "startLine": 351,
+            "endLine": 351,
+            "startColumn": 11,
+            "endColumn": 30,
+            "sourceFile": "INQTRAND.cbl"
+          },
+          "rawText": "MOVE EIBRESP TO ABND-RESPCODE",
+          "targetFieldIds": [
+            "WS_L16_ABND-RESPCODE"
+          ],
+          "fromExpr": "EIBRESP",
+          "toTargets": [
+            "ABND-RESPCODE"
+          ]
+        },
+        {
+          "type": "MOVE",
+          "location": {
+            "startLine": 352,
+            "endLine": 352,
+            "startColumn": 11,
+            "endColumn": 30,
+            "sourceFile": "INQTRAND.cbl"
+          },
+          "rawText": "MOVE EIBRESP2 TO ABND-RESP2CODE",
+          "targetFieldIds": [
+            "WS_L18_ABND-RESP2CODE"
+          ],
+          "fromExpr": "EIBRESP2",
+          "toTargets": [
+            "ABND-RESP2CODE"
+          ]
+        },
+        {
+          "type": "EXEC_CICS",
+          "location": {
+            "startLine": 354,
+            "endLine": 355,
+            "startColumn": 6,
+            "endColumn": 6,
+            "sourceFile": "INQTRAND.cbl"
+          },
+          "rawText": "*>EXECCICS EXEC CICS ASSIGN APPLID(ABND-APPLID) *>EXECCICS END-EXEC }",
+          "subsystem": "CICS",
+          "rawPayload": "EXEC CICS ASSIGN APPLID(ABND-APPLID) END-EXEC"
+        },
+        {
+          "type": "MOVE",
+          "location": {
+            "startLine": 357,
+            "endLine": 357,
+            "startColumn": 11,
+            "endColumn": 30,
+            "sourceFile": "INQTRAND.cbl"
+          },
+          "rawText": "MOVE EIBTASKN TO ABND-TASKNO-KEY",
+          "targetFieldIds": [
+            "WS_L9_ABND-TASKNO-KEY"
+          ],
+          "fromExpr": "EIBTASKN",
+          "toTargets": [
+            "ABND-TASKNO-KEY"
+          ]
+        },
+        {
+          "type": "MOVE",
+          "location": {
+            "startLine": 358,
+            "endLine": 358,
+            "startColumn": 11,
+            "endColumn": 30,
+            "sourceFile": "INQTRAND.cbl"
+          },
+          "rawText": "MOVE EIBTRNID TO ABND-TRANID",
+          "targetFieldIds": [
+            "WS_L11_ABND-TRANID"
+          ],
+          "fromExpr": "EIBTRNID",
+          "toTargets": [
+            "ABND-TRANID"
+          ]
+        },
+        {
+          "type": "PERFORM",
+          "location": {
+            "startLine": 360,
+            "endLine": 360,
+            "startColumn": 11,
+            "endColumn": 19,
+            "sourceFile": "INQTRAND.cbl"
+          },
+          "rawText": "PERFORM POPULATE-TIME-DATE",
+          "target": "POPULATE-TIME-DATE"
+        },
+        {
+          "type": "MOVE",
+          "location": {
+            "startLine": 362,
+            "endLine": 362,
+            "startColumn": 11,
+            "endColumn": 32,
+            "sourceFile": "INQTRAND.cbl"
+          },
+          "rawText": "MOVE WS-ORIG-DATE TO ABND-DATE",
+          "sourceFieldIds": [
+            "WS_L96_WS-ORIG-DATE"
+          ],
+          "targetFieldIds": [
+            "WS_L12_ABND-DATE"
+          ],
+          "fromExpr": "WS-ORIG-DATE",
+          "toTargets": [
+            "ABND-DATE"
+          ]
+        },
+        {
+          "type": "STRING",
+          "location": {
+            "startLine": 363,
+            "endLine": 369,
+            "startColumn": 11,
+            "endColumn": 11,
+            "sourceFile": "INQTRAND.cbl"
+          },
+          "rawText": "STRING WS-TIME-NOW-GRP-HH DELIMITED BY SIZE, ':' DELIMITED BY SIZE, WS-TIME-NOW-GRP-MM DELIMITED BY SIZE, ':' DELIMITED BY SIZE, WS-TIME-NOW-GRP-SS DELIMITED BY SIZE INTO ABND-TIME END-STRING",
+          "sourceFieldIds": [
+            "WS_L107_WS-TIME-NOW-GRP-HH",
+            "WS_L108_WS-TIME-NOW-GRP-MM",
+            "WS_L109_WS-TIME-NOW-GRP-SS",
+            "WS_L13_ABND-TIME"
+          ],
+          "operation": "STRING",
+          "expression": "STRING WS-TIME-NOW-GRP-HH DELIMITED BY SIZE, ':' DELIMITED BY SIZE, WS-TIME-NOW-GRP-MM DELIMITED BY SIZE, ':' DELIMITED BY SIZE, WS-TIME-NOW-GRP-SS DELIMITED BY SIZE INTO ABND-TIME END-STRING"
+        },
+        {
+          "type": "MOVE",
+          "location": {
+            "startLine": 371,
+            "endLine": 371,
+            "startColumn": 11,
+            "endColumn": 31,
+            "sourceFile": "INQTRAND.cbl"
+          },
+          "rawText": "MOVE WS-U-TIME TO ABND-UTIME-KEY",
+          "sourceFieldIds": [
+            "WS_L95_WS-U-TIME"
+          ],
+          "targetFieldIds": [
+            "WS_L8_ABND-UTIME-KEY"
+          ],
+          "fromExpr": "WS-U-TIME",
+          "toTargets": [
+            "ABND-UTIME-KEY"
+          ]
+        },
+        {
+          "type": "MOVE",
+          "location": {
+            "startLine": 372,
+            "endLine": 372,
+            "startColumn": 11,
+            "endColumn": 31,
+            "sourceFile": "INQTRAND.cbl"
+          },
+          "rawText": "MOVE 'ITRD' TO ABND-CODE",
+          "targetFieldIds": [
+            "WS_L14_ABND-CODE"
+          ],
+          "fromExpr": "'ITRD'",
+          "toTargets": [
+            "ABND-CODE"
+          ]
+        },
+        {
+          "type": "EXEC_CICS",
+          "location": {
+            "startLine": 374,
+            "endLine": 375,
+            "startColumn": 6,
+            "endColumn": 6,
+            "sourceFile": "INQTRAND.cbl"
+          },
+          "rawText": "*>EXECCICS EXEC CICS ASSIGN PROGRAM(ABND-PROGRAM) *>EXECCICS END-EXEC }",
+          "subsystem": "CICS",
+          "rawPayload": "EXEC CICS ASSIGN PROGRAM(ABND-PROGRAM) END-EXEC"
+        },
+        {
+          "type": "STRING",
+          "location": {
+            "startLine": 377,
+            "endLine": 380,
+            "startColumn": 11,
+            "endColumn": 11,
+            "sourceFile": "INQTRAND.cbl"
+          },
+          "rawText": "STRING 'INQTRAND - Abend occurred' DELIMITED BY SIZE INTO ABND-FREEFORM END-STRING",
+          "sourceFieldIds": [
+            "WS_L22_ABND-FREEFORM"
+          ],
+          "operation": "STRING",
+          "expression": "STRING 'INQTRAND - Abend occurred' DELIMITED BY SIZE INTO ABND-FREEFORM END-STRING"
+        },
+        {
+          "type": "EXEC_CICS",
+          "location": {
+            "startLine": 382,
+            "endLine": 384,
+            "startColumn": 6,
+            "endColumn": 6,
+            "sourceFile": "INQTRAND.cbl"
+          },
+          "rawText": "*>EXECCICS EXEC CICS LINK PROGRAM(WS-ABEND-PGM) *>EXECCICS COMMAREA(ABNDINFO-REC) *>EXECCICS END-EXEC }",
+          "subsystem": "CICS",
+          "rawPayload": "EXEC CICS LINK PROGRAM(WS-ABEND-PGM) COMMAREA(ABNDINFO-REC) END-EXEC"
+        },
+        {
+          "type": "EXEC_CICS",
+          "location": {
+            "startLine": 386,
+            "endLine": 387,
+            "startColumn": 6,
+            "endColumn": 6,
+            "sourceFile": "INQTRAND.cbl"
+          },
+          "rawText": "*>EXECCICS EXEC CICS RETURN *>EXECCICS END-EXEC }",
+          "subsystem": "CICS",
+          "rawPayload": "EXEC CICS RETURN END-EXEC"
+        }
+      ]
+    },
+    {
+      "name": "AH999",
+      "sectionParent": "ABEND-HANDLING",
+      "location": {
+        "startLine": 389,
+        "endLine": 390,
+        "startColumn": 7,
+        "endColumn": 15,
+        "sourceFile": "INQTRAND.cbl"
+      },
+      "fallthroughSuccessor": "PTD010",
+      "statements": [
+        {
+          "type": "EXIT",
+          "location": {
+            "startLine": 390,
+            "endLine": 390,
+            "startColumn": 11,
+            "endColumn": 11,
+            "sourceFile": "INQTRAND.cbl"
+          },
+          "rawText": "EXIT",
+          "operation": "EXIT"
+        }
+      ]
+    },
+    {
+      "name": "PTD010",
+      "sectionParent": "POPULATE-TIME-DATE",
+      "location": {
+        "startLine": 394,
+        "endLine": 405,
+        "startColumn": 7,
+        "endColumn": 27,
+        "sourceFile": "INQTRAND.cbl"
+      },
+      "fallthroughSuccessor": "PTD999",
+      "statements": [
+        {
+          "type": "EXEC_CICS",
+          "location": {
+            "startLine": 396,
+            "endLine": 398,
+            "startColumn": 6,
+            "endColumn": 6,
+            "sourceFile": "INQTRAND.cbl"
+          },
+          "rawText": "*>EXECCICS EXEC CICS ASKTIME *>EXECCICS ABSTIME(WS-U-TIME) *>EXECCICS END-EXEC }",
+          "subsystem": "CICS",
+          "rawPayload": "EXEC CICS ASKTIME ABSTIME(WS-U-TIME) END-EXEC"
+        },
+        {
+          "type": "EXEC_CICS",
+          "location": {
+            "startLine": 400,
+            "endLine": 405,
+            "startColumn": 6,
+            "endColumn": 6,
+            "sourceFile": "INQTRAND.cbl"
+          },
+          "rawText": "*>EXECCICS EXEC CICS FORMATTIME *>EXECCICS ABSTIME(WS-U-TIME) *>EXECCICS DDMMYYYY(WS-ORIG-DATE) *>EXECCICS TIME(WS-TIME-NOW) *>EXECCICS DATESEP('/') *>EXECCICS END-EXEC }",
+          "subsystem": "CICS",
+          "rawPayload": "EXEC CICS FORMATTIME ABSTIME(WS-U-TIME) DDMMYYYY(WS-ORIG-DATE) TIME(WS-TIME-NOW) DATESEP('/') END-EXEC"
+        }
+      ]
+    },
+    {
+      "name": "PTD999",
+      "sectionParent": "POPULATE-TIME-DATE",
+      "location": {
+        "startLine": 407,
+        "endLine": 408,
+        "startColumn": 7,
+        "endColumn": 15,
+        "sourceFile": "INQTRAND.cbl"
+      },
+      "fallthroughSuccessor": "CYI010",
+      "statements": [
+        {
+          "type": "EXIT",
+          "location": {
+            "startLine": 408,
+            "endLine": 408,
+            "startColumn": 11,
+            "endColumn": 11,
+            "sourceFile": "INQTRAND.cbl"
+          },
+          "rawText": "EXIT",
+          "operation": "EXIT"
+        }
+      ]
+    },
+    {
+      "name": "CYI010",
+      "sectionParent": "CONVERT-YYYYMMDD-TO-ISO",
+      "location": {
+        "startLine": 411,
+        "endLine": 419,
+        "startColumn": 7,
+        "endColumn": 44,
+        "sourceFile": "INQTRAND.cbl"
+      },
+      "fallthroughSuccessor": "CYI999",
+      "statements": [
+        {
+          "type": "MOVE",
+          "location": {
+            "startLine": 415,
+            "endLine": 415,
+            "startColumn": 11,
+            "endColumn": 32,
+            "sourceFile": "INQTRAND.cbl"
+          },
+          "rawText": "MOVE WS-DATE-YYYY TO WS-DATE-ISO-YYYY",
+          "sourceFieldIds": [
+            "WS_L127_WS-DATE-YYYY"
+          ],
+          "targetFieldIds": [
+            "WS_L132_WS-DATE-ISO-YYYY"
+          ],
+          "fromExpr": "WS-DATE-YYYY",
+          "toTargets": [
+            "WS-DATE-ISO-YYYY"
+          ]
+        },
+        {
+          "type": "MOVE",
+          "location": {
+            "startLine": 416,
+            "endLine": 416,
+            "startColumn": 11,
+            "endColumn": 23,
+            "sourceFile": "INQTRAND.cbl"
+          },
+          "rawText": "MOVE '-' TO WS-DATE-ISO-SEP1",
+          "targetFieldIds": [
+            "WS_L133_WS-DATE-ISO-SEP1"
+          ],
+          "fromExpr": "'-'",
+          "toTargets": [
+            "WS-DATE-ISO-SEP1"
+          ]
+        },
+        {
+          "type": "MOVE",
+          "location": {
+            "startLine": 417,
+            "endLine": 417,
+            "startColumn": 11,
+            "endColumn": 30,
+            "sourceFile": "INQTRAND.cbl"
+          },
+          "rawText": "MOVE WS-DATE-MM TO WS-DATE-ISO-MM",
+          "sourceFieldIds": [
+            "WS_L128_WS-DATE-MM"
+          ],
+          "targetFieldIds": [
+            "WS_L134_WS-DATE-ISO-MM"
+          ],
+          "fromExpr": "WS-DATE-MM",
+          "toTargets": [
+            "WS-DATE-ISO-MM"
+          ]
+        },
+        {
+          "type": "MOVE",
+          "location": {
+            "startLine": 418,
+            "endLine": 418,
+            "startColumn": 11,
+            "endColumn": 23,
+            "sourceFile": "INQTRAND.cbl"
+          },
+          "rawText": "MOVE '-' TO WS-DATE-ISO-SEP2",
+          "targetFieldIds": [
+            "WS_L135_WS-DATE-ISO-SEP2"
+          ],
+          "fromExpr": "'-'",
+          "toTargets": [
+            "WS-DATE-ISO-SEP2"
+          ]
+        },
+        {
+          "type": "MOVE",
+          "location": {
+            "startLine": 419,
+            "endLine": 419,
+            "startColumn": 11,
+            "endColumn": 30,
+            "sourceFile": "INQTRAND.cbl"
+          },
+          "rawText": "MOVE WS-DATE-DD TO WS-DATE-ISO-DD",
+          "sourceFieldIds": [
+            "WS_L129_WS-DATE-DD"
+          ],
+          "targetFieldIds": [
+            "WS_L136_WS-DATE-ISO-DD"
+          ],
+          "fromExpr": "WS-DATE-DD",
+          "toTargets": [
+            "WS-DATE-ISO-DD"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "CYI999",
+      "sectionParent": "CONVERT-YYYYMMDD-TO-ISO",
+      "location": {
+        "startLine": 421,
+        "endLine": 422,
+        "startColumn": 7,
+        "endColumn": 15,
+        "sourceFile": "INQTRAND.cbl"
+      },
+      "fallthroughSuccessor": "CIY010",
+      "statements": [
+        {
+          "type": "EXIT",
+          "location": {
+            "startLine": 422,
+            "endLine": 422,
+            "startColumn": 11,
+            "endColumn": 11,
+            "sourceFile": "INQTRAND.cbl"
+          },
+          "rawText": "EXIT",
+          "operation": "EXIT"
+        }
+      ]
+    },
+    {
+      "name": "CIY010",
+      "sectionParent": "CONVERT-ISO-TO-YYYYMMDD",
+      "location": {
+        "startLine": 426,
+        "endLine": 432,
+        "startColumn": 7,
+        "endColumn": 44,
+        "sourceFile": "INQTRAND.cbl"
+      },
+      "fallthroughSuccessor": "CIY999",
+      "statements": [
+        {
+          "type": "MOVE",
+          "location": {
+            "startLine": 430,
+            "endLine": 430,
+            "startColumn": 11,
+            "endColumn": 36,
+            "sourceFile": "INQTRAND.cbl"
+          },
+          "rawText": "MOVE WS-DATE-ISO-YYYY TO WS-DATE-YYYY",
+          "sourceFieldIds": [
+            "WS_L132_WS-DATE-ISO-YYYY"
+          ],
+          "targetFieldIds": [
+            "WS_L127_WS-DATE-YYYY"
+          ],
+          "fromExpr": "WS-DATE-ISO-YYYY",
+          "toTargets": [
+            "WS-DATE-YYYY"
+          ]
+        },
+        {
+          "type": "MOVE",
+          "location": {
+            "startLine": 431,
+            "endLine": 431,
+            "startColumn": 11,
+            "endColumn": 34,
+            "sourceFile": "INQTRAND.cbl"
+          },
+          "rawText": "MOVE WS-DATE-ISO-MM TO WS-DATE-MM",
+          "sourceFieldIds": [
+            "WS_L134_WS-DATE-ISO-MM"
+          ],
+          "targetFieldIds": [
+            "WS_L128_WS-DATE-MM"
+          ],
+          "fromExpr": "WS-DATE-ISO-MM",
+          "toTargets": [
+            "WS-DATE-MM"
+          ]
+        },
+        {
+          "type": "MOVE",
+          "location": {
+            "startLine": 432,
+            "endLine": 432,
+            "startColumn": 11,
+            "endColumn": 34,
+            "sourceFile": "INQTRAND.cbl"
+          },
+          "rawText": "MOVE WS-DATE-ISO-DD TO WS-DATE-DD",
+          "sourceFieldIds": [
+            "WS_L136_WS-DATE-ISO-DD"
+          ],
+          "targetFieldIds": [
+            "WS_L129_WS-DATE-DD"
+          ],
+          "fromExpr": "WS-DATE-ISO-DD",
+          "toTargets": [
+            "WS-DATE-DD"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "CIY999",
+      "sectionParent": "CONVERT-ISO-TO-YYYYMMDD",
+      "location": {
+        "startLine": 434,
+        "endLine": 435,
+        "startColumn": 7,
+        "endColumn": 15,
+        "sourceFile": "INQTRAND.cbl"
+      },
+      "statements": [
+        {
+          "type": "EXIT",
+          "location": {
+            "startLine": 435,
+            "endLine": 435,
+            "startColumn": 11,
+            "endColumn": 11,
+            "sourceFile": "INQTRAND.cbl"
+          },
+          "rawText": "EXIT",
+          "operation": "EXIT"
+        }
+      ]
+    }
+  ],
+  "asgAuditSummary": {
+    "totalAsgDataEntries": 96,
+    "totalAsgLevel88Entries": 5,
+    "totalAsgParagraphs": 16,
+    "totalAsgStatements": 69,
+    "totalAsgCalls": 106,
+    "asgVariableNames": [
+      "SORTCODE",
+      "HOST-PROCTRAN-ROW",
+      "HV-PROCTRAN-EYECATCHER",
+      "HV-PROCTRAN-SORTCODE",
+      "HV-PROCTRAN-NUMBER",
+      "HV-PROCTRAN-DATE",
+      "HV-PROCTRAN-TIME",
+      "HV-PROCTRAN-REF",
+      "HV-PROCTRAN-TYPE",
+      "HV-PROCTRAN-DESC",
+      "HV-PROCTRAN-AMOUNT",
+      "WS-CICS-WORK-AREA",
+      "WS-CICS-RESP",
+      "WS-CICS-RESP2",
+      "SQLCODE-DISPLAY",
+      "WS-ABEND-PGM",
+      "ABNDINFO-REC",
+      "ABND-VSAM-KEY",
+      "ABND-UTIME-KEY",
+      "ABND-TASKNO-KEY",
+      "ABND-APPLID",
+      "ABND-TRANID",
+      "ABND-DATE",
+      "ABND-TIME",
+      "ABND-CODE",
+      "ABND-PROGRAM",
+      "ABND-RESPCODE",
+      "ABND-RESP2CODE",
+      "ABND-SQLCODE",
+      "ABND-FREEFORM",
+      "WS-U-TIME",
+      "WS-ORIG-DATE",
+      "WS-ORIG-DATE-GRP",
+      "WS-ORIG-DATE-DD",
+      "WS-ORIG-DATE-MM",
+      "WS-ORIG-DATE-YYYY",
+      "WS-TIME-DATA",
+      "WS-TIME-NOW",
+      "WS-TIME-NOW-GRP",
+      "WS-TIME-NOW-GRP-HH",
+      "WS-TIME-NOW-GRP-MM",
+      "WS-TIME-NOW-GRP-SS",
+      "WS-TRAN-ID-PARTS",
+      "WS-TRAN-ID-SC",
+      "WS-TRAN-ID-NUM",
+      "WS-TRAN-ID-DATE",
+      "WS-TRAN-ID-TIME",
+      "WS-TRAN-ID-REF",
+      "WS-DATE-WORK",
+      "WS-DATE-YYYYMMDD",
+      "WS-DATE-YYYYMMDD-GRP",
+      "WS-DATE-YYYY",
+      "WS-DATE-MM",
+      "WS-DATE-DD",
+      "WS-DATE-ISO",
+      "WS-DATE-ISO-GRP",
+      "WS-DATE-ISO-YYYY",
+      "WS-DATE-ISO-SEP1",
+      "WS-DATE-ISO-MM",
+      "WS-DATE-ISO-SEP2",
+      "WS-DATE-ISO-DD",
+      "DFHCOMMAREA",
+      "INQTRAND-EYE",
+      "INQTRAND-SORTCODE",
+      "INQTRAND-ACCNO",
+      "INQTRAND-DATE",
+      "INQTRAND-TIME",
+      "INQTRAND-REF",
+      "INQTRAND-SUCCESS",
+      "INQTRAND-FOUND",
+      "INQTRAND-TRAN-ID",
+      "INQTRAND-TRAN-SORTCODE",
+      "INQTRAND-TRAN-ACCNO",
+      "INQTRAND-TRAN-DATE",
+      "INQTRAND-TRAN-DATE-GRP",
+      "INQTRAND-TRAN-DATE-YYYY",
+      "INQTRAND-TRAN-DATE-MM",
+      "INQTRAND-TRAN-DATE-DD",
+      "INQTRAND-TRAN-TIME",
+      "INQTRAND-TRAN-TIME-GRP",
+      "INQTRAND-TRAN-TIME-HH",
+      "INQTRAND-TRAN-TIME-MM",
+      "INQTRAND-TRAN-TIME-SS",
+      "INQTRAND-TRAN-REF",
+      "INQTRAND-TRAN-TYPE",
+      "INQTRAND-TRAN-DESC",
+      "INQTRAND-TRAN-AMOUNT"
+    ],
+    "asgLevel88Names": [
+      "INQTRAND-EYE-VALID",
+      "INQTRAND-SUCCESS-TRUE",
+      "INQTRAND-SUCCESS-FALSE",
+      "INQTRAND-FOUND-TRUE",
+      "INQTRAND-FOUND-FALSE"
+    ]
+  }
+}
