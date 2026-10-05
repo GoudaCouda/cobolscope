@@ -24,47 +24,44 @@ from cobolscope.parser import (
 
 
 def build_arg_parser() -> argparse.ArgumentParser:
-    """Constructs the unified CLI argument parser with organized option groups."""
+    """Constructs the unified CLI argument parser with streamlined enterprise option groups."""
     parser = argparse.ArgumentParser(
         prog="cobolscope",
-        description="Unified CLI for CobolScope COBOL Parsing, Data Dictionaries, Call Graphs, and Reachability.",
+        description="Unified COBOL Documentation, Call Graph, and Data Dictionary Engine.",
         formatter_class=argparse.ArgumentDefaultsHelpFormatter,
     )
 
     # ---------------------------------------------------------
-    # Core Positional & Format Arguments
+    # Positional Primary Input
     # ---------------------------------------------------------
     parser.add_argument(
         "input_file",
         nargs="?",
         default=None,
-        help="Path to the COBOL source file or copybook to parse (optional if using --init-rules).",
+        metavar="input_path",
+        help="Path to COBOL source file or directory (builds full portal by default).",
     )
-    parser.add_argument(
+
+    # ---------------------------------------------------------
+    # Core Options
+    # ---------------------------------------------------------
+    core_group = parser.add_argument_group("Core Options")
+    core_group.add_argument(
+        "-o",
+        "--output",
+        dest="output",
+        metavar="PATH",
+        help="Output destination path (portal directory, HTML, Markdown, or JSON).",
+    )
+    core_group.add_argument(
         "-f",
         "--format",
         default="FIXED",
         choices=VALID_FORMATS,
         type=str.upper,
-        help="COBOL source format (FIXED, TANDEM, VARIABLE).",
+        help="COBOL source format: FIXED, TANDEM, VARIABLE (default: FIXED).",
     )
-    parser.add_argument(
-        "-o",
-        "--output",
-        help="Output destination path (defaults to stdout).",
-    )
-    parser.add_argument(
-        "-v",
-        "--verbose",
-        action="store_true",
-        help="Enable verbose telemetry and execution timing for each task/pipeline step.",
-    )
-
-    # ---------------------------------------------------------
-    # Preprocessor & Copybook Resolution
-    # ---------------------------------------------------------
-    prep_group = parser.add_argument_group("Preprocessor & Copybook Options")
-    prep_group.add_argument(
+    core_group.add_argument(
         "-I",
         "--copybook-dir",
         action="append",
@@ -72,59 +69,51 @@ def build_arg_parser() -> argparse.ArgumentParser:
         metavar="DIR",
         help="Directory containing copybooks to resolve (repeatable).",
     )
-    prep_group.add_argument(
-        "--copybook-ext",
-        action="append",
-        dest="copybook_exts",
-        metavar="EXT",
-        help="Custom copybook file extensions without leading dot (e.g. 'cpy', 'cbl').",
-    )
-    prep_group.add_argument(
+    core_group.add_argument(
         "--ignore-errors",
         "--ignore-syntax-errors",
         action="store_true",
         dest="ignore_syntax_errors",
         help="Ignore minor syntax errors during ASG construction.",
     )
+    core_group.add_argument(
+        "-v",
+        "--verbose",
+        action="store_true",
+        help="Enable detailed progress and timing telemetry.",
+    )
 
     # ---------------------------------------------------------
-    # Output Modes (Subsystem Triggers)
+    # Task Targets (Default: Full Portal for directories / Canonical IR for single files)
     # ---------------------------------------------------------
-    mode_group = parser.add_argument_group("Output Modes (Default: Canonical IR JSON)")
-    mode_group.add_argument(
-        "--dict",
-        "--dictionary",
-        action="store_true",
-        dest="generate_dictionary",
-        help="Generate a comprehensive Data Dictionary instead of raw IR JSON.",
-    )
-    mode_group.add_argument(
+    task_group = parser.add_argument_group("Task Targets (Default: Full Portal / Canonical IR)")
+    task_group.add_argument(
         "--graph",
         "--call-graph",
         action="store_true",
         dest="generate_graph",
-        help="Generate a Level-2 Procedure Call Graph visualization.",
+        help="Generate procedure call graph visualization.",
     )
-    mode_group.add_argument(
+    task_group.add_argument(
+        "--dict",
+        "--dictionary",
+        action="store_true",
+        dest="generate_dictionary",
+        help="Generate comprehensive data dictionary.",
+    )
+    task_group.add_argument(
         "--reachability",
         action="store_true",
         dest="generate_reachability",
-        help="Run Pushdown Reachability Analysis and output verified transitions.",
+        help="Run pushdown control-flow reachability analysis.",
     )
-    mode_group.add_argument(
+    task_group.add_argument(
         "--cfg",
         metavar="PARAGRAPH",
         dest="cfg_target",
-        help="Generate Level 3 Intra-Procedural CFG for the specified procedure paragraph or 'all'.",
+        help="Generate intra-procedural CFG for a specific paragraph (or 'all').",
     )
-    mode_group.add_argument(
-        "--cfg-format",
-        choices=["json", "cytoscape"],
-        default="json",
-        dest="cfg_format",
-        help="Output format for Level 3 CFG (json, cytoscape). Default: json.",
-    )
-    mode_group.add_argument(
+    task_group.add_argument(
         "--portal",
         metavar="TARGET",
         nargs="?",
@@ -134,196 +123,205 @@ def build_arg_parser() -> argparse.ArgumentParser:
     )
 
     # ---------------------------------------------------------
-    # Data Dictionary Options
+    # Graph & Dictionary Controls
     # ---------------------------------------------------------
-    dict_group = parser.add_argument_group("Data Dictionary Options (used with --dict)")
-    dict_group.add_argument(
-        "--dict-format",
-        default="markdown",
-        choices=["markdown", "md", "html", "csv", "json"],
-        help="Output format for Data Dictionary.",
+    controls_group = parser.add_argument_group("Graph & Dictionary Controls")
+    controls_group.add_argument(
+        "--cluster-mode",
+        choices=["auto", "none", "sections", "semantic"],
+        default="auto",
+        help="Clustering hierarchy: auto, sections, semantic, none (default: auto).",
     )
-    dict_group.add_argument(
-        "--hide-fillers",
-        action="store_true",
-        help="Hide FILLER fields in Data Dictionary outputs.",
+    controls_group.add_argument(
+        "--disentangle",
+        nargs="?",
+        const="section",
+        choices=["section", "caller"],
+        default=None,
+        help="Disentangle high-degree hubs using reference stubs (section, caller).",
     )
-
-    # ---------------------------------------------------------
-    # Call Graph Options
-    # ---------------------------------------------------------
-    graph_group = parser.add_argument_group("Call Graph Options (used with --graph)")
-    graph_group.add_argument(
-        "--graph-format",
-        default="html",
-        choices=["html", "cytoscape", "svg", "dot", "json"],
-        help="Output format for Call Graph (html, cytoscape, svg, dot, json). Default: html.",
-    )
-    graph_group.add_argument(
-        "--graph-engine",
-        choices=["cytoscape", "graphviz"],
-        default="cytoscape",
-        help="Default rendering engine in interactive HTML viewer (cytoscape or graphviz).",
-    )
-    graph_group.add_argument(
+    controls_group.add_argument(
         "--show-fallthrough",
         action="store_true",
         dest="show_fallthrough",
         default=False,
-        help="Include physical sequential fall-through connectors in the call graph.",
+        help="Include physical sequential fallthrough edges in graph.",
     )
-    graph_group.add_argument(
-        "--no-collapse-exits",
-        action="store_false",
-        dest="collapse_exits",
-        default=True,
-        help="Disable automatic collapsing of dummy *-EXIT return paragraphs.",
-    )
-    graph_group.add_argument(
-        "--no-cluster",
-        action="store_false",
-        dest="enable_clustering",
-        default=True,
-        help="Disable functional subsystem clustering subgraphs.",
-    )
-    graph_group.add_argument(
-        "--cluster-mode",
-        choices=["auto", "none", "sections", "semantic"],
-        default="auto",
-        help="Clustering strategy: 'auto' (clusters by SECTION if present, else unclustered hierarchy), 'sections', 'semantic', or 'none'.",
-    )
-    graph_group.add_argument(
-        "--splines",
-        choices=["spline", "ortho", "polyline", "curved"],
-        default="spline",
-        help="Graphviz edge routing style (spline, ortho, polyline, curved).",
-    )
-    graph_group.add_argument(
-        "--detailed-nodes",
-        action="store_true",
-        dest="detailed_nodes",
-        default=False,
-        help="Render raw data variable lineage directly on node box face (default keeps boxes compact).",
-    )
-    graph_group.add_argument(
-        "--no-concentrate",
-        action="store_false",
-        dest="concentrate",
-        default=True,
-        help="Disable Graphviz edge concentration/trunk merging.",
-    )
-    graph_group.add_argument(
+    controls_group.add_argument(
         "--show-error-traps",
         action="store_true",
         dest="show_error_traps",
         default=False,
-        help="Include error trap / abend handling procedures and relationships in the call graph (hidden by default).",
+        help="Include abend / error trap handlers in call graph.",
     )
-    graph_group.add_argument(
-        "--enable-cloning",
+    controls_group.add_argument(
+        "--hide-fillers",
         action="store_true",
-        dest="enable_cloning",
-        default=False,
-        help="Disentangle high in-degree utility routines by cloning them locally per caller or section.",
+        help="Hide FILLER variables in data dictionary output.",
     )
-    graph_group.add_argument(
-        "--clone-mode",
-        choices=["section", "caller"],
-        default="section",
-        help="Cloning strategy: 'section' (replicates per calling section) or 'caller' (replicates per calling routine). Default: section.",
-    )
-    graph_group.add_argument(
-        "--clone-threshold",
-        type=int,
-        default=3,
-        help="Minimum in-degree (caller count) required to qualify a utility node for cloning. Default: 3.",
-    )
-    graph_group.add_argument(
-        "--ranker",
-        choices=["network-simplex", "tight-tree", "longest-path"],
-        default=None,
-        help="Graphviz ranking algorithm override (network-simplex, tight-tree, longest-path). Default: dynamically chosen.",
-    )
-    graph_group.add_argument(
-        "--nodesep",
-        type=float,
-        default=None,
-        help="Horizontal routine spacing in inches (overrides dynamic heuristics).",
-    )
-    graph_group.add_argument(
-        "--ranksep",
-        type=float,
-        default=None,
-        help="Vertical rank separation in inches (overrides dynamic heuristics).",
-    )
-    graph_group.add_argument(
-        "--no-dynamic-heuristics",
-        action="store_false",
-        dest="dynamic_heuristics",
-        default=True,
-        help="Disable dynamic topology-based layout heuristics (forces fixed defaults).",
-    )
-    graph_group.add_argument(
-        "--asset-mode",
-        choices=["auto", "inline", "external"],
-        default="auto",
-        help="Asset distribution mode for HTML graph views: 'auto' (inlines for single-file, external for batch), 'inline', or 'external'.",
-    )
-
-
 
     # ---------------------------------------------------------
-    # Rules & Termination Options
+    # Configuration
     # ---------------------------------------------------------
-    rules_group = parser.add_argument_group("Rules & Abend Options")
-    rules_group.add_argument(
+    config_group = parser.add_argument_group("Configuration")
+    config_group.add_argument(
         "-r",
         "--rules",
         metavar="FILE",
         dest="rules_file",
-        help="Path to custom YAML rules file (defaults to ./cobolscope-rules.yaml or built-in defaults).",
+        help="Path to custom YAML rules file (default: ./cobolscope-rules.yaml).",
     )
-    rules_group.add_argument(
+    config_group.add_argument(
         "--init-rules",
         action="store_true",
         dest="init_rules",
-        help="Generate a starter or auto-scanned cobolscope-rules.yaml configuration file.",
+        help="Generate a starter cobolscope-rules.yaml configuration file.",
     )
 
     # ---------------------------------------------------------
-    # Reachability Options
+    # Suppressed Options (Preserved for backwards compatibility with test harnesses and power-users)
     # ---------------------------------------------------------
-    reach_group = parser.add_argument_group("Reachability Options")
-    reach_group.add_argument(
+    parser.add_argument(
+        "--copybook-ext",
+        action="append",
+        dest="copybook_exts",
+        metavar="EXT",
+        help=argparse.SUPPRESS,
+    )
+    parser.add_argument(
+        "--dict-format",
+        choices=["markdown", "md", "html", "csv", "json"],
+        default=None,
+        help=argparse.SUPPRESS,
+    )
+    parser.add_argument(
+        "--graph-format",
+        choices=["html", "cytoscape", "svg", "dot", "json"],
+        default=None,
+        help=argparse.SUPPRESS,
+    )
+    parser.add_argument(
+        "--graph-engine",
+        choices=["cytoscape", "graphviz"],
+        default="cytoscape",
+        help=argparse.SUPPRESS,
+    )
+    parser.add_argument(
+        "--no-collapse-exits",
+        action="store_false",
+        dest="collapse_exits",
+        default=True,
+        help=argparse.SUPPRESS,
+    )
+    parser.add_argument(
+        "--no-cluster",
+        action="store_false",
+        dest="enable_clustering",
+        default=True,
+        help=argparse.SUPPRESS,
+    )
+    parser.add_argument(
+        "--splines",
+        choices=["spline", "ortho", "polyline", "curved"],
+        default="spline",
+        help=argparse.SUPPRESS,
+    )
+    parser.add_argument(
+        "--detailed-nodes",
+        action="store_true",
+        dest="detailed_nodes",
+        default=False,
+        help=argparse.SUPPRESS,
+    )
+    parser.add_argument(
+        "--no-concentrate",
+        action="store_false",
+        dest="concentrate",
+        default=True,
+        help=argparse.SUPPRESS,
+    )
+    parser.add_argument(
+        "--enable-cloning",
+        action="store_true",
+        dest="enable_cloning",
+        default=False,
+        help=argparse.SUPPRESS,
+    )
+    parser.add_argument(
+        "--clone-mode",
+        choices=["section", "caller"],
+        default="section",
+        help=argparse.SUPPRESS,
+    )
+    parser.add_argument(
+        "--clone-threshold",
+        type=int,
+        default=3,
+        help=argparse.SUPPRESS,
+    )
+    parser.add_argument(
+        "--ranker",
+        choices=["network-simplex", "tight-tree", "longest-path"],
+        default=None,
+        help=argparse.SUPPRESS,
+    )
+    parser.add_argument(
+        "--nodesep",
+        type=float,
+        default=None,
+        help=argparse.SUPPRESS,
+    )
+    parser.add_argument(
+        "--ranksep",
+        type=float,
+        default=None,
+        help=argparse.SUPPRESS,
+    )
+    parser.add_argument(
+        "--no-dynamic-heuristics",
+        action="store_false",
+        dest="dynamic_heuristics",
+        default=True,
+        help=argparse.SUPPRESS,
+    )
+    parser.add_argument(
+        "--asset-mode",
+        choices=["auto", "inline", "external"],
+        default="auto",
+        help=argparse.SUPPRESS,
+    )
+    parser.add_argument(
+        "--cfg-format",
+        choices=["json", "cytoscape"],
+        default="json",
+        dest="cfg_format",
+        help=argparse.SUPPRESS,
+    )
+    parser.add_argument(
         "--save-transitions",
         dest="save_transitions",
         metavar="FILE",
-        help="Save serialized Pushdown State Transitions and Reachability model to file.",
+        help=argparse.SUPPRESS,
     )
-
-    # ---------------------------------------------------------
-    # Java & Execution Environment
-    # ---------------------------------------------------------
-    env_group = parser.add_argument_group("JVM & Environment Options")
-    env_group.add_argument(
+    parser.add_argument(
         "--jar",
-        help="Path to proleap-cobol-parser.jar (overrides PROLEAP_JAR env var).",
+        help=argparse.SUPPRESS,
     )
-    env_group.add_argument(
+    parser.add_argument(
         "--runner-cp",
-        help="Classpath entry containing compiled ProLeapCliRunner.class.",
+        help=argparse.SUPPRESS,
     )
-    env_group.add_argument(
+    parser.add_argument(
         "--java-exe",
         default="java",
-        help="Name or path of Java runtime executable.",
+        help=argparse.SUPPRESS,
     )
-    env_group.add_argument(
+    parser.add_argument(
         "--java-arg",
         action="append",
         dest="java_args",
         metavar="ARG",
-        help="Extra JVM argument (repeatable), e.g. --java-arg -Xmx2g.",
+        help=argparse.SUPPRESS,
     )
 
     return parser
@@ -447,9 +445,58 @@ def main(argv: Optional[Sequence[str]] = None) -> int:
 
     from cobolscope.rules import load_rules
     rules = load_rules(path=args.rules_file)
-    log_verbose(f"Loaded rules (runtime_modules={len(rules.runtime_modules)}, strict_paragraphs={len(rules.paragraph_names.strict)})")
+    # Normalize options & apply smart format inference
+    if getattr(args, "disentangle", None):
+        args.enable_cloning = True
+        args.clone_mode = args.disentangle
+
+    if not getattr(args, "enable_clustering", True) or getattr(args, "cluster_mode", "auto") == "none":
+        args.enable_clustering = False
+        args.cluster_mode = "none"
+    else:
+        args.enable_clustering = True
+
+    if not getattr(args, "dict_format", None):
+        if args.output:
+            suf = Path(args.output).suffix.lower()
+            if suf in (".md", ".markdown"):
+                args.dict_format = "markdown"
+            elif suf in (".html", ".htm"):
+                args.dict_format = "html"
+            elif suf in (".csv",):
+                args.dict_format = "csv"
+            elif suf in (".json",):
+                args.dict_format = "json"
+        if not getattr(args, "dict_format", None):
+            args.dict_format = "markdown"
+
+    if not getattr(args, "graph_format", None):
+        if args.output:
+            suf = Path(args.output).suffix.lower()
+            if suf in (".html", ".htm"):
+                args.graph_format = "html"
+            elif suf in (".svg",):
+                args.graph_format = "svg"
+            elif suf in (".dot", ".gv"):
+                args.graph_format = "dot"
+            elif suf in (".json",):
+                args.graph_format = "json"
+            elif suf in (".cytoscape",):
+                args.graph_format = "cytoscape"
+        if not getattr(args, "graph_format", None):
+            args.graph_format = "html"
 
     if input_path.is_dir():
+        has_explicit_mode = (
+            args.generate_graph
+            or args.generate_dictionary
+            or args.generate_reachability
+            or bool(getattr(args, "save_transitions", None))
+            or bool(args.cfg_target)
+        )
+        if not has_explicit_mode:
+            args.generate_graph = True
+            args.generate_dictionary = True
         return _run_batch_directory(input_path, args, rules, log_info, log_verbose, overall_start)
 
     log_info(f"Target: {input_path.name} (format: {args.format})")
