@@ -61,6 +61,21 @@ from cobolscope.assets import AssetMode
 
 
 
+def is_section_based_program(model: ProgramModel) -> bool:
+    """
+    Determines whether a program's procedure call graph should be driven by SECTIONS
+    or PARAGRAPHS.
+
+    A program is section-driven if it has MULTIPLE sections (len(sections) > 1) and
+    those sections contain paragraphs.
+
+    If a program has <= 1 section (e.g. only a wrapper 0000-MAIN SECTION.) or no sections,
+    the program is paragraph-driven to prevent collapsing all procedures into a single
+    black-hole node with zero edges.
+    """
+    return len(model.sections) > 1 and any(len(s.paragraph_names) > 0 for s in model.sections)
+
+
 class CallGraphGenerator:
     """
     Transforms canonical ProgramModel into a structured Level-2 CallGraph,
@@ -113,11 +128,11 @@ class CallGraphGenerator:
         self.ranksep = ranksep
         self.dynamic_heuristics = dynamic_heuristics
 
-        is_section_based = len(self.model.sections) > 0 and any(len(s.paragraph_names) > 0 for s in self.model.sections)
+        is_section_based = is_section_based_program(self.model)
         if not enable_clustering or self.cluster_mode == "none":
             self.enable_clustering = False
         elif self.cluster_mode == "sections":
-            self.enable_clustering = is_section_based
+            self.enable_clustering = is_section_based or len(self.model.sections) > 1
         elif self.cluster_mode == "semantic":
             self.enable_clustering = True
         else:  # "auto"
@@ -237,7 +252,7 @@ class CallGraphGenerator:
         reachability_model = reachability_engine.analyze()
 
         # 1. Determine whether program is Section-Structured or Paragraph-Structured
-        is_section_based = len(self.model.sections) > 0 and any(len(s.paragraph_names) > 0 for s in self.model.sections)
+        is_section_based = is_section_based_program(self.model)
         symbol_to_proc: Dict[str, str] = {}
 
         def is_exit_name(pname: str) -> bool:
@@ -371,7 +386,32 @@ class CallGraphGenerator:
 
         else:
             # === Paragraph-Driven Procedures ===
-            para_list = self.model.paragraphs
+            para_list: List[ParagraphNode] = []
+            para_names_set = {p.name.upper().strip() for p in self.model.paragraphs}
+
+            # 1. Include section-level entry procedures (sections with direct statements before first paragraph)
+            for s in self.model.sections:
+                s_up = s.name.upper().strip()
+                if s.statements and s_up not in para_names_set:
+                    para_list.append(ParagraphNode(
+                        name=s.name,
+                        statements=s.statements,
+                        location=s.location,
+                        section_parent=s.name,
+                    ))
+
+            para_list.extend(self.model.paragraphs)
+
+            # Pre-populate section names in symbol_to_proc so calls to section headers resolve
+            for s in self.model.sections:
+                s_up = s.name.upper().strip()
+                if s.statements and s_up not in para_names_set:
+                    symbol_to_proc[s_up] = s_up
+                elif s.paragraph_names:
+                    symbol_to_proc[s_up] = s.paragraph_names[0].upper().strip()
+                else:
+                    symbol_to_proc[s_up] = s_up
+
             exit_to_parent_map: Dict[str, str] = {}
 
             for i, p in enumerate(para_list):
@@ -628,6 +668,11 @@ class CallGraphGenerator:
             ep_proc = symbol_to_proc.get(reach_ep.upper().strip())
             if ep_proc and ep_proc in nodes:
                 entry_point_name = ep_proc
+
+        if not is_section_based and para_list:
+            first_p_name = para_list[0].name.upper().strip()
+            if first_p_name in nodes and any(s.name.upper().strip() == first_p_name and s.statements for s in self.model.sections):
+                entry_point_name = first_p_name
 
         if not entry_point_name and nodes:
             entry_point_name = next(iter(nodes.keys()))

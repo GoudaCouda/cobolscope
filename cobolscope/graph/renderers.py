@@ -275,12 +275,12 @@ def render_svg(dot_code: str) -> str:
             stderr=subprocess.PIPE,
             text=True,
             encoding="utf-8",
-            timeout=10,
+            timeout=30,
             check=True,
         )
         return res.stdout
     except subprocess.TimeoutExpired as te:
-        raise RuntimeError("Graphviz 'dot' execution timed out after 10 seconds.") from te
+        raise RuntimeError("Graphviz 'dot' execution timed out after 30 seconds.") from te
     except subprocess.CalledProcessError as cpe:
         raise RuntimeError(
             f"Graphviz 'dot' execution failed (exit code {cpe.returncode}). Stderr:\n{cpe.stderr}"
