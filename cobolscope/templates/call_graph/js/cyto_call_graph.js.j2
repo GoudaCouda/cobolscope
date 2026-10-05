@@ -348,8 +348,9 @@
       }
     }
 
-    if (layoutSelect) {
-      layoutSelect.addEventListener("change", (e) => {
+    const activeLayoutSelect = typeof layoutSelect !== "undefined" ? layoutSelect : document.getElementById("layoutSelect");
+    if (activeLayoutSelect) {
+      activeLayoutSelect.addEventListener("change", (e) => {
         applyCytoLayout(e.target.value);
       });
     }
@@ -369,7 +370,7 @@
           cy.add(targetElements);
         });
 
-        const activeLayout = layoutSelect ? layoutSelect.value : "dagre";
+        const activeLayout = activeLayoutSelect ? activeLayoutSelect.value : "dagre";
         applyCytoLayout(activeLayout);
       });
     }

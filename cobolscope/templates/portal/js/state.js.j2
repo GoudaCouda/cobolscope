@@ -72,8 +72,6 @@
     function showBlankState() {
       selectedProgramId = null;
       document.querySelectorAll(".program-item").forEach(el => el.classList.remove("active"));
-      if (currentTitleEl) currentTitleEl.textContent = "—";
-      if (currentChipsEl) currentChipsEl.innerHTML = "";
       if (tabGraph) {
         tabGraph.disabled = true;
         tabGraph.classList.remove("active");

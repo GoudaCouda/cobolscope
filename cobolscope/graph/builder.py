@@ -55,6 +55,10 @@ from cobolscope.rules import GlobalRules, EffectiveProgramRules
 from .utils import tarjan_scc
 from .heuristics import compute_graph_metrics, calculate_layout_heuristics, GraphMetrics, LayoutHeuristics
 from .cloning import identify_clone_candidates, apply_node_cloning
+from cobolscope.assets import AssetMode
+
+
+
 
 
 class CallGraphGenerator:
@@ -791,6 +795,8 @@ class CallGraphGenerator:
         self,
         svg_content: Optional[str] = None,
         initial_engine: str = "cytoscape",
+        asset_mode: Union[str, AssetMode] = "inline",
+        assets_rel_path: str = "assets",
     ) -> str:
         cyto_elements = self.to_cytoscape_elements()
         return render_html(
@@ -804,6 +810,8 @@ class CallGraphGenerator:
             cloned_elements=self.cloned_cyto_elements,
             canonical_elements=self.canonical_cyto_elements,
             enable_cloning=self.enable_cloning,
+            asset_mode=asset_mode,
+            assets_rel_path=assets_rel_path,
         )
 
     def to_json(self, indent: int = 2) -> str:
@@ -832,6 +840,8 @@ def generate_call_graph(
     nodesep: Optional[float] = None,
     ranksep: Optional[float] = None,
     dynamic_heuristics: bool = True,
+    asset_mode: Union[str, AssetMode] = "inline",
+    assets_rel_path: str = "assets",
 ) -> str:
     """
     Convenience functional API to generate Level-2 Procedure Call Graphs
@@ -861,7 +871,7 @@ def generate_call_graph(
 
     fmt = format.lower().strip()
     if fmt in ("html", "htm"):
-        content = generator.to_html(initial_engine=initial_engine)
+        content = generator.to_html(initial_engine=initial_engine, asset_mode=asset_mode, assets_rel_path=assets_rel_path)
     elif fmt in ("cytoscape", "cyto"):
         content = generator.to_cytoscape_json()
     elif fmt in ("svg", "image"):
@@ -871,7 +881,8 @@ def generate_call_graph(
     elif fmt in ("json", "ir"):
         content = generator.to_json()
     else:
-        content = generator.to_html(initial_engine=initial_engine)
+        content = generator.to_html(initial_engine=initial_engine, asset_mode=asset_mode, assets_rel_path=assets_rel_path)
+
 
     if output_path:
         out_file = Path(output_path)

@@ -9,12 +9,14 @@ from __future__ import annotations
 import html
 import subprocess
 from pathlib import Path
-from typing import Any, Dict, List, Optional
+from typing import Any, Dict, List, Optional, Union
 
 import jinja2
 
 from .models import CallGraph, CallGraphNode, GraphNodeType, GraphEdgeType
 from .classifier import CLUSTER_THEMES
+from cobolscope.assets import AssetMode, resolve_asset_mode, get_bundled_css, get_bundled_js
+
 
 
 def format_dot_node(node: CallGraphNode, indent: int = 4, compact: bool = True) -> str:
@@ -264,7 +266,7 @@ def render_dot(
 
 
 def render_svg(dot_code: str) -> str:
-    """Compiles DOT to SVG using local Graphviz dot binary."""
+    """Compiles DOT to SVG using local Graphviz dot binary with execution timeout guard."""
     try:
         res = subprocess.run(
             ["dot", "-Tsvg"],
@@ -273,9 +275,12 @@ def render_svg(dot_code: str) -> str:
             stderr=subprocess.PIPE,
             text=True,
             encoding="utf-8",
+            timeout=10,
             check=True,
         )
         return res.stdout
+    except subprocess.TimeoutExpired as te:
+        raise RuntimeError("Graphviz 'dot' execution timed out after 10 seconds.") from te
     except subprocess.CalledProcessError as cpe:
         raise RuntimeError(
             f"Graphviz 'dot' execution failed (exit code {cpe.returncode}). Stderr:\n{cpe.stderr}"
@@ -284,6 +289,7 @@ def render_svg(dot_code: str) -> str:
         raise RuntimeError(
             f"Graphviz 'dot' execution failed. Ensure Graphviz is installed and on PATH: {e2}"
         ) from e2
+
 
 
 def render_cytoscape_elements(
@@ -440,8 +446,10 @@ def render_html(
     cloned_elements: Optional[List[Dict[str, Any]]] = None,
     canonical_elements: Optional[List[Dict[str, Any]]] = None,
     enable_cloning: bool = False,
+    asset_mode: Union[str, AssetMode] = "inline",
+    assets_rel_path: str = "assets",
 ) -> str:
-    """Renders standalone interactive HTML visualization powered by Cytoscape.js with dynamic heuristics."""
+    """Renders standalone interactive HTML visualization powered by Cytoscape.js with dynamic heuristics and dual-mode bundling."""
     from .heuristics import compute_graph_metrics, calculate_layout_heuristics
     if metrics is None:
         metrics = compute_graph_metrics(graph)
@@ -472,6 +480,26 @@ def render_html(
     canonical_json = json.dumps(canonical_elements or (cyto_elements if not enable_cloning else []))
     clone_count = len([e for e in (cloned_elements or []) if e.get("data", {}).get("is_clone")])
 
+    resolved_mode = resolve_asset_mode(asset_mode)
+    if resolved_mode == AssetMode.INLINE:
+        bundled_css = get_bundled_css()
+        bundled_js = get_bundled_js(monolithic=True)
+    else:
+        bundled_css = ""
+        bundled_js = ""
+
+    payload = {
+        "graph": graph.model_dump(),
+        "cytoElements": cyto_elements or [],
+        "canonicalElements": canonical_elements or (cyto_elements if not enable_cloning else []),
+        "clonedElements": cloned_elements or [],
+        "initialEnableCloning": enable_cloning,
+        "layoutHeuristics": heuristics.to_dict() if heuristics else {},
+        "initialEnginePreference": initial_engine,
+        "sourceCodeRaw": graph.source_code or "",
+    }
+    graph_payload_json = json.dumps(payload)
+
     return template.render(
         program_id=graph.program_id,
         graph=graph,
@@ -489,7 +517,13 @@ def render_html(
         source_code=graph.source_code or "",
         heuristics=heuristics,
         metrics=metrics,
+        graph_payload_json=graph_payload_json,
+        asset_mode=resolved_mode.value,
+        assets_rel_path=assets_rel_path,
+        bundled_css=bundled_css,
+        bundled_js=bundled_js,
     )
+
 
 
 

@@ -31,4 +31,10 @@ where = ["."]
 include = ["cobolscope*"]
 
 [tool.setuptools.package-data]
-cobolscope = ["templates/*.j2", "lib/*.jar"]
+cobolscope = [
+    "templates/*.j2",
+    "templates/**/*.j2",
+    "templates/assets/*",
+    "lib/*.jar",
+]
+

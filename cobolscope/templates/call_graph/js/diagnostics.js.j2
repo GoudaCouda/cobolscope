@@ -7,6 +7,10 @@
         CobolScopeLog.showOnScreenError(msg);
       },
       showOnScreenError: (msg) => {
+        if (!document.body) {
+          console.error("[CobolScope Early Error]", msg);
+          return;
+        }
         let errBox = document.getElementById("cobolscopeErrorBanner");
         if (!errBox) {
           errBox = document.createElement("div");
@@ -30,5 +34,6 @@
     };
 
     window.addEventListener("error", (e) => {
+      if (e.message && e.message.includes("Script error")) return;
       CobolScopeLog.error(`Uncaught script error: ${e.message} at ${e.filename || 'script'}:${e.lineno}`);
     });

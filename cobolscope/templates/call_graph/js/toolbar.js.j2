@@ -1,14 +1,20 @@
-    document.getElementById("btnZoomIn").addEventListener("click", () => {
-      if (cy) {
-        cy.zoom(cy.zoom() * 1.2);
-      }
-    });
+    const btnZoomIn = document.getElementById("btnZoomIn");
+    if (btnZoomIn) {
+      btnZoomIn.addEventListener("click", () => {
+        if (cy) {
+          cy.zoom(cy.zoom() * 1.2);
+        }
+      });
+    }
 
-    document.getElementById("btnZoomOut").addEventListener("click", () => {
-      if (cy) {
-        cy.zoom(cy.zoom() * 0.8);
-      }
-    });
+    const btnZoomOut = document.getElementById("btnZoomOut");
+    if (btnZoomOut) {
+      btnZoomOut.addEventListener("click", () => {
+        if (cy) {
+          cy.zoom(cy.zoom() * 0.8);
+        }
+      });
+    }
 
     const btnZoomReset = document.getElementById("btnZoomReset");
     if (btnZoomReset) {
@@ -225,14 +231,22 @@
     window.addEventListener("hashchange", checkUrlForRoutineSelection);
 
     // Initialize View on DOM Ready
-    window.addEventListener("DOMContentLoaded", () => {
-      CobolScopeLog.info("DOM Ready. Initializing Cytoscape...");
-      initCytoscape();
+    function bootstrapCallGraph() {
+      CobolScopeLog.info("Initializing Cytoscape Call Graph view...");
+      if (typeof initCytoscape === "function") {
+        initCytoscape();
+      }
       const hasUrlRoutine = checkUrlForRoutineSelection();
-      if (!hasUrlRoutine) {
+      if (!hasUrlRoutine && typeof graphData !== "undefined" && graphData && graphData.nodes) {
         const startKey = graphData.entry_point || Object.keys(graphData.nodes)[0];
-        if (startKey) {
+        if (startKey && typeof selectNode === "function") {
           selectNode(startKey);
         }
       }
-    });
+    }
+
+    if (document.readyState === "loading") {
+      window.addEventListener("DOMContentLoaded", bootstrapCallGraph);
+    } else {
+      bootstrapCallGraph();
+    }

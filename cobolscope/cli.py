@@ -263,6 +263,13 @@ def build_arg_parser() -> argparse.ArgumentParser:
         default=True,
         help="Disable dynamic topology-based layout heuristics (forces fixed defaults).",
     )
+    graph_group.add_argument(
+        "--asset-mode",
+        choices=["auto", "inline", "external"],
+        default="auto",
+        help="Asset distribution mode for HTML graph views: 'auto' (inlines for single-file, external for batch), 'inline', or 'external'.",
+    )
+
 
 
     # ---------------------------------------------------------
@@ -534,6 +541,16 @@ def main(argv: Optional[Sequence[str]] = None) -> int:
 
             log_info(f"Rendering Call Graph (format={args.graph_format})...")
             gen_start = time.perf_counter()
+
+            from cobolscope.assets import resolve_asset_mode, copy_static_assets, AssetMode
+            effective_asset_mode = resolve_asset_mode(args.asset_mode, is_batch=False, output_path=args.output)
+            assets_rel_path = "assets"
+            if effective_asset_mode == AssetMode.EXTERNAL and args.output:
+                out_p = Path(args.output).resolve()
+                assets_dir = out_p.parent / "assets"
+                copy_static_assets(assets_dir)
+                log_verbose(f"Copied static assets to {assets_dir}")
+
             content = generate_call_graph(
                 model,
                 format=args.graph_format,
@@ -555,7 +572,10 @@ def main(argv: Optional[Sequence[str]] = None) -> int:
                 nodesep=args.nodesep,
                 ranksep=args.ranksep,
                 dynamic_heuristics=args.dynamic_heuristics,
+                asset_mode=effective_asset_mode.value,
+                assets_rel_path=assets_rel_path,
             )
+
 
             gen_dur = (time.perf_counter() - gen_start) * 1000
             log_verbose(f"Call Graph rendered in {gen_dur:.2f} ms")
