@@ -11999,6 +11999,7 @@ function renderCfgInspectorSection(node) {
             padding: 30
           }
         });
+        window.cyLevel3 = cyLevel3;
 
         // Click on expandable node to reveal all operations without zooming out the screen
         let isLayoutRunning = false;
@@ -12467,8 +12468,8 @@ function renderCfgInspectorSection(node) {
       splitterCanvasCode.style.display = "block";
       if (btnToggleCodeSplit) btnToggleCodeSplit.classList.add("active");
 
-      // Retrieve persisted ratio or use strict 65% Graph / 35% Code default
-      let ratio = 65;
+      // Retrieve persisted ratio or use comfortable 42% Graph / 58% Code default
+      let ratio = 42;
       const savedRatio = localStorage.getItem("cobolscope_code_split_ratio");
       if (savedRatio) {
         const parsed = parseFloat(savedRatio);

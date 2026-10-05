@@ -105,8 +105,8 @@ class TestCodeViewerAndSplitView(unittest.TestCase):
         self.assertIn("btnViewRoutineCode", html)
         self.assertIn("btn-view-routine-code", html)
 
-        # Verify 65/35 ratio default in code_viewer script
-        self.assertIn("ratio = 65", html)
+        # Verify 42/58 ratio default in code_viewer script (wider code pane)
+        self.assertIn("ratio = 42", html)
         self.assertIn("100 - ratio", html)
         self.assertIn("cobolscope_code_split_ratio", html)
 

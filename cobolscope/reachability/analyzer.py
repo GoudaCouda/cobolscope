@@ -52,16 +52,17 @@ class PushdownReachabilityAnalyzer:
         # Index paragraphs in physical lexical order
         self.paragraphs = list(model.paragraphs)
         para_names_set = {p.name.upper().strip() for p in model.paragraphs}
-        for sec in reversed(model.sections):
+        for sec in model.sections:
             sec_up = sec.name.upper().strip()
             if sec.statements and sec_up not in para_names_set:
-                self.paragraphs.insert(0, ParagraphNode(
+                self.paragraphs.append(ParagraphNode(
                     name=sec.name,
                     statements=sec.statements,
                     location=sec.location,
                     section_parent=sec.name,
                 ))
 
+        self.paragraphs.sort(key=lambda p: (p.location.start_line if p.location and p.location.start_line is not None else 0))
         self.para_names = [p.name.upper().strip() for p in self.paragraphs]
         self.para_map: Dict[str, ParagraphNode] = {
             p.name.upper().strip(): p for p in self.paragraphs

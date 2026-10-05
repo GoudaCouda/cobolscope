@@ -129,8 +129,8 @@ def build_arg_parser() -> argparse.ArgumentParser:
     controls_group.add_argument(
         "--cluster-mode",
         choices=["auto", "none", "sections", "semantic"],
-        default="auto",
-        help="Clustering hierarchy: auto, sections, semantic, none (default: auto).",
+        default="none",
+        help="Clustering hierarchy: none, auto, sections, semantic (default: none).",
     )
     controls_group.add_argument(
         "--disentangle",
@@ -214,10 +214,17 @@ def build_arg_parser() -> argparse.ArgumentParser:
         help=argparse.SUPPRESS,
     )
     parser.add_argument(
+        "--cluster",
+        action="store_true",
+        dest="enable_clustering",
+        default=False,
+        help=argparse.SUPPRESS,
+    )
+    parser.add_argument(
         "--no-cluster",
         action="store_false",
         dest="enable_clustering",
-        default=True,
+        default=False,
         help=argparse.SUPPRESS,
     )
     parser.add_argument(
