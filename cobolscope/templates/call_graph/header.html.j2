@@ -78,8 +78,8 @@
       <!-- Layout Dropdown (Cytoscape) & Disentangle Toggle -->
       <div id="cytoLayoutGroup" style="display:flex; align-items:center; gap:8px;">
         <select class="layout-select" id="layoutSelect" title="Graph Layout Engine">
-          <option value="elk-layered"{% if heuristics and heuristics.recommend_elk %} selected{% endif %}>ELK (Layered)</option>
-          <option value="dagre"{% if not (heuristics and heuristics.recommend_elk) %} selected{% endif %}>Dagre (Hierarchy)</option>
+          <option value="dagre" selected>Dagre (Hierarchy)</option>
+          <option value="elk-layered">ELK (Layered)</option>
           <option value="breadthfirst">Breadthfirst (Layers)</option>
         </select>
         {% if clone_count and clone_count > 0 %}

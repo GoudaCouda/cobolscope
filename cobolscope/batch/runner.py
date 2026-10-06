@@ -163,7 +163,7 @@ def run_batch_directory(
             try:
                 source_text = cobol_file.read_text(encoding="utf-8", errors="replace")
                 model.source_code = source_text
-                source_filename = f"{prog_id}.cbl"
+                source_filename = f"{prog_id}.txt"
                 (out_dir / source_filename).write_text(source_text, encoding="utf-8")
                 artifacts_source = source_filename
             except Exception:
