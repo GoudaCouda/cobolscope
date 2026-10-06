@@ -1,5 +1,6 @@
 /*
  * Copyright (C) 2017, Ulrich Wolffgang <ulrich.wolffgang@proleap.io>
+ * Modifications Copyright (c) 2026 CobolScope Contributors.
  * All rights reserved.
  *
  * This software may be modified and distributed under the terms

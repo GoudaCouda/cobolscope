@@ -1,0 +1,95 @@
+CobolScope
+Copyright (c) 2026 CobolScope Contributors
+This product is licensed under the Apache License, Version 2.0.
+
+================================================================================
+Original Work (Developed from scratch for CobolScope)
+================================================================================
+The following components are original works created specifically for CobolScope
+and are licensed under the Apache License, Version 2.0:
+
+1. CobolScope Core Engine (Python):
+   - All modules in `cobolscope/` (AST hydration, call graph builder, reachability
+     analyzer, CFG generation, data dictionary reconciler, portal generator, CLI).
+   - Test suites in `tests/` and test harness tools in `tests/harness/`.
+   - HTML/CSS/JS Jinja2 templates in `cobolscope/templates/`.
+
+2. Original Java Pipeline & Extraction Classes (`java/`):
+   - `java/AsgSemanticAuditor.java`
+     Custom AST/ASG verification oracle.
+   - `java/CobolTextCleaner.java`
+     Custom token and context string cleaner.
+   - `java/DataDivisionExtractor.java`
+     Custom Data Division, REDEFINES, and memory layout extractor.
+   - `java/HeaderDivisionExtractor.java`
+     Custom Identification & Environment Division extractor.
+   - `java/IrJsonWriter.java`
+     Custom zero-dependency JSON serialization engine.
+   - `java/IrModel.java`
+     Custom Canonical IR Data Transfer Object (DTO) hierarchy.
+   - `java/ProcedureDivisionExtractor.java`
+     Custom Procedure Division hierarchy extractor.
+   - `java/ProLeapCliRunner.java`
+     Custom CLI runner orchestrator and streaming JSON pipeline.
+   - `java/StatementMapper.java`
+     Custom open polymorphic statement mapping engine.
+   - `java/io/proleap/cobol/preprocessor/CobolPreprocessorResult.java`
+     Custom container for preprocessed source and line coordinates.
+   - `java/io/proleap/cobol/preprocessor/CobolSourceMap.java`
+     Custom interval-tree coordinate mapping across copybook expansions.
+   - `java/io/proleap/cobol/preprocessor/CobolSourceMapContext.java`
+     Custom thread-local and global registry for active source maps.
+
+================================================================================
+Modified Derivative Works (Adapted from ProLeap COBOL Parser)
+================================================================================
+This product includes modified software derived from the ProLeap COBOL Parser
+(https://github.com/wrdlbrnft/proleap-cobol-parser):
+
+  Copyright (C) 2017, Ulrich Wolffgang <ulrich.wolffgang@proleap.io>
+  Licensed under the MIT License:
+
+  The following files in `java/io/proleap/` are modified derivative works adapted
+  to integrate CobolScope source coordinate mapping:
+  - `java/io/proleap/cobol/asg/runner/impl/CobolParserRunnerImpl.java`
+  - `java/io/proleap/cobol/preprocessor/impl/CobolPreprocessorImpl.java`
+  - `java/io/proleap/cobol/preprocessor/sub/document/CobolDocumentParserListener.java`
+  - `java/io/proleap/cobol/preprocessor/sub/document/impl/CobolDocumentContext.java`
+  - `java/io/proleap/cobol/preprocessor/sub/document/impl/CobolDocumentParserImpl.java`
+  - `java/io/proleap/cobol/preprocessor/sub/document/impl/CobolDocumentParserListenerImpl.java`
+  - `java/io/proleap/cobol/preprocessor/sub/line/writer/impl/CobolLineWriterImpl.java`
+
+  Modifications: Copyright (c) 2026 CobolScope Contributors.
+
+================================================================================
+Third-Party Bundled & Runtime Dependencies
+================================================================================
+This product bundles or integrates with the following third-party libraries:
+
+1. ProLeap COBOL Parser (proleap-cobol-parser)
+   - Copyright (C) 2017, Ulrich Wolffgang
+   - License: MIT License (https://opensource.org/licenses/MIT)
+
+2. ANTLR 4 Runtime (org.antlr:antlr4-runtime)
+   - Copyright (c) 2012 Terence Parr and Sam Harwell
+   - License: BSD 3-Clause License (https://www.antlr.org/license.html)
+
+3. Cytoscape.js
+   - Copyright (c) 2016-2024 The Cytoscape Consortium
+   - License: MIT License (https://opensource.org/licenses/MIT)
+
+4. Dagre & Cytoscape-Dagre
+   - Copyright (c) 2012-2014 Chris Pettitt
+   - License: MIT License (https://opensource.org/licenses/MIT)
+
+5. Eclipse Layout Kernel (ELK / elkjs)
+   - Copyright (c) 2017-2024 Kiel University and others
+   - License: Eclipse Public License 2.0 (EPL-2.0) / MIT License
+
+6. Pydantic
+   - Copyright (c) 2017 to present, Samuel Colvin and other contributors
+   - License: MIT License (https://opensource.org/licenses/MIT)
+
+7. Jinja2
+   - Copyright 2007 by the Pallets team
+   - License: BSD 3-Clause License
