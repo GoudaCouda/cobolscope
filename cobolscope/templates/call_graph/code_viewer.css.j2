@@ -16,13 +16,13 @@
     }
 
     .btn-code-toggle:hover {
-      background: #F1F5F9;
-      border-color: #CBD5E1;
+      background: var(--surface-hover);
+      border-color: var(--border-color);
     }
 
     .btn-code-toggle.active {
       background: var(--primary-light);
-      border-color: rgba(0, 120, 212, 0.4);
+      border-color: var(--primary-border);
       color: var(--primary);
     }
 
@@ -43,13 +43,13 @@
     }
 
     .btn-inspector-toggle:hover {
-      background: #F1F5F9;
-      border-color: #CBD5E1;
+      background: var(--surface-hover);
+      border-color: var(--border-color);
     }
 
     .btn-inspector-toggle.active {
       background: var(--primary-light);
-      border-color: rgba(0, 120, 212, 0.4);
+      border-color: var(--primary-border);
       color: var(--primary);
     }
 
@@ -67,7 +67,7 @@
     .code-pane-header {
       height: 38px;
       min-height: 38px;
-      background: #F8FAFC;
+      background: var(--bg-primary);
       border-bottom: 1px solid var(--border-color);
       padding: 0 12px;
       display: flex;
@@ -97,7 +97,7 @@
       font-weight: 600;
       color: var(--primary);
       background: var(--primary-light);
-      border: 1px solid rgba(0, 120, 212, 0.25);
+      border: 1px solid var(--primary-border);
       padding: 1px 6px;
       border-radius: 4px;
       white-space: nowrap;
@@ -186,7 +186,7 @@
     }
 
     .col-guide {
-      color: #94A3B8;
+      color: var(--text-muted);
     }
 
     .col-guide:hover {
@@ -226,7 +226,7 @@
     }
 
     table.cobol-code-table tr:hover td {
-      background-color: #F8FAFC;
+      background-color: var(--surface-hover);
     }
 
     td.code-line-num {
@@ -234,8 +234,8 @@
       min-width: 50px;
       text-align: right;
       padding: 0 8px;
-      color: #94A3B8;
-      background: #F8FAFC;
+      color: var(--text-muted);
+      background: var(--bg-primary);
       border-right: 1px solid var(--border-color);
       user-select: none;
       cursor: pointer;
@@ -249,16 +249,16 @@
     td.code-line-text {
       padding: 0 10px;
       white-space: pre;
-      color: #1E293B;
+      color: var(--text-primary);
     }
 
     tr.line-highlighted td.code-line-text {
-      background: #EFF6FC !important;
-      color: #0F172A;
+      background: var(--primary-light) !important;
+      color: var(--text-primary);
     }
 
     tr.line-highlighted td.code-line-num {
-      background: #E0F2FE !important;
+      background: var(--primary-border) !important;
       color: var(--primary);
       font-weight: 700;
     }
@@ -275,7 +275,7 @@
     }
 
     .code-word:hover {
-      background-color: rgba(0, 120, 212, 0.12);
+      background-color: var(--primary-light);
     }
 
     .code-word.var-highlight {

@@ -1,20 +1,22 @@
     :root {
-      --bg-primary: #F8FAFC;
+      --bg-primary: #F4F6F8;
       --bg-surface: #FFFFFF;
-      --border-color: #E2E8F0;
-      --border-subtle: #F1F5F9;
-      --text-primary: #0F172A;
-      --text-secondary: #475569;
-      --text-muted: #94A3B8;
-      --primary: #0078D4;
-      --primary-hover: #106EBE;
-      --primary-light: #EFF6FC;
-      --success: #16A34A;
-      --success-light: #F0FDF4;
-      --warning: #D97706;
-      --warning-light: #FFFBEB;
-      --danger: #DC2626;
-      --danger-light: #FEF2F2;
+      --surface-hover: #ECEFF2;
+      --border-color: #D3D9E0;
+      --border-subtle: #E8ECEF;
+      --text-primary: #1A202C;
+      --text-secondary: #4A5568;
+      --text-muted: #718096;
+      --primary: #0056B3;
+      --primary-hover: #004494;
+      --primary-light: #EBF3FC;
+      --primary-border: #BCD7F5;
+      --success: #198754;
+      --success-light: #E8F5E9;
+      --warning: #B76E00;
+      --warning-light: #FFF8E1;
+      --danger: #C82333;
+      --danger-light: #FDE8E8;
       --sidebar-width: 330px;
     }
 
@@ -104,7 +106,7 @@
       width: 36px !important;
       min-width: 36px !important;
       cursor: pointer;
-      background: #F8FAFC;
+      background: var(--bg-primary);
     }
 
     .portal-sidebar.collapsed .sidebar-header-row,
@@ -168,9 +170,17 @@
       background: transparent;
       color: var(--text-muted);
       cursor: pointer;
-      font-size: 14px;
-      line-height: 1;
       display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 2px;
+      border-radius: 3px;
+      transition: color 0.1s, background-color 0.1s;
+    }
+
+    .search-clear-btn:hover {
+      color: var(--text-primary);
+      background: var(--surface-hover);
     }
 
     .sidebar-filter-bar {
@@ -279,7 +289,7 @@
     }
 
     .badge-artifact {
-      background: #E2E8F0;
+      background: var(--surface-hover);
       color: var(--text-secondary);
     }
 
@@ -398,13 +408,13 @@
       text-decoration: none;
       padding: 4px 8px;
       border-radius: 4px;
-      border: 1px solid rgba(0, 120, 212, 0.2);
+      border: 1px solid var(--primary-border);
       background: var(--primary-light);
       transition: background 0.15s;
     }
 
     .action-link:hover {
-      background: #E0F2FE;
+      background: var(--primary-border);
     }
 
     .viewer-frame-container {
@@ -430,7 +440,7 @@
       background: #FFFFFF;
     }
 
-    /* Blank Initial State Container */
+    /* Blank Initial State Container: Integrated Workbench Cue */
     .blank-state-container {
       display: flex;
       flex-direction: column;
@@ -438,64 +448,101 @@
       width: 100%;
       align-items: center;
       justify-content: center;
-      padding: 40px 20px;
-      text-align: center;
+      padding: 48px 24px;
       background: var(--bg-primary);
+      user-select: none;
     }
 
-    .blank-state-card {
-      max-width: 460px;
-      background: #FFFFFF;
-      border: 1px solid var(--border-color);
-      border-radius: 12px;
-      padding: 40px 32px;
-      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
+    .workbench-empty-view {
+      max-width: 480px;
+      width: 100%;
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: 12px;
       text-align: center;
+      gap: 24px;
     }
 
-    .blank-state-icon {
-      width: 56px;
-      height: 56px;
-      border-radius: 50%;
-      background: var(--primary-light);
-      color: var(--primary);
+    .workbench-empty-header {
       display: flex;
+      flex-direction: column;
       align-items: center;
-      justify-content: center;
-      margin-bottom: 4px;
+      gap: 8px;
     }
 
-    .blank-state-title {
-      font-size: 18px;
+    .workbench-watermark-tag {
+      font-size: 11px;
       font-weight: 700;
-      color: var(--text-primary);
-      margin: 0;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+      padding: 2px 8px;
+      background: var(--bg-surface);
+      border: 1px solid var(--border-color);
+      border-radius: 3px;
     }
 
-    .blank-state-subtitle {
+    .workbench-empty-title {
+      font-size: 16px;
+      font-weight: 600;
+      color: var(--text-primary);
+      margin: 4px 0 0;
+      letter-spacing: -0.01em;
+    }
+
+    .workbench-empty-desc {
       font-size: 13px;
       color: var(--text-secondary);
       line-height: 1.5;
-      max-width: 360px;
+      max-width: 400px;
       margin: 0;
     }
 
-    .blank-state-hint {
+    .workbench-shortcuts-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      width: 100%;
+      max-width: 360px;
+      padding: 12px 16px;
+      background: var(--bg-surface);
+      border: 1px solid var(--border-color);
+      border-radius: 4px;
+    }
+
+    .shortcut-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
       font-size: 12px;
-      font-weight: 500;
-      color: var(--primary);
-      background: var(--primary-light);
-      border: 1px solid rgba(0, 120, 212, 0.15);
-      border-radius: 20px;
-      padding: 5px 14px;
-      margin-top: 8px;
+      gap: 12px;
+      padding: 3px 0;
+    }
+
+    .shortcut-keys {
       display: inline-flex;
       align-items: center;
-      gap: 6px;
+      gap: 4px;
+    }
+
+    .shortcut-keys kbd {
+      display: inline-block;
+      padding: 2px 6px;
+      font-size: 11px;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+      font-weight: 600;
+      line-height: 1.2;
+      color: var(--text-primary);
+      background: var(--bg-primary);
+      border: 1px solid var(--border-color);
+      border-radius: 3px;
+      box-shadow: 0 1px 0 rgba(0, 0, 0, 0.08);
+    }
+
+    .shortcut-label {
+      color: var(--text-secondary);
+      text-align: right;
     }
 
     /* Fallback / Error Message Container */
@@ -539,8 +586,8 @@
     }
 
     .error-trace {
-      background: #1E293B;
-      color: #F8FAFC;
+      background: #111827;
+      color: #F3F4F6;
       padding: 12px;
       border-radius: 6px;
       font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;

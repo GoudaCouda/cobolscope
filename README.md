@@ -63,27 +63,23 @@ Browse all programs in a directory from a sidebar with routine counters, status 
 ---
 
 ### 2. Level-2 Procedure Call Graphs with Wide Split-Screen Code (`Alt+C`)
-Understand the structure of complex programs at a glance with a clean, unclustered routine hierarchy. Graph nodes display routine names, entry points, cyclomatic complexity (CC), statement counts, and data flow lineage with directed control transfer edges. Press **`Alt+C`** or click **View Routine Code** to open the spacious, wide-aspect split-screen source code viewer centered directly on the selected procedure.
+Understand routine hierarchies at a glance. Graph nodes display cyclomatic complexity (CC), statement counts, and directed control transfers. Press **`Alt+C`** or click **View Routine Code** to open the wide-aspect source code viewer centered on the selected procedure.
 
-![Call Graph Split Code](docs/images/call_graph_split_code.png)
+![Call Graph Split Code](docs/images/call_graph_walkthrough.gif)
 
 ---
 
 ### 3. Level-3 Intra-Procedural CFG Flowcharts
-Drill down into complex procedures with branching logic. For procedures with conditional splits (`IF`, `EVALUATE`) or loop iterations (`PERFORM UNTIL`), CobolScope generates fine-grained statement-level flowcharts modeling decision diamonds, execution paths, basic block operations, and terminal exits.
+Drill down into complex routines with branching logic (`IF`, `EVALUATE`, `PERFORM UNTIL`). CobolScope generates fine-grained statement-level flowcharts modeling decision diamonds, execution paths, loop iterations, and terminal exits.
 
-![Level 3 CFG Flowchart](docs/images/level3_flowchart.png)
+![Level 3 CFG Flowchart](docs/images/level3_flowchart.svg)
 
 ---
 
 ### 4. Binary Data Dictionaries with Sliding Code Drawer
-Inspect every field across `WORKING-STORAGE`, `LINKAGE`, and `FILE SECTION`. Click any variable row to slide open the source code drawer, which instantly highlights the field definition line in blue and highlights the variable in yellow.
+Inspect field structures across `WORKING-STORAGE`, `LINKAGE`, and `FILE SECTION` with exact byte offsets, `REDEFINES` overlays, and Where-Used cross references. Click any variable row to slide open the code drawer with automatic line and variable occurrence highlighting.
 
-![Data Dictionary Split View](docs/images/data_dictionary_split.png)
-
-- **Exact Byte Offsets & Lengths**: Accurately tracks base offsets and memory overlay starting points.
-- **Where-Used Cross-References**: See every paragraph that references a variable. Click a routine breadcrumb to jump directly to its procedure code.
-- **Type & Section Filters**: Instantly filter down to packed decimals, alphanumeric fields, or specific divisions.
+![Data Dictionary Split View](docs/images/data_dictionary_walkthrough.gif)
 
 ---
 

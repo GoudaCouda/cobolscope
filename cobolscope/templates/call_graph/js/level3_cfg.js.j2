@@ -22,12 +22,12 @@
         return;
       }
 
-      CobolScopeLog.info(`Opening Level 3 CFG modal for routine: ${node.name}`);
+      CobolScopeLog.info(`Opening logic flowchart modal for routine: ${node.name}`);
       selectedRoutineNode = node;
       const modal = document.getElementById("cfgModalBackdrop");
       if (!modal) return;
 
-      document.getElementById("cfgModalTitle").textContent = `Level 3 Intra-Procedure Flow: ${node.name}`;
+      document.getElementById("cfgModalTitle").textContent = `Logic Flowchart: ${node.name}`;
       document.getElementById("cfgModalSubtitle").textContent = `Section: ${node.section || "DEFAULT"} | Complexity (CC): ${node.cyclomatic_complexity} | Statements: ${node.statement_count}`;
       modal.style.display = "flex";
 
@@ -113,10 +113,10 @@
               selector: "node.cfg-loop_header",
               style: {
                 "shape": "hexagon",
-                "background-color": "#F5F3FF",
-                "border-color": "#7C3AED",
+                "background-color": "#FFF8E1",
+                "border-color": "#B76E00",
                 "border-width": 2.5,
-                "color": "#5B21B6",
+                "color": "#7D4B00",
                 "padding": 16
               }
             },
@@ -124,10 +124,10 @@
               selector: "node.cfg-basic_block",
               style: {
                 "shape": "round-rectangle",
-                "background-color": "#F8FAFC",
-                "border-color": "#3B82F6",
+                "background-color": "#F4F6F8",
+                "border-color": "#0056B3",
                 "border-width": 2,
-                "color": "#0F172A",
+                "color": "#1A202C",
                 "font-family": "ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace",
                 "font-size": 10.5,
                 "text-halign": "center",
@@ -168,10 +168,10 @@
             {
               selector: "node.cfg-call_site",
               style: {
-                "background-color": "#F5F3FF",
-                "border-color": "#7C3AED",
+                "background-color": "#EBF3FC",
+                "border-color": "#0056B3",
                 "border-width": 2,
-                "color": "#5B21B6",
+                "color": "#004494",
                 "shape": "round-rectangle"
               }
             },
@@ -181,8 +181,8 @@
                 "curve-style": "bezier",
                 "target-arrow-shape": "triangle",
                 "arrow-scale": 1.1,
-                "line-color": "#94A3B8",
-                "target-arrow-color": "#94A3B8",
+                "line-color": "#A0AEC0",
+                "target-arrow-color": "#A0AEC0",
                 "width": 2,
                 "label": "data(label)",
                 "font-size": 9,
@@ -222,9 +222,9 @@
             {
               selector: "edge.cfg-edge-loop-body",
               style: {
-                "line-color": "#7C3AED",
-                "target-arrow-color": "#7C3AED",
-                "color": "#6D28D9"
+                "line-color": "#B76E00",
+                "target-arrow-color": "#B76E00",
+                "color": "#7D4B00"
               }
             },
             {

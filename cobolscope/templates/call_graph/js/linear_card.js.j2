@@ -4,96 +4,39 @@ function renderCfgInspectorSection(node) {
   if (!secEl) return;
   secEl.innerHTML = "";
 
+  const btnFlow = document.getElementById("btnOpenFlowchart") || document.getElementById("btnOpenLevel3");
+  const btnFlowText = document.getElementById("btnOpenFlowchartText");
+
   if (node.is_cfg_eligible) {
-    // --- Branching Routine (CC > 1): Prompt for Level 3 Flowchart Modal ---
-    const eligibleCard = document.createElement("div");
-    eligibleCard.style.background = "#FFFFFF";
-    eligibleCard.style.border = "1px solid #CBD5E1";
-    eligibleCard.style.borderRadius = "8px";
-    eligibleCard.style.padding = "12px";
-    eligibleCard.style.boxShadow = "0 1px 3px rgba(0,0,0,0.05)";
-
-    const headerDiv = document.createElement("div");
-    headerDiv.style.display = "flex";
-    headerDiv.style.alignItems = "center";
-    headerDiv.style.justifyContent = "space-between";
-    headerDiv.style.marginBottom = "8px";
-
-    const titleDiv = document.createElement("div");
-    titleDiv.style.fontWeight = "700";
-    titleDiv.style.fontSize = "0.85rem";
-    titleDiv.style.color = "#0F172A";
-    titleDiv.style.display = "flex";
-    titleDiv.style.alignItems = "center";
-    titleDiv.style.gap = "6px";
-    titleDiv.innerHTML = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#2563EB" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 3h5v5"/><path d="M4 20 21 3"/><path d="M21 16v5h-5"/><path d="m15 15 6 6"/><path d="M4 4l5 5"/></svg><span>Branching Logic</span>';
-
-    headerDiv.appendChild(titleDiv);
-    eligibleCard.appendChild(headerDiv);
-
-    const descDiv = document.createElement("div");
-    descDiv.style.fontSize = "0.75rem";
-    descDiv.style.color = "#64748B";
-    descDiv.style.marginBottom = "10px";
-    descDiv.textContent = "Contains conditional branch points and decision paths.";
-    eligibleCard.appendChild(descDiv);
-
-    const btn = document.createElement("button");
-    btn.className = "btn btn-primary";
-    btn.id = "btnOpenLevel3";
-    btn.style.width = "100%";
-    btn.style.display = "flex";
-    btn.style.alignItems = "center";
-    btn.style.justifyContent = "center";
-    btn.style.gap = "8px";
-    btn.style.padding = "9px 12px";
-    btn.style.fontWeight = "600";
-    btn.innerHTML = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="8" height="8" x="3" y="3" rx="2"/><path d="M7 11v4a2 2 0 0 0 2 2h4"/><rect width="8" height="8" x="13" y="13" rx="2"/></svg><span>View Level 3 Flowchart</span>';
-    btn.onclick = () => openLevel3Modal(node);
-    eligibleCard.appendChild(btn);
-
-    secEl.appendChild(eligibleCard);
+    // --- Branching Routine (CC > 1): Connect to Logic Flowchart Action ---
+    if (btnFlow) {
+      btnFlow.disabled = false;
+      if (btnFlowText) btnFlowText.textContent = "Logic Flowchart";
+      btnFlow.onclick = () => openLevel3Modal(node);
+      btnFlow.title = "View procedure logic flowchart";
+    }
+    secEl.innerHTML = "";
   } else {
-    // --- Linear Routine: Enhanced Linear Summary Card ---
-    const linearCard = document.createElement("div");
-    linearCard.style.background = "#FFFFFF";
-    linearCard.style.border = "1px solid #CBD5E1";
-    linearCard.style.borderRadius = "8px";
-    linearCard.style.padding = "12px";
-    linearCard.style.boxShadow = "0 1px 3px rgba(0,0,0,0.05)";
-
-    // 1. Header
-    const headerDiv = document.createElement("div");
-    headerDiv.style.display = "flex";
-    headerDiv.style.alignItems = "center";
-    headerDiv.style.justifyContent = "space-between";
-    headerDiv.style.marginBottom = "6px";
-
-    const titleDiv = document.createElement("div");
-    titleDiv.style.fontWeight = "700";
-    titleDiv.style.fontSize = "0.85rem";
-    titleDiv.style.color = "#0F172A";
-    titleDiv.style.display = "flex";
-    titleDiv.style.alignItems = "center";
-    titleDiv.style.gap = "6px";
-    titleDiv.innerHTML = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#166534" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/><line x1="3" y1="6" x2="3.01" y2="6"/><line x1="3" y1="12" x2="3.01" y2="12"/><line x1="3" y1="18" x2="3.01" y2="18"/></svg><span>Linear Procedure</span>';
-
-    headerDiv.appendChild(titleDiv);
-    linearCard.appendChild(headerDiv);
-
-    // 2. Subtitle / Narrative
-    const narrativeDiv = document.createElement("div");
-    narrativeDiv.style.fontSize = "0.75rem";
-    narrativeDiv.style.color = "#64748B";
-    narrativeDiv.style.marginBottom = "10px";
-    narrativeDiv.style.lineHeight = "1.3";
-    narrativeDiv.textContent = "Sequential straight-line execution. Statement trace summarized below.";
-    linearCard.appendChild(narrativeDiv);
+    // --- Linear Routine: Connect to Statement Trace Action & Show Clean Inline Trace ---
+    if (btnFlow) {
+      btnFlow.disabled = false;
+      if (btnFlowText) btnFlowText.textContent = "Statement Trace";
+      btnFlow.onclick = () => openLinearCardModal(node);
+      btnFlow.title = "View sequential execution statement trace";
+    }
 
     const stmts = node.cfg_linear_statements || [];
-
-    // 3. Verb Category Distribution Pills
     if (stmts.length > 0) {
+      const sectionDiv = document.createElement("div");
+      sectionDiv.className = "inspector-section";
+      sectionDiv.style.marginTop = "14px";
+
+      const sectionTitle = document.createElement("div");
+      sectionTitle.className = "section-title";
+      sectionTitle.textContent = `Sequential Statements (${stmts.length})`;
+      sectionDiv.appendChild(sectionTitle);
+
+      // Verb Category Distribution Pills
       const verbCounts = {};
       stmts.forEach(s => {
         const v = s.verb || "STATEMENT";
@@ -104,41 +47,27 @@ function renderCfgInspectorSection(node) {
       pillsContainer.style.display = "flex";
       pillsContainer.style.flexWrap = "wrap";
       pillsContainer.style.gap = "4px";
-      pillsContainer.style.marginBottom = "10px";
+      pillsContainer.style.marginBottom = "8px";
 
       Object.entries(verbCounts).forEach(([verb, count]) => {
         const pill = document.createElement("span");
         pill.style.fontSize = "0.68rem";
         pill.style.fontWeight = "600";
         pill.style.padding = "2px 6px";
-        pill.style.borderRadius = "4px";
-        pill.style.background = "#F1F5F9";
-        pill.style.color = "#475569";
-        pill.style.border = "1px solid #E2E8F0";
+        pill.style.borderRadius = "3px";
+        pill.style.background = "var(--bg-primary)";
+        pill.style.color = "var(--text-secondary)";
+        pill.style.border = "1px solid var(--border-color)";
         pill.textContent = `${verb} (${count})`;
         pillsContainer.appendChild(pill);
       });
-      linearCard.appendChild(pillsContainer);
-    }
+      sectionDiv.appendChild(pillsContainer);
 
-    // 4. Formatted Interactive Statement Trace
-    if (stmts.length > 0) {
-      const traceHeader = document.createElement("div");
-      traceHeader.style.display = "flex";
-      traceHeader.style.alignItems = "center";
-      traceHeader.style.justifyContent = "space-between";
-      traceHeader.style.fontSize = "0.7rem";
-      traceHeader.style.fontWeight = "700";
-      traceHeader.style.textTransform = "uppercase";
-      traceHeader.style.color = "#94A3B8";
-      traceHeader.style.marginBottom = "4px";
-      traceHeader.innerHTML = `<span>Statement Trace (${stmts.length})</span>`;
-      linearCard.appendChild(traceHeader);
-
+      // Formatted Interactive Statement Trace
       const traceBox = document.createElement("div");
-      traceBox.style.background = "#F8FAFC";
-      traceBox.style.border = "1px solid #E2E8F0";
-      traceBox.style.borderRadius = "6px";
+      traceBox.style.background = "var(--bg-primary)";
+      traceBox.style.border = "1px solid var(--border-color)";
+      traceBox.style.borderRadius = "4px";
       traceBox.style.padding = "6px";
       traceBox.style.maxHeight = "180px";
       traceBox.style.overflowY = "auto";
@@ -155,7 +84,7 @@ function renderCfgInspectorSection(node) {
         if (idx % 2 === 0) row.style.background = "#FFFFFF";
 
         const lineSpan = document.createElement("span");
-        lineSpan.style.color = "#94A3B8";
+        lineSpan.style.color = "var(--text-muted)";
         lineSpan.style.minWidth = "34px";
         lineSpan.style.fontSize = "0.68rem";
         lineSpan.textContent = s.line ? `L${s.line}` : "L--";
@@ -167,20 +96,20 @@ function renderCfgInspectorSection(node) {
         verbSpan.style.borderRadius = "3px";
 
         if (s.category === "data") {
-          verbSpan.style.background = "#EFF6FC";
-          verbSpan.style.color = "#0078D4";
+          verbSpan.style.background = "#F0F4F8";
+          verbSpan.style.color = "#245882";
         } else if (s.category === "call") {
-          verbSpan.style.background = "#F5F3FF";
-          verbSpan.style.color = "#7C3AED";
+          verbSpan.style.background = "#EBF3FC";
+          verbSpan.style.color = "#0056B3";
         } else if (s.category === "io") {
-          verbSpan.style.background = "#ECFDF5";
-          verbSpan.style.color = "#059669";
+          verbSpan.style.background = "#E8F5E9";
+          verbSpan.style.color = "#198754";
         } else if (s.category === "terminal") {
-          verbSpan.style.background = "#FEF2F2";
-          verbSpan.style.color = "#DC2626";
+          verbSpan.style.background = "#FDE8E8";
+          verbSpan.style.color = "#C82333";
         } else {
-          verbSpan.style.background = "#F1F5F9";
-          verbSpan.style.color = "#475569";
+          verbSpan.style.background = "#ECEFF2";
+          verbSpan.style.color = "#4A5568";
         }
         verbSpan.textContent = s.verb || "STMT";
 
@@ -190,7 +119,7 @@ function renderCfgInspectorSection(node) {
         textSpan.style.color = "#1E293B";
 
         if ((s.category === "call" || s.category === "terminal") && s.target && graphData.nodes[s.target.toUpperCase()]) {
-          textSpan.innerHTML = `${escapeHtml(s.text.replace(s.target, ""))} <a href="#" style="color:#0078D4; font-weight:700; text-decoration:underline;">${escapeHtml(s.target)}</a>`;
+          textSpan.innerHTML = `${escapeHtml(s.text.replace(s.target, ""))} <a href="#" style="color:var(--primary); font-weight:700; text-decoration:underline;">${escapeHtml(s.target)}</a>`;
           const a = textSpan.querySelector("a");
           if (a) {
             a.onclick = (e) => {
@@ -209,24 +138,8 @@ function renderCfgInspectorSection(node) {
         traceBox.appendChild(row);
       });
 
-      linearCard.appendChild(traceBox);
-
-      const btnExpand = document.createElement("button");
-      btnExpand.className = "btn btn-primary";
-      btnExpand.style.width = "100%";
-      btnExpand.style.marginTop = "10px";
-      btnExpand.style.display = "flex";
-      btnExpand.style.alignItems = "center";
-      btnExpand.style.justifyContent = "center";
-      btnExpand.style.gap = "8px";
-      btnExpand.style.padding = "8px 12px";
-      btnExpand.style.fontWeight = "600";
-      btnExpand.style.fontSize = "0.8rem";
-      btnExpand.innerHTML = '<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 3h6v6"/><path d="M9 21H3v-6"/><path d="M21 3l-7 7"/><path d="M3 21l7-7"/></svg><span>Open Full Linear Card</span>';
-      btnExpand.onclick = () => openLinearCardModal(node);
-      linearCard.appendChild(btnExpand);
+      sectionDiv.appendChild(traceBox);
+      secEl.appendChild(sectionDiv);
     }
-
-    secEl.appendChild(linearCard);
   }
 }

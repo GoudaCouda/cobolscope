@@ -10,7 +10,7 @@
 
     .source-toolbar {
       height: 30px;
-      background: #F8FAFC;
+      background: var(--bg-primary);
       border-bottom: 1px solid var(--border-color);
       display: flex;
       align-items: center;
@@ -29,7 +29,7 @@
     .source-prog-title {
       font-size: 11px;
       font-weight: 700;
-      color: #0F172A;
+      color: var(--text-primary);
       font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
     }
 
@@ -41,7 +41,7 @@
     }
 
     .col-guide {
-      color: #94A3B8;
+      color: var(--text-muted);
     }
 
     .source-search-box input {
@@ -74,7 +74,7 @@
     }
 
     table.cobol-code-table tr:hover td {
-      background-color: #F8FAFC;
+      background-color: var(--surface-hover);
     }
 
     td.code-line-num {
@@ -82,8 +82,8 @@
       min-width: 55px;
       text-align: right;
       padding: 0 8px;
-      color: #94A3B8;
-      background: #F8FAFC;
+      color: var(--text-muted);
+      background: var(--bg-primary);
       border-right: 1px solid var(--border-color);
       border-bottom: none !important;
       user-select: none;
@@ -93,16 +93,16 @@
     td.code-line-text {
       padding: 0 10px;
       white-space: pre;
-      color: #1E293B;
+      color: var(--text-primary);
       border-bottom: none !important;
     }
 
     tr.line-highlighted td.code-line-text {
-      background: #EFF6FC !important;
+      background: var(--primary-light) !important;
     }
 
     tr.line-highlighted td.code-line-num {
-      background: #E0F2FE !important;
+      background: var(--primary-border) !important;
       color: var(--primary);
       font-weight: 700;
     }
@@ -114,7 +114,7 @@
     }
 
     .code-word:hover {
-      background-color: rgba(0, 120, 212, 0.12);
+      background-color: var(--primary-light);
     }
 
     .code-word.var-highlight {

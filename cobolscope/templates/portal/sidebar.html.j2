@@ -2,20 +2,26 @@
       <aside class="portal-sidebar" id="portal-sidebar">
         <!-- Collapsed Rail View (barely on screen) -->
         <div class="sidebar-rail-indicator" id="sidebar-rail-indicator" onclick="toggleSidebar(true)" title="Click to expand Program List">
-          <button class="rail-toggle-btn" title="Expand Program List">»</button>
+          <button class="rail-toggle-btn" title="Expand Program List">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
+          </button>
           <span class="rail-vertical-text">PROGRAMS</span>
         </div>
 
         <!-- Expanded Sidebar Header -->
         <div class="sidebar-header-row">
           <span class="sidebar-header-title">PROGRAMS</span>
-          <button class="sidebar-collapse-btn" onclick="toggleSidebar(false)" title="Collapse Program List">«</button>
+          <button class="sidebar-collapse-btn" onclick="toggleSidebar(false)" title="Collapse Program List">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg>
+          </button>
         </div>
 
         <div class="sidebar-search-box">
           <div class="search-input-wrapper">
             <input type="search" id="prog-search" placeholder="Search programs (ID, name)..." oninput="onSearchInput()" autocomplete="off" />
-            <button class="search-clear-btn" id="search-clear" onclick="clearSearch()" title="Clear">x</button>
+            <button class="search-clear-btn" id="search-clear" onclick="clearSearch()" title="Clear">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+            </button>
           </div>
         </div>
 

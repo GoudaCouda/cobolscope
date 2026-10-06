@@ -56,15 +56,18 @@ def main():
     # Base reset and root variables
     css_parts.append("""
 :root {
-  --bg-primary: #F8FAFC;
+  --bg-primary: #F4F6F8;
   --bg-surface: #FFFFFF;
-  --border-color: #E2E8F0;
-  --text-primary: #0F172A;
-  --text-secondary: #475569;
-  --text-muted: #94A3B8;
-  --primary: #0078D4;
-  --primary-hover: #106EBE;
-  --primary-light: #EFF6FC;
+  --surface-hover: #ECEFF2;
+  --border-color: #D3D9E0;
+  --border-subtle: #E8ECEF;
+  --text-primary: #1A202C;
+  --text-secondary: #4A5568;
+  --text-muted: #718096;
+  --primary: #0056B3;
+  --primary-hover: #004494;
+  --primary-light: #EBF3FC;
+  --primary-border: #BCD7F5;
   --sidebar-width: 380px;
 }
 * { box-sizing: border-box; margin: 0; padding: 0; }

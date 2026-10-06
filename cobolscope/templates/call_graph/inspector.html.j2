@@ -1,9 +1,9 @@
 <!-- Node Inspector Sidebar -->
     <div class="inspector" id="inspector">
       <div class="inspector-header">
-        <div style="flex:1; min-width:0; position:relative;">
-          <div style="display:flex; align-items:center; gap:6px;">
-            <h2 id="inspTitle">Paragraph Inspector</h2>
+        <div class="inspector-title-row">
+          <div class="inspector-title-wrap">
+            <h2 id="inspTitle" class="inspector-routine-name">Paragraph Inspector</h2>
             <button class="program-title-btn" id="btnRoutineInfo" title="Click for procedure details">
               <svg class="info-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                 <circle cx="12" cy="12" r="10"></circle>
@@ -12,58 +12,67 @@
               </svg>
             </button>
           </div>
-          <div id="inspSubtitle" style="font-size:0.8rem; color:var(--text-secondary); margin-top:2px;"></div>
+          <button class="inspector-close-btn" id="btnCloseInspector" title="Close Inspector Sidebar">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+          </button>
+        </div>
 
-          <!-- Routine Details Popover -->
-          <div class="routine-info-popover" id="routineInfoPopover" style="display:none;">
-            <div class="popover-header">
-              <span class="popover-title">Procedure Details</span>
-              <button class="popover-close-btn" id="btnCloseRoutineInfo" title="Close">✕</button>
+        <!-- Routine Details Popover -->
+        <div class="routine-info-popover" id="routineInfoPopover" style="display:none;">
+          <div class="popover-header">
+            <span class="popover-title">Procedure Details</span>
+            <button class="popover-close-btn" id="btnCloseRoutineInfo" title="Close">
+              <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+            </button>
+          </div>
+          <div class="popover-body">
+            <div class="popover-row">
+              <span class="popover-label">Paragraph:</span>
+              <code class="popover-val font-mono" id="inspPara">-</code>
             </div>
-            <div class="popover-body">
-              <div class="popover-row">
-                <span class="popover-label">Paragraph:</span>
-                <code class="popover-val font-mono" id="inspPara">-</code>
-              </div>
-              <div class="popover-row">
-                <span class="popover-label">Section:</span>
-                <span class="popover-val font-mono" id="inspSection">-</span>
-              </div>
-              <div class="popover-row">
-                <span class="popover-label">Line Span:</span>
-                <span class="popover-val font-mono" id="inspLines">-</span>
-              </div>
-              <div class="popover-row">
-                <span class="popover-label">Complexity (CC):</span>
-                <span class="popover-val font-mono" id="inspCC">-</span>
-              </div>
-              <div class="popover-row">
-                <span class="popover-label">Statements:</span>
-                <span class="popover-val font-mono" id="inspStmts">-</span>
-              </div>
-              <div class="popover-row">
-                <span class="popover-label">Cluster:</span>
-                <span class="popover-val font-mono" id="inspCluster">-</span>
-              </div>
+            <div class="popover-row">
+              <span class="popover-label">Section:</span>
+              <span class="popover-val font-mono" id="inspSection">-</span>
+            </div>
+            <div class="popover-row">
+              <span class="popover-label">Line Span:</span>
+              <span class="popover-val font-mono" id="inspLines">-</span>
+            </div>
+            <div class="popover-row">
+              <span class="popover-label">Complexity (CC):</span>
+              <span class="popover-val font-mono" id="inspCC">-</span>
+            </div>
+            <div class="popover-row">
+              <span class="popover-label">Statements:</span>
+              <span class="popover-val font-mono" id="inspStmts">-</span>
+            </div>
+            <div class="popover-row">
+              <span class="popover-label">Cluster:</span>
+              <span class="popover-val font-mono" id="inspCluster">-</span>
             </div>
           </div>
         </div>
-        <div style="display:flex; align-items:center; gap:8px;">
-          <span class="badge" id="inspTypeBadge">GENERIC</span>
-          <button class="inspector-close-btn" id="btnCloseInspector" title="Close Inspector Sidebar">✕</button>
+
+        <!-- Metadata row directly below node name (no container box) -->
+        <div class="inspector-meta-row">
+          <span class="badge badge-entry-point" id="inspEntryBadge" style="display:none;">Program Entry</span>
+          <span class="badge badge-routine-type" id="inspTypeBadge">Procedure</span>
+          <span id="inspSubtitle" class="inspector-subtitle"></span>
         </div>
       </div>
       <div class="inspector-body">
-        <div class="inspector-section">
-          <div>
-            <button class="btn btn-view-routine-code" id="btnViewRoutineCode" title="View procedure source lines in split code viewer">
-              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
-              <span>View Routine Code</span>
-            </button>
-          </div>
-          <!-- Level 3 CFG Action / Linear Summary Card Area -->
-          <div id="inspCfgSection" style="margin-top:10px;"></div>
+        <div class="inspector-actions-bar">
+          <button class="routine-action-btn btn-view-routine-code" id="btnViewRoutineCode" title="View procedure source lines in split code viewer" disabled>
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+            <span id="btnViewRoutineCodeText">Source Code</span>
+          </button>
+          <button class="routine-action-btn btn-view-flowchart" id="btnOpenFlowchart" title="View procedure logic flowchart" disabled>
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="8" height="8" x="3" y="3" rx="2"/><path d="M7 11v4a2 2 0 0 0 2 2h4"/><rect width="8" height="8" x="13" y="13" rx="2"/></svg>
+            <span id="btnOpenFlowchartText">Logic Flowchart</span>
+          </button>
         </div>
+        <!-- Linear Statement Section Area (if routine is linear) -->
+        <div id="inspCfgSection"></div>
 
         <div class="inspector-section">
           <div class="section-title">Invoked By (Callers)</div>

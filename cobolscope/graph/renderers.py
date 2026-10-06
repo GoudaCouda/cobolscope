@@ -535,10 +535,10 @@ _DEFAULT_CALL_GRAPH_HTML_TEMPLATE = """<!DOCTYPE html>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Procedure Call Graph - {{ program_id }}</title>
 <style>
-  body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; margin: 0; padding: 20px; background: #F8FAFC; color: #1E293B; }
-  .header { display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid #E2E8F0; padding-bottom: 12px; margin-bottom: 16px; }
-  .header h1 { margin: 0; font-size: 22px; color: #0F172A; }
-  .svg-container { background: #FFFFFF; border: 1px solid #CBD5E1; border-radius: 8px; overflow: auto; padding: 20px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); }
+  body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; margin: 0; padding: 20px; background: #F4F6F8; color: #1A202C; }
+  .header { display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid #D3D9E0; padding-bottom: 12px; margin-bottom: 16px; }
+  .header h1 { margin: 0; font-size: 22px; color: #1A202C; }
+  .svg-container { background: #FFFFFF; border: 1px solid #D3D9E0; border-radius: 8px; overflow: auto; padding: 20px; box-shadow: 0 1px 3px rgba(0,0,0,0.06); }
   svg { max-width: 100%; height: auto; }
 </style>
 </head>
