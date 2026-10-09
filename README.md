@@ -15,7 +15,7 @@ Built on the [ProLeap ANTLR4 Parser](https://github.com/uwol/proleap-cobol-parse
 
 ---
 
-[![CobolScope Documentation Portal](docs/images/portal_overview.png)](https://goudacouda.github.io/cobolscope/)
+[![CobolScope Documentation Portal](docs/gifs/portal_overview_walkthrough.gif)](https://goudacouda.github.io/cobolscope/)
 
 ---
 
@@ -62,21 +62,21 @@ Browse all programs in a directory from a sidebar with routine counters, status 
 ### 2. Level-2 Procedure Call Graphs with Wide Split-Screen Code (`Alt+C`)
 Understand routine hierarchies. Graph nodes display complexity, statement counts, and directed control transfers. Press **`Alt+C`** or click **View Routine Code** to open the wide-aspect source code viewer centered on the selected procedure.
 
-![Call Graph Split Code](docs/images/call_graph_walkthrough.gif)
+![Call Graph Split Code](docs/gifs/call_graph_split_code.gif)
 
 ---
 
 ### 3. Level-3 Intra-Procedural CFG Flowcharts
 Drill down into complex routines with branching logic (`IF`, `EVALUATE`, `PERFORM UNTIL`). By default it generates fine-grained statement-level flowcharts modeling decision diamonds, execution paths, loop iterations, and terminal exits.
 
-![Level 3 CFG Flowchart](docs/images/level3_flowchart.svg)
+![Level 3 CFG Flowchart](docs/gifs/level3_cfg_flowchart.gif)
 
 ---
 
 ### 4. Binary Data Dictionaries with Sliding Code Drawer
 Inspect field structures across `WORKING-STORAGE`, `LINKAGE`, and `FILE SECTION` with byte offsets, `REDEFINES` overlays, and Where-Used cross references. Click any variable row to slide open the code drawer with automatic line and variable occurrence highlighting.
 
-![Data Dictionary Split View](docs/images/data_dictionary_walkthrough.gif)
+![Data Dictionary Split View](docs/gifs/data_dictionary_walkthrough.gif)
 
 ---
 
