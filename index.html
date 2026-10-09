@@ -6,22 +6,24 @@
   <title>CobolScope Documentation Portal - COBOL Documentation Portal</title>
   <style>
     :root {
-      --bg-primary: #F8FAFC;
+      --bg-primary: #F4F6F8;
       --bg-surface: #FFFFFF;
-      --border-color: #E2E8F0;
-      --border-subtle: #F1F5F9;
-      --text-primary: #0F172A;
-      --text-secondary: #475569;
-      --text-muted: #94A3B8;
-      --primary: #0078D4;
-      --primary-hover: #106EBE;
-      --primary-light: #EFF6FC;
-      --success: #16A34A;
-      --success-light: #F0FDF4;
-      --warning: #D97706;
-      --warning-light: #FFFBEB;
-      --danger: #DC2626;
-      --danger-light: #FEF2F2;
+      --surface-hover: #ECEFF2;
+      --border-color: #D3D9E0;
+      --border-subtle: #E8ECEF;
+      --text-primary: #1A202C;
+      --text-secondary: #4A5568;
+      --text-muted: #718096;
+      --primary: #0056B3;
+      --primary-hover: #004494;
+      --primary-light: #EBF3FC;
+      --primary-border: #BCD7F5;
+      --success: #198754;
+      --success-light: #E8F5E9;
+      --warning: #B76E00;
+      --warning-light: #FFF8E1;
+      --danger: #C82333;
+      --danger-light: #FDE8E8;
       --sidebar-width: 330px;
     }
 
@@ -111,7 +113,7 @@
       width: 36px !important;
       min-width: 36px !important;
       cursor: pointer;
-      background: #F8FAFC;
+      background: var(--bg-primary);
     }
 
     .portal-sidebar.collapsed .sidebar-header-row,
@@ -175,9 +177,17 @@
       background: transparent;
       color: var(--text-muted);
       cursor: pointer;
-      font-size: 14px;
-      line-height: 1;
       display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 2px;
+      border-radius: 3px;
+      transition: color 0.1s, background-color 0.1s;
+    }
+
+    .search-clear-btn:hover {
+      color: var(--text-primary);
+      background: var(--surface-hover);
     }
 
     .sidebar-filter-bar {
@@ -286,7 +296,7 @@
     }
 
     .badge-artifact {
-      background: #E2E8F0;
+      background: var(--surface-hover);
       color: var(--text-secondary);
     }
 
@@ -405,13 +415,13 @@
       text-decoration: none;
       padding: 4px 8px;
       border-radius: 4px;
-      border: 1px solid rgba(0, 120, 212, 0.2);
+      border: 1px solid var(--primary-border);
       background: var(--primary-light);
       transition: background 0.15s;
     }
 
     .action-link:hover {
-      background: #E0F2FE;
+      background: var(--primary-border);
     }
 
     .viewer-frame-container {
@@ -437,7 +447,7 @@
       background: #FFFFFF;
     }
 
-    /* Blank Initial State Container */
+    /* Blank Initial State Container: Integrated Workbench Cue */
     .blank-state-container {
       display: flex;
       flex-direction: column;
@@ -445,64 +455,101 @@
       width: 100%;
       align-items: center;
       justify-content: center;
-      padding: 40px 20px;
-      text-align: center;
+      padding: 48px 24px;
       background: var(--bg-primary);
+      user-select: none;
     }
 
-    .blank-state-card {
-      max-width: 460px;
-      background: #FFFFFF;
-      border: 1px solid var(--border-color);
-      border-radius: 12px;
-      padding: 40px 32px;
-      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
+    .workbench-empty-view {
+      max-width: 480px;
+      width: 100%;
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: 12px;
       text-align: center;
+      gap: 24px;
     }
 
-    .blank-state-icon {
-      width: 56px;
-      height: 56px;
-      border-radius: 50%;
-      background: var(--primary-light);
-      color: var(--primary);
+    .workbench-empty-header {
       display: flex;
+      flex-direction: column;
       align-items: center;
-      justify-content: center;
-      margin-bottom: 4px;
+      gap: 8px;
     }
 
-    .blank-state-title {
-      font-size: 18px;
+    .workbench-watermark-tag {
+      font-size: 11px;
       font-weight: 700;
-      color: var(--text-primary);
-      margin: 0;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+      padding: 2px 8px;
+      background: var(--bg-surface);
+      border: 1px solid var(--border-color);
+      border-radius: 3px;
     }
 
-    .blank-state-subtitle {
+    .workbench-empty-title {
+      font-size: 16px;
+      font-weight: 600;
+      color: var(--text-primary);
+      margin: 4px 0 0;
+      letter-spacing: -0.01em;
+    }
+
+    .workbench-empty-desc {
       font-size: 13px;
       color: var(--text-secondary);
       line-height: 1.5;
-      max-width: 360px;
+      max-width: 400px;
       margin: 0;
     }
 
-    .blank-state-hint {
+    .workbench-shortcuts-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      width: 100%;
+      max-width: 360px;
+      padding: 12px 16px;
+      background: var(--bg-surface);
+      border: 1px solid var(--border-color);
+      border-radius: 4px;
+    }
+
+    .shortcut-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
       font-size: 12px;
-      font-weight: 500;
-      color: var(--primary);
-      background: var(--primary-light);
-      border: 1px solid rgba(0, 120, 212, 0.15);
-      border-radius: 20px;
-      padding: 5px 14px;
-      margin-top: 8px;
+      gap: 12px;
+      padding: 3px 0;
+    }
+
+    .shortcut-keys {
       display: inline-flex;
       align-items: center;
-      gap: 6px;
+      gap: 4px;
+    }
+
+    .shortcut-keys kbd {
+      display: inline-block;
+      padding: 2px 6px;
+      font-size: 11px;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+      font-weight: 600;
+      line-height: 1.2;
+      color: var(--text-primary);
+      background: var(--bg-primary);
+      border: 1px solid var(--border-color);
+      border-radius: 3px;
+      box-shadow: 0 1px 0 rgba(0, 0, 0, 0.08);
+    }
+
+    .shortcut-label {
+      color: var(--text-secondary);
+      text-align: right;
     }
 
     /* Fallback / Error Message Container */
@@ -546,8 +593,8 @@
     }
 
     .error-trace {
-      background: #1E293B;
-      color: #F8FAFC;
+      background: #111827;
+      color: #F3F4F6;
       padding: 12px;
       border-radius: 6px;
       font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
@@ -660,7 +707,7 @@
 
     .source-toolbar {
       height: 30px;
-      background: #F8FAFC;
+      background: var(--bg-primary);
       border-bottom: 1px solid var(--border-color);
       display: flex;
       align-items: center;
@@ -679,7 +726,7 @@
     .source-prog-title {
       font-size: 11px;
       font-weight: 700;
-      color: #0F172A;
+      color: var(--text-primary);
       font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
     }
 
@@ -691,7 +738,7 @@
     }
 
     .col-guide {
-      color: #94A3B8;
+      color: var(--text-muted);
     }
 
     .source-search-box input {
@@ -724,7 +771,7 @@
     }
 
     table.cobol-code-table tr:hover td {
-      background-color: #F8FAFC;
+      background-color: var(--surface-hover);
     }
 
     td.code-line-num {
@@ -732,8 +779,8 @@
       min-width: 55px;
       text-align: right;
       padding: 0 8px;
-      color: #94A3B8;
-      background: #F8FAFC;
+      color: var(--text-muted);
+      background: var(--bg-primary);
       border-right: 1px solid var(--border-color);
       border-bottom: none !important;
       user-select: none;
@@ -743,16 +790,16 @@
     td.code-line-text {
       padding: 0 10px;
       white-space: pre;
-      color: #1E293B;
+      color: var(--text-primary);
       border-bottom: none !important;
     }
 
     tr.line-highlighted td.code-line-text {
-      background: #EFF6FC !important;
+      background: var(--primary-light) !important;
     }
 
     tr.line-highlighted td.code-line-num {
-      background: #E0F2FE !important;
+      background: var(--primary-border) !important;
       color: var(--primary);
       font-weight: 700;
     }
@@ -764,7 +811,7 @@
     }
 
     .code-word:hover {
-      background-color: rgba(0, 120, 212, 0.12);
+      background-color: var(--primary-light);
     }
 
     .code-word.var-highlight {
@@ -788,20 +835,26 @@
       <aside class="portal-sidebar" id="portal-sidebar">
         <!-- Collapsed Rail View (barely on screen) -->
         <div class="sidebar-rail-indicator" id="sidebar-rail-indicator" onclick="toggleSidebar(true)" title="Click to expand Program List">
-          <button class="rail-toggle-btn" title="Expand Program List">»</button>
+          <button class="rail-toggle-btn" title="Expand Program List">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
+          </button>
           <span class="rail-vertical-text">PROGRAMS</span>
         </div>
 
         <!-- Expanded Sidebar Header -->
         <div class="sidebar-header-row">
           <span class="sidebar-header-title">PROGRAMS</span>
-          <button class="sidebar-collapse-btn" onclick="toggleSidebar(false)" title="Collapse Program List">«</button>
+          <button class="sidebar-collapse-btn" onclick="toggleSidebar(false)" title="Collapse Program List">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg>
+          </button>
         </div>
 
         <div class="sidebar-search-box">
           <div class="search-input-wrapper">
             <input type="search" id="prog-search" placeholder="Search programs (ID, name)..." oninput="onSearchInput()" autocomplete="off" />
-            <button class="search-clear-btn" id="search-clear" onclick="clearSearch()" title="Clear">x</button>
+            <button class="search-clear-btn" id="search-clear" onclick="clearSearch()" title="Clear">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+            </button>
           </div>
         </div>
 
@@ -848,22 +901,27 @@
 
           <!-- Single Pane View -->
           <div class="pane-view" id="single-pane-view">
-            <!-- Blank Initial State -->
+            <!-- Blank Initial State: Enterprise Workbench Watermark & Quick Commands -->
             <div class="blank-state-container" id="blank-state-container">
-              <div class="blank-state-card">
-                <div class="blank-state-icon">
-                  <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                    <rect x="3" y="3" width="18" height="18" rx="2"/>
-                    <line x1="9" y1="3" x2="9" y2="21"/>
-                    <path d="M14 9h4"/>
-                    <path d="M14 13h4"/>
-                    <path d="M14 17h2"/>
-                  </svg>
+              <div class="workbench-empty-view">
+                <div class="workbench-empty-header">
+                  <div class="workbench-watermark-tag">COBOL ANALYZER WORKBENCH</div>
+                  <h2 class="workbench-empty-title">No Program Selected</h2>
+                  <p class="workbench-empty-desc">Select a compilation unit from the sidebar to inspect procedure call graphs, data dictionaries, and synchronized source code.</p>
                 </div>
-                <h2 class="blank-state-title">No Program Selected</h2>
-                <p class="blank-state-subtitle">Select a COBOL program from the left sidebar to inspect its Call Graph, Source Code, and Data Dictionary.</p>
-                <div class="blank-state-hint">
-                  <span>&larr; Choose a program from the list to begin</span>
+                <div class="workbench-shortcuts-grid">
+                  <div class="shortcut-item">
+                    <span class="shortcut-keys"><kbd>/</kbd></span>
+                    <span class="shortcut-label">Search programs by ID or routine</span>
+                  </div>
+                  <div class="shortcut-item">
+                    <span class="shortcut-keys"><kbd>Alt</kbd> + <kbd>C</kbd></span>
+                    <span class="shortcut-label">Toggle split source code view</span>
+                  </div>
+                  <div class="shortcut-item">
+                    <span class="shortcut-keys"><kbd>Esc</kbd></span>
+                    <span class="shortcut-label">Close inspectors or clear search filters</span>
+                  </div>
                 </div>
               </div>
             </div>
@@ -907,7 +965,7 @@
 
   <!-- Embedded Manifest Data for Synchronous Zero-CORS Loading -->
   <script id="cobolscope-manifest" type="application/json">
-    {"batch_summary": {"duration_ms": 34915.48, "failed": 0, "format": "FIXED", "succeeded": 20, "total_programs_found": 20}, "programs": [{"artifacts": {"call_graph": "CRDTAGY1.html", "data_dictionary": "CRDTAGY1_dict.md", "data_dictionary_html": "CRDTAGY1_dict.html", "ir": "ir/CRDTAGY1.json", "source": "CRDTAGY1.cbl"}, "program_id": "CRDTAGY1", "status": "SUCCESS", "total_paragraphs": 6, "total_statements": 21}, {"artifacts": {"call_graph": "CRDTAGY2.html", "data_dictionary": "CRDTAGY2_dict.md", "data_dictionary_html": "CRDTAGY2_dict.html", "ir": "ir/CRDTAGY2.json", "source": "CRDTAGY2.cbl"}, "program_id": "CRDTAGY2", "status": "SUCCESS", "total_paragraphs": 6, "total_statements": 21}, {"artifacts": {"call_graph": "CRDTAGY3.html", "data_dictionary": "CRDTAGY3_dict.md", "data_dictionary_html": "CRDTAGY3_dict.html", "ir": "ir/CRDTAGY3.json", "source": "CRDTAGY3.cbl"}, "program_id": "CRDTAGY3", "status": "SUCCESS", "total_paragraphs": 6, "total_statements": 21}, {"artifacts": {"call_graph": "CRDTAGY4.html", "data_dictionary": "CRDTAGY4_dict.md", "data_dictionary_html": "CRDTAGY4_dict.html", "ir": "ir/CRDTAGY4.json", "source": "CRDTAGY4.cbl"}, "program_id": "CRDTAGY4", "status": "SUCCESS", "total_paragraphs": 6, "total_statements": 21}, {"artifacts": {"call_graph": "CRDTAGY5.html", "data_dictionary": "CRDTAGY5_dict.md", "data_dictionary_html": "CRDTAGY5_dict.html", "ir": "ir/CRDTAGY5.json", "source": "CRDTAGY5.cbl"}, "program_id": "CRDTAGY5", "status": "SUCCESS", "total_paragraphs": 6, "total_statements": 21}, {"artifacts": {"call_graph": "CREACC.html", "data_dictionary": "CREACC_dict.md", "data_dictionary_html": "CREACC_dict.html", "ir": "ir/CREACC.json", "source": "CREACC.cbl"}, "program_id": "CREACC", "status": "SUCCESS", "total_paragraphs": 24, "total_statements": 177}, {"artifacts": {"call_graph": "DBCRFUN.html", "data_dictionary": "DBCRFUN_dict.md", "data_dictionary_html": "DBCRFUN_dict.html", "ir": "ir/DBCRFUN.json", "source": "DBCRFUN.cbl"}, "program_id": "DBCRFUN", "status": "SUCCESS", "total_paragraphs": 16, "total_statements": 56}, {"artifacts": {"call_graph": "DELACC.html", "data_dictionary": "DELACC_dict.md", "data_dictionary_html": "DELACC_dict.html", "ir": "ir/DELACC.json", "source": "DELACC.cbl"}, "program_id": "DELACC", "status": "SUCCESS", "total_paragraphs": 14, "total_statements": 84}, {"artifacts": {"call_graph": "DELCUS.html", "data_dictionary": "DELCUS_dict.md", "data_dictionary_html": "DELCUS_dict.html", "ir": "ir/DELCUS.json", "source": "DELCUS.cbl"}, "program_id": "DELCUS", "status": "SUCCESS", "total_paragraphs": 16, "total_statements": 129}, {"artifacts": {"call_graph": "GETCOMPY.html", "data_dictionary": "GETCOMPY_dict.md", "data_dictionary_html": "GETCOMPY_dict.html", "ir": "ir/GETCOMPY.json", "source": "GETCOMPY.cbl"}, "program_id": "GETCOMPY", "status": "SUCCESS", "total_paragraphs": 1, "total_statements": 3}, {"artifacts": {"call_graph": "GETSCODE.html", "data_dictionary": "GETSCODE_dict.md", "data_dictionary_html": "GETSCODE_dict.html", "ir": "ir/GETSCODE.json", "source": "GETSCODE.cbl"}, "program_id": "GETSCODE", "status": "SUCCESS", "total_paragraphs": 1, "total_statements": 3}, {"artifacts": {"call_graph": "INQACC.html", "data_dictionary": "INQACC_dict.md", "data_dictionary_html": "INQACC_dict.html", "ir": "ir/INQACC.json", "source": "INQACC.cbl"}, "program_id": "INQACC", "status": "SUCCESS", "total_paragraphs": 18, "total_statements": 64}, {"artifacts": {"call_graph": "INQACCCU.html", "data_dictionary": "INQACCCU_dict.md", "data_dictionary_html": "INQACCCU_dict.html", "ir": "ir/INQACCCU.json", "source": "INQACCCU.cbl"}, "program_id": "INQACCCU", "status": "SUCCESS", "total_paragraphs": 16, "total_statements": 43}, {"artifacts": {"call_graph": "INQACCS.html", "data_dictionary": "INQACCS_dict.md", "data_dictionary_html": "INQACCS_dict.html", "ir": "ir/INQACCS.json", "source": "INQACCS.cbl"}, "program_id": "INQACCS", "status": "SUCCESS", "total_paragraphs": 14, "total_statements": 31}, {"artifacts": {"call_graph": "INQCUST.html", "data_dictionary": "INQCUST_dict.md", "data_dictionary_html": "INQCUST_dict.html", "ir": "ir/INQCUST.json", "source": "INQCUST.cbl"}, "program_id": "INQCUST", "status": "SUCCESS", "total_paragraphs": 20, "total_statements": 56}, {"artifacts": {"call_graph": "INQTRAND.html", "data_dictionary": "INQTRAND_dict.md", "data_dictionary_html": "INQTRAND_dict.html", "ir": "ir/INQTRAND.json", "source": "INQTRAND.cbl"}, "program_id": "INQTRAND", "status": "SUCCESS", "total_paragraphs": 16, "total_statements": 69}, {"artifacts": {"call_graph": "INQTRANL.html", "data_dictionary": "INQTRANL_dict.md", "data_dictionary_html": "INQTRANL_dict.html", "ir": "ir/INQTRANL.json", "source": "INQTRANL.cbl"}, "program_id": "INQTRANL", "status": "SUCCESS", "total_paragraphs": 20, "total_statements": 152}, {"artifacts": {"call_graph": "UPDACC.html", "data_dictionary": "UPDACC_dict.md", "data_dictionary_html": "UPDACC_dict.html", "ir": "ir/UPDACC.json", "source": "UPDACC.cbl"}, "program_id": "UPDACC", "status": "SUCCESS", "total_paragraphs": 8, "total_statements": 47}, {"artifacts": {"call_graph": "UPDCUST.html", "data_dictionary": "UPDCUST_dict.md", "data_dictionary_html": "UPDCUST_dict.html", "ir": "ir/UPDCUST.json", "source": "UPDCUST.cbl"}, "program_id": "UPDCUST", "status": "SUCCESS", "total_paragraphs": 8, "total_statements": 53}, {"artifacts": {"call_graph": "XFRFUN.html", "data_dictionary": "XFRFUN_dict.md", "data_dictionary_html": "XFRFUN_dict.html", "ir": "ir/XFRFUN.json", "source": "XFRFUN.cbl"}, "program_id": "XFRFUN", "status": "SUCCESS", "total_paragraphs": 20, "total_statements": 101}]}
+    {"batch_summary": {"duration_ms": 22063.52, "failed": 0, "format": "FIXED", "succeeded": 20, "total_programs_found": 20}, "programs": [{"artifacts": {"call_graph": "CRDTAGY1.html", "data_dictionary": "CRDTAGY1_dict.md", "data_dictionary_html": "CRDTAGY1_dict.html", "ir": "ir/CRDTAGY1.json", "source": "CRDTAGY1.txt"}, "program_id": "CRDTAGY1", "status": "SUCCESS", "total_paragraphs": 6, "total_statements": 21}, {"artifacts": {"call_graph": "CRDTAGY2.html", "data_dictionary": "CRDTAGY2_dict.md", "data_dictionary_html": "CRDTAGY2_dict.html", "ir": "ir/CRDTAGY2.json", "source": "CRDTAGY2.txt"}, "program_id": "CRDTAGY2", "status": "SUCCESS", "total_paragraphs": 6, "total_statements": 21}, {"artifacts": {"call_graph": "CRDTAGY3.html", "data_dictionary": "CRDTAGY3_dict.md", "data_dictionary_html": "CRDTAGY3_dict.html", "ir": "ir/CRDTAGY3.json", "source": "CRDTAGY3.txt"}, "program_id": "CRDTAGY3", "status": "SUCCESS", "total_paragraphs": 6, "total_statements": 21}, {"artifacts": {"call_graph": "CRDTAGY4.html", "data_dictionary": "CRDTAGY4_dict.md", "data_dictionary_html": "CRDTAGY4_dict.html", "ir": "ir/CRDTAGY4.json", "source": "CRDTAGY4.txt"}, "program_id": "CRDTAGY4", "status": "SUCCESS", "total_paragraphs": 6, "total_statements": 21}, {"artifacts": {"call_graph": "CRDTAGY5.html", "data_dictionary": "CRDTAGY5_dict.md", "data_dictionary_html": "CRDTAGY5_dict.html", "ir": "ir/CRDTAGY5.json", "source": "CRDTAGY5.txt"}, "program_id": "CRDTAGY5", "status": "SUCCESS", "total_paragraphs": 6, "total_statements": 21}, {"artifacts": {"call_graph": "CREACC.html", "data_dictionary": "CREACC_dict.md", "data_dictionary_html": "CREACC_dict.html", "ir": "ir/CREACC.json", "source": "CREACC.txt"}, "program_id": "CREACC", "status": "SUCCESS", "total_paragraphs": 24, "total_statements": 177}, {"artifacts": {"call_graph": "DBCRFUN.html", "data_dictionary": "DBCRFUN_dict.md", "data_dictionary_html": "DBCRFUN_dict.html", "ir": "ir/DBCRFUN.json", "source": "DBCRFUN.txt"}, "program_id": "DBCRFUN", "status": "SUCCESS", "total_paragraphs": 16, "total_statements": 56}, {"artifacts": {"call_graph": "DELACC.html", "data_dictionary": "DELACC_dict.md", "data_dictionary_html": "DELACC_dict.html", "ir": "ir/DELACC.json", "source": "DELACC.txt"}, "program_id": "DELACC", "status": "SUCCESS", "total_paragraphs": 14, "total_statements": 84}, {"artifacts": {"call_graph": "DELCUS.html", "data_dictionary": "DELCUS_dict.md", "data_dictionary_html": "DELCUS_dict.html", "ir": "ir/DELCUS.json", "source": "DELCUS.txt"}, "program_id": "DELCUS", "status": "SUCCESS", "total_paragraphs": 16, "total_statements": 129}, {"artifacts": {"call_graph": "GETCOMPY.html", "data_dictionary": "GETCOMPY_dict.md", "data_dictionary_html": "GETCOMPY_dict.html", "ir": "ir/GETCOMPY.json", "source": "GETCOMPY.txt"}, "program_id": "GETCOMPY", "status": "SUCCESS", "total_paragraphs": 1, "total_statements": 3}, {"artifacts": {"call_graph": "GETSCODE.html", "data_dictionary": "GETSCODE_dict.md", "data_dictionary_html": "GETSCODE_dict.html", "ir": "ir/GETSCODE.json", "source": "GETSCODE.txt"}, "program_id": "GETSCODE", "status": "SUCCESS", "total_paragraphs": 1, "total_statements": 3}, {"artifacts": {"call_graph": "INQACC.html", "data_dictionary": "INQACC_dict.md", "data_dictionary_html": "INQACC_dict.html", "ir": "ir/INQACC.json", "source": "INQACC.txt"}, "program_id": "INQACC", "status": "SUCCESS", "total_paragraphs": 18, "total_statements": 64}, {"artifacts": {"call_graph": "INQACCCU.html", "data_dictionary": "INQACCCU_dict.md", "data_dictionary_html": "INQACCCU_dict.html", "ir": "ir/INQACCCU.json", "source": "INQACCCU.txt"}, "program_id": "INQACCCU", "status": "SUCCESS", "total_paragraphs": 16, "total_statements": 43}, {"artifacts": {"call_graph": "INQACCS.html", "data_dictionary": "INQACCS_dict.md", "data_dictionary_html": "INQACCS_dict.html", "ir": "ir/INQACCS.json", "source": "INQACCS.txt"}, "program_id": "INQACCS", "status": "SUCCESS", "total_paragraphs": 14, "total_statements": 31}, {"artifacts": {"call_graph": "INQCUST.html", "data_dictionary": "INQCUST_dict.md", "data_dictionary_html": "INQCUST_dict.html", "ir": "ir/INQCUST.json", "source": "INQCUST.txt"}, "program_id": "INQCUST", "status": "SUCCESS", "total_paragraphs": 20, "total_statements": 56}, {"artifacts": {"call_graph": "INQTRAND.html", "data_dictionary": "INQTRAND_dict.md", "data_dictionary_html": "INQTRAND_dict.html", "ir": "ir/INQTRAND.json", "source": "INQTRAND.txt"}, "program_id": "INQTRAND", "status": "SUCCESS", "total_paragraphs": 16, "total_statements": 69}, {"artifacts": {"call_graph": "INQTRANL.html", "data_dictionary": "INQTRANL_dict.md", "data_dictionary_html": "INQTRANL_dict.html", "ir": "ir/INQTRANL.json", "source": "INQTRANL.txt"}, "program_id": "INQTRANL", "status": "SUCCESS", "total_paragraphs": 20, "total_statements": 152}, {"artifacts": {"call_graph": "UPDACC.html", "data_dictionary": "UPDACC_dict.md", "data_dictionary_html": "UPDACC_dict.html", "ir": "ir/UPDACC.json", "source": "UPDACC.txt"}, "program_id": "UPDACC", "status": "SUCCESS", "total_paragraphs": 8, "total_statements": 47}, {"artifacts": {"call_graph": "UPDCUST.html", "data_dictionary": "UPDCUST_dict.md", "data_dictionary_html": "UPDCUST_dict.html", "ir": "ir/UPDCUST.json", "source": "UPDCUST.txt"}, "program_id": "UPDCUST", "status": "SUCCESS", "total_paragraphs": 8, "total_statements": 53}, {"artifacts": {"call_graph": "XFRFUN.html", "data_dictionary": "XFRFUN_dict.md", "data_dictionary_html": "XFRFUN_dict.html", "ir": "ir/XFRFUN.json", "source": "XFRFUN.txt"}, "program_id": "XFRFUN", "status": "SUCCESS", "total_paragraphs": 20, "total_statements": 101}]}
   </script>
 
   <!-- Zero-Dependency Portal Controller Logic -->
@@ -1109,7 +1167,7 @@
 
     function onSearchInput() {
       searchQuery = progSearchInput.value;
-      searchClearBtn.style.display = searchQuery ? "block" : "none";
+      searchClearBtn.style.display = searchQuery ? "inline-flex" : "none";
       renderProgramList();
     }
 

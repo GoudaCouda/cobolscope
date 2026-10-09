@@ -10800,7 +10800,7 @@ module.exports = Worker;
             },
             {
               selector: "node.type-business_logic",
-              style: { "border-color": "#0078D4", "background-color": "#F0F8FF" }
+              style: { "border-color": "#0056B3", "background-color": "#EBF3FC" }
             },
             {
               selector: "node.type-initialization",
@@ -10812,16 +10812,16 @@ module.exports = Worker;
             },
             {
               selector: "node.type-termination",
-              style: { "border-color": "#475569", "background-color": "#F8FAFC" }
+              style: { "border-color": "#4A5568", "background-color": "#F4F6F8" }
             },
             // Entry Point Routine
             {
               selector: "node.entry-point",
               style: {
                 "border-width": 3.5,
-                "border-color": "#0078D4",
-                "background-color": "#EFF6FC",
-                "color": "#004B87"
+                "border-color": "#0056B3",
+                "background-color": "#EBF3FC",
+                "color": "#003875"
               }
             },
             // Terminal Routines (STOP RUN, GOBACK)
@@ -10829,9 +10829,9 @@ module.exports = Worker;
               selector: "node.terminal-node",
               style: {
                 "border-width": 3,
-                "border-color": "#475569",
-                "background-color": "#F8FAFC",
-                "color": "#1E293B"
+                "border-color": "#4A5568",
+                "background-color": "#F4F6F8",
+                "color": "#1A202C"
               }
             },
             // Error Handling & Abend Routines
@@ -10868,8 +10868,8 @@ module.exports = Worker;
               style: {
                 "opacity": 1.0,
                 "width": 3,
-                "line-color": "#0078D4",
-                "target-arrow-color": "#0078D4",
+                "line-color": "#0056B3",
+                "target-arrow-color": "#0056B3",
                 "z-index": 35
               }
             },
@@ -11134,96 +11134,39 @@ function renderCfgInspectorSection(node) {
   if (!secEl) return;
   secEl.innerHTML = "";
 
+  const btnFlow = document.getElementById("btnOpenFlowchart") || document.getElementById("btnOpenLevel3");
+  const btnFlowText = document.getElementById("btnOpenFlowchartText");
+
   if (node.is_cfg_eligible) {
-    // --- Branching Routine (CC > 1): Prompt for Level 3 Flowchart Modal ---
-    const eligibleCard = document.createElement("div");
-    eligibleCard.style.background = "#FFFFFF";
-    eligibleCard.style.border = "1px solid #CBD5E1";
-    eligibleCard.style.borderRadius = "8px";
-    eligibleCard.style.padding = "12px";
-    eligibleCard.style.boxShadow = "0 1px 3px rgba(0,0,0,0.05)";
-
-    const headerDiv = document.createElement("div");
-    headerDiv.style.display = "flex";
-    headerDiv.style.alignItems = "center";
-    headerDiv.style.justifyContent = "space-between";
-    headerDiv.style.marginBottom = "8px";
-
-    const titleDiv = document.createElement("div");
-    titleDiv.style.fontWeight = "700";
-    titleDiv.style.fontSize = "0.85rem";
-    titleDiv.style.color = "#0F172A";
-    titleDiv.style.display = "flex";
-    titleDiv.style.alignItems = "center";
-    titleDiv.style.gap = "6px";
-    titleDiv.innerHTML = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#2563EB" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 3h5v5"/><path d="M4 20 21 3"/><path d="M21 16v5h-5"/><path d="m15 15 6 6"/><path d="M4 4l5 5"/></svg><span>Branching Logic</span>';
-
-    headerDiv.appendChild(titleDiv);
-    eligibleCard.appendChild(headerDiv);
-
-    const descDiv = document.createElement("div");
-    descDiv.style.fontSize = "0.75rem";
-    descDiv.style.color = "#64748B";
-    descDiv.style.marginBottom = "10px";
-    descDiv.textContent = "Contains conditional branch points and decision paths.";
-    eligibleCard.appendChild(descDiv);
-
-    const btn = document.createElement("button");
-    btn.className = "btn btn-primary";
-    btn.id = "btnOpenLevel3";
-    btn.style.width = "100%";
-    btn.style.display = "flex";
-    btn.style.alignItems = "center";
-    btn.style.justifyContent = "center";
-    btn.style.gap = "8px";
-    btn.style.padding = "9px 12px";
-    btn.style.fontWeight = "600";
-    btn.innerHTML = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="8" height="8" x="3" y="3" rx="2"/><path d="M7 11v4a2 2 0 0 0 2 2h4"/><rect width="8" height="8" x="13" y="13" rx="2"/></svg><span>View Level 3 Flowchart</span>';
-    btn.onclick = () => openLevel3Modal(node);
-    eligibleCard.appendChild(btn);
-
-    secEl.appendChild(eligibleCard);
+    // --- Branching Routine (CC > 1): Connect to Logic Flowchart Action ---
+    if (btnFlow) {
+      btnFlow.disabled = false;
+      if (btnFlowText) btnFlowText.textContent = "Logic Flowchart";
+      btnFlow.onclick = () => openLevel3Modal(node);
+      btnFlow.title = "View procedure logic flowchart";
+    }
+    secEl.innerHTML = "";
   } else {
-    // --- Linear Routine: Enhanced Linear Summary Card ---
-    const linearCard = document.createElement("div");
-    linearCard.style.background = "#FFFFFF";
-    linearCard.style.border = "1px solid #CBD5E1";
-    linearCard.style.borderRadius = "8px";
-    linearCard.style.padding = "12px";
-    linearCard.style.boxShadow = "0 1px 3px rgba(0,0,0,0.05)";
-
-    // 1. Header
-    const headerDiv = document.createElement("div");
-    headerDiv.style.display = "flex";
-    headerDiv.style.alignItems = "center";
-    headerDiv.style.justifyContent = "space-between";
-    headerDiv.style.marginBottom = "6px";
-
-    const titleDiv = document.createElement("div");
-    titleDiv.style.fontWeight = "700";
-    titleDiv.style.fontSize = "0.85rem";
-    titleDiv.style.color = "#0F172A";
-    titleDiv.style.display = "flex";
-    titleDiv.style.alignItems = "center";
-    titleDiv.style.gap = "6px";
-    titleDiv.innerHTML = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#166534" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/><line x1="3" y1="6" x2="3.01" y2="6"/><line x1="3" y1="12" x2="3.01" y2="12"/><line x1="3" y1="18" x2="3.01" y2="18"/></svg><span>Linear Procedure</span>';
-
-    headerDiv.appendChild(titleDiv);
-    linearCard.appendChild(headerDiv);
-
-    // 2. Subtitle / Narrative
-    const narrativeDiv = document.createElement("div");
-    narrativeDiv.style.fontSize = "0.75rem";
-    narrativeDiv.style.color = "#64748B";
-    narrativeDiv.style.marginBottom = "10px";
-    narrativeDiv.style.lineHeight = "1.3";
-    narrativeDiv.textContent = "Sequential straight-line execution. Statement trace summarized below.";
-    linearCard.appendChild(narrativeDiv);
+    // --- Linear Routine: Connect to Statement Trace Action & Show Clean Inline Trace ---
+    if (btnFlow) {
+      btnFlow.disabled = false;
+      if (btnFlowText) btnFlowText.textContent = "Statement Trace";
+      btnFlow.onclick = () => openLinearCardModal(node);
+      btnFlow.title = "View sequential execution statement trace";
+    }
 
     const stmts = node.cfg_linear_statements || [];
-
-    // 3. Verb Category Distribution Pills
     if (stmts.length > 0) {
+      const sectionDiv = document.createElement("div");
+      sectionDiv.className = "inspector-section";
+      sectionDiv.style.marginTop = "14px";
+
+      const sectionTitle = document.createElement("div");
+      sectionTitle.className = "section-title";
+      sectionTitle.textContent = `Sequential Statements (${stmts.length})`;
+      sectionDiv.appendChild(sectionTitle);
+
+      // Verb Category Distribution Pills
       const verbCounts = {};
       stmts.forEach(s => {
         const v = s.verb || "STATEMENT";
@@ -11234,41 +11177,27 @@ function renderCfgInspectorSection(node) {
       pillsContainer.style.display = "flex";
       pillsContainer.style.flexWrap = "wrap";
       pillsContainer.style.gap = "4px";
-      pillsContainer.style.marginBottom = "10px";
+      pillsContainer.style.marginBottom = "8px";
 
       Object.entries(verbCounts).forEach(([verb, count]) => {
         const pill = document.createElement("span");
         pill.style.fontSize = "0.68rem";
         pill.style.fontWeight = "600";
         pill.style.padding = "2px 6px";
-        pill.style.borderRadius = "4px";
-        pill.style.background = "#F1F5F9";
-        pill.style.color = "#475569";
-        pill.style.border = "1px solid #E2E8F0";
+        pill.style.borderRadius = "3px";
+        pill.style.background = "var(--bg-primary)";
+        pill.style.color = "var(--text-secondary)";
+        pill.style.border = "1px solid var(--border-color)";
         pill.textContent = `${verb} (${count})`;
         pillsContainer.appendChild(pill);
       });
-      linearCard.appendChild(pillsContainer);
-    }
+      sectionDiv.appendChild(pillsContainer);
 
-    // 4. Formatted Interactive Statement Trace
-    if (stmts.length > 0) {
-      const traceHeader = document.createElement("div");
-      traceHeader.style.display = "flex";
-      traceHeader.style.alignItems = "center";
-      traceHeader.style.justifyContent = "space-between";
-      traceHeader.style.fontSize = "0.7rem";
-      traceHeader.style.fontWeight = "700";
-      traceHeader.style.textTransform = "uppercase";
-      traceHeader.style.color = "#94A3B8";
-      traceHeader.style.marginBottom = "4px";
-      traceHeader.innerHTML = `<span>Statement Trace (${stmts.length})</span>`;
-      linearCard.appendChild(traceHeader);
-
+      // Formatted Interactive Statement Trace
       const traceBox = document.createElement("div");
-      traceBox.style.background = "#F8FAFC";
-      traceBox.style.border = "1px solid #E2E8F0";
-      traceBox.style.borderRadius = "6px";
+      traceBox.style.background = "var(--bg-primary)";
+      traceBox.style.border = "1px solid var(--border-color)";
+      traceBox.style.borderRadius = "4px";
       traceBox.style.padding = "6px";
       traceBox.style.maxHeight = "180px";
       traceBox.style.overflowY = "auto";
@@ -11285,7 +11214,7 @@ function renderCfgInspectorSection(node) {
         if (idx % 2 === 0) row.style.background = "#FFFFFF";
 
         const lineSpan = document.createElement("span");
-        lineSpan.style.color = "#94A3B8";
+        lineSpan.style.color = "var(--text-muted)";
         lineSpan.style.minWidth = "34px";
         lineSpan.style.fontSize = "0.68rem";
         lineSpan.textContent = s.line ? `L${s.line}` : "L--";
@@ -11297,20 +11226,20 @@ function renderCfgInspectorSection(node) {
         verbSpan.style.borderRadius = "3px";
 
         if (s.category === "data") {
-          verbSpan.style.background = "#EFF6FC";
-          verbSpan.style.color = "#0078D4";
+          verbSpan.style.background = "#F0F4F8";
+          verbSpan.style.color = "#245882";
         } else if (s.category === "call") {
-          verbSpan.style.background = "#F5F3FF";
-          verbSpan.style.color = "#7C3AED";
+          verbSpan.style.background = "#EBF3FC";
+          verbSpan.style.color = "#0056B3";
         } else if (s.category === "io") {
-          verbSpan.style.background = "#ECFDF5";
-          verbSpan.style.color = "#059669";
+          verbSpan.style.background = "#E8F5E9";
+          verbSpan.style.color = "#198754";
         } else if (s.category === "terminal") {
-          verbSpan.style.background = "#FEF2F2";
-          verbSpan.style.color = "#DC2626";
+          verbSpan.style.background = "#FDE8E8";
+          verbSpan.style.color = "#C82333";
         } else {
-          verbSpan.style.background = "#F1F5F9";
-          verbSpan.style.color = "#475569";
+          verbSpan.style.background = "#ECEFF2";
+          verbSpan.style.color = "#4A5568";
         }
         verbSpan.textContent = s.verb || "STMT";
 
@@ -11320,7 +11249,7 @@ function renderCfgInspectorSection(node) {
         textSpan.style.color = "#1E293B";
 
         if ((s.category === "call" || s.category === "terminal") && s.target && graphData.nodes[s.target.toUpperCase()]) {
-          textSpan.innerHTML = `${escapeHtml(s.text.replace(s.target, ""))} <a href="#" style="color:#0078D4; font-weight:700; text-decoration:underline;">${escapeHtml(s.target)}</a>`;
+          textSpan.innerHTML = `${escapeHtml(s.text.replace(s.target, ""))} <a href="#" style="color:var(--primary); font-weight:700; text-decoration:underline;">${escapeHtml(s.target)}</a>`;
           const a = textSpan.querySelector("a");
           if (a) {
             a.onclick = (e) => {
@@ -11339,25 +11268,9 @@ function renderCfgInspectorSection(node) {
         traceBox.appendChild(row);
       });
 
-      linearCard.appendChild(traceBox);
-
-      const btnExpand = document.createElement("button");
-      btnExpand.className = "btn btn-primary";
-      btnExpand.style.width = "100%";
-      btnExpand.style.marginTop = "10px";
-      btnExpand.style.display = "flex";
-      btnExpand.style.alignItems = "center";
-      btnExpand.style.justifyContent = "center";
-      btnExpand.style.gap = "8px";
-      btnExpand.style.padding = "8px 12px";
-      btnExpand.style.fontWeight = "600";
-      btnExpand.style.fontSize = "0.8rem";
-      btnExpand.innerHTML = '<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 3h6v6"/><path d="M9 21H3v-6"/><path d="M21 3l-7 7"/><path d="M3 21l7-7"/></svg><span>Open Full Linear Card</span>';
-      btnExpand.onclick = () => openLinearCardModal(node);
-      linearCard.appendChild(btnExpand);
+      sectionDiv.appendChild(traceBox);
+      secEl.appendChild(sectionDiv);
     }
-
-    secEl.appendChild(linearCard);
   }
 }
 
@@ -11393,23 +11306,35 @@ function renderCfgInspectorSection(node) {
         }
       }
 
-      // Update Header & Badge
-      const hasDistinctSection = Boolean(node.section && node.section.trim() && node.section.trim().toUpperCase() !== node.name.trim().toUpperCase());
-      const displayTitle = hasDistinctSection ? node.section.trim() : node.name;
-      const displaySubtitle = hasDistinctSection ? `¶ Paragraph: ${node.name}` : "";
+      // Update Header: Routine Name spans across full panel
+      document.getElementById("inspTitle").textContent = node.name || "Routine";
 
-      document.getElementById("inspTitle").textContent = displayTitle;
-      document.getElementById("inspSubtitle").textContent = displaySubtitle;
+      // Subtitle / Section context
+      const subtitleEl = document.getElementById("inspSubtitle");
+      if (subtitleEl) {
+        subtitleEl.textContent = node.section ? `Section: ${node.section}` : "";
+      }
 
+      // Entry Point Badge
+      const entryBadge = document.getElementById("inspEntryBadge");
+      if (entryBadge) {
+        entryBadge.style.display = node.is_entry_point ? "inline-flex" : "none";
+      }
+
+      // Routine Type Badge (human-friendly title instead of raw SCREAMING_SNAKE_CASE)
       const typeBadge = document.getElementById("inspTypeBadge");
-      if (node.is_entry_point) {
-        typeBadge.textContent = "[ENTRY] " + node.node_type;
-        typeBadge.style.background = "#EFF6FC";
-        typeBadge.style.color = "#0078D4";
-      } else {
-        typeBadge.textContent = node.node_type;
-        typeBadge.style.background = "#F1F5F9";
-        typeBadge.style.color = "var(--text-secondary)";
+      if (typeBadge) {
+        const typeLabels = {
+          "MAIN_DRIVER": "Main Driver",
+          "BUSINESS_LOGIC": "Business Logic",
+          "FILE_IO": "File I/O",
+          "DB_SUBSYSTEM": "DB / Subsystem",
+          "TABLE_LOOKUP": "Table Lookup",
+          "ERROR_HANDLING": "Error Handling",
+          "ROUTINE_EXIT": "Exit Routine",
+          "GENERIC": "Procedure"
+        };
+        typeBadge.textContent = typeLabels[node.node_type] || node.node_type || "Procedure";
       }
 
       document.getElementById("inspSection").textContent = node.section ? node.section : "—";
@@ -11420,16 +11345,19 @@ function renderCfgInspectorSection(node) {
       document.getElementById("inspCluster").textContent = node.cluster_id.replace("cluster_", "");
 
       const btnViewCode = document.getElementById("btnViewRoutineCode");
-      if (btnViewCode) {
+      const btnViewCodeText = document.getElementById("btnViewRoutineCodeText") || (btnViewCode ? btnViewCode.querySelector("span") : null);
+      if (btnViewCode && btnViewCodeText) {
         if (node.start_line > 0) {
           btnViewCode.disabled = false;
           const mainFile = (typeof graphData !== "undefined" && graphData.source_file) ? graphData.source_file : "";
           const isCopybook = Boolean(node.source_file && mainFile && !mainFile.endsWith(node.source_file) && !node.source_file.endsWith(mainFile));
-          const lineSpan = isCopybook ? `(${node.source_file}:L${node.start_line})` : `(L${node.start_line}-L${node.end_line})`;
-          btnViewCode.querySelector("span").textContent = `View Routine Code ${lineSpan}`;
+          const lineSpan = isCopybook ? `${node.source_file}:L${node.start_line}` : `L${node.start_line}–L${node.end_line}`;
+          btnViewCodeText.textContent = "Source Code";
+          btnViewCode.title = `View source code (${lineSpan})`;
         } else {
           btnViewCode.disabled = true;
-          btnViewCode.querySelector("span").textContent = `View Routine Code (Line info unavailable)`;
+          btnViewCodeText.textContent = "Source Code";
+          btnViewCode.title = "Line info unavailable";
         }
       }
 
@@ -11437,7 +11365,7 @@ function renderCfgInspectorSection(node) {
         highlightRoutineInCode(node.start_line, node.end_line, node.name, node.source_file);
       }
 
-      // Render Level 3 Action or Enhanced Linear Summary Card
+      // Render Logic Flowchart / Linear Summary Card
       renderCfgInspectorSection(node);
 
       // Callers List
@@ -11452,7 +11380,7 @@ function renderCfgInspectorSection(node) {
           callersEl.appendChild(tag);
         });
       } else {
-        callersEl.innerHTML = '<span style="font-size:0.8rem; color:var(--text-muted);">' + (node.is_entry_point ? '<span style="color:#0078D4; font-weight:600;">[ENTRY]</span> Program Entry Point' : 'Root / Uncalled') + '</span>';
+        callersEl.innerHTML = '<span style="font-size:0.8rem; color:var(--text-muted);">' + (node.is_entry_point ? '<span style="color:var(--primary); font-weight:600;">[Entry Point]</span> Program Entry' : 'Root / Uncalled') + '</span>';
       }
 
       // Successors List
@@ -11661,20 +11589,20 @@ function renderCfgInspectorSection(node) {
         verbSpan.style.borderRadius = "4px";
 
         if (s.category === "data") {
-          verbSpan.style.background = "#EFF6FC";
-          verbSpan.style.color = "#0078D4";
+          verbSpan.style.background = "#F0F4F8";
+          verbSpan.style.color = "#245882";
         } else if (s.category === "call") {
-          verbSpan.style.background = "#F5F3FF";
-          verbSpan.style.color = "#7C3AED";
+          verbSpan.style.background = "#EBF3FC";
+          verbSpan.style.color = "#0056B3";
         } else if (s.category === "io") {
-          verbSpan.style.background = "#ECFDF5";
-          verbSpan.style.color = "#059669";
+          verbSpan.style.background = "#E8F5E9";
+          verbSpan.style.color = "#198754";
         } else if (s.category === "terminal") {
-          verbSpan.style.background = "#FEF2F2";
-          verbSpan.style.color = "#DC2626";
+          verbSpan.style.background = "#FDE8E8";
+          verbSpan.style.color = "#C82333";
         } else {
-          verbSpan.style.background = "#F1F5F9";
-          verbSpan.style.color = "#475569";
+          verbSpan.style.background = "#ECEFF2";
+          verbSpan.style.color = "#4A5568";
         }
         verbSpan.textContent = s.verb || "STMT";
         tdVerb.appendChild(verbSpan);
@@ -11767,12 +11695,12 @@ function renderCfgInspectorSection(node) {
         return;
       }
 
-      CobolScopeLog.info(`Opening Level 3 CFG modal for routine: ${node.name}`);
+      CobolScopeLog.info(`Opening logic flowchart modal for routine: ${node.name}`);
       selectedRoutineNode = node;
       const modal = document.getElementById("cfgModalBackdrop");
       if (!modal) return;
 
-      document.getElementById("cfgModalTitle").textContent = `Level 3 Intra-Procedure Flow: ${node.name}`;
+      document.getElementById("cfgModalTitle").textContent = `Logic Flowchart: ${node.name}`;
       document.getElementById("cfgModalSubtitle").textContent = `Section: ${node.section || "DEFAULT"} | Complexity (CC): ${node.cyclomatic_complexity} | Statements: ${node.statement_count}`;
       modal.style.display = "flex";
 
@@ -11858,10 +11786,10 @@ function renderCfgInspectorSection(node) {
               selector: "node.cfg-loop_header",
               style: {
                 "shape": "hexagon",
-                "background-color": "#F5F3FF",
-                "border-color": "#7C3AED",
+                "background-color": "#FFF8E1",
+                "border-color": "#B76E00",
                 "border-width": 2.5,
-                "color": "#5B21B6",
+                "color": "#7D4B00",
                 "padding": 16
               }
             },
@@ -11869,10 +11797,10 @@ function renderCfgInspectorSection(node) {
               selector: "node.cfg-basic_block",
               style: {
                 "shape": "round-rectangle",
-                "background-color": "#F8FAFC",
-                "border-color": "#3B82F6",
+                "background-color": "#F4F6F8",
+                "border-color": "#0056B3",
                 "border-width": 2,
-                "color": "#0F172A",
+                "color": "#1A202C",
                 "font-family": "ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace",
                 "font-size": 10.5,
                 "text-halign": "center",
@@ -11913,10 +11841,10 @@ function renderCfgInspectorSection(node) {
             {
               selector: "node.cfg-call_site",
               style: {
-                "background-color": "#F5F3FF",
-                "border-color": "#7C3AED",
+                "background-color": "#EBF3FC",
+                "border-color": "#0056B3",
                 "border-width": 2,
-                "color": "#5B21B6",
+                "color": "#004494",
                 "shape": "round-rectangle"
               }
             },
@@ -11926,8 +11854,8 @@ function renderCfgInspectorSection(node) {
                 "curve-style": "bezier",
                 "target-arrow-shape": "triangle",
                 "arrow-scale": 1.1,
-                "line-color": "#94A3B8",
-                "target-arrow-color": "#94A3B8",
+                "line-color": "#A0AEC0",
+                "target-arrow-color": "#A0AEC0",
                 "width": 2,
                 "label": "data(label)",
                 "font-size": 9,
@@ -11967,9 +11895,9 @@ function renderCfgInspectorSection(node) {
             {
               selector: "edge.cfg-edge-loop-body",
               style: {
-                "line-color": "#7C3AED",
-                "target-arrow-color": "#7C3AED",
-                "color": "#6D28D9"
+                "line-color": "#B76E00",
+                "target-arrow-color": "#B76E00",
+                "color": "#7D4B00"
               }
             },
             {

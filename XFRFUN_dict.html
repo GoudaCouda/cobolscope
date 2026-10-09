@@ -6,31 +6,31 @@
     <title>Data Dictionary - XFRFUN</title>
     <style>
 :root {
-    --bg-primary: #F8FAFC;
+    --bg-primary: #F4F6F8;
     --bg-surface: #FFFFFF;
-    --surface-hover: #F1F5F9;
-    --border-color: #E2E8F0;
-    --border-subtle: #F1F5F9;
-    --text-primary: #0F172A;
-    --text-secondary: #475569;
-    --text-muted: #64748B;
-    --primary: #0078D4;
-    --primary-hover: #106EBE;
-    --primary-light: #EFF6FC;
-    --primary-border: #C7E0F4;
+    --surface-hover: #ECEFF2;
+    --border-color: #D3D9E0;
+    --border-subtle: #E8ECEF;
+    --text-primary: #1A202C;
+    --text-secondary: #4A5568;
+    --text-muted: #718096;
+    --primary: #0056B3;
+    --primary-hover: #004494;
+    --primary-light: #EBF3FC;
+    --primary-border: #BCD7F5;
 
     /* Semantic badges matching Call Graph & Portal */
-    --badge-redef: #B45309;
-    --badge-redef-bg: #FEF3C7;
-    --badge-redef-border: #FDE68A;
+    --badge-redef: #B76E00;
+    --badge-redef-bg: #FFF8E1;
+    --badge-redef-border: #FCE6A2;
 
-    --badge-occurs: #6D28D9;
-    --badge-occurs-bg: #EDE9FE;
-    --badge-occurs-border: #DDD6FE;
+    --badge-occurs: #0056B3;
+    --badge-occurs-bg: #EBF3FC;
+    --badge-occurs-border: #BCD7F5;
 
-    --badge-val: #15803D;
-    --badge-val-bg: #DCFCE7;
-    --badge-val-border: #BBF7D0;
+    --badge-val: #198754;
+    --badge-val-bg: #E8F5E9;
+    --badge-val-border: #C3E6CB;
 }
 
 * {
@@ -123,41 +123,7 @@ html.in-portal-iframe .header {
     font-size: 0.8rem;
 }
 
-/* Summary Metrics Grid */
-.stats-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-    gap: 14px;
-    margin-bottom: 20px;
-}
 
-.stat-card {
-    background-color: var(--bg-surface);
-    border: 1px solid var(--border-color);
-    border-radius: 8px;
-    padding: 16px 18px;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.03);
-    transition: box-shadow 0.15s ease;
-}
-
-.stat-card:hover {
-    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.06);
-}
-
-.stat-title {
-    font-size: 0.72rem;
-    text-transform: uppercase;
-    letter-spacing: 0.06em;
-    font-weight: 700;
-    color: var(--text-muted);
-}
-
-.stat-value {
-    font-size: 1.6rem;
-    font-weight: 700;
-    color: var(--text-primary);
-    margin-top: 4px;
-}
 
 /* Search & Filter Toolbar */
 .toolbar {
@@ -183,7 +149,7 @@ html.in-portal-iframe .header {
 .search-box:focus {
     outline: none;
     border-color: var(--primary);
-    box-shadow: 0 0 0 3px rgba(0, 120, 212, 0.15);
+    box-shadow: 0 0 0 3px rgba(0, 86, 179, 0.15);
 }
 
 .search-box::placeholder {
@@ -205,7 +171,7 @@ html.in-portal-iframe .header {
 .filter-select:focus {
     outline: none;
     border-color: var(--primary);
-    box-shadow: 0 0 0 3px rgba(0, 120, 212, 0.15);
+    box-shadow: 0 0 0 3px rgba(0, 86, 179, 0.15);
 }
 
 /* Split-Screen Data Dictionary & Code Workspace */
@@ -214,14 +180,14 @@ html.in-portal-iframe .header {
     flex-direction: row;
     align-items: stretch;
     width: 100%;
-    height: calc(100vh - 280px);
+    height: calc(100vh - 170px);
     min-height: 520px;
     gap: 0;
     position: relative;
 }
 
 html.in-portal-iframe .dict-workspace {
-    height: calc(100vh - 230px);
+    height: calc(100vh - 120px);
 }
 
 .table-container {
@@ -239,7 +205,7 @@ html.in-portal-iframe .dict-workspace {
     position: sticky;
     top: 0;
     z-index: 2;
-    background-color: #F8FAFC;
+    background-color: var(--bg-primary);
     box-shadow: 0 1px 0 var(--border-color);
 }
 
@@ -293,7 +259,7 @@ html.in-portal-iframe .dict-workspace {
 .dict-code-header {
     height: 38px;
     min-height: 38px;
-    background: #F8FAFC;
+    background: var(--bg-primary);
     border-bottom: 1px solid var(--border-color);
     padding: 0 12px;
     display: flex;
@@ -323,7 +289,7 @@ html.in-portal-iframe .dict-workspace {
     font-weight: 600;
     color: var(--primary);
     background: var(--primary-light);
-    border: 1px solid rgba(0, 120, 212, 0.25);
+    border: 1px solid var(--primary-border);
     padding: 1px 6px;
     border-radius: 4px;
     white-space: nowrap;
@@ -378,7 +344,7 @@ html.in-portal-iframe .dict-workspace {
 }
 
 .col-guide {
-    color: #94A3B8;
+    color: var(--text-muted);
 }
 
 .col-guide:hover {
@@ -423,7 +389,7 @@ table.cobol-code-table tr td {
 }
 
 table.cobol-code-table tr:hover td {
-    background-color: #F8FAFC;
+    background-color: var(--surface-hover);
 }
 
 td.code-line-num {
@@ -431,8 +397,8 @@ td.code-line-num {
     min-width: 50px;
     text-align: right;
     padding: 0 8px !important;
-    color: #94A3B8;
-    background: #F8FAFC;
+    color: var(--text-muted);
+    background: var(--bg-primary);
     border-right: 1px solid var(--border-color);
     border-bottom: none !important;
     user-select: none;
@@ -449,19 +415,19 @@ td.code-line-num:hover {
 td.code-line-text {
     padding: 0 10px !important;
     white-space: pre;
-    color: #1E293B;
+    color: var(--text-primary);
     border-bottom: none !important;
     line-height: 1.5;
     vertical-align: middle;
 }
 
 tr.line-highlighted td.code-line-text {
-    background: #EFF6FC !important;
-    color: #0F172A;
+    background: var(--primary-light) !important;
+    color: var(--text-primary);
 }
 
 tr.line-highlighted td.code-line-num {
-    background: #E0F2FE !important;
+    background: var(--primary-border) !important;
     color: var(--primary);
     font-weight: 700;
 }
@@ -479,7 +445,7 @@ tr.line-highlight-start td.code-line-text {
 }
 
 .code-word:hover {
-    background-color: rgba(0, 120, 212, 0.12);
+    background-color: var(--primary-light);
 }
 
 .code-word.var-highlight {
@@ -516,7 +482,7 @@ tr.selected-var-row td:first-child {
 }
 
 #dictTable th {
-    background-color: #F8FAFC;
+    background-color: var(--bg-primary);
     color: var(--text-secondary);
     font-size: 0.74rem;
     font-weight: 700;
@@ -656,12 +622,12 @@ tr.selected-var-row td:first-child {
 }
 
 .ref-breadcrumb:hover {
-    background: #EFF6FC;
-    border-color: #0078D4;
+    background: var(--primary-light);
+    border-color: var(--primary);
 }
 
 .ref-breadcrumb:hover .ref-para {
-    color: #0078D4;
+    color: var(--primary);
     text-decoration: underline;
 }
 
@@ -700,24 +666,7 @@ tr.selected-var-row td:first-child {
 <div>Author: <b>Jon Collett</b></div>            </div>
         </header>
 
-        <section class="stats-grid">
-            <div class="stat-card">
-                <div class="stat-title">Total Data Items</div>
-                <div class="stat-value font-mono">261</div>
-            </div>
-            <div class="stat-card">
-                <div class="stat-title">Level-88 Rules</div>
-                <div class="stat-value font-mono">29</div>
-            </div>
-            <div class="stat-card">
-                <div class="stat-title">Memory Overlays</div>
-                <div class="stat-value font-mono">16</div>
-            </div>
-            <div class="stat-card">
-                <div class="stat-title">Working-Storage Span</div>
-                <div class="stat-value font-mono">198 bytes</div>
-            </div>
-        </section>
+
 
         <div class="toolbar">
             <input type="text" id="searchInput" class="search-box" placeholder="Search fields, qualified paths, or referencing paragraphs...">
