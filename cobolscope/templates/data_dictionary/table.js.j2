@@ -436,11 +436,6 @@
                     routine: targetPara,
                     section: targetSec
                 }, '*');
-                try {
-                    if (typeof window.parent.handleJumpToRoutine === 'function') {
-                        window.parent.handleJumpToRoutine(targetPara, targetSec);
-                    }
-                } catch (e) {}
                 return;
             }
 

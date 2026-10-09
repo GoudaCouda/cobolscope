@@ -102,6 +102,19 @@ class TestBatchProcessing(unittest.TestCase):
             self.assertTrue((out_dir / artifacts["data_dictionary"]).exists())
             self.assertTrue((out_dir / artifacts["data_dictionary_html"]).exists())
             self.assertTrue((out_dir / artifacts["ir"]).exists())
+            self.assertIn("source", artifacts)
+            self.assertTrue(artifacts["source"].endswith(".txt"))
+            self.assertTrue((out_dir / artifacts["source"]).exists())
+
+            # Verify call graph links to relative external assets
+            cg_html = (out_dir / artifacts["call_graph"]).read_text(encoding="utf-8")
+            self.assertIn('src="assets/cobolscope-viewer.bundle.js"', cg_html)
+            self.assertIn('href="assets/cobolscope-viewer.css"', cg_html)
+
+        # Verify static assets were automatically copied to output directory
+        self.assertTrue((out_dir / "assets" / "cobolscope-viewer.bundle.js").exists())
+        self.assertTrue((out_dir / "assets" / "cobolscope-viewer.css").exists())
+
 
 
 if __name__ == "__main__":

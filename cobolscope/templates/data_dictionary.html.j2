@@ -27,24 +27,7 @@
             {% endif %}
         </header>
 
-        <section class="stats-grid">
-            <div class="stat-card">
-                <div class="stat-title">Total Data Items</div>
-                <div class="stat-value font-mono">{{ summary.total_fields }}</div>
-            </div>
-            <div class="stat-card">
-                <div class="stat-title">Level-88 Rules</div>
-                <div class="stat-value font-mono">{{ summary.total_88s }}</div>
-            </div>
-            <div class="stat-card">
-                <div class="stat-title">Memory Overlays</div>
-                <div class="stat-value font-mono">{{ summary.total_redefines }}</div>
-            </div>
-            <div class="stat-card">
-                <div class="stat-title">Working-Storage Span</div>
-                <div class="stat-value font-mono">{{ summary.ws_bytes | format_bytes }}</div>
-            </div>
-        </section>
+
 
         <div class="toolbar">
             <input type="text" id="searchInput" class="search-box" placeholder="Search fields, qualified paths, or referencing paragraphs...">

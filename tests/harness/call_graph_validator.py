@@ -25,6 +25,7 @@ from cobolscope.graph import (
     CallGraphGenerator,
     GraphEdgeType,
 )
+from cobolscope.graph.builder import is_section_based_program
 
 
 class CallGraphValidator:
@@ -50,7 +51,7 @@ class CallGraphValidator:
         Verifies that every procedure/section/paragraph in the AST is either present as a node
         or properly tracked in a collapsed exit container or procedure container.
         """
-        is_section_based = len(self.model.sections) > 0 and any(len(s.paragraph_names) > 0 for s in self.model.sections)
+        is_section_based = is_section_based_program(self.model)
 
         if is_section_based:
             model_secs = {s.name.upper().strip() for s in self.model.sections}
@@ -61,6 +62,9 @@ class CallGraphValidator:
             assert not missing, f"Missing sections in call graph: {missing}"
         else:
             model_paras = {p.name.upper().strip() for p in self.model.paragraphs}
+            for s in self.model.sections:
+                if s.statements:
+                    model_paras.add(s.name.upper().strip())
             graph_nodes = set(self.graph.nodes.keys())
             if self.generator.collapse_exits:
                 for node in self.graph.nodes.values():
@@ -77,7 +81,7 @@ class CallGraphValidator:
         Verifies that every PERFORM and GO TO call-site in the AST
         is accounted for in the graph edges.
         """
-        is_section_based = len(self.model.sections) > 0 and any(len(s.paragraph_names) > 0 for s in self.model.sections)
+        is_section_based = is_section_based_program(self.model)
         symbol_to_proc: Dict[str, str] = {}
 
         if is_section_based:
@@ -87,6 +91,15 @@ class CallGraphValidator:
                 for p in s.paragraph_names:
                     symbol_to_proc[p.upper().strip()] = s_up
         else:
+            para_names_set = {p.name.upper().strip() for p in self.model.paragraphs}
+            for s in self.model.sections:
+                s_up = s.name.upper().strip()
+                if s.statements and s_up not in para_names_set:
+                    symbol_to_proc[s_up] = s_up
+                elif s.paragraph_names:
+                    symbol_to_proc[s_up] = s.paragraph_names[0].upper().strip()
+                else:
+                    symbol_to_proc[s_up] = s_up
             for p in self.model.paragraphs:
                 p_up = p.name.upper().strip()
                 symbol_to_proc[p_up] = p_up
@@ -108,6 +121,9 @@ class CallGraphValidator:
                 elif isinstance(s, PerformStatementNode) and s.nested_statements:
                     scan_stmts(s.nested_statements, caller)
 
+        for s in self.model.sections:
+            if s.statements:
+                scan_stmts(s.statements, s.name)
         for p in self.model.paragraphs:
             scan_stmts(p.statements, p.name)
 
@@ -170,7 +186,7 @@ class CallGraphValidator:
 
     def verify_thru_expansion(self) -> bool:
         """Verifies that all PERFORM ... THRU statements generate proper procedure calls."""
-        is_section_based = len(self.model.sections) > 0 and any(len(s.paragraph_names) > 0 for s in self.model.sections)
+        is_section_based = is_section_based_program(self.model)
         symbol_to_proc: Dict[str, str] = {}
 
         if is_section_based:
@@ -180,13 +196,28 @@ class CallGraphValidator:
                 for p in s.paragraph_names:
                     symbol_to_proc[p.upper().strip()] = s_up
         else:
+            para_names_set = {p.name.upper().strip() for p in self.model.paragraphs}
+            for s in self.model.sections:
+                s_up = s.name.upper().strip()
+                if s.statements and s_up not in para_names_set:
+                    symbol_to_proc[s_up] = s_up
+                elif s.paragraph_names:
+                    symbol_to_proc[s_up] = s.paragraph_names[0].upper().strip()
+                else:
+                    symbol_to_proc[s_up] = s_up
             for p in self.model.paragraphs:
                 p_up = p.name.upper().strip()
                 symbol_to_proc[p_up] = p_up
 
         graph_edges = {(e.source.upper().strip(), e.target.upper().strip()) for e in self.graph.edges}
 
-        for p in self.model.paragraphs:
+        all_callers: List[ParagraphNode] = []
+        for s in self.model.sections:
+            if s.statements:
+                all_callers.append(ParagraphNode(name=s.name, statements=s.statements, location=s.location))
+        all_callers.extend(self.model.paragraphs)
+
+        for p in all_callers:
             caller_proc = symbol_to_proc.get(p.name.upper().strip(), p.name.upper().strip())
             for s in p.statements:
                 if isinstance(s, PerformStatementNode) and s.target and s.thru:

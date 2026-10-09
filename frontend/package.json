@@ -1,0 +1,17 @@
+{
+  "name": "cobolscope-frontend",
+  "version": "0.1.0",
+  "description": "Frontend visualization runtime for CobolScope COBOL call graphs, CFGs, and data dictionaries.",
+  "scripts": {
+    "build": "node build.js"
+  },
+  "keywords": [
+    "cobol",
+    "call-graph",
+    "cytoscape",
+    "elkjs",
+    "dagre"
+  ],
+  "author": "CobolScope",
+  "license": "Apache-2.0"
+}

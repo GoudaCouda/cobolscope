@@ -1,0 +1,807 @@
+{
+  "programId": "TSTEDGES",
+  "format": "FIXED",
+  "dataDictionary": {
+    "fileControls": [
+      {
+        "selectName": "CUST-FILE",
+        "assignTo": "CUST.DAT",
+        "fileStatusVar": "WS-FILE-STATUS",
+        "location": {
+          "startLine": 6,
+          "endLine": 7,
+          "startColumn": 11,
+          "endColumn": 30
+        }
+      }
+    ],
+    "fileSection": [
+      {
+        "name": "CUST-FILE",
+        "selectName": "CUST-FILE",
+        "location": {
+          "startLine": 10,
+          "endLine": 11,
+          "startColumn": 7,
+          "endColumn": 44
+        },
+        "records": [
+          {
+            "id": "FD_CUST-FILE_L11_CUST-REC",
+            "qualifiedName": "CUST-REC",
+            "level": 1,
+            "name": "CUST-REC",
+            "pic": "X(100)",
+            "usage": "DISPLAY",
+            "logicalType": "Alphanumeric (100 chars)",
+            "byteOffset": 0,
+            "relativeOffset": 0,
+            "byteLength": 100,
+            "elementByteLength": 100,
+            "location": {
+              "startLine": 11,
+              "endLine": 11,
+              "startColumn": 7,
+              "endColumn": 44
+            }
+          }
+        ]
+      }
+    ],
+    "workingStorageSection": [
+      {
+        "id": "WS_L13_WS-FILE-STATUS",
+        "qualifiedName": "WS-FILE-STATUS",
+        "level": 1,
+        "name": "WS-FILE-STATUS",
+        "pic": "X(2)",
+        "usage": "DISPLAY",
+        "logicalType": "Alphanumeric (2 chars)",
+        "byteOffset": 0,
+        "relativeOffset": 0,
+        "byteLength": 2,
+        "elementByteLength": 2,
+        "location": {
+          "startLine": 13,
+          "endLine": 13,
+          "startColumn": 7,
+          "endColumn": 42
+        }
+      },
+      {
+        "id": "WS_L14_WS-FLAG",
+        "qualifiedName": "WS-FLAG",
+        "level": 1,
+        "name": "WS-FLAG",
+        "pic": "9(1)",
+        "usage": "DISPLAY",
+        "value": "0",
+        "logicalType": "Numeric Display (1 digits)",
+        "byteOffset": 2,
+        "relativeOffset": 0,
+        "byteLength": 1,
+        "elementByteLength": 1,
+        "location": {
+          "startLine": 14,
+          "endLine": 14,
+          "startColumn": 7,
+          "endColumn": 50
+        }
+      },
+      {
+        "id": "WS_L15_WS-TRAN-TYPE",
+        "qualifiedName": "WS-TRAN-TYPE",
+        "level": 1,
+        "name": "WS-TRAN-TYPE",
+        "pic": "9(1)",
+        "usage": "DISPLAY",
+        "value": "1",
+        "logicalType": "Numeric Display (1 digits)",
+        "byteOffset": 3,
+        "relativeOffset": 0,
+        "byteLength": 1,
+        "elementByteLength": 1,
+        "location": {
+          "startLine": 15,
+          "endLine": 15,
+          "startColumn": 7,
+          "endColumn": 50
+        }
+      },
+      {
+        "id": "WS_L16_WS-PARAM",
+        "qualifiedName": "WS-PARAM",
+        "level": 1,
+        "name": "WS-PARAM",
+        "pic": "X(10)",
+        "usage": "DISPLAY",
+        "logicalType": "Alphanumeric (10 chars)",
+        "byteOffset": 4,
+        "relativeOffset": 0,
+        "byteLength": 10,
+        "elementByteLength": 10,
+        "location": {
+          "startLine": 16,
+          "endLine": 16,
+          "startColumn": 7,
+          "endColumn": 43
+        }
+      }
+    ],
+    "linkageSection": [
+      {
+        "id": "LK_L18_LK-PARAM",
+        "qualifiedName": "LK-PARAM",
+        "level": 1,
+        "name": "LK-PARAM",
+        "pic": "X(10)",
+        "usage": "DISPLAY",
+        "logicalType": "Alphanumeric (10 chars)",
+        "byteOffset": 0,
+        "relativeOffset": 0,
+        "byteLength": 10,
+        "elementByteLength": 10,
+        "location": {
+          "startLine": 18,
+          "endLine": 18,
+          "startColumn": 7,
+          "endColumn": 43
+        }
+      }
+    ],
+    "workingStorageBytes": 14
+  },
+  "sections": [
+    {
+      "name": "0000-MAIN",
+      "location": {
+        "startLine": 29,
+        "endLine": 43,
+        "startColumn": 7,
+        "endColumn": 17
+      },
+      "paragraphNames": [
+        "0000-START",
+        "1000-TERMINATE",
+        "1100-OBSOLETE-CLEANUP"
+      ]
+    },
+    {
+      "name": "2000-CALC-SECTION",
+      "location": {
+        "startLine": 45,
+        "endLine": 77,
+        "startColumn": 7,
+        "endColumn": 17
+      },
+      "paragraphNames": [
+        "2000-FIRST-PARA",
+        "2000-SECOND-PARA",
+        "3000-ROUTINE",
+        "3100-SKIPPED-LOGIC",
+        "3000-EXIT",
+        "4000-DISPATCH",
+        "4100-NEW-ACCT",
+        "4200-UPDATE-ACCT",
+        "4300-CLOSE-ACCT"
+      ]
+    },
+    {
+      "name": "5000-ALT-ENTRY-SECTION",
+      "location": {
+        "startLine": 79,
+        "endLine": 83,
+        "startColumn": 7,
+        "endColumn": 17
+      },
+      "statements": [
+        {
+          "type": "ENTRY",
+          "location": {
+            "startLine": 80,
+            "endLine": 80,
+            "startColumn": 11,
+            "endColumn": 34
+          },
+          "rawText": "ENTRY 'ALTENTRY' USING LK-PARAM"
+        }
+      ],
+      "paragraphNames": [
+        "5000-ALT-ENTRY-PARA"
+      ]
+    },
+    {
+      "name": "DECLARATIVES-SECTION",
+      "location": {
+        "startLine": 22,
+        "endLine": 26,
+        "startColumn": 7,
+        "endColumn": 17
+      },
+      "paragraphNames": [
+        "ERROR-LOG-PARA"
+      ]
+    }
+  ],
+  "paragraphs": [
+    {
+      "name": "ERROR-LOG-PARA",
+      "sectionParent": "DECLARATIVES-SECTION",
+      "location": {
+        "startLine": 24,
+        "endLine": 26,
+        "startColumn": 7,
+        "endColumn": 17
+      },
+      "isTerminal": true,
+      "statements": [
+        {
+          "type": "DISPLAY",
+          "location": {
+            "startLine": 25,
+            "endLine": 25,
+            "startColumn": 11,
+            "endColumn": 19
+          },
+          "rawText": "DISPLAY 'I/O ERROR OCCURRED'",
+          "operands": [
+            "'I/O ERROR OCCURRED'"
+          ]
+        },
+        {
+          "type": "GOBACK",
+          "location": {
+            "startLine": 26,
+            "endLine": 26,
+            "startColumn": 11,
+            "endColumn": 11
+          },
+          "rawText": "GOBACK",
+          "operation": "GOBACK"
+        }
+      ]
+    },
+    {
+      "name": "0000-START",
+      "sectionParent": "0000-MAIN",
+      "location": {
+        "startLine": 30,
+        "endLine": 35,
+        "startColumn": 7,
+        "endColumn": 19
+      },
+      "successors": [
+        "2000-CALC-SECTION",
+        "4000-DISPATCH",
+        "3000-ROUTINE"
+      ],
+      "isTerminal": true,
+      "statements": [
+        {
+          "type": "DISPLAY",
+          "location": {
+            "startLine": 31,
+            "endLine": 31,
+            "startColumn": 11,
+            "endColumn": 19
+          },
+          "rawText": "DISPLAY 'TEST GRAPH PIPELINE START'",
+          "operands": [
+            "'TEST GRAPH PIPELINE START'"
+          ]
+        },
+        {
+          "type": "PERFORM",
+          "location": {
+            "startLine": 32,
+            "endLine": 32,
+            "startColumn": 11,
+            "endColumn": 19
+          },
+          "rawText": "PERFORM 2000-CALC-SECTION",
+          "target": "2000-CALC-SECTION"
+        },
+        {
+          "type": "PERFORM",
+          "location": {
+            "startLine": 33,
+            "endLine": 33,
+            "startColumn": 11,
+            "endColumn": 19
+          },
+          "rawText": "PERFORM 4000-DISPATCH",
+          "target": "4000-DISPATCH"
+        },
+        {
+          "type": "PERFORM",
+          "location": {
+            "startLine": 34,
+            "endLine": 34,
+            "startColumn": 11,
+            "endColumn": 19
+          },
+          "rawText": "PERFORM 3000-ROUTINE",
+          "target": "3000-ROUTINE"
+        },
+        {
+          "type": "STOP",
+          "location": {
+            "startLine": 35,
+            "endLine": 35,
+            "startColumn": 11,
+            "endColumn": 16
+          },
+          "rawText": "STOP RUN",
+          "operation": "STOP",
+          "expression": "STOP RUN"
+        }
+      ]
+    },
+    {
+      "name": "1000-TERMINATE",
+      "sectionParent": "0000-MAIN",
+      "location": {
+        "startLine": 37,
+        "endLine": 39,
+        "startColumn": 7,
+        "endColumn": 17
+      },
+      "isTerminal": true,
+      "statements": [
+        {
+          "type": "DISPLAY",
+          "location": {
+            "startLine": 38,
+            "endLine": 38,
+            "startColumn": 11,
+            "endColumn": 19
+          },
+          "rawText": "DISPLAY 'NORMAL END'",
+          "operands": [
+            "'NORMAL END'"
+          ]
+        },
+        {
+          "type": "GOBACK",
+          "location": {
+            "startLine": 39,
+            "endLine": 39,
+            "startColumn": 11,
+            "endColumn": 11
+          },
+          "rawText": "GOBACK",
+          "operation": "GOBACK"
+        }
+      ]
+    },
+    {
+      "name": "1100-OBSOLETE-CLEANUP",
+      "sectionParent": "0000-MAIN",
+      "location": {
+        "startLine": 41,
+        "endLine": 43,
+        "startColumn": 7,
+        "endColumn": 17
+      },
+      "isTerminal": true,
+      "statements": [
+        {
+          "type": "DISPLAY",
+          "location": {
+            "startLine": 42,
+            "endLine": 42,
+            "startColumn": 11,
+            "endColumn": 19
+          },
+          "rawText": "DISPLAY 'CLEANING UP STRANDED CODE'",
+          "operands": [
+            "'CLEANING UP STRANDED CODE'"
+          ]
+        },
+        {
+          "type": "GOBACK",
+          "location": {
+            "startLine": 43,
+            "endLine": 43,
+            "startColumn": 11,
+            "endColumn": 11
+          },
+          "rawText": "GOBACK",
+          "operation": "GOBACK"
+        }
+      ]
+    },
+    {
+      "name": "2000-FIRST-PARA",
+      "sectionParent": "2000-CALC-SECTION",
+      "location": {
+        "startLine": 46,
+        "endLine": 47,
+        "startColumn": 7,
+        "endColumn": 28
+      },
+      "fallthroughSuccessor": "2000-SECOND-PARA",
+      "statements": [
+        {
+          "type": "MOVE",
+          "location": {
+            "startLine": 47,
+            "endLine": 47,
+            "startColumn": 11,
+            "endColumn": 21
+          },
+          "rawText": "MOVE 1 TO WS-FLAG",
+          "targetFieldIds": [
+            "WS_L14_WS-FLAG"
+          ],
+          "fromExpr": "1",
+          "toTargets": [
+            "WS-FLAG"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "2000-SECOND-PARA",
+      "sectionParent": "2000-CALC-SECTION",
+      "location": {
+        "startLine": 48,
+        "endLine": 49,
+        "startColumn": 7,
+        "endColumn": 28
+      },
+      "fallthroughSuccessor": "3000-ROUTINE",
+      "statements": [
+        {
+          "type": "MOVE",
+          "location": {
+            "startLine": 49,
+            "endLine": 49,
+            "startColumn": 11,
+            "endColumn": 21
+          },
+          "rawText": "MOVE 2 TO WS-FLAG",
+          "targetFieldIds": [
+            "WS_L14_WS-FLAG"
+          ],
+          "fromExpr": "2",
+          "toTargets": [
+            "WS-FLAG"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "3000-ROUTINE",
+      "sectionParent": "2000-CALC-SECTION",
+      "location": {
+        "startLine": 51,
+        "endLine": 53,
+        "startColumn": 7,
+        "endColumn": 26
+      },
+      "calledBy": [
+        "0000-START"
+      ],
+      "successors": [
+        "3000-EXIT"
+      ],
+      "statements": [
+        {
+          "type": "MOVE",
+          "location": {
+            "startLine": 52,
+            "endLine": 52,
+            "startColumn": 11,
+            "endColumn": 21
+          },
+          "rawText": "MOVE 3 TO WS-FLAG",
+          "targetFieldIds": [
+            "WS_L14_WS-FLAG"
+          ],
+          "fromExpr": "3",
+          "toTargets": [
+            "WS-FLAG"
+          ]
+        },
+        {
+          "type": "GO_TO",
+          "location": {
+            "startLine": 53,
+            "endLine": 53,
+            "startColumn": 11,
+            "endColumn": 17
+          },
+          "rawText": "GO TO 3000-EXIT",
+          "target": "3000-EXIT",
+          "operation": "GO_TO"
+        }
+      ]
+    },
+    {
+      "name": "3100-SKIPPED-LOGIC",
+      "sectionParent": "2000-CALC-SECTION",
+      "location": {
+        "startLine": 55,
+        "endLine": 56,
+        "startColumn": 7,
+        "endColumn": 28
+      },
+      "fallthroughSuccessor": "3000-EXIT",
+      "statements": [
+        {
+          "type": "MOVE",
+          "location": {
+            "startLine": 56,
+            "endLine": 56,
+            "startColumn": 11,
+            "endColumn": 21
+          },
+          "rawText": "MOVE 0 TO WS-FLAG",
+          "targetFieldIds": [
+            "WS_L14_WS-FLAG"
+          ],
+          "fromExpr": "0",
+          "toTargets": [
+            "WS-FLAG"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "3000-EXIT",
+      "sectionParent": "2000-CALC-SECTION",
+      "location": {
+        "startLine": 58,
+        "endLine": 59,
+        "startColumn": 7,
+        "endColumn": 15
+      },
+      "calledBy": [
+        "3000-ROUTINE"
+      ],
+      "fallthroughSuccessor": "4000-DISPATCH",
+      "statements": [
+        {
+          "type": "EXIT",
+          "location": {
+            "startLine": 59,
+            "endLine": 59,
+            "startColumn": 11,
+            "endColumn": 11
+          },
+          "rawText": "EXIT",
+          "operation": "EXIT"
+        }
+      ]
+    },
+    {
+      "name": "4000-DISPATCH",
+      "sectionParent": "2000-CALC-SECTION",
+      "location": {
+        "startLine": 61,
+        "endLine": 65,
+        "startColumn": 7,
+        "endColumn": 40
+      },
+      "calledBy": [
+        "0000-START"
+      ],
+      "successors": [
+        "4100-NEW-ACCT",
+        "4200-UPDATE-ACCT",
+        "4300-CLOSE-ACCT"
+      ],
+      "fallthroughSuccessor": "4100-NEW-ACCT",
+      "statements": [
+        {
+          "type": "GO_TO",
+          "location": {
+            "startLine": 62,
+            "endLine": 65,
+            "startColumn": 11,
+            "endColumn": 28
+          },
+          "rawText": "GO TO 4100-NEW-ACCT 4200-UPDATE-ACCT 4300-CLOSE-ACCT DEPENDING ON WS-TRAN-TYPE",
+          "sourceFieldIds": [
+            "WS_L15_WS-TRAN-TYPE"
+          ],
+          "operation": "GO_TO",
+          "dependingOn": "4100-NEW-ACCT 4200-UPDATE-ACCT 4300-CLOSE-ACCT DEPENDING ON WS-TRAN-TYPE"
+        }
+      ]
+    },
+    {
+      "name": "4100-NEW-ACCT",
+      "sectionParent": "2000-CALC-SECTION",
+      "location": {
+        "startLine": 67,
+        "endLine": 69,
+        "startColumn": 7,
+        "endColumn": 17
+      },
+      "calledBy": [
+        "4000-DISPATCH"
+      ],
+      "isTerminal": true,
+      "statements": [
+        {
+          "type": "DISPLAY",
+          "location": {
+            "startLine": 68,
+            "endLine": 68,
+            "startColumn": 11,
+            "endColumn": 19
+          },
+          "rawText": "DISPLAY 'NEW ACCT'",
+          "operands": [
+            "'NEW ACCT'"
+          ]
+        },
+        {
+          "type": "GOBACK",
+          "location": {
+            "startLine": 69,
+            "endLine": 69,
+            "startColumn": 11,
+            "endColumn": 11
+          },
+          "rawText": "GOBACK",
+          "operation": "GOBACK"
+        }
+      ]
+    },
+    {
+      "name": "4200-UPDATE-ACCT",
+      "sectionParent": "2000-CALC-SECTION",
+      "location": {
+        "startLine": 71,
+        "endLine": 73,
+        "startColumn": 7,
+        "endColumn": 17
+      },
+      "calledBy": [
+        "4000-DISPATCH"
+      ],
+      "isTerminal": true,
+      "statements": [
+        {
+          "type": "DISPLAY",
+          "location": {
+            "startLine": 72,
+            "endLine": 72,
+            "startColumn": 11,
+            "endColumn": 19
+          },
+          "rawText": "DISPLAY 'UPDATE ACCT'",
+          "operands": [
+            "'UPDATE ACCT'"
+          ]
+        },
+        {
+          "type": "GOBACK",
+          "location": {
+            "startLine": 73,
+            "endLine": 73,
+            "startColumn": 11,
+            "endColumn": 11
+          },
+          "rawText": "GOBACK",
+          "operation": "GOBACK"
+        }
+      ]
+    },
+    {
+      "name": "4300-CLOSE-ACCT",
+      "sectionParent": "2000-CALC-SECTION",
+      "location": {
+        "startLine": 75,
+        "endLine": 77,
+        "startColumn": 7,
+        "endColumn": 17
+      },
+      "calledBy": [
+        "4000-DISPATCH"
+      ],
+      "isTerminal": true,
+      "statements": [
+        {
+          "type": "DISPLAY",
+          "location": {
+            "startLine": 76,
+            "endLine": 76,
+            "startColumn": 11,
+            "endColumn": 19
+          },
+          "rawText": "DISPLAY 'CLOSE ACCT'",
+          "operands": [
+            "'CLOSE ACCT'"
+          ]
+        },
+        {
+          "type": "GOBACK",
+          "location": {
+            "startLine": 77,
+            "endLine": 77,
+            "startColumn": 11,
+            "endColumn": 11
+          },
+          "rawText": "GOBACK",
+          "operation": "GOBACK"
+        }
+      ]
+    },
+    {
+      "name": "5000-ALT-ENTRY-PARA",
+      "sectionParent": "5000-ALT-ENTRY-SECTION",
+      "location": {
+        "startLine": 81,
+        "endLine": 83,
+        "startColumn": 7,
+        "endColumn": 17
+      },
+      "isTerminal": true,
+      "statements": [
+        {
+          "type": "DISPLAY",
+          "location": {
+            "startLine": 82,
+            "endLine": 82,
+            "startColumn": 11,
+            "endColumn": 19
+          },
+          "rawText": "DISPLAY 'ALT ENTRY INVOKED'",
+          "operands": [
+            "'ALT ENTRY INVOKED'"
+          ]
+        },
+        {
+          "type": "GOBACK",
+          "location": {
+            "startLine": 83,
+            "endLine": 83,
+            "startColumn": 11,
+            "endColumn": 11
+          },
+          "rawText": "GOBACK",
+          "operation": "GOBACK"
+        }
+      ]
+    }
+  ],
+  "asgAuditSummary": {
+    "totalAsgDataEntries": 6,
+    "totalAsgLevel88Entries": 0,
+    "totalAsgParagraphs": 14,
+    "totalAsgStatements": 27,
+    "totalAsgCalls": 7,
+    "asgVariableNames": [
+      "CUST-REC",
+      "WS-FILE-STATUS",
+      "WS-FLAG",
+      "WS-TRAN-TYPE",
+      "WS-PARAM",
+      "LK-PARAM"
+    ],
+    "asgParagraphCalls": {
+      "3000-ROUTINE": [
+        "3000-ROUTINE"
+      ],
+      "3000-EXIT": [
+        "3000-EXIT"
+      ],
+      "4000-DISPATCH": [
+        "4000-DISPATCH"
+      ],
+      "4100-NEW-ACCT": [
+        "4100-NEW-ACCT"
+      ],
+      "4200-UPDATE-ACCT": [
+        "4200-UPDATE-ACCT"
+      ],
+      "4300-CLOSE-ACCT": [
+        "4300-CLOSE-ACCT"
+      ]
+    }
+  }
+}

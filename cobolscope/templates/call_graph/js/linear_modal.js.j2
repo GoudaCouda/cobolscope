@@ -79,20 +79,20 @@
         verbSpan.style.borderRadius = "4px";
 
         if (s.category === "data") {
-          verbSpan.style.background = "#EFF6FC";
-          verbSpan.style.color = "#0078D4";
+          verbSpan.style.background = "#F0F4F8";
+          verbSpan.style.color = "#245882";
         } else if (s.category === "call") {
-          verbSpan.style.background = "#F5F3FF";
-          verbSpan.style.color = "#7C3AED";
+          verbSpan.style.background = "#EBF3FC";
+          verbSpan.style.color = "#0056B3";
         } else if (s.category === "io") {
-          verbSpan.style.background = "#ECFDF5";
-          verbSpan.style.color = "#059669";
+          verbSpan.style.background = "#E8F5E9";
+          verbSpan.style.color = "#198754";
         } else if (s.category === "terminal") {
-          verbSpan.style.background = "#FEF2F2";
-          verbSpan.style.color = "#DC2626";
+          verbSpan.style.background = "#FDE8E8";
+          verbSpan.style.color = "#C82333";
         } else {
-          verbSpan.style.background = "#F1F5F9";
-          verbSpan.style.color = "#475569";
+          verbSpan.style.background = "#ECEFF2";
+          verbSpan.style.color = "#4A5568";
         }
         verbSpan.textContent = s.verb || "STMT";
         tdVerb.appendChild(verbSpan);

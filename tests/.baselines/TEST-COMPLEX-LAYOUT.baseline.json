@@ -1,0 +1,1059 @@
+{
+  "programId": "TSTCMPLX",
+  "format": "FIXED",
+  "dataDictionary": {
+    "workingStorageSection": [
+      {
+        "id": "WS_L7_WS-STANDALONE-COUNT",
+        "qualifiedName": "WS-STANDALONE-COUNT",
+        "level": 77,
+        "name": "WS-STANDALONE-COUNT",
+        "pic": "S9(4)",
+        "usage": "COMP",
+        "value": "0",
+        "logicalType": "Signed SmallInt (16-bit Binary)",
+        "byteOffset": 0,
+        "relativeOffset": 0,
+        "byteLength": 2,
+        "elementByteLength": 2,
+        "location": {
+          "startLine": 7,
+          "endLine": 7,
+          "startColumn": 7,
+          "endColumn": 60
+        }
+      },
+      {
+        "id": "WS_L9_WS-CUSTOMER-RECORD",
+        "qualifiedName": "WS-CUSTOMER-RECORD",
+        "level": 1,
+        "name": "WS-CUSTOMER-RECORD",
+        "usage": "DISPLAY",
+        "logicalType": "Group",
+        "byteOffset": 2,
+        "relativeOffset": 0,
+        "byteLength": 276,
+        "elementByteLength": 276,
+        "children": [
+          {
+            "id": "WS_L10_WS-RECORD-HEADER",
+            "qualifiedName": "WS-CUSTOMER-RECORD.WS-RECORD-HEADER",
+            "level": 5,
+            "name": "WS-RECORD-HEADER",
+            "usage": "DISPLAY",
+            "logicalType": "Group",
+            "byteOffset": 2,
+            "relativeOffset": 0,
+            "byteLength": 6,
+            "elementByteLength": 6,
+            "children": [
+              {
+                "id": "WS_L11_WS-RECORD-TYPE",
+                "qualifiedName": "WS-CUSTOMER-RECORD.WS-RECORD-HEADER.WS-RECORD-TYPE",
+                "level": 10,
+                "name": "WS-RECORD-TYPE",
+                "pic": "X",
+                "usage": "DISPLAY",
+                "logicalType": "Alphanumeric (1 chars)",
+                "byteOffset": 2,
+                "relativeOffset": 0,
+                "byteLength": 1,
+                "elementByteLength": 1,
+                "location": {
+                  "startLine": 11,
+                  "endLine": 11,
+                  "startColumn": 15,
+                  "endColumn": 43
+                }
+              },
+              {
+                "id": "WS_L12_FILLER",
+                "qualifiedName": "WS-CUSTOMER-RECORD.WS-RECORD-HEADER.FILLER",
+                "level": 10,
+                "name": "FILLER",
+                "pic": "X(2)",
+                "usage": "DISPLAY",
+                "logicalType": "Alphanumeric (2 chars)",
+                "byteOffset": 3,
+                "relativeOffset": 1,
+                "byteLength": 2,
+                "elementByteLength": 2,
+                "isFiller": true,
+                "location": {
+                  "startLine": 12,
+                  "endLine": 12,
+                  "startColumn": 15,
+                  "endColumn": 46
+                }
+              },
+              {
+                "id": "WS_L13_WS-RECORD-LENGTH",
+                "qualifiedName": "WS-CUSTOMER-RECORD.WS-RECORD-HEADER.WS-RECORD-LENGTH",
+                "level": 10,
+                "name": "WS-RECORD-LENGTH",
+                "pic": "9(5)",
+                "usage": "COMP_3",
+                "logicalType": "Integer(5) Packed",
+                "byteOffset": 5,
+                "relativeOffset": 3,
+                "byteLength": 3,
+                "elementByteLength": 3,
+                "location": {
+                  "startLine": 13,
+                  "endLine": 13,
+                  "startColumn": 15,
+                  "endColumn": 53
+                }
+              }
+            ],
+            "location": {
+              "startLine": 10,
+              "endLine": 10,
+              "startColumn": 11,
+              "endColumn": 31
+            }
+          },
+          {
+            "id": "WS_L14_WS-CUSTOMER-DETAIL",
+            "qualifiedName": "WS-CUSTOMER-RECORD.WS-CUSTOMER-DETAIL",
+            "level": 5,
+            "name": "WS-CUSTOMER-DETAIL",
+            "usage": "DISPLAY",
+            "logicalType": "Group",
+            "byteOffset": 8,
+            "relativeOffset": 6,
+            "byteLength": 122,
+            "elementByteLength": 122,
+            "children": [
+              {
+                "id": "WS_L15_WS-CUSTOMER-KEY",
+                "qualifiedName": "WS-CUSTOMER-RECORD.WS-CUSTOMER-DETAIL.WS-CUSTOMER-KEY",
+                "level": 10,
+                "name": "WS-CUSTOMER-KEY",
+                "usage": "DISPLAY",
+                "logicalType": "Group",
+                "byteOffset": 8,
+                "relativeOffset": 0,
+                "byteLength": 16,
+                "elementByteLength": 16,
+                "children": [
+                  {
+                    "id": "WS_L16_WS-BRANCH-CODE",
+                    "qualifiedName": "WS-CUSTOMER-RECORD.WS-CUSTOMER-DETAIL.WS-CUSTOMER-KEY.WS-BRANCH-CODE",
+                    "level": 15,
+                    "name": "WS-BRANCH-CODE",
+                    "pic": "9(6)",
+                    "usage": "DISPLAY",
+                    "logicalType": "Numeric Display (6 digits)",
+                    "byteOffset": 8,
+                    "relativeOffset": 0,
+                    "byteLength": 6,
+                    "elementByteLength": 6,
+                    "location": {
+                      "startLine": 16,
+                      "endLine": 16,
+                      "startColumn": 19,
+                      "endColumn": 47
+                    }
+                  },
+                  {
+                    "id": "WS_L17_WS-ACCOUNT-NO",
+                    "qualifiedName": "WS-CUSTOMER-RECORD.WS-CUSTOMER-DETAIL.WS-CUSTOMER-KEY.WS-ACCOUNT-NO",
+                    "level": 15,
+                    "name": "WS-ACCOUNT-NO",
+                    "pic": "9(10)",
+                    "usage": "DISPLAY",
+                    "logicalType": "Numeric Display (10 digits)",
+                    "byteOffset": 14,
+                    "relativeOffset": 6,
+                    "byteLength": 10,
+                    "elementByteLength": 10,
+                    "location": {
+                      "startLine": 17,
+                      "endLine": 17,
+                      "startColumn": 19,
+                      "endColumn": 48
+                    }
+                  }
+                ],
+                "location": {
+                  "startLine": 15,
+                  "endLine": 15,
+                  "startColumn": 15,
+                  "endColumn": 34
+                }
+              },
+              {
+                "id": "WS_L18_WS-CUSTOMER-NAME",
+                "qualifiedName": "WS-CUSTOMER-RECORD.WS-CUSTOMER-DETAIL.WS-CUSTOMER-NAME",
+                "level": 10,
+                "name": "WS-CUSTOMER-NAME",
+                "usage": "DISPLAY",
+                "logicalType": "Group",
+                "byteOffset": 24,
+                "relativeOffset": 16,
+                "byteLength": 58,
+                "elementByteLength": 58,
+                "children": [
+                  {
+                    "id": "WS_L19_WS-TITLE",
+                    "qualifiedName": "WS-CUSTOMER-RECORD.WS-CUSTOMER-DETAIL.WS-CUSTOMER-NAME.WS-TITLE",
+                    "level": 15,
+                    "name": "WS-TITLE",
+                    "pic": "X(8)",
+                    "usage": "DISPLAY",
+                    "logicalType": "Alphanumeric (8 chars)",
+                    "byteOffset": 24,
+                    "relativeOffset": 0,
+                    "byteLength": 8,
+                    "elementByteLength": 8,
+                    "location": {
+                      "startLine": 19,
+                      "endLine": 19,
+                      "startColumn": 19,
+                      "endColumn": 47
+                    }
+                  },
+                  {
+                    "id": "WS_L20_WS-FIRST-NAME",
+                    "qualifiedName": "WS-CUSTOMER-RECORD.WS-CUSTOMER-DETAIL.WS-CUSTOMER-NAME.WS-FIRST-NAME",
+                    "level": 15,
+                    "name": "WS-FIRST-NAME",
+                    "pic": "X(20)",
+                    "usage": "DISPLAY",
+                    "logicalType": "Alphanumeric (20 chars)",
+                    "byteOffset": 32,
+                    "relativeOffset": 8,
+                    "byteLength": 20,
+                    "elementByteLength": 20,
+                    "location": {
+                      "startLine": 20,
+                      "endLine": 20,
+                      "startColumn": 19,
+                      "endColumn": 48
+                    }
+                  },
+                  {
+                    "id": "WS_L21_WS-LAST-NAME",
+                    "qualifiedName": "WS-CUSTOMER-RECORD.WS-CUSTOMER-DETAIL.WS-CUSTOMER-NAME.WS-LAST-NAME",
+                    "level": 15,
+                    "name": "WS-LAST-NAME",
+                    "pic": "X(30)",
+                    "usage": "DISPLAY",
+                    "logicalType": "Alphanumeric (30 chars)",
+                    "byteOffset": 52,
+                    "relativeOffset": 28,
+                    "byteLength": 30,
+                    "elementByteLength": 30,
+                    "location": {
+                      "startLine": 21,
+                      "endLine": 21,
+                      "startColumn": 19,
+                      "endColumn": 48
+                    }
+                  }
+                ],
+                "location": {
+                  "startLine": 18,
+                  "endLine": 18,
+                  "startColumn": 15,
+                  "endColumn": 35
+                }
+              },
+              {
+                "id": "WS_L22_WS-CONTACT-GROUP",
+                "qualifiedName": "WS-CUSTOMER-RECORD.WS-CUSTOMER-DETAIL.WS-CONTACT-GROUP",
+                "level": 10,
+                "name": "WS-CONTACT-GROUP",
+                "usage": "DISPLAY",
+                "logicalType": "Group",
+                "byteOffset": 82,
+                "relativeOffset": 74,
+                "byteLength": 48,
+                "elementByteLength": 48,
+                "children": [
+                  {
+                    "id": "WS_L23_WS-PHONE",
+                    "qualifiedName": "WS-CUSTOMER-RECORD.WS-CUSTOMER-DETAIL.WS-CONTACT-GROUP.WS-PHONE",
+                    "level": 15,
+                    "name": "WS-PHONE",
+                    "usage": "DISPLAY",
+                    "logicalType": "Group Array [3]",
+                    "byteOffset": 82,
+                    "relativeOffset": 0,
+                    "byteLength": 48,
+                    "elementByteLength": 16,
+                    "occursMin": 3,
+                    "occursMax": 3,
+                    "children": [
+                      {
+                        "id": "WS_L24_WS-PHONE-TYPE",
+                        "qualifiedName": "WS-CUSTOMER-RECORD.WS-CUSTOMER-DETAIL.WS-CONTACT-GROUP.WS-PHONE.WS-PHONE-TYPE",
+                        "level": 20,
+                        "name": "WS-PHONE-TYPE",
+                        "pic": "X",
+                        "usage": "DISPLAY",
+                        "logicalType": "Alphanumeric (1 chars)",
+                        "byteOffset": 82,
+                        "relativeOffset": 0,
+                        "byteLength": 1,
+                        "elementByteLength": 1,
+                        "location": {
+                          "startLine": 24,
+                          "endLine": 24,
+                          "startColumn": 23,
+                          "endColumn": 46
+                        }
+                      },
+                      {
+                        "id": "WS_L25_WS-PHONE-NUMBER",
+                        "qualifiedName": "WS-CUSTOMER-RECORD.WS-CUSTOMER-DETAIL.WS-CONTACT-GROUP.WS-PHONE.WS-PHONE-NUMBER",
+                        "level": 20,
+                        "name": "WS-PHONE-NUMBER",
+                        "pic": "X(15)",
+                        "usage": "DISPLAY",
+                        "logicalType": "Alphanumeric (15 chars)",
+                        "byteOffset": 83,
+                        "relativeOffset": 1,
+                        "byteLength": 15,
+                        "elementByteLength": 15,
+                        "location": {
+                          "startLine": 25,
+                          "endLine": 25,
+                          "startColumn": 23,
+                          "endColumn": 52
+                        }
+                      }
+                    ],
+                    "location": {
+                      "startLine": 23,
+                      "endLine": 23,
+                      "startColumn": 19,
+                      "endColumn": 46
+                    }
+                  }
+                ],
+                "location": {
+                  "startLine": 22,
+                  "endLine": 22,
+                  "startColumn": 15,
+                  "endColumn": 35
+                }
+              }
+            ],
+            "location": {
+              "startLine": 14,
+              "endLine": 14,
+              "startColumn": 11,
+              "endColumn": 33
+            }
+          },
+          {
+            "id": "WS_L26_WS-ACCOUNT-TABLE",
+            "qualifiedName": "WS-CUSTOMER-RECORD.WS-ACCOUNT-TABLE",
+            "level": 5,
+            "name": "WS-ACCOUNT-TABLE",
+            "usage": "DISPLAY",
+            "logicalType": "Group Array [2]",
+            "byteOffset": 130,
+            "relativeOffset": 128,
+            "byteLength": 148,
+            "elementByteLength": 74,
+            "occursMin": 2,
+            "occursMax": 2,
+            "children": [
+              {
+                "id": "WS_L27_WS-ACCOUNT-DETAIL",
+                "qualifiedName": "WS-CUSTOMER-RECORD.WS-ACCOUNT-TABLE.WS-ACCOUNT-DETAIL",
+                "level": 10,
+                "name": "WS-ACCOUNT-DETAIL",
+                "usage": "DISPLAY",
+                "logicalType": "Group",
+                "byteOffset": 130,
+                "relativeOffset": 0,
+                "byteLength": 14,
+                "elementByteLength": 14,
+                "children": [
+                  {
+                    "id": "WS_L28_WS-ACCOUNT-TYPE",
+                    "qualifiedName": "WS-CUSTOMER-RECORD.WS-ACCOUNT-TABLE.WS-ACCOUNT-DETAIL.WS-ACCOUNT-TYPE",
+                    "level": 15,
+                    "name": "WS-ACCOUNT-TYPE",
+                    "pic": "X(3)",
+                    "usage": "DISPLAY",
+                    "logicalType": "Alphanumeric (3 chars)",
+                    "byteOffset": 130,
+                    "relativeOffset": 0,
+                    "byteLength": 3,
+                    "elementByteLength": 3,
+                    "location": {
+                      "startLine": 28,
+                      "endLine": 28,
+                      "startColumn": 19,
+                      "endColumn": 47
+                    }
+                  },
+                  {
+                    "id": "WS_L29_FILLER",
+                    "qualifiedName": "WS-CUSTOMER-RECORD.WS-ACCOUNT-TABLE.WS-ACCOUNT-DETAIL.FILLER",
+                    "level": 15,
+                    "name": "FILLER",
+                    "pic": "X",
+                    "usage": "DISPLAY",
+                    "logicalType": "Alphanumeric (1 chars)",
+                    "byteOffset": 133,
+                    "relativeOffset": 3,
+                    "byteLength": 1,
+                    "elementByteLength": 1,
+                    "isFiller": true,
+                    "location": {
+                      "startLine": 29,
+                      "endLine": 29,
+                      "startColumn": 19,
+                      "endColumn": 44
+                    }
+                  },
+                  {
+                    "id": "WS_L30_WS-BALANCE",
+                    "qualifiedName": "WS-CUSTOMER-RECORD.WS-ACCOUNT-TABLE.WS-ACCOUNT-DETAIL.WS-BALANCE",
+                    "level": 15,
+                    "name": "WS-BALANCE",
+                    "pic": "S9(9)V99",
+                    "usage": "COMP_3",
+                    "logicalType": "Signed Decimal(11, 2) Packed",
+                    "byteOffset": 134,
+                    "relativeOffset": 4,
+                    "byteLength": 6,
+                    "elementByteLength": 6,
+                    "location": {
+                      "startLine": 30,
+                      "endLine": 30,
+                      "startColumn": 19,
+                      "endColumn": 58
+                    }
+                  },
+                  {
+                    "id": "WS_L31_WS-LIMIT",
+                    "qualifiedName": "WS-CUSTOMER-RECORD.WS-ACCOUNT-TABLE.WS-ACCOUNT-DETAIL.WS-LIMIT",
+                    "level": 15,
+                    "name": "WS-LIMIT",
+                    "pic": "S9(9)",
+                    "usage": "COMP",
+                    "logicalType": "Signed Integer (32-bit Binary)",
+                    "byteOffset": 140,
+                    "relativeOffset": 10,
+                    "byteLength": 4,
+                    "elementByteLength": 4,
+                    "location": {
+                      "startLine": 31,
+                      "endLine": 31,
+                      "startColumn": 19,
+                      "endColumn": 53
+                    }
+                  }
+                ],
+                "location": {
+                  "startLine": 27,
+                  "endLine": 27,
+                  "startColumn": 15,
+                  "endColumn": 36
+                }
+              },
+              {
+                "id": "WS_L32_WS-MONTH-TABLE",
+                "qualifiedName": "WS-CUSTOMER-RECORD.WS-ACCOUNT-TABLE.WS-MONTH-TABLE",
+                "level": 10,
+                "name": "WS-MONTH-TABLE",
+                "usage": "DISPLAY",
+                "logicalType": "Group Array [12]",
+                "byteOffset": 144,
+                "relativeOffset": 14,
+                "byteLength": 60,
+                "elementByteLength": 5,
+                "occursMin": 12,
+                "occursMax": 12,
+                "children": [
+                  {
+                    "id": "WS_L33_WS-MONTH-AMOUNT",
+                    "qualifiedName": "WS-CUSTOMER-RECORD.WS-ACCOUNT-TABLE.WS-MONTH-TABLE.WS-MONTH-AMOUNT",
+                    "level": 15,
+                    "name": "WS-MONTH-AMOUNT",
+                    "pic": "S9(7)V99",
+                    "usage": "COMP_3",
+                    "logicalType": "Signed Decimal(9, 2) Packed",
+                    "byteOffset": 144,
+                    "relativeOffset": 0,
+                    "byteLength": 5,
+                    "elementByteLength": 5,
+                    "location": {
+                      "startLine": 33,
+                      "endLine": 33,
+                      "startColumn": 19,
+                      "endColumn": 58
+                    }
+                  }
+                ],
+                "location": {
+                  "startLine": 32,
+                  "endLine": 32,
+                  "startColumn": 15,
+                  "endColumn": 49
+                }
+              }
+            ],
+            "location": {
+              "startLine": 26,
+              "endLine": 26,
+              "startColumn": 11,
+              "endColumn": 46
+            }
+          }
+        ],
+        "location": {
+          "startLine": 9,
+          "endLine": 9,
+          "startColumn": 7,
+          "endColumn": 29
+        }
+      },
+      {
+        "id": "WS_L35_WS-STATUS",
+        "qualifiedName": "WS-STATUS",
+        "level": 1,
+        "name": "WS-STATUS",
+        "pic": "X",
+        "usage": "DISPLAY",
+        "value": "N",
+        "logicalType": "Alphanumeric (1 chars)",
+        "byteOffset": 278,
+        "relativeOffset": 0,
+        "byteLength": 1,
+        "elementByteLength": 1,
+        "conditions88": [
+          {
+            "name": "WS-STATUS-VALID",
+            "values": [
+              "Y"
+            ],
+            "location": {
+              "startLine": 36,
+              "endLine": 36,
+              "startColumn": 11,
+              "endColumn": 47
+            }
+          },
+          {
+            "name": "WS-STATUS-INVALID",
+            "values": [
+              "N"
+            ],
+            "location": {
+              "startLine": 37,
+              "endLine": 37,
+              "startColumn": 11,
+              "endColumn": 47
+            }
+          }
+        ],
+        "location": {
+          "startLine": 35,
+          "endLine": 35,
+          "startColumn": 7,
+          "endColumn": 53
+        }
+      },
+      {
+        "id": "WS_L39_WS-DATE-STORAGE",
+        "qualifiedName": "WS-DATE-STORAGE",
+        "level": 1,
+        "name": "WS-DATE-STORAGE",
+        "usage": "DISPLAY",
+        "logicalType": "Group",
+        "byteOffset": 279,
+        "relativeOffset": 0,
+        "byteLength": 10,
+        "elementByteLength": 10,
+        "children": [
+          {
+            "id": "WS_L40_WS-DATE-RAW",
+            "qualifiedName": "WS-DATE-STORAGE.WS-DATE-RAW",
+            "level": 5,
+            "name": "WS-DATE-RAW",
+            "pic": "X(8)",
+            "usage": "DISPLAY",
+            "logicalType": "Alphanumeric (8 chars)",
+            "byteOffset": 279,
+            "relativeOffset": 0,
+            "byteLength": 8,
+            "elementByteLength": 8,
+            "location": {
+              "startLine": 40,
+              "endLine": 40,
+              "startColumn": 11,
+              "endColumn": 46
+            }
+          },
+          {
+            "id": "WS_L41_WS-DATE-PARTS",
+            "qualifiedName": "WS-DATE-STORAGE.WS-DATE-PARTS",
+            "level": 5,
+            "name": "WS-DATE-PARTS",
+            "usage": "DISPLAY",
+            "redefines": "WS-DATE-RAW",
+            "logicalType": "Group",
+            "byteOffset": 279,
+            "relativeOffset": 0,
+            "byteLength": 8,
+            "elementByteLength": 8,
+            "children": [
+              {
+                "id": "WS_L42_WS-DATE-YEAR",
+                "qualifiedName": "WS-DATE-STORAGE.WS-DATE-PARTS.WS-DATE-YEAR",
+                "level": 10,
+                "name": "WS-DATE-YEAR",
+                "pic": "9(4)",
+                "usage": "DISPLAY",
+                "logicalType": "Numeric Display (4 digits)",
+                "byteOffset": 279,
+                "relativeOffset": 0,
+                "byteLength": 4,
+                "elementByteLength": 4,
+                "location": {
+                  "startLine": 42,
+                  "endLine": 42,
+                  "startColumn": 15,
+                  "endColumn": 46
+                }
+              },
+              {
+                "id": "WS_L43_WS-DATE-MONTH",
+                "qualifiedName": "WS-DATE-STORAGE.WS-DATE-PARTS.WS-DATE-MONTH",
+                "level": 10,
+                "name": "WS-DATE-MONTH",
+                "pic": "99",
+                "usage": "DISPLAY",
+                "logicalType": "Numeric Display (2 digits)",
+                "byteOffset": 283,
+                "relativeOffset": 4,
+                "byteLength": 2,
+                "elementByteLength": 2,
+                "location": {
+                  "startLine": 43,
+                  "endLine": 43,
+                  "startColumn": 15,
+                  "endColumn": 44
+                }
+              },
+              {
+                "id": "WS_L44_WS-DATE-DAY",
+                "qualifiedName": "WS-DATE-STORAGE.WS-DATE-PARTS.WS-DATE-DAY",
+                "level": 10,
+                "name": "WS-DATE-DAY",
+                "pic": "99",
+                "usage": "DISPLAY",
+                "logicalType": "Numeric Display (2 digits)",
+                "byteOffset": 285,
+                "relativeOffset": 6,
+                "byteLength": 2,
+                "elementByteLength": 2,
+                "location": {
+                  "startLine": 44,
+                  "endLine": 44,
+                  "startColumn": 15,
+                  "endColumn": 44
+                }
+              }
+            ],
+            "location": {
+              "startLine": 41,
+              "endLine": 41,
+              "startColumn": 11,
+              "endColumn": 50
+            }
+          },
+          {
+            "id": "WS_L45_WS-DATE-TRAILER",
+            "qualifiedName": "WS-DATE-STORAGE.WS-DATE-TRAILER",
+            "level": 5,
+            "name": "WS-DATE-TRAILER",
+            "pic": "X(2)",
+            "usage": "DISPLAY",
+            "logicalType": "Alphanumeric (2 chars)",
+            "byteOffset": 287,
+            "relativeOffset": 8,
+            "byteLength": 2,
+            "elementByteLength": 2,
+            "location": {
+              "startLine": 45,
+              "endLine": 45,
+              "startColumn": 11,
+              "endColumn": 46
+            }
+          }
+        ],
+        "location": {
+          "startLine": 39,
+          "endLine": 39,
+          "startColumn": 7,
+          "endColumn": 26
+        }
+      },
+      {
+        "id": "WS_L47_WS-ALIGNMENT-RECORD",
+        "qualifiedName": "WS-ALIGNMENT-RECORD",
+        "level": 1,
+        "name": "WS-ALIGNMENT-RECORD",
+        "usage": "DISPLAY",
+        "logicalType": "Group",
+        "byteOffset": 289,
+        "relativeOffset": 0,
+        "byteLength": 16,
+        "elementByteLength": 16,
+        "children": [
+          {
+            "id": "WS_L48_WS-ALIGN-PREFIX",
+            "qualifiedName": "WS-ALIGNMENT-RECORD.WS-ALIGN-PREFIX",
+            "level": 5,
+            "name": "WS-ALIGN-PREFIX",
+            "pic": "X",
+            "usage": "DISPLAY",
+            "logicalType": "Alphanumeric (1 chars)",
+            "byteOffset": 289,
+            "relativeOffset": 0,
+            "byteLength": 1,
+            "elementByteLength": 1,
+            "location": {
+              "startLine": 48,
+              "endLine": 48,
+              "startColumn": 11,
+              "endColumn": 43
+            }
+          },
+          {
+            "id": "WS_L49_FILLER",
+            "qualifiedName": "WS-ALIGNMENT-RECORD.FILLER",
+            "level": 5,
+            "name": "FILLER",
+            "pic": "X",
+            "usage": "DISPLAY",
+            "logicalType": "Alphanumeric (1 chars)",
+            "byteOffset": 290,
+            "relativeOffset": 1,
+            "byteLength": 1,
+            "elementByteLength": 1,
+            "isFiller": true,
+            "location": {
+              "startLine": 49,
+              "endLine": 49,
+              "startColumn": 11,
+              "endColumn": 43
+            }
+          },
+          {
+            "id": "WS_L50_WS-ALIGNED-SHORT",
+            "qualifiedName": "WS-ALIGNMENT-RECORD.WS-ALIGNED-SHORT",
+            "level": 5,
+            "name": "WS-ALIGNED-SHORT",
+            "pic": "S9(4)",
+            "usage": "COMP",
+            "logicalType": "Signed SmallInt (16-bit Binary)",
+            "byteOffset": 291,
+            "relativeOffset": 2,
+            "byteLength": 2,
+            "elementByteLength": 2,
+            "location": {
+              "startLine": 50,
+              "endLine": 50,
+              "startColumn": 11,
+              "endColumn": 52
+            }
+          },
+          {
+            "id": "WS_L51_FILLER",
+            "qualifiedName": "WS-ALIGNMENT-RECORD.FILLER",
+            "level": 5,
+            "name": "FILLER",
+            "pic": "X(3)",
+            "usage": "DISPLAY",
+            "logicalType": "Alphanumeric (3 chars)",
+            "byteOffset": 293,
+            "relativeOffset": 4,
+            "byteLength": 3,
+            "elementByteLength": 3,
+            "isFiller": true,
+            "location": {
+              "startLine": 51,
+              "endLine": 51,
+              "startColumn": 11,
+              "endColumn": 46
+            }
+          },
+          {
+            "id": "WS_L52_FILLER",
+            "qualifiedName": "WS-ALIGNMENT-RECORD.FILLER",
+            "level": 5,
+            "name": "FILLER",
+            "pic": "X(3)",
+            "usage": "DISPLAY",
+            "logicalType": "Alphanumeric (3 chars)",
+            "byteOffset": 296,
+            "relativeOffset": 7,
+            "byteLength": 3,
+            "elementByteLength": 3,
+            "isFiller": true,
+            "location": {
+              "startLine": 52,
+              "endLine": 52,
+              "startColumn": 11,
+              "endColumn": 46
+            }
+          },
+          {
+            "id": "WS_L53_WS-ALIGNED-LONG",
+            "qualifiedName": "WS-ALIGNMENT-RECORD.WS-ALIGNED-LONG",
+            "level": 5,
+            "name": "WS-ALIGNED-LONG",
+            "pic": "S9(9)",
+            "usage": "COMP",
+            "logicalType": "Signed Integer (32-bit Binary)",
+            "byteOffset": 299,
+            "relativeOffset": 10,
+            "byteLength": 4,
+            "elementByteLength": 4,
+            "location": {
+              "startLine": 53,
+              "endLine": 53,
+              "startColumn": 11,
+              "endColumn": 52
+            }
+          },
+          {
+            "id": "WS_L54_WS-ALIGN-SUFFIX",
+            "qualifiedName": "WS-ALIGNMENT-RECORD.WS-ALIGN-SUFFIX",
+            "level": 5,
+            "name": "WS-ALIGN-SUFFIX",
+            "pic": "X(2)",
+            "usage": "DISPLAY",
+            "logicalType": "Alphanumeric (2 chars)",
+            "byteOffset": 303,
+            "relativeOffset": 14,
+            "byteLength": 2,
+            "elementByteLength": 2,
+            "location": {
+              "startLine": 54,
+              "endLine": 54,
+              "startColumn": 11,
+              "endColumn": 46
+            }
+          }
+        ],
+        "location": {
+          "startLine": 47,
+          "endLine": 47,
+          "startColumn": 7,
+          "endColumn": 30
+        }
+      }
+    ],
+    "linkageSection": [
+      {
+        "id": "LK_L57_LK-REQUEST",
+        "qualifiedName": "LK-REQUEST",
+        "level": 1,
+        "name": "LK-REQUEST",
+        "usage": "DISPLAY",
+        "logicalType": "Group",
+        "byteOffset": 0,
+        "relativeOffset": 0,
+        "byteLength": 24,
+        "elementByteLength": 24,
+        "children": [
+          {
+            "id": "LK_L58_LK-REQUEST-ID",
+            "qualifiedName": "LK-REQUEST.LK-REQUEST-ID",
+            "level": 5,
+            "name": "LK-REQUEST-ID",
+            "pic": "X(12)",
+            "usage": "DISPLAY",
+            "logicalType": "Alphanumeric (12 chars)",
+            "byteOffset": 0,
+            "relativeOffset": 0,
+            "byteLength": 12,
+            "elementByteLength": 12,
+            "location": {
+              "startLine": 58,
+              "endLine": 58,
+              "startColumn": 11,
+              "endColumn": 47
+            }
+          },
+          {
+            "id": "LK_L59_LK-REQUEST-DATA",
+            "qualifiedName": "LK-REQUEST.LK-REQUEST-DATA",
+            "level": 5,
+            "name": "LK-REQUEST-DATA",
+            "usage": "DISPLAY",
+            "logicalType": "Group",
+            "byteOffset": 12,
+            "relativeOffset": 12,
+            "byteLength": 12,
+            "elementByteLength": 12,
+            "children": [
+              {
+                "id": "LK_L60_LK-REQUEST-CODE",
+                "qualifiedName": "LK-REQUEST.LK-REQUEST-DATA.LK-REQUEST-CODE",
+                "level": 10,
+                "name": "LK-REQUEST-CODE",
+                "pic": "9(4)",
+                "usage": "COMP",
+                "logicalType": "Unsigned SmallInt (16-bit Binary)",
+                "byteOffset": 12,
+                "relativeOffset": 0,
+                "byteLength": 2,
+                "elementByteLength": 2,
+                "location": {
+                  "startLine": 60,
+                  "endLine": 60,
+                  "startColumn": 15,
+                  "endColumn": 51
+                }
+              },
+              {
+                "id": "LK_L61_LK-REQUEST-AMOUNT",
+                "qualifiedName": "LK-REQUEST.LK-REQUEST-DATA.LK-REQUEST-AMOUNT",
+                "level": 10,
+                "name": "LK-REQUEST-AMOUNT",
+                "pic": "S9(7)V99",
+                "usage": "COMP_3",
+                "logicalType": "Signed Decimal(9, 2) Packed",
+                "byteOffset": 14,
+                "relativeOffset": 2,
+                "byteLength": 5,
+                "elementByteLength": 5,
+                "location": {
+                  "startLine": 61,
+                  "endLine": 61,
+                  "startColumn": 15,
+                  "endColumn": 57
+                }
+              },
+              {
+                "id": "LK_L62_FILLER",
+                "qualifiedName": "LK-REQUEST.LK-REQUEST-DATA.FILLER",
+                "level": 10,
+                "name": "FILLER",
+                "pic": "X(5)",
+                "usage": "DISPLAY",
+                "logicalType": "Alphanumeric (5 chars)",
+                "byteOffset": 19,
+                "relativeOffset": 7,
+                "byteLength": 5,
+                "elementByteLength": 5,
+                "isFiller": true,
+                "location": {
+                  "startLine": 62,
+                  "endLine": 62,
+                  "startColumn": 15,
+                  "endColumn": 46
+                }
+              }
+            ],
+            "location": {
+              "startLine": 59,
+              "endLine": 59,
+              "startColumn": 11,
+              "endColumn": 30
+            }
+          }
+        ],
+        "location": {
+          "startLine": 57,
+          "endLine": 57,
+          "startColumn": 7,
+          "endColumn": 21
+        }
+      }
+    ],
+    "workingStorageBytes": 305
+  },
+  "paragraphs": [
+    {
+      "name": "0000-MAIN",
+      "location": {
+        "startLine": 65,
+        "endLine": 66,
+        "startColumn": 7,
+        "endColumn": 17
+      },
+      "isTerminal": true,
+      "statements": [
+        {
+          "type": "GOBACK",
+          "location": {
+            "startLine": 66,
+            "endLine": 66,
+            "startColumn": 11,
+            "endColumn": 11
+          },
+          "rawText": "GOBACK",
+          "operation": "GOBACK"
+        }
+      ]
+    }
+  ],
+  "asgAuditSummary": {
+    "totalAsgDataEntries": 48,
+    "totalAsgLevel88Entries": 2,
+    "totalAsgParagraphs": 1,
+    "totalAsgStatements": 1,
+    "totalAsgCalls": 2,
+    "asgVariableNames": [
+      "WS-STANDALONE-COUNT",
+      "WS-CUSTOMER-RECORD",
+      "WS-RECORD-HEADER",
+      "WS-RECORD-TYPE",
+      "WS-RECORD-LENGTH",
+      "WS-CUSTOMER-DETAIL",
+      "WS-CUSTOMER-KEY",
+      "WS-BRANCH-CODE",
+      "WS-ACCOUNT-NO",
+      "WS-CUSTOMER-NAME",
+      "WS-TITLE",
+      "WS-FIRST-NAME",
+      "WS-LAST-NAME",
+      "WS-CONTACT-GROUP",
+      "WS-PHONE",
+      "WS-PHONE-TYPE",
+      "WS-PHONE-NUMBER",
+      "WS-ACCOUNT-TABLE",
+      "WS-ACCOUNT-DETAIL",
+      "WS-ACCOUNT-TYPE",
+      "WS-BALANCE",
+      "WS-LIMIT",
+      "WS-MONTH-TABLE",
+      "WS-MONTH-AMOUNT",
+      "WS-STATUS",
+      "WS-DATE-STORAGE",
+      "WS-DATE-RAW",
+      "WS-DATE-PARTS",
+      "WS-DATE-YEAR",
+      "WS-DATE-MONTH",
+      "WS-DATE-DAY",
+      "WS-DATE-TRAILER",
+      "WS-ALIGNMENT-RECORD",
+      "WS-ALIGN-PREFIX",
+      "WS-ALIGNED-SHORT",
+      "WS-ALIGNED-LONG",
+      "WS-ALIGN-SUFFIX",
+      "LK-REQUEST",
+      "LK-REQUEST-ID",
+      "LK-REQUEST-DATA",
+      "LK-REQUEST-CODE",
+      "LK-REQUEST-AMOUNT"
+    ],
+    "asgLevel88Names": [
+      "WS-STATUS-VALID",
+      "WS-STATUS-INVALID"
+    ]
+  }
+}

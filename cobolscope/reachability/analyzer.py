@@ -50,7 +50,19 @@ class PushdownReachabilityAnalyzer:
         self.classifier = TerminationClassifier.for_program(self.model, rules=rules)
 
         # Index paragraphs in physical lexical order
-        self.paragraphs = model.paragraphs
+        self.paragraphs = list(model.paragraphs)
+        para_names_set = {p.name.upper().strip() for p in model.paragraphs}
+        for sec in model.sections:
+            sec_up = sec.name.upper().strip()
+            if sec.statements and sec_up not in para_names_set:
+                self.paragraphs.append(ParagraphNode(
+                    name=sec.name,
+                    statements=sec.statements,
+                    location=sec.location,
+                    section_parent=sec.name,
+                ))
+
+        self.paragraphs.sort(key=lambda p: (p.location.start_line if p.location and p.location.start_line is not None else 0))
         self.para_names = [p.name.upper().strip() for p in self.paragraphs]
         self.para_map: Dict[str, ParagraphNode] = {
             p.name.upper().strip(): p for p in self.paragraphs
@@ -62,10 +74,15 @@ class PushdownReachabilityAnalyzer:
         # Index sections and map section names to (first_para, last_para)
         self.section_map: Dict[str, Tuple[str, str]] = {}
         for sec in model.sections:
-            if sec.paragraph_names:
+            sec_up = sec.name.upper().strip()
+            if sec.statements and sec_up in self.para_map:
+                first_p = sec_up
+                last_p = sec.paragraph_names[-1].upper().strip() if sec.paragraph_names else sec_up
+                self.section_map[sec_up] = (first_p, last_p)
+            elif sec.paragraph_names:
                 first_p = sec.paragraph_names[0].upper().strip()
                 last_p = sec.paragraph_names[-1].upper().strip()
-                self.section_map[sec.name.upper().strip()] = (first_p, last_p)
+                self.section_map[sec_up] = (first_p, last_p)
 
         # Build sequential statement representations
         self.para_stmts: Dict[str, List[AnyStatementNode]] = {

@@ -1,5 +1,6 @@
 /*
  * Copyright (C) 2017, Ulrich Wolffgang <ulrich.wolffgang@proleap.io>
+ * Modifications Copyright (c) 2026 CobolScope Contributors.
  * All rights reserved.
  *
  * This software may be modified and distributed under the terms
@@ -15,8 +16,13 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 
+import org.antlr.v4.runtime.BailErrorStrategy;
 import org.antlr.v4.runtime.CharStreams;
 import org.antlr.v4.runtime.CommonTokenStream;
+import org.antlr.v4.runtime.DefaultErrorStrategy;
+import org.antlr.v4.runtime.RecognitionException;
+import org.antlr.v4.runtime.atn.PredictionMode;
+import org.antlr.v4.runtime.misc.ParseCancellationException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -52,16 +58,42 @@ public class CobolParserRunnerImpl implements CobolParserRunner {
 	private final static Logger LOG = LoggerFactory.getLogger(CobolParserRunnerImpl.class);
 
 	protected void analyze(final Program program) {
+		final boolean profile = "true".equalsIgnoreCase(System.getProperty("cobolscope.profile", System.getenv("COBOLSCOPE_PROFILE")));
+		final long tStart = System.nanoTime();
+
+		final long t0 = System.nanoTime();
 		analyzeProgramUnits(program);
+		final long tUnits = System.nanoTime() - t0;
 
+		final long t1 = System.nanoTime();
 		analyzeDataDivisionsStep1(program);
+		final long tData1 = System.nanoTime() - t1;
+
+		final long t2 = System.nanoTime();
 		analyzeDataDivisionsStep2(program);
+		final long tData2 = System.nanoTime() - t2;
 
+		final long t3 = System.nanoTime();
 		analyzeFileControlClauses(program);
-		analyzeFileDescriptionEntriesClauses(program);
+		final long tFc = System.nanoTime() - t3;
 
+		final long t4 = System.nanoTime();
+		analyzeFileDescriptionEntriesClauses(program);
+		final long tFd = System.nanoTime() - t4;
+
+		final long t5 = System.nanoTime();
 		analyzeProcedureDivisions(program);
+		final long tProc = System.nanoTime() - t5;
+
+		final long t6 = System.nanoTime();
 		analyzeProcedureStatements(program);
+		final long tStmt = System.nanoTime() - t6;
+
+		if (profile) {
+			final long tTotal = System.nanoTime() - tStart;
+			System.err.printf("[PROFILE-ASG] Total: %.2f ms | units: %.2f ms | data1: %.2f ms | data2: %.2f ms | fc: %.2f ms | fd: %.2f ms | proc: %.2f ms | stmt: %.2f ms%n",
+					tTotal / 1e6, tUnits / 1e6, tData1 / 1e6, tData2 / 1e6, tFc / 1e6, tFd / 1e6, tProc / 1e6, tStmt / 1e6);
+		}
 	}
 
 	@Override
@@ -95,10 +127,24 @@ public class CobolParserRunnerImpl implements CobolParserRunner {
 
 	@Override
 	public Program analyzeFile(final File inputFile, final CobolParserParams params) throws IOException {
+		final boolean profile = "true".equalsIgnoreCase(System.getProperty("cobolscope.profile", System.getenv("COBOLSCOPE_PROFILE")));
+		final long tStart = System.nanoTime();
+
 		final Program program = new ProgramImpl();
 
+		final long tParse0 = System.nanoTime();
 		parseFile(inputFile, program, params);
+		final long tParse = System.nanoTime() - tParse0;
+
+		final long tAnalyze0 = System.nanoTime();
 		analyze(program);
+		final long tAnalyze = System.nanoTime() - tAnalyze0;
+
+		if (profile) {
+			final long tTotal = System.nanoTime() - tStart;
+			System.err.printf("[PROFILE-FILE] File: %s | Total: %.2f ms | Parse+Preprocess: %.2f ms | ASG Analyze: %.2f ms%n",
+					inputFile.getName(), tTotal / 1e6, tParse / 1e6, tAnalyze / 1e6);
+		}
 
 		return program;
 	}
@@ -212,6 +258,9 @@ public class CobolParserRunnerImpl implements CobolParserRunner {
 
 	protected void parsePreprocessInput(final String preProcessedInput, final String compilationUnitName,
 			final Program program, final CobolParserParams params) throws IOException {
+		final boolean profile = "true".equalsIgnoreCase(System.getProperty("cobolscope.profile", System.getenv("COBOLSCOPE_PROFILE")));
+		final long t0 = System.nanoTime();
+
 		// run the lexer
 		final CobolLexer lexer = new CobolLexer(CharStreams.fromString(preProcessedInput));
 
@@ -227,31 +276,88 @@ public class CobolParserRunnerImpl implements CobolParserRunner {
 		// pass the tokens to the parser
 		final CobolParser parser = new CobolParser(tokens);
 
-		if (!params.getIgnoreSyntaxErrors()) {
-			// register an error listener, so that preprocessing stops on errors
+		final long tParse0 = System.nanoTime();
+		StartRuleContext ctx = null;
+
+		// Stage 1: Fast SLL prediction mode with BailErrorStrategy
+		try {
+			parser.getInterpreter().setPredictionMode(PredictionMode.SLL);
 			parser.removeErrorListeners();
-			parser.addErrorListener(new ThrowingErrorListener());
+			parser.setErrorHandler(new BailErrorStrategy());
+
+			ctx = parser.startRule();
+		} catch (final ParseCancellationException | RecognitionException ex) {
+			// Fast path failed on ambiguous or invalid rule: rewind and fall back to full LL
+			tokens.seek(0);
+			parser.reset();
+			parser.getInterpreter().setPredictionMode(PredictionMode.LL);
+
+			if (!params.getIgnoreSyntaxErrors()) {
+				parser.removeErrorListeners();
+				parser.addErrorListener(new ThrowingErrorListener());
+			} else {
+				parser.setErrorHandler(new DefaultErrorStrategy());
+			}
+
+			ctx = parser.startRule();
+		} catch (final Exception ex) {
+			// Any unexpected parser exception during SLL: rewind and fall back to LL
+			tokens.seek(0);
+			parser.reset();
+			parser.getInterpreter().setPredictionMode(PredictionMode.LL);
+
+			if (!params.getIgnoreSyntaxErrors()) {
+				parser.removeErrorListeners();
+				parser.addErrorListener(new ThrowingErrorListener());
+			} else {
+				parser.setErrorHandler(new DefaultErrorStrategy());
+			}
+
+			ctx = parser.startRule();
 		}
 
-		// specify our entry point
-		final StartRuleContext ctx = parser.startRule();
+		final long tParse = System.nanoTime() - tParse0;
 
-		// analyze contained compilation units
+		final long tSplit0 = System.nanoTime();
 		final List<String> lines = splitLines(preProcessedInput);
-		final ParserVisitor visitor = new CobolCompilationUnitVisitorImpl(compilationUnitName, lines, tokens, program);
+		final long tSplit = System.nanoTime() - tSplit0;
 
+		final long tCu0 = System.nanoTime();
+		final ParserVisitor visitor = new CobolCompilationUnitVisitorImpl(compilationUnitName, lines, tokens, program);
 		visitor.visit(ctx);
+		final long tCu = System.nanoTime() - tCu0;
+
+		if (profile) {
+			final long tTotal = System.nanoTime() - t0;
+			System.err.printf("[PROFILE-PARSE] Total: %.2f ms | ANTLR parse: %.2f ms | splitLines: %.2f ms | CU Visitor: %.2f ms%n",
+					tTotal / 1e6, tParse / 1e6, tSplit / 1e6, tCu / 1e6);
+		}
 	}
 
 	protected List<String> splitLines(final String preProcessedInput) {
-		final Scanner scanner = new Scanner(preProcessedInput);
-		final List<String> result = new ArrayList<String>();
-
-		while (scanner.hasNextLine()) {
-			result.add(scanner.nextLine());
+		if (preProcessedInput == null || preProcessedInput.isEmpty()) {
+			return new ArrayList<String>();
 		}
 
-		scanner.close();
+		final List<String> result = new ArrayList<String>();
+		final int len = preProcessedInput.length();
+		int start = 0;
+
+		for (int i = 0; i < len; i++) {
+			final char c = preProcessedInput.charAt(i);
+			if (c == '\r') {
+				result.add(preProcessedInput.substring(start, i));
+				if (i + 1 < len && preProcessedInput.charAt(i + 1) == '\n') {
+					i++; // consume \n if CRLF
+				}
+				start = i + 1;
+			} else if (c == '\n') {
+				result.add(preProcessedInput.substring(start, i));
+				start = i + 1;
+			}
+		}
+
+		result.add(preProcessedInput.substring(start));
 		return result;
 	}
 }

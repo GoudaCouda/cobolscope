@@ -32,6 +32,17 @@ from .utils import (
     compute_post_dominators,
 )
 
+from .heuristics import (
+    GraphMetrics,
+    LayoutHeuristics,
+    compute_graph_metrics,
+    calculate_layout_heuristics,
+)
+from .cloning import (
+    identify_clone_candidates,
+    apply_node_cloning,
+)
+
 __all__ = [
     "GraphNodeType",
     "GraphEdgeType",
@@ -61,4 +72,10 @@ __all__ = [
     "tarjan_scc",
     "compute_dominators",
     "compute_post_dominators",
+    "GraphMetrics",
+    "LayoutHeuristics",
+    "compute_graph_metrics",
+    "calculate_layout_heuristics",
+    "identify_clone_candidates",
+    "apply_node_cloning",
 ]

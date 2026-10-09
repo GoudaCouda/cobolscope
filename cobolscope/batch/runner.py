@@ -19,8 +19,8 @@ from cobolscope.parser.runner import parse_batch
 from cobolscope.models import ProgramModel, ParagraphNode
 from cobolscope.data_dictionary import generate_data_dictionary
 from cobolscope.graph import generate_call_graph, build_procedure_cfg
-from cobolscope.graph.cfg_builder import compute_cyclomatic_complexity
 from cobolscope.portal import generate_portal
+from cobolscope.assets import AssetMode, copy_static_assets, resolve_asset_mode
 
 logger = logging.getLogger(__name__)
 
@@ -68,6 +68,13 @@ def run_batch_directory(
     out_dir.mkdir(parents=True, exist_ok=True)
     ir_dir = out_dir / "ir"
     ir_dir.mkdir(parents=True, exist_ok=True)
+
+    effective_asset_mode = resolve_asset_mode(getattr(args, "asset_mode", None), is_batch=True, output_path=out_dir)
+    if effective_asset_mode == AssetMode.EXTERNAL:
+        assets_dir = out_dir / "assets"
+        copy_static_assets(assets_dir)
+        log_verbose(f"Copied static assets to {assets_dir}")
+
 
     log_info(f"Target directory: {input_path.resolve()} ({len(cobol_files)} COBOL programs found)")
     log_info("Parsing COBOL sources via single-JVM ProLeap bridge (streaming)...")
@@ -156,7 +163,7 @@ def run_batch_directory(
             try:
                 source_text = cobol_file.read_text(encoding="utf-8", errors="replace")
                 model.source_code = source_text
-                source_filename = f"{prog_id}.cbl"
+                source_filename = f"{prog_id}.txt"
                 (out_dir / source_filename).write_text(source_text, encoding="utf-8")
                 artifacts_source = source_filename
             except Exception:
@@ -206,8 +213,8 @@ def run_batch_directory(
                     format=graph_fmt,
                     hide_fallthrough=not getattr(args, "show_fallthrough", False),
                     collapse_exits=getattr(args, "collapse_exits", False),
-                    enable_clustering=getattr(args, "enable_clustering", True),
-                    cluster_mode=getattr(args, "cluster_mode", "section"),
+                    enable_clustering=getattr(args, "enable_clustering", False),
+                    cluster_mode=getattr(args, "cluster_mode", "none"),
                     compact_nodes=not getattr(args, "detailed_nodes", False),
                     concentrate=getattr(args, "concentrate", True),
                     splines=getattr(args, "splines", "ortho"),
@@ -215,9 +222,19 @@ def run_batch_directory(
                     rules=rules,
                     hide_error_traps=not getattr(args, "show_error_traps", False),
                     source_code=source_text,
+                    enable_cloning=getattr(args, "enable_cloning", False),
+                    clone_mode=getattr(args, "clone_mode", "section"),
+                    clone_threshold=getattr(args, "clone_threshold", 3),
+                    ranker=getattr(args, "ranker", None),
+                    nodesep=getattr(args, "nodesep", None),
+                    ranksep=getattr(args, "ranksep", None),
+                    dynamic_heuristics=getattr(args, "dynamic_heuristics", True),
+                    asset_mode=effective_asset_mode.value,
+                    assets_rel_path="assets",
                 )
                 graph_path.write_text(graph_content, encoding="utf-8")
                 artifacts["call_graph"] = graph_filename
+
 
             # C. Reachability
             if getattr(args, "generate_reachability", False) or getattr(args, "save_transitions", False):

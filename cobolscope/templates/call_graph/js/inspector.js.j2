@@ -1,7 +1,20 @@
 // Node Inspector & Enhanced Linear Summary Card
     function selectNode(nodeName) {
-      const node = graphData.nodes[nodeName.toUpperCase().trim()];
+      if (!nodeName) return;
+      const lookupKey = nodeName.toUpperCase().trim();
+      let node = graphData.nodes[lookupKey];
+      if (!node) {
+        for (const k in graphData.nodes) {
+          const candidate = graphData.nodes[k];
+          if ((candidate.original_name && candidate.original_name.toUpperCase().trim() === lookupKey) ||
+              (candidate.name && candidate.name.toUpperCase().trim() === lookupKey)) {
+            node = candidate;
+            break;
+          }
+        }
+      }
       if (!node) return;
+
 
       selectedRoutineNode = node;
 
@@ -14,23 +27,35 @@
         }
       }
 
-      // Update Header & Badge
-      const hasDistinctSection = Boolean(node.section && node.section.trim() && node.section.trim().toUpperCase() !== node.name.trim().toUpperCase());
-      const displayTitle = hasDistinctSection ? node.section.trim() : node.name;
-      const displaySubtitle = hasDistinctSection ? `¶ Paragraph: ${node.name}` : "";
+      // Update Header: Routine Name spans across full panel
+      document.getElementById("inspTitle").textContent = node.name || "Routine";
 
-      document.getElementById("inspTitle").textContent = displayTitle;
-      document.getElementById("inspSubtitle").textContent = displaySubtitle;
+      // Subtitle / Section context
+      const subtitleEl = document.getElementById("inspSubtitle");
+      if (subtitleEl) {
+        subtitleEl.textContent = node.section ? `Section: ${node.section}` : "";
+      }
 
+      // Entry Point Badge
+      const entryBadge = document.getElementById("inspEntryBadge");
+      if (entryBadge) {
+        entryBadge.style.display = node.is_entry_point ? "inline-flex" : "none";
+      }
+
+      // Routine Type Badge (human-friendly title instead of raw SCREAMING_SNAKE_CASE)
       const typeBadge = document.getElementById("inspTypeBadge");
-      if (node.is_entry_point) {
-        typeBadge.textContent = "[ENTRY] " + node.node_type;
-        typeBadge.style.background = "#EFF6FC";
-        typeBadge.style.color = "#0078D4";
-      } else {
-        typeBadge.textContent = node.node_type;
-        typeBadge.style.background = "#F1F5F9";
-        typeBadge.style.color = "var(--text-secondary)";
+      if (typeBadge) {
+        const typeLabels = {
+          "MAIN_DRIVER": "Main Driver",
+          "BUSINESS_LOGIC": "Business Logic",
+          "FILE_IO": "File I/O",
+          "DB_SUBSYSTEM": "DB / Subsystem",
+          "TABLE_LOOKUP": "Table Lookup",
+          "ERROR_HANDLING": "Error Handling",
+          "ROUTINE_EXIT": "Exit Routine",
+          "GENERIC": "Procedure"
+        };
+        typeBadge.textContent = typeLabels[node.node_type] || node.node_type || "Procedure";
       }
 
       document.getElementById("inspSection").textContent = node.section ? node.section : "—";
@@ -41,16 +66,19 @@
       document.getElementById("inspCluster").textContent = node.cluster_id.replace("cluster_", "");
 
       const btnViewCode = document.getElementById("btnViewRoutineCode");
-      if (btnViewCode) {
+      const btnViewCodeText = document.getElementById("btnViewRoutineCodeText") || (btnViewCode ? btnViewCode.querySelector("span") : null);
+      if (btnViewCode && btnViewCodeText) {
         if (node.start_line > 0) {
           btnViewCode.disabled = false;
           const mainFile = (typeof graphData !== "undefined" && graphData.source_file) ? graphData.source_file : "";
           const isCopybook = Boolean(node.source_file && mainFile && !mainFile.endsWith(node.source_file) && !node.source_file.endsWith(mainFile));
-          const lineSpan = isCopybook ? `(${node.source_file}:L${node.start_line})` : `(L${node.start_line}-L${node.end_line})`;
-          btnViewCode.querySelector("span").textContent = `View Routine Code ${lineSpan}`;
+          const lineSpan = isCopybook ? `${node.source_file}:L${node.start_line}` : `L${node.start_line}–L${node.end_line}`;
+          btnViewCodeText.textContent = "Source Code";
+          btnViewCode.title = `View source code (${lineSpan})`;
         } else {
           btnViewCode.disabled = true;
-          btnViewCode.querySelector("span").textContent = `View Routine Code (Line info unavailable)`;
+          btnViewCodeText.textContent = "Source Code";
+          btnViewCode.title = "Line info unavailable";
         }
       }
 
@@ -58,7 +86,7 @@
         highlightRoutineInCode(node.start_line, node.end_line, node.name, node.source_file);
       }
 
-      // Render Level 3 Action or Enhanced Linear Summary Card
+      // Render Logic Flowchart / Linear Summary Card
       renderCfgInspectorSection(node);
 
       // Callers List
@@ -73,7 +101,7 @@
           callersEl.appendChild(tag);
         });
       } else {
-        callersEl.innerHTML = '<span style="font-size:0.8rem; color:var(--text-muted);">' + (node.is_entry_point ? '<span style="color:#0078D4; font-weight:600;">[ENTRY]</span> Program Entry Point' : 'Root / Uncalled') + '</span>';
+        callersEl.innerHTML = '<span style="font-size:0.8rem; color:var(--text-muted);">' + (node.is_entry_point ? '<span style="color:var(--primary); font-weight:600;">[Entry Point]</span> Program Entry' : 'Root / Uncalled') + '</span>';
       }
 
       // Successors List

@@ -1,237 +1,287 @@
 # CobolScope
 
+[![Live Demo](https://img.shields.io/badge/Live%20Demo-GitHub%20Pages-brightgreen?logo=github&style=for-the-badge)](https://goudacouda.github.io/cobolscope/)
 [![Python 3.10+](https://img.shields.io/badge/python-3.10+-blue.svg)](https://www.python.org/downloads/)
 [![Java 17+](https://img.shields.io/badge/java-17+-orange.svg)](https://openjdk.org/)
+[![GnuCOBOL Parity](https://img.shields.io/badge/GnuCOBOL-verified-brightgreen.svg)](https://gnucobol.sourceforge.io/)
+[![NIST Conformance](https://img.shields.io/badge/NIST%20COBOL--85-audited-success.svg)](https://www.itl.nist.gov/)
 [![License: Apache 2.0](https://img.shields.io/badge/License-Apache_2.0-blue.svg)](LICENSE)
 
-**CobolScope** is a high-performance COBOL semantic analysis, AST/ASG extraction, memory layout data dictionary generator, and interactive procedure call graph visualizer built on top of the ANTLR4 [ProLeap COBOL Parser](https://github.com/uwol/proleap-cobol-parser).
+**CobolScope** is a developer tool that turns COBOL programs into interactive call graphs, memory layout data dictionaries, and searchable static HTML documentation.
 
-CobolScope bridges enterprise mainframe COBOL to modern Python data models, enabling automated code intelligence, legacy migration, architecture mapping, and dead code elimination.
+Built on the [ProLeap ANTLR4 Parser](https://github.com/uwol/proleap-cobol-parser) with a Python semantic engine, it runs completely locally with no database or server requirements.
 
----
-
-## Key Features
-
-- **High-Fidelity AST & Semantic Graph IR**: Extracts full compilation unit hierarchies, sections, paragraphs, statements, and symbol cross-references into structured JSON.
-- **Exact Binary Memory Layout**: Reconstructs exact byte offsets, lengths, and memory overlays (`REDEFINES`) verified against live IBM/GnuCOBOL compiler symbol tables.
-- **Interactive Data Dictionaries**: Exports data definitions into searchable, filterable **HTML reports**, clean **Markdown tables**, **CSV**, and **JSON Schema**.
-- **Level-2 Procedure Call Graphs**: Generates clean architectural control flow diagrams with functional clustering, `PERFORM ... THRU` range expansion, and exit collapsing in **SVG**, **Interactive HTML (pan & zoom)**, and **Graphviz DOT**.
-- **Level-3 Intra-Procedural CFGs**: Generates fine-grained intra-paragraph control flow graphs in **Cytoscape** and **JSON**, modeling decision splits (`IF`, `EVALUATE`), loop constructs, and terminal abend sinks.
-- **Declarative YAML Rules Engine**: Configurable rules (`cobolscope-rules.yaml`) governing abnormal termination (`ABEND`), runtime modules (`CEE3ABD`, `ILBOABN0`, etc.), custom paragraph naming patterns, database condition checks (`SQLCODE NOT = 0`), S0C7 hardware exceptions, and per-program overrides.
-- **Automated Rule Discovery (`--init-rules`)**: Scans codebases to automatically discover abending routines, database check patterns, and runtime modules, outputting pre-populated YAML configuration files.
-- **Pushdown Reachability Analyzer**: Emulates COBOL runtime execution using a Pushdown Automaton to detect dead paragraphs, uncalled abend routines, and unreachable blocks.
-- **Open Polymorphic Statement Architecture**: Strongly typed Pydantic models for rich statements (`MOVE`, `PERFORM`, `IF`, `EVALUATE`, `CALL`, `COMPUTE`, `EXEC SQL`, `EXEC CICS`).
-- **6-Tier Verification Suite**: Audited against mathematical invariant proofs, live GnuCOBOL compiler listings, the official NIST COBOL-85 conformance suite, and open-source enterprise CICS programs ([IBM Bank-of-Z](https://github.com/IBM/Bank-of-Z)).
+> **Live Demo**: [https://goudacouda.github.io/cobolscope/](https://goudacouda.github.io/cobolscope/)
 
 ---
 
-> Looking for the complete visual walkthrough and end-user guide? Check out the **[CobolScope User Guide](USER_GUIDE.md)**!
+[![CobolScope Documentation Portal](docs/images/portal_overview.png)](https://goudacouda.github.io/cobolscope/)
+
+---
+
+## What Does It Do?
+
+Reading thousands of lines of legacy COBOL is tedious. Deep paragraph fall-throughs, `PERFORM ... THRU` ranges, complex `REDEFINES` memory overlays, and dead code make it hard to see what a program actually does.
+
+CobolScope helps you make sense of it:
+
+- **Procedure Call Graphs**: Interactive hierarchy of routines, control flow, and branch targets.
+- **Memory Layout Dictionaries**: Exact byte offsets, field sizes, and `REDEFINES` overlays without doing the math by hand.
+- **Split Code View (`Alt+C`)**: Jump straight from graph nodes or data dictionary rows to the source line, with identifier occurrence highlighting.
+- **Dead Code Detection**: Pushdown reachability analyzer that flags uncalled paragraphs and stranded logic.
+- **Static Documentation Portal**: Point it at a directory of COBOL files and copybooks to generate a self-contained `index.html` website you can open directly in any browser.
+
+---
+
+## The Default Way to Use CobolScope
+
+CobolScope is designed to be used out of the box with **`--graph` and `--dict`** on a folder of programs or a single file to produce a complete, interactive **HTML portal**:
+
+```bash
+# Recommended default: Generate Call Graphs, Data Dictionaries, and the Web Portal
+cobolscope path/to/cobol_folder/ -I path/to/copybooks/ --graph --dict -o docs_portal/
+```
+
+### What This Generates:
+1. **`docs_portal/index.html`**: A standalone, zero-CORS documentation portal you can open in any browser (`open docs_portal/index.html` or double-click).
+2. **Interactive Call Graphs** for each program with functional clustering, zoom/pan controls, and split code inspection.
+3. **Binary Data Dictionaries** with live search, column sorting, type filtering, Where-Used cross-references, and sliding code drawers.
+4. **Syntax-Highlighted Source Code** with COBOL standard column indicators (Area A, Area B, Sequence area).
+5. **`docs_portal/manifest.json`**: Machine-readable metadata and program inventory.
+
+> 💡 **See the exact output live**: Test the fully generated portal deployed on GitHub Pages: **[https://goudacouda.github.io/cobolscope/](https://goudacouda.github.io/cobolscope/)**.
+
+---
+
+## Feature Showcase
+
+### 1. Multi-Program Documentation Portal
+Browse all programs in a directory from a sidebar with routine counters, status badges, search filtering, and deep-linkable URLs (e.g. `#program=INQCUST&tab=call_graph`).
+
+[![CobolScope Portal Overview](docs/images/portal_overview.png)](https://goudacouda.github.io/cobolscope/)
+
+---
+
+### 2. Level-2 Procedure Call Graphs with Wide Split-Screen Code (`Alt+C`)
+Understand routine hierarchies at a glance. Graph nodes display cyclomatic complexity (CC), statement counts, and directed control transfers. Press **`Alt+C`** or click **View Routine Code** to open the wide-aspect source code viewer centered on the selected procedure.
+
+![Call Graph Split Code](docs/images/call_graph_walkthrough.gif)
+
+---
+
+### 3. Level-3 Intra-Procedural CFG Flowcharts
+Drill down into complex routines with branching logic (`IF`, `EVALUATE`, `PERFORM UNTIL`). CobolScope generates fine-grained statement-level flowcharts modeling decision diamonds, execution paths, loop iterations, and terminal exits.
+
+![Level 3 CFG Flowchart](docs/images/level3_flowchart.svg)
+
+---
+
+### 4. Binary Data Dictionaries with Sliding Code Drawer
+Inspect field structures across `WORKING-STORAGE`, `LINKAGE`, and `FILE SECTION` with exact byte offsets, `REDEFINES` overlays, and Where-Used cross references. Click any variable row to slide open the code drawer with automatic line and variable occurrence highlighting.
+
+![Data Dictionary Split View](docs/images/data_dictionary_walkthrough.gif)
+
+---
+
 
 ## Quick Start
 
 ### Prerequisites
-- **Java 17+ runtime** on your `PATH` (`java`)
 - **Python 3.10+**
-- *(Optional)* [Graphviz](https://graphviz.org/) (`dot` on your `PATH`) for SVG compilation
+- **Java 17+** runtime (`java` on your `PATH`)
+- *(Optional)* [Graphviz](https://graphviz.org/) (`dot` on your `PATH`) if exporting static SVG/DOT diagrams
 
-### 1. Install
+### Installation
+The Java parser bridge is pre-compiled and bundled directly with the repository:
+
 ```bash
-# The Java parser bridge is already bundled with the package.
+# Clone the repository
+git clone https://github.com/GoudaCouda/cobolscope.git
+cd cobolscope
+
+# Install the Python package in editable mode
 pip install -e .
 ```
 
-To rebuild the bundled Java bridge after changing files under `java/`, install
-a JDK 17+ (`java` and `javac`) and run `python build_java.py`. The equivalent
-platform wrappers are `./build.ps1` on Windows and `./build.sh` on Linux/macOS.
-Regular CobolScope users do not need to run these build scripts.
+---
 
-### 2. CLI Usage
+## How to Use CobolScope
 
-#### Parse & Output Canonical AST JSON
+### 1. Repository-Level Batch Processing (Recommended)
+
+Process an entire directory of COBOL programs in a single, high-speed JVM run:
+
 ```bash
-# Print AST IR JSON to stdout
-cobolscope path/to/program.cbl -f FIXED
+# Full build with interactive call graphs, data dictionaries, and web portal
+cobolscope ./src/cobol -I ./src/copybooks --graph --dict -o ./dist/portal/
 
-# Save AST IR JSON to file with copybook resolution
-cobolscope path/to/program.cbl -I ./copybooks -o output.json
+# Include dead code reachability analysis and CFG flowcharts
+cobolscope ./src/cobol -I ./src/copybooks --graph --dict --reachability --cfg all -o ./dist/portal/
 ```
 
-#### Generate Data Dictionaries
+Open `./dist/portal/index.html` directly in your browser. No web server is required.
+
+---
+
+### 2. Single-Program Analysis
+
+Run analysis on individual programs and output specific artifacts:
+
+#### Call Graphs
 ```bash
-# Interactive HTML Report with live search & type filtering
-cobolscope path/to/program.cbl --dict --dict-format html -o dictionary.html
+# Standalone interactive HTML Call Graph
+cobolscope program.cbl -I copy/ --graph -o call_graph.html
 
-# GitHub-Flavored Markdown Table
-cobolscope path/to/program.cbl --dict --dict-format md -o dictionary.md
-
-# CSV or JSON export
-cobolscope path/to/program.cbl --dict --dict-format csv -o dictionary.csv
+# Scalable Vector Graphics (SVG) or Graphviz DOT format
+cobolscope program.cbl --graph --graph-format svg -o call_graph.svg
+cobolscope program.cbl --graph --graph-format dot -o call_graph.dot
 ```
 
-#### Generate Procedure Call Graphs
+#### Data Dictionaries
 ```bash
-# Interactive pan & zoom HTML Call Graph
-cobolscope path/to/program.cbl --graph --graph-format html -o call_graph.html
+# Standalone interactive HTML Data Dictionary
+cobolscope program.cbl -I copy/ --dict --dict-format html -o dictionary.html
 
-# Scalable Vector Graphics (SVG)
-cobolscope path/to/program.cbl --graph --graph-format svg -o call_graph.svg
+# GitHub-Flavored Markdown table
+cobolscope program.cbl --dict --dict-format md -o dictionary.md
 
-# Graphviz DOT format
-cobolscope path/to/program.cbl --graph --graph-format dot -o call_graph.dot
+# CSV export (for spreadsheets or databases)
+cobolscope program.cbl --dict --dict-format csv -o dictionary.csv
 ```
 
-#### Generate Level-3 Intra-Procedural CFGs
+#### Pushdown Reachability & Dead Code Detection
 ```bash
-# Interactive Cytoscape HTML Control Flow Graph
-cobolscope path/to/program.cbl --cfg --cfg-format html -o cfg.html
+# Find dead paragraphs and uncalled execution paths
+cobolscope program.cbl --reachability
 
-# Cytoscape JSON Elements export
-cobolscope path/to/program.cbl --cfg --cfg-format json -o cfg.json
+# Save verified state transitions to JSON
+cobolscope program.cbl --reachability --save-transitions transitions.json
 ```
 
-#### Declarative Rules Engine & Rule Discovery
+#### Canonical AST IR Export
 ```bash
-# Automatically discover ABEND routines, runtime modules, and DB checks into a YAML rules file
-cobolscope --init-rules path/to/program.cbl -o cobolscope-rules.yaml
-
-# Apply custom rules to any analysis or visualization command
-cobolscope path/to/program.cbl --graph --rules cobolscope-rules.yaml -o call_graph.html
-cobolscope path/to/program.cbl --reachability -r cobolscope-rules.yaml
+# Stream complete semantic AST JSON to file
+cobolscope program.cbl -I copy/ -o program_ast.json
 ```
 
-#### Run Pushdown Reachability Analysis
+---
+
+### 3. Declarative Rules Engine (`cobolscope-rules.yaml`)
+
+Mainframe environments often use proprietary macros or runtime modules (`CEE3ABD`, `ILBOABN0`, `ABEND`) to handle fatal errors. CobolScope features a declarative YAML rules engine to model these semantics:
+
 ```bash
-cobolscope path/to/program.cbl --reachability
+# Automatically scan a codebase and generate a starter rules file
+cobolscope --init-rules ./src/cobol -o cobolscope-rules.yaml
+
+# Apply the rules file to any analysis or portal build
+cobolscope ./src/cobol --graph --dict -r cobolscope-rules.yaml -o ./dist/portal/
 ```
+
+---
+
+## Architecture Overview
+
+CobolScope follows a clean, decoupled architecture that pairs a high-performance Java semantic parser with a Python modeling and rendering pipeline:
+
+```mermaid
+flowchart LR
+    A["COBOL Sources<br/>& Copybooks"] --> B["Java ProLeap Bridge<br/>(ANTLR4 AST & Symbol Table)"]
+    B --> C["Streaming AST IR<br/>(JSON)"]
+    C --> D["Python Semantic Core<br/>(Pydantic Models)"]
+    D --> E["Data Dictionary Engine<br/>(Byte Offsets & Overlays)"]
+    D --> F["Call Graph & CFG Engine<br/>(Clustering & Topologies)"]
+    D --> G["Pushdown Reachability<br/>(Dead Code Detection)"]
+    E --> H["Interactive Web Portal<br/>(index.html & Standalone HTMLs)"]
+    F --> H
+    G --> H
+```
+
+### Key Architectural Components
+
+- **Java Parser Bridge (`java/`)**: Invokes the ANTLR4 ProLeap parser in a single JVM instance to preprocess copybooks, evaluate `REDEFINES` byte calculations, and extract semantic symbols with streaming JSON serialization.
+- **Strongly-Typed Semantic IR (`cobolscope/models/`)**: Hydrates the raw AST into rich Pydantic models with dedicated representations for structured verbs (`MOVE`, `PERFORM`, `IF`, `EVALUATE`, `CALL`, `EXEC SQL`, `EXEC CICS`) and graceful fallbacks for extended dialects.
+- **Memory Layout Engine (`cobolscope/dictionary/`)**: Calculates exact starting byte offsets, group bounds, and memory overlays.
+- **Graph & CFG Engine (`cobolscope/graph/`)**: Builds Level-2 procedure call graphs with functional clustering and Level-3 intra-procedural flowcharts using Cytoscape.js and Graphviz.
+- **Portal & HTML Generator (`cobolscope/portal/`)**: Assembles static HTML, CSS, and vanilla JS into self-contained, responsive documentation portals with zero external runtime dependencies.
 
 ---
 
 ## Python API
 
+You can also use CobolScope programmatically as a Python library:
+
 ```python
 from cobolscope.parser import parse
 from cobolscope.models import ProgramModel
-from cobolscope.dictionary import DataDictionaryGenerator
-from cobolscope.graph import CallGraphGenerator, build_procedure_cfg, is_paragraph_terminal
+from cobolscope.data_dictionary import generate_data_dictionary
+from cobolscope.graph import generate_call_graph
 from cobolscope.reachability import PushdownReachabilityAnalyzer
-from cobolscope.rules import load_rules, get_effective_rules
 
-# 1. Parse COBOL Source & Load Rules
-raw_ir = parse("path/to/program.cbl", copybook_dirs=["./copybooks"], format="FIXED")
+# 1. Parse COBOL source with copybook resolution
+raw_ir = parse("program.cbl", copybook_dirs=["./copybooks"], format="FIXED")
 model = ProgramModel.from_dict(raw_ir)
-rules = load_rules("cobolscope-rules.yaml")
 
-print(f"Program ID: {model.program_id}")
-print(f"Total Paragraphs: {len(model.paragraphs)}")
+print(f"Program: {model.program_id} ({len(model.paragraphs)} routines)")
 
-# 2. Inspect Data Dictionary & Memory Layout
-dict_gen = DataDictionaryGenerator(model)
-for row in dict_gen.rows:
-    print(f"{row.level:02d} {row.name:<30} Offset: {row.byte_offset:<5} Len: {row.byte_length:<4} Type: {row.logical_type}")
+# 2. Generate Interactive Data Dictionary
+html_dict = generate_data_dictionary(model, format="html")
 
-# Export Markdown or HTML
-md_report = dict_gen.to_markdown()
-html_report = dict_gen.to_html()
+# 3. Generate Interactive Call Graph
+html_graph = generate_call_graph(model, format="html")
 
-# 3. Generate Procedure Call Graph with Rules
-graph_gen = CallGraphGenerator(model, rules=rules)
-dot_source = graph_gen.to_dot()
-svg_content = graph_gen.to_svg()
-html_viewer = graph_gen.to_html()
-
-# 4. Generate Level-3 Intra-Procedural CFGs
-main_para = model.paragraphs[0]
-cfg = build_procedure_cfg(main_para, rules=rules, program_id=model.program_id)
-print(f"CFG Nodes: {len(cfg.nodes)}, Edges: {len(cfg.edges)}")
-cytoscape_elements = cfg.to_cytoscape_elements()
-
-# 5. Run Reachability & Dead Code Detection
-analyzer = PushdownReachabilityAnalyzer(model, rules=rules)
+# 4. Run Dead Code / Reachability Analysis
+analyzer = PushdownReachabilityAnalyzer(model)
 reach_result = analyzer.analyze()
-print(f"Reachable Paragraphs: {len(reach_result.reachable_paragraphs)}")
-print(f"Dead / Unreachable Code: {reach_result.unreachable_paragraphs}")
+print(f"Reachable: {len(reach_result.reachable_paragraphs)}")
+print(f"Dead Code: {reach_result.unreachable_paragraphs}")
 ```
 
 ---
 
-## Example: IBM Bank-of-Z (`XFRFUN.cbl`)
+## 6-Tier Verification & Quality Standards
 
-CobolScope includes pre-generated samples from the open-source **IBM Bank-of-Z** enterprise CICS/DB2 funds transfer application ([`XFRFUN.cbl`](tests/fixtures/bank_of_z/cobol/XFRFUN.cbl)):
+CobolScope enforces strict verification standards across every component:
 
-- **Interactive Procedure Call Graph**: [`examples/XFRFUN_call_graph.html`](examples/XFRFUN_call_graph.html) ([SVG version](examples/XFRFUN_call_graph.svg))
-- **Interactive Data Dictionary**: [`examples/XFRFUN_data_dictionary.html`](examples/XFRFUN_data_dictionary.html) ([Markdown version](examples/XFRFUN_data_dictionary.md))
-
-### Sample Data Dictionary Output
-
-| Level | Field Name / Path | Business Type | PIC / Usage | Offset | Bytes | Allowed Values / Attributes | References |
-| :---: | :--- | :--- | :--- | :---: | :---: | :--- | :--- |
-| 77 | `SORTCODE`<br/><small>`SORTCODE`</small> | Numeric Display (6 digits) | `9(6)` | 0 | 6 | **Default:** `987654` | `A010` |
-| 01 | **`HOST-ACCOUNT-ROW`**<br/><small>`HOST-ACCOUNT-ROW`</small> | Group | *DISPLAY* | 6 | 88 | — | `UADT010` |
-| 03 | &nbsp;&nbsp;`HV-ACCOUNT-EYECATCHER`<br/><small>`HOST-ACCOUNT-ROW.HV-ACCOUNT-EYECATCHER`</small> | Alphanumeric (4 chars) | `X(4)` | 6 | 4 | — | `A010` |
-| 03 | &nbsp;&nbsp;`HV-ACCOUNT-INT-RATE`<br/><small>`HOST-ACCOUNT-ROW.HV-ACCOUNT-INT-RATE`</small> | Signed Decimal(6, 2) Packed | `S9(4)V99`<br/>*COMP_3* | 42 | 4 | — | — |
-| 03 | &nbsp;&nbsp;`HV-ACCOUNT-AVAIL-BAL`<br/><small>`HOST-ACCOUNT-ROW.HV-ACCOUNT-AVAIL-BAL`</small> | Signed Decimal(12, 2) Packed | `S9(10)V99`<br/>*COMP_3* | 80 | 7 | — | `UADF010`, `UADT010` |
-
----
-
-## 6-Tier Verification Suite
-
-CobolScope enforces strict mathematical, architectural, and compiler correctness standards:
-
-| Tier | Suite | Purpose |
+| Verification Tier | Focus Area | Verification Strategy |
 | :--- | :--- | :--- |
-| **Tier 1** | `test_pipeline.py` | End-to-end AST & statement deserialization parity |
-| **Tier 2** | `test_data_dictionary.py` | 1:1 Memory layout, overlay offsets, and exporter roundtrip |
-| **Tier 3** | `test_invariants.py` | Mathematical proofs (Group Sum, REDEFINES Alignment, Zero Slop) |
-| **Tier 4** | `test_asg_parity.py` | Native ProLeap ASG semantic metamodel zero-drop completeness |
-| **Tier 5** | `test_call_graph.py` | Procedure call graph topology, cluster partitioning, and exit collapsing |
-| **Tier 6** | `test_gnucobol_parity.py`| Live binary GnuCOBOL (`cobc`) compiler symbol table cross-check |
-| **Pushdown** | `test_reachability.py` | Interprocedural call stack reachability & dead code detection |
-| **NIST** | `test_nist_suite.py` | Official NIST COBOL-85 standard conformance suite (500+ programs) |
+| **Tier 1: Pipeline E2E** | AST Deserialization | Complete roundtrip parity across all statements |
+| **Tier 2: Data Dictionary** | Memory Layout | Exact byte offsets, group boundaries, and overlay alignments |
+| **Tier 3: Invariants** | Mathematical Proofs | Group Sum consistency, REDEFINES alignment, and zero-slop checks |
+| **Tier 4: ASG Parity** | Semantic Completeness | Zero-drop audit against native ProLeap ASG metamodels |
+| **Tier 5: Call Graph** | Graph Topology | Cluster boundaries, exit collapsing, and acyclic/cyclic flows |
+| **Tier 6: GnuCOBOL Parity** | Compiler Truth | 1:1 symbol table cross-checks against live `cobc` compiler listings |
+| **NIST COBOL-85** | Language Standard | Audited against official 500+ program NIST conformance suite |
 
-To run the full suite:
-```powershell
+To run the verification suite:
+```bash
 python -m tests.run_all_tests
 python -m tests.test_nist_suite
 ```
 
 ---
 
-## Architecture & Project Structure
+## Keyboard Shortcuts
 
-```
-cobolscope/
-├── __init__.py                # Core package entrypoints (parse, models, rules)
-├── cli.py                     # Unified CLI with subcommands & argument parser
-├── models/                    # Typed Pydantic IR data models (AST, DFG, CFG)
-├── parser/                    # Java subprocess runner & streaming JSON reader
-├── dictionary/                # Data dictionary engine, offsets, & exporters (HTML, MD, CSV)
-├── graph/                     # Procedure call graph & Level-3 CFG builder
-│   ├── builder.py             # Level-2 call graph generator & cluster classifier
-│   ├── cfg_builder.py         # Level-3 intra-procedural CFG builder
-│   ├── cfg_models.py          # Level-3 CFG node & edge data models
-│   ├── termination.py         # ABEND & terminal procedure classification
-│   ├── utils.py               # Zero-dependency graph algorithms (Tarjan SCC & ipdom)
-│   └── renderers.py           # DOT, SVG, and Cytoscape/HTML renderers
-├── reachability/              # Pushdown Automaton interprocedural reachability analyzer
-├── rules.py                   # Declarative YAML rules schema & effective rule resolution
-├── rules_generator.py         # Automated rule discovery AST scanner (--init-rules)
-└── templates/                 # Jinja2 templates for interactive HTML visualizers
+| Shortcut | Context | Action |
+| :--- | :--- | :--- |
+| **`Alt + C`** | Call Graph | Toggle split-screen source code viewer |
+| **`Esc`** | Any Viewer | Close code drawer, routine inspector, or active modal |
+| **Click Row** | Data Dictionary | Slide open split code drawer focused on variable definition |
+| **Click Breadcrumb** | Data Dictionary | Jump directly to routine procedure code |
+| **`Ctrl + Click` Breadcrumb** | Data Dictionary | Jump straight to routine in Call Graph |
+| **Click Any Identifier** | Code Viewers | Highlight all occurrences of that variable across code |
 
-java/
-├── ProLeapCliRunner.java      # CLI entrypoint for the ProLeap parser bridge
-├── CobolTextCleaner.java      # Preprocessor and comment/directive sanitizer
-├── HeaderDivisionExtractor.java # Program identification metadata extractor
-├── DataDivisionExtractor.java # Memory layout, PIC sizing, and REDEFINES offset calculator
-├── ProcedureDivisionExtractor.java # Paragraphs, CFG edges, and call target extractor
-├── StatementMapper.java       # Polymorphic statement mapper (MOVE, PERFORM, SQL, CICS)
-├── AsgSemanticAuditor.java    # Metamodel completeness & ASG auditor
-├── IrJsonWriter.java          # High-speed streaming JSON serializer
-└── IrModel.java               # Intermediate DTO transfer objects
-```
+---
+
+## Additional Documentation
+
+- 📖 **[User Guide & Visual Walkthrough](USER_GUIDE.md)**: In-depth guide on graph navigation, occurrence highlighting, and split-screen features.
+- 📐 **[Agent & Architecture Guidelines](AGENTS.md)**: Engineering guidelines, ProLeap-first principles, and domain separation standards.
 
 ---
 
 ## License
 
-This project is licensed under the Apache License, Version 2.0 - see the [LICENSE](LICENSE) file for details.
+This project is licensed under the **Apache License, Version 2.0** - see the [LICENSE](LICENSE) file for details.  
 CobolScope utilizes the [ProLeap COBOL Parser](https://github.com/uwol/proleap-cobol-parser) under the MIT License.

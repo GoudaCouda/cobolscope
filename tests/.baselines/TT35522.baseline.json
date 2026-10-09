@@ -1,0 +1,6252 @@
+{
+  "programId": "TT35522",
+  "format": "FIXED",
+  "dataDictionary": {
+    "fileControls": [
+      {
+        "selectName": "RDM-INPUT-FILE",
+        "assignTo": "UT-S-RDIFILE",
+        "location": {
+          "startLine": 38,
+          "endLine": 39,
+          "startColumn": 11,
+          "endColumn": 25
+        }
+      },
+      {
+        "selectName": "DSN-INPUT-FILE",
+        "assignTo": "UT-S-DSNFILE",
+        "location": {
+          "startLine": 41,
+          "endLine": 42,
+          "startColumn": 11,
+          "endColumn": 25
+        }
+      },
+      {
+        "selectName": "RDM-OUTPUT-FILE",
+        "assignTo": "UT-S-OUTFILE",
+        "location": {
+          "startLine": 44,
+          "endLine": 45,
+          "startColumn": 11,
+          "endColumn": 25
+        }
+      },
+      {
+        "selectName": "CONTROL-REPORT",
+        "assignTo": "UT-S-REPORT",
+        "location": {
+          "startLine": 47,
+          "endLine": 48,
+          "startColumn": 11,
+          "endColumn": 25
+        }
+      }
+    ],
+    "fileSection": [
+      {
+        "name": "RDM-INPUT-FILE",
+        "selectName": "RDM-INPUT-FILE",
+        "location": {
+          "startLine": 53,
+          "endLine": 59,
+          "startColumn": 7,
+          "endColumn": 51
+        },
+        "records": [
+          {
+            "id": "FD_RDM-INPUT-FILE_L59_RDM-INP-REC",
+            "qualifiedName": "RDM-INP-REC",
+            "level": 1,
+            "name": "RDM-INP-REC",
+            "pic": "X(100)",
+            "usage": "DISPLAY",
+            "logicalType": "Alphanumeric (100 chars)",
+            "byteOffset": 0,
+            "relativeOffset": 0,
+            "byteLength": 100,
+            "elementByteLength": 100,
+            "location": {
+              "startLine": 59,
+              "endLine": 59,
+              "startColumn": 7,
+              "endColumn": 51
+            }
+          }
+        ]
+      },
+      {
+        "name": "DSN-INPUT-FILE",
+        "selectName": "DSN-INPUT-FILE",
+        "location": {
+          "startLine": 61,
+          "endLine": 67,
+          "startColumn": 7,
+          "endColumn": 50
+        },
+        "records": [
+          {
+            "id": "FD_DSN-INPUT-FILE_L67_DSN-INP-REC",
+            "qualifiedName": "DSN-INP-REC",
+            "level": 1,
+            "name": "DSN-INP-REC",
+            "pic": "X(80)",
+            "usage": "DISPLAY",
+            "logicalType": "Alphanumeric (80 chars)",
+            "byteOffset": 0,
+            "relativeOffset": 0,
+            "byteLength": 80,
+            "elementByteLength": 80,
+            "location": {
+              "startLine": 67,
+              "endLine": 67,
+              "startColumn": 7,
+              "endColumn": 50
+            }
+          }
+        ]
+      },
+      {
+        "name": "RDM-OUTPUT-FILE",
+        "selectName": "RDM-OUTPUT-FILE",
+        "location": {
+          "startLine": 69,
+          "endLine": 75,
+          "startColumn": 7,
+          "endColumn": 51
+        },
+        "records": [
+          {
+            "id": "FD_RDM-OUTPUT-FILE_L75_RDM-OUT-REC",
+            "qualifiedName": "RDM-OUT-REC",
+            "level": 1,
+            "name": "RDM-OUT-REC",
+            "pic": "X(200)",
+            "usage": "DISPLAY",
+            "logicalType": "Alphanumeric (200 chars)",
+            "byteOffset": 0,
+            "relativeOffset": 0,
+            "byteLength": 200,
+            "elementByteLength": 200,
+            "location": {
+              "startLine": 75,
+              "endLine": 75,
+              "startColumn": 7,
+              "endColumn": 51
+            }
+          }
+        ]
+      },
+      {
+        "name": "CONTROL-REPORT",
+        "selectName": "CONTROL-REPORT",
+        "location": {
+          "startLine": 77,
+          "endLine": 83,
+          "startColumn": 7,
+          "endColumn": 51
+        },
+        "records": [
+          {
+            "id": "FD_CONTROL-REPORT_L83_CTL-FILE-REP",
+            "qualifiedName": "CTL-FILE-REP",
+            "level": 1,
+            "name": "CTL-FILE-REP",
+            "pic": "X(133)",
+            "usage": "DISPLAY",
+            "logicalType": "Alphanumeric (133 chars)",
+            "byteOffset": 0,
+            "relativeOffset": 0,
+            "byteLength": 133,
+            "elementByteLength": 133,
+            "location": {
+              "startLine": 83,
+              "endLine": 83,
+              "startColumn": 7,
+              "endColumn": 51
+            }
+          }
+        ]
+      }
+    ],
+    "workingStorageSection": [
+      {
+        "id": "WS_L92_BEGIN-WS",
+        "qualifiedName": "BEGIN-WS",
+        "level": 1,
+        "name": "BEGIN-WS",
+        "pic": "X(30)",
+        "usage": "DISPLAY",
+        "value": "BEGIN WORKING STORAGE TT35522",
+        "logicalType": "Alphanumeric (30 chars)",
+        "byteOffset": 0,
+        "relativeOffset": 0,
+        "byteLength": 30,
+        "elementByteLength": 30,
+        "location": {
+          "startLine": 92,
+          "endLine": 93,
+          "startColumn": 7,
+          "endColumn": 46
+        }
+      },
+      {
+        "id": "WS_L95_WSS-CURRENT-DATE",
+        "qualifiedName": "WSS-CURRENT-DATE",
+        "level": 1,
+        "name": "WSS-CURRENT-DATE",
+        "usage": "DISPLAY",
+        "logicalType": "Group",
+        "byteOffset": 30,
+        "relativeOffset": 0,
+        "byteLength": 8,
+        "elementByteLength": 8,
+        "children": [
+          {
+            "id": "WS_L96_WSS-CENTURY",
+            "qualifiedName": "WSS-CURRENT-DATE.WSS-CENTURY",
+            "level": 3,
+            "name": "WSS-CENTURY",
+            "pic": "99",
+            "usage": "DISPLAY",
+            "value": "ZEROES",
+            "logicalType": "Numeric Display (2 digits)",
+            "byteOffset": 30,
+            "relativeOffset": 0,
+            "byteLength": 2,
+            "elementByteLength": 2,
+            "location": {
+              "startLine": 96,
+              "endLine": 96,
+              "startColumn": 11,
+              "endColumn": 60
+            }
+          },
+          {
+            "id": "WS_L97_WSS-YEAR",
+            "qualifiedName": "WSS-CURRENT-DATE.WSS-YEAR",
+            "level": 3,
+            "name": "WSS-YEAR",
+            "pic": "99",
+            "usage": "DISPLAY",
+            "value": "ZEROES",
+            "logicalType": "Numeric Display (2 digits)",
+            "byteOffset": 32,
+            "relativeOffset": 2,
+            "byteLength": 2,
+            "elementByteLength": 2,
+            "location": {
+              "startLine": 97,
+              "endLine": 97,
+              "startColumn": 11,
+              "endColumn": 60
+            }
+          },
+          {
+            "id": "WS_L98_WSS-MONTH",
+            "qualifiedName": "WSS-CURRENT-DATE.WSS-MONTH",
+            "level": 3,
+            "name": "WSS-MONTH",
+            "pic": "99",
+            "usage": "DISPLAY",
+            "value": "ZEROES",
+            "logicalType": "Numeric Display (2 digits)",
+            "byteOffset": 34,
+            "relativeOffset": 4,
+            "byteLength": 2,
+            "elementByteLength": 2,
+            "location": {
+              "startLine": 98,
+              "endLine": 98,
+              "startColumn": 11,
+              "endColumn": 60
+            }
+          },
+          {
+            "id": "WS_L99_WSS-DAY",
+            "qualifiedName": "WSS-CURRENT-DATE.WSS-DAY",
+            "level": 3,
+            "name": "WSS-DAY",
+            "pic": "99",
+            "usage": "DISPLAY",
+            "value": "ZEROES",
+            "logicalType": "Numeric Display (2 digits)",
+            "byteOffset": 36,
+            "relativeOffset": 6,
+            "byteLength": 2,
+            "elementByteLength": 2,
+            "location": {
+              "startLine": 99,
+              "endLine": 99,
+              "startColumn": 11,
+              "endColumn": 60
+            }
+          }
+        ],
+        "location": {
+          "startLine": 95,
+          "endLine": 95,
+          "startColumn": 7,
+          "endColumn": 27
+        }
+      },
+      {
+        "id": "WS_L101_WSS-CURRENT-TIME",
+        "qualifiedName": "WSS-CURRENT-TIME",
+        "level": 1,
+        "name": "WSS-CURRENT-TIME",
+        "usage": "DISPLAY",
+        "logicalType": "Group",
+        "byteOffset": 38,
+        "relativeOffset": 0,
+        "byteLength": 6,
+        "elementByteLength": 6,
+        "children": [
+          {
+            "id": "WS_L102_WSS-HOUR",
+            "qualifiedName": "WSS-CURRENT-TIME.WSS-HOUR",
+            "level": 3,
+            "name": "WSS-HOUR",
+            "pic": "99",
+            "usage": "DISPLAY",
+            "value": "ZEROES",
+            "logicalType": "Numeric Display (2 digits)",
+            "byteOffset": 38,
+            "relativeOffset": 0,
+            "byteLength": 2,
+            "elementByteLength": 2,
+            "location": {
+              "startLine": 102,
+              "endLine": 102,
+              "startColumn": 11,
+              "endColumn": 60
+            }
+          },
+          {
+            "id": "WS_L103_WSS-MINUTES",
+            "qualifiedName": "WSS-CURRENT-TIME.WSS-MINUTES",
+            "level": 3,
+            "name": "WSS-MINUTES",
+            "pic": "99",
+            "usage": "DISPLAY",
+            "value": "ZEROES",
+            "logicalType": "Numeric Display (2 digits)",
+            "byteOffset": 40,
+            "relativeOffset": 2,
+            "byteLength": 2,
+            "elementByteLength": 2,
+            "location": {
+              "startLine": 103,
+              "endLine": 103,
+              "startColumn": 11,
+              "endColumn": 60
+            }
+          },
+          {
+            "id": "WS_L104_WSS-SECONDS",
+            "qualifiedName": "WSS-CURRENT-TIME.WSS-SECONDS",
+            "level": 3,
+            "name": "WSS-SECONDS",
+            "pic": "99",
+            "usage": "DISPLAY",
+            "value": "ZEROES",
+            "logicalType": "Numeric Display (2 digits)",
+            "byteOffset": 42,
+            "relativeOffset": 4,
+            "byteLength": 2,
+            "elementByteLength": 2,
+            "location": {
+              "startLine": 104,
+              "endLine": 104,
+              "startColumn": 11,
+              "endColumn": 60
+            }
+          }
+        ],
+        "location": {
+          "startLine": 101,
+          "endLine": 101,
+          "startColumn": 7,
+          "endColumn": 27
+        }
+      },
+      {
+        "id": "WS_L106_WSS-DSN-DATA",
+        "qualifiedName": "WSS-DSN-DATA",
+        "level": 1,
+        "name": "WSS-DSN-DATA",
+        "usage": "DISPLAY",
+        "logicalType": "Group",
+        "byteOffset": 44,
+        "relativeOffset": 0,
+        "byteLength": 80,
+        "elementByteLength": 80,
+        "children": [
+          {
+            "id": "WS_L107_DATA-SET-NAME",
+            "qualifiedName": "WSS-DSN-DATA.DATA-SET-NAME",
+            "level": 3,
+            "name": "DATA-SET-NAME",
+            "pic": "X(44)",
+            "usage": "DISPLAY",
+            "value": "",
+            "logicalType": "Alphanumeric (44 chars)",
+            "byteOffset": 44,
+            "relativeOffset": 0,
+            "byteLength": 44,
+            "elementByteLength": 44,
+            "location": {
+              "startLine": 107,
+              "endLine": 107,
+              "startColumn": 11,
+              "endColumn": 60
+            }
+          },
+          {
+            "id": "WS_L108_FILLER",
+            "qualifiedName": "WSS-DSN-DATA.FILLER",
+            "level": 3,
+            "name": "FILLER",
+            "pic": "X(36)",
+            "usage": "DISPLAY",
+            "value": "",
+            "logicalType": "Alphanumeric (36 chars)",
+            "byteOffset": 88,
+            "relativeOffset": 44,
+            "byteLength": 36,
+            "elementByteLength": 36,
+            "isFiller": true,
+            "location": {
+              "startLine": 108,
+              "endLine": 108,
+              "startColumn": 11,
+              "endColumn": 60
+            }
+          }
+        ],
+        "location": {
+          "startLine": 106,
+          "endLine": 106,
+          "startColumn": 7,
+          "endColumn": 23
+        }
+      },
+      {
+        "id": "WS_L111_WSS-SWITCHES",
+        "qualifiedName": "WSS-SWITCHES",
+        "level": 1,
+        "name": "WSS-SWITCHES",
+        "usage": "DISPLAY",
+        "logicalType": "Group",
+        "byteOffset": 124,
+        "relativeOffset": 0,
+        "byteLength": 6,
+        "elementByteLength": 6,
+        "children": [
+          {
+            "id": "WS_L112_EOF-INET",
+            "qualifiedName": "WSS-SWITCHES.EOF-INET",
+            "level": 3,
+            "name": "EOF-INET",
+            "pic": "XXX",
+            "usage": "DISPLAY",
+            "value": "NO",
+            "logicalType": "Alphanumeric (3 chars)",
+            "byteOffset": 124,
+            "relativeOffset": 0,
+            "byteLength": 3,
+            "elementByteLength": 3,
+            "conditions88": [
+              {
+                "name": "END-OF-RDM-FILE",
+                "values": [
+                  "YES"
+                ],
+                "location": {
+                  "startLine": 113,
+                  "endLine": 113,
+                  "startColumn": 15,
+                  "endColumn": 52
+                }
+              }
+            ],
+            "location": {
+              "startLine": 112,
+              "endLine": 112,
+              "startColumn": 11,
+              "endColumn": 60
+            }
+          },
+          {
+            "id": "WS_L115_EOF-DSN",
+            "qualifiedName": "WSS-SWITCHES.EOF-DSN",
+            "level": 3,
+            "name": "EOF-DSN",
+            "pic": "XXX",
+            "usage": "DISPLAY",
+            "value": "NO",
+            "logicalType": "Alphanumeric (3 chars)",
+            "byteOffset": 127,
+            "relativeOffset": 3,
+            "byteLength": 3,
+            "elementByteLength": 3,
+            "conditions88": [
+              {
+                "name": "END-OF-DSN-FILE",
+                "values": [
+                  "YES"
+                ],
+                "location": {
+                  "startLine": 116,
+                  "endLine": 116,
+                  "startColumn": 15,
+                  "endColumn": 52
+                }
+              }
+            ],
+            "location": {
+              "startLine": 115,
+              "endLine": 115,
+              "startColumn": 11,
+              "endColumn": 60
+            }
+          }
+        ],
+        "location": {
+          "startLine": 111,
+          "endLine": 111,
+          "startColumn": 7,
+          "endColumn": 23
+        }
+      },
+      {
+        "id": "WS_L118_WSS-DIFFERENT-DATES",
+        "qualifiedName": "WSS-DIFFERENT-DATES",
+        "level": 1,
+        "name": "WSS-DIFFERENT-DATES",
+        "usage": "DISPLAY",
+        "logicalType": "Group",
+        "byteOffset": 130,
+        "relativeOffset": 0,
+        "byteLength": 39,
+        "elementByteLength": 39,
+        "children": [
+          {
+            "id": "WS_L119_WSS-DATE-YYYYMMDD",
+            "qualifiedName": "WSS-DIFFERENT-DATES.WSS-DATE-YYYYMMDD",
+            "level": 3,
+            "name": "WSS-DATE-YYYYMMDD",
+            "pic": "X(10)",
+            "usage": "DISPLAY",
+            "value": "SPACES",
+            "logicalType": "Alphanumeric (10 chars)",
+            "byteOffset": 130,
+            "relativeOffset": 0,
+            "byteLength": 10,
+            "elementByteLength": 10,
+            "location": {
+              "startLine": 119,
+              "endLine": 119,
+              "startColumn": 11,
+              "endColumn": 63
+            }
+          },
+          {
+            "id": "WS_L121_MY-CURRENT-DATE",
+            "qualifiedName": "WSS-DIFFERENT-DATES.MY-CURRENT-DATE",
+            "level": 3,
+            "name": "MY-CURRENT-DATE",
+            "usage": "DISPLAY",
+            "logicalType": "Group",
+            "byteOffset": 140,
+            "relativeOffset": 10,
+            "byteLength": 21,
+            "elementByteLength": 21,
+            "children": [
+              {
+                "id": "WS_L122_MY-CURR-CENTYEAR",
+                "qualifiedName": "WSS-DIFFERENT-DATES.MY-CURRENT-DATE.MY-CURR-CENTYEAR",
+                "level": 5,
+                "name": "MY-CURR-CENTYEAR",
+                "pic": "X(4)",
+                "usage": "DISPLAY",
+                "value": "SPACES",
+                "logicalType": "Alphanumeric (4 chars)",
+                "byteOffset": 140,
+                "relativeOffset": 0,
+                "byteLength": 4,
+                "elementByteLength": 4,
+                "location": {
+                  "startLine": 122,
+                  "endLine": 122,
+                  "startColumn": 15,
+                  "endColumn": 62
+                }
+              },
+              {
+                "id": "WS_L123_MY-CURR-MONTH",
+                "qualifiedName": "WSS-DIFFERENT-DATES.MY-CURRENT-DATE.MY-CURR-MONTH",
+                "level": 5,
+                "name": "MY-CURR-MONTH",
+                "pic": "X(2)",
+                "usage": "DISPLAY",
+                "value": "SPACES",
+                "logicalType": "Alphanumeric (2 chars)",
+                "byteOffset": 144,
+                "relativeOffset": 4,
+                "byteLength": 2,
+                "elementByteLength": 2,
+                "location": {
+                  "startLine": 123,
+                  "endLine": 123,
+                  "startColumn": 15,
+                  "endColumn": 62
+                }
+              },
+              {
+                "id": "WS_L124_MY-CURR-DAY",
+                "qualifiedName": "WSS-DIFFERENT-DATES.MY-CURRENT-DATE.MY-CURR-DAY",
+                "level": 5,
+                "name": "MY-CURR-DAY",
+                "pic": "X(2)",
+                "usage": "DISPLAY",
+                "value": "SPACES",
+                "logicalType": "Alphanumeric (2 chars)",
+                "byteOffset": 146,
+                "relativeOffset": 6,
+                "byteLength": 2,
+                "elementByteLength": 2,
+                "location": {
+                  "startLine": 124,
+                  "endLine": 124,
+                  "startColumn": 15,
+                  "endColumn": 62
+                }
+              },
+              {
+                "id": "WS_L125_MY-CURR-HOUR",
+                "qualifiedName": "WSS-DIFFERENT-DATES.MY-CURRENT-DATE.MY-CURR-HOUR",
+                "level": 5,
+                "name": "MY-CURR-HOUR",
+                "pic": "X(2)",
+                "usage": "DISPLAY",
+                "value": "SPACES",
+                "logicalType": "Alphanumeric (2 chars)",
+                "byteOffset": 148,
+                "relativeOffset": 8,
+                "byteLength": 2,
+                "elementByteLength": 2,
+                "location": {
+                  "startLine": 125,
+                  "endLine": 125,
+                  "startColumn": 15,
+                  "endColumn": 62
+                }
+              },
+              {
+                "id": "WS_L126_MY-CURR-MINS",
+                "qualifiedName": "WSS-DIFFERENT-DATES.MY-CURRENT-DATE.MY-CURR-MINS",
+                "level": 5,
+                "name": "MY-CURR-MINS",
+                "pic": "X(2)",
+                "usage": "DISPLAY",
+                "value": "SPACES",
+                "logicalType": "Alphanumeric (2 chars)",
+                "byteOffset": 150,
+                "relativeOffset": 10,
+                "byteLength": 2,
+                "elementByteLength": 2,
+                "location": {
+                  "startLine": 126,
+                  "endLine": 126,
+                  "startColumn": 15,
+                  "endColumn": 62
+                }
+              },
+              {
+                "id": "WS_L127_MY-CURR-SECS",
+                "qualifiedName": "WSS-DIFFERENT-DATES.MY-CURRENT-DATE.MY-CURR-SECS",
+                "level": 5,
+                "name": "MY-CURR-SECS",
+                "pic": "X(2)",
+                "usage": "DISPLAY",
+                "value": "SPACES",
+                "logicalType": "Alphanumeric (2 chars)",
+                "byteOffset": 152,
+                "relativeOffset": 12,
+                "byteLength": 2,
+                "elementByteLength": 2,
+                "location": {
+                  "startLine": 127,
+                  "endLine": 127,
+                  "startColumn": 15,
+                  "endColumn": 62
+                }
+              },
+              {
+                "id": "WS_L128_MY-CURR-REST",
+                "qualifiedName": "WSS-DIFFERENT-DATES.MY-CURRENT-DATE.MY-CURR-REST",
+                "level": 5,
+                "name": "MY-CURR-REST",
+                "pic": "X(7)",
+                "usage": "DISPLAY",
+                "value": "SPACES",
+                "logicalType": "Alphanumeric (7 chars)",
+                "byteOffset": 154,
+                "relativeOffset": 14,
+                "byteLength": 7,
+                "elementByteLength": 7,
+                "location": {
+                  "startLine": 128,
+                  "endLine": 128,
+                  "startColumn": 15,
+                  "endColumn": 62
+                }
+              }
+            ],
+            "location": {
+              "startLine": 121,
+              "endLine": 121,
+              "startColumn": 11,
+              "endColumn": 29
+            }
+          },
+          {
+            "id": "WS_L130_MY-DATE-OF-INTEGER",
+            "qualifiedName": "WSS-DIFFERENT-DATES.MY-DATE-OF-INTEGER",
+            "level": 3,
+            "name": "MY-DATE-OF-INTEGER",
+            "usage": "DISPLAY",
+            "logicalType": "Group",
+            "byteOffset": 161,
+            "relativeOffset": 31,
+            "byteLength": 8,
+            "elementByteLength": 8,
+            "children": [
+              {
+                "id": "WS_L131_MY-DATE-CENTYEAR",
+                "qualifiedName": "WSS-DIFFERENT-DATES.MY-DATE-OF-INTEGER.MY-DATE-CENTYEAR",
+                "level": 5,
+                "name": "MY-DATE-CENTYEAR",
+                "pic": "X(4)",
+                "usage": "DISPLAY",
+                "value": "SPACES",
+                "logicalType": "Alphanumeric (4 chars)",
+                "byteOffset": 161,
+                "relativeOffset": 0,
+                "byteLength": 4,
+                "elementByteLength": 4,
+                "location": {
+                  "startLine": 131,
+                  "endLine": 131,
+                  "startColumn": 15,
+                  "endColumn": 62
+                }
+              },
+              {
+                "id": "WS_L132_MY-DATE-MONTH",
+                "qualifiedName": "WSS-DIFFERENT-DATES.MY-DATE-OF-INTEGER.MY-DATE-MONTH",
+                "level": 5,
+                "name": "MY-DATE-MONTH",
+                "pic": "X(2)",
+                "usage": "DISPLAY",
+                "value": "SPACES",
+                "logicalType": "Alphanumeric (2 chars)",
+                "byteOffset": 165,
+                "relativeOffset": 4,
+                "byteLength": 2,
+                "elementByteLength": 2,
+                "location": {
+                  "startLine": 132,
+                  "endLine": 132,
+                  "startColumn": 15,
+                  "endColumn": 62
+                }
+              },
+              {
+                "id": "WS_L133_MY-DATE-DAY",
+                "qualifiedName": "WSS-DIFFERENT-DATES.MY-DATE-OF-INTEGER.MY-DATE-DAY",
+                "level": 5,
+                "name": "MY-DATE-DAY",
+                "pic": "X(2)",
+                "usage": "DISPLAY",
+                "value": "SPACES",
+                "logicalType": "Alphanumeric (2 chars)",
+                "byteOffset": 167,
+                "relativeOffset": 6,
+                "byteLength": 2,
+                "elementByteLength": 2,
+                "location": {
+                  "startLine": 133,
+                  "endLine": 133,
+                  "startColumn": 15,
+                  "endColumn": 62
+                }
+              }
+            ],
+            "location": {
+              "startLine": 130,
+              "endLine": 130,
+              "startColumn": 11,
+              "endColumn": 32
+            }
+          }
+        ],
+        "location": {
+          "startLine": 118,
+          "endLine": 118,
+          "startColumn": 7,
+          "endColumn": 30
+        }
+      },
+      {
+        "id": "WS_L135_WSS-COUNTERS",
+        "qualifiedName": "WSS-COUNTERS",
+        "level": 1,
+        "name": "WSS-COUNTERS",
+        "usage": "DISPLAY",
+        "logicalType": "Group",
+        "byteOffset": 169,
+        "relativeOffset": 0,
+        "byteLength": 7,
+        "elementByteLength": 7,
+        "children": [
+          {
+            "id": "WS_L136_PAGE-COUNTR",
+            "qualifiedName": "WSS-COUNTERS.PAGE-COUNTR",
+            "level": 3,
+            "name": "PAGE-COUNTR",
+            "pic": "9(5)",
+            "usage": "DISPLAY",
+            "value": "ZEROES",
+            "logicalType": "Numeric Display (5 digits)",
+            "byteOffset": 169,
+            "relativeOffset": 0,
+            "byteLength": 5,
+            "elementByteLength": 5,
+            "location": {
+              "startLine": 136,
+              "endLine": 136,
+              "startColumn": 11,
+              "endColumn": 62
+            }
+          },
+          {
+            "id": "WS_L137_LINE-COUNTR",
+            "qualifiedName": "WSS-COUNTERS.LINE-COUNTR",
+            "level": 3,
+            "name": "LINE-COUNTR",
+            "pic": "9(2)",
+            "usage": "DISPLAY",
+            "value": "99",
+            "logicalType": "Numeric Display (2 digits)",
+            "byteOffset": 174,
+            "relativeOffset": 5,
+            "byteLength": 2,
+            "elementByteLength": 2,
+            "location": {
+              "startLine": 137,
+              "endLine": 137,
+              "startColumn": 11,
+              "endColumn": 58
+            }
+          }
+        ],
+        "location": {
+          "startLine": 135,
+          "endLine": 135,
+          "startColumn": 7,
+          "endColumn": 23
+        }
+      },
+      {
+        "id": "WS_L139_WSS-COUNTERS",
+        "qualifiedName": "WSS-COUNTERS",
+        "level": 1,
+        "name": "WSS-COUNTERS",
+        "usage": "DISPLAY",
+        "logicalType": "Group",
+        "byteOffset": 176,
+        "relativeOffset": 0,
+        "byteLength": 36,
+        "elementByteLength": 36,
+        "children": [
+          {
+            "id": "WS_L141_TOT-RECS-READ",
+            "qualifiedName": "WSS-COUNTERS.TOT-RECS-READ",
+            "level": 3,
+            "name": "TOT-RECS-READ",
+            "pic": "9(09)",
+            "usage": "DISPLAY",
+            "value": "ZEROES",
+            "logicalType": "Numeric Display (9 digits)",
+            "byteOffset": 176,
+            "relativeOffset": 0,
+            "byteLength": 9,
+            "elementByteLength": 9,
+            "location": {
+              "startLine": 141,
+              "endLine": 141,
+              "startColumn": 11,
+              "endColumn": 63
+            }
+          },
+          {
+            "id": "WS_L142_TOT-RECS-WRITTEN",
+            "qualifiedName": "WSS-COUNTERS.TOT-RECS-WRITTEN",
+            "level": 3,
+            "name": "TOT-RECS-WRITTEN",
+            "pic": "9(09)",
+            "usage": "DISPLAY",
+            "value": "ZEROES",
+            "logicalType": "Numeric Display (9 digits)",
+            "byteOffset": 185,
+            "relativeOffset": 9,
+            "byteLength": 9,
+            "elementByteLength": 9,
+            "location": {
+              "startLine": 142,
+              "endLine": 142,
+              "startColumn": 11,
+              "endColumn": 63
+            }
+          },
+          {
+            "id": "WS_L143_SUB-DETAIL-COUNT",
+            "qualifiedName": "WSS-COUNTERS.SUB-DETAIL-COUNT",
+            "level": 3,
+            "name": "SUB-DETAIL-COUNT",
+            "pic": "9(09)",
+            "usage": "DISPLAY",
+            "value": "ZEROES",
+            "logicalType": "Numeric Display (9 digits)",
+            "byteOffset": 194,
+            "relativeOffset": 18,
+            "byteLength": 9,
+            "elementByteLength": 9,
+            "location": {
+              "startLine": 143,
+              "endLine": 143,
+              "startColumn": 11,
+              "endColumn": 63
+            }
+          },
+          {
+            "id": "WS_L144_GRAND-DETAIL-COUNT",
+            "qualifiedName": "WSS-COUNTERS.GRAND-DETAIL-COUNT",
+            "level": 3,
+            "name": "GRAND-DETAIL-COUNT",
+            "pic": "9(09)",
+            "usage": "DISPLAY",
+            "value": "ZEROES",
+            "logicalType": "Numeric Display (9 digits)",
+            "byteOffset": 203,
+            "relativeOffset": 27,
+            "byteLength": 9,
+            "elementByteLength": 9,
+            "location": {
+              "startLine": 144,
+              "endLine": 144,
+              "startColumn": 11,
+              "endColumn": 63
+            }
+          }
+        ],
+        "location": {
+          "startLine": 139,
+          "endLine": 139,
+          "startColumn": 7,
+          "endColumn": 23
+        }
+      },
+      {
+        "id": "WS_L146_WSS-ACCUMULATORS",
+        "qualifiedName": "WSS-ACCUMULATORS",
+        "level": 1,
+        "name": "WSS-ACCUMULATORS",
+        "usage": "DISPLAY",
+        "logicalType": "Group",
+        "byteOffset": 212,
+        "relativeOffset": 0,
+        "byteLength": 34,
+        "elementByteLength": 34,
+        "children": [
+          {
+            "id": "WS_L148_SUM-SUB-DETAIL-AMOUNT",
+            "qualifiedName": "WSS-ACCUMULATORS.SUM-SUB-DETAIL-AMOUNT",
+            "level": 3,
+            "name": "SUM-SUB-DETAIL-AMOUNT",
+            "pic": "S9(15)V99",
+            "usage": "DISPLAY",
+            "value": "0",
+            "logicalType": "Signed Decimal Display (17, 2)",
+            "byteOffset": 212,
+            "relativeOffset": 0,
+            "byteLength": 17,
+            "elementByteLength": 17,
+            "location": {
+              "startLine": 148,
+              "endLine": 148,
+              "startColumn": 11,
+              "endColumn": 62
+            }
+          },
+          {
+            "id": "WS_L149_SUM-GRAND-DETAIL-AMOUNT",
+            "qualifiedName": "WSS-ACCUMULATORS.SUM-GRAND-DETAIL-AMOUNT",
+            "level": 3,
+            "name": "SUM-GRAND-DETAIL-AMOUNT",
+            "pic": "S9(15)V99",
+            "usage": "DISPLAY",
+            "value": "0",
+            "logicalType": "Signed Decimal Display (17, 2)",
+            "byteOffset": 229,
+            "relativeOffset": 17,
+            "byteLength": 17,
+            "elementByteLength": 17,
+            "location": {
+              "startLine": 149,
+              "endLine": 149,
+              "startColumn": 11,
+              "endColumn": 62
+            }
+          }
+        ],
+        "location": {
+          "startLine": 146,
+          "endLine": 146,
+          "startColumn": 7,
+          "endColumn": 27
+        }
+      },
+      {
+        "id": "WS_L151_WSS-HOLD-TAX-SOURCE-SUB",
+        "qualifiedName": "WSS-HOLD-TAX-SOURCE-SUB",
+        "level": 1,
+        "name": "WSS-HOLD-TAX-SOURCE-SUB",
+        "usage": "DISPLAY",
+        "logicalType": "Group",
+        "byteOffset": 246,
+        "relativeOffset": 0,
+        "byteLength": 13,
+        "elementByteLength": 13,
+        "children": [
+          {
+            "id": "WS_L152_HOLD-TAX-CODE-ALL",
+            "qualifiedName": "WSS-HOLD-TAX-SOURCE-SUB.HOLD-TAX-CODE-ALL",
+            "level": 3,
+            "name": "HOLD-TAX-CODE-ALL",
+            "usage": "DISPLAY",
+            "logicalType": "Group",
+            "byteOffset": 246,
+            "relativeOffset": 0,
+            "byteLength": 3,
+            "elementByteLength": 3,
+            "children": [
+              {
+                "id": "WS_L153_HOLD-TAX-CODE",
+                "qualifiedName": "WSS-HOLD-TAX-SOURCE-SUB.HOLD-TAX-CODE-ALL.HOLD-TAX-CODE",
+                "level": 5,
+                "name": "HOLD-TAX-CODE",
+                "pic": "XXX",
+                "usage": "DISPLAY",
+                "value": "093",
+                "logicalType": "Alphanumeric (3 chars)",
+                "byteOffset": 246,
+                "relativeOffset": 0,
+                "byteLength": 3,
+                "elementByteLength": 3,
+                "location": {
+                  "startLine": 153,
+                  "endLine": 153,
+                  "startColumn": 15,
+                  "endColumn": 60
+                }
+              }
+            ],
+            "location": {
+              "startLine": 152,
+              "endLine": 152,
+              "startColumn": 11,
+              "endColumn": 31
+            }
+          },
+          {
+            "id": "WS_L154_HOLD-SOURCE-CODE",
+            "qualifiedName": "WSS-HOLD-TAX-SOURCE-SUB.HOLD-SOURCE-CODE",
+            "level": 3,
+            "name": "HOLD-SOURCE-CODE",
+            "pic": "X(3)",
+            "usage": "DISPLAY",
+            "value": "RDM",
+            "logicalType": "Alphanumeric (3 chars)",
+            "byteOffset": 249,
+            "relativeOffset": 3,
+            "byteLength": 3,
+            "elementByteLength": 3,
+            "location": {
+              "startLine": 154,
+              "endLine": 154,
+              "startColumn": 11,
+              "endColumn": 61
+            }
+          },
+          {
+            "id": "WS_L155_HOLD-FORMAT-CODE",
+            "qualifiedName": "WSS-HOLD-TAX-SOURCE-SUB.HOLD-FORMAT-CODE",
+            "level": 3,
+            "name": "HOLD-FORMAT-CODE",
+            "pic": "X(7)",
+            "usage": "DISPLAY",
+            "value": "RDI",
+            "logicalType": "Alphanumeric (7 chars)",
+            "byteOffset": 252,
+            "relativeOffset": 6,
+            "byteLength": 7,
+            "elementByteLength": 7,
+            "location": {
+              "startLine": 155,
+              "endLine": 155,
+              "startColumn": 11,
+              "endColumn": 61
+            }
+          }
+        ],
+        "location": {
+          "startLine": 151,
+          "endLine": 151,
+          "startColumn": 7,
+          "endColumn": 34
+        }
+      },
+      {
+        "id": "WS_L157_WSS-PREV-TAX-SOURCE-SUB",
+        "qualifiedName": "WSS-PREV-TAX-SOURCE-SUB",
+        "level": 1,
+        "name": "WSS-PREV-TAX-SOURCE-SUB",
+        "usage": "DISPLAY",
+        "logicalType": "Group",
+        "byteOffset": 259,
+        "relativeOffset": 0,
+        "byteLength": 13,
+        "elementByteLength": 13,
+        "children": [
+          {
+            "id": "WS_L158_PREV-TAX-CODE-ALL",
+            "qualifiedName": "WSS-PREV-TAX-SOURCE-SUB.PREV-TAX-CODE-ALL",
+            "level": 3,
+            "name": "PREV-TAX-CODE-ALL",
+            "usage": "DISPLAY",
+            "logicalType": "Group",
+            "byteOffset": 259,
+            "relativeOffset": 0,
+            "byteLength": 3,
+            "elementByteLength": 3,
+            "children": [
+              {
+                "id": "WS_L159_PREV-TAX-CODE",
+                "qualifiedName": "WSS-PREV-TAX-SOURCE-SUB.PREV-TAX-CODE-ALL.PREV-TAX-CODE",
+                "level": 5,
+                "name": "PREV-TAX-CODE",
+                "pic": "XXX",
+                "usage": "DISPLAY",
+                "value": "093",
+                "logicalType": "Alphanumeric (3 chars)",
+                "byteOffset": 259,
+                "relativeOffset": 0,
+                "byteLength": 3,
+                "elementByteLength": 3,
+                "location": {
+                  "startLine": 159,
+                  "endLine": 159,
+                  "startColumn": 15,
+                  "endColumn": 60
+                }
+              }
+            ],
+            "location": {
+              "startLine": 158,
+              "endLine": 158,
+              "startColumn": 11,
+              "endColumn": 31
+            }
+          },
+          {
+            "id": "WS_L160_PREV-SOURCE-CODE",
+            "qualifiedName": "WSS-PREV-TAX-SOURCE-SUB.PREV-SOURCE-CODE",
+            "level": 3,
+            "name": "PREV-SOURCE-CODE",
+            "pic": "X(3)",
+            "usage": "DISPLAY",
+            "value": "RDM",
+            "logicalType": "Alphanumeric (3 chars)",
+            "byteOffset": 262,
+            "relativeOffset": 3,
+            "byteLength": 3,
+            "elementByteLength": 3,
+            "location": {
+              "startLine": 160,
+              "endLine": 160,
+              "startColumn": 11,
+              "endColumn": 61
+            }
+          },
+          {
+            "id": "WS_L161_PREV-FORMAT-CODE",
+            "qualifiedName": "WSS-PREV-TAX-SOURCE-SUB.PREV-FORMAT-CODE",
+            "level": 3,
+            "name": "PREV-FORMAT-CODE",
+            "pic": "X(7)",
+            "usage": "DISPLAY",
+            "value": "RDI",
+            "logicalType": "Alphanumeric (7 chars)",
+            "byteOffset": 265,
+            "relativeOffset": 6,
+            "byteLength": 7,
+            "elementByteLength": 7,
+            "location": {
+              "startLine": 161,
+              "endLine": 161,
+              "startColumn": 11,
+              "endColumn": 61
+            }
+          }
+        ],
+        "location": {
+          "startLine": 157,
+          "endLine": 157,
+          "startColumn": 7,
+          "endColumn": 34
+        }
+      },
+      {
+        "id": "WS_L167_WSS-RDM-TRANS",
+        "qualifiedName": "WSS-RDM-TRANS",
+        "level": 1,
+        "name": "WSS-RDM-TRANS",
+        "pic": "X(100)",
+        "usage": "DISPLAY",
+        "logicalType": "Alphanumeric (100 chars)",
+        "byteOffset": 272,
+        "relativeOffset": 0,
+        "byteLength": 100,
+        "elementByteLength": 100,
+        "location": {
+          "startLine": 167,
+          "endLine": 167,
+          "startColumn": 7,
+          "endColumn": 51
+        }
+      },
+      {
+        "id": "WS_L168_WSS-RDM-REDEF",
+        "qualifiedName": "WSS-RDM-REDEF",
+        "level": 1,
+        "name": "WSS-RDM-REDEF",
+        "usage": "DISPLAY",
+        "redefines": "WSS-RDM-TRANS",
+        "logicalType": "Group",
+        "byteOffset": 272,
+        "relativeOffset": 0,
+        "byteLength": 101,
+        "elementByteLength": 101,
+        "children": [
+          {
+            "id": "WS_L169_RDM-PAYMENT-DATE",
+            "qualifiedName": "WSS-RDM-REDEF.RDM-PAYMENT-DATE",
+            "level": 3,
+            "name": "RDM-PAYMENT-DATE",
+            "pic": "X(6)",
+            "usage": "DISPLAY",
+            "logicalType": "Alphanumeric (6 chars)",
+            "byteOffset": 272,
+            "relativeOffset": 0,
+            "byteLength": 6,
+            "elementByteLength": 6,
+            "location": {
+              "startLine": 169,
+              "endLine": 169,
+              "startColumn": 11,
+              "endColumn": 49
+            }
+          },
+          {
+            "id": "WS_L170_RDM-BATCH-NUMBER",
+            "qualifiedName": "WSS-RDM-REDEF.RDM-BATCH-NUMBER",
+            "level": 3,
+            "name": "RDM-BATCH-NUMBER",
+            "pic": "X(4)",
+            "usage": "DISPLAY",
+            "logicalType": "Alphanumeric (4 chars)",
+            "byteOffset": 278,
+            "relativeOffset": 6,
+            "byteLength": 4,
+            "elementByteLength": 4,
+            "location": {
+              "startLine": 170,
+              "endLine": 170,
+              "startColumn": 11,
+              "endColumn": 49
+            }
+          },
+          {
+            "id": "WS_L171_RDM-ADDRESS-CHANGE",
+            "qualifiedName": "WSS-RDM-REDEF.RDM-ADDRESS-CHANGE",
+            "level": 3,
+            "name": "RDM-ADDRESS-CHANGE",
+            "pic": "X",
+            "usage": "DISPLAY",
+            "logicalType": "Alphanumeric (1 chars)",
+            "byteOffset": 282,
+            "relativeOffset": 10,
+            "byteLength": 1,
+            "elementByteLength": 1,
+            "location": {
+              "startLine": 171,
+              "endLine": 171,
+              "startColumn": 11,
+              "endColumn": 46
+            }
+          },
+          {
+            "id": "WS_L172_RDM-DLN",
+            "qualifiedName": "WSS-RDM-REDEF.RDM-DLN",
+            "level": 3,
+            "name": "RDM-DLN",
+            "pic": "X(9)",
+            "usage": "DISPLAY",
+            "logicalType": "Alphanumeric (9 chars)",
+            "byteOffset": 283,
+            "relativeOffset": 11,
+            "byteLength": 9,
+            "elementByteLength": 9,
+            "location": {
+              "startLine": 172,
+              "endLine": 172,
+              "startColumn": 11,
+              "endColumn": 49
+            }
+          },
+          {
+            "id": "WS_L173_RDM-APPLICATION-ID",
+            "qualifiedName": "WSS-RDM-REDEF.RDM-APPLICATION-ID",
+            "level": 3,
+            "name": "RDM-APPLICATION-ID",
+            "pic": "X(30)",
+            "usage": "DISPLAY",
+            "logicalType": "Alphanumeric (30 chars)",
+            "byteOffset": 292,
+            "relativeOffset": 20,
+            "byteLength": 30,
+            "elementByteLength": 30,
+            "location": {
+              "startLine": 173,
+              "endLine": 173,
+              "startColumn": 11,
+              "endColumn": 50
+            }
+          },
+          {
+            "id": "WS_L174_RDM-LASER-ID",
+            "qualifiedName": "WSS-RDM-REDEF.RDM-LASER-ID",
+            "level": 3,
+            "name": "RDM-LASER-ID",
+            "pic": "X(6)",
+            "usage": "DISPLAY",
+            "logicalType": "Alphanumeric (6 chars)",
+            "byteOffset": 322,
+            "relativeOffset": 50,
+            "byteLength": 6,
+            "elementByteLength": 6,
+            "location": {
+              "startLine": 174,
+              "endLine": 174,
+              "startColumn": 11,
+              "endColumn": 49
+            }
+          },
+          {
+            "id": "WS_L175_RDM-PAYMENT-AMOUNT",
+            "qualifiedName": "WSS-RDM-REDEF.RDM-PAYMENT-AMOUNT",
+            "level": 3,
+            "name": "RDM-PAYMENT-AMOUNT",
+            "pic": "9(7)V99",
+            "usage": "DISPLAY",
+            "logicalType": "Decimal Display (9, 2)",
+            "byteOffset": 328,
+            "relativeOffset": 56,
+            "byteLength": 9,
+            "elementByteLength": 9,
+            "location": {
+              "startLine": 175,
+              "endLine": 175,
+              "startColumn": 11,
+              "endColumn": 52
+            }
+          },
+          {
+            "id": "WS_L176_RDM-DLN-LAST6",
+            "qualifiedName": "WSS-RDM-REDEF.RDM-DLN-LAST6",
+            "level": 3,
+            "name": "RDM-DLN-LAST6",
+            "pic": "X(6)",
+            "usage": "DISPLAY",
+            "logicalType": "Alphanumeric (6 chars)",
+            "byteOffset": 337,
+            "relativeOffset": 65,
+            "byteLength": 6,
+            "elementByteLength": 6,
+            "location": {
+              "startLine": 176,
+              "endLine": 176,
+              "startColumn": 11,
+              "endColumn": 49
+            }
+          },
+          {
+            "id": "WS_L177_RDM-INVOICE",
+            "qualifiedName": "WSS-RDM-REDEF.RDM-INVOICE",
+            "level": 3,
+            "name": "RDM-INVOICE",
+            "pic": "X(9)",
+            "usage": "DISPLAY",
+            "logicalType": "Alphanumeric (9 chars)",
+            "byteOffset": 343,
+            "relativeOffset": 71,
+            "byteLength": 9,
+            "elementByteLength": 9,
+            "location": {
+              "startLine": 177,
+              "endLine": 177,
+              "startColumn": 11,
+              "endColumn": 49
+            }
+          },
+          {
+            "id": "WS_L178_FILLER",
+            "qualifiedName": "WSS-RDM-REDEF.FILLER",
+            "level": 3,
+            "name": "FILLER",
+            "pic": "X",
+            "usage": "DISPLAY",
+            "logicalType": "Alphanumeric (1 chars)",
+            "byteOffset": 352,
+            "relativeOffset": 80,
+            "byteLength": 1,
+            "elementByteLength": 1,
+            "isFiller": true,
+            "location": {
+              "startLine": 178,
+              "endLine": 178,
+              "startColumn": 11,
+              "endColumn": 46
+            }
+          },
+          {
+            "id": "WS_L179_RDM-ENCODER-CODE",
+            "qualifiedName": "WSS-RDM-REDEF.RDM-ENCODER-CODE",
+            "level": 3,
+            "name": "RDM-ENCODER-CODE",
+            "pic": "XX",
+            "usage": "DISPLAY",
+            "logicalType": "Alphanumeric (2 chars)",
+            "byteOffset": 353,
+            "relativeOffset": 81,
+            "byteLength": 2,
+            "elementByteLength": 2,
+            "location": {
+              "startLine": 179,
+              "endLine": 179,
+              "startColumn": 11,
+              "endColumn": 47
+            }
+          },
+          {
+            "id": "WS_L180_FILLER",
+            "qualifiedName": "WSS-RDM-REDEF.FILLER",
+            "level": 3,
+            "name": "FILLER",
+            "pic": "XX",
+            "usage": "DISPLAY",
+            "logicalType": "Alphanumeric (2 chars)",
+            "byteOffset": 355,
+            "relativeOffset": 83,
+            "byteLength": 2,
+            "elementByteLength": 2,
+            "isFiller": true,
+            "location": {
+              "startLine": 180,
+              "endLine": 180,
+              "startColumn": 11,
+              "endColumn": 47
+            }
+          },
+          {
+            "id": "WS_L181_RDM-AGENCY",
+            "qualifiedName": "WSS-RDM-REDEF.RDM-AGENCY",
+            "level": 3,
+            "name": "RDM-AGENCY",
+            "pic": "XXX",
+            "usage": "DISPLAY",
+            "logicalType": "Alphanumeric (3 chars)",
+            "byteOffset": 357,
+            "relativeOffset": 85,
+            "byteLength": 3,
+            "elementByteLength": 3,
+            "location": {
+              "startLine": 181,
+              "endLine": 181,
+              "startColumn": 11,
+              "endColumn": 48
+            }
+          },
+          {
+            "id": "WS_L182_RDM-COLLECT-METHOD",
+            "qualifiedName": "WSS-RDM-REDEF.RDM-COLLECT-METHOD",
+            "level": 3,
+            "name": "RDM-COLLECT-METHOD",
+            "pic": "XXX",
+            "usage": "DISPLAY",
+            "logicalType": "Alphanumeric (3 chars)",
+            "byteOffset": 360,
+            "relativeOffset": 88,
+            "byteLength": 3,
+            "elementByteLength": 3,
+            "location": {
+              "startLine": 182,
+              "endLine": 182,
+              "startColumn": 11,
+              "endColumn": 48
+            }
+          },
+          {
+            "id": "WS_L183_RDM-PROCESS-DATE",
+            "qualifiedName": "WSS-RDM-REDEF.RDM-PROCESS-DATE",
+            "level": 3,
+            "name": "RDM-PROCESS-DATE",
+            "pic": "X(06)",
+            "usage": "DISPLAY",
+            "logicalType": "Alphanumeric (6 chars)",
+            "byteOffset": 363,
+            "relativeOffset": 91,
+            "byteLength": 6,
+            "elementByteLength": 6,
+            "location": {
+              "startLine": 183,
+              "endLine": 183,
+              "startColumn": 11,
+              "endColumn": 50
+            }
+          },
+          {
+            "id": "WS_L184_FILLER",
+            "qualifiedName": "WSS-RDM-REDEF.FILLER",
+            "level": 3,
+            "name": "FILLER",
+            "pic": "XXXX",
+            "usage": "DISPLAY",
+            "logicalType": "Alphanumeric (4 chars)",
+            "byteOffset": 369,
+            "relativeOffset": 97,
+            "byteLength": 4,
+            "elementByteLength": 4,
+            "isFiller": true,
+            "location": {
+              "startLine": 184,
+              "endLine": 184,
+              "startColumn": 11,
+              "endColumn": 49
+            }
+          }
+        ],
+        "location": {
+          "startLine": 168,
+          "endLine": 168,
+          "startColumn": 7,
+          "endColumn": 64
+        }
+      },
+      {
+        "id": "WS_L195_CRAS-STATISTICS-RECORD",
+        "qualifiedName": "CRAS-STATISTICS-RECORD",
+        "level": 1,
+        "name": "CRAS-STATISTICS-RECORD",
+        "pic": "X(200)",
+        "usage": "DISPLAY",
+        "value": "SPACES",
+        "logicalType": "Alphanumeric (200 chars)",
+        "byteOffset": 373,
+        "relativeOffset": 0,
+        "byteLength": 200,
+        "elementByteLength": 200,
+        "location": {
+          "startLine": 195,
+          "endLine": 195,
+          "startColumn": 7,
+          "endColumn": 64
+        }
+      },
+      {
+        "id": "WS_L196_CRAS-STATISTICS-REDEF",
+        "qualifiedName": "CRAS-STATISTICS-REDEF",
+        "level": 1,
+        "name": "CRAS-STATISTICS-REDEF",
+        "usage": "DISPLAY",
+        "redefines": "CRAS-STATISTICS-RECORD",
+        "logicalType": "Group",
+        "byteOffset": 373,
+        "relativeOffset": 0,
+        "byteLength": 200,
+        "elementByteLength": 200,
+        "children": [
+          {
+            "id": "WS_L198_CRAS-RECORD-DESC",
+            "qualifiedName": "CRAS-STATISTICS-REDEF.CRAS-RECORD-DESC",
+            "level": 3,
+            "name": "CRAS-RECORD-DESC",
+            "pic": "X(7)",
+            "usage": "DISPLAY",
+            "logicalType": "Alphanumeric (7 chars)",
+            "byteOffset": 373,
+            "relativeOffset": 0,
+            "byteLength": 7,
+            "elementByteLength": 7,
+            "location": {
+              "startLine": 198,
+              "endLine": 198,
+              "startColumn": 11,
+              "endColumn": 49
+            }
+          },
+          {
+            "id": "WS_L199_CRAS-TAX-TYPE",
+            "qualifiedName": "CRAS-STATISTICS-REDEF.CRAS-TAX-TYPE",
+            "level": 3,
+            "name": "CRAS-TAX-TYPE",
+            "pic": "XXX",
+            "usage": "DISPLAY",
+            "logicalType": "Alphanumeric (3 chars)",
+            "byteOffset": 380,
+            "relativeOffset": 7,
+            "byteLength": 3,
+            "elementByteLength": 3,
+            "location": {
+              "startLine": 199,
+              "endLine": 199,
+              "startColumn": 11,
+              "endColumn": 48
+            }
+          },
+          {
+            "id": "WS_L200_CRAS-SOURCE-CODE",
+            "qualifiedName": "CRAS-STATISTICS-REDEF.CRAS-SOURCE-CODE",
+            "level": 3,
+            "name": "CRAS-SOURCE-CODE",
+            "pic": "XXX",
+            "usage": "DISPLAY",
+            "logicalType": "Alphanumeric (3 chars)",
+            "byteOffset": 383,
+            "relativeOffset": 10,
+            "byteLength": 3,
+            "elementByteLength": 3,
+            "location": {
+              "startLine": 200,
+              "endLine": 200,
+              "startColumn": 11,
+              "endColumn": 48
+            }
+          },
+          {
+            "id": "WS_L201_CRAS-FORMAT-CODE",
+            "qualifiedName": "CRAS-STATISTICS-REDEF.CRAS-FORMAT-CODE",
+            "level": 3,
+            "name": "CRAS-FORMAT-CODE",
+            "pic": "X(8)",
+            "usage": "DISPLAY",
+            "logicalType": "Alphanumeric (8 chars)",
+            "byteOffset": 386,
+            "relativeOffset": 13,
+            "byteLength": 8,
+            "elementByteLength": 8,
+            "location": {
+              "startLine": 201,
+              "endLine": 201,
+              "startColumn": 11,
+              "endColumn": 49
+            }
+          },
+          {
+            "id": "WS_L202_CRAS-DET5LV2-COUNT",
+            "qualifiedName": "CRAS-STATISTICS-REDEF.CRAS-DET5LV2-COUNT",
+            "level": 3,
+            "name": "CRAS-DET5LV2-COUNT",
+            "pic": "9(9)",
+            "usage": "DISPLAY",
+            "logicalType": "Numeric Display (9 digits)",
+            "byteOffset": 394,
+            "relativeOffset": 21,
+            "byteLength": 9,
+            "elementByteLength": 9,
+            "location": {
+              "startLine": 202,
+              "endLine": 202,
+              "startColumn": 11,
+              "endColumn": 49
+            }
+          },
+          {
+            "id": "WS_L203_CRAS-DET5LV2-AMOUNT",
+            "qualifiedName": "CRAS-STATISTICS-REDEF.CRAS-DET5LV2-AMOUNT",
+            "level": 3,
+            "name": "CRAS-DET5LV2-AMOUNT",
+            "pic": "S9(12)V99",
+            "usage": "DISPLAY",
+            "logicalType": "Signed Decimal Display (14, 2)",
+            "byteOffset": 403,
+            "relativeOffset": 30,
+            "byteLength": 14,
+            "elementByteLength": 14,
+            "location": {
+              "startLine": 203,
+              "endLine": 203,
+              "startColumn": 11,
+              "endColumn": 54
+            }
+          },
+          {
+            "id": "WS_L204_CRAS-DET5ALL-COUNT",
+            "qualifiedName": "CRAS-STATISTICS-REDEF.CRAS-DET5ALL-COUNT",
+            "level": 3,
+            "name": "CRAS-DET5ALL-COUNT",
+            "pic": "9(9)",
+            "usage": "DISPLAY",
+            "logicalType": "Numeric Display (9 digits)",
+            "byteOffset": 417,
+            "relativeOffset": 44,
+            "byteLength": 9,
+            "elementByteLength": 9,
+            "location": {
+              "startLine": 204,
+              "endLine": 204,
+              "startColumn": 11,
+              "endColumn": 49
+            }
+          },
+          {
+            "id": "WS_L205_CRAS-DET67LV2-COUNT",
+            "qualifiedName": "CRAS-STATISTICS-REDEF.CRAS-DET67LV2-COUNT",
+            "level": 3,
+            "name": "CRAS-DET67LV2-COUNT",
+            "pic": "9(9)",
+            "usage": "DISPLAY",
+            "logicalType": "Numeric Display (9 digits)",
+            "byteOffset": 426,
+            "relativeOffset": 53,
+            "byteLength": 9,
+            "elementByteLength": 9,
+            "location": {
+              "startLine": 205,
+              "endLine": 205,
+              "startColumn": 11,
+              "endColumn": 49
+            }
+          },
+          {
+            "id": "WS_L206_CRAS-DET67ALL-COUNT",
+            "qualifiedName": "CRAS-STATISTICS-REDEF.CRAS-DET67ALL-COUNT",
+            "level": 3,
+            "name": "CRAS-DET67ALL-COUNT",
+            "pic": "9(9)",
+            "usage": "DISPLAY",
+            "logicalType": "Numeric Display (9 digits)",
+            "byteOffset": 435,
+            "relativeOffset": 62,
+            "byteLength": 9,
+            "elementByteLength": 9,
+            "location": {
+              "startLine": 206,
+              "endLine": 206,
+              "startColumn": 11,
+              "endColumn": 49
+            }
+          },
+          {
+            "id": "WS_L207_CRAS-TRAILER-AMOUNT",
+            "qualifiedName": "CRAS-STATISTICS-REDEF.CRAS-TRAILER-AMOUNT",
+            "level": 3,
+            "name": "CRAS-TRAILER-AMOUNT",
+            "pic": "S9(12)V99",
+            "usage": "DISPLAY",
+            "logicalType": "Signed Decimal Display (14, 2)",
+            "byteOffset": 444,
+            "relativeOffset": 71,
+            "byteLength": 14,
+            "elementByteLength": 14,
+            "location": {
+              "startLine": 207,
+              "endLine": 207,
+              "startColumn": 11,
+              "endColumn": 54
+            }
+          },
+          {
+            "id": "WS_L208_CRAS-RUN-DATE",
+            "qualifiedName": "CRAS-STATISTICS-REDEF.CRAS-RUN-DATE",
+            "level": 3,
+            "name": "CRAS-RUN-DATE",
+            "pic": "X(10)",
+            "usage": "DISPLAY",
+            "logicalType": "Alphanumeric (10 chars)",
+            "byteOffset": 458,
+            "relativeOffset": 85,
+            "byteLength": 10,
+            "elementByteLength": 10,
+            "location": {
+              "startLine": 208,
+              "endLine": 208,
+              "startColumn": 11,
+              "endColumn": 50
+            }
+          },
+          {
+            "id": "WS_L209_CRAS-RUN-TIME",
+            "qualifiedName": "CRAS-STATISTICS-REDEF.CRAS-RUN-TIME",
+            "level": 3,
+            "name": "CRAS-RUN-TIME",
+            "pic": "X(8)",
+            "usage": "DISPLAY",
+            "logicalType": "Alphanumeric (8 chars)",
+            "byteOffset": 468,
+            "relativeOffset": 95,
+            "byteLength": 8,
+            "elementByteLength": 8,
+            "location": {
+              "startLine": 209,
+              "endLine": 209,
+              "startColumn": 11,
+              "endColumn": 49
+            }
+          },
+          {
+            "id": "WS_L210_CRAS-DATASET-NAME",
+            "qualifiedName": "CRAS-STATISTICS-REDEF.CRAS-DATASET-NAME",
+            "level": 3,
+            "name": "CRAS-DATASET-NAME",
+            "pic": "X(44)",
+            "usage": "DISPLAY",
+            "logicalType": "Alphanumeric (44 chars)",
+            "byteOffset": 476,
+            "relativeOffset": 103,
+            "byteLength": 44,
+            "elementByteLength": 44,
+            "location": {
+              "startLine": 210,
+              "endLine": 210,
+              "startColumn": 11,
+              "endColumn": 50
+            }
+          },
+          {
+            "id": "WS_L211_FILLER",
+            "qualifiedName": "CRAS-STATISTICS-REDEF.FILLER",
+            "level": 3,
+            "name": "FILLER",
+            "pic": "X(53)",
+            "usage": "DISPLAY",
+            "logicalType": "Alphanumeric (53 chars)",
+            "byteOffset": 520,
+            "relativeOffset": 147,
+            "byteLength": 53,
+            "elementByteLength": 53,
+            "isFiller": true,
+            "location": {
+              "startLine": 211,
+              "endLine": 211,
+              "startColumn": 11,
+              "endColumn": 50
+            }
+          }
+        ],
+        "location": {
+          "startLine": 196,
+          "endLine": 197,
+          "startColumn": 7,
+          "endColumn": 37
+        }
+      },
+      {
+        "id": "WS_L221_WSS-EMPTY-FILE-LINE",
+        "qualifiedName": "WSS-EMPTY-FILE-LINE",
+        "level": 1,
+        "name": "WSS-EMPTY-FILE-LINE",
+        "usage": "DISPLAY",
+        "logicalType": "Group",
+        "byteOffset": 573,
+        "relativeOffset": 0,
+        "byteLength": 132,
+        "elementByteLength": 132,
+        "children": [
+          {
+            "id": "WS_L222_FILER",
+            "qualifiedName": "WSS-EMPTY-FILE-LINE.FILER",
+            "level": 3,
+            "name": "FILER",
+            "pic": "X(5)",
+            "usage": "DISPLAY",
+            "value": "SPACES",
+            "logicalType": "Alphanumeric (5 chars)",
+            "byteOffset": 573,
+            "relativeOffset": 0,
+            "byteLength": 5,
+            "elementByteLength": 5,
+            "location": {
+              "startLine": 222,
+              "endLine": 222,
+              "startColumn": 11,
+              "endColumn": 62
+            }
+          },
+          {
+            "id": "WS_L223_FILLER",
+            "qualifiedName": "WSS-EMPTY-FILE-LINE.FILLER",
+            "level": 3,
+            "name": "FILLER",
+            "pic": "X(34)",
+            "usage": "DISPLAY",
+            "value": "RDI DEP FILE IS EMPTY!!!",
+            "logicalType": "Alphanumeric (34 chars)",
+            "byteOffset": 578,
+            "relativeOffset": 5,
+            "byteLength": 34,
+            "elementByteLength": 34,
+            "isFiller": true,
+            "location": {
+              "startLine": 223,
+              "endLine": 224,
+              "startColumn": 11,
+              "endColumn": 48
+            }
+          },
+          {
+            "id": "WS_L225_WSS-EMPTY-FILE-NAME",
+            "qualifiedName": "WSS-EMPTY-FILE-LINE.WSS-EMPTY-FILE-NAME",
+            "level": 3,
+            "name": "WSS-EMPTY-FILE-NAME",
+            "pic": "X(93)",
+            "usage": "DISPLAY",
+            "value": "SPACES",
+            "logicalType": "Alphanumeric (93 chars)",
+            "byteOffset": 612,
+            "relativeOffset": 39,
+            "byteLength": 93,
+            "elementByteLength": 93,
+            "location": {
+              "startLine": 225,
+              "endLine": 225,
+              "startColumn": 11,
+              "endColumn": 63
+            }
+          }
+        ],
+        "location": {
+          "startLine": 221,
+          "endLine": 221,
+          "startColumn": 7,
+          "endColumn": 30
+        }
+      },
+      {
+        "id": "WS_L227_WSS-CONTROL-TITLE",
+        "qualifiedName": "WSS-CONTROL-TITLE",
+        "level": 1,
+        "name": "WSS-CONTROL-TITLE",
+        "usage": "DISPLAY",
+        "logicalType": "Group",
+        "byteOffset": 705,
+        "relativeOffset": 0,
+        "byteLength": 34,
+        "elementByteLength": 34,
+        "children": [
+          {
+            "id": "WS_L228_WSS-CTL-TITLE",
+            "qualifiedName": "WSS-CONTROL-TITLE.WSS-CTL-TITLE",
+            "level": 3,
+            "name": "WSS-CTL-TITLE",
+            "pic": "X(34)",
+            "usage": "DISPLAY",
+            "value": "CONTROL TOTALS REPORT",
+            "logicalType": "Alphanumeric (34 chars)",
+            "byteOffset": 705,
+            "relativeOffset": 0,
+            "byteLength": 34,
+            "elementByteLength": 34,
+            "location": {
+              "startLine": 228,
+              "endLine": 229,
+              "startColumn": 11,
+              "endColumn": 55
+            }
+          }
+        ],
+        "location": {
+          "startLine": 227,
+          "endLine": 227,
+          "startColumn": 7,
+          "endColumn": 28
+        }
+      },
+      {
+        "id": "WS_L231_WSS-CONTROL-TOTALS-REPORT",
+        "qualifiedName": "WSS-CONTROL-TOTALS-REPORT",
+        "level": 1,
+        "name": "WSS-CONTROL-TOTALS-REPORT",
+        "usage": "DISPLAY",
+        "logicalType": "Group",
+        "byteOffset": 739,
+        "relativeOffset": 0,
+        "byteLength": 1289,
+        "elementByteLength": 1289,
+        "children": [
+          {
+            "id": "WS_L232_BLANK-LINE",
+            "qualifiedName": "WSS-CONTROL-TOTALS-REPORT.BLANK-LINE",
+            "level": 3,
+            "name": "BLANK-LINE",
+            "pic": "X(133)",
+            "usage": "DISPLAY",
+            "value": "SPACES",
+            "logicalType": "Alphanumeric (133 chars)",
+            "byteOffset": 739,
+            "relativeOffset": 0,
+            "byteLength": 133,
+            "elementByteLength": 133,
+            "location": {
+              "startLine": 232,
+              "endLine": 232,
+              "startColumn": 11,
+              "endColumn": 64
+            }
+          },
+          {
+            "id": "WS_L233_HEADING-LINE-1",
+            "qualifiedName": "WSS-CONTROL-TOTALS-REPORT.HEADING-LINE-1",
+            "level": 3,
+            "name": "HEADING-LINE-1",
+            "usage": "DISPLAY",
+            "logicalType": "Group",
+            "byteOffset": 872,
+            "relativeOffset": 133,
+            "byteLength": 134,
+            "elementByteLength": 134,
+            "children": [
+              {
+                "id": "WS_L234_FILLER",
+                "qualifiedName": "WSS-CONTROL-TOTALS-REPORT.HEADING-LINE-1.FILLER",
+                "level": 5,
+                "name": "FILLER",
+                "pic": "X(1)",
+                "usage": "DISPLAY",
+                "value": "SPACES",
+                "logicalType": "Alphanumeric (1 chars)",
+                "byteOffset": 872,
+                "relativeOffset": 0,
+                "byteLength": 1,
+                "elementByteLength": 1,
+                "isFiller": true,
+                "location": {
+                  "startLine": 234,
+                  "endLine": 234,
+                  "startColumn": 15,
+                  "endColumn": 62
+                }
+              },
+              {
+                "id": "WS_L235_FILLER",
+                "qualifiedName": "WSS-CONTROL-TOTALS-REPORT.HEADING-LINE-1.FILLER",
+                "level": 5,
+                "name": "FILLER",
+                "pic": "X(16)",
+                "usage": "DISPLAY",
+                "value": "SYSTEM NO : 260",
+                "logicalType": "Alphanumeric (16 chars)",
+                "byteOffset": 873,
+                "relativeOffset": 1,
+                "byteLength": 16,
+                "elementByteLength": 16,
+                "isFiller": true,
+                "location": {
+                  "startLine": 235,
+                  "endLine": 236,
+                  "startColumn": 15,
+                  "endColumn": 41
+                }
+              },
+              {
+                "id": "WS_L237_FILLER",
+                "qualifiedName": "WSS-CONTROL-TOTALS-REPORT.HEADING-LINE-1.FILLER",
+                "level": 5,
+                "name": "FILLER",
+                "pic": "X(32)",
+                "usage": "DISPLAY",
+                "value": "SPACES",
+                "logicalType": "Alphanumeric (32 chars)",
+                "byteOffset": 889,
+                "relativeOffset": 17,
+                "byteLength": 32,
+                "elementByteLength": 32,
+                "isFiller": true,
+                "location": {
+                  "startLine": 237,
+                  "endLine": 237,
+                  "startColumn": 15,
+                  "endColumn": 63
+                }
+              },
+              {
+                "id": "WS_L238_FILLER",
+                "qualifiedName": "WSS-CONTROL-TOTALS-REPORT.HEADING-LINE-1.FILLER",
+                "level": 5,
+                "name": "FILLER",
+                "pic": "X(34)",
+                "usage": "DISPLAY",
+                "value": "S T A T E O F N E W J E R S E Y",
+                "logicalType": "Alphanumeric (34 chars)",
+                "byteOffset": 921,
+                "relativeOffset": 49,
+                "byteLength": 34,
+                "elementByteLength": 34,
+                "isFiller": true,
+                "location": {
+                  "startLine": 238,
+                  "endLine": 239,
+                  "startColumn": 15,
+                  "endColumn": 59
+                }
+              },
+              {
+                "id": "WS_L240_FILLER",
+                "qualifiedName": "WSS-CONTROL-TOTALS-REPORT.HEADING-LINE-1.FILLER",
+                "level": 5,
+                "name": "FILLER",
+                "pic": "X(31)",
+                "usage": "DISPLAY",
+                "value": "SPACES",
+                "logicalType": "Alphanumeric (31 chars)",
+                "byteOffset": 955,
+                "relativeOffset": 83,
+                "byteLength": 31,
+                "elementByteLength": 31,
+                "isFiller": true,
+                "location": {
+                  "startLine": 240,
+                  "endLine": 240,
+                  "startColumn": 15,
+                  "endColumn": 63
+                }
+              },
+              {
+                "id": "WS_L241_FILLER",
+                "qualifiedName": "WSS-CONTROL-TOTALS-REPORT.HEADING-LINE-1.FILLER",
+                "level": 5,
+                "name": "FILLER",
+                "pic": "X(10)",
+                "usage": "DISPLAY",
+                "value": "RUN DATE:",
+                "logicalType": "Alphanumeric (10 chars)",
+                "byteOffset": 986,
+                "relativeOffset": 114,
+                "byteLength": 10,
+                "elementByteLength": 10,
+                "isFiller": true,
+                "location": {
+                  "startLine": 241,
+                  "endLine": 241,
+                  "startColumn": 15,
+                  "endColumn": 69
+                }
+              },
+              {
+                "id": "WS_L242_CURRENT-DATE",
+                "qualifiedName": "WSS-CONTROL-TOTALS-REPORT.HEADING-LINE-1.CURRENT-DATE",
+                "level": 5,
+                "name": "CURRENT-DATE",
+                "pic": "X(08)",
+                "usage": "DISPLAY",
+                "value": "SPACES",
+                "logicalType": "Alphanumeric (8 chars)",
+                "byteOffset": 996,
+                "relativeOffset": 124,
+                "byteLength": 8,
+                "elementByteLength": 8,
+                "location": {
+                  "startLine": 242,
+                  "endLine": 242,
+                  "startColumn": 15,
+                  "endColumn": 63
+                }
+              },
+              {
+                "id": "WS_L243_FILLER",
+                "qualifiedName": "WSS-CONTROL-TOTALS-REPORT.HEADING-LINE-1.FILLER",
+                "level": 5,
+                "name": "FILLER",
+                "pic": "X(02)",
+                "usage": "DISPLAY",
+                "value": "SPACES",
+                "logicalType": "Alphanumeric (2 chars)",
+                "byteOffset": 1004,
+                "relativeOffset": 132,
+                "byteLength": 2,
+                "elementByteLength": 2,
+                "isFiller": true,
+                "location": {
+                  "startLine": 243,
+                  "endLine": 243,
+                  "startColumn": 15,
+                  "endColumn": 63
+                }
+              }
+            ],
+            "location": {
+              "startLine": 233,
+              "endLine": 233,
+              "startColumn": 11,
+              "endColumn": 28
+            }
+          },
+          {
+            "id": "WS_L244_HEADING-LINE-2",
+            "qualifiedName": "WSS-CONTROL-TOTALS-REPORT.HEADING-LINE-2",
+            "level": 3,
+            "name": "HEADING-LINE-2",
+            "usage": "DISPLAY",
+            "logicalType": "Group",
+            "byteOffset": 1006,
+            "relativeOffset": 267,
+            "byteLength": 134,
+            "elementByteLength": 134,
+            "children": [
+              {
+                "id": "WS_L245_FILLER",
+                "qualifiedName": "WSS-CONTROL-TOTALS-REPORT.HEADING-LINE-2.FILLER",
+                "level": 5,
+                "name": "FILLER",
+                "pic": "X(1)",
+                "usage": "DISPLAY",
+                "value": "SPACES",
+                "logicalType": "Alphanumeric (1 chars)",
+                "byteOffset": 1006,
+                "relativeOffset": 0,
+                "byteLength": 1,
+                "elementByteLength": 1,
+                "isFiller": true,
+                "location": {
+                  "startLine": 245,
+                  "endLine": 245,
+                  "startColumn": 15,
+                  "endColumn": 62
+                }
+              },
+              {
+                "id": "WS_L246_FILLER",
+                "qualifiedName": "WSS-CONTROL-TOTALS-REPORT.HEADING-LINE-2.FILLER",
+                "level": 5,
+                "name": "FILLER",
+                "pic": "X(18)",
+                "usage": "DISPLAY",
+                "value": "SYSTEM : CRAS",
+                "logicalType": "Alphanumeric (18 chars)",
+                "byteOffset": 1007,
+                "relativeOffset": 1,
+                "byteLength": 18,
+                "elementByteLength": 18,
+                "isFiller": true,
+                "location": {
+                  "startLine": 246,
+                  "endLine": 247,
+                  "startColumn": 15,
+                  "endColumn": 43
+                }
+              },
+              {
+                "id": "WS_L248_FILLER",
+                "qualifiedName": "WSS-CONTROL-TOTALS-REPORT.HEADING-LINE-2.FILLER",
+                "level": 5,
+                "name": "FILLER",
+                "pic": "X(24)",
+                "usage": "DISPLAY",
+                "value": "SPACES",
+                "logicalType": "Alphanumeric (24 chars)",
+                "byteOffset": 1025,
+                "relativeOffset": 19,
+                "byteLength": 24,
+                "elementByteLength": 24,
+                "isFiller": true,
+                "location": {
+                  "startLine": 248,
+                  "endLine": 248,
+                  "startColumn": 15,
+                  "endColumn": 63
+                }
+              },
+              {
+                "id": "WS_L249_FILLER",
+                "qualifiedName": "WSS-CONTROL-TOTALS-REPORT.HEADING-LINE-2.FILLER",
+                "level": 5,
+                "name": "FILLER",
+                "pic": "X(45)",
+                "usage": "DISPLAY",
+                "value": "DEPARTMENT OF TREASURY - DIVISION OF TAXATION",
+                "logicalType": "Alphanumeric (45 chars)",
+                "byteOffset": 1049,
+                "relativeOffset": 43,
+                "byteLength": 45,
+                "elementByteLength": 45,
+                "isFiller": true,
+                "location": {
+                  "startLine": 249,
+                  "endLine": 250,
+                  "startColumn": 15,
+                  "endColumn": 70
+                }
+              },
+              {
+                "id": "WS_L251_FILLER",
+                "qualifiedName": "WSS-CONTROL-TOTALS-REPORT.HEADING-LINE-2.FILLER",
+                "level": 5,
+                "name": "FILLER",
+                "pic": "X(26)",
+                "usage": "DISPLAY",
+                "value": "SPACES",
+                "logicalType": "Alphanumeric (26 chars)",
+                "byteOffset": 1094,
+                "relativeOffset": 88,
+                "byteLength": 26,
+                "elementByteLength": 26,
+                "isFiller": true,
+                "location": {
+                  "startLine": 251,
+                  "endLine": 251,
+                  "startColumn": 15,
+                  "endColumn": 63
+                }
+              },
+              {
+                "id": "WS_L252_FILLER",
+                "qualifiedName": "WSS-CONTROL-TOTALS-REPORT.HEADING-LINE-2.FILLER",
+                "level": 5,
+                "name": "FILLER",
+                "pic": "X(10)",
+                "usage": "DISPLAY",
+                "value": "RUN TIME:",
+                "logicalType": "Alphanumeric (10 chars)",
+                "byteOffset": 1120,
+                "relativeOffset": 114,
+                "byteLength": 10,
+                "elementByteLength": 10,
+                "isFiller": true,
+                "location": {
+                  "startLine": 252,
+                  "endLine": 252,
+                  "startColumn": 15,
+                  "endColumn": 69
+                }
+              },
+              {
+                "id": "WS_L253_CURRENT-TIME",
+                "qualifiedName": "WSS-CONTROL-TOTALS-REPORT.HEADING-LINE-2.CURRENT-TIME",
+                "level": 5,
+                "name": "CURRENT-TIME",
+                "pic": "X(08)",
+                "usage": "DISPLAY",
+                "value": "SPACES",
+                "logicalType": "Alphanumeric (8 chars)",
+                "byteOffset": 1130,
+                "relativeOffset": 124,
+                "byteLength": 8,
+                "elementByteLength": 8,
+                "location": {
+                  "startLine": 253,
+                  "endLine": 253,
+                  "startColumn": 15,
+                  "endColumn": 63
+                }
+              },
+              {
+                "id": "WS_L254_FILLER",
+                "qualifiedName": "WSS-CONTROL-TOTALS-REPORT.HEADING-LINE-2.FILLER",
+                "level": 5,
+                "name": "FILLER",
+                "pic": "X(02)",
+                "usage": "DISPLAY",
+                "value": "SPACES",
+                "logicalType": "Alphanumeric (2 chars)",
+                "byteOffset": 1138,
+                "relativeOffset": 132,
+                "byteLength": 2,
+                "elementByteLength": 2,
+                "isFiller": true,
+                "location": {
+                  "startLine": 254,
+                  "endLine": 254,
+                  "startColumn": 15,
+                  "endColumn": 63
+                }
+              }
+            ],
+            "location": {
+              "startLine": 244,
+              "endLine": 244,
+              "startColumn": 11,
+              "endColumn": 28
+            }
+          },
+          {
+            "id": "WS_L255_HEADING-LINE-3",
+            "qualifiedName": "WSS-CONTROL-TOTALS-REPORT.HEADING-LINE-3",
+            "level": 3,
+            "name": "HEADING-LINE-3",
+            "usage": "DISPLAY",
+            "logicalType": "Group",
+            "byteOffset": 1140,
+            "relativeOffset": 401,
+            "byteLength": 133,
+            "elementByteLength": 133,
+            "children": [
+              {
+                "id": "WS_L256_FILLER",
+                "qualifiedName": "WSS-CONTROL-TOTALS-REPORT.HEADING-LINE-3.FILLER",
+                "level": 5,
+                "name": "FILLER",
+                "pic": "X(1)",
+                "usage": "DISPLAY",
+                "value": "SPACES",
+                "logicalType": "Alphanumeric (1 chars)",
+                "byteOffset": 1140,
+                "relativeOffset": 0,
+                "byteLength": 1,
+                "elementByteLength": 1,
+                "isFiller": true,
+                "location": {
+                  "startLine": 256,
+                  "endLine": 256,
+                  "startColumn": 15,
+                  "endColumn": 62
+                }
+              },
+              {
+                "id": "WS_L257_FILLER",
+                "qualifiedName": "WSS-CONTROL-TOTALS-REPORT.HEADING-LINE-3.FILLER",
+                "level": 5,
+                "name": "FILLER",
+                "pic": "X(21)",
+                "usage": "DISPLAY",
+                "value": "PROGRAM NO : TT35522",
+                "logicalType": "Alphanumeric (21 chars)",
+                "byteOffset": 1141,
+                "relativeOffset": 1,
+                "byteLength": 21,
+                "elementByteLength": 21,
+                "isFiller": true,
+                "location": {
+                  "startLine": 257,
+                  "endLine": 258,
+                  "startColumn": 15,
+                  "endColumn": 46
+                }
+              },
+              {
+                "id": "WS_L259_FILLER",
+                "qualifiedName": "WSS-CONTROL-TOTALS-REPORT.HEADING-LINE-3.FILLER",
+                "level": 5,
+                "name": "FILLER",
+                "pic": "X(24)",
+                "usage": "DISPLAY",
+                "value": "SPACES",
+                "logicalType": "Alphanumeric (24 chars)",
+                "byteOffset": 1162,
+                "relativeOffset": 22,
+                "byteLength": 24,
+                "elementByteLength": 24,
+                "isFiller": true,
+                "location": {
+                  "startLine": 259,
+                  "endLine": 259,
+                  "startColumn": 15,
+                  "endColumn": 63
+                }
+              },
+              {
+                "id": "WS_L260_FILLER",
+                "qualifiedName": "WSS-CONTROL-TOTALS-REPORT.HEADING-LINE-3.FILLER",
+                "level": 5,
+                "name": "FILLER",
+                "pic": "X(44)",
+                "usage": "DISPLAY",
+                "value": "CRAS CONTROL - REVENUE DEPOSIT MANUAL TRANS",
+                "logicalType": "Alphanumeric (44 chars)",
+                "byteOffset": 1186,
+                "relativeOffset": 46,
+                "byteLength": 44,
+                "elementByteLength": 44,
+                "isFiller": true,
+                "location": {
+                  "startLine": 260,
+                  "endLine": 261,
+                  "startColumn": 15,
+                  "endColumn": 68
+                }
+              },
+              {
+                "id": "WS_L262_FILLER",
+                "qualifiedName": "WSS-CONTROL-TOTALS-REPORT.HEADING-LINE-3.FILLER",
+                "level": 5,
+                "name": "FILLER",
+                "pic": "X(24)",
+                "usage": "DISPLAY",
+                "value": "SPACES",
+                "logicalType": "Alphanumeric (24 chars)",
+                "byteOffset": 1230,
+                "relativeOffset": 90,
+                "byteLength": 24,
+                "elementByteLength": 24,
+                "isFiller": true,
+                "location": {
+                  "startLine": 262,
+                  "endLine": 262,
+                  "startColumn": 15,
+                  "endColumn": 63
+                }
+              },
+              {
+                "id": "WS_L263_FILLER",
+                "qualifiedName": "WSS-CONTROL-TOTALS-REPORT.HEADING-LINE-3.FILLER",
+                "level": 5,
+                "name": "FILLER",
+                "pic": "X(11)",
+                "usage": "DISPLAY",
+                "value": "PAGE NO:",
+                "logicalType": "Alphanumeric (11 chars)",
+                "byteOffset": 1254,
+                "relativeOffset": 114,
+                "byteLength": 11,
+                "elementByteLength": 11,
+                "isFiller": true,
+                "location": {
+                  "startLine": 263,
+                  "endLine": 263,
+                  "startColumn": 15,
+                  "endColumn": 69
+                }
+              },
+              {
+                "id": "WS_L264_PRINT-PAGE",
+                "qualifiedName": "WSS-CONTROL-TOTALS-REPORT.HEADING-LINE-3.PRINT-PAGE",
+                "level": 5,
+                "name": "PRINT-PAGE",
+                "pic": "ZZZ,ZZ9",
+                "usage": "DISPLAY",
+                "logicalType": "Numeric Display (6 digits)",
+                "byteOffset": 1265,
+                "relativeOffset": 125,
+                "byteLength": 7,
+                "elementByteLength": 7,
+                "location": {
+                  "startLine": 264,
+                  "endLine": 264,
+                  "startColumn": 15,
+                  "endColumn": 52
+                }
+              },
+              {
+                "id": "WS_L265_FILLER",
+                "qualifiedName": "WSS-CONTROL-TOTALS-REPORT.HEADING-LINE-3.FILLER",
+                "level": 5,
+                "name": "FILLER",
+                "pic": "X",
+                "usage": "DISPLAY",
+                "value": "SPACES",
+                "logicalType": "Alphanumeric (1 chars)",
+                "byteOffset": 1272,
+                "relativeOffset": 132,
+                "byteLength": 1,
+                "elementByteLength": 1,
+                "isFiller": true,
+                "location": {
+                  "startLine": 265,
+                  "endLine": 265,
+                  "startColumn": 15,
+                  "endColumn": 59
+                }
+              }
+            ],
+            "location": {
+              "startLine": 255,
+              "endLine": 255,
+              "startColumn": 11,
+              "endColumn": 28
+            }
+          },
+          {
+            "id": "WS_L266_HEADING-LINE-4",
+            "qualifiedName": "WSS-CONTROL-TOTALS-REPORT.HEADING-LINE-4",
+            "level": 3,
+            "name": "HEADING-LINE-4",
+            "usage": "DISPLAY",
+            "logicalType": "Group",
+            "byteOffset": 1273,
+            "relativeOffset": 534,
+            "byteLength": 134,
+            "elementByteLength": 134,
+            "children": [
+              {
+                "id": "WS_L267_FILLER",
+                "qualifiedName": "WSS-CONTROL-TOTALS-REPORT.HEADING-LINE-4.FILLER",
+                "level": 5,
+                "name": "FILLER",
+                "pic": "X(1)",
+                "usage": "DISPLAY",
+                "value": "SPACES",
+                "logicalType": "Alphanumeric (1 chars)",
+                "byteOffset": 1273,
+                "relativeOffset": 0,
+                "byteLength": 1,
+                "elementByteLength": 1,
+                "isFiller": true,
+                "location": {
+                  "startLine": 267,
+                  "endLine": 267,
+                  "startColumn": 15,
+                  "endColumn": 62
+                }
+              },
+              {
+                "id": "WS_L268_FILLER",
+                "qualifiedName": "WSS-CONTROL-TOTALS-REPORT.HEADING-LINE-4.FILLER",
+                "level": 5,
+                "name": "FILLER",
+                "pic": "X(23)",
+                "usage": "DISPLAY",
+                "value": "FREQUENCY : ON REQUEST",
+                "logicalType": "Alphanumeric (23 chars)",
+                "byteOffset": 1274,
+                "relativeOffset": 1,
+                "byteLength": 23,
+                "elementByteLength": 23,
+                "isFiller": true,
+                "location": {
+                  "startLine": 268,
+                  "endLine": 269,
+                  "startColumn": 15,
+                  "endColumn": 48
+                }
+              },
+              {
+                "id": "WS_L270_FILLER",
+                "qualifiedName": "WSS-CONTROL-TOTALS-REPORT.HEADING-LINE-4.FILLER",
+                "level": 5,
+                "name": "FILLER",
+                "pic": "X(25)",
+                "usage": "DISPLAY",
+                "value": "SPACES",
+                "logicalType": "Alphanumeric (25 chars)",
+                "byteOffset": 1297,
+                "relativeOffset": 24,
+                "byteLength": 25,
+                "elementByteLength": 25,
+                "isFiller": true,
+                "location": {
+                  "startLine": 270,
+                  "endLine": 270,
+                  "startColumn": 15,
+                  "endColumn": 63
+                }
+              },
+              {
+                "id": "WS_L271_DET-CTL-TITLE",
+                "qualifiedName": "WSS-CONTROL-TOTALS-REPORT.HEADING-LINE-4.DET-CTL-TITLE",
+                "level": 5,
+                "name": "DET-CTL-TITLE",
+                "pic": "X(34)",
+                "usage": "DISPLAY",
+                "value": "",
+                "logicalType": "Alphanumeric (34 chars)",
+                "byteOffset": 1322,
+                "relativeOffset": 49,
+                "byteLength": 34,
+                "elementByteLength": 34,
+                "location": {
+                  "startLine": 271,
+                  "endLine": 272,
+                  "startColumn": 15,
+                  "endColumn": 59
+                }
+              },
+              {
+                "id": "WS_L273_FILLER",
+                "qualifiedName": "WSS-CONTROL-TOTALS-REPORT.HEADING-LINE-4.FILLER",
+                "level": 5,
+                "name": "FILLER",
+                "pic": "X(51)",
+                "usage": "DISPLAY",
+                "value": "SPACES",
+                "logicalType": "Alphanumeric (51 chars)",
+                "byteOffset": 1356,
+                "relativeOffset": 83,
+                "byteLength": 51,
+                "elementByteLength": 51,
+                "isFiller": true,
+                "location": {
+                  "startLine": 273,
+                  "endLine": 273,
+                  "startColumn": 15,
+                  "endColumn": 63
+                }
+              }
+            ],
+            "location": {
+              "startLine": 266,
+              "endLine": 266,
+              "startColumn": 11,
+              "endColumn": 28
+            }
+          },
+          {
+            "id": "WS_L275_CONTROL-TITLE1",
+            "qualifiedName": "WSS-CONTROL-TOTALS-REPORT.CONTROL-TITLE1",
+            "level": 3,
+            "name": "CONTROL-TITLE1",
+            "usage": "DISPLAY",
+            "logicalType": "Group",
+            "byteOffset": 1407,
+            "relativeOffset": 668,
+            "byteLength": 136,
+            "elementByteLength": 136,
+            "children": [
+              {
+                "id": "WS_L276_FILLER",
+                "qualifiedName": "WSS-CONTROL-TOTALS-REPORT.CONTROL-TITLE1.FILLER",
+                "level": 5,
+                "name": "FILLER",
+                "pic": "X(1)",
+                "usage": "DISPLAY",
+                "value": "SPACES",
+                "logicalType": "Alphanumeric (1 chars)",
+                "byteOffset": 1407,
+                "relativeOffset": 0,
+                "byteLength": 1,
+                "elementByteLength": 1,
+                "isFiller": true,
+                "location": {
+                  "startLine": 276,
+                  "endLine": 276,
+                  "startColumn": 15,
+                  "endColumn": 62
+                }
+              },
+              {
+                "id": "WS_L277_FILLER",
+                "qualifiedName": "WSS-CONTROL-TOTALS-REPORT.CONTROL-TITLE1.FILLER",
+                "level": 5,
+                "name": "FILLER",
+                "pic": "X(30)",
+                "usage": "DISPLAY",
+                "value": "SPACES",
+                "logicalType": "Alphanumeric (30 chars)",
+                "byteOffset": 1408,
+                "relativeOffset": 1,
+                "byteLength": 30,
+                "elementByteLength": 30,
+                "isFiller": true,
+                "location": {
+                  "startLine": 277,
+                  "endLine": 277,
+                  "startColumn": 15,
+                  "endColumn": 63
+                }
+              },
+              {
+                "id": "WS_L278_FILLER",
+                "qualifiedName": "WSS-CONTROL-TOTALS-REPORT.CONTROL-TITLE1.FILLER",
+                "level": 5,
+                "name": "FILLER",
+                "pic": "X(10)",
+                "usage": "DISPLAY",
+                "value": "TAX",
+                "logicalType": "Alphanumeric (10 chars)",
+                "byteOffset": 1438,
+                "relativeOffset": 31,
+                "byteLength": 10,
+                "elementByteLength": 10,
+                "isFiller": true,
+                "location": {
+                  "startLine": 278,
+                  "endLine": 278,
+                  "startColumn": 15,
+                  "endColumn": 65
+                }
+              },
+              {
+                "id": "WS_L279_FILLER",
+                "qualifiedName": "WSS-CONTROL-TOTALS-REPORT.CONTROL-TITLE1.FILLER",
+                "level": 5,
+                "name": "FILLER",
+                "pic": "X(12)",
+                "usage": "DISPLAY",
+                "value": "SOURCE",
+                "logicalType": "Alphanumeric (12 chars)",
+                "byteOffset": 1448,
+                "relativeOffset": 41,
+                "byteLength": 12,
+                "elementByteLength": 12,
+                "isFiller": true,
+                "location": {
+                  "startLine": 279,
+                  "endLine": 279,
+                  "startColumn": 15,
+                  "endColumn": 65
+                }
+              },
+              {
+                "id": "WS_L280_FILLER",
+                "qualifiedName": "WSS-CONTROL-TOTALS-REPORT.CONTROL-TITLE1.FILLER",
+                "level": 5,
+                "name": "FILLER",
+                "pic": "X(19)",
+                "usage": "DISPLAY",
+                "value": "FORMAT",
+                "logicalType": "Alphanumeric (19 chars)",
+                "byteOffset": 1460,
+                "relativeOffset": 53,
+                "byteLength": 19,
+                "elementByteLength": 19,
+                "isFiller": true,
+                "location": {
+                  "startLine": 280,
+                  "endLine": 280,
+                  "startColumn": 15,
+                  "endColumn": 70
+                }
+              },
+              {
+                "id": "WS_L281_FILLER",
+                "qualifiedName": "WSS-CONTROL-TOTALS-REPORT.CONTROL-TITLE1.FILLER",
+                "level": 5,
+                "name": "FILLER",
+                "pic": "X(19)",
+                "usage": "DISPLAY",
+                "value": "",
+                "logicalType": "Alphanumeric (19 chars)",
+                "byteOffset": 1479,
+                "relativeOffset": 72,
+                "byteLength": 19,
+                "elementByteLength": 19,
+                "isFiller": true,
+                "location": {
+                  "startLine": 281,
+                  "endLine": 281,
+                  "startColumn": 15,
+                  "endColumn": 70
+                }
+              },
+              {
+                "id": "WS_L282_FILLER",
+                "qualifiedName": "WSS-CONTROL-TOTALS-REPORT.CONTROL-TITLE1.FILLER",
+                "level": 5,
+                "name": "FILLER",
+                "pic": "X(09)",
+                "usage": "DISPLAY",
+                "value": "SPACES",
+                "logicalType": "Alphanumeric (9 chars)",
+                "byteOffset": 1498,
+                "relativeOffset": 91,
+                "byteLength": 9,
+                "elementByteLength": 9,
+                "isFiller": true,
+                "location": {
+                  "startLine": 282,
+                  "endLine": 282,
+                  "startColumn": 15,
+                  "endColumn": 63
+                }
+              },
+              {
+                "id": "WS_L283_FILLER",
+                "qualifiedName": "WSS-CONTROL-TOTALS-REPORT.CONTROL-TITLE1.FILLER",
+                "level": 5,
+                "name": "FILLER",
+                "pic": "X(21)",
+                "usage": "DISPLAY",
+                "value": "",
+                "logicalType": "Alphanumeric (21 chars)",
+                "byteOffset": 1507,
+                "relativeOffset": 100,
+                "byteLength": 21,
+                "elementByteLength": 21,
+                "isFiller": true,
+                "location": {
+                  "startLine": 283,
+                  "endLine": 284,
+                  "startColumn": 15,
+                  "endColumn": 38
+                }
+              },
+              {
+                "id": "WS_L285_FILLER",
+                "qualifiedName": "WSS-CONTROL-TOTALS-REPORT.CONTROL-TITLE1.FILLER",
+                "level": 5,
+                "name": "FILLER",
+                "pic": "X(11)",
+                "usage": "DISPLAY",
+                "value": "",
+                "logicalType": "Alphanumeric (11 chars)",
+                "byteOffset": 1528,
+                "relativeOffset": 121,
+                "byteLength": 11,
+                "elementByteLength": 11,
+                "isFiller": true,
+                "location": {
+                  "startLine": 285,
+                  "endLine": 285,
+                  "startColumn": 15,
+                  "endColumn": 70
+                }
+              },
+              {
+                "id": "WS_L286_FILLER",
+                "qualifiedName": "WSS-CONTROL-TOTALS-REPORT.CONTROL-TITLE1.FILLER",
+                "level": 5,
+                "name": "FILLER",
+                "pic": "X(04)",
+                "usage": "DISPLAY",
+                "value": "SPACES",
+                "logicalType": "Alphanumeric (4 chars)",
+                "byteOffset": 1539,
+                "relativeOffset": 132,
+                "byteLength": 4,
+                "elementByteLength": 4,
+                "isFiller": true,
+                "location": {
+                  "startLine": 286,
+                  "endLine": 286,
+                  "startColumn": 15,
+                  "endColumn": 63
+                }
+              }
+            ],
+            "location": {
+              "startLine": 275,
+              "endLine": 275,
+              "startColumn": 11,
+              "endColumn": 28
+            }
+          },
+          {
+            "id": "WS_L288_CONTROL-TITLE2",
+            "qualifiedName": "WSS-CONTROL-TOTALS-REPORT.CONTROL-TITLE2",
+            "level": 3,
+            "name": "CONTROL-TITLE2",
+            "usage": "DISPLAY",
+            "logicalType": "Group",
+            "byteOffset": 1543,
+            "relativeOffset": 804,
+            "byteLength": 136,
+            "elementByteLength": 136,
+            "children": [
+              {
+                "id": "WS_L289_FILLER",
+                "qualifiedName": "WSS-CONTROL-TOTALS-REPORT.CONTROL-TITLE2.FILLER",
+                "level": 5,
+                "name": "FILLER",
+                "pic": "X(1)",
+                "usage": "DISPLAY",
+                "value": "SPACES",
+                "logicalType": "Alphanumeric (1 chars)",
+                "byteOffset": 1543,
+                "relativeOffset": 0,
+                "byteLength": 1,
+                "elementByteLength": 1,
+                "isFiller": true,
+                "location": {
+                  "startLine": 289,
+                  "endLine": 289,
+                  "startColumn": 15,
+                  "endColumn": 62
+                }
+              },
+              {
+                "id": "WS_L290_FILLER",
+                "qualifiedName": "WSS-CONTROL-TOTALS-REPORT.CONTROL-TITLE2.FILLER",
+                "level": 5,
+                "name": "FILLER",
+                "pic": "X(30)",
+                "usage": "DISPLAY",
+                "value": "SPACES",
+                "logicalType": "Alphanumeric (30 chars)",
+                "byteOffset": 1544,
+                "relativeOffset": 1,
+                "byteLength": 30,
+                "elementByteLength": 30,
+                "isFiller": true,
+                "location": {
+                  "startLine": 290,
+                  "endLine": 290,
+                  "startColumn": 15,
+                  "endColumn": 63
+                }
+              },
+              {
+                "id": "WS_L291_FILLER",
+                "qualifiedName": "WSS-CONTROL-TOTALS-REPORT.CONTROL-TITLE2.FILLER",
+                "level": 5,
+                "name": "FILLER",
+                "pic": "X(10)",
+                "usage": "DISPLAY",
+                "value": "CODE",
+                "logicalType": "Alphanumeric (10 chars)",
+                "byteOffset": 1574,
+                "relativeOffset": 31,
+                "byteLength": 10,
+                "elementByteLength": 10,
+                "isFiller": true,
+                "location": {
+                  "startLine": 291,
+                  "endLine": 291,
+                  "startColumn": 15,
+                  "endColumn": 65
+                }
+              },
+              {
+                "id": "WS_L292_FILLER",
+                "qualifiedName": "WSS-CONTROL-TOTALS-REPORT.CONTROL-TITLE2.FILLER",
+                "level": 5,
+                "name": "FILLER",
+                "pic": "X(12)",
+                "usage": "DISPLAY",
+                "value": "CODE",
+                "logicalType": "Alphanumeric (12 chars)",
+                "byteOffset": 1584,
+                "relativeOffset": 41,
+                "byteLength": 12,
+                "elementByteLength": 12,
+                "isFiller": true,
+                "location": {
+                  "startLine": 292,
+                  "endLine": 292,
+                  "startColumn": 15,
+                  "endColumn": 65
+                }
+              },
+              {
+                "id": "WS_L293_FILLER",
+                "qualifiedName": "WSS-CONTROL-TOTALS-REPORT.CONTROL-TITLE2.FILLER",
+                "level": 5,
+                "name": "FILLER",
+                "pic": "X(19)",
+                "usage": "DISPLAY",
+                "value": "CODE",
+                "logicalType": "Alphanumeric (19 chars)",
+                "byteOffset": 1596,
+                "relativeOffset": 53,
+                "byteLength": 19,
+                "elementByteLength": 19,
+                "isFiller": true,
+                "location": {
+                  "startLine": 293,
+                  "endLine": 293,
+                  "startColumn": 15,
+                  "endColumn": 70
+                }
+              },
+              {
+                "id": "WS_L294_FILLER",
+                "qualifiedName": "WSS-CONTROL-TOTALS-REPORT.CONTROL-TITLE2.FILLER",
+                "level": 5,
+                "name": "FILLER",
+                "pic": "X(19)",
+                "usage": "DISPLAY",
+                "value": "COUNT",
+                "logicalType": "Alphanumeric (19 chars)",
+                "byteOffset": 1615,
+                "relativeOffset": 72,
+                "byteLength": 19,
+                "elementByteLength": 19,
+                "isFiller": true,
+                "location": {
+                  "startLine": 294,
+                  "endLine": 294,
+                  "startColumn": 15,
+                  "endColumn": 70
+                }
+              },
+              {
+                "id": "WS_L295_FILLER",
+                "qualifiedName": "WSS-CONTROL-TOTALS-REPORT.CONTROL-TITLE2.FILLER",
+                "level": 5,
+                "name": "FILLER",
+                "pic": "X(09)",
+                "usage": "DISPLAY",
+                "value": "SPACES",
+                "logicalType": "Alphanumeric (9 chars)",
+                "byteOffset": 1634,
+                "relativeOffset": 91,
+                "byteLength": 9,
+                "elementByteLength": 9,
+                "isFiller": true,
+                "location": {
+                  "startLine": 295,
+                  "endLine": 295,
+                  "startColumn": 15,
+                  "endColumn": 63
+                }
+              },
+              {
+                "id": "WS_L296_FILLER",
+                "qualifiedName": "WSS-CONTROL-TOTALS-REPORT.CONTROL-TITLE2.FILLER",
+                "level": 5,
+                "name": "FILLER",
+                "pic": "X(21)",
+                "usage": "DISPLAY",
+                "value": "AMOUNT",
+                "logicalType": "Alphanumeric (21 chars)",
+                "byteOffset": 1643,
+                "relativeOffset": 100,
+                "byteLength": 21,
+                "elementByteLength": 21,
+                "isFiller": true,
+                "location": {
+                  "startLine": 296,
+                  "endLine": 297,
+                  "startColumn": 15,
+                  "endColumn": 38
+                }
+              },
+              {
+                "id": "WS_L298_FILLER",
+                "qualifiedName": "WSS-CONTROL-TOTALS-REPORT.CONTROL-TITLE2.FILLER",
+                "level": 5,
+                "name": "FILLER",
+                "pic": "X(11)",
+                "usage": "DISPLAY",
+                "value": "",
+                "logicalType": "Alphanumeric (11 chars)",
+                "byteOffset": 1664,
+                "relativeOffset": 121,
+                "byteLength": 11,
+                "elementByteLength": 11,
+                "isFiller": true,
+                "location": {
+                  "startLine": 298,
+                  "endLine": 298,
+                  "startColumn": 15,
+                  "endColumn": 70
+                }
+              },
+              {
+                "id": "WS_L299_FILLER",
+                "qualifiedName": "WSS-CONTROL-TOTALS-REPORT.CONTROL-TITLE2.FILLER",
+                "level": 5,
+                "name": "FILLER",
+                "pic": "X(04)",
+                "usage": "DISPLAY",
+                "value": "SPACES",
+                "logicalType": "Alphanumeric (4 chars)",
+                "byteOffset": 1675,
+                "relativeOffset": 132,
+                "byteLength": 4,
+                "elementByteLength": 4,
+                "isFiller": true,
+                "location": {
+                  "startLine": 299,
+                  "endLine": 299,
+                  "startColumn": 15,
+                  "endColumn": 63
+                }
+              }
+            ],
+            "location": {
+              "startLine": 288,
+              "endLine": 288,
+              "startColumn": 11,
+              "endColumn": 28
+            }
+          },
+          {
+            "id": "WS_L301_CONTROL-PRINT-LINE",
+            "qualifiedName": "WSS-CONTROL-TOTALS-REPORT.CONTROL-PRINT-LINE",
+            "level": 3,
+            "name": "CONTROL-PRINT-LINE",
+            "usage": "DISPLAY",
+            "logicalType": "Group",
+            "byteOffset": 1679,
+            "relativeOffset": 940,
+            "byteLength": 133,
+            "elementByteLength": 133,
+            "children": [
+              {
+                "id": "WS_L302_FILLER",
+                "qualifiedName": "WSS-CONTROL-TOTALS-REPORT.CONTROL-PRINT-LINE.FILLER",
+                "level": 5,
+                "name": "FILLER",
+                "pic": "X(1)",
+                "usage": "DISPLAY",
+                "value": "SPACES",
+                "logicalType": "Alphanumeric (1 chars)",
+                "byteOffset": 1679,
+                "relativeOffset": 0,
+                "byteLength": 1,
+                "elementByteLength": 1,
+                "isFiller": true,
+                "location": {
+                  "startLine": 302,
+                  "endLine": 302,
+                  "startColumn": 15,
+                  "endColumn": 62
+                }
+              },
+              {
+                "id": "WS_L303_FILLER",
+                "qualifiedName": "WSS-CONTROL-TOTALS-REPORT.CONTROL-PRINT-LINE.FILLER",
+                "level": 5,
+                "name": "FILLER",
+                "pic": "X(04)",
+                "usage": "DISPLAY",
+                "value": "SPACES",
+                "logicalType": "Alphanumeric (4 chars)",
+                "byteOffset": 1680,
+                "relativeOffset": 1,
+                "byteLength": 4,
+                "elementByteLength": 4,
+                "isFiller": true,
+                "location": {
+                  "startLine": 303,
+                  "endLine": 303,
+                  "startColumn": 15,
+                  "endColumn": 63
+                }
+              },
+              {
+                "id": "WS_L304_CTL-MESSAGE",
+                "qualifiedName": "WSS-CONTROL-TOTALS-REPORT.CONTROL-PRINT-LINE.CTL-MESSAGE",
+                "level": 5,
+                "name": "CTL-MESSAGE",
+                "usage": "DISPLAY",
+                "logicalType": "Group",
+                "byteOffset": 1684,
+                "relativeOffset": 5,
+                "byteLength": 26,
+                "elementByteLength": 26,
+                "children": [
+                  {
+                    "id": "WS_L305_FILLER",
+                    "qualifiedName": "WSS-CONTROL-TOTALS-REPORT.CONTROL-PRINT-LINE.CTL-MESSAGE.FILLER",
+                    "level": 7,
+                    "name": "FILLER",
+                    "pic": "X(10)",
+                    "usage": "DISPLAY",
+                    "value": "SPACES",
+                    "logicalType": "Alphanumeric (10 chars)",
+                    "byteOffset": 1684,
+                    "relativeOffset": 0,
+                    "byteLength": 10,
+                    "elementByteLength": 10,
+                    "isFiller": true,
+                    "location": {
+                      "startLine": 305,
+                      "endLine": 305,
+                      "startColumn": 19,
+                      "endColumn": 63
+                    }
+                  },
+                  {
+                    "id": "WS_L306_CTL-TAX-DESCRIP",
+                    "qualifiedName": "WSS-CONTROL-TOTALS-REPORT.CONTROL-PRINT-LINE.CTL-MESSAGE.CTL-TAX-DESCRIP",
+                    "level": 7,
+                    "name": "CTL-TAX-DESCRIP",
+                    "pic": "X(16)",
+                    "usage": "DISPLAY",
+                    "value": "SPACES",
+                    "logicalType": "Alphanumeric (16 chars)",
+                    "byteOffset": 1694,
+                    "relativeOffset": 10,
+                    "byteLength": 16,
+                    "elementByteLength": 16,
+                    "location": {
+                      "startLine": 306,
+                      "endLine": 306,
+                      "startColumn": 19,
+                      "endColumn": 63
+                    }
+                  }
+                ],
+                "location": {
+                  "startLine": 304,
+                  "endLine": 304,
+                  "startColumn": 15,
+                  "endColumn": 29
+                }
+              },
+              {
+                "id": "WS_L307_CTL-TAX-TYPE",
+                "qualifiedName": "WSS-CONTROL-TOTALS-REPORT.CONTROL-PRINT-LINE.CTL-TAX-TYPE",
+                "level": 5,
+                "name": "CTL-TAX-TYPE",
+                "pic": "X(11)",
+                "usage": "DISPLAY",
+                "value": "SPACES",
+                "logicalType": "Alphanumeric (11 chars)",
+                "byteOffset": 1710,
+                "relativeOffset": 31,
+                "byteLength": 11,
+                "elementByteLength": 11,
+                "location": {
+                  "startLine": 307,
+                  "endLine": 307,
+                  "startColumn": 15,
+                  "endColumn": 63
+                }
+              },
+              {
+                "id": "WS_L308_CTL-SOURCE-CODE",
+                "qualifiedName": "WSS-CONTROL-TOTALS-REPORT.CONTROL-PRINT-LINE.CTL-SOURCE-CODE",
+                "level": 5,
+                "name": "CTL-SOURCE-CODE",
+                "pic": "X(11)",
+                "usage": "DISPLAY",
+                "value": "SPACES",
+                "logicalType": "Alphanumeric (11 chars)",
+                "byteOffset": 1721,
+                "relativeOffset": 42,
+                "byteLength": 11,
+                "elementByteLength": 11,
+                "location": {
+                  "startLine": 308,
+                  "endLine": 308,
+                  "startColumn": 15,
+                  "endColumn": 63
+                }
+              },
+              {
+                "id": "WS_L309_CTL-FORMAT-CODE",
+                "qualifiedName": "WSS-CONTROL-TOTALS-REPORT.CONTROL-PRINT-LINE.CTL-FORMAT-CODE",
+                "level": 5,
+                "name": "CTL-FORMAT-CODE",
+                "pic": "X(16)",
+                "usage": "DISPLAY",
+                "value": "SPACES",
+                "logicalType": "Alphanumeric (16 chars)",
+                "byteOffset": 1732,
+                "relativeOffset": 53,
+                "byteLength": 16,
+                "elementByteLength": 16,
+                "location": {
+                  "startLine": 309,
+                  "endLine": 309,
+                  "startColumn": 15,
+                  "endColumn": 63
+                }
+              },
+              {
+                "id": "WS_L310_CTL-DETAIL-COUNT",
+                "qualifiedName": "WSS-CONTROL-TOTALS-REPORT.CONTROL-PRINT-LINE.CTL-DETAIL-COUNT",
+                "level": 5,
+                "name": "CTL-DETAIL-COUNT",
+                "pic": "ZZZ,ZZZ,ZZ9B(8)",
+                "usage": "DISPLAY",
+                "logicalType": "Numeric Display (9 digits)",
+                "byteOffset": 1748,
+                "relativeOffset": 69,
+                "byteLength": 19,
+                "elementByteLength": 19,
+                "location": {
+                  "startLine": 310,
+                  "endLine": 310,
+                  "startColumn": 15,
+                  "endColumn": 60
+                }
+              },
+              {
+                "id": "WS_L311_CTL-DETAIL-REDEF",
+                "qualifiedName": "WSS-CONTROL-TOTALS-REPORT.CONTROL-PRINT-LINE.CTL-DETAIL-REDEF",
+                "level": 5,
+                "name": "CTL-DETAIL-REDEF",
+                "pic": "X(19)",
+                "usage": "DISPLAY",
+                "redefines": "CTL-DETAIL-COUNT",
+                "logicalType": "Alphanumeric (19 chars)",
+                "byteOffset": 1748,
+                "relativeOffset": 69,
+                "byteLength": 19,
+                "elementByteLength": 19,
+                "location": {
+                  "startLine": 311,
+                  "endLine": 312,
+                  "startColumn": 15,
+                  "endColumn": 32
+                }
+              },
+              {
+                "id": "WS_L313_CTL-DETAIL-AMOUNT",
+                "qualifiedName": "WSS-CONTROL-TOTALS-REPORT.CONTROL-PRINT-LINE.CTL-DETAIL-AMOUNT",
+                "level": 5,
+                "name": "CTL-DETAIL-AMOUNT",
+                "pic": "ZZZ,ZZZ,ZZZ,ZZZ,ZZ9.99",
+                "usage": "DISPLAY",
+                "logicalType": "Decimal Display (17, 2)",
+                "byteOffset": 1767,
+                "relativeOffset": 88,
+                "byteLength": 22,
+                "elementByteLength": 22,
+                "location": {
+                  "startLine": 313,
+                  "endLine": 313,
+                  "startColumn": 15,
+                  "endColumn": 67
+                }
+              },
+              {
+                "id": "WS_L314_FILLER",
+                "qualifiedName": "WSS-CONTROL-TOTALS-REPORT.CONTROL-PRINT-LINE.FILLER",
+                "level": 5,
+                "name": "FILLER",
+                "pic": "X(08)",
+                "usage": "DISPLAY",
+                "value": "SPACES",
+                "logicalType": "Alphanumeric (8 chars)",
+                "byteOffset": 1789,
+                "relativeOffset": 110,
+                "byteLength": 8,
+                "elementByteLength": 8,
+                "isFiller": true,
+                "location": {
+                  "startLine": 314,
+                  "endLine": 314,
+                  "startColumn": 15,
+                  "endColumn": 63
+                }
+              },
+              {
+                "id": "WS_L315_CTL-DETALL-COUNT",
+                "qualifiedName": "WSS-CONTROL-TOTALS-REPORT.CONTROL-PRINT-LINE.CTL-DETALL-COUNT",
+                "level": 5,
+                "name": "CTL-DETALL-COUNT",
+                "pic": "ZZZ,ZZZ,ZZ9",
+                "usage": "DISPLAY",
+                "logicalType": "Numeric Display (9 digits)",
+                "byteOffset": 1797,
+                "relativeOffset": 118,
+                "byteLength": 11,
+                "elementByteLength": 11,
+                "location": {
+                  "startLine": 315,
+                  "endLine": 315,
+                  "startColumn": 15,
+                  "endColumn": 56
+                }
+              },
+              {
+                "id": "WS_L316_CTL-DETALL-REDEF",
+                "qualifiedName": "WSS-CONTROL-TOTALS-REPORT.CONTROL-PRINT-LINE.CTL-DETALL-REDEF",
+                "level": 5,
+                "name": "CTL-DETALL-REDEF",
+                "pic": "X(11)",
+                "usage": "DISPLAY",
+                "redefines": "CTL-DETALL-COUNT",
+                "logicalType": "Alphanumeric (11 chars)",
+                "byteOffset": 1797,
+                "relativeOffset": 118,
+                "byteLength": 11,
+                "elementByteLength": 11,
+                "location": {
+                  "startLine": 316,
+                  "endLine": 317,
+                  "startColumn": 15,
+                  "endColumn": 32
+                }
+              },
+              {
+                "id": "WS_L318_FILLER",
+                "qualifiedName": "WSS-CONTROL-TOTALS-REPORT.CONTROL-PRINT-LINE.FILLER",
+                "level": 5,
+                "name": "FILLER",
+                "pic": "X(04)",
+                "usage": "DISPLAY",
+                "value": "SPACES",
+                "logicalType": "Alphanumeric (4 chars)",
+                "byteOffset": 1808,
+                "relativeOffset": 129,
+                "byteLength": 4,
+                "elementByteLength": 4,
+                "isFiller": true,
+                "location": {
+                  "startLine": 318,
+                  "endLine": 318,
+                  "startColumn": 15,
+                  "endColumn": 63
+                }
+              }
+            ],
+            "location": {
+              "startLine": 301,
+              "endLine": 301,
+              "startColumn": 11,
+              "endColumn": 32
+            }
+          },
+          {
+            "id": "WS_L320_CONTROL-LINE-1",
+            "qualifiedName": "WSS-CONTROL-TOTALS-REPORT.CONTROL-LINE-1",
+            "level": 3,
+            "name": "CONTROL-LINE-1",
+            "usage": "DISPLAY",
+            "logicalType": "Group",
+            "byteOffset": 1812,
+            "relativeOffset": 1073,
+            "byteLength": 108,
+            "elementByteLength": 108,
+            "children": [
+              {
+                "id": "WS_L321_FILLER",
+                "qualifiedName": "WSS-CONTROL-TOTALS-REPORT.CONTROL-LINE-1.FILLER",
+                "level": 5,
+                "name": "FILLER",
+                "pic": "X(22)",
+                "usage": "DISPLAY",
+                "value": "SPACES",
+                "logicalType": "Alphanumeric (22 chars)",
+                "byteOffset": 1812,
+                "relativeOffset": 0,
+                "byteLength": 22,
+                "elementByteLength": 22,
+                "isFiller": true,
+                "location": {
+                  "startLine": 321,
+                  "endLine": 321,
+                  "startColumn": 15,
+                  "endColumn": 63
+                }
+              },
+              {
+                "id": "WS_L322_FILLER",
+                "qualifiedName": "WSS-CONTROL-TOTALS-REPORT.CONTROL-LINE-1.FILLER",
+                "level": 5,
+                "name": "FILLER",
+                "pic": "X(56)",
+                "usage": "DISPLAY",
+                "value": "TOTAL RECORDS READ FROM INPUT FILE",
+                "logicalType": "Alphanumeric (56 chars)",
+                "byteOffset": 1834,
+                "relativeOffset": 22,
+                "byteLength": 56,
+                "elementByteLength": 56,
+                "isFiller": true,
+                "location": {
+                  "startLine": 322,
+                  "endLine": 323,
+                  "startColumn": 15,
+                  "endColumn": 68
+                }
+              },
+              {
+                "id": "WS_L324_CTL-RECS-READ",
+                "qualifiedName": "WSS-CONTROL-TOTALS-REPORT.CONTROL-LINE-1.CTL-RECS-READ",
+                "level": 5,
+                "name": "CTL-RECS-READ",
+                "pic": "ZZZ,ZZZ,ZZ9",
+                "usage": "DISPLAY",
+                "logicalType": "Numeric Display (9 digits)",
+                "byteOffset": 1890,
+                "relativeOffset": 78,
+                "byteLength": 11,
+                "elementByteLength": 11,
+                "location": {
+                  "startLine": 324,
+                  "endLine": 324,
+                  "startColumn": 15,
+                  "endColumn": 56
+                }
+              },
+              {
+                "id": "WS_L325_FILLER",
+                "qualifiedName": "WSS-CONTROL-TOTALS-REPORT.CONTROL-LINE-1.FILLER",
+                "level": 5,
+                "name": "FILLER",
+                "pic": "X(19)",
+                "usage": "DISPLAY",
+                "value": "SPACES",
+                "logicalType": "Alphanumeric (19 chars)",
+                "byteOffset": 1901,
+                "relativeOffset": 89,
+                "byteLength": 19,
+                "elementByteLength": 19,
+                "isFiller": true,
+                "location": {
+                  "startLine": 325,
+                  "endLine": 325,
+                  "startColumn": 15,
+                  "endColumn": 63
+                }
+              }
+            ],
+            "location": {
+              "startLine": 320,
+              "endLine": 320,
+              "startColumn": 11,
+              "endColumn": 28
+            }
+          },
+          {
+            "id": "WS_L327_CONTROL-LINE-2",
+            "qualifiedName": "WSS-CONTROL-TOTALS-REPORT.CONTROL-LINE-2",
+            "level": 3,
+            "name": "CONTROL-LINE-2",
+            "usage": "DISPLAY",
+            "logicalType": "Group",
+            "byteOffset": 1920,
+            "relativeOffset": 1181,
+            "byteLength": 108,
+            "elementByteLength": 108,
+            "children": [
+              {
+                "id": "WS_L328_FILLER",
+                "qualifiedName": "WSS-CONTROL-TOTALS-REPORT.CONTROL-LINE-2.FILLER",
+                "level": 5,
+                "name": "FILLER",
+                "pic": "X(22)",
+                "usage": "DISPLAY",
+                "value": "SPACES",
+                "logicalType": "Alphanumeric (22 chars)",
+                "byteOffset": 1920,
+                "relativeOffset": 0,
+                "byteLength": 22,
+                "elementByteLength": 22,
+                "isFiller": true,
+                "location": {
+                  "startLine": 328,
+                  "endLine": 328,
+                  "startColumn": 15,
+                  "endColumn": 63
+                }
+              },
+              {
+                "id": "WS_L329_FILLER",
+                "qualifiedName": "WSS-CONTROL-TOTALS-REPORT.CONTROL-LINE-2.FILLER",
+                "level": 5,
+                "name": "FILLER",
+                "pic": "X(56)",
+                "usage": "DISPLAY",
+                "value": "TOTAL RECORDS WRITTEN TO OUTPUT FILE",
+                "logicalType": "Alphanumeric (56 chars)",
+                "byteOffset": 1942,
+                "relativeOffset": 22,
+                "byteLength": 56,
+                "elementByteLength": 56,
+                "isFiller": true,
+                "location": {
+                  "startLine": 329,
+                  "endLine": 330,
+                  "startColumn": 15,
+                  "endColumn": 68
+                }
+              },
+              {
+                "id": "WS_L331_CTL-RECS-WRITTEN",
+                "qualifiedName": "WSS-CONTROL-TOTALS-REPORT.CONTROL-LINE-2.CTL-RECS-WRITTEN",
+                "level": 5,
+                "name": "CTL-RECS-WRITTEN",
+                "pic": "ZZZ,ZZZ,ZZ9",
+                "usage": "DISPLAY",
+                "logicalType": "Numeric Display (9 digits)",
+                "byteOffset": 1998,
+                "relativeOffset": 78,
+                "byteLength": 11,
+                "elementByteLength": 11,
+                "location": {
+                  "startLine": 331,
+                  "endLine": 331,
+                  "startColumn": 15,
+                  "endColumn": 56
+                }
+              },
+              {
+                "id": "WS_L332_FILLER",
+                "qualifiedName": "WSS-CONTROL-TOTALS-REPORT.CONTROL-LINE-2.FILLER",
+                "level": 5,
+                "name": "FILLER",
+                "pic": "X(19)",
+                "usage": "DISPLAY",
+                "value": "SPACES",
+                "logicalType": "Alphanumeric (19 chars)",
+                "byteOffset": 2009,
+                "relativeOffset": 89,
+                "byteLength": 19,
+                "elementByteLength": 19,
+                "isFiller": true,
+                "location": {
+                  "startLine": 332,
+                  "endLine": 332,
+                  "startColumn": 15,
+                  "endColumn": 63
+                }
+              }
+            ],
+            "location": {
+              "startLine": 327,
+              "endLine": 327,
+              "startColumn": 11,
+              "endColumn": 28
+            }
+          }
+        ],
+        "location": {
+          "startLine": 231,
+          "endLine": 231,
+          "startColumn": 7,
+          "endColumn": 36
+        }
+      }
+    ],
+    "workingStorageBytes": 2028
+  },
+  "sections": [
+    {
+      "name": "0000-MAIN",
+      "location": {
+        "startLine": 338,
+        "endLine": 602,
+        "startColumn": 7,
+        "endColumn": 15
+      },
+      "statements": [
+        {
+          "type": "PERFORM",
+          "location": {
+            "startLine": 340,
+            "endLine": 340,
+            "startColumn": 11,
+            "endColumn": 37
+          },
+          "rawText": "PERFORM 1000-GET-DSN THRU 1000-GET-DSN-EXIT",
+          "target": "1000-GET-DSN",
+          "thru": "1000-GET-DSN-EXIT"
+        },
+        {
+          "type": "IF",
+          "location": {
+            "startLine": 342,
+            "endLine": 355,
+            "startColumn": 11,
+            "endColumn": 45
+          },
+          "rawText": "IF END-OF-DSN-FILE PERFORM 2000-DLN-FILE-EMPTY THRU 2000-DLN-FILE-EMPTY-EXIT ELSE PERFORM 3000-OPEN-FILES THRU 3000-OPEN-FILES-EXIT PERFORM 4000-READ-RDM-FILE THRU 4000-READ-RDM-FILE-EXIT PERFORM 5000-PROCESS-RDM-FILE THRU 5000-PROCESS-RDM-FILE-EXIT UNTIL END-OF-RDM-FILE PERFORM 9000-CLOSE-FILES THRU 9000-CLOSE-FILES-EXIT",
+          "condition": "END-OF-DSN-FILE",
+          "thenStatements": [
+            {
+              "type": "PERFORM",
+              "location": {
+                "startLine": 344,
+                "endLine": 345,
+                "startColumn": 15,
+                "endColumn": 19
+              },
+              "rawText": "PERFORM 2000-DLN-FILE-EMPTY THRU 2000-DLN-FILE-EMPTY-EXIT",
+              "target": "2000-DLN-FILE-EMPTY",
+              "thru": "2000-DLN-FILE-EMPTY-EXIT"
+            }
+          ],
+          "elseStatements": [
+            {
+              "type": "PERFORM",
+              "location": {
+                "startLine": 348,
+                "endLine": 348,
+                "startColumn": 15,
+                "endColumn": 44
+              },
+              "rawText": "PERFORM 3000-OPEN-FILES THRU 3000-OPEN-FILES-EXIT",
+              "target": "3000-OPEN-FILES",
+              "thru": "3000-OPEN-FILES-EXIT"
+            },
+            {
+              "type": "PERFORM",
+              "location": {
+                "startLine": 350,
+                "endLine": 350,
+                "startColumn": 15,
+                "endColumn": 47
+              },
+              "rawText": "PERFORM 4000-READ-RDM-FILE THRU 4000-READ-RDM-FILE-EXIT",
+              "target": "4000-READ-RDM-FILE",
+              "thru": "4000-READ-RDM-FILE-EXIT"
+            },
+            {
+              "type": "PERFORM",
+              "location": {
+                "startLine": 352,
+                "endLine": 353,
+                "startColumn": 15,
+                "endColumn": 52
+              },
+              "rawText": "PERFORM 5000-PROCESS-RDM-FILE THRU 5000-PROCESS-RDM-FILE-EXIT UNTIL END-OF-RDM-FILE",
+              "target": "5000-PROCESS-RDM-FILE",
+              "thru": "5000-PROCESS-RDM-FILE-EXIT",
+              "performType": "UNTIL",
+              "untilCondition": "UNTIL END-OF-RDM-FILE"
+            },
+            {
+              "type": "PERFORM",
+              "location": {
+                "startLine": 355,
+                "endLine": 355,
+                "startColumn": 15,
+                "endColumn": 45
+              },
+              "rawText": "PERFORM 9000-CLOSE-FILES THRU 9000-CLOSE-FILES-EXIT",
+              "target": "9000-CLOSE-FILES",
+              "thru": "9000-CLOSE-FILES-EXIT"
+            }
+          ]
+        },
+        {
+          "type": "STOP",
+          "location": {
+            "startLine": 357,
+            "endLine": 357,
+            "startColumn": 11,
+            "endColumn": 16
+          },
+          "rawText": "STOP RUN",
+          "operation": "STOP",
+          "expression": "STOP RUN"
+        }
+      ],
+      "paragraphNames": [
+        "1000-GET-DSN",
+        "1000-GET-DSN-EXIT",
+        "2000-DLN-FILE-EMPTY",
+        "2000-DLN-FILE-EMPTY-EXIT",
+        "3000-OPEN-FILES",
+        "3000-OPEN-FILES-EXIT",
+        "5000-PROCESS-RDM-FILE",
+        "5000-PROCESS-RDM-FILE-EXIT",
+        "4000-READ-RDM-FILE",
+        "4000-READ-RDM-FILE-EXIT",
+        "5000-WRITE-TOTALS",
+        "5000-WRITE-TOTALS-EXIT",
+        "5500-PRINT-TAX-SOURCE-SUB",
+        "5500-PRINT-TAX-SOURCE-SUB-EXIT",
+        "7000-PRINT-HEADERS",
+        "7000-PRINT-HEADERS-EXIT",
+        "8000-PRINT-GRAND-TOTALS",
+        "8000-PRINT-GRAND-TOTALS-EXIT",
+        "8500-WRITE-CNTRL-TOT",
+        "8500-WRITE-CNTRL-TOT-EXIT",
+        "9000-CLOSE-FILES",
+        "9000-CLOSE-FILES-EXIT",
+        "9000-EMPTY-FILE-MSG",
+        "9000-EMPTY-FILE-MSG-EXIT"
+      ]
+    }
+  ],
+  "paragraphs": [
+    {
+      "name": "1000-GET-DSN",
+      "sectionParent": "0000-MAIN",
+      "location": {
+        "startLine": 366,
+        "endLine": 371,
+        "startColumn": 7,
+        "endColumn": 31
+      },
+      "fallthroughSuccessor": "1000-GET-DSN-EXIT",
+      "statements": [
+        {
+          "type": "OPEN",
+          "location": {
+            "startLine": 367,
+            "endLine": 367,
+            "startColumn": 11,
+            "endColumn": 22
+          },
+          "rawText": "OPEN INPUT DSN-INPUT-FILE",
+          "operation": "OPEN",
+          "expression": "OPEN INPUT DSN-INPUT-FILE"
+        },
+        {
+          "type": "READ",
+          "location": {
+            "startLine": 367,
+            "endLine": 370,
+            "startColumn": 37,
+            "endColumn": 38
+          },
+          "rawText": "READ DSN-INPUT-FILE INTO WSS-DSN-DATA AT END SET END-OF-DSN-FILE TO TRUE",
+          "targetFieldIds": [
+            "WS_L106_WSS-DSN-DATA"
+          ],
+          "operation": "READ",
+          "file": "DSN-INPUT-FILE",
+          "into": "INTO WSS-DSN-DATA",
+          "atEndStatements": [
+            {
+              "type": "SET",
+              "location": {
+                "startLine": 370,
+                "endLine": 370,
+                "startColumn": 15,
+                "endColumn": 38
+              },
+              "rawText": "SET END-OF-DSN-FILE TO TRUE",
+              "operation": "SET",
+              "expression": "SET END-OF-DSN-FILE TO TRUE"
+            }
+          ]
+        },
+        {
+          "type": "CLOSE",
+          "location": {
+            "startLine": 371,
+            "endLine": 371,
+            "startColumn": 11,
+            "endColumn": 17
+          },
+          "rawText": "CLOSE DSN-INPUT-FILE",
+          "operation": "CLOSE",
+          "expression": "CLOSE DSN-INPUT-FILE"
+        }
+      ]
+    },
+    {
+      "name": "1000-GET-DSN-EXIT",
+      "sectionParent": "0000-MAIN",
+      "location": {
+        "startLine": 373,
+        "endLine": 374,
+        "startColumn": 7,
+        "endColumn": 15
+      },
+      "fallthroughSuccessor": "2000-DLN-FILE-EMPTY",
+      "statements": [
+        {
+          "type": "EXIT",
+          "location": {
+            "startLine": 374,
+            "endLine": 374,
+            "startColumn": 11,
+            "endColumn": 11
+          },
+          "rawText": "EXIT",
+          "operation": "EXIT"
+        }
+      ]
+    },
+    {
+      "name": "2000-DLN-FILE-EMPTY",
+      "sectionParent": "0000-MAIN",
+      "location": {
+        "startLine": 380,
+        "endLine": 382,
+        "startColumn": 7,
+        "endColumn": 46
+      },
+      "fallthroughSuccessor": "2000-DLN-FILE-EMPTY-EXIT",
+      "statements": [
+        {
+          "type": "DISPLAY",
+          "location": {
+            "startLine": 381,
+            "endLine": 382,
+            "startColumn": 11,
+            "endColumn": 15
+          },
+          "rawText": "DISPLAY 'FILE CONTAINING THE DLN FOR THE FILE ' 'TO BE PROCESSED IS EMPTY!!!! '",
+          "operands": [
+            "'FILE CONTAINING THE DLN FOR THE FILE '",
+            "'TO BE PROCESSED IS EMPTY!!!! '"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "2000-DLN-FILE-EMPTY-EXIT",
+      "sectionParent": "0000-MAIN",
+      "location": {
+        "startLine": 383,
+        "endLine": 384,
+        "startColumn": 7,
+        "endColumn": 15
+      },
+      "fallthroughSuccessor": "3000-OPEN-FILES",
+      "statements": [
+        {
+          "type": "EXIT",
+          "location": {
+            "startLine": 384,
+            "endLine": 384,
+            "startColumn": 11,
+            "endColumn": 11
+          },
+          "rawText": "EXIT",
+          "operation": "EXIT"
+        }
+      ]
+    },
+    {
+      "name": "3000-OPEN-FILES",
+      "sectionParent": "0000-MAIN",
+      "location": {
+        "startLine": 390,
+        "endLine": 403,
+        "startColumn": 7,
+        "endColumn": 42
+      },
+      "fallthroughSuccessor": "3000-OPEN-FILES-EXIT",
+      "statements": [
+        {
+          "type": "OPEN",
+          "location": {
+            "startLine": 391,
+            "endLine": 392,
+            "startColumn": 11,
+            "endColumn": 31
+          },
+          "rawText": "OPEN INPUT RDM-INPUT-FILE DSN-INPUT-FILE OUTPUT RDM-OUTPUT-FILE CONTROL-REPORT",
+          "operation": "OPEN",
+          "expression": "OPEN INPUT RDM-INPUT-FILE DSN-INPUT-FILE OUTPUT RDM-OUTPUT-FILE CONTROL-REPORT"
+        },
+        {
+          "type": "ACCEPT",
+          "location": {
+            "startLine": 393,
+            "endLine": 393,
+            "startColumn": 11,
+            "endColumn": 45
+          },
+          "rawText": "ACCEPT WSS-CURRENT-DATE FROM DATE YYYYMMDD",
+          "targetFieldIds": [
+            "WS_L95_WSS-CURRENT-DATE"
+          ],
+          "operation": "ACCEPT",
+          "expression": "ACCEPT WSS-CURRENT-DATE FROM DATE YYYYMMDD"
+        },
+        {
+          "type": "STRING",
+          "location": {
+            "startLine": 394,
+            "endLine": 395,
+            "startColumn": 11,
+            "endColumn": 25
+          },
+          "rawText": "STRING WSS-MONTH '/' WSS-DAY '/' WSS-YEAR DELIMITED BY SIZE INTO CURRENT-DATE",
+          "sourceFieldIds": [
+            "WS_L98_WSS-MONTH",
+            "WS_L99_WSS-DAY",
+            "WS_L97_WSS-YEAR",
+            "WS_L242_CURRENT-DATE"
+          ],
+          "operation": "STRING",
+          "expression": "STRING WSS-MONTH '/' WSS-DAY '/' WSS-YEAR DELIMITED BY SIZE INTO CURRENT-DATE"
+        },
+        {
+          "type": "ACCEPT",
+          "location": {
+            "startLine": 396,
+            "endLine": 396,
+            "startColumn": 15,
+            "endColumn": 44
+          },
+          "rawText": "ACCEPT WSS-CURRENT-TIME FROM TIME",
+          "targetFieldIds": [
+            "WS_L101_WSS-CURRENT-TIME"
+          ],
+          "operation": "ACCEPT",
+          "expression": "ACCEPT WSS-CURRENT-TIME FROM TIME"
+        },
+        {
+          "type": "STRING",
+          "location": {
+            "startLine": 397,
+            "endLine": 399,
+            "startColumn": 15,
+            "endColumn": 29
+          },
+          "rawText": "STRING WSS-HOUR ':' WSS-MINUTES ':' WSS-SECONDS DELIMITED BY SIZE INTO CURRENT-TIME",
+          "sourceFieldIds": [
+            "WS_L102_WSS-HOUR",
+            "WS_L103_WSS-MINUTES",
+            "WS_L104_WSS-SECONDS",
+            "WS_L253_CURRENT-TIME"
+          ],
+          "operation": "STRING",
+          "expression": "STRING WSS-HOUR ':' WSS-MINUTES ':' WSS-SECONDS DELIMITED BY SIZE INTO CURRENT-TIME"
+        },
+        {
+          "type": "STRING",
+          "location": {
+            "startLine": 401,
+            "endLine": 403,
+            "startColumn": 11,
+            "endColumn": 25
+          },
+          "rawText": "STRING WSS-CENTURY WSS-YEAR '/' WSS-MONTH '/' WSS-DAY DELIMITED BY SIZE INTO WSS-DATE-YYYYMMDD",
+          "sourceFieldIds": [
+            "WS_L96_WSS-CENTURY",
+            "WS_L97_WSS-YEAR",
+            "WS_L98_WSS-MONTH",
+            "WS_L99_WSS-DAY",
+            "WS_L119_WSS-DATE-YYYYMMDD"
+          ],
+          "operation": "STRING",
+          "expression": "STRING WSS-CENTURY WSS-YEAR '/' WSS-MONTH '/' WSS-DAY DELIMITED BY SIZE INTO WSS-DATE-YYYYMMDD"
+        }
+      ]
+    },
+    {
+      "name": "3000-OPEN-FILES-EXIT",
+      "sectionParent": "0000-MAIN",
+      "location": {
+        "startLine": 405,
+        "endLine": 406,
+        "startColumn": 7,
+        "endColumn": 15
+      },
+      "fallthroughSuccessor": "5000-PROCESS-RDM-FILE",
+      "statements": [
+        {
+          "type": "EXIT",
+          "location": {
+            "startLine": 406,
+            "endLine": 406,
+            "startColumn": 11,
+            "endColumn": 11
+          },
+          "rawText": "EXIT",
+          "operation": "EXIT"
+        }
+      ]
+    },
+    {
+      "name": "5000-PROCESS-RDM-FILE",
+      "sectionParent": "0000-MAIN",
+      "location": {
+        "startLine": 411,
+        "endLine": 422,
+        "startColumn": 7,
+        "endColumn": 66
+      },
+      "successors": [
+        "4000-READ-RDM-FILE"
+      ],
+      "fallthroughSuccessor": "5000-PROCESS-RDM-FILE-EXIT",
+      "statements": [
+        {
+          "type": "ADD",
+          "location": {
+            "startLine": 419,
+            "endLine": 419,
+            "startColumn": 11,
+            "endColumn": 20
+          },
+          "rawText": "ADD 1 TO SUB-DETAIL-COUNT",
+          "sourceFieldIds": [
+            "WS_L143_SUB-DETAIL-COUNT"
+          ],
+          "operation": "ADD",
+          "expression": "ADD 1 TO SUB-DETAIL-COUNT"
+        },
+        {
+          "type": "ADD",
+          "location": {
+            "startLine": 420,
+            "endLine": 420,
+            "startColumn": 11,
+            "endColumn": 37
+          },
+          "rawText": "ADD RDM-PAYMENT-AMOUNT TO SUM-SUB-DETAIL-AMOUNT",
+          "sourceFieldIds": [
+            "WS_L175_RDM-PAYMENT-AMOUNT",
+            "WS_L148_SUM-SUB-DETAIL-AMOUNT"
+          ],
+          "operation": "ADD",
+          "expression": "ADD RDM-PAYMENT-AMOUNT TO SUM-SUB-DETAIL-AMOUNT"
+        },
+        {
+          "type": "PERFORM",
+          "location": {
+            "startLine": 422,
+            "endLine": 422,
+            "startColumn": 11,
+            "endColumn": 43
+          },
+          "rawText": "PERFORM 4000-READ-RDM-FILE THRU 4000-READ-RDM-FILE-EXIT",
+          "target": "4000-READ-RDM-FILE",
+          "thru": "4000-READ-RDM-FILE-EXIT"
+        }
+      ]
+    },
+    {
+      "name": "5000-PROCESS-RDM-FILE-EXIT",
+      "sectionParent": "0000-MAIN",
+      "location": {
+        "startLine": 424,
+        "endLine": 425,
+        "startColumn": 7,
+        "endColumn": 15
+      },
+      "fallthroughSuccessor": "4000-READ-RDM-FILE",
+      "statements": [
+        {
+          "type": "EXIT",
+          "location": {
+            "startLine": 425,
+            "endLine": 425,
+            "startColumn": 11,
+            "endColumn": 11
+          },
+          "rawText": "EXIT",
+          "operation": "EXIT"
+        }
+      ]
+    },
+    {
+      "name": "4000-READ-RDM-FILE",
+      "sectionParent": "0000-MAIN",
+      "location": {
+        "startLine": 430,
+        "endLine": 434,
+        "startColumn": 7,
+        "endColumn": 37
+      },
+      "calledBy": [
+        "5000-PROCESS-RDM-FILE"
+      ],
+      "fallthroughSuccessor": "4000-READ-RDM-FILE-EXIT",
+      "statements": [
+        {
+          "type": "READ",
+          "location": {
+            "startLine": 431,
+            "endLine": 434,
+            "startColumn": 11,
+            "endColumn": 24
+          },
+          "rawText": "READ RDM-INPUT-FILE INTO WSS-RDM-TRANS AT END SET END-OF-RDM-FILE TO TRUE NOT AT END ADD 1 TO TOT-RECS-READ",
+          "targetFieldIds": [
+            "WS_L167_WSS-RDM-TRANS"
+          ],
+          "operation": "READ",
+          "file": "RDM-INPUT-FILE",
+          "into": "INTO WSS-RDM-TRANS",
+          "atEndStatements": [
+            {
+              "type": "SET",
+              "location": {
+                "startLine": 433,
+                "endLine": 433,
+                "startColumn": 15,
+                "endColumn": 38
+              },
+              "rawText": "SET END-OF-RDM-FILE TO TRUE",
+              "operation": "SET",
+              "expression": "SET END-OF-RDM-FILE TO TRUE"
+            }
+          ],
+          "notAtEndStatements": [
+            {
+              "type": "ADD",
+              "location": {
+                "startLine": 434,
+                "endLine": 434,
+                "startColumn": 15,
+                "endColumn": 24
+              },
+              "rawText": "ADD 1 TO TOT-RECS-READ",
+              "sourceFieldIds": [
+                "WS_L141_TOT-RECS-READ"
+              ],
+              "operation": "ADD",
+              "expression": "ADD 1 TO TOT-RECS-READ"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "4000-READ-RDM-FILE-EXIT",
+      "sectionParent": "0000-MAIN",
+      "location": {
+        "startLine": 435,
+        "endLine": 436,
+        "startColumn": 7,
+        "endColumn": 15
+      },
+      "calledBy": [
+        "5000-PROCESS-RDM-FILE"
+      ],
+      "fallthroughSuccessor": "5000-WRITE-TOTALS",
+      "statements": [
+        {
+          "type": "EXIT",
+          "location": {
+            "startLine": 436,
+            "endLine": 436,
+            "startColumn": 11,
+            "endColumn": 11
+          },
+          "rawText": "EXIT",
+          "operation": "EXIT"
+        }
+      ]
+    },
+    {
+      "name": "5000-WRITE-TOTALS",
+      "sectionParent": "0000-MAIN",
+      "location": {
+        "startLine": 441,
+        "endLine": 449,
+        "startColumn": 7,
+        "endColumn": 66
+      },
+      "calledBy": [
+        "9000-CLOSE-FILES"
+      ],
+      "successors": [
+        "5500-PRINT-TAX-SOURCE-SUB"
+      ],
+      "fallthroughSuccessor": "5000-WRITE-TOTALS-EXIT",
+      "statements": [
+        {
+          "type": "PERFORM",
+          "location": {
+            "startLine": 442,
+            "endLine": 443,
+            "startColumn": 11,
+            "endColumn": 15
+          },
+          "rawText": "PERFORM 5500-PRINT-TAX-SOURCE-SUB THRU 5500-PRINT-TAX-SOURCE-SUB-EXIT",
+          "target": "5500-PRINT-TAX-SOURCE-SUB",
+          "thru": "5500-PRINT-TAX-SOURCE-SUB-EXIT"
+        },
+        {
+          "type": "ADD",
+          "location": {
+            "startLine": 445,
+            "endLine": 445,
+            "startColumn": 11,
+            "endColumn": 35
+          },
+          "rawText": "ADD SUB-DETAIL-COUNT TO GRAND-DETAIL-COUNT",
+          "sourceFieldIds": [
+            "WS_L143_SUB-DETAIL-COUNT",
+            "WS_L144_GRAND-DETAIL-COUNT"
+          ],
+          "operation": "ADD",
+          "expression": "ADD SUB-DETAIL-COUNT TO GRAND-DETAIL-COUNT"
+        },
+        {
+          "type": "ADD",
+          "location": {
+            "startLine": 446,
+            "endLine": 446,
+            "startColumn": 11,
+            "endColumn": 40
+          },
+          "rawText": "ADD SUM-SUB-DETAIL-AMOUNT TO SUM-GRAND-DETAIL-AMOUNT",
+          "sourceFieldIds": [
+            "WS_L148_SUM-SUB-DETAIL-AMOUNT",
+            "WS_L149_SUM-GRAND-DETAIL-AMOUNT"
+          ],
+          "operation": "ADD",
+          "expression": "ADD SUM-SUB-DETAIL-AMOUNT TO SUM-GRAND-DETAIL-AMOUNT"
+        },
+        {
+          "type": "MOVE",
+          "location": {
+            "startLine": 447,
+            "endLine": 447,
+            "startColumn": 11,
+            "endColumn": 26
+          },
+          "rawText": "MOVE ZEROES TO SUB-DETAIL-COUNT",
+          "targetFieldIds": [
+            "WS_L143_SUB-DETAIL-COUNT"
+          ],
+          "fromExpr": "ZEROES",
+          "toTargets": [
+            "SUB-DETAIL-COUNT"
+          ]
+        },
+        {
+          "type": "MOVE",
+          "location": {
+            "startLine": 448,
+            "endLine": 448,
+            "startColumn": 11,
+            "endColumn": 26
+          },
+          "rawText": "MOVE ZEROES TO SUM-SUB-DETAIL-AMOUNT",
+          "targetFieldIds": [
+            "WS_L148_SUM-SUB-DETAIL-AMOUNT"
+          ],
+          "fromExpr": "ZEROES",
+          "toTargets": [
+            "SUM-SUB-DETAIL-AMOUNT"
+          ]
+        },
+        {
+          "type": "MOVE",
+          "location": {
+            "startLine": 449,
+            "endLine": 449,
+            "startColumn": 11,
+            "endColumn": 43
+          },
+          "rawText": "MOVE WSS-HOLD-TAX-SOURCE-SUB TO WSS-PREV-TAX-SOURCE-SUB",
+          "sourceFieldIds": [
+            "WS_L151_WSS-HOLD-TAX-SOURCE-SUB"
+          ],
+          "targetFieldIds": [
+            "WS_L157_WSS-PREV-TAX-SOURCE-SUB"
+          ],
+          "fromExpr": "WSS-HOLD-TAX-SOURCE-SUB",
+          "toTargets": [
+            "WSS-PREV-TAX-SOURCE-SUB"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "5000-WRITE-TOTALS-EXIT",
+      "sectionParent": "0000-MAIN",
+      "location": {
+        "startLine": 451,
+        "endLine": 452,
+        "startColumn": 7,
+        "endColumn": 15
+      },
+      "calledBy": [
+        "9000-CLOSE-FILES"
+      ],
+      "fallthroughSuccessor": "5500-PRINT-TAX-SOURCE-SUB",
+      "statements": [
+        {
+          "type": "EXIT",
+          "location": {
+            "startLine": 452,
+            "endLine": 452,
+            "startColumn": 11,
+            "endColumn": 11
+          },
+          "rawText": "EXIT",
+          "operation": "EXIT"
+        }
+      ]
+    },
+    {
+      "name": "5500-PRINT-TAX-SOURCE-SUB",
+      "sectionParent": "0000-MAIN",
+      "location": {
+        "startLine": 456,
+        "endLine": 489,
+        "startColumn": 7,
+        "endColumn": 36
+      },
+      "calledBy": [
+        "5000-WRITE-TOTALS"
+      ],
+      "successors": [
+        "7000-PRINT-HEADERS"
+      ],
+      "fallthroughSuccessor": "5500-PRINT-TAX-SOURCE-SUB-EXIT",
+      "statements": [
+        {
+          "type": "IF",
+          "location": {
+            "startLine": 457,
+            "endLine": 458,
+            "startColumn": 11,
+            "endColumn": 47
+          },
+          "rawText": "IF LINE-COUNTR GREATER THAN 54 PERFORM 7000-PRINT-HEADERS THRU 7000-PRINT-HEADERS-EXIT",
+          "sourceFieldIds": [
+            "WS_L137_LINE-COUNTR"
+          ],
+          "condition": "LINE-COUNTR GREATER THAN 54",
+          "thenStatements": [
+            {
+              "type": "PERFORM",
+              "location": {
+                "startLine": 458,
+                "endLine": 458,
+                "startColumn": 15,
+                "endColumn": 47
+              },
+              "rawText": "PERFORM 7000-PRINT-HEADERS THRU 7000-PRINT-HEADERS-EXIT",
+              "target": "7000-PRINT-HEADERS",
+              "thru": "7000-PRINT-HEADERS-EXIT"
+            }
+          ]
+        },
+        {
+          "type": "MOVE",
+          "location": {
+            "startLine": 460,
+            "endLine": 460,
+            "startColumn": 11,
+            "endColumn": 32
+          },
+          "rawText": "MOVE 'REVENUE 93' TO CTL-TAX-DESCRIP",
+          "targetFieldIds": [
+            "WS_L306_CTL-TAX-DESCRIP"
+          ],
+          "fromExpr": "'REVENUE 93'",
+          "toTargets": [
+            "CTL-TAX-DESCRIP"
+          ]
+        },
+        {
+          "type": "MOVE",
+          "location": {
+            "startLine": 461,
+            "endLine": 461,
+            "startColumn": 11,
+            "endColumn": 33
+          },
+          "rawText": "MOVE PREV-TAX-CODE TO CTL-TAX-TYPE",
+          "sourceFieldIds": [
+            "WS_L159_PREV-TAX-CODE"
+          ],
+          "targetFieldIds": [
+            "WS_L307_CTL-TAX-TYPE"
+          ],
+          "fromExpr": "PREV-TAX-CODE",
+          "toTargets": [
+            "CTL-TAX-TYPE"
+          ]
+        },
+        {
+          "type": "MOVE",
+          "location": {
+            "startLine": 462,
+            "endLine": 462,
+            "startColumn": 11,
+            "endColumn": 36
+          },
+          "rawText": "MOVE PREV-SOURCE-CODE TO CTL-SOURCE-CODE",
+          "sourceFieldIds": [
+            "WS_L160_PREV-SOURCE-CODE"
+          ],
+          "targetFieldIds": [
+            "WS_L308_CTL-SOURCE-CODE"
+          ],
+          "fromExpr": "PREV-SOURCE-CODE",
+          "toTargets": [
+            "CTL-SOURCE-CODE"
+          ]
+        },
+        {
+          "type": "MOVE",
+          "location": {
+            "startLine": 463,
+            "endLine": 463,
+            "startColumn": 11,
+            "endColumn": 36
+          },
+          "rawText": "MOVE PREV-FORMAT-CODE TO CTL-FORMAT-CODE",
+          "sourceFieldIds": [
+            "WS_L161_PREV-FORMAT-CODE"
+          ],
+          "targetFieldIds": [
+            "WS_L309_CTL-FORMAT-CODE"
+          ],
+          "fromExpr": "PREV-FORMAT-CODE",
+          "toTargets": [
+            "CTL-FORMAT-CODE"
+          ]
+        },
+        {
+          "type": "MOVE",
+          "location": {
+            "startLine": 464,
+            "endLine": 464,
+            "startColumn": 11,
+            "endColumn": 36
+          },
+          "rawText": "MOVE SUB-DETAIL-COUNT TO CTL-DETAIL-COUNT",
+          "sourceFieldIds": [
+            "WS_L143_SUB-DETAIL-COUNT"
+          ],
+          "targetFieldIds": [
+            "WS_L310_CTL-DETAIL-COUNT"
+          ],
+          "fromExpr": "SUB-DETAIL-COUNT",
+          "toTargets": [
+            "CTL-DETAIL-COUNT"
+          ]
+        },
+        {
+          "type": "MOVE",
+          "location": {
+            "startLine": 465,
+            "endLine": 465,
+            "startColumn": 11,
+            "endColumn": 41
+          },
+          "rawText": "MOVE SUM-SUB-DETAIL-AMOUNT TO CTL-DETAIL-AMOUNT",
+          "sourceFieldIds": [
+            "WS_L148_SUM-SUB-DETAIL-AMOUNT"
+          ],
+          "targetFieldIds": [
+            "WS_L313_CTL-DETAIL-AMOUNT"
+          ],
+          "fromExpr": "SUM-SUB-DETAIL-AMOUNT",
+          "toTargets": [
+            "CTL-DETAIL-AMOUNT"
+          ]
+        },
+        {
+          "type": "WRITE",
+          "location": {
+            "startLine": 465,
+            "endLine": 466,
+            "startColumn": 59,
+            "endColumn": 68
+          },
+          "rawText": "WRITE CTL-FILE-REP FROM CONTROL-PRINT-LINE AFTER ADVANCING 2",
+          "sourceFieldIds": [
+            "WS_L301_CONTROL-PRINT-LINE"
+          ],
+          "targetFieldIds": [
+            "FD_CONTROL-REPORT_L83_CTL-FILE-REP"
+          ],
+          "fromExpr": "FROM CONTROL-PRINT-LINE",
+          "operation": "WRITE",
+          "record": "CTL-FILE-REP"
+        },
+        {
+          "type": "ADD",
+          "location": {
+            "startLine": 467,
+            "endLine": 467,
+            "startColumn": 11,
+            "endColumn": 20
+          },
+          "rawText": "ADD 2 TO LINE-COUNTR",
+          "sourceFieldIds": [
+            "WS_L137_LINE-COUNTR"
+          ],
+          "operation": "ADD",
+          "expression": "ADD 2 TO LINE-COUNTR"
+        },
+        {
+          "type": "MOVE",
+          "location": {
+            "startLine": 471,
+            "endLine": 471,
+            "startColumn": 11,
+            "endColumn": 26
+          },
+          "rawText": "MOVE SPACES TO CRAS-STATISTICS-RECORD",
+          "targetFieldIds": [
+            "WS_L195_CRAS-STATISTICS-RECORD"
+          ],
+          "fromExpr": "SPACES",
+          "toTargets": [
+            "CRAS-STATISTICS-RECORD"
+          ]
+        },
+        {
+          "type": "MOVE",
+          "location": {
+            "startLine": 472,
+            "endLine": 472,
+            "startColumn": 11,
+            "endColumn": 29
+          },
+          "rawText": "MOVE 'DETAIL ' TO CRAS-RECORD-DESC",
+          "targetFieldIds": [
+            "WS_L198_CRAS-RECORD-DESC"
+          ],
+          "fromExpr": "'DETAIL '",
+          "toTargets": [
+            "CRAS-RECORD-DESC"
+          ]
+        },
+        {
+          "type": "MOVE",
+          "location": {
+            "startLine": 473,
+            "endLine": 473,
+            "startColumn": 11,
+            "endColumn": 33
+          },
+          "rawText": "MOVE PREV-TAX-CODE TO CRAS-TAX-TYPE",
+          "sourceFieldIds": [
+            "WS_L159_PREV-TAX-CODE"
+          ],
+          "targetFieldIds": [
+            "WS_L199_CRAS-TAX-TYPE"
+          ],
+          "fromExpr": "PREV-TAX-CODE",
+          "toTargets": [
+            "CRAS-TAX-TYPE"
+          ]
+        },
+        {
+          "type": "MOVE",
+          "location": {
+            "startLine": 474,
+            "endLine": 474,
+            "startColumn": 11,
+            "endColumn": 36
+          },
+          "rawText": "MOVE PREV-SOURCE-CODE TO CRAS-SOURCE-CODE",
+          "sourceFieldIds": [
+            "WS_L160_PREV-SOURCE-CODE"
+          ],
+          "targetFieldIds": [
+            "WS_L200_CRAS-SOURCE-CODE"
+          ],
+          "fromExpr": "PREV-SOURCE-CODE",
+          "toTargets": [
+            "CRAS-SOURCE-CODE"
+          ]
+        },
+        {
+          "type": "MOVE",
+          "location": {
+            "startLine": 475,
+            "endLine": 475,
+            "startColumn": 11,
+            "endColumn": 36
+          },
+          "rawText": "MOVE PREV-FORMAT-CODE TO CRAS-FORMAT-CODE",
+          "sourceFieldIds": [
+            "WS_L161_PREV-FORMAT-CODE"
+          ],
+          "targetFieldIds": [
+            "WS_L201_CRAS-FORMAT-CODE"
+          ],
+          "fromExpr": "PREV-FORMAT-CODE",
+          "toTargets": [
+            "CRAS-FORMAT-CODE"
+          ]
+        },
+        {
+          "type": "MOVE",
+          "location": {
+            "startLine": 477,
+            "endLine": 477,
+            "startColumn": 11,
+            "endColumn": 26
+          },
+          "rawText": "MOVE ZEROES TO CRAS-DET5LV2-COUNT",
+          "targetFieldIds": [
+            "WS_L202_CRAS-DET5LV2-COUNT"
+          ],
+          "fromExpr": "ZEROES",
+          "toTargets": [
+            "CRAS-DET5LV2-COUNT"
+          ]
+        },
+        {
+          "type": "MOVE",
+          "location": {
+            "startLine": 478,
+            "endLine": 478,
+            "startColumn": 11,
+            "endColumn": 36
+          },
+          "rawText": "MOVE SUB-DETAIL-COUNT TO CRAS-DET5ALL-COUNT",
+          "sourceFieldIds": [
+            "WS_L143_SUB-DETAIL-COUNT"
+          ],
+          "targetFieldIds": [
+            "WS_L204_CRAS-DET5ALL-COUNT"
+          ],
+          "fromExpr": "SUB-DETAIL-COUNT",
+          "toTargets": [
+            "CRAS-DET5ALL-COUNT"
+          ]
+        },
+        {
+          "type": "MOVE",
+          "location": {
+            "startLine": 479,
+            "endLine": 479,
+            "startColumn": 11,
+            "endColumn": 41
+          },
+          "rawText": "MOVE SUM-SUB-DETAIL-AMOUNT TO CRAS-DET5LV2-AMOUNT",
+          "sourceFieldIds": [
+            "WS_L148_SUM-SUB-DETAIL-AMOUNT"
+          ],
+          "targetFieldIds": [
+            "WS_L203_CRAS-DET5LV2-AMOUNT"
+          ],
+          "fromExpr": "SUM-SUB-DETAIL-AMOUNT",
+          "toTargets": [
+            "CRAS-DET5LV2-AMOUNT"
+          ]
+        },
+        {
+          "type": "MOVE",
+          "location": {
+            "startLine": 480,
+            "endLine": 480,
+            "startColumn": 11,
+            "endColumn": 26
+          },
+          "rawText": "MOVE ZEROES TO CRAS-DET67LV2-COUNT",
+          "targetFieldIds": [
+            "WS_L205_CRAS-DET67LV2-COUNT"
+          ],
+          "fromExpr": "ZEROES",
+          "toTargets": [
+            "CRAS-DET67LV2-COUNT"
+          ]
+        },
+        {
+          "type": "MOVE",
+          "location": {
+            "startLine": 481,
+            "endLine": 481,
+            "startColumn": 11,
+            "endColumn": 26
+          },
+          "rawText": "MOVE ZEROES TO CRAS-DET67ALL-COUNT",
+          "targetFieldIds": [
+            "WS_L206_CRAS-DET67ALL-COUNT"
+          ],
+          "fromExpr": "ZEROES",
+          "toTargets": [
+            "CRAS-DET67ALL-COUNT"
+          ]
+        },
+        {
+          "type": "MOVE",
+          "location": {
+            "startLine": 483,
+            "endLine": 483,
+            "startColumn": 11,
+            "endColumn": 26
+          },
+          "rawText": "MOVE ZEROES TO CRAS-TRAILER-AMOUNT",
+          "targetFieldIds": [
+            "WS_L207_CRAS-TRAILER-AMOUNT"
+          ],
+          "fromExpr": "ZEROES",
+          "toTargets": [
+            "CRAS-TRAILER-AMOUNT"
+          ]
+        },
+        {
+          "type": "MOVE",
+          "location": {
+            "startLine": 484,
+            "endLine": 484,
+            "startColumn": 11,
+            "endColumn": 37
+          },
+          "rawText": "MOVE WSS-DATE-YYYYMMDD TO CRAS-RUN-DATE",
+          "sourceFieldIds": [
+            "WS_L119_WSS-DATE-YYYYMMDD"
+          ],
+          "targetFieldIds": [
+            "WS_L208_CRAS-RUN-DATE"
+          ],
+          "fromExpr": "WSS-DATE-YYYYMMDD",
+          "toTargets": [
+            "CRAS-RUN-DATE"
+          ]
+        },
+        {
+          "type": "MOVE",
+          "location": {
+            "startLine": 485,
+            "endLine": 485,
+            "startColumn": 11,
+            "endColumn": 32
+          },
+          "rawText": "MOVE CURRENT-TIME TO CRAS-RUN-TIME",
+          "sourceFieldIds": [
+            "WS_L253_CURRENT-TIME"
+          ],
+          "targetFieldIds": [
+            "WS_L209_CRAS-RUN-TIME"
+          ],
+          "fromExpr": "CURRENT-TIME",
+          "toTargets": [
+            "CRAS-RUN-TIME"
+          ]
+        },
+        {
+          "type": "MOVE",
+          "location": {
+            "startLine": 486,
+            "endLine": 486,
+            "startColumn": 11,
+            "endColumn": 33
+          },
+          "rawText": "MOVE DATA-SET-NAME TO CRAS-DATASET-NAME",
+          "sourceFieldIds": [
+            "WS_L107_DATA-SET-NAME"
+          ],
+          "targetFieldIds": [
+            "WS_L210_CRAS-DATASET-NAME"
+          ],
+          "fromExpr": "DATA-SET-NAME",
+          "toTargets": [
+            "CRAS-DATASET-NAME"
+          ]
+        },
+        {
+          "type": "WRITE",
+          "location": {
+            "startLine": 486,
+            "endLine": 488,
+            "startColumn": 51,
+            "endColumn": 20
+          },
+          "rawText": "WRITE RDM-OUT-REC FROM CRAS-STATISTICS-RECORD",
+          "sourceFieldIds": [
+            "WS_L195_CRAS-STATISTICS-RECORD"
+          ],
+          "targetFieldIds": [
+            "FD_RDM-OUTPUT-FILE_L75_RDM-OUT-REC"
+          ],
+          "fromExpr": "FROM CRAS-STATISTICS-RECORD",
+          "operation": "WRITE",
+          "record": "RDM-OUT-REC"
+        },
+        {
+          "type": "ADD",
+          "location": {
+            "startLine": 489,
+            "endLine": 489,
+            "startColumn": 11,
+            "endColumn": 20
+          },
+          "rawText": "ADD 1 TO TOT-RECS-WRITTEN",
+          "sourceFieldIds": [
+            "WS_L142_TOT-RECS-WRITTEN"
+          ],
+          "operation": "ADD",
+          "expression": "ADD 1 TO TOT-RECS-WRITTEN"
+        }
+      ]
+    },
+    {
+      "name": "5500-PRINT-TAX-SOURCE-SUB-EXIT",
+      "sectionParent": "0000-MAIN",
+      "location": {
+        "startLine": 491,
+        "endLine": 492,
+        "startColumn": 7,
+        "endColumn": 15
+      },
+      "calledBy": [
+        "5000-WRITE-TOTALS"
+      ],
+      "fallthroughSuccessor": "7000-PRINT-HEADERS",
+      "statements": [
+        {
+          "type": "EXIT",
+          "location": {
+            "startLine": 492,
+            "endLine": 492,
+            "startColumn": 11,
+            "endColumn": 11
+          },
+          "rawText": "EXIT",
+          "operation": "EXIT"
+        }
+      ]
+    },
+    {
+      "name": "7000-PRINT-HEADERS",
+      "sectionParent": "0000-MAIN",
+      "location": {
+        "startLine": 497,
+        "endLine": 507,
+        "startColumn": 7,
+        "endColumn": 32
+      },
+      "calledBy": [
+        "5500-PRINT-TAX-SOURCE-SUB",
+        "9000-CLOSE-FILES"
+      ],
+      "fallthroughSuccessor": "7000-PRINT-HEADERS-EXIT",
+      "statements": [
+        {
+          "type": "ADD",
+          "location": {
+            "startLine": 498,
+            "endLine": 498,
+            "startColumn": 11,
+            "endColumn": 20
+          },
+          "rawText": "ADD 1 TO PAGE-COUNTR",
+          "sourceFieldIds": [
+            "WS_L136_PAGE-COUNTR"
+          ],
+          "operation": "ADD",
+          "expression": "ADD 1 TO PAGE-COUNTR"
+        },
+        {
+          "type": "MOVE",
+          "location": {
+            "startLine": 499,
+            "endLine": 499,
+            "startColumn": 11,
+            "endColumn": 31
+          },
+          "rawText": "MOVE PAGE-COUNTR TO PRINT-PAGE",
+          "sourceFieldIds": [
+            "WS_L136_PAGE-COUNTR"
+          ],
+          "targetFieldIds": [
+            "WS_L264_PRINT-PAGE"
+          ],
+          "fromExpr": "PAGE-COUNTR",
+          "toTargets": [
+            "PRINT-PAGE"
+          ]
+        },
+        {
+          "type": "WRITE",
+          "location": {
+            "startLine": 499,
+            "endLine": 500,
+            "startColumn": 42,
+            "endColumn": 46
+          },
+          "rawText": "WRITE CTL-FILE-REP FROM HEADING-LINE-1 AFTER ADVANCING PAGE",
+          "sourceFieldIds": [
+            "WS_L233_HEADING-LINE-1"
+          ],
+          "targetFieldIds": [
+            "FD_CONTROL-REPORT_L83_CTL-FILE-REP"
+          ],
+          "fromExpr": "FROM HEADING-LINE-1",
+          "operation": "WRITE",
+          "record": "CTL-FILE-REP"
+        },
+        {
+          "type": "WRITE",
+          "location": {
+            "startLine": 501,
+            "endLine": 501,
+            "startColumn": 11,
+            "endColumn": 66
+          },
+          "rawText": "WRITE CTL-FILE-REP FROM HEADING-LINE-2 AFTER ADVANCING 1",
+          "sourceFieldIds": [
+            "WS_L244_HEADING-LINE-2"
+          ],
+          "targetFieldIds": [
+            "FD_CONTROL-REPORT_L83_CTL-FILE-REP"
+          ],
+          "fromExpr": "FROM HEADING-LINE-2",
+          "operation": "WRITE",
+          "record": "CTL-FILE-REP"
+        },
+        {
+          "type": "WRITE",
+          "location": {
+            "startLine": 502,
+            "endLine": 502,
+            "startColumn": 11,
+            "endColumn": 66
+          },
+          "rawText": "WRITE CTL-FILE-REP FROM HEADING-LINE-3 AFTER ADVANCING 1",
+          "sourceFieldIds": [
+            "WS_L255_HEADING-LINE-3"
+          ],
+          "targetFieldIds": [
+            "FD_CONTROL-REPORT_L83_CTL-FILE-REP"
+          ],
+          "fromExpr": "FROM HEADING-LINE-3",
+          "operation": "WRITE",
+          "record": "CTL-FILE-REP"
+        },
+        {
+          "type": "WRITE",
+          "location": {
+            "startLine": 503,
+            "endLine": 503,
+            "startColumn": 11,
+            "endColumn": 66
+          },
+          "rawText": "WRITE CTL-FILE-REP FROM HEADING-LINE-4 AFTER ADVANCING 1",
+          "sourceFieldIds": [
+            "WS_L266_HEADING-LINE-4"
+          ],
+          "targetFieldIds": [
+            "FD_CONTROL-REPORT_L83_CTL-FILE-REP"
+          ],
+          "fromExpr": "FROM HEADING-LINE-4",
+          "operation": "WRITE",
+          "record": "CTL-FILE-REP"
+        },
+        {
+          "type": "WRITE",
+          "location": {
+            "startLine": 504,
+            "endLine": 504,
+            "startColumn": 11,
+            "endColumn": 66
+          },
+          "rawText": "WRITE CTL-FILE-REP FROM CONTROL-TITLE1 AFTER ADVANCING 2",
+          "sourceFieldIds": [
+            "WS_L275_CONTROL-TITLE1"
+          ],
+          "targetFieldIds": [
+            "FD_CONTROL-REPORT_L83_CTL-FILE-REP"
+          ],
+          "fromExpr": "FROM CONTROL-TITLE1",
+          "operation": "WRITE",
+          "record": "CTL-FILE-REP"
+        },
+        {
+          "type": "WRITE",
+          "location": {
+            "startLine": 505,
+            "endLine": 505,
+            "startColumn": 11,
+            "endColumn": 66
+          },
+          "rawText": "WRITE CTL-FILE-REP FROM CONTROL-TITLE2 AFTER ADVANCING 1",
+          "sourceFieldIds": [
+            "WS_L288_CONTROL-TITLE2"
+          ],
+          "targetFieldIds": [
+            "FD_CONTROL-REPORT_L83_CTL-FILE-REP"
+          ],
+          "fromExpr": "FROM CONTROL-TITLE2",
+          "operation": "WRITE",
+          "record": "CTL-FILE-REP"
+        },
+        {
+          "type": "WRITE",
+          "location": {
+            "startLine": 506,
+            "endLine": 506,
+            "startColumn": 11,
+            "endColumn": 62
+          },
+          "rawText": "WRITE CTL-FILE-REP FROM BLANK-LINE AFTER ADVANCING 1",
+          "sourceFieldIds": [
+            "WS_L232_BLANK-LINE"
+          ],
+          "targetFieldIds": [
+            "FD_CONTROL-REPORT_L83_CTL-FILE-REP"
+          ],
+          "fromExpr": "FROM BLANK-LINE",
+          "operation": "WRITE",
+          "record": "CTL-FILE-REP"
+        },
+        {
+          "type": "MOVE",
+          "location": {
+            "startLine": 507,
+            "endLine": 507,
+            "startColumn": 11,
+            "endColumn": 21
+          },
+          "rawText": "MOVE 7 TO LINE-COUNTR",
+          "targetFieldIds": [
+            "WS_L137_LINE-COUNTR"
+          ],
+          "fromExpr": "7",
+          "toTargets": [
+            "LINE-COUNTR"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "7000-PRINT-HEADERS-EXIT",
+      "sectionParent": "0000-MAIN",
+      "location": {
+        "startLine": 508,
+        "endLine": 509,
+        "startColumn": 7,
+        "endColumn": 15
+      },
+      "calledBy": [
+        "5500-PRINT-TAX-SOURCE-SUB",
+        "9000-CLOSE-FILES"
+      ],
+      "fallthroughSuccessor": "8000-PRINT-GRAND-TOTALS",
+      "statements": [
+        {
+          "type": "EXIT",
+          "location": {
+            "startLine": 509,
+            "endLine": 509,
+            "startColumn": 11,
+            "endColumn": 11
+          },
+          "rawText": "EXIT",
+          "operation": "EXIT"
+        }
+      ]
+    },
+    {
+      "name": "8000-PRINT-GRAND-TOTALS",
+      "sectionParent": "0000-MAIN",
+      "location": {
+        "startLine": 515,
+        "endLine": 548,
+        "startColumn": 7,
+        "endColumn": 36
+      },
+      "calledBy": [
+        "9000-CLOSE-FILES"
+      ],
+      "fallthroughSuccessor": "8000-PRINT-GRAND-TOTALS-EXIT",
+      "statements": [
+        {
+          "type": "MOVE",
+          "location": {
+            "startLine": 517,
+            "endLine": 517,
+            "startColumn": 11,
+            "endColumn": 35
+          },
+          "rawText": "MOVE 'GRAND TOTALS ' TO CTL-MESSAGE",
+          "targetFieldIds": [
+            "WS_L304_CTL-MESSAGE"
+          ],
+          "fromExpr": "'GRAND TOTALS '",
+          "toTargets": [
+            "CTL-MESSAGE"
+          ]
+        },
+        {
+          "type": "MOVE",
+          "location": {
+            "startLine": 518,
+            "endLine": 518,
+            "startColumn": 11,
+            "endColumn": 25
+          },
+          "rawText": "MOVE ' ' TO CTL-TAX-TYPE",
+          "targetFieldIds": [
+            "WS_L307_CTL-TAX-TYPE"
+          ],
+          "fromExpr": "' '",
+          "toTargets": [
+            "CTL-TAX-TYPE"
+          ]
+        },
+        {
+          "type": "MOVE",
+          "location": {
+            "startLine": 519,
+            "endLine": 519,
+            "startColumn": 11,
+            "endColumn": 25
+          },
+          "rawText": "MOVE ' ' TO CTL-SOURCE-CODE",
+          "targetFieldIds": [
+            "WS_L308_CTL-SOURCE-CODE"
+          ],
+          "fromExpr": "' '",
+          "toTargets": [
+            "CTL-SOURCE-CODE"
+          ]
+        },
+        {
+          "type": "MOVE",
+          "location": {
+            "startLine": 520,
+            "endLine": 520,
+            "startColumn": 11,
+            "endColumn": 25
+          },
+          "rawText": "MOVE ' ' TO CTL-FORMAT-CODE",
+          "targetFieldIds": [
+            "WS_L309_CTL-FORMAT-CODE"
+          ],
+          "fromExpr": "' '",
+          "toTargets": [
+            "CTL-FORMAT-CODE"
+          ]
+        },
+        {
+          "type": "MOVE",
+          "location": {
+            "startLine": 521,
+            "endLine": 521,
+            "startColumn": 11,
+            "endColumn": 38
+          },
+          "rawText": "MOVE GRAND-DETAIL-COUNT TO CTL-DETAIL-COUNT",
+          "sourceFieldIds": [
+            "WS_L144_GRAND-DETAIL-COUNT"
+          ],
+          "targetFieldIds": [
+            "WS_L310_CTL-DETAIL-COUNT"
+          ],
+          "fromExpr": "GRAND-DETAIL-COUNT",
+          "toTargets": [
+            "CTL-DETAIL-COUNT"
+          ]
+        },
+        {
+          "type": "MOVE",
+          "location": {
+            "startLine": 522,
+            "endLine": 522,
+            "startColumn": 11,
+            "endColumn": 43
+          },
+          "rawText": "MOVE SUM-GRAND-DETAIL-AMOUNT TO CTL-DETAIL-AMOUNT",
+          "sourceFieldIds": [
+            "WS_L149_SUM-GRAND-DETAIL-AMOUNT"
+          ],
+          "targetFieldIds": [
+            "WS_L313_CTL-DETAIL-AMOUNT"
+          ],
+          "fromExpr": "SUM-GRAND-DETAIL-AMOUNT",
+          "toTargets": [
+            "CTL-DETAIL-AMOUNT"
+          ]
+        },
+        {
+          "type": "WRITE",
+          "location": {
+            "startLine": 522,
+            "endLine": 523,
+            "startColumn": 61,
+            "endColumn": 68
+          },
+          "rawText": "WRITE CTL-FILE-REP FROM CONTROL-PRINT-LINE AFTER ADVANCING 3",
+          "sourceFieldIds": [
+            "WS_L301_CONTROL-PRINT-LINE"
+          ],
+          "targetFieldIds": [
+            "FD_CONTROL-REPORT_L83_CTL-FILE-REP"
+          ],
+          "fromExpr": "FROM CONTROL-PRINT-LINE",
+          "operation": "WRITE",
+          "record": "CTL-FILE-REP"
+        },
+        {
+          "type": "MOVE",
+          "location": {
+            "startLine": 530,
+            "endLine": 530,
+            "startColumn": 11,
+            "endColumn": 26
+          },
+          "rawText": "MOVE SPACES TO CRAS-STATISTICS-RECORD",
+          "targetFieldIds": [
+            "WS_L195_CRAS-STATISTICS-RECORD"
+          ],
+          "fromExpr": "SPACES",
+          "toTargets": [
+            "CRAS-STATISTICS-RECORD"
+          ]
+        },
+        {
+          "type": "MOVE",
+          "location": {
+            "startLine": 531,
+            "endLine": 531,
+            "startColumn": 11,
+            "endColumn": 29
+          },
+          "rawText": "MOVE 'TRAILER' TO CRAS-RECORD-DESC",
+          "targetFieldIds": [
+            "WS_L198_CRAS-RECORD-DESC"
+          ],
+          "fromExpr": "'TRAILER'",
+          "toTargets": [
+            "CRAS-RECORD-DESC"
+          ]
+        },
+        {
+          "type": "MOVE",
+          "location": {
+            "startLine": 532,
+            "endLine": 532,
+            "startColumn": 11,
+            "endColumn": 25
+          },
+          "rawText": "MOVE ' ' TO CRAS-TAX-TYPE",
+          "targetFieldIds": [
+            "WS_L199_CRAS-TAX-TYPE"
+          ],
+          "fromExpr": "' '",
+          "toTargets": [
+            "CRAS-TAX-TYPE"
+          ]
+        },
+        {
+          "type": "MOVE",
+          "location": {
+            "startLine": 533,
+            "endLine": 533,
+            "startColumn": 11,
+            "endColumn": 25
+          },
+          "rawText": "MOVE ' ' TO CRAS-SOURCE-CODE",
+          "targetFieldIds": [
+            "WS_L200_CRAS-SOURCE-CODE"
+          ],
+          "fromExpr": "' '",
+          "toTargets": [
+            "CRAS-SOURCE-CODE"
+          ]
+        },
+        {
+          "type": "MOVE",
+          "location": {
+            "startLine": 534,
+            "endLine": 534,
+            "startColumn": 11,
+            "endColumn": 25
+          },
+          "rawText": "MOVE ' ' TO CRAS-FORMAT-CODE",
+          "targetFieldIds": [
+            "WS_L201_CRAS-FORMAT-CODE"
+          ],
+          "fromExpr": "' '",
+          "toTargets": [
+            "CRAS-FORMAT-CODE"
+          ]
+        },
+        {
+          "type": "MOVE",
+          "location": {
+            "startLine": 536,
+            "endLine": 536,
+            "startColumn": 11,
+            "endColumn": 26
+          },
+          "rawText": "MOVE ZEROES TO CRAS-DET5LV2-COUNT",
+          "targetFieldIds": [
+            "WS_L202_CRAS-DET5LV2-COUNT"
+          ],
+          "fromExpr": "ZEROES",
+          "toTargets": [
+            "CRAS-DET5LV2-COUNT"
+          ]
+        },
+        {
+          "type": "MOVE",
+          "location": {
+            "startLine": 537,
+            "endLine": 537,
+            "startColumn": 11,
+            "endColumn": 38
+          },
+          "rawText": "MOVE GRAND-DETAIL-COUNT TO CRAS-DET5ALL-COUNT",
+          "sourceFieldIds": [
+            "WS_L144_GRAND-DETAIL-COUNT"
+          ],
+          "targetFieldIds": [
+            "WS_L204_CRAS-DET5ALL-COUNT"
+          ],
+          "fromExpr": "GRAND-DETAIL-COUNT",
+          "toTargets": [
+            "CRAS-DET5ALL-COUNT"
+          ]
+        },
+        {
+          "type": "MOVE",
+          "location": {
+            "startLine": 538,
+            "endLine": 538,
+            "startColumn": 11,
+            "endColumn": 43
+          },
+          "rawText": "MOVE SUM-GRAND-DETAIL-AMOUNT TO CRAS-DET5LV2-AMOUNT",
+          "sourceFieldIds": [
+            "WS_L149_SUM-GRAND-DETAIL-AMOUNT"
+          ],
+          "targetFieldIds": [
+            "WS_L203_CRAS-DET5LV2-AMOUNT"
+          ],
+          "fromExpr": "SUM-GRAND-DETAIL-AMOUNT",
+          "toTargets": [
+            "CRAS-DET5LV2-AMOUNT"
+          ]
+        },
+        {
+          "type": "MOVE",
+          "location": {
+            "startLine": 539,
+            "endLine": 539,
+            "startColumn": 11,
+            "endColumn": 26
+          },
+          "rawText": "MOVE ZEROES TO CRAS-DET67LV2-COUNT",
+          "targetFieldIds": [
+            "WS_L205_CRAS-DET67LV2-COUNT"
+          ],
+          "fromExpr": "ZEROES",
+          "toTargets": [
+            "CRAS-DET67LV2-COUNT"
+          ]
+        },
+        {
+          "type": "MOVE",
+          "location": {
+            "startLine": 540,
+            "endLine": 540,
+            "startColumn": 11,
+            "endColumn": 26
+          },
+          "rawText": "MOVE ZEROES TO CRAS-DET67ALL-COUNT",
+          "targetFieldIds": [
+            "WS_L206_CRAS-DET67ALL-COUNT"
+          ],
+          "fromExpr": "ZEROES",
+          "toTargets": [
+            "CRAS-DET67ALL-COUNT"
+          ]
+        },
+        {
+          "type": "MOVE",
+          "location": {
+            "startLine": 542,
+            "endLine": 542,
+            "startColumn": 11,
+            "endColumn": 26
+          },
+          "rawText": "MOVE ZEROES TO CRAS-TRAILER-AMOUNT",
+          "targetFieldIds": [
+            "WS_L207_CRAS-TRAILER-AMOUNT"
+          ],
+          "fromExpr": "ZEROES",
+          "toTargets": [
+            "CRAS-TRAILER-AMOUNT"
+          ]
+        },
+        {
+          "type": "MOVE",
+          "location": {
+            "startLine": 543,
+            "endLine": 543,
+            "startColumn": 11,
+            "endColumn": 37
+          },
+          "rawText": "MOVE WSS-DATE-YYYYMMDD TO CRAS-RUN-DATE",
+          "sourceFieldIds": [
+            "WS_L119_WSS-DATE-YYYYMMDD"
+          ],
+          "targetFieldIds": [
+            "WS_L208_CRAS-RUN-DATE"
+          ],
+          "fromExpr": "WSS-DATE-YYYYMMDD",
+          "toTargets": [
+            "CRAS-RUN-DATE"
+          ]
+        },
+        {
+          "type": "MOVE",
+          "location": {
+            "startLine": 544,
+            "endLine": 544,
+            "startColumn": 11,
+            "endColumn": 32
+          },
+          "rawText": "MOVE CURRENT-TIME TO CRAS-RUN-TIME",
+          "sourceFieldIds": [
+            "WS_L253_CURRENT-TIME"
+          ],
+          "targetFieldIds": [
+            "WS_L209_CRAS-RUN-TIME"
+          ],
+          "fromExpr": "CURRENT-TIME",
+          "toTargets": [
+            "CRAS-RUN-TIME"
+          ]
+        },
+        {
+          "type": "MOVE",
+          "location": {
+            "startLine": 545,
+            "endLine": 545,
+            "startColumn": 11,
+            "endColumn": 33
+          },
+          "rawText": "MOVE DATA-SET-NAME TO CRAS-DATASET-NAME",
+          "sourceFieldIds": [
+            "WS_L107_DATA-SET-NAME"
+          ],
+          "targetFieldIds": [
+            "WS_L210_CRAS-DATASET-NAME"
+          ],
+          "fromExpr": "DATA-SET-NAME",
+          "toTargets": [
+            "CRAS-DATASET-NAME"
+          ]
+        },
+        {
+          "type": "WRITE",
+          "location": {
+            "startLine": 545,
+            "endLine": 547,
+            "startColumn": 51,
+            "endColumn": 20
+          },
+          "rawText": "WRITE RDM-OUT-REC FROM CRAS-STATISTICS-RECORD",
+          "sourceFieldIds": [
+            "WS_L195_CRAS-STATISTICS-RECORD"
+          ],
+          "targetFieldIds": [
+            "FD_RDM-OUTPUT-FILE_L75_RDM-OUT-REC"
+          ],
+          "fromExpr": "FROM CRAS-STATISTICS-RECORD",
+          "operation": "WRITE",
+          "record": "RDM-OUT-REC"
+        },
+        {
+          "type": "ADD",
+          "location": {
+            "startLine": 548,
+            "endLine": 548,
+            "startColumn": 11,
+            "endColumn": 20
+          },
+          "rawText": "ADD 1 TO TOT-RECS-WRITTEN",
+          "sourceFieldIds": [
+            "WS_L142_TOT-RECS-WRITTEN"
+          ],
+          "operation": "ADD",
+          "expression": "ADD 1 TO TOT-RECS-WRITTEN"
+        }
+      ]
+    },
+    {
+      "name": "8000-PRINT-GRAND-TOTALS-EXIT",
+      "sectionParent": "0000-MAIN",
+      "location": {
+        "startLine": 549,
+        "endLine": 550,
+        "startColumn": 7,
+        "endColumn": 15
+      },
+      "calledBy": [
+        "9000-CLOSE-FILES"
+      ],
+      "fallthroughSuccessor": "8500-WRITE-CNTRL-TOT",
+      "statements": [
+        {
+          "type": "EXIT",
+          "location": {
+            "startLine": 550,
+            "endLine": 550,
+            "startColumn": 11,
+            "endColumn": 11
+          },
+          "rawText": "EXIT",
+          "operation": "EXIT"
+        }
+      ]
+    },
+    {
+      "name": "8500-WRITE-CNTRL-TOT",
+      "sectionParent": "0000-MAIN",
+      "location": {
+        "startLine": 555,
+        "endLine": 561,
+        "startColumn": 7,
+        "endColumn": 67
+      },
+      "calledBy": [
+        "9000-CLOSE-FILES"
+      ],
+      "fallthroughSuccessor": "8500-WRITE-CNTRL-TOT-EXIT",
+      "statements": [
+        {
+          "type": "MOVE",
+          "location": {
+            "startLine": 557,
+            "endLine": 557,
+            "startColumn": 11,
+            "endColumn": 33
+          },
+          "rawText": "MOVE TOT-RECS-READ TO CTL-RECS-READ",
+          "sourceFieldIds": [
+            "WS_L141_TOT-RECS-READ"
+          ],
+          "targetFieldIds": [
+            "WS_L324_CTL-RECS-READ"
+          ],
+          "fromExpr": "TOT-RECS-READ",
+          "toTargets": [
+            "CTL-RECS-READ"
+          ]
+        },
+        {
+          "type": "MOVE",
+          "location": {
+            "startLine": 558,
+            "endLine": 558,
+            "startColumn": 11,
+            "endColumn": 36
+          },
+          "rawText": "MOVE TOT-RECS-WRITTEN TO CTL-RECS-WRITTEN",
+          "sourceFieldIds": [
+            "WS_L142_TOT-RECS-WRITTEN"
+          ],
+          "targetFieldIds": [
+            "WS_L331_CTL-RECS-WRITTEN"
+          ],
+          "fromExpr": "TOT-RECS-WRITTEN",
+          "toTargets": [
+            "CTL-RECS-WRITTEN"
+          ]
+        },
+        {
+          "type": "WRITE",
+          "location": {
+            "startLine": 558,
+            "endLine": 560,
+            "startColumn": 53,
+            "endColumn": 64
+          },
+          "rawText": "WRITE CTL-FILE-REP FROM CONTROL-LINE-1 AFTER ADVANCING 3",
+          "sourceFieldIds": [
+            "WS_L320_CONTROL-LINE-1"
+          ],
+          "targetFieldIds": [
+            "FD_CONTROL-REPORT_L83_CTL-FILE-REP"
+          ],
+          "fromExpr": "FROM CONTROL-LINE-1",
+          "operation": "WRITE",
+          "record": "CTL-FILE-REP"
+        },
+        {
+          "type": "WRITE",
+          "location": {
+            "startLine": 561,
+            "endLine": 561,
+            "startColumn": 11,
+            "endColumn": 66
+          },
+          "rawText": "WRITE CTL-FILE-REP FROM CONTROL-LINE-2 AFTER ADVANCING 2",
+          "sourceFieldIds": [
+            "WS_L327_CONTROL-LINE-2"
+          ],
+          "targetFieldIds": [
+            "FD_CONTROL-REPORT_L83_CTL-FILE-REP"
+          ],
+          "fromExpr": "FROM CONTROL-LINE-2",
+          "operation": "WRITE",
+          "record": "CTL-FILE-REP"
+        }
+      ]
+    },
+    {
+      "name": "8500-WRITE-CNTRL-TOT-EXIT",
+      "sectionParent": "0000-MAIN",
+      "location": {
+        "startLine": 562,
+        "endLine": 563,
+        "startColumn": 7,
+        "endColumn": 15
+      },
+      "calledBy": [
+        "9000-CLOSE-FILES"
+      ],
+      "fallthroughSuccessor": "9000-CLOSE-FILES",
+      "statements": [
+        {
+          "type": "EXIT",
+          "location": {
+            "startLine": 563,
+            "endLine": 563,
+            "startColumn": 11,
+            "endColumn": 11
+          },
+          "rawText": "EXIT",
+          "operation": "EXIT"
+        }
+      ]
+    },
+    {
+      "name": "9000-CLOSE-FILES",
+      "sectionParent": "0000-MAIN",
+      "location": {
+        "startLine": 568,
+        "endLine": 590,
+        "startColumn": 7,
+        "endColumn": 29
+      },
+      "successors": [
+        "9000-EMPTY-FILE-MSG",
+        "5000-WRITE-TOTALS",
+        "8000-PRINT-GRAND-TOTALS",
+        "7000-PRINT-HEADERS",
+        "8500-WRITE-CNTRL-TOT"
+      ],
+      "fallthroughSuccessor": "9000-CLOSE-FILES-EXIT",
+      "statements": [
+        {
+          "type": "IF",
+          "location": {
+            "startLine": 571,
+            "endLine": 579,
+            "startColumn": 11,
+            "endColumn": 19
+          },
+          "rawText": "IF TOT-RECS-READ EQUAL ZERO PERFORM 9000-EMPTY-FILE-MSG THRU 9000-EMPTY-FILE-MSG-EXIT ELSE PERFORM 5000-WRITE-TOTALS THRU 5000-WRITE-TOTALS-EXIT PERFORM 8000-PRINT-GRAND-TOTALS THRU 8000-PRINT-GRAND-TOTALS-EXIT",
+          "sourceFieldIds": [
+            "WS_L141_TOT-RECS-READ"
+          ],
+          "condition": "TOT-RECS-READ EQUAL ZERO",
+          "thenStatements": [
+            {
+              "type": "PERFORM",
+              "location": {
+                "startLine": 572,
+                "endLine": 573,
+                "startColumn": 15,
+                "endColumn": 19
+              },
+              "rawText": "PERFORM 9000-EMPTY-FILE-MSG THRU 9000-EMPTY-FILE-MSG-EXIT",
+              "target": "9000-EMPTY-FILE-MSG",
+              "thru": "9000-EMPTY-FILE-MSG-EXIT"
+            }
+          ],
+          "elseStatements": [
+            {
+              "type": "PERFORM",
+              "location": {
+                "startLine": 576,
+                "endLine": 576,
+                "startColumn": 15,
+                "endColumn": 46
+              },
+              "rawText": "PERFORM 5000-WRITE-TOTALS THRU 5000-WRITE-TOTALS-EXIT",
+              "target": "5000-WRITE-TOTALS",
+              "thru": "5000-WRITE-TOTALS-EXIT"
+            },
+            {
+              "type": "PERFORM",
+              "location": {
+                "startLine": 578,
+                "endLine": 579,
+                "startColumn": 15,
+                "endColumn": 19
+              },
+              "rawText": "PERFORM 8000-PRINT-GRAND-TOTALS THRU 8000-PRINT-GRAND-TOTALS-EXIT",
+              "target": "8000-PRINT-GRAND-TOTALS",
+              "thru": "8000-PRINT-GRAND-TOTALS-EXIT"
+            }
+          ]
+        },
+        {
+          "type": "MOVE",
+          "location": {
+            "startLine": 581,
+            "endLine": 581,
+            "startColumn": 11,
+            "endColumn": 26
+          },
+          "rawText": "MOVE SPACES TO CONTROL-TITLE1",
+          "targetFieldIds": [
+            "WS_L275_CONTROL-TITLE1"
+          ],
+          "fromExpr": "SPACES",
+          "toTargets": [
+            "CONTROL-TITLE1"
+          ]
+        },
+        {
+          "type": "MOVE",
+          "location": {
+            "startLine": 582,
+            "endLine": 582,
+            "startColumn": 11,
+            "endColumn": 26
+          },
+          "rawText": "MOVE SPACES TO CONTROL-TITLE2",
+          "targetFieldIds": [
+            "WS_L288_CONTROL-TITLE2"
+          ],
+          "fromExpr": "SPACES",
+          "toTargets": [
+            "CONTROL-TITLE2"
+          ]
+        },
+        {
+          "type": "MOVE",
+          "location": {
+            "startLine": 583,
+            "endLine": 583,
+            "startColumn": 11,
+            "endColumn": 33
+          },
+          "rawText": "MOVE WSS-CTL-TITLE TO DET-CTL-TITLE",
+          "sourceFieldIds": [
+            "WS_L228_WSS-CTL-TITLE"
+          ],
+          "targetFieldIds": [
+            "WS_L271_DET-CTL-TITLE"
+          ],
+          "fromExpr": "WSS-CTL-TITLE",
+          "toTargets": [
+            "DET-CTL-TITLE"
+          ]
+        },
+        {
+          "type": "PERFORM",
+          "location": {
+            "startLine": 585,
+            "endLine": 585,
+            "startColumn": 11,
+            "endColumn": 43
+          },
+          "rawText": "PERFORM 7000-PRINT-HEADERS THRU 7000-PRINT-HEADERS-EXIT",
+          "target": "7000-PRINT-HEADERS",
+          "thru": "7000-PRINT-HEADERS-EXIT"
+        },
+        {
+          "type": "PERFORM",
+          "location": {
+            "startLine": 587,
+            "endLine": 587,
+            "startColumn": 11,
+            "endColumn": 45
+          },
+          "rawText": "PERFORM 8500-WRITE-CNTRL-TOT THRU 8500-WRITE-CNTRL-TOT-EXIT",
+          "target": "8500-WRITE-CNTRL-TOT",
+          "thru": "8500-WRITE-CNTRL-TOT-EXIT"
+        },
+        {
+          "type": "CLOSE",
+          "location": {
+            "startLine": 589,
+            "endLine": 590,
+            "startColumn": 11,
+            "endColumn": 15
+          },
+          "rawText": "CLOSE RDM-INPUT-FILE DSN-INPUT-FILE RDM-OUTPUT-FILE CONTROL-REPORT",
+          "operation": "CLOSE",
+          "expression": "CLOSE RDM-INPUT-FILE DSN-INPUT-FILE RDM-OUTPUT-FILE CONTROL-REPORT"
+        }
+      ]
+    },
+    {
+      "name": "9000-CLOSE-FILES-EXIT",
+      "sectionParent": "0000-MAIN",
+      "location": {
+        "startLine": 592,
+        "endLine": 593,
+        "startColumn": 7,
+        "endColumn": 15
+      },
+      "fallthroughSuccessor": "9000-EMPTY-FILE-MSG",
+      "statements": [
+        {
+          "type": "EXIT",
+          "location": {
+            "startLine": 593,
+            "endLine": 593,
+            "startColumn": 11,
+            "endColumn": 11
+          },
+          "rawText": "EXIT",
+          "operation": "EXIT"
+        }
+      ]
+    },
+    {
+      "name": "9000-EMPTY-FILE-MSG",
+      "sectionParent": "0000-MAIN",
+      "location": {
+        "startLine": 598,
+        "endLine": 600,
+        "startColumn": 7,
+        "endColumn": 70
+      },
+      "calledBy": [
+        "9000-CLOSE-FILES"
+      ],
+      "fallthroughSuccessor": "9000-EMPTY-FILE-MSG-EXIT",
+      "statements": [
+        {
+          "type": "MOVE",
+          "location": {
+            "startLine": 599,
+            "endLine": 599,
+            "startColumn": 11,
+            "endColumn": 33
+          },
+          "rawText": "MOVE DATA-SET-NAME TO WSS-EMPTY-FILE-NAME",
+          "sourceFieldIds": [
+            "WS_L107_DATA-SET-NAME"
+          ],
+          "targetFieldIds": [
+            "WS_L225_WSS-EMPTY-FILE-NAME"
+          ],
+          "fromExpr": "DATA-SET-NAME",
+          "toTargets": [
+            "WSS-EMPTY-FILE-NAME"
+          ]
+        },
+        {
+          "type": "WRITE",
+          "location": {
+            "startLine": 599,
+            "endLine": 600,
+            "startColumn": 53,
+            "endColumn": 69
+          },
+          "rawText": "WRITE CTL-FILE-REP FROM WSS-EMPTY-FILE-LINE AFTER ADVANCING 3",
+          "sourceFieldIds": [
+            "WS_L221_WSS-EMPTY-FILE-LINE"
+          ],
+          "targetFieldIds": [
+            "FD_CONTROL-REPORT_L83_CTL-FILE-REP"
+          ],
+          "fromExpr": "FROM WSS-EMPTY-FILE-LINE",
+          "operation": "WRITE",
+          "record": "CTL-FILE-REP"
+        }
+      ]
+    },
+    {
+      "name": "9000-EMPTY-FILE-MSG-EXIT",
+      "sectionParent": "0000-MAIN",
+      "location": {
+        "startLine": 601,
+        "endLine": 602,
+        "startColumn": 7,
+        "endColumn": 15
+      },
+      "calledBy": [
+        "9000-CLOSE-FILES"
+      ],
+      "statements": [
+        {
+          "type": "EXIT",
+          "location": {
+            "startLine": 602,
+            "endLine": 602,
+            "startColumn": 11,
+            "endColumn": 11
+          },
+          "rawText": "EXIT",
+          "operation": "EXIT"
+        }
+      ]
+    }
+  ],
+  "asgAuditSummary": {
+    "totalAsgDataEntries": 178,
+    "totalAsgLevel88Entries": 2,
+    "totalAsgParagraphs": 24,
+    "totalAsgStatements": 106,
+    "totalAsgCalls": 144,
+    "asgVariableNames": [
+      "RDM-INP-REC",
+      "DSN-INP-REC",
+      "RDM-OUT-REC",
+      "CTL-FILE-REP",
+      "BEGIN-WS",
+      "WSS-CURRENT-DATE",
+      "WSS-CENTURY",
+      "WSS-YEAR",
+      "WSS-MONTH",
+      "WSS-DAY",
+      "WSS-CURRENT-TIME",
+      "WSS-HOUR",
+      "WSS-MINUTES",
+      "WSS-SECONDS",
+      "WSS-DSN-DATA",
+      "DATA-SET-NAME",
+      "WSS-SWITCHES",
+      "EOF-INET",
+      "EOF-DSN",
+      "WSS-DIFFERENT-DATES",
+      "WSS-DATE-YYYYMMDD",
+      "MY-CURRENT-DATE",
+      "MY-CURR-CENTYEAR",
+      "MY-CURR-MONTH",
+      "MY-CURR-DAY",
+      "MY-CURR-HOUR",
+      "MY-CURR-MINS",
+      "MY-CURR-SECS",
+      "MY-CURR-REST",
+      "MY-DATE-OF-INTEGER",
+      "MY-DATE-CENTYEAR",
+      "MY-DATE-MONTH",
+      "MY-DATE-DAY",
+      "WSS-COUNTERS",
+      "PAGE-COUNTR",
+      "LINE-COUNTR",
+      "WSS-COUNTERS",
+      "TOT-RECS-READ",
+      "TOT-RECS-WRITTEN",
+      "SUB-DETAIL-COUNT",
+      "GRAND-DETAIL-COUNT",
+      "WSS-ACCUMULATORS",
+      "SUM-SUB-DETAIL-AMOUNT",
+      "SUM-GRAND-DETAIL-AMOUNT",
+      "WSS-HOLD-TAX-SOURCE-SUB",
+      "HOLD-TAX-CODE-ALL",
+      "HOLD-TAX-CODE",
+      "HOLD-SOURCE-CODE",
+      "HOLD-FORMAT-CODE",
+      "WSS-PREV-TAX-SOURCE-SUB",
+      "PREV-TAX-CODE-ALL",
+      "PREV-TAX-CODE",
+      "PREV-SOURCE-CODE",
+      "PREV-FORMAT-CODE",
+      "WSS-RDM-TRANS",
+      "WSS-RDM-REDEF",
+      "RDM-PAYMENT-DATE",
+      "RDM-BATCH-NUMBER",
+      "RDM-ADDRESS-CHANGE",
+      "RDM-DLN",
+      "RDM-APPLICATION-ID",
+      "RDM-LASER-ID",
+      "RDM-PAYMENT-AMOUNT",
+      "RDM-DLN-LAST6",
+      "RDM-INVOICE",
+      "RDM-ENCODER-CODE",
+      "RDM-AGENCY",
+      "RDM-COLLECT-METHOD",
+      "RDM-PROCESS-DATE",
+      "CRAS-STATISTICS-RECORD",
+      "CRAS-STATISTICS-REDEF",
+      "CRAS-RECORD-DESC",
+      "CRAS-TAX-TYPE",
+      "CRAS-SOURCE-CODE",
+      "CRAS-FORMAT-CODE",
+      "CRAS-DET5LV2-COUNT",
+      "CRAS-DET5LV2-AMOUNT",
+      "CRAS-DET5ALL-COUNT",
+      "CRAS-DET67LV2-COUNT",
+      "CRAS-DET67ALL-COUNT",
+      "CRAS-TRAILER-AMOUNT",
+      "CRAS-RUN-DATE",
+      "CRAS-RUN-TIME",
+      "CRAS-DATASET-NAME",
+      "WSS-EMPTY-FILE-LINE",
+      "FILER",
+      "WSS-EMPTY-FILE-NAME",
+      "WSS-CONTROL-TITLE",
+      "WSS-CTL-TITLE",
+      "WSS-CONTROL-TOTALS-REPORT",
+      "BLANK-LINE",
+      "HEADING-LINE-1",
+      "CURRENT-DATE",
+      "HEADING-LINE-2",
+      "CURRENT-TIME",
+      "HEADING-LINE-3",
+      "PRINT-PAGE",
+      "HEADING-LINE-4",
+      "DET-CTL-TITLE",
+      "CONTROL-TITLE1",
+      "CONTROL-TITLE2",
+      "CONTROL-PRINT-LINE",
+      "CTL-MESSAGE",
+      "CTL-TAX-DESCRIP",
+      "CTL-TAX-TYPE",
+      "CTL-SOURCE-CODE",
+      "CTL-FORMAT-CODE",
+      "CTL-DETAIL-COUNT",
+      "CTL-DETAIL-REDEF",
+      "CTL-DETAIL-AMOUNT",
+      "CTL-DETALL-COUNT",
+      "CTL-DETALL-REDEF",
+      "CONTROL-LINE-1",
+      "CTL-RECS-READ",
+      "CONTROL-LINE-2",
+      "CTL-RECS-WRITTEN"
+    ],
+    "asgLevel88Names": [
+      "END-OF-RDM-FILE",
+      "END-OF-DSN-FILE"
+    ],
+    "asgParagraphCalls": {
+      "1000-GET-DSN": [
+        "1000-GET-DSN"
+      ],
+      "1000-GET-DSN-EXIT": [
+        "1000-GET-DSN-EXIT"
+      ],
+      "2000-DLN-FILE-EMPTY": [
+        "2000-DLN-FILE-EMPTY"
+      ],
+      "2000-DLN-FILE-EMPTY-EXIT": [
+        "2000-DLN-FILE-EMPTY-EXIT"
+      ],
+      "3000-OPEN-FILES": [
+        "3000-OPEN-FILES"
+      ],
+      "3000-OPEN-FILES-EXIT": [
+        "3000-OPEN-FILES-EXIT"
+      ],
+      "5000-PROCESS-RDM-FILE": [
+        "5000-PROCESS-RDM-FILE"
+      ],
+      "5000-PROCESS-RDM-FILE-EXIT": [
+        "5000-PROCESS-RDM-FILE-EXIT"
+      ],
+      "4000-READ-RDM-FILE": [
+        "4000-READ-RDM-FILE",
+        "4000-READ-RDM-FILE"
+      ],
+      "4000-READ-RDM-FILE-EXIT": [
+        "4000-READ-RDM-FILE-EXIT",
+        "4000-READ-RDM-FILE-EXIT"
+      ],
+      "5000-WRITE-TOTALS": [
+        "5000-WRITE-TOTALS"
+      ],
+      "5000-WRITE-TOTALS-EXIT": [
+        "5000-WRITE-TOTALS-EXIT"
+      ],
+      "5500-PRINT-TAX-SOURCE-SUB": [
+        "5500-PRINT-TAX-SOURCE-SUB"
+      ],
+      "5500-PRINT-TAX-SOURCE-SUB-EXIT": [
+        "5500-PRINT-TAX-SOURCE-SUB-EXIT"
+      ],
+      "7000-PRINT-HEADERS": [
+        "7000-PRINT-HEADERS",
+        "7000-PRINT-HEADERS"
+      ],
+      "7000-PRINT-HEADERS-EXIT": [
+        "7000-PRINT-HEADERS-EXIT",
+        "7000-PRINT-HEADERS-EXIT"
+      ],
+      "8000-PRINT-GRAND-TOTALS": [
+        "8000-PRINT-GRAND-TOTALS"
+      ],
+      "8000-PRINT-GRAND-TOTALS-EXIT": [
+        "8000-PRINT-GRAND-TOTALS-EXIT"
+      ],
+      "8500-WRITE-CNTRL-TOT": [
+        "8500-WRITE-CNTRL-TOT"
+      ],
+      "8500-WRITE-CNTRL-TOT-EXIT": [
+        "8500-WRITE-CNTRL-TOT-EXIT"
+      ],
+      "9000-CLOSE-FILES": [
+        "9000-CLOSE-FILES"
+      ],
+      "9000-CLOSE-FILES-EXIT": [
+        "9000-CLOSE-FILES-EXIT"
+      ],
+      "9000-EMPTY-FILE-MSG": [
+        "9000-EMPTY-FILE-MSG"
+      ],
+      "9000-EMPTY-FILE-MSG-EXIT": [
+        "9000-EMPTY-FILE-MSG-EXIT"
+      ]
+    }
+  }
+}

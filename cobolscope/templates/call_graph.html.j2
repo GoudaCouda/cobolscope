@@ -3,15 +3,20 @@
 
 {% block title %}Procedure Call Graph - {{ program_id }}{% endblock %}
 
-{% block vendor_scripts %}
-  <!-- Cytoscape.js & Layout Extensions -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/cytoscape/3.28.1/cytoscape.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/dagre@0.8.5/dist/dagre.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/cytoscape-dagre@2.5.0/cytoscape-dagre.min.js"></script>
+{% block head_styles %}
+  {% if asset_mode == "external" %}
+    <!-- CobolScope Static Pre-Bundled Assets (Relative) -->
+    <link rel="stylesheet" href="{{ assets_rel_path }}/cobolscope-viewer.css">
+  {% endif %}
 {% endblock %}
 
 {% block styles %}
-  {% include "call_graph/styles.css.j2" %}
+  {% if asset_mode == "inline" and bundled_css %}
+    <!-- Inlined CobolScope CSS (Air-Gapped & Offline Ready) -->
+    {{ bundled_css | safe }}
+  {% elif asset_mode != "external" %}
+    {% include "call_graph/styles.css.j2" %}
+  {% endif %}
 {% endblock %}
 
 {% block content %}
@@ -34,35 +39,22 @@
 {% endblock %}
 
 {% block scripts %}
-  <script>
-    if (window.self !== window.top) {
-      document.documentElement.classList.add("in-portal-iframe");
-    }
-
-    {% include "call_graph/js/diagnostics.js.j2" %}
-
-    const graphData = {{ graph.model_dump_json() | safe }};
-    const cytoElements = {{ cyto_json | safe }};
-    const initialEnginePreference = "{{ initial_engine }}";
-    const sourceCodeRaw = {{ (source_code or graph.source_code or "") | tojson }};
-
-    CobolScopeLog.info(`Loaded graphData for ${graphData.program_id}: ${graphData.total_paragraphs} paragraphs, ${cytoElements.length} Cytoscape elements.`);
-
-    let currentEngine = "cytoscape";
-    let cy = null;
-    let cyLevel3 = null;
-    let selectedRoutineNode = null;
-
-    const cyContainer = document.getElementById("cy-container");
-    const layoutSelect = document.getElementById("layoutSelect");
-    const cytoLayoutGroup = document.getElementById("cytoLayoutGroup");
-
-    {% include "call_graph/js/cyto_call_graph.js.j2" %}
-    {% include "call_graph/js/linear_card.js.j2" %}
-    {% include "call_graph/js/inspector.js.j2" %}
-    {% include "call_graph/js/linear_modal.js.j2" %}
-    {% include "call_graph/js/level3_cfg.js.j2" %}
-    {% include "call_graph/js/toolbar.js.j2" %}
-    {% include "call_graph/js/code_viewer.js.j2" %}
+  <!-- Embedded Zero-CORS JSON Data Island -->
+  <script id="cobolscope-data" type="application/json">
+    {{ graph_payload_json | safe }}
   </script>
+
+  {% if asset_mode == "external" %}
+    <!-- CobolScope Static Pre-Bundled Assets (Relative) -->
+    <script src="{{ assets_rel_path }}/cobolscope-viewer.bundle.js"></script>
+  {% elif asset_mode == "inline" and bundled_js %}
+    <!-- Inlined Monolithic Runtime Bundle (Air-Gapped & Offline Ready) -->
+    <script>
+      {{ bundled_js | safe }}
+    </script>
+  {% else %}
+    <!-- Fallback Development Runtime -->
+    <script src="{{ assets_rel_path }}/vendor.bundle.js"></script>
+    <script src="{{ assets_rel_path }}/cobolscope-viewer.js"></script>
+  {% endif %}
 {% endblock %}
